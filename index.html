@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal de Estudio · Antonio</title>
+<style>
+  :root {
+    --bg: #0f0f13;
+    --surface: #1a1a22;
+    --surface2: #22222e;
+    --border: #2e2e3e;
+    --accent: #7c6af7;
+    --accent2: #4fc3a1;
+    --text: #e8e8f0;
+    --text2: #9090a8;
+    --font: 'Georgia', serif;
+    --mono: 'Courier New', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    min-height: 100vh;
+    padding: 0;
+  }
+  header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 36px 24px 28px;
+    text-align: center;
+  }
+  header h1 {
+    font-size: 1.6rem;
+    font-weight: normal;
+    letter-spacing: 0.04em;
+    color: #c0c0e0;
+  }
+  header h1 span { color: var(--accent); font-weight: bold; }
+  header p { margin-top: 8px; color: var(--text2); font-size: 0.85rem; }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 22px 18px;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card .badge {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--accent2);
+    letter-spacing: 0.05em;
+  }
+  .card h2 { font-size: 1.1rem; font-weight: normal; }
+  .card p { font-size: 0.82rem; color: var(--text2); line-height: 1.5; }
+  .card .go {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-family: var(--mono);
+  }
+
+  .card.placeholder {
+    border-style: dashed;
+    color: var(--text2);
+    cursor: default;
+  }
+  .card.placeholder:hover { border-color: var(--border); transform: none; }
+  .card.placeholder .badge { color: var(--text2); }
+
+  footer {
+    text-align: center;
+    color: var(--text2);
+    font-size: 0.75rem;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📚 Portal de <span>Estudio</span></h1>
+  <p>Tests adaptativos · Grado en Derecho & GACE</p>
+</header>
+
+<main>
+
+  <!-- ── Tests activos ──────────────────────────────────────────── -->
+
+  <a class="card" href="fdd.html">
+    <span class="badge">GRADO · TEORÍA Y FILOSOFÍA DEL DERECHO</span>
+    <h2>FDD · Test Adaptativo</h2>
+    <p>81 preguntas, 6 unidades. Filtros por error y modo adaptativo top-20.</p>
+    <span class="go">Abrir test →</span>
+  </a>
+
+  <!--
+  ── PLANTILLA: copia este bloque para añadir una nueva asignatura ──
+
+  <a class="card" href="NOMBRE_ARCHIVO.html">
+    <span class="badge">CATEGORÍA · NOMBRE ASIGNATURA</span>
+    <h2>SIGLAS · Test Adaptativo</h2>
+    <p>Breve descripción: nº preguntas, unidades, etc.</p>
+    <span class="go">Abrir test →</span>
+  </a>
+
+  -->
+
+  <!-- ── Próximamente (placeholders, opcional) ─────────────────── -->
+
+  <div class="card placeholder">
+    <span class="badge">GRADO · DERECHO DE LA UNIÓN EUROPEA</span>
+    <h2>DUE · Test Adaptativo</h2>
+    <p>Pendiente de subir.</p>
+  </div>
+
+</main>
+
+<footer>
+  Generado y mantenido por Antonio · ajdelamo/FDD-TEST
+</footer>
+
+</body>
+</html>
