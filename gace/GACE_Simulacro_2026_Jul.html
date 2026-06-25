@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · Simulacro Julio 2026</title>
+<style>
+:root {
+  --green: #1d9e75; --green-dark: #0d5c43; --green-light: #e8f7f2;
+  --red: #c0392b; --orange: #e67e22; --gray: #6b7280;
+  --bg: #f8fafb; --white: #ffffff; --border: #e5e7eb;
+  --text: #111827; --muted: #6b7280;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+       background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* HEADER */
+.header { background: var(--green-dark); color: white; padding: 12px 20px;
+          display: flex; align-items: center; justify-content: space-between;
+          position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+.header-left { display: flex; align-items: center; gap: 12px; }
+.badge-sim { background: var(--red); color: white; font-size: 10px; font-weight: 700;
+             letter-spacing: 1.5px; padding: 3px 8px; border-radius: 3px; }
+.header-title { font-size: 15px; font-weight: 600; }
+.timer { font-size: 22px; font-weight: 700; font-family: monospace; letter-spacing: 2px;
+         color: white; transition: color .3s; }
+.timer.warning { color: #fbbf24; }
+.timer.critical { color: #f87171; animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* PROGRESS BAR */
+.progress-bar { height: 4px; background: rgba(255,255,255,.2); }
+.progress-fill { height: 100%; background: #4ade80; transition: width .3s; }
+
+/* MAIN */
+.container { max-width: 820px; margin: 0 auto; padding: 20px 16px 80px; }
+
+/* QUESTION CARD */
+.q-card { background: var(--white); border-radius: 12px; padding: 28px;
+          box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-bottom: 16px; }
+.q-meta { font-size: 11px; color: var(--muted); margin-bottom: 12px;
+          display: flex; align-items: center; gap: 8px; }
+.q-num { font-size: 13px; font-weight: 600; color: var(--green-dark);
+         background: var(--green-light); padding: 4px 10px; border-radius: 20px; }
+.q-year { font-size: 11px; color: var(--muted); }
+.q-text { font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+.options { display: flex; flex-direction: column; gap: 10px; }
+.opt { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px;
+       border: 2px solid var(--border); border-radius: 8px; cursor: pointer;
+       transition: all .15s; font-size: 14px; line-height: 1.5; background: var(--white); }
+.opt:hover { border-color: var(--green); background: var(--green-light); }
+.opt.selected { border-color: var(--green); background: var(--green-light); }
+.opt-letter { width: 24px; height: 24px; border-radius: 50%; background: var(--border);
+              display: flex; align-items: center; justify-content: center;
+              font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+              color: var(--gray); }
+.opt.selected .opt-letter { background: var(--green); color: white; }
+/* Review mode */
+.opt.correct { border-color: #16a34a; background: #f0fdf4; }
+.opt.correct .opt-letter { background: #16a34a; color: white; }
+.opt.wrong { border-color: var(--red); background: #fef2f2; }
+.opt.wrong .opt-letter { background: var(--red); color: white; }
+
+/* NAV BUTTONS */
+.nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white;
+           border-top: 1px solid var(--border); padding: 12px 16px;
+           display: flex; align-items: center; justify-content: space-between;
+           box-shadow: 0 -2px 8px rgba(0,0,0,.06); z-index: 100; }
+.btn { padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+       cursor: pointer; border: none; transition: all .15s; }
+.btn-outline { background: white; border: 2px solid var(--border); color: var(--text); }
+.btn-outline:hover { border-color: var(--green); color: var(--green); }
+.btn-primary { background: var(--green); color: white; }
+.btn-primary:hover { background: var(--green-dark); }
+.btn-danger { background: var(--red); color: white; }
+.btn-danger:hover { opacity: .85; }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* GRID */
+.grid-toggle { font-size: 12px; color: var(--green); cursor: pointer; text-decoration: underline; }
+.q-grid { position: fixed; bottom: 60px; left: 0; right: 0; background: white;
+          border-top: 1px solid var(--border); padding: 12px 16px;
+          display: none; flex-wrap: wrap; gap: 6px; z-index: 99;
+          max-height: 160px; overflow-y: auto; }
+.q-grid.open { display: flex; }
+.grid-dot { width: 32px; height: 32px; border-radius: 6px; border: 2px solid var(--border);
+            font-size: 11px; font-weight: 600; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; color: var(--muted); }
+.grid-dot.answered { background: var(--green); border-color: var(--green); color: white; }
+.grid-dot.current { border-color: var(--green-dark); color: var(--green-dark); }
+
+/* RESULTS SCREEN */
+#results { display: none; }
+.results-header { background: var(--green-dark); color: white; padding: 40px 20px;
+                  text-align: center; border-radius: 0 0 24px 24px; margin-bottom: 24px; }
+.results-grade { font-size: 64px; font-weight: 800; margin-bottom: 8px; }
+.results-subtitle { font-size: 16px; opacity: .85; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.stat { background: white; border-radius: 10px; padding: 16px; text-align: center;
+        box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+.stat-val { font-size: 28px; font-weight: 700; }
+.stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.stat.correct .stat-val { color: #16a34a; }
+.stat.wrong .stat-val { color: var(--red); }
+.stat.blank .stat-val { color: var(--orange); }
+.stat.score .stat-val { color: var(--green-dark); }
+.formula { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px;
+           padding: 12px 16px; font-size: 13px; color: var(--green-dark); margin-bottom: 24px;
+           text-align: center; }
+.btn-review { width: 100%; padding: 14px; background: var(--green); color: white;
+              border: none; border-radius: 8px; font-size: 15px; font-weight: 600;
+              cursor: pointer; margin-bottom: 12px; }
+.btn-review:hover { background: var(--green-dark); }
+
+/* REVIEW */
+.review-q { border-left: 4px solid var(--border); padding-left: 16px; margin-bottom: 24px; }
+.review-q.r-correct { border-color: #16a34a; }
+.review-q.r-wrong { border-color: var(--red); }
+.review-q.r-blank { border-color: var(--orange); }
+.review-label { font-size: 11px; font-weight: 700; letter-spacing: .5px;
+                margin-bottom: 6px; text-transform: uppercase; }
+.review-q.r-correct .review-label { color: #16a34a; }
+.review-q.r-wrong .review-label { color: var(--red); }
+.review-q.r-blank .review-label { color: var(--orange); }
+.review-text { font-size: 14px; margin-bottom: 10px; line-height: 1.6; }
+.review-opts { display: flex; flex-direction: column; gap: 6px; }
+.review-opt { font-size: 13px; padding: 8px 12px; border-radius: 6px; }
+.review-opt.r-correct { background: #f0fdf4; color: #166534; }
+.review-opt.r-your-wrong { background: #fef2f2; color: #991b1b; }
+
+/* CONFIRM MODAL */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5);
+                 display: none; align-items: center; justify-content: center; z-index: 200; }
+.modal-overlay.open { display: flex; }
+.modal { background: white; border-radius: 16px; padding: 28px; max-width: 360px;
+         width: 90%; text-align: center; }
+.modal h3 { font-size: 18px; margin-bottom: 8px; }
+.modal p { color: var(--muted); font-size: 14px; margin-bottom: 20px; line-height: 1.5; }
+.modal-btns { display: flex; gap: 12px; justify-content: center; }
+</style>
+</head>
+<body>
+
+<div id="exam">
+  <div class="header">
+    <div class="header-left">
+      <span class="badge-sim">SIMULACRO</span>
+      <span class="header-title">GACE · Julio 2026</span>
+    </div>
+    <div class="timer" id="timer">60:00</div>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress" style="width:0%"></div>
+  </div>
+
+  <div class="container">
+    <div class="q-card">
+      <div class="q-meta">
+        <span class="q-num" id="q-num">1 / 60</span>
+        <span class="q-year" id="q-year"></span>
+      </div>
+      <div class="q-text" id="q-text"></div>
+      <div class="options" id="options"></div>
+    </div>
+  </div>
+
+  <div class="q-grid" id="grid"></div>
+
+  <div class="nav-bar">
+    <button class="btn btn-outline" id="btn-prev" onclick="goTo(cur-1)">← Anterior</button>
+    <span class="grid-toggle" onclick="toggleGrid()">Ver preguntas</span>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-primary" id="btn-next" onclick="goTo(cur+1)">Siguiente →</button>
+      <button class="btn btn-danger" onclick="confirmFinish()">Terminar</button>
+    </div>
+  </div>
+</div>
+
+<div id="results">
+  <div class="results-header">
+    <div class="results-grade" id="res-grade">—</div>
+    <div class="results-subtitle" id="res-sub"></div>
+  </div>
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat correct"><div class="stat-val" id="res-correct">—</div><div class="stat-label">Correctas</div></div>
+      <div class="stat wrong"><div class="stat-val" id="res-wrong">—</div><div class="stat-label">Incorrectas</div></div>
+      <div class="stat blank"><div class="stat-val" id="res-blank">—</div><div class="stat-label">En blanco</div></div>
+      <div class="stat score"><div class="stat-val" id="res-pts">—</div><div class="stat-label">Puntos brutos</div></div>
+    </div>
+    <div class="formula" id="formula-text"></div>
+    <button class="btn-review" onclick="showReview()">📋 Ver revisión completa</button>
+    <div id="review-section" style="display:none"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3>¿Terminar el examen?</h3>
+    <p id="modal-msg"></p>
+    <div class="modal-btns">
+      <button class="btn btn-outline" onclick="closeModal()">Seguir</button>
+      <button class="btn btn-danger" onclick="finish()">Terminar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const BANK = [
+  {n:1, u:"2024", t:`La Ley Orgánica 4/2000, de 11 de enero, sobre derechos y libertades de los extranjeros en España y su integración social, hace referencia a un órgano que aunará el conjunto de la información estadística disponible en materia de extranjería, inmigración, protección internacional y nacionalidad, con independencia de la Administración Pública responsable de su elaboración. Indique cuál:`, o:[`Consejo General para la Inmigración.`, `Comisión Multilateral para la Inmigración.`, `Observatorio Permanente de la Inmigración.`, `Foro para la Integración Social de los Inmigrantes.`], c:3},
+  {n:2, u:"2024", t:`¿Cuál de las siguientes afirmaciones describe correctamente el procedimiento para la aprobación de una ley orgánica por las Cortes Generales según la Constitución Española de 1978?`, o:[`Debe ser aprobada por mayoría absoluta del Senado en una votación final sobre el conjunto del proyecto.`, `Requiere mayoría simple en el Congreso de los Diputados y mayoría absoluta en el Senado.`, `Debe ser aprobada por mayoría absoluta del Congreso de los Diputados en una votación final sobre el conjunto del proyecto.`, `Requiere la aprobación por mayoría absoluta en el Congreso de los Diputados y en el Senado.`], c:2},
+  {n:3, u:"2024", t:`De conformidad con la Ley 2/2014, de 25 de marzo, de la Acción y del Servicio Exterior del Estado, la creación y supresión de las Misiones Diplomáticas Permanentes y Representaciones Permanentes se realizará mediante:`, o:[`Real decreto del Consejo de Ministros, a iniciativa del Ministerio de Asuntos Exteriores y de Cooperación, y a propuesta del Ministerio de Hacienda y Administraciones Públicas, previo informe del Consejo Ejecutivo de Política Exterior.`, `Ley de las Cortes Generales, previo informe del Consejo de Política Exterior.`, `Orden del Ministro de Asuntos Exteriores.`, `Real decreto del Consejo de Ministros, a iniciativa del Ministerio del Interior, y a propuesta del Ministerio de Asuntos Exteriores y de Cooperación, previo informe del Consejo Ejecutivo de Política Exterior.`], c:0},
+  {n:4, u:"2024", t:`Según el artículo 149.1 de la Constitución Española de 1978, ¿qué competencias de las relacionadas a continuación NO son exclusivas del Estado y pueden asumirse por las Comunidades Autónomas?`, o:[`Defensa y Fuerzas Armadas.`, `Los montes y aprovechamientos forestales.`, `Administración de Justicia.`, `Legislación sobre la propiedad intelectual e industrial.`], c:1},
+  {n:5, u:"2024", t:`Indique en qué fecha entró en vigor el Tratado de Lisboa:`, o:[`3 de diciembre de 2007.`, `1 de diciembre de 2009.`, `13 de diciembre de 2007.`, `3 de diciembre de 2009.`], c:1},
+  {n:6, u:"2024", t:`En virtud del artículo 288 del Tratado de Funcionamiento de la Unión Europea, los reglamentos:`, o:[`Tienen siempre alcance general, obligan en todos sus elementos y son directamente aplicables.`, `Podrán ser vinculantes.`, `Se incluyen dentro del Derecho originario de la Unión Europea.`, `Entran en vigor siempre a los veinte días de su publicación.`], c:0},
+  {n:7, u:"2024", t:`Señale qué país NO pertenece al Espacio Schengen:`, o:[`Croacia.`, `Irlanda.`, `Noruega.`, `Suiza.`], c:1},
+  {n:8, u:"2024", t:`De acuerdo con el Real Decreto Legislativo 8/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley General de la Seguridad Social, la gestión y administración de la Seguridad Social se efectuará, bajo la dirección y tutela de los respectivos departamentos ministeriales, con sujeción a los principios de:`, o:[`Simplificación, racionalización, economía de costes, solidaridad financiera y unidad de caja, eficacia social y descentralización.`, `Racionalización, eficiencia, solidaridad financiera, universalidad, eficacia institucional y desconcentración.`, `Eficacia, economía procesal, solidaridad, universalidad, descentralización, reducción de gastos y simplificación.`, `Eficiencia, racionalización de los recursos, agilización, caja única, eficacia, universalidad y solidaridad financiera.`], c:0},
+  {n:9, u:"2024", t:`De acuerdo con la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales, ¿cuál será la duración del mandato de la Presidencia y del Adjunto de la Agencia Española de Protección de Datos?`, o:[`Será de cinco y cuatro años para la Presidencia y Adjunto respectivamente, no renovables.`, `Será de cuatro años y puede ser renovado solo en el caso de la Presidencia.`, `Será de cuatro años no renovables.`, `Será de cinco años y puede ser renovado para otro período de igual duración.`], c:3},
+  {n:10, u:"2024", t:`¿Qué órgano eleva el Plan Anual Normativo al Consejo de Ministros, según el literal del artículo 25 de la Ley 50/1997, de 27 de noviembre, del Gobierno?`, o:[`La Secretaría General Técnica del Ministerio de Justicia.`, `El Abogado General del Estado.`, `La Ministra de Hacienda.`, `El Ministro de la Presidencia.`], c:3},
+  {n:11, u:"2024", t:`El artículo 34.1 de la Ley 9/2017, de 8 de noviembre, de Contratos del Sector Público, dispone que en los contratos del sector público podrán incluirse cualesquiera pactos, cláusulas y condiciones, siempre que no sean contrarios:`, o:[`Al interés público, al ordenamiento jurídico y a los principios de buena administración.`, `Al orden público, a la ley y a la buena fe.`, `A las leyes, a la moral y al orden público.`, `A los principios generales del derecho, a la ley y al interés público.`], c:0},
+  {n:12, u:"2024", t:`Según la Ley de 16 de diciembre de 1954 sobre expropiación forzosa, en el procedimiento especial para la expropiación de bienes de valor artístico, histórico y arqueológico, el justo precio de los bienes se determinará por:`, o:[`El Jurado Provincial de Expropiación.`, `El Ministro de Educación y Formación Profesional.`, `El Director General de Patrimonio.`, `Una Comisión compuesta por académicos.`], c:3},
+  {n:13, u:"2024", t:`¿Qué consecuencia establece el artículo 68.1 de la Ley 39/2015, de 1 de octubre, del Procedimiento Administrativo Común de las Administraciones Públicas, cuando un interesado no responde al requerimiento administrativo de subsanación o mejora de su solicitud?`, o:[`El procedimiento continúa en sus siguientes fases.`, `La Administración notifica un segundo requerimiento de subsanación o mejora de la solicitud.`, `Se resuelve el desistimiento de la solicitud.`, `La Administración declara el archivo de las actuaciones.`], c:2},
+  {n:14, u:"2024", t:`Indique cuál de las siguientes afirmaciones sobre la pérdida de la condición de funcionario es FALSA:`, o:[`La renuncia a la condición de funcionario no inhabilita para ingresar de nuevo en la Administración Pública a través del procedimiento de selección establecido.`, `La pérdida de la nacionalidad española determina automáticamente la pérdida de la condición de funcionario.`, `La jubilación total, ya sea voluntaria, forzosa o por declaración de incapacidad permanente para el ejercicio de las funciones propias del cuerpo o escala, es causa de pérdida de la condición de funcionario.`, `La pena principal o accesoria de inhabilitación especial para cargo público, cuando hubiera adquirido firmeza la sentencia que la imponga, produce la pérdida de la condición de funcionario respecto de aquellos empleos o cargos especificados en la sentencia.`], c:1},
+  {n:15, u:"2024", t:`De acuerdo con la Orden TDF/380/2024, de 26 de abril, sobre planificación estratégica de los recursos humanos de la Administración del Estado, ¿cuándo deberán aprobarse los planes específicos?`, o:[`Dicha Orden NO prevé la existencia de planes específicos.`, `En el primer trimestre del año.`, `En el último trimestre del año.`, `Con carácter bienal.`], c:1},
+  {n:16, u:"2024", t:`Según el artículo 22 del texto refundido de la Ley de Estatuto Básico del Empleado Público, ¿cuántas pagas extraordinarias, y de qué importe, tienen los funcionarios de carrera?`, o:[`Dos pagas extraordinarias al año, cada una por el importe de una mensualidad de las retribuciones básicas.`, `Dos pagas extraordinarias al año, de idéntico importe al de la mensualidad ordinaria.`, `Tres pagas extraordinarias al año, cada una por el importe de una mensualidad de las retribuciones básicas.`, `Dos pagas extraordinarias al año, cada una por el importe de una mensualidad de las retribuciones básicas y de la totalidad de las retribuciones complementarias, salvo aquellas que retribuyan el grado de interés, iniciativa o esfuerzo con que el funcionario desempeña su trabajo y el rendimiento o resultados obtenidos, y las que retribuyan los servicios extraordinarios prestados fuera de la jornada normal de trabajo.`], c:3},
+  {n:17, u:"2024", t:`De acuerdo con el Real Decreto 375/2003, de 28 de marzo, por el que se aprueba el Reglamento General del Mutualismo Administrativo, ¿qué mutualistas quedan exceptuados de la obligación de cotizar?`, o:[`Los funcionarios que estén en expectativa de destino.`, `Los funcionarios que se encuentren en la situación de excedencia para atender al cuidado de hijos o familiares.`, `Los funcionarios que estén en servicios en comunidades autónomas.`, `Los funcionarios que estén en excedencia forzosa.`], c:1},
+  {n:18, u:"2024", t:`¿Cuál es el órgano competente para la confección de los escenarios presupuestarios plurianuales, según el artículo 28 de la Ley 47/2003, de 26 de noviembre, General Presupuestaria?`, o:[`El Consejo de Ministros.`, `El Ministerio de Hacienda.`, `El Consejo de Estado.`, `La Intervención General de la Administración del Estado.`], c:1},
+  {n:19, u:"2024", t:`¿Qué tipo de modificación presupuestaria permite imputar a créditos del ejercicio corriente obligaciones derivadas de compromisos de gastos debidamente adquiridos en ejercicios anteriores?`, o:[`Gastos plurianuales.`, `Ampliaciones de créditos.`, `Generaciones de créditos.`, `Incorporaciones de créditos.`], c:3},
+  {n:20, u:"2024", t:`Según la Ley 47/2003, de 26 de noviembre, General Presupuestaria, ¿cuál de las siguientes actuaciones NO debe incluir el control financiero permanente?`, o:[`Comprobación de la planificación, gestión y situación de la tesorería.`, `Seguimiento de la ejecución presupuestaria y verificación del cumplimiento de los objetivos asignados a los programas de los centros gestores del gasto y verificación del balance de resultados e informe de gestión.`, `Revisión y aprobación de los Presupuestos Generales del Estado.`, `En los departamentos ministeriales y entidades gestoras y servicios comunes de la Seguridad Social, verificar, mediante técnicas de auditoría, que los datos e información con trascendencia económica proporcionados por los órganos gestores como soporte de la información contable, reflejan razonablemente las operaciones derivadas de su actividad.`], c:2},
+  {n:21, u:"2022", t:`De conformidad con el artículo 84 de IV Convenio colectivo único para el personal laboral de la Administración General del Estado, en materia de representación colectiva del personal laboral se estará a lo dispuesto en:`, o:[`El título II del Estatuto de los Trabajadores y en el XII del IV Convenio colectivo único para el personal laboral de la Administración General del Estado.`, `El título II del Estatuto de los Trabajadores, en la Ley Orgánica de Libertad Sindical y en el XII del IV Convenio colectivo único para el personal laboral de la Administración General del Estado.`, `El título III del Estatuto de los Trabajadores, en la Ley Orgánica de Libertad Sindical y en el XII del IV Convenio colectivo único para el personal laboral de la Administración General del Estado.`, `El título II del Estatuto de los Trabajadores, en la Ley Orgánica de Libertad Sindical y en el X del IV Convenio colectivo único para el personal laboral de la Administración General del Estado.`], c:2},
+  {n:22, u:"2022", t:`De acuerdo con la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, la Sala de lo Penal de la Audiencia Nacional conocerá de:`, o:[`Los delitos cometidos fuera del territorio nacional, cuando conforme a las leyes o a los tratados corresponda su enjuiciamiento a los Tribunales españoles.`, `Los recursos de casación, revisión y otros extraordinarios en materia penal que establezca la ley.`, `La instrucción y enjuiciamiento de las causas contra el Presidente del Gobierno, Presidentes del Congreso y del Senado, Presidente del Tribunal Supremo y del Consejo General del Poder Judicial, Presidente del Tribunal Constitucional, miembros del Gobierno, Diputados y Senadores.`, `La instrucción y el fallo de las causas penales contra jueces, magistrados y miembros del Ministerio Fiscal por delitos o faltas cometidos en el ejercicio de su cargo en la comunidad autónoma, siempre que esta atribución no corresponda al Tribunal Supremo.`], c:0},
+  {n:23, u:"2022", t:`Según lo establecido en la Ley 7/1985, de 2 de abril, Reguladora de las Bases del Régimen Local, la coordinación de la prestación del servicio de recogida y tratamiento de residuos es competencia de la Diputación provincial o entidad equivalente en municipios con:`, o:[`Población inferior a 50.000 habitantes.`, `Población inferior a 5.000 habitantes.`, `Población superior a 20.000 habitantes.`, `Población inferior a 20.000 habitantes.`], c:3},
+  {n:24, u:"2022", t:`De acuerdo con el artículo 285 del Tratado de Funcionamiento de la Unión Europea, ¿quién compone el Tribunal de Cuentas de la Unión Europea?`, o:[`Treinta personas elegidas por el Parlamento Europeo.`, `Los presidentes del órgano fiscalizador de cuentas de cada Estado miembro.`, `Diez personas designadas por la Comisión Europea.`, `Un nacional de cada Estado miembro.`], c:3},
+  {n:25, u:"2022", t:`¿Dónde tiene su sede FRONTEX, la Agencia Europea de la Guardia de Fronteras y Costas?`, o:[`Madrid.`, `Varsovia.`, `Roma.`, `Budapest.`], c:1},
+  {n:26, u:"2022", t:`De acuerdo con el Real Decreto Legislativo 8/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley General de la Seguridad Social, ¿cuál de los siguientes NO es uno de los regímenes especiales a los que se hace referencia en el artículo 10?`, o:[`Directivos de empresas cotizadas.`, `Trabajadores por cuenta propia o autónomos.`, `Funcionarios públicos, civiles y militares.`, `Estudiantes.`], c:0},
+  {n:27, u:"2022", t:`De acuerdo con lo establecido en el Reglamento (UE) 2016/679, del Parlamento y del Consejo, de 27 de abril, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos y por el que se deroga la Directiva 95/46/CE (Reglamento general de protección de datos), los Estados miembros podrán establecer por Ley una edad inferior a 16 años para el consentimiento del niño en relación con los servicios de la sociedad de la información:`, o:[`Siempre que esta no sea inferior a 14 años.`, `Siempre que esta no sea inferior a 15 años.`, `Siempre que esta no sea inferior a 12 años.`, `Siempre que esta no sea inferior a 13 años.`], c:3},
+  {n:28, u:"2022", t:`De conformidad con lo dispuesto en la Constitución Española de 1978, los Decretos-Leyes dictados por el Gobierno en casos de extraordinaria y urgente necesidad:`, o:[`Deberán ser sometidos a debate y votación de totalidad al Congreso, convocado al efecto si no estuviese reunido, en el plazo de los sesenta días siguientes a su promulgación.`, `Deberán ser sometidos a debate y votación de las Cortes Generales, convocadas al efecto si no estuviesen reunidas, en el plazo de los treinta días siguientes a su promulgación.`, `Deberán ser inmediatamente sometidos a debate y votación de totalidad al Congreso, convocado al efecto si no estuviese reunido, en el plazo de los treinta días siguientes a su promulgación.`, `Deberán ser sometidos a debate y votación de totalidad del Senado, convocado al efecto si no estuviese reunido, en el plazo de los sesenta días siguientes a su promulgación.`], c:2},
+  {n:29, u:"2022", t:`Según lo establecido en el artículo 23 de la Ley 40/2015, de 1 de octubre, de Régimen Jurídico del Sector Público, ¿cuál de los siguientes NO es un motivo de abstención en un procedimiento administrativo?`, o:[`Tener parentesco de consanguinidad dentro del cuarto grado con cualquiera de los interesados en el procedimiento.`, `Tener parentesco de afinidad dentro del segundo grado con cualquiera de los interesados en el procedimiento.`, `Compartir despacho profesional con los interesados en el procedimiento.`, `Haberle prestado al interesado hace cinco años servicios profesionales de cualquier tipo.`], c:3},
+  {n:30, u:"2022", t:`¿Qué regulación resulta aplicable a los contratos de fabricación?`, o:[`Las normas generales y especiales del contrato de obras.`, `Las normas generales y especiales del contrato de suministro.`, `Las normas generales y especiales del contrato de obras, salvo las relativas a su publicidad y procedimiento de adjudicación, que se acomodarán, en todo caso, al contrato de suministro.`, `Las normas generales y especiales del contrato de suministro, salvo las relativas a su publicidad y procedimiento de adjudicación, que se acomodarán, en todo caso, al contrato de obras.`], c:2},
+  {n:31, u:"2022", t:`Señale la afirmación correcta en relación con el régimen de expropiación forzosa:`, o:[`El beneficiario de una expropiación no puede ser un particular.`, `El Jurado Provincial de expropiación estará presidido por el Registrador de la Propiedad de mayor antigüedad de la provincia.`, `El precio de la expropiación tiene que ser determinado por el Jurado Provincial de Expropiación.`, `Los Organismos Públicos no tienen atribuida la potestad expropiatoria.`], c:3},
+  {n:32, u:"2022", t:`De conformidad con el artículo 32 de la Ley 40/2015, de 1 de octubre, de Régimen Jurídico del Sector Público, los particulares tendrán derecho a ser indemnizados por las Administraciones Públicas de toda lesión que sufran en sus bienes y derechos:`, o:[`En todos los casos en los que se produzca la anulación en via administrativa o por el orden jurisdiccional contencioso- administrativo de actos o disposiciones administrativas.`, `Cuando la lesión sea consecuencia del funcionamiento normal de los servicios públicos.`, `Cuando la lesión sea consecuencia de daños que el particular tenga el deber jurídico de soportar de acuerdo con la Ley.`, `Cuando la lesión haya tenido lugar por causa de fuerza mayor.`], c:1},
+  {n:33, u:"2022", t:`Es un medio de ejecución forzosa de los actos administrativos:`, o:[`La sanción subsidiaria.`, `La multa coercitiva.`, `La compulsa de documentos administrativos.`, `La desviación de poder.`], c:1},
+  {n:34, u:"2022", t:`De acuerdo con el artículo 103.3 de la Constitución Española de 1978, el acceso a la función pública y las garantías de imparcialidad en el ejercicio de sus funciones se regulará:`, o:[`Por Ley Orgánica.`, `Por Real Decreto.`, `Por Ley.`, `Por Reglamento.`], c:2},
+  {n:35, u:"2022", t:`¿Cuál de los siguientes conceptos NO tiene el carácter de sanción disciplinaria, de conformidad con el Real Decreto 33/1986, de 10 de enero, por el que se aprueba el Reglamento de Régimen Disciplinario de los Funcionarios de la Administración del Estado?`, o:[`Suspensión de funciones.`, `Apercibimiento.`, `Deducción proporcional de retribuciones.`, `Traslado con cambio de residencia.`], c:2},
+  {n:36, u:"2022", t:`De conformidad con el Real Decreto 364/1995 de 10 de marzo, por el que se aprueba el Reglamento General de Ingreso del Personal al servicio de la Administración general del Estado y de Provisión de Puestos de Trabajo y Promoción Profesional de los Funcionarios Civiles de la Administración general del Estado, el plazo máximo para resolver los concursos es de:`, o:[`Un mes salvo que en la convocatoria se establezca otro distinto.`, `Dos meses en todo caso.`, `Tres meses salvo que en la convocatoria se establezca otro distinto.`, `Dos meses salvo que en la convocatoria se establezca otro distinto.`], c:3},
+  {n:37, u:"2022", t:`Las comisiones de servicio con derecho a indemnización, que no tengan la condición de residencia eventual, reguladas en el Real Decreto 462/2002, de 24 de mayo, sobre indemnizaciones por razón del servicio, tendrán, con carácter general, una duración máxima de:`, o:[`Un mes en territorio nacional y tres meses en el extranjero.`, `Dos meses en territorio nacional y seis en el extranjero.`, `Tres meses en territorio nacional y un mes en el extranjero.`, `No tienen límite de duración, ya que dependen de las necesidades del servicio.`], c:0},
+  {n:38, u:"2022", t:`De acuerdo con el artículo 26 de la Ley 47/2003, de 26 de noviembre, General Presupuestaria, ¿cuáles son todos los principios que rigen la programación presupuestaria?`, o:[`Los principios de estabilidad presupuestaria, sostenibilidad financiera, plurianualidad, transparencia, eficiencia en la asignación y utilización de los recursos públicos, responsabilidad y lealtad institucional.`, `Los principios de estabilidad presupuestaria, plurianualidad y unidad de caja.`, `Los principios de estabilidad presupuestaria, sostenibilidad financiera, plurianualidad, unidad de caja, eficacia en la asignación y utilización de todos los recursos, coherencia normativa y lealtad institucional.`, `Los principios de estabilidad presupuestaria, equilibrio financiero, plurianualidad, transparencia y neutralidad en la utilización de los recursos, responsabilidad y lealtad institucional.`], c:0},
+  {n:39, u:"2022", t:`De acuerdo con el artículo 49 de la Ley Orgánica 2/1982, de 12 de mayo, del Tribunal de Cuentas, ¿qué recursos se pueden interponer contra las resoluciones del Tribunal de Cuentas, en los casos y en la forma que determina su Ley de Funcionamiento?`, o:[`Serán susceptibles del recurso de casación y revisión ante el Tribunal Supremo.`, `Serán susceptibles del recurso de casación y revisión ante el Tribunal Constitucional.`, `Serán susceptibles del recurso de alzada y casación ante el Tribunal Supremo.`, `Serán susceptibles del recurso de alzada y extraordinario de revisión ante el Tribunal Supremo.`], c:0},
+  {n:40, u:"2022", t:`Señale la definición de precio público de acuerdo con la Ley 58/2003, de 17 de diciembre, General Tributaria:`, o:[`Son los tributos cuyo hecho imponible consiste en la utilización privativa o el aprovechamiento especial del dominio público, la prestación de servicios o la realización de actividades en régimen de derecho público que se refieran, afecten o beneficien de modo particular al obligado tributario, cuando los servicios o actividades no sean de solicitud o recepción voluntaria para los obligados tributarios o no se presten o realicen por el sector privado.`, `Son los tributos cuyo hecho imponible consiste en la obtención por el obligado tributario de un beneficio o de un aumento de valor de sus bienes como consecuencia de la realización de obras públicas o del establecimiento o ampliación de servicios públicos.`, `Son los tributos exigidos sin contraprestación cuyo hecho imponible está constituido por negocios, actos o hechos que ponen de manifiesto la capacidad económica del contribuyente.`, `Son las contraprestaciones pecuniarias que se satisfagan por la prestación de servicios o la realización de actividades efectuadas en régimen de Derecho público cuando, prestándose también tales servicios o actividades por el sector privado, sean de solicitud voluntaria por parte de los administrados.`], c:3},
+  {n:41, u:"2019", t:`De conformidad con el artículo 101 de la LCSP, ¿cuál de los siguientes costes NO deberá tenerse en cuenta para el cálculo del valor estimado del contrato?`, o:[`Gastos generales de estructura.`, `Impuesto sobre el Valor Añadido.`, `Beneficio industrial.`, `Eventuales prórrogas del contrato.`], c:3},
+  {n:42, u:"2019", t:`De conformidad con el artículo 99 de la CE, el candidato propuesto por el Rey a la Presidencia del Gobierno expondrá el programa político del Gobierno que pretenda formar ante:`, o:[`El Rey.`, `El Congreso de los Diputados.`, `El Senado.`, `Las Cortes Generales. Página 2 de 11 2019 GACE-LI`], c:1},
+  {n:43, u:"2019", t:`Conforme a la Ley 40/2015, la norma de creación de un órgano colegiado interministerial con competencias decisorias cuyo presidente no tenga rango superior al de Director General revestirá la forma de:`, o:[`Orden del Ministerio de Presidencia.`, `Real decreto.`, `Orden ministerial conjunta.`, `Acuerdo de Consejo de Ministros.`], c:2},
+  {n:44, u:"2019", t:`Según el artículo 20 de la Ley 7/1985, de 2 de abril, Reguladora de las Bases de Régimen Local, la Junta de Gobierno Local:`, o:[`Existe en todos los Ayuntamientos.`, `Existe en todos los municipios con población superior a 5.000 habitantes y en los de menos, cuando así lo disponga su reglamento orgánico o así lo acuerde el Pleno de su Ayuntamiento.`, `Existe en todos los municipios con población superior a 10.000 habitantes y en los de menos, cuando así lo disponga su reglamento orgánico o así lo acuerde el Pleno de su Ayuntamiento.`, `Solo existe en los municipios con población superior a 5.000 habitantes.`], c:1},
+  {n:45, u:"2019", t:`A partir del 1 de noviembre de 2014, una mayoría cualificada en el Consejo se define como:`, o:[`Al menos el 55 % de los Estados miembros a favor, representando al menos el 62 % de la población total de la UE.`, `Al menos el 65 % de los Estados miembros a favor, representando al menos el 55 % de la población total de la UE.`, `Al menos el 65 % de los Estados miembros a favor, representando al menos el 62 % de la población total de la UE.`, `Al menos el 55 % de los Estados miembros a favor, representando al menos el 65 % de la población total de la UE.`], c:3},
+  {n:46, u:"2019", t:`Según el artículo 61 de la Ley 40/2015, ¿a quién le corresponde aprobar los planes de actuación del Ministerio?`, o:[`A la persona titular de la Subsecretaría.`, `A la persona titular de la Secretaría General Técnica.`, `A la persona titular de la Secretaría de Estado.`, `A la persona titular del Ministerio.`], c:3},
+  {n:47, u:"2019", t:`Según la Ley 42/2007, de 13 de diciembre, del Patrimonio Natural y de la Biodiversidad, los espacios naturales, cuya creación tiene como finalidad la protección de ecosistemas, comunidades o elementos biológicos que, por su rareza, fragilidad, importancia o singularidad merecen una valoración especial son denominados:`, o:[`Parques.`, `Reservas Naturales.`, `Monumentos Naturales.`, `Paisajes Protegidos.`], c:1},
+  {n:48, u:"2019", t:`Según el artículo 25 bis de la Ley Orgánica 4/2000, de 11 de enero, sobre derechos y libertades de los extranjeros en España y su integración social, el visado de residencia y trabajo de temporada habilita para trabajar por cuenta ajena:`, o:[`Hasta 6 meses en un periodo de 18 meses consecutivos.`, `Hasta 9 meses en un periodo de 12 meses consecutivos.`, `Hasta 9 meses en un periodo de 18 meses consecutivos.`, `Hasta 6 meses en un periodo de 12 meses consecutivos.`], c:1},
+  {n:49, u:"2019", t:`Según la Ley Orgánica 3/2007, de 22 de marzo, para la igualdad efectiva de mujeres y hombres, ¿a quién corresponde aprobar el Plan para la Igualdad entre mujeres y hombres en la Administración General del Estado?`, o:[`A la Mesa General de Negociación de las Administraciones Públicas, finalizado el plazo de vigencia del anterior Plan.`, `Al Gobierno, al inicio de cada legislatura.`, `Al Congreso de los Diputados, al cierre del ejercicio parlamentario.`, `A la Comisión Técnica de Igualdad, dependiente de la Mesa General de Negociación de la Administración General del Estado.`], c:1},
+  {n:50, u:"2019", t:`Conforme a la Ley 40/2015, cuando de la gestión dimanante de fórmulas conjuntas de actuación entre varias Administraciones públicas se derive responsabilidad patrimonial concurrente, a falta de reglas específicas de la organización colegiada:`, o:[`La Administración competente en el procedimiento será la que cuente con mayor participación en la financiación del servicio, y la responsabilidad será solidaria.`, `La Administración competente en el procedimiento se acordará según la intensidad de su intervención en el servicio, y la responsabilidad será mancomunada.`, `Se decidirá qué Administración es competente en función del interés público tutelado, y la responsabilidad será mancomunada.`, `Cada Administración será competente en el procedimiento según la intensidad de su intervención y el interés público tutelado, y la responsabilidad será solidaria.`], c:0},
+  {n:51, u:"2019", t:`Según el artículo 235 de la LCSP, los órganos de contratación deberán solicitar un informe de las correspondientes oficinas o unidades de supervisión de los proyectos encargadas de verificar que se han tenido en cuenta las disposiciones generales de carácter legal o reglamentario, así como la normativa técnica que resulten de aplicación para cada tipo de proyecto. Este informe se solicitará:`, o:[`Después de la aprobación del proyecto, cuando el presupuesto base de licitación del contrato de obras sea superior a 500.000,00 euros, IVA excluido.`, `Antes de la aprobación del proyecto, cuando el presupuesto base de licitación del contrato de obras sea igual o superior a 500.000 euros, IVA excluido.`, `Después de la aprobación del proyecto, cuando el presupuesto base de licitación del contrato de obras sea superior a 300.000,00 euros, IVA excluido.`, `Antes de la aprobación del proyecto, cuando el presupuesto base de licitación del contrato de obras sea superior a 300.000,00 euros, IVA incluido.`], c:1},
+  {n:52, u:"2019", t:`De conformidad con la Ley 38/2003, de 17 de noviembre, General de Subvenciones, requerirá la previa autorización del Consejo de Ministros o, en el caso de que así lo establezca la normativa reguladora de la subvención, de la Comisión Delegada del Gobierno para Asuntos Económicos, la concesión de subvenciones de cuantía superior a:`, o:[`Diez millones de euros.`, `Doce millones de euros.`, `Quince millones de euros.`, `Veinte millones de euros.`], c:1},
+  {n:53, u:"2019", t:`Señale la respuesta correcta en relación con la acumulación de procedimientos del artículo 57 de la Ley 39/2015:`, o:[`El órgano administrativo que inicie o tramite un procedimiento podrá disponer su acumulación a otros siempre que haya identidad en los interesados.`, `Solo podrá acordarse en procedimientos iniciados de oficio.`, `Contra el acuerdo de acumulación podrá interponerse recurso de alzada ante el superior jerárquico del órgano que acordó la acumulación de procedimientos.`, `Contra el acuerdo de acumulación no procederá recurso alguno.`], c:3},
+  {n:54, u:"2019", t:`De conformidad con el artículo 8 del Real Decreto Legislativo 5/2015, de 30 de octubre, por el que se aprueba el Texto Refundido del Estatuto Básico del Empleado Público (en adelante TREBEP), NO se encuentra dentro de la clasificación de empleado público, el:`, o:[`Personal directivo profesional.`, `Personal eventual.`, `Personal funcionario interino.`, `Personal laboral temporal. Página 8 de 11 2019 GACE-LI`], c:0},
+  {n:55, u:"2019", t:`De conformidad con el artículo 12 del Real Decreto 365/1995, de 10 de marzo, por el que se aprueba el Reglamento de Situaciones Administrativas de los Funcionarios Civiles de la Administración General del Estado, ¿cuánto tiempo pueden permanecer los funcionarios en situación de expectativa de destino?`, o:[`Un período máximo de 1 año, transcurrido el cual pasarán a la situación de excedencia forzosa.`, `Un período de máximo de 6 meses, transcurrido el cual pasarán a la situación de excedencia forzosa.`, `Un período máximo de 6 meses, transcurrido el cual pasarán a la situación de excedencia voluntaria por interés particular.`, `Un período máximo de 18 meses, transcurrido el cual pasarán a la situación de excedencia voluntaria por interés particular.`], c:0},
+  {n:56, u:"2019", t:`¿Podrían sustituirse las vacaciones anuales retribuidas de los funcionarios por una cuantía económica o compensación económica?`, o:[`No, en ningún caso.`, `Sí, puede solicitarse una compensación económica en los casos en que no fuera posible el disfrute de las vacaciones en el año natural, por necesidades de servicio y debidamente motivado.`, `Sí, en casos de conclusión de la relación de servicio por causas ajenas a la voluntad de los funcionarios, tendrán derecho a solicitar el abono de una compensación económica por las vacaciones devengadas y no disfrutadas; y en particular, en los casos de jubilación por incapacidad permanente o por fallecimiento, hasta un máximo de dieciocho meses.`, `Sí, tendrán derecho a solicitar una compensación económica por las vacaciones devengadas y no disfrutadas en casos de incapacidad temporal que sobreviniera una vez iniciado el disfrute vacacional e impida su disfrute en el año natural y siempre que no hayan transcurrido más de dieciocho meses a partir del final del año en que se hayan originado.`], c:2},
+  {n:57, u:"2019", t:`De acuerdo con la Ley 30/1984, de 2 de agosto, de medidas para la reforma de la Función Pública, el incumplimiento de la obligación de atender los servicios esenciales en caso de huelga se considera como:`, o:[`Falta muy grave.`, `Falta grave.`, `Falta leve.`, `No tiene consideración de infracción administrativa.`], c:0},
+  {n:58, u:"2019", t:`En la aplicación presupuestaria 15.202.463A.120.05, "120.05" se refiere a:`, o:[`La clasificación orgánica que agrupa por secciones y servicios los créditos asignados a los distintos centros gestores de gasto.`, `La clasificación por programas conforme a los objetivos a conseguir, siendo en este caso un programa finalista.`, `La clasificación económica, en este caso gastos correspondientes a las retribuciones básicas de funcionarios, en concreto trienios.`, `La clasificación económica, en este caso gastos corrientes en bienes y servicios.`], c:2},
+  {n:59, u:"2019", t:`La Regla 83 de la Orden de 1 de febrero de 1996, por la que se aprueba la Instrucción de operatoria contable a seguir en la ejecución del gasto del Estado, indica en relación con la tramitación de subvenciones nominativas que, una vez dictado el acuerdo de concesión por el órgano competente, el servicio gestor formulará un documento:`, o:[`AD o ADOK.`, `RC.`, `OK.`, `D.`], c:0},
+  {n:60, u:"2019", t:`En las retribuciones de los funcionarios públicos:`, o:[`El sueldo y los trienios dependen del Grupo o Subgrupo de clasificación profesional al que pertenece su cuerpo o escala.`, `El complemento de productividad se establece en las leyes anuales de presupuestos en función del nivel del puesto de trabajo desempeñado.`, `El complemento específico se establece en las leyes anuales de presupuestos en función del nivel del puesto de trabajo desempeñado.`, `Las gratificaciones por servicios extraordinarios se fijan en atención a la valía personal y la consecución de resultados.`], c:0}
+];
+
+const TOTAL = BANK.length; // 60
+let cur = 0;
+let answers = new Array(TOTAL).fill(null); // null=blank, 0-3=chosen
+let timerSec = 60 * 60;
+let timerInterval = null;
+let gridOpen = false;
+let finished = false;
+
+// Build grid dots
+const grid = document.getElementById('grid');
+for (let i = 0; i < TOTAL; i++) {
+  const d = document.createElement('div');
+  d.className = 'grid-dot';
+  d.id = 'dot-' + i;
+  d.textContent = i + 1;
+  d.onclick = () => { goTo(i); toggleGrid(false); };
+  grid.appendChild(d);
+}
+
+function render() {
+  const q = BANK[cur];
+  document.getElementById('q-num').textContent = `${cur + 1} / ${TOTAL}`;
+  document.getElementById('q-year').textContent = `Convocatoria ${q.u}`;
+  document.getElementById('q-text').textContent = q.t;
+  const opts = document.getElementById('options');
+  opts.innerHTML = '';
+  q.o.forEach((o, i) => {
+    const div = document.createElement('div');
+    div.className = 'opt' + (answers[cur] === i ? ' selected' : '');
+    div.innerHTML = `<div class="opt-letter">${'ABCD'[i]}</div><div>${o}</div>`;
+    div.onclick = () => select(i);
+    opts.appendChild(div);
+  });
+  document.getElementById('btn-prev').disabled = cur === 0;
+  document.getElementById('btn-next').disabled = cur === TOTAL - 1;
+  document.getElementById('progress').style.width = ((cur + 1) / TOTAL * 100) + '%';
+  updateGrid();
+}
+
+function select(idx) {
+  if (finished) return;
+  answers[cur] = answers[cur] === idx ? null : idx;
+  render();
+}
+
+function goTo(i) {
+  if (i < 0 || i >= TOTAL) return;
+  cur = i;
+  render();
+}
+
+function updateGrid() {
+  for (let i = 0; i < TOTAL; i++) {
+    const d = document.getElementById('dot-' + i);
+    d.className = 'grid-dot' +
+      (answers[i] !== null ? ' answered' : '') +
+      (i === cur ? ' current' : '');
+  }
+}
+
+function toggleGrid(force) {
+  gridOpen = force !== undefined ? force : !gridOpen;
+  document.getElementById('grid').classList.toggle('open', gridOpen);
+}
+
+// Timer
+function startTimer() {
+  timerInterval = setInterval(() => {
+    timerSec--;
+    const m = Math.floor(timerSec / 60);
+    const s = timerSec % 60;
+    const el = document.getElementById('timer');
+    el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if (timerSec <= 300) el.className = 'timer warning';
+    if (timerSec <= 60) el.className = 'timer critical';
+    if (timerSec <= 0) {
+      clearInterval(timerInterval);
+      finish();
+    }
+  }, 1000);
+}
+
+function confirmFinish() {
+  const blank = answers.filter(a => a === null).length;
+  const msg = blank > 0
+    ? `Tienes ${blank} pregunta${blank > 1 ? 's' : ''} sin responder. Las preguntas en blanco no penalizan.`
+    : 'Has respondido todas las preguntas.';
+  document.getElementById('modal-msg').textContent = msg;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+function finish() {
+  clearInterval(timerInterval);
+  finished = true;
+  closeModal();
+  showResults();
+}
+
+function showResults() {
+  document.getElementById('exam').style.display = 'none';
+  document.getElementById('results').style.display = 'block';
+
+  let correct = 0, wrong = 0, blank = 0;
+  answers.forEach((a, i) => {
+    if (a === null) blank++;
+    else if (a === BANK[i].c) correct++;
+    else wrong++;
+  });
+
+  const pts = correct - wrong / 3;
+  const grade = Math.max(0, (pts / TOTAL) * 10);
+
+  document.getElementById('res-correct').textContent = correct;
+  document.getElementById('res-wrong').textContent = wrong;
+  document.getElementById('res-blank').textContent = blank;
+  document.getElementById('res-pts').textContent = pts.toFixed(2);
+  document.getElementById('res-grade').textContent = grade.toFixed(2) + ' / 10';
+  document.getElementById('res-sub').textContent =
+    grade >= 5 ? '✅ Aprobado (referencia)' : '❌ Por debajo del umbral · sigue trabajando';
+  document.getElementById('formula-text').textContent =
+    `Fórmula: ${correct} correctas − ${wrong} incorrectas ÷ 3 = ${pts.toFixed(2)} puntos · Nota: ${grade.toFixed(2)}/10`;
+}
+
+function showReview() {
+  const sec = document.getElementById('review-section');
+  if (sec.style.display === 'block') { sec.style.display = 'none'; return; }
+  sec.style.display = 'block';
+  sec.innerHTML = '<h3 style="margin-bottom:20px;color:var(--green-dark)">Revisión de respuestas</h3>';
+
+  BANK.forEach((q, i) => {
+    const ans = answers[i];
+    const isCorrect = ans === q.c;
+    const isBlank = ans === null;
+    const cls = isBlank ? 'r-blank' : isCorrect ? 'r-correct' : 'r-wrong';
+    const label = isBlank ? 'En blanco' : isCorrect ? 'Correcta ✓' : 'Incorrecta ✗';
+
+    let optsHtml = q.o.map((o, j) => {
+      let cls = '';
+      if (j === q.c) cls = 'r-correct';
+      else if (j === ans && ans !== null) cls = 'r-your-wrong';
+      const mark = j === q.c ? ' ✓' : (j === ans && ans !== null ? ' ✗ (tu respuesta)' : '');
+      return cls ? `<div class="review-opt ${cls}">${'ABCD'[j]}) ${o}${mark}</div>` : '';
+    }).join('');
+
+    sec.innerHTML += `
+      <div class="review-q ${cls}">
+        <div class="review-label">P${i+1} · ${label} · Convocatoria ${q.u}</div>
+        <div class="review-text">${q.t}</div>
+        <div class="review-opts">${optsHtml}</div>
+      </div>`;
+  });
+}
+
+// Init
+render();
+startTimer();
+</script>
+</body>
+</html>
