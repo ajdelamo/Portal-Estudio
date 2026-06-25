@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇬🇧 Inglés S01 · Test Adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#faeeda;color:#854f0b;border-color:#e8a63a}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer}
+.ubar:hover{border-color:#e8a63a}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#e8a63a;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#faeeda;color:#854f0b;border-color:#e8a63a}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #e8a63a}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🇬🇧 Inglés S01 · Vocabulario · Comprensión · Gramática</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+// UNIT 1 — Vocabulario S01 (European Parliament) ──────────────────────────────
+{u:1,t:'Fill in the gap: "The European Parliament is one of the main _____ of the EU."',o:["institutions","organisations","agencies","departments"],c:0,e:"'Institution' refers to an established, important official body. The European Parliament is one of the 7 official EU institutions. 'Organisation' is vaguer; 'agency' is a smaller, more specialised body."},
+{u:1,t:'Choose the best word: "MEPs are elected _____ who speak for their citizens."',o:["managers","supervisors","representatives","delegates"],c:2,e:"'Representatives' are people elected to speak and act on behalf of others — the standard political term for elected officials. 'Delegates' is also possible but is more often used for non-elected, appointed representatives."},
+{u:1,t:'Complete the sentence: "The Parliament _____ the work of the European Commission."',o:["manages","supervises","controls","directs"],c:1,e:"'Supervise' means to watch and check that something is being done correctly. The Parliament supervises — it monitors and holds other institutions accountable, but does not manage their day-to-day work directly."},
+{u:1,t:'Fill in the gap: "The Parliament has power over the EU _____ — it decides how money is spent."',o:["economy","funds","budget","finances"],c:2,e:"'Budget' is the specific word for a formal plan showing how money will be collected and spent over a period. 'Funds' = pools of money; 'finances' = financial affairs in general; 'economy' is too broad."},
+{u:1,t:'Choose the correct word: "The official _____ of the Parliament are held in Strasbourg."',o:["meetings","sessions","conferences","debates"],c:1,e:"'Session' is the formal term for official sittings of a parliament or court — it implies a set period of formal work. 'Meetings' is too informal for a parliamentary context; 'conference' suggests a separate event."},
+{u:1,t:'Fill in the gap: "The Parliament works across national _____."',o:["limits","frontiers","edges","borders"],c:3,e:"'Borders' is the standard political and administrative term for the official lines that divide countries. 'Frontiers' is also correct but more literary or geographical; 'limits' and 'edges' do not work in this context."},
+{u:1,t:'Complete the sentence: "For many people, the Parliament is a _____ of democracy."',o:["sign","signal","symbol","mark"],c:2,e:"'Symbol' is something that represents an idea, quality or value — a parliament symbolises democracy. 'Sign' and 'signal' suggest communication of information (you see a sign, you send a signal); they do not express representation of values."},
+{u:1,t:'Choose the best word: "The EU is built on _____ between member states."',o:["combination","cooperation","coordination","connection"],c:1,e:"'Cooperation' means working together towards shared goals — the standard term in EU, political and diplomatic contexts. 'Coordination' is about organising separate activities to fit together; it does not carry the same idea of joint purpose and mutual support."},
+{u:1,t:'Fill in the gap: "EU _____ can vote for their MEP every five years."',o:["people","residents","inhabitants","citizens"],c:3,e:"'Citizens' are people who are legally recognised members of a state and have political rights, including the right to vote. 'Residents' just means people who live in a place — they may not have voting rights. 'Inhabitants' is even more neutral."},
+{u:1,t:'Choose the correct word: "_____ MEPs belong to the same European political group."',o:["Traditional","Conservative","Classical","Republican"],c:1,e:"'Conservative' is the standard political term for parties that favour traditional institutions and moderate change. In the European Parliament the EPP (European People\'s Party) is the main conservative group. 'Traditional' is an adjective describing behaviour, not a party label."},
+// UNIT 2 — Comprensión S01 (European Parliament) ────────────────────────────
+{u:2,t:"According to the text, how many members does the European Parliament have?",o:["450","625","705","751"],c:2,e:"The text states: 'It has 705 members, called Members of the European Parliament, or MEPs.' This number can change slightly after elections as the allocation per country is adjusted."},
+{u:2,t:"How often do EU citizens elect their MEPs?",o:["Every 3 years","Every 4 years","Every 5 years","Every 7 years"],c:2,e:"The text says: 'Citizens from all 27 EU countries vote to choose their representatives every five years.' The most recent elections (before mid-2026) were held in June 2024."},
+{u:2,t:"Where do the official sessions of the European Parliament take place?",o:["Brussels, Belgium","Luxembourg City","Strasbourg, France","Geneva, Switzerland"],c:2,e:"The text says: 'The official sessions are in Strasbourg.' Most day-to-day committee work happens in Brussels, but the official plenary sessions must be held in Strasbourg — this is a Treaty requirement."},
+{u:2,t:"How do MEPs sit in the Parliament chamber?",o:["Alphabetically by surname","By the country they represent","By political group, not by country","By seniority"],c:2,e:"The text explains: 'MEPs do not sit with their country. Instead, they sit in political groups.' This reflects that European democracy is organised by ideology across national borders, not by national delegation."},
+{u:2,t:"Which of the following is NOT one of the Parliament's three main jobs described in the text?",o:["Making laws together with the Council","Controlling the EU budget","Collecting EU taxes from member states","Supervising other EU institutions"],c:2,e:"The Parliament's three jobs are: (1) making laws with the Council, (2) controlling the EU budget, (3) supervising other EU institutions. Collecting taxes is NOT a function of the Parliament — taxes are collected by member states through their national systems."},
+// UNIT 3 — Gramática y Uso S00-S01 ─────────────────────────────────────────
+{u:3,t:'How do you correctly say "Actualmente trabajo en el Ayuntamiento" in English?',o:["Actually I work at the town hall.","Currently I work at the town hall.","Eventually I work at the town hall.","Effectively I work at the town hall."],c:1,e:"FALSO AMIGO. 'Currently' = en este momento / actualmente ✓. 'Actually' = en realidad / de hecho (introduces a surprising or corrective truth). 'Eventually' = al final / finalmente (after a long process). Never translate 'actualmente' as 'actually'."},
+{u:3,t:'Fill in the gap: "I was so _____ when I forgot his name in front of everyone."',o:["ashamed","embarrassed","shamed","humiliated"],c:1,e:"FALSO AMIGO. 'Embarrassed' = avergonzado/a (socially awkward moment — pasar vergüenza) ✓. 'Ashamed' implies deeper moral guilt about something wrong you did. 'Embarrassed' is right for awkward social situations with no moral failure."},
+{u:3,t:'Choose the correct word: "She always makes very _____ decisions." (= sensatas)',o:["sensitive","sensible","sensational","sense"],c:1,e:"FALSO AMIGO. 'Sensible' = sensato/a (reasonable, practical) ✓. 'Sensitive' = sensible (easily affected emotionally or physically). Memory trick: Spanish 'sensato' → English 'sensible'; Spanish 'sensible' → English 'sensitive'. They cross over!"},
+{u:3,t:'Fill in the gap: "My colleague is very _____ — she gets upset easily when criticised." (= sensible)',o:["sensible","sensitive","reasonable","emotional"],c:1,e:"FALSO AMIGO. 'Sensitive' = sensible (easily affected by emotions or external stimuli) ✓. 'Sensible' = sensato (practical and wise). The Spanish-English pair is reversed: 'sensible' (ES) → 'sensitive' (EN); 'sensato' (ES) → 'sensible' (EN)."},
+{u:3,t:'Complete the sentence: "He tried for years and _____ passed the exam."',o:["actually","currently","eventually","lately"],c:2,e:"'Eventually' = al final, finalmente (after a long time or many attempts) ✓. It always implies a process — something took longer than expected but finally happened. 'Actually' = en realidad. 'Currently' = actualmente. 'Lately' = últimamente."},
+{u:3,t:'Fill in the gap: "This explanation doesn\'t _____ sense."',o:["do","make","have","give"],c:1,e:"In English, the fixed expression is always 'make sense' — not 'do', 'have' or 'give'. Learn other common 'make' collocations: make a mistake, make an effort, make progress, make a decision, make an appointment."},
+{u:3,t:"Which sentence uses TOO or VERY correctly?",o:["The conference was too interesting!","Madrid is too beautiful in spring.","The file is too large to attach to the email.","She is too hardworking — she never stops."],c:2,e:"'Too' requires a negative consequence or problem: 'too large to attach' ✓ — the size prevents attaching the file. Options A, B, D use 'too' with positive qualities (interesting, beautiful, hardworking) without any negative consequence — use 'very' instead. 'Too interesting', 'too beautiful', 'too hardworking' suggest these qualities are problematic, which is not the intended meaning."},
+{u:3,t:'Fill in the gaps: "I work _____ the European Commission, which is based _____ Brussels."',o:["in / in","at / in","at / at","in / at"],c:1,e:"Institutions and organisations: use 'at' (I work at the Commission, at the university, at the town hall) ✓. Cities and countries: use 'in' (based in Brussels, born in Spain) ✓. Common error: 'I work in the European Commission' — use 'at', not 'in', for institutions."},
+];
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNAMES={1:"Vocabulario · S01",2:"Comprensión · S01",3:"Gramática y Uso · S00-S01"};
+const SK="ingles_s01_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const DNAMES={1:"Vocab",2:"Comprensión",3:"Gramática"};
+  const tabs=[{v:0,l:"All units"},...[1,2,3].map(u=>({v:u,l:DNAMES[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("")
+    +`<button class="nb${state.mode==="adaptive"?" active":""}" style="margin-left:auto" onclick="setMode('adaptive')">🎯 Adaptive</button>`;
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Answered</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correct</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Wrong</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">Score</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=[1,2,3].map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"no data":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">All</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Wrong only</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptive</button>
+    <button class="btn" onclick="reShuf()" title="Reshuffle options">🔀 Shuffle</button>
+    <button class="btn danger" onclick="if(confirm('Reset all progress?')){db={records:{}};save();renderAll()}" style="margin-left:auto">Reset</button>`;
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No questions match this filter.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correct":"✗ Wrong"}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=u;renderAll();}
+function setMode(m){state.mode=m;renderAll();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+</script>
+</body>
+</html>
