@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE BV · Semana 3 · Test Adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>📚 GACE BV · Semana 3 · Personal, Régimen Disciplinario y Planificación de RRHH (TREBEP)</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+// UD1 — Tema 41: Personal al servicio de las AAPP, concepto y clases. Adquisición y pérdida de la relación de servicio ──────
+{u:1,t:"Conforme al art. 8.2 TREBEP, ¿cuáles son las cuatro clases de empleados públicos?",o:["Directivos, técnicos, administrativos y auxiliares","Funcionarios de carrera, funcionarios interinos, personal laboral y personal eventual","Funcionarios, contratados, becarios y voluntarios","Personal de carrera, personal directivo, personal laboral y personal de confianza"],c:1,e:"El art. 8.2 TREBEP clasifica a los empleados públicos en funcionarios de carrera (art. 9), funcionarios interinos (art. 10), personal laboral fijo/indefinido/temporal (art. 11) y personal eventual (art. 12). El personal directivo profesional (art. 13) se añade sin formar parte de esta enumeración cerrada."},
+{u:1,t:"¿Qué establece la reserva de funciones públicas del art. 9.2 TREBEP?",o:["Que todos los puestos de la Administración deben reservarse a funcionarios de carrera sin excepción","Que el ejercicio de funciones que impliquen participación directa o indirecta en potestades públicas o en la salvaguardia de los intereses generales corresponde exclusivamente a funcionarios públicos","Que el personal laboral puede ejercer cualquier función si así lo autoriza el Ministerio","Que solo el personal directivo puede ejercer potestades públicas"],c:1,e:"El art. 9.2 TREBEP reserva a los funcionarios públicos el ejercicio de funciones que impliquen participación en potestades públicas o en la salvaguardia de los intereses generales del Estado y de las Administraciones Públicas, en los términos que establezca la ley de desarrollo de cada Administración."},
+{u:1,t:"El art. 10 TREBEP, reformado por el Real Decreto-ley 6/2023, exige una causa tasada para nombrar funcionarios interinos. ¿Cuál es el límite temporal para la causa de cobertura de plazas vacantes?",o:["1 año, no prorrogable","3 años, salvo que el proceso selectivo quede desierto","5 años en todo caso","No existe límite temporal para esta causa"],c:1,e:"Cuando la interinidad se debe a plazas vacantes, transcurridos 3 años desde el nombramiento se produce el fin de la interinidad y la vacante solo puede cubrirse por funcionario de carrera, salvo que el proceso selectivo quede desierto, en cuyo caso cabe otro nombramiento (art. 10 TREBEP)."},
+{u:1,t:"Tras la actualización introducida por el Real Decreto-ley 6/2023, ¿cuál es el intervalo de niveles de complemento de destino correspondiente al subgrupo A2?",o:["24-30","20-26","18-24","16-22"],c:1,e:"El Real Decreto-ley 6/2023 actualizó los intervalos de niveles de complemento de destino: A1: 24-30; A2: 20-26; B: 18-24; C1: 16-22; C2: 14-18. Es un dato especialmente preguntable en examen."},
+{u:1,t:"¿Cuál de las siguientes afirmaciones sobre el personal eventual (art. 12 TREBEP) es correcta?",o:["Su condición constituye mérito para el acceso a la función pública o la promoción interna","Su nombramiento y cese son libres, y cesa automáticamente cuando cesa la autoridad a la que presta la función de confianza o asesoramiento","Puede ejercer funciones reservadas a los funcionarios de carrera si así lo decide el Subsecretario","Se selecciona mediante concurso-oposición, igual que el personal laboral"],c:1,e:"El personal eventual tiene nombramiento y cese libres (art. 12.3 TREBEP) y cesa en todo caso cuando cesa la autoridad a la que sirve. El art. 12.4 TREBEP prohíbe expresamente que su condición constituya mérito para el acceso o la promoción interna."},
+{u:1,t:"Conforme al art. 127 del Real Decreto-ley 6/2023, ¿cuáles son la duración máxima del nombramiento del personal directivo público profesional y el plazo de presentación de solicitudes a la convocatoria?",o:["3 años renovables; 15 días hábiles","5 años renovables por períodos idénticos; 10 días naturales","Indefinido; 20 días naturales","2 años no renovables; 1 mes"],c:1,e:"El art. 127 del Real Decreto-ley 6/2023 fija una duración máxima de 5 años, renovable por períodos idénticos, y un plazo de presentación de solicitudes de 10 días naturales desde la publicación de la convocatoria (frente a los 15 días hábiles generales del Real Decreto 364/1995)."},
+{u:1,t:"¿Cuáles son los cuatro requisitos que, de forma acumulativa, exige el art. 62 TREBEP para adquirir la condición de funcionario de carrera?",o:["Nacionalidad, edad, titulación y capacidad funcional","Superación del proceso selectivo, nombramiento por el órgano competente, acto de acatamiento de la Constitución y toma de posesión en plazo","Concurso-oposición, publicación en el BOE, jura del cargo y período de prácticas","Convocatoria pública, superación del proceso selectivo y nombramiento, sin más trámites"],c:1,e:"El art. 62 TREBEP exige el cumplimiento sucesivo y acumulativo de: superación del proceso selectivo, nombramiento publicado en el Diario Oficial, acto de acatamiento de la Constitución (y Estatuto de Autonomía, en su caso) y toma de posesión dentro de plazo."},
+{u:1,t:"Según el art. 114 del Real Decreto-ley 6/2023, ¿en qué supuesto puede aplicarse el sistema de concurso (valoración exclusiva de méritos) para la selección de funcionarios de carrera?",o:["Siempre que lo decida el órgano de selección","Con carácter excepcional y solo cuando así se establezca por ley","Únicamente para el ingreso en cuerpos especiales","Nunca: el concurso está reservado al personal laboral"],c:1,e:"Los sistemas ordinarios para funcionarios de carrera son la oposición y el concurso-oposición. El concurso, consistente exclusivamente en la valoración de méritos, solo se aplica con carácter excepcional cuando así se establezca por ley (art. 114 Real Decreto-ley 6/2023)."},
+{u:1,t:"Tras la reforma del art. 108 del Real Decreto-ley 6/2023, ¿qué porcentaje mínimo de plazas de una Oferta de Empleo Público debe reservarse a personas con discapacidad, y qué parte de ese porcentaje corresponde a discapacidad intelectual?",o:["7% total, sin subcupo específico","10% total, del cual al menos el 2% para discapacidad intelectual","5% total, del cual el 1% para discapacidad intelectual","15% total, del cual el 3% para discapacidad intelectual"],c:1,e:"El art. 108 del Real Decreto-ley 6/2023 eleva la reserva a un porcentaje no inferior al 10% de las plazas convocadas para personas con discapacidad, del cual al menos el 2% se cubrirá por personas que acrediten discapacidad intelectual."},
+{u:1,t:"¿Cuáles son las cinco causas tasadas de pérdida de la condición de funcionario de carrera conforme al art. 63 TREBEP?",o:["Renuncia, pérdida de la nacionalidad, jubilación total, sanción disciplinaria de separación del servicio firme, y pena de inhabilitación absoluta o especial firme","Renuncia, excedencia voluntaria, suspensión de funciones, traslado forzoso y jubilación parcial","Solo la jubilación y la sanción disciplinaria","Renuncia, fallecimiento, incapacidad temporal y cambio de Cuerpo"],c:0,e:"El art. 63 TREBEP enumera taxativamente: renuncia, pérdida de la nacionalidad, jubilación total, sanción disciplinaria de separación del servicio con carácter firme, y pena principal o accesoria de inhabilitación absoluta o especial firme."},
+{u:1,t:"¿Qué requisito es imprescindible para que la renuncia a la condición de funcionario (art. 64 TREBEP) produzca efectos?",o:["Que transcurran seis meses desde su presentación","Que sea manifestada por escrito y aceptada expresamente por la Administración; no despliega efectos hasta la aceptación","Que se comunique verbalmente al superior jerárquico","Que sea ratificada ante notario"],c:1,e:"La renuncia debe manifestarse por escrito y ser aceptada expresamente por la Administración: la aceptación es requisito constitutivo. Además, no puede aceptarse si el funcionario está sujeto a expediente disciplinario o a auto de procesamiento/apertura de juicio oral."},
+{u:1,t:"¿A qué edad se declara de oficio la jubilación forzosa conforme al art. 67.3 TREBEP, y hasta qué edad máxima puede solicitarse la prolongación de la permanencia en el servicio activo?",o:["60 años; prolongación hasta los 65","65 años; prolongación hasta los 70","67 años; prolongación hasta los 72","70 años; sin posibilidad de prolongación"],c:1,e:"La jubilación forzosa se declara de oficio al cumplir 65 años (art. 67.3 TREBEP), pudiendo solicitarse la prolongación de la permanencia en el servicio activo, como máximo, hasta los 70 años, conforme a las leyes de Función Pública de desarrollo."},
+{u:1,t:"El art. 68 TREBEP distingue dos regímenes de rehabilitación de la condición de funcionario. ¿Cómo se clasifican?",o:["Rehabilitación reglada (pérdida de nacionalidad o jubilación por incapacidad, con derecho a concesión) y rehabilitación excepcional (inhabilitación, de concesión discrecional)","Rehabilitación automática en todos los casos, sin necesidad de solicitud","Rehabilitación solo posible tras la separación del servicio","Rehabilitación exclusivamente judicial, nunca administrativa"],c:0,e:"El art. 68.1 TREBEP regula la rehabilitación reglada (pérdida de nacionalidad, jubilación por incapacidad permanente): es un derecho, se concede si desaparece la causa. El art. 68.2 regula la rehabilitación excepcional en caso de inhabilitación: es discrecional y el silencio es negativo."},
+// UD2 — Tema 42: Derechos y deberes del personal. Régimen disciplinario ──────
+{u:2,t:"¿Qué naturaleza normativa tiene el TREBEP conforme al art. 149.1.18.ª de la Constitución Española?",o:["Legislación básica del Estado en materia de régimen estatutario de los funcionarios públicos","Normativa de desarrollo autonómico exclusivamente","Reglamento sin rango de ley","Normativa supletoria sin aplicación directa"],c:0,e:"El TREBEP se dicta al amparo del art. 149.1.18.ª CE, que atribuye al Estado la competencia sobre las bases del régimen estatutario de los funcionarios públicos, teniendo por ello carácter de legislación básica aplicable a todas las Administraciones."},
+{u:2,t:"La letra j bis) del art. 14 TREBEP, incorporada por la Ley Orgánica 3/2018 (LOPDGDD), ¿qué derechos reconoce?",o:["El derecho a la negociación colectiva","El derecho a la intimidad frente al uso de dispositivos digitales, a la desconexión digital y a la protección frente a la videovigilancia y geolocalización","El derecho a la libertad sindical","El derecho a la formación continua"],c:1,e:"La letra j bis) del art. 14 TREBEP, añadida por la Ley Orgánica 3/2018 de protección de datos y garantía de derechos digitales, reconoce la intimidad digital, la desconexión digital y la protección frente a videovigilancia y geolocalización."},
+{u:2,t:"¿Cuáles son los cinco derechos individuales de ejercicio colectivo reconocidos en el art. 15 TREBEP?",o:["Retribución, vacaciones, permisos, formación y promoción","Libertad sindical, negociación colectiva y participación institucional, derecho de reunión, adopción de medidas de conflicto colectivo, y derecho de huelga","Igualdad, mérito, capacidad, objetividad e imparcialidad","Intimidad, honor, propia imagen, protección de datos y desconexión digital"],c:1,e:"El art. 15 TREBEP reconoce como derechos individuales de ejercicio colectivo: la libertad sindical, la negociación colectiva y participación institucional, el derecho de reunión, la adopción de medidas de conflicto colectivo y el derecho de huelga (con garantía de servicios esenciales)."},
+{u:2,t:"Conforme a la Resolución SEFP de 28 de febrero de 2019, ¿cuál es la jornada general de trabajo en la Administración General del Estado y cuál la de especial dedicación?",o:["35 horas semanales / 38 horas","37,5 horas semanales / 40 horas","40 horas semanales / 42 horas","30 horas semanales / 35 horas"],c:1,e:"La jornada general en la Administración General del Estado es de 37,5 horas semanales de trabajo efectivo de promedio en cómputo anual; la jornada de especial dedicación es de 40 horas semanales (art. 47 TREBEP y Resolución SEFP 28/02/2019)."},
+{u:2,t:"¿Cuántos días hábiles de vacaciones anuales corresponden con carácter general, y cuántos a un funcionario con 25 años de antigüedad reconocida?",o:["22 días con carácter general; 24 días con 25 años de antigüedad","22 días con carácter general; 25 días con 25 años de antigüedad","30 días con carácter general; sin incremento por antigüedad","20 días con carácter general; 22 días con 25 años de antigüedad"],c:1,e:"Las vacaciones generales son 22 días hábiles por año completo de servicio (los sábados no se consideran hábiles a estos efectos). La escala de incremento por antigüedad es: 15 años → 23 días; 20 años → 24 días; 25 años → 25 días; 30 o más años → 26 días."},
+{u:2,t:"¿Cuál es la duración del permiso por nacimiento regulado en el art. 49.a) TREBEP para el progenitor que ha dado a luz, y cómo se distribuye?",o:["16 semanas ininterrumpidas, sin distribución específica","19 semanas, distribuidas en 6 semanas obligatorias inmediatas al parto más 11 semanas adicionales y 2 semanas más de ampliación","12 semanas, iguales para ambos progenitores","26 semanas en todo caso"],c:1,e:"El permiso por nacimiento del art. 49.a) TREBEP es de 19 semanas (32 en familia monoparental), distribuidas en un esquema de 6 semanas obligatorias inmediatamente posteriores al parto + 11 semanas adicionales + 2 semanas más, conforme a los sucesivos incrementos normativos."},
+{u:2,t:"¿Qué diferencia esencial existe entre un permiso y una licencia en el régimen del personal funcionario?",o:["No existe diferencia jurídica relevante entre ambas figuras","El permiso es un derecho reconocido si concurre la causa legalmente prevista; la licencia es de concesión discrecional en atención a las necesidades del servicio","La licencia siempre es retribuida y el permiso nunca lo es","El permiso lo concede el Tribunal de Cuentas y la licencia el Subsecretario"],c:1,e:"Los permisos constituyen un derecho del funcionario cuando concurre la causa legalmente prevista (art. 48 y ss. TREBEP); las licencias (arts. 72-75 Decreto 315/1964, vigentes en lo no opuesto al TREBEP) son de concesión discrecional atendiendo a las necesidades del servicio, como la licencia por asuntos propios."},
+{u:2,t:"¿Qué establece el art. 52 TREBEP respecto a los deberes de los empleados públicos?",o:["Se limita a remitir íntegramente al Estatuto de los Trabajadores","Recoge los deberes generales de los empleados públicos y los principios de actuación que constituyen la cabecera del Código de Conducta (arts. 53 y 54 TREBEP)","Solo regula el deber de asistencia y puntualidad","Únicamente se aplica al personal laboral"],c:1,e:"El art. 52 TREBEP establece los deberes generales de los empleados públicos y los principios que deben regir su actuación (objetividad, integridad, neutralidad, responsabilidad, imparcialidad, confidencialidad, dedicación al servicio público, entre otros), sirviendo de cabecera al Código de Conducta de los arts. 53 y 54."},
+{u:2,t:"Conforme al art. 54.3 TREBEP, ¿debe un empleado público obedecer siempre las instrucciones y órdenes de sus superiores?",o:["Sí, en todo caso, sin excepción alguna","No: no se debe obediencia a las órdenes que entrañen infracción manifiesta, clara y terminante de un precepto de ley o de la Constitución","Solo si la orden se da por escrito","La obediencia es siempre discrecional para el funcionario"],c:1,e:"El principio de obediencia del art. 54.3 TREBEP no es absoluto: el empleado público no debe obediencia a las instrucciones u órdenes que constituyan una infracción manifiesta, clara y terminante de un precepto de ley o de la Constitución."},
+{u:2,t:"¿Cuáles son los seis principios que, conforme al art. 94 TREBEP, rigen la potestad disciplinaria?",o:["Eficacia, jerarquía, descentralización, desconcentración, coordinación y legalidad","Legalidad, tipicidad, irretroactividad (con retroactividad favorable), proporcionalidad, culpabilidad y presunción de inocencia","Publicidad, transparencia, participación, buena fe, confianza legítima y responsabilidad","Objetividad, imparcialidad, neutralidad, integridad, discreción y ejemplaridad"],c:1,e:"El art. 94 TREBEP recoge los principios de la potestad disciplinaria, proyección de los arts. 24-25 CE y 25-31 Ley 40/2015: legalidad, tipicidad, irretroactividad (salvo retroactividad favorable, que alcanza también a los plazos de prescripción), proporcionalidad, culpabilidad (no hay responsabilidad objetiva) y presunción de inocencia."},
+{u:2,t:"¿Qué duración máxima tiene la sanción de suspensión firme de funciones conforme al art. 96.1 TREBEP, y qué límite rige para las faltas graves?",o:["3 años en todo caso, sin distinción por gravedad","6 años como máximo; para faltas graves, la suspensión no puede superar la mitad de ese máximo (3 años)","1 año como máximo en todos los casos","10 años como máximo; 5 años para faltas graves"],c:1,e:"La suspensión firme de funciones tiene una duración máxima de 6 años (art. 96.1 TREBEP). Cuando la falta sancionada es grave, la suspensión no puede exceder de la mitad de ese máximo, es decir, 3 años."},
+{u:2,t:"Conforme al art. 97 TREBEP, ¿en qué plazo prescriben las faltas muy graves y las sanciones impuestas por faltas muy graves?",o:["Las faltas muy graves prescriben a los 3 años; las sanciones por faltas muy graves también a los 3 años","Las faltas muy graves prescriben al año; las sanciones a los 2 años","Ambas prescriben a los 6 meses","Las faltas muy graves no prescriben nunca"],c:0,e:"El art. 97 TREBEP fija la prescripción de las faltas muy graves en 3 años (graves: 2 años; leves: 6 meses) y de las sanciones impuestas por faltas muy graves también en 3 años (graves: 2 años; leves: 1 año). El cómputo de las faltas se inicia desde su comisión y el de las sanciones desde la firmeza de la resolución."},
+{u:2,t:"En el procedimiento disciplinario ordinario (faltas graves y muy graves), ¿de cuántos días dispone el funcionario expedientado para contestar al pliego de cargos?",o:["5 días hábiles","10 días hábiles","15 días naturales","1 mes"],c:1,e:"Conforme al Real Decreto 33/1986 (vigente en lo no opuesto al TREBEP), tras la formulación del pliego de cargos el inculpado dispone de 10 días hábiles para contestarlo, y se le concede una nueva audiencia de 10 días tras la propuesta de resolución."},
+{u:2,t:"En materia de negociación colectiva del personal funcionario (arts. 33-38 TREBEP), ¿qué diferencia existe entre un Pacto y un Acuerdo?",o:["No hay diferencia: ambos términos son sinónimos","El Pacto versa sobre materias que son competencia propia del órgano administrativo y tiene aplicación directa; el Acuerdo versa sobre materias competencia del Consejo de Ministros/Gobierno y requiere aprobación expresa y formal","El Pacto lo suscriben solo los sindicatos y el Acuerdo solo la Administración","El Acuerdo es de rango inferior al Pacto"],c:1,e:"El art. 38 TREBEP distingue: los Pactos versan sobre materias de competencia propia del órgano administrativo y su contenido vincula directamente; los Acuerdos versan sobre materias competencia del Consejo de Ministros u órgano de gobierno equivalente y, para su validez y eficacia, requieren la aprobación expresa y formal de éste."},
+// UD3 — Tema 43: Planificación de RRHH. OEP. Selección de personal. Competencias en materia de personal ──────
+{u:3,t:"¿Cuál es el objetivo de la planificación de recursos humanos conforme al art. 69 TREBEP?",o:["Reducir en todo caso la plantilla de las Administraciones Públicas","Contribuir a la consecución de la eficacia en la prestación de servicios y de la eficiencia en la utilización de los recursos económicos disponibles, mediante la dimensión adecuada de sus efectivos","Sustituir la Oferta de Empleo Público por otro instrumento","Fijar exclusivamente las retribuciones del personal directivo"],c:1,e:"El art. 69 TREBEP configura la planificación de recursos humanos como instrumento para contribuir a la eficacia en la prestación de servicios y a la eficiencia en la utilización de los recursos económicos, adecuando los efectivos de personal a las necesidades de los servicios."},
+{u:3,t:"Conforme a la Orden TDF/380/2024, ¿qué tres tipos de planes de ordenación de recursos humanos se distinguen en la Administración General del Estado?",o:["Plan general, planes específicos y planes de reestructuración","Plan anual, plan trienal y plan quinquenal","Plan de personal, plan de retribuciones y plan de formación","Plan de ingreso, plan de promoción y plan de jubilación"],c:0,e:"La Orden TDF/380/2024, de planificación estratégica de recursos humanos de la Administración General del Estado, distingue tres tipos: el plan general, los planes específicos (aprobación en el primer trimestre del año) y los planes de reestructuración."},
+{u:3,t:"¿En qué plazo debe comunicarse al Registro Central de Personal un acto que afecte a la vida administrativa de un funcionario, y en qué plazo debe practicarse el asiento correspondiente?",o:["3 días hábiles para comunicar; 3 días hábiles para practicar el asiento desde la recepción","1 mes para comunicar; 15 días para el asiento","10 días hábiles para comunicar; 5 días para el asiento","No existe plazo tasado para ninguna de las dos actuaciones"],c:0,e:"El acto debe comunicarse al Registro Central de Personal en el plazo de 3 días hábiles desde que se dicta, y la oficina correspondiente debe practicar el asiento en otros 3 días hábiles desde la recepción de la comunicación."},
+{u:3,t:"¿Cuál es el plazo improrrogable de ejecución de una Oferta de Empleo Público desde su publicación, y en qué plazo debe convocarse el proceso selectivo?",o:["2 años de ejecución; convocatoria en el mismo año natural de la OEP","3 años de ejecución improrrogable; la convocatoria debe producirse dentro del mismo año natural de aprobación y publicación de la OEP","5 años de ejecución; convocatoria en los 2 años siguientes","1 año de ejecución; convocatoria inmediata"],c:1,e:"La OEP tiene un plazo improrrogable de ejecución de 3 años desde su publicación. La convocatoria de los correspondientes procesos selectivos debe producirse, en todo caso, dentro del mismo año natural en que se aprueba y publica la Oferta de Empleo Público."},
+{u:3,t:"¿A qué órgano corresponde la aprobación de la Oferta de Empleo Público en la Administración General del Estado, y quién eleva la propuesta?",o:["Al Ministro de Hacienda, en solitario","Al Gobierno, mediante Real Decreto acordado en Consejo de Ministros, a propuesta del Ministerio para la Transformación Digital y de la Función Pública","Al Congreso de los Diputados, mediante ley ordinaria","A la Comisión Interministerial de Retribuciones (CECIR), sin intervención del Consejo de Ministros"],c:1,e:"La OEP se aprueba por el Gobierno, mediante Real Decreto adoptado en Consejo de Ministros, a propuesta del Ministerio para la Transformación Digital y de la Función Pública (MTDFP), previo informe del Ministerio de Hacienda."},
+{u:3,t:"¿Qué personas quedan excluidas, con carácter general, de formar parte de los órganos de selección conforme a la normativa de función pública?",o:["Los funcionarios del Cuerpo o Escala convocante, sin excepción","El personal de elección o de designación política, los funcionarios interinos, el personal eventual y los altos cargos","Únicamente el personal laboral","No existe ninguna exclusión legal"],c:1,e:"Quedan excluidos de los órganos de selección el personal de elección o designación política, los funcionarios interinos, el personal eventual y los altos cargos, en garantía de los principios de imparcialidad y profesionalidad que deben presidir su composición."},
+{u:3,t:"¿Cuántos miembros como mínimo debe tener un Tribunal de selección, y qué característica numérica debe cumplir dicha composición?",o:["3 miembros, número par","5 miembros como mínimo, en número impar, con igual número de suplentes","10 miembros, sin restricción sobre paridad numérica","2 miembros: presidente y secretario"],c:1,e:"Los Tribunales de selección deben estar compuestos por un mínimo de 5 miembros, en número impar, debiendo designarse un número igual de miembros suplentes, y su titulación debe ser igual o superior a la exigida para el ingreso en el Cuerpo o Escala convocado."},
+{u:3,t:"¿Cuál es el plazo general de presentación de solicitudes para participar en un proceso selectivo, contado desde la publicación de la convocatoria en el BOE?",o:["10 días hábiles","20 días naturales desde el día siguiente a la publicación","1 mes natural","15 días hábiles"],c:1,e:"El plazo de presentación de solicitudes es, con carácter general, de 20 días naturales contados a partir del día siguiente al de la publicación de la convocatoria en el Boletín Oficial del Estado (art. 17 Real Decreto 364/1995)."},
+{u:3,t:"¿Cuáles son los plazos mínimo y máximo que deben mediar entre la terminación de un ejercicio y el comienzo del siguiente en un proceso selectivo, cuando se trata de distintos ejercicios?",o:["24 horas mínimo y 30 días máximo","Mínimo 72 horas y máximo 45 días naturales","Sin plazo mínimo; máximo 10 días","Mínimo 1 semana y máximo 2 meses"],c:1,e:"Entre la terminación de un ejercicio y el comienzo del siguiente debe mediar un mínimo de 72 horas y un máximo de 45 días naturales. El anuncio de la siguiente prueba dentro del mismo ejercicio requiere solo 12 horas de antelación; si es un ejercicio nuevo, 24 horas."},
+{u:3,t:"Conforme al Real Decreto 210/2024, ¿qué órgano determina el nombramiento como funcionario de carrera y ante qué autoridad se toma posesión en los servicios centrales?",o:["Nombra el Ministro de Hacienda; toma de posesión ante el Tribunal de Cuentas","Nombra el Secretario de Estado para la Administración Pública (SEAP); toma de posesión ante el Subsecretario del Departamento (en servicios centrales) o el Delegado del Gobierno (en servicios periféricos)","Nombra el Rey; toma de posesión ante el Consejo de Ministros","Nombra el Director del INAP; toma de posesión ante el Defensor del Pueblo"],c:1,e:"El nombramiento como funcionario de carrera corresponde al Secretario de Estado para la Administración Pública (SEAP), y la toma de posesión se realiza ante el Subsecretario del Departamento en los servicios centrales, o ante el Delegado del Gobierno en los servicios periféricos."},
+{u:3,t:"¿Qué requisitos, conforme al art. 62 TREBEP, deben concurrir de forma acumulativa para adquirir la condición de funcionario de carrera tras superar un proceso selectivo de planificación de RRHH?",o:["Solo superar el proceso selectivo, sin más trámite","Superación del proceso selectivo, nombramiento publicado en el Diario Oficial, acatamiento de la Constitución y toma de posesión dentro de plazo","Superación del proceso selectivo y jura ante notario","Superación del proceso selectivo y afiliación sindical"],c:1,e:"Como en el resto de procesos selectivos regulados por el TREBEP, la adquisición de la condición de funcionario de carrera exige el cumplimiento sucesivo de los cuatro requisitos del art. 62 TREBEP: proceso selectivo superado, nombramiento publicado, acatamiento constitucional y toma de posesión en plazo."},
+{u:3,t:"¿A qué órgano corresponde la aprobación de las Relaciones de Puestos de Trabajo (RPT) en la Administración General del Estado?",o:["Exclusivamente al Ministerio para la Transformación Digital y de la Función Pública","Conjuntamente al Ministerio competente en función pública y al Ministerio de Hacienda, actuando a través de la Comisión Interministerial de Retribuciones (CECIR)","Al Congreso de los Diputados mediante ley","A cada Subsecretaría de forma autónoma, sin intervención de Hacienda"],c:1,e:"La aprobación y modificación de las RPT en la Administración General del Estado compete conjuntamente al Ministerio competente en materia de función pública y al Ministerio de Hacienda, actuando a través de la Comisión Interministerial de Retribuciones (CECIR), en concreto de su Comisión Ejecutiva."},
+];
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNAMES={1:"Miércoles · T41 Personal/clases",2:"Jueves · T42 Derechos/disciplinario",3:"Viernes · T43 Planificación/OEP/selección"};
+const SK="gace_bv_s3_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const DNAMES={1:"Mié·T41",2:"Jue·T42",3:"Vie·T43"};
+  const tabs=[{v:0,l:"Toda la semana"},...[1,2,3].map(u=>({v:u,l:DNAMES[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("")
+    +`<button class="nb${state.mode==="adaptive"?" active":""}" style="margin-left:auto" onclick="setMode('adaptive')">🎯 Adaptativo</button>`;
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=[1,2,3].map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Rebarajar opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="if(confirm('¿Borrar todo el historial?')){db={records:{}};save();renderAll()}" style="margin-left:auto">Reiniciar</button>`;
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto":"✗ Incorrecto"}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);if(state.mode!=="adaptive")state.mode="all";renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+</script>
+</body>
+</html>
