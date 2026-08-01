@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BV — Flashcards T1-T3</title>
+<style>
+:root{--azul:#0e7490;--azul2:#0891b2;--verde:#16a34a;--rojo:#dc2626;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:40px}
+header{background:linear-gradient(135deg,#065f46,#0e7490);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.f{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.83rem;font-weight:600;cursor:pointer}
+.f.on{background:var(--azul);color:#fff}
+.stats{display:flex;gap:10px;margin:8px 0 14px;font-size:.83rem;flex-wrap:wrap}
+.stats span{background:#fff;border-radius:8px;padding:5px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.escena{perspective:1200px;margin:10px 0}
+.carta{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
+.carta.girada{transform:rotateY(180deg)}
+.cara{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.frente{background:#fff;border:3px solid var(--azul2)}
+.frente .cat{position:absolute;top:12px;left:14px;font-size:.72rem;font-weight:700;color:#fff;background:var(--azul2);border-radius:12px;padding:2px 10px}
+.frente .idx{position:absolute;top:12px;right:14px;font-size:.72rem;color:#94a3b8}
+.frente h2{font-size:1.08rem;line-height:1.5;font-weight:600;border:none;color:#1e293b}
+.frente .pista{margin-top:14px;font-size:.75rem;color:#94a3b8}
+.dorso{background:linear-gradient(135deg,#065f46,#0e7490);color:#fff;transform:rotateY(180deg)}
+.dorso .resp{font-size:1.15rem;font-weight:800;line-height:1.45}
+.dorso .det{margin-top:12px;font-size:.85rem;opacity:.92;line-height:1.5}
+.botones{display:flex;gap:8px;margin:14px 0;justify-content:center;flex-wrap:wrap}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-size:.9rem;font-weight:700;cursor:pointer}
+.btn.mal{background:#fee2e2;color:var(--rojo)}
+.btn.bien{background:#dcfce7;color:#15803d}
+.btn.nav{background:#e2e8f0;color:#334155}
+.btn.accion{background:var(--azul);color:#fff}
+.aviso{text-align:center;font-size:.8rem;color:#64748b;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>🃏 Flashcards BV · T1-T3 Personal, Derechos y Selección</h1>
+  <p>Plazos · artículos · datos-ancla · TREBEP + RDL 6/2023 + RD-ley 9/2025 · verificado a 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="filtros" id="filtros"></div>
+  <div class="stats"><span id="st-total"></span><span id="st-dom">✅ dominadas: <b id="ndom">0</b></span><span id="st-rep">🔁 a repasar: <b id="nrep">0</b></span></div>
+  <div class="escena"><div class="carta" id="carta" onclick="girar()">
+    <div class="cara frente"><div class="cat" id="cat"></div><div class="idx" id="idx"></div><h2 id="preg"></h2><div class="pista">👆 toca para ver la respuesta</div></div>
+    <div class="cara dorso"><div class="resp" id="resp"></div><div class="det" id="det"></div></div>
+  </div></div>
+  <div class="botones">
+    <button class="btn mal" onclick="marcar(false)">❌ Repasar</button>
+    <button class="btn bien" onclick="marcar(true)">✅ Me la sé</button>
+  </div>
+  <div class="botones">
+    <button class="btn nav" onclick="mover(-1)">← Anterior</button>
+    <button class="btn accion" onclick="barajar()">🔀 Barajar</button>
+    <button class="btn nav" onclick="mover(1)">Siguiente →</button>
+  </div>
+  <div class="botones"><button class="btn nav" onclick="soloRepaso()" id="btnrep">🎯 Solo las marcadas "repasar"</button>
+  <button class="btn nav" onclick="resetear()">🗑️ Reiniciar</button></div>
+  <div class="aviso">El progreso se guarda en este navegador (localStorage).</div>
+</div>
+<script>
+const LS='gace_bv_fc_t01t03_v1';
+const CARDS=[
+// —— T1 ——
+{c:'T1·Datos',p:'TREBEP: norma y fecha',r:'Real Decreto Legislativo 5/2015, de 30 de octubre',d:'Refunde la Ley 7/2007 (EBEP). Vigente desde el 1/11/2015. Legislación básica (149.1.18ª CE).'},
+{c:'T1·Datos',p:'4 clases de empleados públicos (art. 8.2)',r:'Funcionarios de carrera, interinos, personal laboral y personal eventual',d:'El personal directivo profesional (art. 13) no figura en la enumeración pero participa del concepto.'},
+{c:'T1·Plazos',p:'4 causas y plazos de nombramiento de interinos (art. 10)',r:'Vacantes: 3 años · sustitución: tiempo necesario · programas: 3+12 meses · acumulación: 9 meses en 18',d:'Trampa: la acumulación es "9 meses EN 18", no en 12.'},
+{c:'T1·Datos',p:'Personal eventual: nombramiento, cese y mérito',r:'Nombramiento y cese LIBRES · cesa automáticamente al cesar la autoridad · NO cuenta como mérito',d:'Art. 12.3 y 12.4 TREBEP. No puede ejercer funciones del art. 9.2.'},
+{c:'T1·Datos',p:'Personal directivo público profesional: requisitos y plazos',r:'Funcionario de carrera A1 · libre designación · 5 años renovables · 10 días naturales de solicitudes',d:'Arts. 13 y 123-127 RDL 6/2023. Desarrollo: Orden TDF/379/2024.'},
+{c:'T1·Datos',p:'4 requisitos ACUMULATIVOS de adquisición (art. 62)',r:'Proceso selectivo + nombramiento + acatamiento de la CE + toma de posesión',d:'La falta de cualquiera impide la adquisición de la condición de funcionario.'},
+{c:'T1·Plazos',p:'Toma de posesión: plazos',r:'15 días naturales (1 mes si cambio de localidad) · interinos/eventuales: al día siguiente',d:'Art. 62 TREBEP en relación con el desarrollo reglamentario.'},
+{c:'T1·Datos',p:'5 causas de pérdida de la condición de funcionario (art. 63)',r:'Renuncia · pérdida de nacionalidad · jubilación total · separación firme · inhabilitación firme',d:'Solo la separación del servicio no admite rehabilitación por vía ordinaria.'},
+{c:'T1·Plazos',p:'Jubilación forzosa y prolongación',r:'65 años · prolongación posible hasta 70 años, a solicitud',d:'Solicitud con 2 meses de antelación; resolución en 1 mes; silencio positivo 15 días antes de la jubilación.'},
+{c:'T1·Datos',p:'Rehabilitación: reglada vs. excepcional',r:'Reglada (nacionalidad/incapacidad): se CONCEDE, silencio + · Excepcional (inhabilitación): discrecional, silencio −',d:'Art. 68 TREBEP + RD 2669/1998. Procedimiento: máx. 6 meses. Nueva solicitud tras inhabilitación: 2 años.'},
+{c:'T1·Datos',p:'RDL 6/2023: estado de tramitación a 08/2026',r:'Vigente, convalidado 10/01/2024, en tramitación como Proyecto de Ley; recurso 1863-2024 admitido, sin sentencia',d:'Es un Real Decreto-ley (no "Real Decreto Legislativo", error frecuente en resúmenes).'},
+{c:'T1·Datos',p:'Niveles de complemento de destino por grupo (RDL 6/2023)',r:'A1: 24-30 · A2: 20-26 · B: 18-24 · C1: 16-22 · C2: 14-18',d:'Dato muy preguntable en examen (art. 76 TREBEP).'},
+{c:'T1·Datos',p:'Registro Central de Personal: ubicación y plazos',r:'Dirección General de la Función Pública · comunicación y asiento: 3 días hábiles cada uno',d:'RD 1405/1986 (mod. RD 2073/1999). Anotaciones provisionales: 90+90 días naturales.'},
+// —— T2 ——
+{c:'T2·Datos',p:'Relación jurídica del empleado público',r:'ESTATUTARIA: derechos y deberes fijados unilateralmente por la ley, no por contrato',d:'Justifica la inamovilidad del funcionario de carrera y el régimen reforzado de deberes.'},
+{c:'T2·Datos',p:'Art. 14 j bis TREBEP: origen y contenido',r:'LO 3/2018 (LOPDGDD): intimidad digital, videovigilancia/geolocalización, desconexión digital',d:'Letras h/i ampliadas por Ley 4/2023: identidad sexual, expresión de género, características sexuales.'},
+{c:'T2·Plazos',p:'Jornada general AGE y jornada especial',r:'37,5 h/semana (cómputo anual) · dedicación especial: 40 h',d:'Resolución SEFP de 28/02/2019. Jornada intensiva verano: 16 junio-15 septiembre.'},
+{c:'T2·Plazos',p:'Vacaciones: régimen general y por antigüedad',r:'22 días hábiles + antigüedad: 15/20/25/30 años → 23/24/25/26 días',d:'Art. 50 TREBEP. Mínimo 5 días consecutivos; mitad entre 15 junio-15 septiembre; plazo final 31 enero.'},
+{c:'T2·Plazos',p:'Permiso por nacimiento (49.a/b/c) — RD-ley 9/2025',r:'19 semanas (32 monoparentalidad), estructura 6+11+2',d:'6 obligatorias + 11 flexibles hasta 12 meses + 2 hasta 8 años (novedad 2025).'},
+{c:'T2·Plazos',p:'Permiso parental (49.g) — RD-ley 9/2025',r:'8 semanas, NO RETRIBUIDAS, hasta los 8 años del menor',d:'Antes discutido su carácter retributivo; el RDL 9/2025 lo clarificó como no retribuido. Preaviso 15 días.'},
+{c:'T2·Plazos',p:'Asuntos particulares y licencia por asuntos propios',r:'Moscosos: 6 días/año (+2 al 6º trienio, +1 desde el 8º) · Licencia asuntos propios: 3 meses/2 años SIN retribuir',d:'Diferencia clave: los permisos son derecho si concurre causa; las licencias son discrecionales.'},
+{c:'T2·Datos',p:'Código de Conducta: estructura',r:'Art. 52 (15 principios generales) + art. 53 (12 éticos) + art. 54 (11 de conducta)',d:'Informan la interpretación del régimen disciplinario. Obediencia NO absoluta (54.3): excepción de infracción manifiesta.'},
+{c:'T2·Datos',p:'Normativa del régimen disciplinario, por orden',r:'TREBEP 93-98 → RD 33/1986 (graves/leves) → Ley 39/2015 (supletoria) → Ley 40/2015 (25-31)',d:'RD 33/1986 vigente en lo no opuesto al TREBEP; sigue siendo la norma reglamentaria de referencia.'},
+{c:'T2·Datos',p:'6 principios del art. 94 TREBEP',r:'Legalidad, tipicidad, irretroactividad (con retroactividad favorable), proporcionalidad, culpabilidad, presunción de inocencia',d:'La retroactividad favorable alcanza también a los plazos de prescripción.'},
+{c:'T2·Datos',p:'Faltas: normas tipificadoras por gravedad',r:'Muy graves: art. 95.2 TREBEP (catálogo cerrado legal) · graves: art. 7 RD 33/1986 · leves: art. 8 RD 33/1986',d:'Ley 4/2023 modificó el 95.2.b) para incluir identidad sexual/expresión de género. Acoso laboral: falta muy grave expresa.'},
+{c:'T2·Datos',p:'Sanciones y sus límites (art. 96.1)',r:'Separación/despido: solo muy graves · suspensión: máx. 6 años (graves: máx. 3) · apercibimiento: solo leves',d:'Criterios de graduación (96.3): intencionalidad, daño al interés público, reincidencia, participación.'},
+{c:'T2·Plazos',p:'Procedimiento disciplinario ordinario: plazos',r:'Pliego de cargos: 10 días hábiles para contestar · audiencia final: 10 días',d:'Separación instrucción/resolución obligatoria. Suspensión provisional cautelar: máx. 6 meses (art. 90).'},
+{c:'T2·Plazos',p:'PRESCRIPCIÓN de faltas (art. 97) — ¡ojo con manuales viejos!',r:'Muy graves: 3 años · graves: 2 años · leves: 6 MESES',d:'Estos plazos DEROGARON los del antiguo RD 33/1986. Cómputo: desde la comisión (o cese, si continuada).'},
+{c:'T2·Plazos',p:'PRESCRIPCIÓN de sanciones (art. 97)',r:'Muy graves: 3 años · graves: 2 años · leves: 1 AÑO',d:'Distinto del plazo de prescripción de la falta leve (6 meses). Cómputo: desde la firmeza.'},
+{c:'T2·Plazos',p:'CANCELACIÓN de sanciones (art. 93 D. 315/1964)',r:'Leves: 6 meses · graves: 2 años · muy graves: 6 años (separación: no cancelable)',d:'No borra físicamente: anula los efectos a efectos de reincidencia.'},
+{c:'T2·Datos',p:'Delegados de Personal vs. Juntas de Personal',r:'Delegados: 6-49 funcionarios · Juntas: 50 o más funcionarios',d:'Crédito horario (art. 41): 15h (≤100) a 40h (>750) mensuales.'},
+{c:'T2·Datos',p:'Pactos vs. Acuerdos en negociación colectiva (art. 38)',r:'Pactos: eficacia directa desde la firma · Acuerdos: requieren aprobación expresa y formal',d:'Pactos: materias del propio órgano. Acuerdos: materias del Consejo de Ministros u órgano equivalente.'},
+// —— T3 ——
+{c:'T3·Datos',p:'Objetivo de la planificación de RRHH (art. 69 TREBEP)',r:'Eficacia en la prestación de servicios + eficiencia en el uso de recursos económicos',d:'Mediante dimensión adecuada de efectivos, distribución, formación, promoción y movilidad.'},
+{c:'T3·Datos',p:'Planificación estratégica plurianual: base legal',r:'Art. 107 RDL 6/2023 (LFPAE), desarrollado por la Orden TDF/380/2024',d:'3 tipos de planes: general (SEFP), específicos (ministerios), reestructuración (SEFP + negociación).'},
+{c:'T3·Plazos',p:'Aprobación de planes específicos y plan general',r:'Específicos: 1er trimestre · General: 2 meses después de los específicos',d:'Todos antes de la Orden de elaboración de los Presupuestos Generales del Estado.'},
+{c:'T3·Datos',p:'RPT: aprobación conjunta en la AGE',r:'Ministerio de Función Pública + Ministerio de Hacienda, vía CECIR',d:'Comisión Interministerial de Retribuciones, su Comisión Ejecutiva. Contenido: art. 74 TREBEP.'},
+{c:'T3·Plazos',p:'OEP: plazo de ejecución vs. plazo de convocatoria',r:'Ejecución OEP: 3 años IMPRORROGABLE · ejecución convocatoria: 2 años (oposición: 1 año)',d:'No confundir ambos plazos — es una trampa clásica de examen.'},
+{c:'T3·Datos',p:'Cupos de reserva en la OEP',r:'Promoción interna: ≥30% · discapacidad: ≥10% (≥2% intelectual)',d:'El 7% del art. 59 TREBEP fue elevado al 10% por el RDL 6/2023 — responde siempre 10% si preguntan la cifra vigente.'},
+{c:'T3·Datos',p:'OEP 2026 en la AGE: norma y cifra',r:'Real Decreto 387/2026, de 6 de mayo — 27.232 plazas',d:'BOE 07/05/2026. Ejes: transformación digital, servicios esenciales, 1.700 plazas TIC (+42%), 346 plazas emergencias climáticas.'},
+{c:'T3·Datos',p:'Sistemas selectivos: regla y excepción',r:'Oposición y concurso-oposición: normales · concurso puro: EXCEPCIONAL y por ley',d:'En el concurso-oposición, la fase de concurso solo se valora si se superó la oposición.'},
+{c:'T3·Datos',p:'Modelo de selección tras el RDL 6/2023 (art. 112)',r:'Adaptable, mixto y social',d:'Añade a igualdad/mérito/capacidad los principios de accesibilidad e igualdad socioeconómica.'},
+{c:'T3·Datos',p:'Exclusiones de los órganos de selección',r:'Personal político, interinos, laborales no fijos, eventuales, preparadores de opositores (5 años), altos cargos',d:'Además: no pueden ser mayoritariamente del mismo Cuerpo/Escala objeto de selección (salvo sectores especiales).'},
+{c:'T3·Datos',p:'Comisión Permanente de Selección: composición',r:'1 Presidente + 45 Vocales + 1 Secretario (con voz y voto)',d:'Orden HFP/266/2023. Nombramiento del Presidente: titular SEFP, a propuesta del Director del INAP.'},
+{c:'T3·Plazos',p:'Plazos del proceso selectivo',r:'Solicitudes: 20 días naturales · lista admitidos: 1 mes · subsanación: 10 días hábiles',d:'Entre ejercicios: 72 horas-45 días naturales. Documentación final: 20 días naturales.'},
+{c:'T3·Datos',p:'Nombramiento y toma de posesión: órganos',r:'Nombramiento: Secretario de Estado para la Administración Pública · Toma de posesión: Subsecretario (centrales) / Delegado del Gobierno (periféricos)',d:'Cualquier resolución de nombramiento que contravenga la competencia del SEAP es nula de pleno derecho.'},
+{c:'T3·Datos',p:'Consecuencias de no superar prácticas o curso selectivo',r:'Prácticas: pérdida automática de todos los derechos · curso selectivo: pérdida mediante resolución motivada',d:'Si no puede realizarse por fuerza mayor/servicio militar, se hace después, según la puntuación obtenida.'}
+];
+let vista=[...CARDS.keys()], pos=0, filtro='Todas';
+let estado=JSON.parse(localStorage.getItem(LS)||'{}');
+const cats=['Todas',...new Set(CARDS.map(c=>c.c.split('·')[0]))];
+function guardar(){localStorage.setItem(LS,JSON.stringify(estado))}
+function pinta(){
+  const fdiv=document.getElementById('filtros');fdiv.innerHTML='';
+  cats.forEach(c=>{const b=document.createElement('button');b.className='f'+(filtro===c?' on':'');b.textContent=c==='Todas'?'📋 Todas':c;b.onclick=()=>{filtro=c;aplicar()};fdiv.appendChild(b)});
+  const i=vista[pos],c=CARDS[i];
+  document.getElementById('cat').textContent=c.c;
+  document.getElementById('idx').textContent=(pos+1)+' / '+vista.length;
+  document.getElementById('preg').textContent=c.p;
+  document.getElementById('resp').textContent=c.r;
+  document.getElementById('det').textContent=c.d;
+  document.getElementById('carta').classList.remove('girada');
+  document.getElementById('st-total').textContent='📇 '+vista.length+' tarjetas';
+  const vals=Object.values(estado);
+  document.getElementById('ndom').textContent=vals.filter(v=>v==='ok').length;
+  document.getElementById('nrep').textContent=vals.filter(v=>v==='ko').length;
+}
+function aplicar(){
+  vista=[...CARDS.keys()].filter(i=>filtro==='Todas'||CARDS[i].c.startsWith(filtro));
+  pos=0;pinta();
+}
+function girar(){document.getElementById('carta').classList.toggle('girada')}
+function mover(d){pos=(pos+d+vista.length)%vista.length;pinta()}
+function marcar(bien){estado[vista[pos]]=bien?'ok':'ko';guardar();mover(1)}
+function barajar(){for(let i=vista.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vista[i],vista[j]]=[vista[j],vista[i]]}pos=0;pinta()}
+function soloRepaso(){
+  const rep=[...CARDS.keys()].filter(i=>estado[i]==='ko'&&(filtro==='Todas'||CARDS[i].c.startsWith(filtro)));
+  if(rep.length===0){alert('🎉 No tienes tarjetas marcadas para repasar en este filtro.');return}
+  vista=rep;pos=0;pinta();
+}
+function resetear(){if(confirm('¿Borrar el progreso de estas flashcards?')){estado={};guardar();aplicar()}}
+aplicar();
+</script>
+</body>
+</html>
