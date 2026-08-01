@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV — Test T11, T12 y T13 (Procedimiento y Contencioso)</title>
+<style>
+:root{--azul:#1e3a8a;--azul2:#3b62c4;--verde:#16a34a;--rojo:#dc2626;--naranja:#ea580c;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:70px}
+header{background:linear-gradient(135deg,#1e3a8a,#3b62c4);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:800px;margin:0 auto;padding:0 14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 6px}
+.tab{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;cursor:pointer}
+.tab.on{background:var(--azul);color:#fff}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 14px}
+.mode{border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:5px 12px;font-size:.8rem;cursor:pointer}
+.mode.on{background:#0f766e;color:#fff;border-color:#0f766e}
+.bars{display:flex;flex-direction:column;gap:6px;margin:10px 0 18px}
+.bar{background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.bar .lbl{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin-bottom:4px}
+.bar .track{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.bar .fill{height:100%;border-radius:4px;transition:width .3s}
+.q{background:#fff;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.q .meta{font-size:.75rem;color:#64748b;margin-bottom:8px;display:flex;justify-content:space-between}
+.q h3{font-size:.98rem;margin-bottom:12px;line-height:1.45}
+.opt{display:block;width:100%;text-align:left;border:2px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:10px 12px;margin:6px 0;font-size:.9rem;cursor:pointer;line-height:1.4}
+.opt:hover{border-color:var(--azul2)}
+.opt.ok{border-color:var(--verde);background:#f0fdf4}
+.opt.ko{border-color:var(--rojo);background:#fef2f2}
+.opt:disabled{cursor:default;opacity:.92}
+.exp{display:none;margin-top:10px;background:#eef2ff;border-left:4px solid var(--azul2);border-radius:0 8px 8px 0;padding:10px 12px;font-size:.85rem}
+.exp.show{display:block}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.btn{border:none;border-radius:8px;padding:8px 16px;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--azul);color:#fff}
+.btn.sec{background:#64748b}
+.btn.warn{background:var(--rojo)}
+.score{position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#fff;padding:10px 16px;text-align:center;font-size:.9rem}
+.score b{color:#4ade80}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧪 Test BIV · T11+T12+T13 Procedimiento y Contencioso</h1>
+  <p>GACE 2027 · Autocorregible y adaptativo · 60 preguntas · Ley 39/2015 y LJCA post-LO 1/2025 · verificado a 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="tabs" id="tabs"></div>
+  <div class="modes">
+    <button class="mode on" data-m="normal">📚 Normal</button>
+    <button class="mode" data-m="adapt">🎯 Adaptativo (peores 20)</button>
+    <button class="mode" data-m="fail">❌ Solo erróneas</button>
+  </div>
+  <div class="bars" id="bars"></div>
+  <div class="controls">
+    <button class="btn" onclick="render(true)">🔀 Barajar</button>
+    <button class="btn sec" onclick="showAll()">👁️ Ver explicaciones</button>
+    <button class="btn warn" onclick="resetHist()">🗑️ Reiniciar historial</button>
+  </div>
+  <div id="quiz"></div>
+</div>
+<div class="score" id="score"></div>
+<script>
+const LS_KEY='gace_biv_t11t13_v1';
+const UNIDADES={11:'T11 · Procedimiento',12:'T12 · Revisión y recursos',13:'T13 · Contencioso'};
+const BANK=[
+// ============ T11 (u:11) ============
+{u:11,t:"Las Leyes 39/2015 y 40/2015 entraron en vigor, con carácter general:",o:["El 1 de octubre de 2015","El 2 de octubre de 2016","El 2 de abril de 2021","El 1 de enero de 2016"],c:1,e:"Publicadas el 2/10/2015, vacatio de un año. Las previsiones de registro y archivo electrónico se demoraron hasta el 2/4/2021 (RD-ley 27/2020). Derogan la Ley 30/1992."},
+{u:11,t:"La distinción estructural del modelo dual de 2015 es:",o:["Estado-CCAA","Relaciones ad extra (Ley 39) y ad intra (Ley 40)","Derecho sustantivo y procesal","Actos y reglamentos"],c:1,e:"Ley 39: procedimiento, actos, revisión, recursos (con el ciudadano). Ley 40: órganos, principios, sancionadora, responsabilidad, organización (interno e interadministrativo)."},
+{u:11,t:"Según la STC 55/2018, el procedimiento administrativo común 'en sentido estricto':",o:["Es competencia compartida","Es competencia exclusiva del Estado (149.1.18ª CE)","Corresponde a las CCAA","Solo vincula a la AGE"],c:1,e:"Los tres planos: común estricto (Estado), procedimientos ratione materiae (bases estatales + desarrollo autonómico) y autoorganización (CCAA). La sentencia recortó la proyección autonómica de ciertos preceptos, no su aplicación a la AGE."},
+{u:11,t:"En un plazo señalado por días, se excluyen del cómputo:",o:["Solo los domingos","Sábados, domingos y festivos (art. 30.2)","Solo los festivos nacionales","Ningún día si el procedimiento es urgente"],c:1,e:"Salvo que se declaren días naturales. Los plazos por meses van de fecha a fecha (30.4) y si el último día es inhábil se prorroga al primer hábil (30.5)."},
+{u:11,t:"La ampliación de plazos del art. 32 no puede exceder de:",o:["El doble del plazo","La mitad del plazo, acordada antes del vencimiento","10 días en todo caso","Un mes"],c:1,e:"De oficio o a petición, si no se perjudican derechos de tercero. Ni la ampliación ni su denegación son susceptibles de recurso. La tramitación de urgencia (33) reduce los plazos a la mitad, salvo solicitudes y recursos."},
+{u:11,t:"El plazo máximo para resolver, cuando la norma reguladora no fija ninguno, es de:",o:["6 meses","3 meses (art. 21.3)","1 mes","30 días"],c:1,e:"El tope que puede fijar una norma reglamentaria es 6 meses; más de 6 meses exige ley o norma UE. El vencimiento no exime de la obligación de resolver."},
+{u:11,t:"¿En cuál de estos casos el silencio es ESTIMATORIO?",o:["Reclamación de responsabilidad patrimonial","Solicitud de licencia sobre dominio público","Recurso de alzada contra la desestimación presunta de una solicitud (doble silencio)","Ejercicio del derecho de petición"],c:2,e:"Art. 24.1 párr. 3º: doble silencio en alzada → estimatorio. Los otros tres son excepciones expresas con silencio negativo."},
+{u:11,t:"En procedimientos iniciados de oficio susceptibles de producir efectos desfavorables, el vencimiento del plazo sin resolución produce:",o:["Silencio estimatorio","La caducidad (art. 25.1.b)","Silencio desestimatorio","Nulidad de las actuaciones"],c:1,e:"En los susceptibles de efectos favorables: desestimación por silencio. La caducidad no impide iniciar un nuevo procedimiento si no ha prescrito la infracción."},
+{u:11,t:"La certificación acreditativa del silencio administrativo:",o:["Debe solicitarla siempre el interesado","Se expide de oficio en el plazo de 15 días desde el vencimiento (art. 24.4)","Es constitutiva del derecho","No existe en la Ley 39/2015"],c:1,e:"Los efectos del silencio se producen ex lege desde el vencimiento; la certificación es declarativa y puede también pedirse en cualquier momento."},
+{u:11,t:"Las formas de iniciación de oficio son (art. 58 y ss.):",o:["Denuncia y solicitud","Propia iniciativa, orden superior, petición razonada de otros órganos y denuncia","Acuerdo del Consejo de Ministros","Moción y propuesta"],c:1,e:"La denuncia no convierte por sí sola al denunciante en interesado (62.5)."},
+{u:11,t:"Las medidas provisionales adoptadas ANTES de la iniciación (art. 56.2):",o:["No están permitidas","Proceden por urgencia inaplazable y deben confirmarse, modificarse o levantarse en el acuerdo de iniciación, que debe dictarse en los 15 días siguientes","Duran hasta la resolución","Requieren autorización judicial"],c:1,e:"Quedan sin efecto si no se inicia el procedimiento en ese plazo o si el acuerdo no las confirma expresamente."},
+{u:11,t:"El plazo de subsanación de una solicitud incompleta es de:",o:["5 días","10 días, ampliables en 5 (art. 68)","15 días","1 mes"],c:1,e:"Bajo apercibimiento de tenerle por desistido, previa resolución. La ampliación de hasta 5 días cabe cuando la aportación presente dificultades especiales (no en procedimientos selectivos)."},
+{u:11,t:"El período de prueba ordinario es de:",o:["No superior a 30 días ni inferior a 10 (art. 77.2)","Exactamente 20 días","Entre 15 y 45 días","Libre apreciación del instructor"],c:0,e:"Cabe además un período extraordinario de hasta 10 días a petición del interesado. El rechazo de pruebas exige resolución motivada (manifiestamente improcedentes o innecesarias)."},
+{u:11,t:"Como regla general, los informes son:",o:["Preceptivos y vinculantes","Facultativos y no vinculantes, y se emiten en 10 días (art. 80)","Preceptivos y no vinculantes","Vinculantes si los emite la Abogacía del Estado"],c:1,e:"Salvo disposición expresa en contrario. Si el informe preceptivo no se emite en plazo, se pueden proseguir las actuaciones (excepto informes preceptivos de otra Administración que suspenden, art. 22.1.d)."},
+{u:11,t:"El trámite de audiencia:",o:["Dura 20 días y es previo a la prueba","Dura de 10 a 15 días, tras la instrucción e inmediatamente antes de la propuesta de resolución (art. 82)","Puede omitirse siempre","Sustituye a la información pública"],c:1,e:"Puede prescindirse solo cuando no figuren ni vayan a tenerse en cuenta otros hechos o alegaciones que las del interesado. La información pública (83) es de 20 días como mínimo."},
+{u:11,t:"La caducidad por paralización imputable al interesado (art. 95) exige:",o:["3 meses de inactividad tras la advertencia de la Administración","6 meses de inactividad","1 mes desde el requerimiento","Resolución del superior jerárquico"],c:0,e:"Transcurridos 3 meses desde la advertencia, se declara la caducidad y el archivo. No aplica si la cuestión afecta al interés general o conviene sustanciarla."},
+{u:11,t:"En la tramitación simplificada del procedimiento (art. 96), el plazo de resolución es de:",o:["15 días","30 días desde el día siguiente al acuerdo de tramitación simplificada","2 meses","10 días"],c:1,e:"Si el Consejo de Estado dictamina en contra del fondo, se vuelve a la tramitación ordinaria. En sancionadores simplificados: infracciones leves."},
+{u:11,t:"La resolución en procedimientos iniciados a solicitud del interesado:",o:["Puede agravar la situación inicial del solicitante","No puede agravar su situación inicial (prohibición de reformatio in peius, art. 88.2)","Debe ser siempre estimatoria","No requiere congruencia"],c:1,e:"La congruencia rige sin perjuicio de la potestad de incoar de oficio un nuevo procedimiento si procede."},
+{u:11,t:"Las sanciones administrativas son ejecutivas:",o:["Desde que se dictan","Cuando no quepa contra ellas ningún recurso ordinario en vía administrativa (art. 90.3)","Desde su notificación","Tras la firmeza judicial"],c:1,e:"Especialidad sancionadora: la ejecutividad queda demorada hasta agotar la vía administrativa; cabe además suspensión cautelar si se anuncia contencioso."},
+{u:11,t:"Las cuestiones incidentales suscitadas en el procedimiento:",o:["Suspenden siempre su tramitación","No suspenden la tramitación, salvo la recusación (art. 74)","Suspenden solo en sancionadores","Deben resolverse por el superior"],c:1,e:"La recusación es la única cuestión incidental suspensiva."},
+// ============ T12 (u:12) ============
+{u:12,t:"El derecho a NO presentar documentos ya aportados o elaborados por cualquier Administración corresponde:",o:["A las personas en general (art. 13)","A los interesados en el procedimiento (art. 53.1.d)","Solo a las personas jurídicas","Solo en procedimientos electrónicos"],c:1,e:"El art. 13 recoge los derechos de las personas (asistencia electrónica, lenguas, acceso a información, responsabilidades…); el 53, los del interesado en un procedimiento concreto."},
+{u:12,t:"Están obligados a relacionarse electrónicamente con la Administración (art. 14.2):",o:["Todas las personas físicas","Personas jurídicas, entidades sin personalidad, profesionales colegiados (en ejercicio), empleados públicos y quienes los representen","Solo las grandes empresas","Los mayores de edad"],c:1,e:"Las personas físicas no obligadas pueden elegir. Reglamentariamente puede extenderse a colectivos con capacidad acreditada (14.3)."},
+{u:12,t:"La revisión de oficio de actos nulos (art. 106) requiere:",o:["Dictamen preceptivo del Consejo de Estado, cualquiera que sea su sentido","Dictamen previo FAVORABLE del Consejo de Estado u órgano consultivo autonómico","Autorización judicial","Informe de la Intervención"],c:1,e:"Sin dictamen favorable no puede declararse la nulidad. Procede en cualquier momento, de oficio o a solicitud de interesado (acción de nulidad), contra actos firmes nulos del 47.1 y disposiciones del 47.2."},
+{u:12,t:"El procedimiento de revisión de oficio iniciado de oficio caduca a los:",o:["3 meses","6 meses sin resolución (art. 106.5)","12 meses","2 años"],c:1,e:"Iniciado a solicitud del interesado, el silencio es desestimatorio. La inadmisión a trámite motivada (106.3) no requiere dictamen."},
+{u:12,t:"Para anular un acto ANULABLE favorable al interesado, la Administración debe:",o:["Revocarlo libremente","Declararlo lesivo para el interés público e impugnarlo ante el contencioso (art. 107)","Revisarlo de oficio con dictamen favorable","Esperar 4 años"],c:1,e:"Lesividad: antes de 4 años desde el acto; el procedimiento de declaración caduca a los 6 meses. Con audiencia de los interesados."},
+{u:12,t:"La revocación del art. 109.1 procede sobre:",o:["Actos favorables","Actos de gravamen o desfavorables, dentro del plazo de prescripción y con los límites legales","Reglamentos","Actos firmes en vía judicial"],c:1,e:"Límites: no constituir dispensa o exención no permitida ni ser contraria al principio de igualdad, al interés público o al ordenamiento."},
+{u:12,t:"La rectificación de errores materiales, de hecho o aritméticos (art. 109.2):",o:["Exige recurso del interesado","Puede realizarse en cualquier momento, de oficio o a instancia, sin alterar el contenido sustancial del acto","Caduca a los 6 meses","Requiere dictamen del Consejo de Estado"],c:1,e:"El error de derecho no es rectificable por esta vía: exige revisión o recurso."},
+{u:12,t:"El recurso de alzada se interpone contra:",o:["Actos que ponen fin a la vía administrativa","Resoluciones y actos de trámite cualificados que NO ponen fin a la vía administrativa","Actos firmes","Disposiciones generales"],c:1,e:"Ante el órgano autor o su superior (resuelve el superior). Plazo: 1 mes en actos expresos; resolución en 3 meses; silencio desestimatorio salvo doble silencio."},
+{u:12,t:"El plazo para interponer alzada contra un acto PRESUNTO es:",o:["1 mes","3 meses","En cualquier momento a partir del día siguiente a la producción del silencio (art. 122.1)","6 meses"],c:2,e:"Redacción de 2015 acorde con la doctrina constitucional sobre el acceso al recurso frente a la inactividad. En actos expresos: 1 mes."},
+{u:12,t:"El recurso potestativo de reposición:",o:["Se resuelve en 3 meses","Impide acudir al contencioso hasta su resolución expresa o presunta (art. 123.2), y se resuelve en 1 mes","Cabe contra actos de trámite no cualificados","Es preceptivo antes del contencioso"],c:1,e:"Potestativo y alternativo. Contra su resolución no cabe nueva reposición. Plazos: 1 mes de interposición (expresos) y 1 mes de resolución."},
+{u:12,t:"¿Cuál es causa del recurso extraordinario de revisión (art. 125.1)?",o:["Cualquier infracción del ordenamiento","Que al dictar el acto se hubiera incurrido en error de hecho que resulte de los propios documentos incorporados al expediente","La desviación de poder","La incompetencia jerárquica"],c:1,e:"Las 4 causas: a) error de hecho de los documentos del expediente (4 años); b) documentos esenciales posteriores (3 meses); c) documentos o testimonios declarados falsos por sentencia (3 meses); d) prevaricación, cohecho, violencia o maquinación declaradas por sentencia firme (3 meses)."},
+{u:12,t:"La solicitud de suspensión de un acto recurrido se entiende estimada si:",o:["No se resuelve en 10 días","Transcurre 1 mes desde que tuvo entrada en el registro electrónico sin resolución (art. 117.3)","No se resuelve en 3 meses","Nunca opera el silencio"],c:1,e:"Suspensión cautelar por ponderación de perjuicios o causa de nulidad del 47.1; puede prolongarse a la vía contenciosa si se pide con la medida cautelar."},
+{u:12,t:"La resolución de un recurso administrativo:",o:["Puede agravar la situación inicial del recurrente","No puede agravarla (prohibición de reformatio in peius, art. 119.3)","Debe limitarse a confirmar o anular","No exige congruencia"],c:1,e:"Estima, desestima o inadmite; cabe retroacción por vicio de forma (119.2). Decide cuantas cuestiones plantee el procedimiento, oídos los interesados en su caso."},
+{u:12,t:"Contra las disposiciones administrativas de carácter general:",o:["Cabe alzada","No cabe recurso en vía administrativa (art. 112.3)","Cabe reposición","Cabe revisión extraordinaria"],c:1,e:"Recurso contencioso directo (2 meses) o indirecto contra los actos de aplicación."},
+{u:12,t:"El error del recurrente al calificar el recurso:",o:["Determina su inadmisión","No obsta a su tramitación si se deduce su verdadero carácter (art. 115.2)","Obliga a subsanar en 10 días","Genera caducidad"],c:1,e:"Principio antiformalista. Los vicios de anulabilidad no alegables por quien los causó (115.3)."},
+{u:12,t:"El dictamen del Consejo de Estado en el recurso extraordinario de revisión:",o:["No se exige nunca","Es preceptivo, salvo que se acuerde la inadmisión a trámite motivada (art. 126.1)","Debe ser favorable","Sustituye a la resolución"],c:1,e:"La inadmisión procede cuando el recurso no se funde en alguna de las causas del 125.1 o se hubiesen desestimado en cuanto al fondo otros recursos sustancialmente iguales."},
+// ============ T13 (u:13) ============
+{u:13,t:"Tras la LO 1/2025, los antiguos Juzgados de lo Contencioso-Administrativo son:",o:["Salas de lo contencioso de las Audiencias Provinciales","Secciones de lo Contencioso-Administrativo de los Tribunales de Instancia","Tribunales administrativos independientes","Juzgados de Primera Instancia especializados"],c:1,e:"Y los Juzgados Centrales: Sección de lo C-A del Tribunal Central de Instancia (Madrid, jurisdicción nacional). No confundir el Tribunal Central de Instancia con la Audiencia Nacional, que subsiste."},
+{u:13,t:"Las impugnaciones de los instrumentos de planeamiento urbanístico corresponden a:",o:["Las Secciones de lo C-A del Tribunal de Instancia","Las Salas de lo C-A de los Tribunales Superiores de Justicia (art. 8.1 in fine y 10)","La Audiencia Nacional","El Tribunal Supremo"],c:1,e:"Excepción expresa a la competencia de las Secciones sobre actos de las entidades locales."},
+{u:13,t:"Los actos de órganos centrales de la AGE de cuantía superior a 60.000 € se impugnan ante:",o:["El Tribunal Central de Instancia","La Sala de lo C-A de la Audiencia Nacional (art. 11)","El TSJ de Madrid","El Tribunal Supremo"],c:1,e:"Regla 30-60: ≤60.000 € → Tribunal Central de Instancia; >60.000 € → Audiencia Nacional; Consejo de Ministros → siempre TS (art. 12). La AN conoce también del TEAC; los TEAR van al TSJ."},
+{u:13,t:"Los actos y disposiciones del Consejo de Ministros se impugnan ante:",o:["La Audiencia Nacional","La Sala Tercera del Tribunal Supremo (art. 12)","El Tribunal Central de Instancia","El Tribunal Constitucional"],c:1,e:"También CGPJ y órganos constitucionales (Congreso, Senado, TC, TCu, Defensor del Pueblo) en personal, administración y gestión patrimonial."},
+{u:13,t:"En materia de personal y sanciones, la competencia territorial corresponde:",o:["Siempre a la sede del órgano autor","A elección del demandante: sede del órgano o su propio domicilio (art. 14.1.2ª)","Siempre al domicilio del demandante","A Madrid en todo caso"],c:1,e:"Regla general: sede del órgano que dictó el acto originario. La elección rige en personal, propiedades especiales y sanciones."},
+{u:13,t:"El plazo para interponer recurso contencioso contra un acto EXPRESO es de:",o:["1 mes","2 meses desde la notificación o publicación (art. 46.1)","6 meses","20 días"],c:1,e:"Actos presuntos: 6 meses (con la doctrina constitucional de que el silencio negativo no precluye el plazo mientras no haya resolución expresa). Vía de hecho: 10/20 días. Inactividad: previa reclamación y 3 meses."},
+{u:13,t:"En la vía de hecho (art. 30), el requerimiento previo de cesación es:",o:["Obligatorio","Potestativo; si no es atendido en 10 días, o si no se formula, cabe el recurso","Constitutivo del derecho","Sustituido por los MASC"],c:1,e:"Plazos del 46.3: 10 días desde el fin del plazo del requerimiento; 20 días desde el inicio de la actuación si no hubo requerimiento."},
+{u:13,t:"No es admisible el recurso contencioso contra:",o:["Actos de trámite cualificados","Los actos reproducción de otros definitivos y firmes y los confirmatorios de actos consentidos (art. 28)","Actos presuntos","La inactividad administrativa"],c:1,e:"Finalidad: impedir la reapertura de plazos precluidos. Causas de inadmisibilidad: art. 69 (jurisdicción, legitimación, acto no impugnable, plazo, cosa juzgada)."},
+{u:13,t:"La legitimación sindical del nuevo art. 19.1.k) LJCA (LO 1/2025) permite a los sindicatos:",o:["Ejercer la acción popular","Actuar en nombre e interés del personal funcionario y estatutario afiliado que lo autorice","Impugnar cualquier acto administrativo","Sustituir al Ministerio Fiscal"],c:1,e:"Exige acompañar: documento de afiliación, comunicación previa al afiliado y autorización expresa (art. 45.2.e). No constituye acción popular."},
+{u:13,t:"Las aseguradoras de las Administraciones Públicas, en el proceso contencioso:",o:["No pueden ser parte","Son siempre parte codemandada junto a la Administración asegurada (art. 21.1.c)","Intervienen como terceros","Solo actúan en ejecución"],c:1,e:"Legitimación pasiva. Los funcionarios pueden comparecer por sí mismos en cuestiones de personal que no impliquen separación de inamovibles (23.3)."},
+{u:13,t:"El procedimiento abreviado (art. 78) se aplica a:",o:["Todos los asuntos de las Secciones","Cuantía ≤ 30.000 €, personal, extranjería, inadmisión de asilo y dopaje deportivo","Solo extranjería","Cuantía ≤ 60.000 €"],c:1,e:"Se inicia por DEMANDA directamente y rige la oralidad. Es el artículo más preguntado de la LJCA."},
+{u:13,t:"Tras la LO 1/2025, en el procedimiento abreviado la vista:",o:["Se celebra siempre","Ya no es automática: el demandado debe justificar la disconformidad fáctica y el juez decide por auto","Queda a discreción del recurrente","Se sustituye por los MASC"],c:1,e:"El auto que acuerda la vista es irrecurrible; contra el que la rechaza cabe reposición. Sin vista: conclusiones escritas de 5 días para ambas partes."},
+{u:13,t:"La sentencia oral (in voce) del art. 78.20 LJCA:",o:["No existe en el contencioso","Puede dictarse al concluir la vista y, si todas las partes presentes manifiestan su voluntad de no recurrir, se declara firme en el acto","Solo cabe en casación","Exige conformidad del Ministerio Fiscal"],c:1,e:"Gran novedad LO 1/2025; después se documenta por escrito y se notifica. La sentencia del abreviado debe dictarse en 10 días desde la vista (78.22)."},
+{u:13,t:"Los MASC (medios adecuados de solución de controversias) de la LO 1/2025:",o:["Son requisito de procedibilidad en el contencioso","Se aplican solo al orden civil y mercantil: los asuntos con entidades del sector público están excluidos","Sustituyen al recurso de reposición","Suspenden los plazos del art. 46"],c:1,e:"Trampa segura: afirmar su exigencia previa al contencioso es falso. Hay mandato al Gobierno para extenderlos en 2 años mediante proyecto de ley."},
+{u:13,t:"El recurso de casación contencioso se admite:",o:["Por cuantía superior a 600.000 €","Por interés casacional objetivo para la formación de jurisprudencia (LO 7/2015)","Por cualquier infracción procesal","Automáticamente contra sentencias de los TSJ"],c:1,e:"Sección de Admisión de la Sala 3ª: auto si admite, providencia sucintamente motivada si inadmite. La LO 1/2025 no altera la casación contenciosa: exporta el modelo a otros órdenes."},
+{u:13,t:"NO son apelables las sentencias de las Secciones de lo C-A:",o:["Las de cuantía superior a 30.000 €","Las de cuantía no superior a 30.000 €, salvo que declaren la inadmisibilidad del recurso","Las dictadas en materia electoral","Las de litigios entre Administraciones"],c:1,e:"Art. 81. Siempre apelables: litigios entre AAPP e impugnaciones indirectas de reglamentos. STS 19/5/2025: el umbral se extiende a apelaciones contra autos de ejecución."},
+{u:13,t:"La medida cautelar en el contencioso procede cuando:",o:["Se acredita apariencia de buen derecho únicamente","La ejecución del acto pudiera hacer perder su finalidad legítima al recurso, ponderando los intereses en conflicto (art. 130)","El acto es de trámite","La Administración lo consiente"],c:1,e:"Periculum in mora + ponderación; puede exigirse caución. En vía de hecho e inactividad: régimen del art. 136."},
+{u:13,t:"La sentencia firme que anula un precepto de una disposición general:",o:["Revive todos los actos firmes dictados a su amparo","No afecta por sí misma a la eficacia de las sentencias y actos firmes anteriores, salvo la exclusión o reducción de sanciones no ejecutadas completamente (art. 73)","Solo produce efectos entre las partes","Debe ratificarla el Tribunal Supremo"],c:1,e:"Los efectos de la anulación son erga omnes desde la publicación (72.2), pero sin revisión automática de lo firme."},
+{u:13,t:"La ejecución forzosa de una sentencia contenciosa puede instarse:",o:["Inmediatamente","Transcurridos 2 meses desde la comunicación de la sentencia o el plazo fijado en ella (art. 104.2)","A los 6 meses","Tras la casación"],c:1,e:"Los actos y disposiciones dictados con la finalidad de eludir el fallo son NULOS de pleno derecho (103.4). Imposibilidad de ejecución: indemnización sustitutoria (105.2)."},
+{u:13,t:"En caso de inactividad material de la Administración (art. 29.1), antes de recurrir hay que:",o:["Interponer alzada","Reclamar el cumplimiento y esperar 3 meses","Acudir a un MASC","Requerir al Defensor del Pueblo"],c:1,e:"Si en 3 meses desde la reclamación no se cumple, queda abierto el contencioso (plazo: 2 meses). Para actos firmes inejecutados: requerimiento y 1 mes, con recurso en 20 días (46.2)."},
+{u:13,t:"La cuestión de ilegalidad (art. 27 LJCA) la plantea:",o:["Cualquier parte","El juez que dictó sentencia firme estimatoria en un recurso indirecto, ante el tribunal competente para el recurso directo","El Ministerio Fiscal","La Administración autora del reglamento"],c:1,e:"Salvo que él mismo sea competente para conocer del recurso directo (anula entonces la disposición) o que sea el TS (27.3)."},
+{u:13,t:"La acción popular en el contencioso-administrativo:",o:["Corresponde a cualquier ciudadano en todo caso","Solo existe en los casos expresamente previstos por las leyes (art. 19.1.h)","Fue suprimida en 1998","Corresponde solo a las asociaciones"],c:1,e:"Ejemplos legales: urbanismo, costas, patrimonio histórico. El Ministerio Fiscal interviene solo en los procesos que determine la ley."},
+{u:13,t:"La responsabilidad patrimonial de la periférica del Estado corresponde a las Secciones de lo C-A cuando su cuantía no exceda de:",o:["30.000 €","30.050 € (art. 8.2.c)","60.000 €","60.101 €"],c:1,e:"No confundir con los 30.000 € del abreviado y la apelación ni con los 60.000 € de la frontera Tribunal Central de Instancia/Audiencia Nacional."},
+{u:13,t:"Las autorizaciones de entrada en domicilio para la ejecución forzosa de actos corresponden a:",o:["El juez de instrucción","Las Secciones de lo Contencioso-Administrativo del Tribunal de Instancia (art. 8.6)","La Audiencia Nacional","El Tribunal Superior de Justicia"],c:1,e:"También ratifican las medidas sanitarias urgentes que limiten derechos fundamentales con destinatarios identificados (redacción Leyes 3/2020 y 11/2021), y las entradas de la CNMC y la Administración tributaria."}
+];
+// ===== Motor =====
+let hist=JSON.parse(localStorage.getItem(LS_KEY)||'{}');
+let unidadSel='all', modo='normal';
+function saveHist(){localStorage.setItem(LS_KEY,JSON.stringify(hist))}
+function qid(q){return q.u+'|'+q.t.slice(0,60)}
+function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r}
+function ratio(q){const h=hist[qid(q)];if(!h||h.n===0)return null;return h.ok/h.n}
+function buildPool(){
+  let pool=BANK.filter(q=>unidadSel==='all'||q.u===unidadSel);
+  if(modo==='fail'){pool=pool.filter(q=>{const h=hist[qid(q)];return h&&h.n>0&&h.ok<h.n})}
+  if(modo==='adapt'){pool=[...pool].sort((a,b)=>{const ra=ratio(a),rb=ratio(b);return (ra===null?-1:ra)-(rb===null?-1:rb)}).slice(0,20)}
+  else{pool=shuffle(pool)}
+  return pool.map(q=>{const idx=shuffle(q.o.map((_,i)=>i));return{...q,idx}});
+}
+function render(reshuffle){
+  const tabs=document.getElementById('tabs');
+  tabs.innerHTML='';
+  const mk=(v,l)=>{const b=document.createElement('button');b.className='tab'+(unidadSel===v?' on':'');b.textContent=l;b.onclick=()=>{unidadSel=v;render(true)};tabs.appendChild(b)};
+  mk('all','📋 Todas ('+BANK.length+')');
+  for(const u in UNIDADES){mk(Number(u),UNIDADES[u]+' ('+BANK.filter(q=>q.u==u).length+')')}
+  document.querySelectorAll('.mode').forEach(b=>{b.classList.toggle('on',b.dataset.m===modo);b.onclick=()=>{modo=b.dataset.m;render(true)}});
+  renderBars();
+  const cont=document.getElementById('quiz');cont.innerHTML='';
+  const pool=buildPool();
+  if(pool.length===0){cont.innerHTML='<div class="q"><h3>🎉 No hay preguntas en este modo (ninguna errónea pendiente).</h3></div>';updateScore();return}
+  pool.forEach((q,n)=>{
+    const d=document.createElement('div');d.className='q';
+    const h=hist[qid(q)];
+    d.innerHTML='<div class="meta"><span>'+UNIDADES[q.u]+' · Pregunta '+(n+1)+'/'+pool.length+'</span><span>'+(h&&h.n?('histórico: '+h.ok+'/'+h.n):'nueva')+'</span></div><h3>'+q.t+'</h3>';
+    q.idx.forEach(i=>{
+      const b=document.createElement('button');b.className='opt';b.textContent=q.o[i];
+      b.onclick=()=>{
+        const id=qid(q);hist[id]=hist[id]||{ok:0,n:0};hist[id].n++;
+        d.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+        if(i===q.c){b.classList.add('ok');hist[id].ok++}
+        else{b.classList.add('ko');d.querySelectorAll('.opt').forEach(x=>{if(x.textContent===q.o[q.c])x.classList.add('ok')})}
+        d.querySelector('.exp').classList.add('show');
+        saveHist();renderBars();updateScore();
+      };
+      d.appendChild(b);
+    });
+    const e=document.createElement('div');e.className='exp';e.innerHTML='💡 '+q.e;d.appendChild(e);
+    cont.appendChild(d);
+  });
+  updateScore();
+}
+function renderBars(){
+  const el=document.getElementById('bars');el.innerHTML='';
+  for(const u in UNIDADES){
+    const qs=BANK.filter(q=>q.u==u);
+    let ok=0,n=0;qs.forEach(q=>{const h=hist[qid(q)];if(h){ok+=h.ok;n+=h.n}});
+    const pct=n?Math.round(100*ok/n):0;
+    const col=pct<50?'#dc2626':pct<75?'#ea580c':'#16a34a';
+    el.innerHTML+='<div class="bar"><div class="lbl"><span>'+UNIDADES[u]+'</span><span>'+(n?pct+'% ('+ok+'/'+n+')':'sin datos')+'</span></div><div class="track"><div class="fill" style="width:'+pct+'%;background:'+col+'"></div></div></div>';
+  }
+}
+function updateScore(){
+  let ok=0,n=0;BANK.forEach(q=>{const h=hist[qid(q)];if(h){ok+=h.ok;n+=h.n}});
+  document.getElementById('score').innerHTML=n?('Histórico total: <b>'+ok+'</b> aciertos de <b>'+n+'</b> respuestas ('+Math.round(100*ok/n)+'%)'):'Responde para empezar a registrar tu progreso (se guarda en este navegador).';
+}
+function showAll(){document.querySelectorAll('.exp').forEach(e=>e.classList.add('show'))}
+function resetHist(){if(confirm('¿Borrar todo el historial de este test?')){hist={};saveHist();render(true)}}
+render(true);
+</script>
+</body>
+</html>
