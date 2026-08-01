@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BV — Test T7, T8, T9 y T10 (Laboral/Convenio, Negociación/Huelga, MUFACE, Discapacidad)</title>
+<style>
+:root{--azul:#0e7490;--azul2:#0891b2;--verde:#16a34a;--rojo:#dc2626;--naranja:#ea580c;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:70px}
+header{background:linear-gradient(135deg,#0369a1,#15803d);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.25rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:800px;margin:0 auto;padding:0 14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 6px}
+.tab{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;cursor:pointer}
+.tab.on{background:var(--azul);color:#fff}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 14px}
+.mode{border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:5px 12px;font-size:.8rem;cursor:pointer}
+.mode.on{background:#0f766e;color:#fff;border-color:#0f766e}
+.bars{display:flex;flex-direction:column;gap:6px;margin:10px 0 18px}
+.bar{background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.bar .lbl{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin-bottom:4px}
+.bar .track{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.bar .fill{height:100%;border-radius:4px;transition:width .3s}
+.q{background:#fff;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.q .meta{font-size:.75rem;color:#64748b;margin-bottom:8px;display:flex;justify-content:space-between}
+.q h3{font-size:.98rem;margin-bottom:12px;line-height:1.45}
+.opt{display:block;width:100%;text-align:left;border:2px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:10px 12px;margin:6px 0;font-size:.9rem;cursor:pointer;line-height:1.4}
+.opt:hover{border-color:var(--azul2)}
+.opt.ok{border-color:var(--verde);background:#f0fdf4}
+.opt.ko{border-color:var(--rojo);background:#fef2f2}
+.opt:disabled{cursor:default;opacity:.92}
+.exp{display:none;margin-top:10px;background:#eef2ff;border-left:4px solid var(--azul2);border-radius:0 8px 8px 0;padding:10px 12px;font-size:.85rem}
+.exp.show{display:block}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.btn{border:none;border-radius:8px;padding:8px 16px;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--azul);color:#fff}
+.btn.sec{background:#64748b}
+.btn.warn{background:var(--rojo)}
+.score{position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#fff;padding:10px 16px;text-align:center;font-size:.9rem}
+.score b{color:#4ade80}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧪 Test BV · T7+T8+T9+T10 — Laboral/Convenio, Negociación/Huelga, MUFACE, Discapacidad</h1>
+  <p>GACE 2027 · Autocorregible y adaptativo · IV Convenio Único + LOLS + RD-ley 17/1977 + TR 4/2000 + RD 2271/2004 · verificado 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="tabs" id="tabs"></div>
+  <div class="modes">
+    <button class="mode on" data-m="normal">📚 Normal</button>
+    <button class="mode" data-m="adapt">🎯 Adaptativo (peores 20)</button>
+    <button class="mode" data-m="fail">❌ Solo erróneas</button>
+  </div>
+  <div class="bars" id="bars"></div>
+  <div class="controls">
+    <button class="btn" onclick="render(true)">🔀 Barajar</button>
+    <button class="btn sec" onclick="showAll()">👁️ Ver explicaciones</button>
+    <button class="btn warn" onclick="resetHist()">🗑️ Reiniciar historial</button>
+  </div>
+  <div id="quiz"></div>
+</div>
+<div class="score" id="score"></div>
+<script>
+const LS_KEY='gace_bv_t07t10_v1';
+const UNIDADES={7:'T7 · Laboral/Convenio',8:'T8 · Negociación/Huelga',9:'T9 · MUFACE/Clases Pasivas',10:'T10 · Discapacidad'};
+const BANK=[
+// ============ T7 (u:7) ============
+{u:7,t:"El art. 11.1 TREBEP define al personal laboral por:",o:["Nombramiento administrativo","Contrato de trabajo escrito + legislación laboral + retribución","Elección democrática","Concurso de méritos exclusivamente"],c:1,e:"Se distingue del funcionario por el vínculo contractual (no de nombramiento) y la legislación aplicable (TRET, no TREBEP en lo laboral)."},
+{u:7,t:"El personal laboral fijo, frente al indefinido no fijo, se caracteriza por:",o:["Haber accedido tras proceso selectivo reglamentario con igualdad, mérito y capacidad","Ser el resultado de una resolución judicial por temporalidad fraudulenta","No tener nunca movilidad","Cobrar menos que el temporal"],c:0,e:"El indefinido no fijo suele derivar de sentencia judicial que sanciona el uso irregular de la temporalidad, y no tiene los derechos plenos del fijo."},
+{u:7,t:"La reserva funcional del art. 9.2 TREBEP implica que:",o:["El personal laboral puede ejercer cualquier función","Las funciones que impliquen potestades públicas corresponden exclusivamente a funcionarios","Solo se aplica a la Administración Local","Es de aplicación potestativa"],c:1,e:"Límite estructural del modelo: dos rasgos distinguen al laboral del funcionario, siendo este el principal."},
+{u:7,t:"La reforma de 2021 del Estatuto de los Trabajadores se realizó mediante:",o:["Real Decreto Legislativo 32/2021","Real Decreto-ley 32/2021, de 28 de diciembre","Ley Orgánica 32/2021","Ley 32/2021"],c:1,e:"Corrección frecuente: es un Real Decreto-ley (norma de urgencia), no un Real Decreto Legislativo (que aprueba textos refundidos)."},
+{u:7,t:"El IV Convenio Colectivo Único para el personal laboral de la AGE fue publicado en el BOE el:",o:["4 de marzo de 2019","17 de mayo de 2019","1 de enero de 2019","31 de diciembre de 2021"],c:1,e:"Suscrito el 4 de marzo de 2019; entrada en vigor el 18 de mayo de 2019, con efectos económicos desde el 1 de enero de 2019."},
+{u:7,t:"La situación del IV Convenio Único a fecha de 2026 es:",o:["Ha decaído completamente por falta de acuerdo","Denunciado, en ultraactividad indefinida (art. 86.3 ET), con el V Convenio en negociación sin acuerdo","Sustituido íntegramente por el V Convenio","Nunca fue denunciado"],c:1,e:"UGT y CC.OO. lo denunciaron tras completar su agenda pactada; sigue vigente por ultraactividad."},
+{u:7,t:"La Comisión Paritaria del IV Convenio Único está compuesta por:",o:["15 miembros en total","30 miembros: 15 de la Administración y 15 de los sindicatos","10 miembros","50 miembros"],c:1,e:"Es el órgano máximo de interpretación, vigilancia y aplicación del Convenio; los acuerdos económicos requieren aprobación de la CECIR."},
+{u:7,t:"En el sistema de clasificación del IV Convenio, el grupo M2 corresponde a:",o:["Técnico Superior (FP Grado Superior)","Grado universitario o equivalente (Nivel 2 MECES)","Máster universitario","Bachillerato"],c:1,e:"M3=Máster, M2=Grado, M1=FP Superior, E2=Bachiller/FP Medio, E1=ESO/FP Básica, E0=sin titulación."},
+{u:7,t:"El período de prueba para los grupos M3 y M2 en el IV Convenio es de:",o:["15 días laborables","1 mes","3 meses","6 meses"],c:2,e:"M1, E2 y E1: 1 mes. E0: 15 días laborables."},
+{u:7,t:"El orden de prelación para cubrir vacantes en el IV Convenio Único es:",o:["Ingreso libre, promoción, concurso abierto y permanente","Concurso abierto y permanente, promoción profesional, ingreso libre","Promoción, ingreso libre, concurso","Aleatorio según disponibilidad"],c:1,e:"Prioriza primero la movilidad voluntaria del personal fijo, luego la promoción interna, y por último el ingreso externo."},
+{u:7,t:"Para participar en el concurso abierto y permanente se exige, con carácter general, una permanencia mínima en el último puesto definitivo de:",o:["6 meses","1 año","2 años","5 años"],c:2,e:"Excepción: no se exige si el puesto solicitado está en la misma Secretaría de Estado, departamento u organismo."},
+{u:7,t:"La jornada general del art. 64 del IV Convenio Único es de:",o:["35 horas semanales","37 horas y 30 minutos semanales (1.642 h/año)","40 horas semanales","30 horas semanales"],c:1,e:"Desde el 16/04/2026, la Resolución SEFP de 14/04/2026 (BOE-A-2026-8287) fija 35h/semana con carácter general para la AGE, pero su aplicación al personal laboral requiere negociación específica."},
+{u:7,t:"Un despido disciplinario por falta muy grave del personal laboral fijo, declarado improcedente, conlleva:",o:["El pago de una indemnización sustitutiva a elección del empresario","La readmisión obligatoria del trabajador","La extinción automática del contrato","Ninguna consecuencia"],c:1,e:"Regla de especial relevancia: conecta con la estabilidad en el empleo público y prohíbe sustituir la readmisión por indemnización."},
+{u:7,t:"La Ley 53/1984 de incompatibilidades:",o:["Solo se aplica a funcionarios de carrera","Se aplica también al personal laboral","No se aplica al empleo público","Solo se aplica al personal eventual"],c:1,e:"Error típico del opositor: creer que las incompatibilidades son un régimen exclusivo de funcionarios."},
+{u:7,t:"La excedencia voluntaria por interés particular del personal laboral fijo exige una antigüedad mínima de:",o:["6 meses","1 año","2 años","5 años"],c:1,e:"Duración mínima 4 meses, máxima indefinida; no puede solicitarse de nuevo hasta pasados 3 años desde el final de la anterior."},
+{u:7,t:"En la excedencia por cuidado de hijos del personal laboral, la reserva de puesto se mantiene durante:",o:["Todo el periodo de excedencia","Los 2 primeros años (después, puesto equivalente)","Solo los primeros 6 meses","No hay reserva de puesto"],c:1,e:"Duración máxima: 3 años (5 si el hijo tiene discapacidad reconocida); computa a efectos de antigüedad."},
+{u:7,t:"El desplazamiento temporal del personal laboral no puede superar:",o:["6 meses en un período de 1 año","12 meses en un período de 3 años","2 años en total","No tiene límite"],c:1,e:"Diferencia con el traslado obligatorio, que es definitivo."},
+];
+BANK.push(
+// ============ T8 (u:8) ============
+{u:8,t:"El primer límite constitucional de la negociación colectiva en el empleo público es:",o:["La reserva de ley del art. 103.3 CE","La legalidad presupuestaria del art. 134.2 CE","El derecho de huelga","La libertad sindical"],c:1,e:"El Parlamento aprueba la totalidad de los gastos; el informe favorable de Hacienda es requisito de validez de cualquier acuerdo con efectos económicos."},
+{u:8,t:"Los principios de la negociación colectiva del art. 33 TREBEP son:",o:["Solo legalidad y buena fe","Legalidad, cobertura presupuestaria, obligatoriedad, buena fe negocial y publicidad","Únicamente la obligatoriedad de acordar","Solo la publicidad"],c:1,e:"La obligatoriedad es de NEGOCIAR, no de alcanzar acuerdo."},
+{u:8,t:"El art. 35 TREBEP sobre constitución de mesas de negociación fue modificado por:",o:["El Real Decreto-ley 1/2015, de 27 de febrero","El Real Decreto Legislativo 1/2015","La Ley 7/2007","El Real Decreto-ley 6/2023"],c:0,e:"Corrección de denominación: es Real Decreto-ley, no Legislativo."},
+{u:8,t:"La diferencia esencial entre un Pacto y un Acuerdo es:",o:["No existe diferencia","El Pacto tiene eficacia directa y no requiere ratificación; el Acuerdo requiere aprobación del órgano de gobierno","El Acuerdo es siempre más rápido","El Pacto solo se aplica a funcionarios"],c:1,e:"Pacto = ámbito del órgano que lo suscribe. Acuerdo = competencia de los órganos de gobierno, requiere ratificación."},
+{u:8,t:"La mediación en conflictos derivados de Pactos y Acuerdos es:",o:["Voluntaria en todo caso","Obligatoria cuando lo solicita una de las partes","Nunca aplicable en el sector público","Solo aplicable al personal laboral"],c:1,e:"El arbitraje, en cambio, es siempre voluntario; el laudo es vinculante una vez aceptado."},
+{u:8,t:"Las Juntas de Personal se constituyen en unidades electorales con un censo mínimo de:",o:["6 funcionarios","30 funcionarios","50 funcionarios","100 funcionarios"],c:2,e:"Los Delegados de Personal se constituyen entre 6 y 49 funcionarios."},
+{u:8,t:"El crédito de horas mensuales retribuidas para unidades de hasta 100 funcionarios (art. 41.1.d TREBEP) es de:",o:["10 horas","15 horas","25 horas","40 horas"],c:1,e:"Escala: 15h/20h/30h/35h/40h según tramos de plantilla (hasta 100, 101-250, 251-500, 501-750, 751+)."},
+{u:8,t:"Para constituir una sección sindical con delegados sindicales plenos (art. 10.1 LOLS) se exige:",o:["Cualquier centro de trabajo, sin requisitos","Centro con más de 250 trabajadores + presencia sindical en órganos unitarios","Solo la afiliación de 10 trabajadores","Autorización del Ministerio"],c:1,e:"Ambos requisitos son acumulativos."},
+{u:8,t:"Un sindicato es más representativo a nivel estatal cuando obtiene:",o:["Al menos el 5% de representantes","Al menos el 10% del total de representantes en toda España","Al menos el 20%","Mayoría absoluta"],c:1,e:"A nivel autonómico: ≥15% en la Comunidad Autónoma + mínimo 1.500 representantes + no federado a nivel estatal."},
+{u:8,t:"El sindicato adquiere personalidad jurídica plena:",o:["De forma inmediata al constituirse","A los 20 días desde el depósito de sus estatutos","Tras 1 año de actividad","Nunca, requiere ley específica"],c:1,e:"Si no hay defectos formales, la Oficina Pública publica los estatutos en el BOE en 10 días adicionales."},
+{u:8,t:"El quórum de empleados públicos para convocar una reunión sin pasar por sindicatos ni órganos de representación es:",o:["El 10% del colectivo convocado","El 25% del colectivo convocado","El 40% del colectivo convocado","Mayoría absoluta del colectivo"],c:2,e:"Art. 46 TREBEP: derecho de reunión. La reunión no puede perjudicar la prestación de los servicios."},
+{u:8,t:"La norma vigente sobre el derecho de huelga en España es:",o:["Una ley orgánica específica aprobada en 2020","El Real Decreto-ley 17/1977, de 4 de marzo, depurado por la STC 11/1981","El Estatuto de los Trabajadores íntegramente","El TREBEP en su totalidad"],c:1,e:"La ley orgánica exigida por el art. 28.2 en relación con el art. 81.1 CE sigue sin aprobarse a fecha de 2026."},
+{u:8,t:"Una huelga rotatoria (afecta por turnos a distintos sectores) se califica como:",o:["Legal ordinaria","Abusiva, con los mismos efectos que la ilegal","Ilegal por motivos políticos","No regulada"],c:1,e:"Art. 7.2 RD-ley 17/1977: las huelgas abusivas se equiparan jurisprudencialmente a las ilegales."},
+{u:8,t:"El preaviso de huelga en empresas de servicios públicos es de:",o:["5 días naturales","10 días naturales, más publicidad necesaria","24 horas","No se exige preaviso"],c:1,e:"El preaviso general (no servicios públicos) es de 5 días naturales."},
+{u:8,t:"El Comité de Huelga, cuando afecta a un solo centro de trabajo, no puede exceder de:",o:["6 personas","12 personas","20 personas","No tiene límite"],c:1,e:"Solo puede estar integrado por trabajadores del propio centro afectado."},
+{u:8,t:"La fijación de los servicios mínimos en una huelga corresponde a:",o:["El órgano de gestión del servicio afectado","La autoridad gubernativa (STC 123/1990)","El Comité de Huelga","Los sindicatos convocantes"],c:1,e:"Se excluye al órgano gestor por falta de neutralidad e independencia."},
+{u:8,t:"En una huelga legal, la sustitución de huelguistas por trabajadores ajenos a la empresa está:",o:["Permitida sin restricciones","Prohibida (esquirolaje externo prohibido)","Permitida solo con autorización judicial","Permitida si dura más de 5 días"],c:1,e:"En la huelga ilegal, por el contrario, sí es posible sustituir a los huelguistas."},
+{u:8,t:"El cierre patronal (lock-out) es lícito únicamente cuando es:",o:["Ofensivo, para presionar a los trabajadores","Defensivo, ante peligro de violencia, ocupación ilegal o inasistencia grave","Preventivo, sin causa concreta","Decidido libremente por el empresario en cualquier momento"],c:1,e:"Debe comunicarse a la autoridad laboral en el plazo de 12 horas."},
+{u:8,t:"La deducción de haberes por el ejercicio del derecho de huelga (art. 30 TREBEP):",o:["Tiene carácter sancionador","No tiene carácter sancionador","Solo se aplica en huelgas ilegales","Está prohibida"],c:1,e:"Es una consecuencia de la suspensión del contrato, no una sanción disciplinaria."},
+// ============ T9 (u:9) ============
+{u:9,t:"El régimen especial de Seguridad Social de los funcionarios civiles del Estado se regula en:",o:["El Real Decreto Legislativo 4/2000, de 23 de junio","El Estatuto de los Trabajadores","La Ley General de la Seguridad Social exclusivamente","El TREBEP en su Capítulo III"],c:0,e:"Integrado por dos mecanismos: Clases Pasivas (RDLeg 670/1987) y MUFACE (mutualismo administrativo, gestionado conforme al propio TR 4/2000)."},
+{u:9,t:"Los funcionarios de carrera de la Administración Civil del Estado que ingresan desde el 1 de enero de 2011:",o:["Quedan excluidos de toda protección social","Se integran en el Régimen General de la SS a efectos exclusivos de pensiones","Pasan directamente a Clases Pasivas","Pierden la condición de mutualistas de MUFACE"],c:1,e:"Art. 20 RD-ley 13/2010. A efectos de las demás prestaciones, siguen en MUFACE."},
+{u:9,t:"MUFACE es, en cuanto a su naturaleza jurídica:",o:["Una sociedad mercantil pública","Un organismo autónomo adscrito al Ministerio para la Transformación Digital y de la Función Pública","Una entidad gestora de la Seguridad Social","Una fundación pública"],c:1,e:"Se rige por la Ley 40/2015, no por la Ley 6/1997 (derogada)."},
+{u:9,t:"La cotización mensual a MUFACE se calcula como:",o:["Base anual × tipo / 12","Base anual × tipo / 14","Cuota fija idéntica para todos los grupos","No existe cotización a MUFACE"],c:1,e:"En junio y diciembre se abona cuota doble, coincidiendo con las pagas extraordinarias."},
+{u:9,t:"El copago farmacéutico ordinario en oficina de farmacia para mutualistas de MUFACE es del:",o:["10%","20%","30%","50%"],c:2,e:"Gratuito en instituciones sanitarias y en caso de accidente de servicio o enfermedad profesional."},
+{u:9,t:"Durante los primeros 90 días de una incapacidad temporal, el funcionario percibe:",o:["El 80% de las retribuciones básicas","El 100% de las retribuciones ordinarias del mes de inicio","El 75% de las retribuciones complementarias","Ninguna retribución"],c:1,e:"Desde el día 91: la mayor entre 80% de básicas (+1/6 paga extra) o 75% de complementarias del tercer mes."},
+{u:9,t:"La prestación económica por gran invalidez equivale a:",o:["El 25% de la pensión de jubilación","El 50% de la pensión de jubilación","El 100% de la pensión de jubilación","Una cantidad fija anual"],c:1,e:"Destinada a remunerar a la persona que asiste al funcionario jubilado por gran invalidez."},
+{u:9,t:"La gestión del Régimen de Clases Pasivas del Estado corresponde, desde el 6 de octubre de 2020, a:",o:["La Dirección General de Costes de Personal","El INSS","MUFACE","La Tesorería General de la Seguridad Social exclusivamente"],c:1,e:"El pago material de las prestaciones lo realiza la TGSS; el reconocimiento y propuesta de pago, el INSS."},
+{u:9,t:"El período de carencia para la pensión ordinaria de jubilación de Clases Pasivas es de:",o:["10 años de servicios efectivos","15 años de servicios efectivos","20 años de servicios efectivos","25 años de servicios efectivos"],c:1,e:"La jubilación voluntaria exige, además, ≥60 años de edad y ≥30 años de servicios efectivos."},
+{u:9,t:"La cuota de derechos pasivos que se descuenta mensualmente en nómina es del:",o:["1,69% del haber regulador","3,86% del haber regulador","6,59% del haber regulador","10% del haber regulador"],c:1,e:"1,69% es el tipo de cotización del funcionario a MUFACE, una cifra distinta."},
+{u:9,t:"La pensión ordinaria de viudedad equivale, con carácter general, a:",o:["El 25% de la base reguladora","El 40% de la base reguladora","El 50% de la base reguladora","El 100% de la base reguladora"],c:2,e:"No se exige período de carencia. Se incrementa 4 o 2 puntos en determinadas condiciones (RD-ley 28/2018)."},
+{u:9,t:"En la pensión de orfandad, si existe un solo hijo beneficiario, la cuantía es del:",o:["10% de la base reguladora","15% de la base reguladora","25% de la base reguladora","50% de la base reguladora"],c:2,e:"Con varios hijos: 10% cada uno + 15% a prorrata entre todos; tope 50% (con cónyuge) o 100% (sin cónyuge)."},
+{u:9,t:"En las pensiones extraordinarias de Clases Pasivas, el haber o base reguladora se toma:",o:["Al 100%","Al 150%","Al 200%","Al 50%"],c:2,e:"Se computan además como servicios efectivos los años que faltan hasta la jubilación forzosa."},
+{u:9,t:"La pensión de jubilación por incapacidad permanente total/absoluta, compatibilizada con actividad distinta a la previa y con más de 20 años de servicios, se reduce al:",o:["100%","75%","55%","25%"],c:1,e:"Con 20 años de servicios o menos, la reducción es al 55%."},
+{u:9,t:"La revalorización de las pensiones de Clases Pasivas para 2026 fue del:",o:["1,5%","2,7%","3,8%","5%"],c:1,e:"Conforme al Real Decreto-ley 3/2026, de 3 de febrero; tope 2026: 3.359,60 €/mes."},
+{u:9,t:"El concierto de asistencia sanitaria de MUFACE vigente en el período 2025-2027 se firma con:",o:["Solo con el Sistema Nacional de Salud","ASISA y SegurCaixa Adeslas","DKV y ASISA","Todas las aseguradoras privadas sin excepción"],c:1,e:"DKV no se presentó al concurso. Presupuesto: 4.808,5 millones de euros."},
+// ============ T10 (u:10) ============
+{u:10,t:"El artículo 49 de la Constitución Española fue reformado:",o:["En 2018","El 17 de febrero de 2024 (BOE-A-2024-3099)","En 2026 junto con el art. 69.3","Nunca ha sido reformado"],c:1,e:"Es la tercera reforma constitucional desde 1978 y la primera de contenido social; sustituye la terminología de 'disminuidos'."},
+{u:10,t:"El umbral de grado de discapacidad reconocido a efectos de empleo público es:",o:["Igual o superior al 25%","Igual o superior al 33%","Igual o superior al 50%","Igual o superior al 65%"],c:1,e:"Art. 4.2 TRLGDPD. Se equiparan automáticamente los pensionistas con IP total/absoluta/gran invalidez."},
+{u:10,t:"El cupo general de reserva en las OEP conforme al art. 59 TREBEP es de:",o:["5%","7%","10%","15%"],c:1,e:"Aplicable a todas las Administraciones Públicas, como legislación básica, con el objetivo progresivo de alcanzar el 2% de efectivos totales."},
+{u:10,t:"El Real Decreto-ley 6/2023 eleva la reserva en las OEP de la Administración General del Estado al:",o:["7%","8%","10%","12%"],c:2,e:"Art. 108 RD-ley 6/2023. De ese cupo, al menos el 2% se destina a discapacidad intelectual."},
+{u:10,t:"El artículo del RD-ley 6/2023 que regula las adaptaciones y ajustes razonables (uso de prótesis incluido) es:",o:["El mismo art. 108 que fija el cupo","El artículo 113","El artículo 122","El artículo 59"],c:1,e:"Trampa habitual: atribuir el cupo del 10% y las adaptaciones a un único artículo, cuando son preceptos distintos (108 y 113)."},
+{u:10,t:"La regla de acumulación de plazas no cubiertas por discapacidad (art. 3.2 RD 2271/2004) se activa cuando la cobertura real:",o:["Es inferior al 3% de las plazas convocadas","Simplemente queda alguna plaza sin cubrir","Supera el 10%","Nunca se acumula"],c:0,e:"Límite máximo de acumulación a la oferta siguiente: 10% de dicha oferta."},
+{u:10,t:"El cupo de reserva en convocatorias de promoción interna en la AGE es de:",o:["3%","5%","7%","10%"],c:1,e:"Art. 5 RD 2271/2004. Las plazas desiertas se acumulan al turno ordinario de promoción interna."},
+{u:10,t:"El cupo de reserva en convocatorias de personal temporal en la AGE exige, además del 5%:",o:["Ningún otro requisito","Que haya fase de oposición y se convoquen 20 o más plazas","Que el proceso dure más de 6 meses","Autorización previa del Consejo de Ministros"],c:1,e:"Art. 6 RD 2271/2004. Las vacantes se acumulan al turno libre, no a la oferta siguiente."},
+{u:10,t:"En una convocatoria ordinaria con reserva de plazas, la relación final de aprobados se elabora:",o:["Por separado, un listado para cada turno","Como relación única, ordenada por puntuación total, con independencia del turno","Solo con los aspirantes del turno de discapacidad","No se elabora relación final"],c:1,e:"Dicha relación única determina la petición y adjudicación de destinos."},
+{u:10,t:"El mecanismo de trasvase al turno general permite que:",o:["Un aspirante del cupo de reserva que supere ejercicios pero no obtenga plaza, y tenga puntuación superior a aspirantes del turno general, se incluya en este último","Los aspirantes del turno general pasen al cupo de reserva","Se reduzcan las plazas del cupo de reserva","Se cancele la convocatoria"],c:0,e:"Mecanismo de igualdad de oportunidades previsto en el art. 3 RD 2271/2004."},
+{u:10,t:"La adaptación de tiempos y medios en los procesos selectivos se rige, desde 2025, por:",o:["Un criterio discrecional de cada tribunal","La Orden PJC/804/2025, de 23 de julio","El TREBEP exclusivamente","No existe normativa específica"],c:1,e:"Desarrolla la remisión pendiente del art. 8 RD 2271/2004 y el art. 113 RD-ley 6/2023."},
+{u:10,t:"La adaptación en un proceso selectivo procede:",o:["Siempre que se solicite, sin más trámite","Solo si la discapacidad guarda relación directa con la prueba a realizar","Únicamente en el turno independiente","Nunca en pruebas de conocimientos"],c:1,e:"Criterio de no automatismo: la adaptación no puede alterar el contenido ni el nivel de exigencia de las pruebas."},
+{u:10,t:"La alteración del orden de prelación para la elección de plazas (art. 9 RD 2271/2004):",o:["Es un derecho automático de cualquier aspirante con discapacidad","Es una excepción proporcional que exige solicitud motivada y decisión fundada del órgano convocante","Solo se aplica al turno independiente","Está prohibida por ley"],c:1,e:"Motivos: dependencia personal, dificultades de desplazamiento u otras razones análogas acreditadas."},
+{u:10,t:"La financiación de la adaptación de un puesto de trabajo corresponde a:",o:["El propio empleado con discapacidad","El ministerio u organismo al que esté adscrito el puesto","El Ministerio para la Transformación Digital y de la Función Pública en todo caso","No está prevista financiación"],c:1,e:"Sin perjuicio de subvenciones o ayudas adicionales que puedan aplicarse."},
+{u:10,t:"El informe balance anual sobre acceso al empleo público de personas con discapacidad se eleva a:",o:["Solo al Ministerio de Hacienda","La Comisión Superior de Personal y el Consejo Nacional de la Discapacidad","El Congreso de los Diputados","El Defensor del Pueblo"],c:1,e:"Elaborado por el Ministerio para la Transformación Digital y de la Función Pública."},
+{u:10,t:"La CIDPD (Convención de la ONU sobre los Derechos de las Personas con Discapacidad) tiene, en el ordenamiento español, el rango de:",o:["Ley orgánica","Tratado internacional conforme al art. 96.1 CE, con función interpretativa reforzada vía art. 10.2 CE","Reglamento administrativo","Ninguno, no está ratificada por España"],c:1,e:"Precisión frecuente: no se tramita ni deroga como ley orgánica, aunque su rango se sitúe por encima de la ley ordinaria."}
+);
+const CATS_LABEL=UNIDADES;
+let filtered=[...BANK], mode='normal', curTab=0;
+function loadHist(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'{}')}catch(e){return{}}}
+function saveHist(h){localStorage.setItem(LS_KEY,JSON.stringify(h))}
+function qid(q){return q.u+'|'+q.t.slice(0,60)}
+function buildTabs(){
+  const tabs=document.getElementById('tabs');
+  tabs.innerHTML='<button class="tab on" data-u="0">Todos</button>'+Object.entries(UNIDADES).map(([k,v])=>`<button class="tab" data-u="${k}">${v}</button>`).join('');
+  tabs.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{tabs.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');curTab=+b.dataset.u;applyFilter();render(false)});
+}
+function applyFilter(){
+  let base = curTab===0?[...BANK]:BANK.filter(q=>q.u===curTab);
+  const hist=loadHist();
+  if(mode==='fail'){base=base.filter(q=>{const h=hist[qid(q)];return h&&h.wrong>0&&(h.wrong>=h.right)})}
+  if(mode==='adapt'){base=base.map(q=>{const h=hist[qid(q)]||{right:0,wrong:0};const score=h.right-h.wrong;return{q,score}}).sort((a,b)=>a.score-b.score).slice(0,20).map(x=>x.q)}
+  filtered=base;
+}
+function buildBars(){
+  const hist=loadHist();
+  const bars=document.getElementById('bars');
+  bars.innerHTML=Object.entries(UNIDADES).map(([k,v])=>{
+    const qs=BANK.filter(q=>q.u==k);
+    let right=0,total=0;
+    qs.forEach(q=>{const h=hist[qid(q)];if(h){total+=h.right+h.wrong;right+=h.right}});
+    const pct=total>0?Math.round(100*right/total):0;
+    const col=pct>=70?'#16a34a':pct>=40?'#ea580c':'#dc2626';
+    return `<div class="bar"><div class="lbl"><span>${v}</span><span>${pct}%</span></div><div class="track"><div class="fill" style="width:${pct}%;background:${col}"></div></div></div>`;
+  }).join('');
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function render(doShuffle){
+  applyFilter();
+  if(doShuffle)shuffle(filtered);
+  const quiz=document.getElementById('quiz');
+  quiz.innerHTML='';
+  filtered.forEach((q,idx)=>{
+    const div=document.createElement('div');div.className='q';
+    div.innerHTML=`<div class="meta"><span>${UNIDADES[q.u]}</span><span>#${idx+1}/${filtered.length}</span></div><h3>${q.t}</h3>`+
+      q.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')+
+      `<div class="exp" id="exp${idx}"><b>Explicación:</b> ${q.e}</div>`;
+    quiz.appendChild(div);
+    div.querySelectorAll('.opt').forEach(btn=>{
+      btn.onclick=()=>{
+        if(btn.disabled)return;
+        const opts=div.querySelectorAll('.opt');
+        opts.forEach(o=>o.disabled=true);
+        const hist=loadHist();const id=qid(q);const h=hist[id]||{right:0,wrong:0};
+        if(+btn.dataset.i===q.c){btn.classList.add('ok');h.right++}
+        else{btn.classList.add('ko');opts[q.c].classList.add('ok');h.wrong++}
+        hist[id]=h;saveHist(hist);
+        document.getElementById('exp'+idx).classList.add('show');
+        updateScore();buildBars();
+      };
+    });
+  });
+  updateScore();buildBars();
+}
+function showAll(){document.querySelectorAll('.exp').forEach(e=>e.classList.add('show'))}
+function resetHist(){if(confirm('¿Reiniciar todo el historial de este test?')){localStorage.removeItem(LS_KEY);buildBars();updateScore()}}
+function updateScore(){
+  const hist=loadHist();let right=0,wrong=0;
+  Object.values(hist).forEach(h=>{right+=h.right;wrong+=h.wrong});
+  const total=right+wrong;
+  document.getElementById('score').innerHTML=total>0?`Aciertos históricos: <b>${right}</b> / ${total} (${Math.round(100*right/total)}%)`:'Aún sin respuestas registradas';
+}
+document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>{document.querySelectorAll('.mode').forEach(x=>x.classList.remove('on'));b.classList.add('on');mode=b.dataset.m;render(false)});
+buildTabs();applyFilter();render(false);
+</script>
+</body>
+</html>
