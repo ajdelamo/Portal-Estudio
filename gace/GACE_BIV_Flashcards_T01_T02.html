@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV — Flashcards T1 y T2</title>
+<style>
+:root{--azul:#1e3a8a;--azul2:#3b62c4;--verde:#16a34a;--rojo:#dc2626;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:40px}
+header{background:linear-gradient(135deg,#0f766e,#1e3a8a);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.f{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.83rem;font-weight:600;cursor:pointer}
+.f.on{background:var(--azul);color:#fff}
+.stats{display:flex;gap:10px;margin:8px 0 14px;font-size:.83rem;flex-wrap:wrap}
+.stats span{background:#fff;border-radius:8px;padding:5px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.escena{perspective:1200px;margin:10px 0}
+.carta{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
+.carta.girada{transform:rotateY(180deg)}
+.cara{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.frente{background:#fff;border:3px solid var(--azul2)}
+.frente .cat{position:absolute;top:12px;left:14px;font-size:.72rem;font-weight:700;color:#fff;background:var(--azul2);border-radius:12px;padding:2px 10px}
+.frente .idx{position:absolute;top:12px;right:14px;font-size:.72rem;color:#94a3b8}
+.frente h2{font-size:1.08rem;line-height:1.5;font-weight:600;border:none;color:#1e293b}
+.frente .pista{margin-top:14px;font-size:.75rem;color:#94a3b8}
+.dorso{background:linear-gradient(135deg,#1e3a8a,#3b62c4);color:#fff;transform:rotateY(180deg)}
+.dorso .resp{font-size:1.15rem;font-weight:800;line-height:1.45}
+.dorso .det{margin-top:12px;font-size:.85rem;opacity:.92;line-height:1.5}
+.botones{display:flex;gap:8px;margin:14px 0;justify-content:center;flex-wrap:wrap}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-size:.9rem;font-weight:700;cursor:pointer}
+.btn.mal{background:#fee2e2;color:var(--rojo)}
+.btn.bien{background:#dcfce7;color:#15803d}
+.btn.nav{background:#e2e8f0;color:#334155}
+.btn.accion{background:var(--azul);color:#fff}
+.aviso{text-align:center;font-size:.8rem;color:#64748b;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>🃏 Flashcards BIV · T1 Fuentes + T2 La Ley</h1>
+  <p>Plazos · artículos · datos-ancla · GACE 2027 · verificado a 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="filtros" id="filtros"></div>
+  <div class="stats"><span id="st-total"></span><span id="st-dom">✅ dominadas: <b id="ndom">0</b></span><span id="st-rep">🔁 a repasar: <b id="nrep">0</b></span></div>
+  <div class="escena"><div class="carta" id="carta" onclick="girar()">
+    <div class="cara frente"><div class="cat" id="cat"></div><div class="idx" id="idx"></div><h2 id="preg"></h2><div class="pista">👆 toca para ver la respuesta</div></div>
+    <div class="cara dorso"><div class="resp" id="resp"></div><div class="det" id="det"></div></div>
+  </div></div>
+  <div class="botones">
+    <button class="btn mal" onclick="marcar(false)">❌ Repasar</button>
+    <button class="btn bien" onclick="marcar(true)">✅ Me la sé</button>
+  </div>
+  <div class="botones">
+    <button class="btn nav" onclick="mover(-1)">← Anterior</button>
+    <button class="btn accion" onclick="barajar()">🔀 Barajar</button>
+    <button class="btn nav" onclick="mover(1)">Siguiente →</button>
+  </div>
+  <div class="botones"><button class="btn nav" onclick="soloRepaso()" id="btnrep">🎯 Solo las marcadas "repasar"</button>
+  <button class="btn nav" onclick="resetear()">🗑️ Reiniciar</button></div>
+  <div class="aviso">El progreso se guarda en este navegador (localStorage).</div>
+</div>
+<script>
+const LS='gace_biv_fc_t1t2_v1';
+const CARDS=[
+// —— T1 · FUENTES ——
+{c:'T1·Artículos',p:'¿Qué artículo de la CE garantiza la jerarquía normativa, la publicidad de las normas y la interdicción de la arbitrariedad?',r:'Art. 9.3 CE',d:'Lista completa: legalidad, jerarquía, publicidad, irretroactividad de sancionadoras no favorables o restrictivas de derechos, seguridad jurídica, responsabilidad e interdicción de la arbitrariedad.'},
+{c:'T1·Artículos',p:'¿Qué artículo de la CE atribuye al Gobierno la potestad reglamentaria?',r:'Art. 97 CE',d:'Función ejecutiva y potestad reglamentaria «de acuerdo con la Constitución y las leyes».'},
+{c:'T1·Artículos',p:'Principios de actuación de la Administración (eficacia, jerarquía, descentralización, desconcentración, coordinación): ¿artículo?',r:'Art. 103.1 CE',d:'Con objetividad, y sometimiento pleno a la ley y al Derecho.'},
+{c:'T1·Artículos',p:'¿Qué artículo CE atribuye al Estado la competencia sobre el procedimiento administrativo común?',r:'Art. 149.1.18ª CE',d:'También: bases del régimen jurídico de las AAPP, expropiación, legislación básica de contratos y responsabilidad de las AAPP.'},
+{c:'T1·Artículos',p:'Inderogabilidad singular de los reglamentos: ¿artículo y ley?',r:'Art. 37.1 Ley 39/2015',d:'Una resolución particular no puede vulnerar una disposición general, ni siquiera dictada por órgano de igual o superior jerarquía.'},
+{c:'T1·Artículos',p:'Procedimiento de elaboración de normas (principios de buena regulación): ¿artículos de la Ley 39/2015?',r:'Arts. 127 a 133 (Título VI)',d:'Recorte competencial por STC 55/2018 respecto de CCAA; plenamente aplicables a la AGE.'},
+{c:'T1·Artículos',p:'Jerarquía de los reglamentos estatales (RD > Orden Ministerial): ¿artículo?',r:'Art. 24.2 Ley 50/1997',d:'1º Real Decreto (Presidente o Consejo de Ministros); 2º Orden Ministerial.'},
+{c:'T1·Plazos',p:'Vacatio legis supletoria de las leyes',r:'20 días',d:'Art. 2.1 CC: desde la completa publicación en el BOE, salvo que la ley disponga otra cosa.'},
+{c:'T1·Plazos',p:'Entrada en vigor de reglamentos que impongan nuevas obligaciones a actividades económicas o profesionales',r:'2 de enero o 1 de julio',d:'Art. 23 Ley 50/1997 (siguientes a su aprobación), con excepciones (normas UE, plazos de otra norma, razones justificadas).'},
+{c:'T1·Datos',p:'Fechas de la Constitución: aprobación por las Cortes, referéndum y publicación/vigor',r:'31/10/1978 · 6/12/1978 · 29/12/1978',d:'Entró en vigor el MISMO día de su publicación en el BOE.'},
+{c:'T1·Datos',p:'¿Cuántas reformas tiene la CE y de qué años son?',r:'CUATRO: 1992, 2011, 2024 y 2026',d:'13.2 (sufragio pasivo UE) · 135 (estabilidad presupuestaria) · 49 (personas con discapacidad) · 69.3 (senador de Formentera).'},
+{c:'T1·Datos',p:'Reforma constitucional de 2026: artículo, objeto y BOE',r:'Art. 69.3 · senador propio para Formentera · BOE 20/05/2026',d:'BOE-A-2026-10881. Vía art. 167, sin referéndum. Iniciativa del Parlamento balear (art. 87.2 CE). Eficacia pospuesta a las primeras elecciones al Senado.'},
+{c:'T1·Datos',p:'Reforma constitucional de 2024: artículo y objeto',r:'Art. 49 · personas con discapacidad',d:'BOE 17/02/2024 (BOE-A-2024-3099). Sustituyó «disminuidos». Primera reforma sancionada por Felipe VI.'},
+{c:'T1·Artículos',p:'Integración de los tratados internacionales en el ordenamiento interno: ¿artículo CE y requisito?',r:'Art. 96.1 CE · publicación oficial en España',d:'Rango infraconstitucional pero supralegal. Prevalencia: art. 31 Ley 25/2014.'},
+{c:'T1·Artículos',p:'Tratados que exigen autorización mediante LEY ORGÁNICA',r:'Art. 93 CE',d:'Atribución a organizaciones internacionales del ejercicio de competencias derivadas de la CE (vía de adhesión a la UE).'},
+{c:'T1·Datos',p:'¿Fecha de ingreso de España en las Comunidades Europeas?',r:'1 de enero de 1986',d:'Tras Lisboa (en vigor 1/12/2009): TUE + TFUE + Carta DDFF vinculante.'},
+{c:'T1·Datos',p:'Sentencia que estableció la PRIMACÍA del Derecho de la UE',r:'Costa c. ENEL (15/07/1964)',d:'Efecto directo: Van Gend en Loos (1963). Responsabilidad del Estado: Francovich (1991).'},
+{c:'T1·Artículos',p:'Tipología de actos de Derecho derivado de la UE: ¿artículo?',r:'Art. 288 TFUE',d:'Reglamento (directamente aplicable), directiva (transposición), decisión (obligatoria para destinatarios), recomendaciones y dictámenes (no vinculantes).'},
+{c:'T1·Artículos',p:'Nulidad de pleno derecho de los reglamentos ilegales: ¿artículo?',r:'Art. 47.2 Ley 39/2015',d:'En los reglamentos no hay anulabilidad: siempre nulidad. Contra ellos no cabe recurso administrativo (art. 112.3).'},
+{c:'T1·Artículos',p:'Bloque de constitucionalidad: ¿artículo?',r:'Art. 28.1 LOTC',d:'CE + Estatutos de Autonomía + leyes de delimitación competencial + Reglamentos parlamentarios.'},
+{c:'T1·Datos',p:'Jurisprudencia del TS vs. del TC: ¿cuántas sentencias hacen doctrina?',r:'TS: 2 (reiterada) · TC: 1',d:'Art. 1.6 CC (complementa) y art. 5.1 LOPJ (vincula a todos los jueces).'},
+{c:'T1·Datos',p:'Tipos de costumbre y cuál está prohibida',r:'Secundum legem (admitida) · praeter legem (tolerable) · CONTRA LEGEM (prohibida)',d:'Art. 1.3 CC: defecto de ley + no contraria a moral/orden público + probada.'},
+// —— T2 · LA LEY ——
+{c:'T2·Artículos',p:'Materias reservadas a Ley Orgánica: ¿artículo?',r:'Art. 81.1 CE',d:'Desarrollo de DDFF y libertades públicas, Estatutos de Autonomía, régimen electoral general y demás previstas en la CE.'},
+{c:'T2·Datos',p:'Mayoría necesaria para aprobar una Ley Orgánica',r:'Mayoría ABSOLUTA del Congreso (176/350)',d:'Art. 81.2 CE: en votación final sobre el conjunto del proyecto. En el Senado basta mayoría simple.'},
+{c:'T2·Datos',p:'Relación entre Ley Orgánica y Ley Ordinaria',r:'COMPETENCIA, no jerarquía',d:'STC 5/1981 (materias conexas con rango ordinario) y STC 76/1983 (no ampliación del ámbito orgánico).'},
+{c:'T2·Artículos',p:'Ley de transferencia o delegación a las CCAA: ¿artículo y naturaleza?',r:'Art. 150.2 CE · Ley Orgánica',d:'La ley marco (150.1) y la de armonización (150.3) son ordinarias; la armonización exige apreciar el interés general por mayoría absoluta de cada Cámara.'},
+{c:'T2·Plazos',p:'Plazo máximo de la detención preventiva y artículo exacto',r:'72 horas · art. 17.2 CE',d:'⚠ No es el 17.3 (derechos del detenido). Reserva absoluta de ley.'},
+{c:'T2·Datos',p:'Firmas necesarias para la Iniciativa Legislativa Popular y ley reguladora',r:'500.000 firmas · LO 3/1984',d:'Excluidas (art. 87.3 CE): materias de LO, tributarias, internacionales y prerrogativa de gracia.'},
+{c:'T2·Plazos',p:'Plazo del Senado para enmendar o vetar un proyecto de ley',r:'2 meses (20 días naturales si urgente)',d:'Art. 90 CE. Veto: mayoría absoluta. El Congreso lo levanta por mayoría absoluta o por simple tras 2 meses.'},
+{c:'T2·Plazos',p:'Plazo del Rey para sancionar las leyes',r:'15 días',d:'Art. 91 CE. Acto debido: no existe veto regio.'},
+{c:'T2·Plazos',p:'Plazo del Congreso para convalidar o derogar un decreto-ley',r:'30 días desde la promulgación',d:'Art. 86.2 CE. Si no se pronuncia, queda derogado. El Senado NO interviene.'},
+{c:'T2·Datos',p:'¿La convalidación convierte el decreto-ley en ley?',r:'NO',d:'Mantiene su naturaleza; sin enmiendas. Solo la tramitación como proyecto de ley (art. 86.3) genera una ley que lo sustituye.'},
+{c:'T2·Datos',p:'Las 4 materias que un decreto-ley NO puede afectar',r:'Instituciones básicas del Estado · derechos del Título I · régimen de las CCAA · Derecho electoral general',d:'Art. 86.1 CE. Presupuesto habilitante: extraordinaria y urgente necesidad («conexión de sentido», STC 29/1982 y 6/1983).'},
+{c:'T2·Datos',p:'Texto articulado vs. texto refundido: ¿qué ley delega cada uno?',r:'Articulado ← LEY DE BASES · Refundido ← LEY ORDINARIA',d:'Arts. 82.4 y 82.5 CE. La refundición puede incluir «regularizar, aclarar y armonizar».'},
+{c:'T2·Datos',p:'Límites de la Ley de Bases (art. 83 CE)',r:'No autorizar su propia modificación ni normas retroactivas',d:'Además: delegación expresa, materia concreta, plazo determinado, sin subdelegación (art. 82.3).'},
+{c:'T2·Datos',p:'¿Quién controla el exceso de delegación (ultra vires) de un decreto legislativo?',r:'TC + tribunales contencioso-administrativos',d:'Lo que excede la delegación carece de rango de ley (STC 51/1982, STC 13/1992).'},
+{c:'T2·Plazos',p:'Plazo del recurso de inconstitucionalidad',r:'3 meses (ampliable a 9)',d:'Art. 33 LOTC. Los 9 meses: Estado-CCAA con reunión de la Comisión Bilateral de Cooperación.'},
+{c:'T2·Datos',p:'Legitimados para el recurso de inconstitucionalidad',r:'Presidente del Gobierno · Defensor del Pueblo · 50 diputados · 50 senadores · órganos de las CCAA',d:'Art. 162.1.a CE. Los jueces plantean cuestión (art. 163); los ciudadanos, amparo (arts. 14-29 + 30.2).'},
+{c:'T2·Datos',p:'Mayorías de la reforma constitucional ordinaria (art. 167)',r:'3/5 de cada Cámara',d:'Subsidiario: comisión paritaria; Congreso 2/3 si el Senado aprobó por mayoría absoluta. Referéndum facultativo: 1/10 de una Cámara en 15 días.'},
+{c:'T2·Datos',p:'Reforma agravada (art. 168): materias y requisitos',r:'Revisión total · Tít. Preliminar · arts. 15-29 · Corona → 2/3 + disolución + 2/3 + referéndum OBLIGATORIO',d:'Nunca se ha utilizado.'},
+{c:'T2·Datos',p:'¿Cuándo NO puede iniciarse una reforma constitucional?',r:'En tiempo de guerra o vigentes los estados de alarma, excepción o sitio',d:'Art. 169 CE. Solo prohíbe INICIARLA; no suspende la actividad legislativa ordinaria.'},
+{c:'T2·Datos',p:'¿Qué no puede delegarse en Comisión Legislativa Permanente?',r:'Reforma constitucional · cuestiones internacionales · leyes orgánicas y de bases · PGE',d:'Art. 75.3 CE.'},
+{c:'T2·Datos',p:'TR de la Ley General de la Seguridad Social y TREBEP: ¿normas exactas?',r:'RDLeg 8/2015 (TRLGSS) · RDLeg 5/2015 (TREBEP)',d:'⚠ Son Reales Decretos LEGISLATIVOS. El RDLeg 1/2020 es el TR de la Ley Concursal; el RDLeg 1/1996, el TRLPI.'},
+{c:'T2·Plazos',p:'¿Desde cuándo producen efectos las sentencias del TC?',r:'Valor de cosa juzgada desde el día siguiente a su publicación en el BOE',d:'Art. 164 CE. Las que declaran inconstitucionalidad: efectos erga omnes.'},
+];
+let vista=[...CARDS.keys()], pos=0, filtro='Todas';
+let estado=JSON.parse(localStorage.getItem(LS)||'{}');
+const cats=['Todas',...new Set(CARDS.map(c=>c.c.split('·')[0]))];
+function guardar(){localStorage.setItem(LS,JSON.stringify(estado))}
+function pinta(){
+  const fdiv=document.getElementById('filtros');fdiv.innerHTML='';
+  cats.forEach(c=>{const b=document.createElement('button');b.className='f'+(filtro===c?' on':'');b.textContent=c==='Todas'?'📋 Todas':c;b.onclick=()=>{filtro=c;aplicar()};fdiv.appendChild(b)});
+  const i=vista[pos],c=CARDS[i];
+  document.getElementById('cat').textContent=c.c;
+  document.getElementById('idx').textContent=(pos+1)+' / '+vista.length;
+  document.getElementById('preg').textContent=c.p;
+  document.getElementById('resp').textContent=c.r;
+  document.getElementById('det').textContent=c.d;
+  document.getElementById('carta').classList.remove('girada');
+  document.getElementById('st-total').textContent='📇 '+vista.length+' tarjetas';
+  const vals=Object.values(estado);
+  document.getElementById('ndom').textContent=vals.filter(v=>v==='ok').length;
+  document.getElementById('nrep').textContent=vals.filter(v=>v==='ko').length;
+}
+function aplicar(){
+  vista=[...CARDS.keys()].filter(i=>filtro==='Todas'||CARDS[i].c.startsWith(filtro));
+  pos=0;pinta();
+}
+function girar(){document.getElementById('carta').classList.toggle('girada')}
+function mover(d){pos=(pos+d+vista.length)%vista.length;pinta()}
+function marcar(bien){estado[vista[pos]]=bien?'ok':'ko';guardar();mover(1)}
+function barajar(){for(let i=vista.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vista[i],vista[j]]=[vista[j],vista[i]]}pos=0;pinta()}
+function soloRepaso(){
+  const rep=[...CARDS.keys()].filter(i=>estado[i]==='ko'&&(filtro==='Todas'||CARDS[i].c.startsWith(filtro)));
+  if(rep.length===0){alert('🎉 No tienes tarjetas marcadas para repasar en este filtro.');return}
+  vista=rep;pos=0;pinta();
+}
+function resetear(){if(confirm('¿Borrar el progreso de estas flashcards?')){estado={};guardar();aplicar()}}
+aplicar();
+</script>
+</body>
+</html>
