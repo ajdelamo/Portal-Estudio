@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BV T5 — Situaciones administrativas e incompatibilidades</title>
+<style>
+:root{
+  --v:#9f1239; --v2:#e11d48; --vclaro:#fff1f2; --borde:#fecdd3;
+  --verde:#166534; --verdeclaro:#f0fdf4; --vborde:#bbf7d0;
+  --rojo:#991b1b; --rojoclaro:#fef2f2; --rborde:#fecaca;
+  --ambar:#92400e; --ambarclaro:#fffbeb; --aborde:#fde68a;
+  --morado:#0e7490; --moradoclaro:#ecfeff; --mborde:#a5f3fc;
+  --gris:#334155; --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#9f1239,#e11d48);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.7rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--v);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--v2);display:flex;align-items:center;gap:8px}
+h3{color:var(--v2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.87rem;background:#fff}
+th{background:var(--v);color:#fff;padding:8px 10px;text-align:left;font-size:.85rem}
+td{padding:7px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--vclaro);border-left:5px solid var(--v2);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--v);font-size:.85rem;letter-spacing:.5px;margin-bottom:6px}
+.trampa{background:var(--rojoclaro);border-left:5px solid var(--rojo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--rojo);font-size:.85rem;margin-bottom:6px}
+.nuevo{background:var(--verdeclaro);border-left:5px solid var(--verde);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.nuevo .tit{font-weight:700;color:var(--verde);font-size:.85rem;margin-bottom:6px}
+.nota{background:#eef2ff;border-left:5px solid #4338ca;border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:#4338ca;font-size:.85rem;margin-bottom:6px}
+.art{display:inline-block;background:var(--v);color:#fff;border-radius:5px;padding:1px 7px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+.memo{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:14px 0}
+.memo .m{background:#fff;border:2px solid var(--borde);border-radius:10px;padding:12px;font-size:.85rem}
+.memo .m b{color:var(--v);display:block;margin-bottom:4px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:14px 0;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.vs>div{padding:14px 16px}
+.vs .izq{background:var(--vclaro)}
+.vs .der{background:var(--moradoclaro)}
+.vs h4{margin-bottom:8px;font-size:.95rem}
+.vs .izq h4{color:var(--v)}
+.vs .der h4{color:var(--morado)}
+.vs ul{margin-left:18px;font-size:.87rem}
+.vs li{margin:4px 0}
+@media(max-width:720px){.vs{grid-template-columns:1fr}}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{
+  body{background:#fff}
+  header{background:var(--v)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card{box-shadow:none}
+  h2{page-break-after:avoid}
+  table,.clave,.trampa,.nuevo,.vs{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque V · Administración de Recursos Humanos</div>
+  <h1>Tema 5 — Situaciones administrativas. Incompatibilidades</h1>
+  <div class="sub">Servicio activo, servicios especiales, servicio en otras AAPP, excedencias, suspensión · Ley 53/1984</div>
+  <div class="badge-verif">✅ Verificado a 01/08/2026 · fuente revisada 13/07/2026 con autocorrección sobre el alcance del RD-ley 9/2025</div>
+</header>
+<div class="wrap">
+
+<div class="nota"><div class="tit">📌 PRECISIÓN IMPORTANTE</div>
+<p>El RD-ley 9/2025 (permiso de nacimiento y parental) modifica el <b>art. 49</b> y el párrafo 2º del <b>art. 7 TREBEP</b> — materia de <i>permisos</i>, NO de situaciones administrativas. Los arts. 85-92 TREBEP (situaciones administrativas) no han sido tocados por esa reforma: sus últimas modificaciones siguen siendo la <b>LO 10/2022</b> (art. 89.5, violencia sexual) y la <b>LO 9/2015</b> (art. 89.6, violencia terrorista). No confundir ambas reformas en el examen.</p></div>
+
+<h2>🗂️ 1. Marco general (art. 85 TREBEP)</h2>
+<div class="card"><p>Las situaciones administrativas determinan el vínculo efectivo del funcionario de carrera con la Administración: derechos, deberes, retribuciones, carrera y efectos sobre trienios/Seguridad Social. Catálogo <b>NO cerrado</b>: las leyes de función pública pueden crear otras.</p></div>
+<table><tr><th>5 situaciones del art. 85 TREBEP</th><th>+ situaciones RD 365/1995 (cláusula habilitadora)</th></tr>
+<tr><td>Servicio activo · Servicios especiales · Servicio en otras AAPP · Excedencia (4 modalidades básicas) · Suspensión de funciones</td><td>Expectativa de destino (art. 12) · Excedencia forzosa (art. 13) · Excedencia voluntaria por servicios en sector público (art. 15) · Excedencia voluntaria incentivada (art. 18)</td></tr>
+</table>
+
+<h2>✅ 2. Servicio activo (art. 86 TREBEP)</h2>
+<div class="clave"><div class="tit">🔑 SITUACIÓN "POR DEFECTO"</div><p>Si no corresponde otra situación → servicio activo. Plenitud de derechos y deberes. Retribuciones: las del puesto efectivamente desempeñado. Es el "punto de retorno" desde todas las demás situaciones.</p></div>
+
+<h2>🏛️ 3. Servicios especiales (art. 87 TREBEP)</h2>
+<div class="card"><p>Mantiene el vínculo con la Administración de origen mientras se desempeñan cargos de relevancia institucional, política o representativa (miembro del Gobierno, alto cargo, Diputado/Senador, CGPJ, misión internacional &gt;6 meses, personal eventual, Subsecretario/Director General...).</p></div>
+<table><tr><th>Aspecto</th><th>Régimen</th></tr>
+<tr><td>Retribuciones</td><td>Las del cargo desempeñado + <b>trienios reconocidos</b> (los abona el departamento de origen si no cabe cargarlos al cargo)</td></tr>
+<tr><td>Cómputo</td><td>Computa a TODOS los efectos: ascensos, grado personal, trienios, promoción, SS, período para excedencia voluntaria</td></tr>
+<tr><td>Reingreso</td><td><b>1 mes</b> desde que cesa la causa; si no → excedencia voluntaria por interés particular</td></tr>
+<tr><td>Reserva de puesto</td><td>LD → puesto provisional, mismo municipio · Concurso → puesto definitivo, mismo ministerio y municipio</td></tr>
+</table>
+<p style="font-size:.85rem"><b>Excepción parlamentaria:</b> Diputados/Senadores que cesan por disolución de cámaras pueden permanecer en servicios especiales hasta la nueva constitución.</p>
+
+<h2>🔀 4. Servicio en otras Administraciones Públicas (art. 88 TREBEP)</h2>
+<div class="vs">
+<div class="izq"><h4>Funcionario TRANSFERIDO (art. 10 RD 365/1995)</h4><ul><li>En destino: <b>SERVICIO ACTIVO</b></li><li>En origen: servicio en otras AAPP</li><li>Separación: órgano CCAA + dictamen del <b>Consejo de Estado</b></li></ul></div>
+<div class="der"><h4>Funcionario por PROVISIÓN (art. 11 RD 365/1995)</h4><ul><li>En destino: servicio activo; en origen: servicio en otras AAPP</li><li>Conserva plenamente el vínculo de origen</li><li>Separación: Ministro del departamento de adscripción</li></ul></div>
+</div>
+<p style="font-size:.85rem">El tiempo computa como servicio activo en el cuerpo/escala de origen. Reingreso: reconocimiento de progresos de carrera vía convenio de Conferencia Sectorial (preferente) o por la Administración de reingreso (subsidiaria).</p>
+
+<h2>🌙 5. Excedencias (art. 89 TREBEP + RD 365/1995)</h2>
+<table><tr><th>Modalidad</th><th>Requisito</th><th>Duración</th><th>Retribución/cómputo/reserva</th></tr>
+<tr><td>Voluntaria por interés particular (89.2)</td><td>5 años de servicios efectivos</td><td>Mínima 2 años (AGE); sin máximo</td><td>NO retribución, NO cómputo, NO reserva</td></tr>
+<tr><td>Voluntaria por agrupación familiar (89.3)</td><td>Cónyuge con puesto definitivo en otra localidad; sin antigüedad previa</td><td>Mín. 2 años / máx. 15 años</td><td>NO retribución, NO cómputo, NO reserva</td></tr>
+<tr><td>Por cuidado de familiares (89.4)</td><td>Hijos o familiar 2º grado que no pueda valerse</td><td>Máx. <b>3 años</b> por sujeto causante</td><td>SÍ computa (trienios/carrera/SS); reserva: 2 años mismo puesto, después misma localidad</td></tr>
+<tr><td>Por violencia de género/sexual (89.5, LO 10/2022)</td><td>Sin antigüedad ni permanencia mínima</td><td>Prórrogas de 3 meses, máx. <b>18 meses</b></td><td>Retribuciones íntegras 2 meses; reserva de puesto 6 meses</td></tr>
+<tr><td>Por violencia terrorista (89.6, LO 9/2015)</td><td>Reconocimiento Min. Interior o sentencia firme</td><td>El tiempo necesario (no plazo fijo)</td><td>Mismas condiciones que violencia de género</td></tr>
+<tr><td>Por servicios en sector público (art. 15 RD 365/1995)</td><td>Servicio activo en otro cuerpo/AAPP, o laboral fijo</td><td>—</td><td>NO retribución, NO cómputo, NO reserva. Reingreso: 1 mes</td></tr>
+<tr><td>Voluntaria incentivada (art. 18 RD 365/1995)</td><td>2 primeras fases de reasignación, expectativa de destino o excedencia forzosa por plan de empleo</td><td><b>5 años</b></td><td>Prohibido sector público 5 años. Indemnización: 1 mensualidad/año, máx. 12</td></tr>
+</table>
+<div class="trampa"><div class="tit">⚠️ TRAMPA — violencia de género</div><p>Titular: <b>FUNCIONARIA</b> (femenino, no "funcionario"). Sin requisito de antigüedad. Retribuciones íntegras solo primeros <b>2 meses</b>; reserva de puesto solo primeros <b>6 meses</b>; prórrogas de 3 en 3 meses hasta 18 meses máximo.</p></div>
+
+<h3>Expectativa de destino y excedencia forzosa (RD 365/1995)</h3>
+<table><tr><th>Figura</th><th>Régimen</th></tr>
+<tr><td>Expectativa de destino (art. 12)</td><td>Fase 3ª de reasignación; máx. <b>1 año</b>; obligaciones: aceptar puestos y concursos en la MISMA PROVINCIA</td></tr>
+<tr><td>Excedencia forzosa (art. 13)</td><td>Tras agotar la expectativa o no reingresar en 6 meses tras suspensión firme; retribuciones básicas + CD; obligaciones de ámbito NACIONAL; prohibido el sector público</td></tr>
+</table>
+
+<h2>⛔ 6. Suspensión de funciones (arts. 90 y 98 TREBEP)</h2>
+<table><tr><th>Elemento</th><th>Provisional</th><th>Firme</th></tr>
+<tr><td>Causa</td><td>Expediente judicial (prisión) o disciplinario</td><td>Sentencia penal o sanción disciplinaria firme</td></tr>
+<tr><td>Duración máx.</td><td>6 meses (expediente disciplinario)</td><td><b>Máx. 6 años</b>: graves hasta 3 / muy graves 3-6</td></tr>
+<tr><td>Retribuciones</td><td>100% básicas + prestaciones familiares</td><td>NO se perciben</td></tr>
+<tr><td>Pérdida del puesto</td><td>No si ≤6 meses</td><td>Sí, salvo ≤6 meses</td></tr>
+<tr><td>Sin reingreso en 6 meses</td><td>—</td><td>→ <b>EXCEDENCIA FORZOSA</b></td></tr>
+</table>
+
+<h2>↩️ 7. Reingreso al servicio activo</h2>
+<div class="card"><p><b>3 sistemas:</b> concurso · libre designación · adscripción provisional (el puesto provisional debe convocarse en el plazo máximo de 1 año; si el funcionario no participa → excedencia voluntaria por interés particular de oficio).</p></div>
+<table><tr><th>Situación de procedencia</th><th>Plazo de solicitud</th></tr>
+<tr><td>Servicios especiales / prestación sector público / incentivada</td><td>1 mes</td></tr>
+<tr><td>Agrupación familiar (antes del máximo)</td><td>Antes de los 15 años</td></tr>
+<tr><td>Cuidado de familiares</td><td>1 mes de antelación al fin del período</td></tr>
+<tr><td>Suspensión firme sin reserva</td><td>1 mes de antelación</td></tr>
+</table>
+<p style="font-size:.85rem">Consecuencia general del incumplimiento: excedencia voluntaria por interés particular (salvo suspensión firme sin reingreso en 6 meses → excedencia forzosa).</p>
+
+<h2>⚖️ 8. Incompatibilidades — Ley 53/1984</h2>
+<div class="clave"><div class="tit">🔑 PRINCIPIOS GENERALES</div><p>Norma <b>básica</b>, aplicable a todas las AAPP. Regla: dos puestos públicos son <b>INCOMPATIBLES</b> (salvo excepciones); un puesto público + actividad privada son <b>COMPATIBLES</b> (con reconocimiento previo y límites).</p></div>
+<table><tr><th>Trámite</th><th>Norma</th><th>Plazo</th></tr>
+<tr><td>Compatibilidad público-público</td><td>RD 598/1985</td><td>3 meses (+1 prorrogable)</td></tr>
+<tr><td>Autorización 2º puesto público</td><td>RD 1777/1994</td><td>4 meses (silencio positivo)</td></tr>
+<tr><td>Compatibilidad público-privado</td><td>Ley 53/1984</td><td>2 meses</td></tr>
+<tr><td>Reconocimiento compatibilidad privada</td><td>RD 1777/1994</td><td>3 meses</td></tr>
+</table>
+<div class="grid2">
+<div class="card"><p><b>Segundo puesto público</b></p><p style="font-size:.85rem">Regla: INCOMPATIBLE. Tope retributivo: el de un Director General. Porcentajes de complemento específico compatible: A1→30% · A2→35% · C1→40% · C2→45% · AP→50%.</p></div>
+<div class="card"><p><b>Actividad privada</b></p><p style="font-size:.85rem">Regla: COMPATIBLE con reconocimiento previo. Complemento específico &gt;30% de básicas → INCOMPATIBLE (salvo renuncia al exceso). Prohibición absoluta: asuntos en que intervino en los últimos 2 años; participación &gt;10% en empresa relacionada.</p></div>
+</div>
+<div class="nota"><div class="tit">📌 Excepción clave</div><p>El <b>profesor asociado universitario</b> (tiempo parcial, duración determinada) es compatible con cualquier puesto público. 9 actividades no requieren solicitar compatibilidad (docencia/formación hasta <b>75 horas/año</b>, entre otras).</p></div>
+<table><tr><th>Régimen disciplinario</th><th>Calificación</th></tr>
+<tr><td>Desempeño de 2 puestos incompatibles</td><td><b>FALTA MUY GRAVE</b></td></tr>
+<tr><td>Incumplimiento de procedimiento/plazos</td><td><b>FALTA GRAVE</b></td></tr>
+</table>
+<p style="font-size:.85rem"><b>Plazo para optar</b> tras toma de posesión: 1 mes. <b>Plazo para solicitar compatibilidad:</b> primeros 10 días del plazo posesorio. Inscripción en Registro: 3 días hábiles. Máximo en Consejos de Administración: 2.</p>
+
+<h2>📌 9. Datos clave para el examen</h2>
+<table>
+<tr><th>Dato</th><th>Cifra</th></tr>
+<tr><td>Reingreso desde servicios especiales</td><td>1 mes</td></tr>
+<tr><td>Excedencia voluntaria interés particular</td><td>5 años servicios / mín. 2 años duración (AGE)</td></tr>
+<tr><td>Excedencia agrupación familiar</td><td>Mín. 2 años / máx. 15 años</td></tr>
+<tr><td>Excedencia cuidado de familiares</td><td>Máx. 3 años por sujeto causante</td></tr>
+<tr><td>Excedencia violencia de género</td><td>Retribución 2 meses / reserva 6 meses / máx. 18 meses</td></tr>
+<tr><td>Excedencia incentivada</td><td>5 años, indemnización máx. 12 mensualidades</td></tr>
+<tr><td>Expectativa de destino</td><td>Máx. 1 año → excedencia forzosa</td></tr>
+<tr><td>Suspensión firme</td><td>Máx. 6 años (graves 3 / muy graves 3-6)</td></tr>
+<tr><td>Compatibilidad público-privado</td><td>2 meses de resolución</td></tr>
+<tr><td>Formación no habitual sin solicitar compatibilidad</td><td>75 horas/año</td></tr>
+</table>
+
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS DE EXAMEN</div>
+<ul class="lista">
+<li>El RD-ley 9/2025 NO modifica las situaciones administrativas (arts. 85-92) — solo permisos (art. 49 y párrafo 2º del art. 7).</li>
+<li>Excedencia por cuidado de familiares SÍ computa a efectos de carrera/trienios/SS; la voluntaria por interés particular y por agrupación familiar NO computan.</li>
+<li>Violencia de género/sexual: titular es la FUNCIONARIA; retribuciones íntegras solo 2 meses (no todo el periodo).</li>
+<li>Expectativa de destino: obligaciones de ámbito PROVINCIAL. Excedencia forzosa: ámbito NACIONAL.</li>
+<li>Dos puestos públicos: la regla es la INCOMPATIBILIDAD, no al revés.</li>
+</ul>
+</div>
+
+</div>
+<footer>GACE 2027 · Bloque V · Tema 5 · Material verificado contra BOE a 01/08/2026 · Antonio José De Lamo Villar</footer>
+</body>
+</html>
