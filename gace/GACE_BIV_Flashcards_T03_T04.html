@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV — Flashcards T3 y T4</title>
+<style>
+:root{--azul:#1e3a8a;--azul2:#3b62c4;--verde:#16a34a;--rojo:#dc2626;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:40px}
+header{background:linear-gradient(135deg,#0f766e,#1e3a8a);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.f{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.83rem;font-weight:600;cursor:pointer}
+.f.on{background:var(--azul);color:#fff}
+.stats{display:flex;gap:10px;margin:8px 0 14px;font-size:.83rem;flex-wrap:wrap}
+.stats span{background:#fff;border-radius:8px;padding:5px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.escena{perspective:1200px;margin:10px 0}
+.carta{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
+.carta.girada{transform:rotateY(180deg)}
+.cara{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.frente{background:#fff;border:3px solid var(--azul2)}
+.frente .cat{position:absolute;top:12px;left:14px;font-size:.72rem;font-weight:700;color:#fff;background:var(--azul2);border-radius:12px;padding:2px 10px}
+.frente .idx{position:absolute;top:12px;right:14px;font-size:.72rem;color:#94a3b8}
+.frente h2{font-size:1.08rem;line-height:1.5;font-weight:600;border:none;color:#1e293b}
+.frente .pista{margin-top:14px;font-size:.75rem;color:#94a3b8}
+.dorso{background:linear-gradient(135deg,#1e3a8a,#3b62c4);color:#fff;transform:rotateY(180deg)}
+.dorso .resp{font-size:1.15rem;font-weight:800;line-height:1.45}
+.dorso .det{margin-top:12px;font-size:.85rem;opacity:.92;line-height:1.5}
+.botones{display:flex;gap:8px;margin:14px 0;justify-content:center;flex-wrap:wrap}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-size:.9rem;font-weight:700;cursor:pointer}
+.btn.mal{background:#fee2e2;color:var(--rojo)}
+.btn.bien{background:#dcfce7;color:#15803d}
+.btn.nav{background:#e2e8f0;color:#334155}
+.btn.accion{background:var(--azul);color:#fff}
+.aviso{text-align:center;font-size:.8rem;color:#64748b;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>🃏 Flashcards BIV · T3 Reglamento + T4 Acto Administrativo</h1>
+  <p>Plazos · artículos · datos-ancla · GACE 2027 · verificado a 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="filtros" id="filtros"></div>
+  <div class="stats"><span id="st-total"></span><span id="st-dom">✅ dominadas: <b id="ndom">0</b></span><span id="st-rep">🔁 a repasar: <b id="nrep">0</b></span></div>
+  <div class="escena"><div class="carta" id="carta" onclick="girar()">
+    <div class="cara frente"><div class="cat" id="cat"></div><div class="idx" id="idx"></div><h2 id="preg"></h2><div class="pista">👆 toca para ver la respuesta</div></div>
+    <div class="cara dorso"><div class="resp" id="resp"></div><div class="det" id="det"></div></div>
+  </div></div>
+  <div class="botones">
+    <button class="btn mal" onclick="marcar(false)">❌ Repasar</button>
+    <button class="btn bien" onclick="marcar(true)">✅ Me la sé</button>
+  </div>
+  <div class="botones">
+    <button class="btn nav" onclick="mover(-1)">← Anterior</button>
+    <button class="btn accion" onclick="barajar()">🔀 Barajar</button>
+    <button class="btn nav" onclick="mover(1)">Siguiente →</button>
+  </div>
+  <div class="botones"><button class="btn nav" onclick="soloRepaso()" id="btnrep">🎯 Solo las marcadas "repasar"</button>
+  <button class="btn nav" onclick="resetear()">🗑️ Reiniciar</button></div>
+  <div class="aviso">El progreso se guarda en este navegador (localStorage).</div>
+</div>
+<script>
+const LS='gace_biv_fc_t3t4_v1';
+const CARDS=[
+// —— T3 · REGLAMENTO ——
+{c:'T3·Artículos',p:'Inderogabilidad singular: ¿artículo y literal clave?',r:'Art. 37.1 Ley 39/2015 — «órgano de igual o superior JERARQUÍA»',d:'Las resoluciones particulares no pueden vulnerar una disposición general aunque procedan de órgano de igual o superior jerarquía. 37.2: esas resoluciones son NULAS.'},
+{c:'T3·Artículos',p:'Jerarquía de los reglamentos estatales: ¿artículo?',r:'Art. 24.2 Ley 50/1997',d:'1º Real Decreto (Presidente/Consejo de Ministros) · 2º Orden Ministerial.'},
+{c:'T3·Artículos',p:'Dictamen del Consejo de Estado en reglamentos ejecutivos: ¿norma?',r:'Art. 22.3 LO 3/1980',d:'Preceptivo en los reglamentos dictados en ejecución de las leyes. Su omisión → nulidad de la disposición.'},
+{c:'T3·Artículos',p:'Potestad reglamentaria local: ¿norma y órgano que aprueba las ordenanzas?',r:'Art. 4 LRBRL · las aprueba el PLENO',d:'Bandos: el Alcalde (art. 21.1.e LRBRL). Reglamento orgánico: Pleno.'},
+{c:'T3·Datos',p:'Los 6 principios de buena regulación (art. 129 Ley 39/2015)',r:'Necesidad · eficacia · proporcionalidad · seguridad jurídica · transparencia · eficiencia',d:'Justificación en el preámbulo. Alcance frente a CCAA matizado por STC 55/2018; plena aplicación a la AGE.'},
+{c:'T3·Datos',p:'Clases de reglamentos por su relación con la ley',r:'Ejecutivos · independientes · de necesidad',d:'Ejecutivos: desarrollan ley + dictamen Consejo de Estado. Independientes: solo ámbito organizativo. De necesidad: emergencias, vigencia limitada.'},
+{c:'T3·Plazos',p:'Recurso contencioso DIRECTO contra un reglamento',r:'2 meses desde su publicación',d:'Art. 46.1 LJCA. El recurso INDIRECTO (contra actos de aplicación) no tiene ese límite.'},
+{c:'T3·Plazos',p:'Revisión de oficio de una disposición nula iniciada de oficio: ¿caducidad?',r:'6 meses',d:'Art. 106.5 Ley 39/2015. Requiere dictamen FAVORABLE del Consejo de Estado (106.2). Contra reglamentos no cabe recurso administrativo (112.3).'},
+{c:'T3·Plazos',p:'Audiencia e información pública en tramitación normativa URGENTE',r:'7 días',d:'Art. 27.2 Ley 50/1997. Además: plazos a la mitad y sin consulta pública previa.'},
+{c:'T3·Datos',p:'¿Quién puede inaplicar un reglamento ilegal sin acudir al TC?',r:'Cualquier juez o tribunal (art. 6 LOPJ)',d:'Los reglamentos contrarios a la CE, a la ley o a la jerarquía normativa no se aplican. Con las leyes no cabe: cuestión de inconstitucionalidad.'},
+{c:'T3·Datos',p:'¿Qué es la cuestión de ilegalidad?',r:'La plantea el juez que estimó un recurso indirecto y no puede anular el reglamento (arts. 25-27 LJCA)',d:'Excepciones: el propio órgano competente anula (27.2); el TS anula directamente sin plantearla (27.3).'},
+{c:'T3·Datos',p:'Sanción del reglamento ilegal',r:'NULIDAD DE PLENO DERECHO (art. 47.2 Ley 39/2015)',d:'Imprescriptible, insanable, con efectos en cadena. En reglamentos no existe la anulabilidad.'},
+{c:'T3·Datos',p:'Consulta pública previa: ¿cuándo se realiza?',r:'ANTES de elaborar el texto',d:'A través del portal web: problemas, necesidad, objetivos (arts. 26.2 Ley 50/1997 y 133 Ley 39/2015). No confundir con la audiencia (sobre el texto ya redactado).'},
+{c:'T3·Datos',p:'¿Qué documento analiza los impactos del proyecto normativo?',r:'La MAIN (Memoria del Análisis de Impacto Normativo)',d:'Art. 26.3 Ley 50/1997 y RD 931/2017: oportunidad, competencias, impacto económico-presupuestario, cargas, género…'},
+{c:'T3·Artículos',p:'Plan Anual Normativo: ¿artículos?',r:'Art. 25 Ley 50/1997 y art. 132 Ley 39/2015',d:'Planificación anual de las iniciativas legislativas y reglamentarias.'},
+{c:'T3·Datos',p:'Reglamentos jurídicos vs. organizativos',r:'Ad extra (derechos/obligaciones de ciudadanos, exigen habilitación) vs. ad intra (organización y sujeciones especiales)',d:'El reglamento independiente solo puede ser organizativo.'},
+{c:'T3·Datos',p:'Criterios para distinguir reglamento y acto general',r:'Ordinamentalidad vs. consunción',d:'Se integra en el ordenamiento para casos indefinidos → reglamento. Se agota con su cumplimiento (convocatoria) → acto administrativo general.'},
+{c:'T3·Plazos',p:'Entrada en vigor de reglamentos con nuevas obligaciones a empresas/profesionales',r:'2 de enero o 1 de julio',d:'Art. 23 Ley 50/1997 (repaso de T1). Excepciones: transposición UE, plazos de otra norma, razones justificadas.'},
+// —— T4 · ACTO ADMINISTRATIVO ——
+{c:'T4·Artículos',p:'Actos de trámite cualificados (recurribles): ¿artículo y supuestos?',r:'Art. 112.1 Ley 39/2015 — deciden el fondo, impiden continuar o causan indefensión/perjuicio irreparable',d:'Contra los demás trámites: alegaciones (art. 76).'},
+{c:'T4·Artículos',p:'Actos que ponen fin a la vía administrativa: ¿artículo?',r:'Art. 114 Ley 39/2015',d:'Alzada, órganos sin superior, pactos finalizadores, responsabilidad patrimonial… Estatal: Directores generales o superior EN MATERIA DE PERSONAL (114.2.c).'},
+{c:'T4·Datos',p:'Incompetencia por materia/territorio vs. jerárquica',r:'Materia/territorio (manifiesta) → NULIDAD (47.1.b) · Jerárquica → ANULABLE, convalidable (52.3)',d:'La convalida el órgano superior competente.'},
+{c:'T4·Datos',p:'Grados de parentesco que obligan a abstenerse',r:'Consanguinidad 4º · afinidad 2º',d:'Art. 23.2.b Ley 40/2015. Truco: "sangre 4, política 2". La no abstención no invalida automáticamente (23.4).'},
+{c:'T4·Datos',p:'¿Qué vicio produce la desviación de poder?',r:'ANULABILIDAD (art. 48.1 Ley 39/2015)',d:'Ejercicio de potestades para fines distintos de los fijados por el ordenamiento, aunque el fin también sea público.'},
+{c:'T4·Datos',p:'Las 7 causas de nulidad del art. 47.1 (letras)',r:'a) amparo · b) incompetencia materia/territorio · c) contenido imposible · d) infracción penal · e) sin procedimiento/reglas colegiados · f) derechos sin requisitos esenciales · g) previsión legal expresa',d:'Reglamentos: 47.2 (siempre nulidad).'},
+{c:'T4·Plazos',p:'Plazo para cursar la notificación de un acto',r:'10 días desde que se dicta',d:'Art. 40.2 Ley 39/2015. Contenido: texto íntegro + fin de vía + recursos + órgano + plazos.'},
+{c:'T4·Plazos',p:'Notificación electrónica: ¿cuándo se entiende rechazada?',r:'A los 10 días NATURALES sin acceder',d:'Art. 43.2. El trámite se da por efectuado y el procedimiento sigue (41.5).'},
+{c:'T4·Plazos',p:'Notificación en papel: segundo intento',r:'Dentro de los 3 días siguientes, en hora distinta (≥3 h de diferencia)',d:'Art. 42.2. Agotados los intentos → art. 44: anuncio en el BOE.'},
+{c:'T4·Datos',p:'¿Dónde se anuncia la notificación infructuosa?',r:'En el BOE (art. 44)',d:'Interesados desconocidos, lugar ignorado o intento sin efecto. Facultativo: boletines autonómicos/provinciales y tablones.'},
+{c:'T4·Datos',p:'Regla general de eficacia de los actos',r:'Desde la fecha en que se dictan (art. 39.1)',d:'Demorada (39.2): contenido, notificación/publicación o aprobación superior. La notificación es condición de EFICACIA, no de validez.'},
+{c:'T4·Datos',p:'Los 2 supuestos de eficacia retroactiva (art. 39.3)',r:'Sustitución de actos anulados · actos favorables',d:'Condiciones: supuestos de hecho existentes en la fecha retrotraída + no lesionar derechos de terceros.'},
+{c:'T4·Datos',p:'Los 4 medios de ejecución forzosa (art. 100)',r:'Apremio sobre el patrimonio · ejecución subsidiaria · multa coercitiva · compulsión sobre las personas',d:'Previo apercibimiento (99) y eligiendo el menos restrictivo. Sin acto previo: vía de hecho (97).'},
+{c:'T4·Datos',p:'Naturaleza de la multa coercitiva',r:'NO es sanción: independiente y compatible con ella (art. 103.2)',d:'Reiterable por lapsos suficientes; exige ley que la autorice.'},
+{c:'T4·Datos',p:'¿Cuándo anula un defecto de forma?',r:'Si el acto carece de requisitos indispensables para su fin o causa INDEFENSIÓN (art. 48.2)',d:'Fuera de eso: irregularidad no invalidante. Fuera de plazo: solo anula si lo impone la naturaleza del plazo (48.3).'},
+{c:'T4·Datos',p:'Conversión vs. conservación vs. convalidación',r:'50: el acto viciado vale como otro · 51: se conservan trámites no afectados · 52: se sanan los ANULABLES',d:'Los nulos nunca se convalidan. Convalidación con efectos desde su fecha (salvo 39.3).'},
+{c:'T4·Datos',p:'¿Suspende el recurso la ejecución del acto?',r:'NO (art. 117.1)',d:'Suspensión cautelar excepcional: perjuicios de imposible o difícil reparación o causa de nulidad del 47.1. Sanciones: no ejecutivas hasta agotar la vía administrativa (90.3).'},
+{c:'T4·Artículos',p:'Motivación: ¿artículo y forma?',r:'Art. 35 Ley 39/2015 — sucinta referencia de hechos y fundamentos',d:'Cabe in aliunde por referencia a informes del expediente (35.2). Discrecionales: motivación obligatoria (35.1.i; STC 14/2002).'},
+{c:'T4·Datos',p:'Actos firmes: ¿qué recurso queda?',r:'Solo el extraordinario de revisión (art. 125)',d:'Supuestos tasados: error de hecho, documentos esenciales posteriores, prueba falsa, prevaricación/cohecho.'},
+{c:'T4·Datos',p:'Silencio positivo y requisitos esenciales',r:'No se adquieren facultades o derechos careciendo de los requisitos esenciales → acto presunto NULO (47.1.f)',d:'Clave para supuestos: una licencia por silencio contra el planeamiento no se consolida.'},
+{c:'T4·Datos',p:'Revocación de actos: ¿cuáles y con qué límites?',r:'Actos de GRAVAMEN, mientras no haya prescrito (art. 109.1)',d:'Límites: no contraria a la igualdad, al interés público ni al ordenamiento. Los favorables exigen revisión de oficio (106) o lesividad (107: 4 años).'},
+{c:'T4·Datos',p:'Formas de exteriorización del acto',r:'Escrito por medios electrónicos (regla, art. 36.1); verbal si la naturaleza lo exige; plúrimos refundibles (36.3)',d:'Del verbal se deja constancia escrita por el receptor.'}
+];
+let vista=[...CARDS.keys()], pos=0, filtro='Todas';
+let estado=JSON.parse(localStorage.getItem(LS)||'{}');
+const cats=['Todas',...new Set(CARDS.map(c=>c.c.split('·')[0]))];
+function guardar(){localStorage.setItem(LS,JSON.stringify(estado))}
+function pinta(){
+  const fdiv=document.getElementById('filtros');fdiv.innerHTML='';
+  cats.forEach(c=>{const b=document.createElement('button');b.className='f'+(filtro===c?' on':'');b.textContent=c==='Todas'?'📋 Todas':c;b.onclick=()=>{filtro=c;aplicar()};fdiv.appendChild(b)});
+  const i=vista[pos],c=CARDS[i];
+  document.getElementById('cat').textContent=c.c;
+  document.getElementById('idx').textContent=(pos+1)+' / '+vista.length;
+  document.getElementById('preg').textContent=c.p;
+  document.getElementById('resp').textContent=c.r;
+  document.getElementById('det').textContent=c.d;
+  document.getElementById('carta').classList.remove('girada');
+  document.getElementById('st-total').textContent='📇 '+vista.length+' tarjetas';
+  const vals=Object.values(estado);
+  document.getElementById('ndom').textContent=vals.filter(v=>v==='ok').length;
+  document.getElementById('nrep').textContent=vals.filter(v=>v==='ko').length;
+}
+function aplicar(){
+  vista=[...CARDS.keys()].filter(i=>filtro==='Todas'||CARDS[i].c.startsWith(filtro));
+  pos=0;pinta();
+}
+function girar(){document.getElementById('carta').classList.toggle('girada')}
+function mover(d){pos=(pos+d+vista.length)%vista.length;pinta()}
+function marcar(bien){estado[vista[pos]]=bien?'ok':'ko';guardar();mover(1)}
+function barajar(){for(let i=vista.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vista[i],vista[j]]=[vista[j],vista[i]]}pos=0;pinta()}
+function soloRepaso(){
+  const rep=[...CARDS.keys()].filter(i=>estado[i]==='ko'&&(filtro==='Todas'||CARDS[i].c.startsWith(filtro)));
+  if(rep.length===0){alert('🎉 No tienes tarjetas marcadas para repasar en este filtro.');return}
+  vista=rep;pos=0;pinta();
+}
+function resetear(){if(confirm('¿Borrar el progreso de estas flashcards?')){estado={};guardar();aplicar()}}
+aplicar();
+</script>
+</body>
+</html>
