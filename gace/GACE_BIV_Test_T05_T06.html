@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV — Test T5 y T6 (Contratos del Sector Público)</title>
+<style>
+:root{--azul:#1e3a8a;--azul2:#3b62c4;--verde:#16a34a;--rojo:#dc2626;--naranja:#ea580c;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:70px}
+header{background:linear-gradient(135deg,#1e3a8a,#3b62c4);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:800px;margin:0 auto;padding:0 14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 6px}
+.tab{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;cursor:pointer}
+.tab.on{background:var(--azul);color:#fff}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 14px}
+.mode{border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:5px 12px;font-size:.8rem;cursor:pointer}
+.mode.on{background:#0f766e;color:#fff;border-color:#0f766e}
+.bars{display:flex;flex-direction:column;gap:6px;margin:10px 0 18px}
+.bar{background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.bar .lbl{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin-bottom:4px}
+.bar .track{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.bar .fill{height:100%;border-radius:4px;transition:width .3s}
+.q{background:#fff;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.q .meta{font-size:.75rem;color:#64748b;margin-bottom:8px;display:flex;justify-content:space-between}
+.q h3{font-size:.98rem;margin-bottom:12px;line-height:1.45}
+.opt{display:block;width:100%;text-align:left;border:2px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:10px 12px;margin:6px 0;font-size:.9rem;cursor:pointer;line-height:1.4}
+.opt:hover{border-color:var(--azul2)}
+.opt.ok{border-color:var(--verde);background:#f0fdf4}
+.opt.ko{border-color:var(--rojo);background:#fef2f2}
+.opt:disabled{cursor:default;opacity:.92}
+.exp{display:none;margin-top:10px;background:#eef2ff;border-left:4px solid var(--azul2);border-radius:0 8px 8px 0;padding:10px 12px;font-size:.85rem}
+.exp.show{display:block}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.btn{border:none;border-radius:8px;padding:8px 16px;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--azul);color:#fff}
+.btn.sec{background:#64748b}
+.btn.warn{background:var(--rojo)}
+.score{position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#fff;padding:10px 16px;text-align:center;font-size:.9rem}
+.score b{color:#4ade80}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧪 Test BIV · T5+T6 Contratos del Sector Público</h1>
+  <p>GACE 2027 · Autocorregible y adaptativo · 60 preguntas · Umbrales Orden HAC/1517/2025 · verificado a 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="tabs" id="tabs"></div>
+  <div class="modes">
+    <button class="mode on" data-m="normal">📚 Normal</button>
+    <button class="mode" data-m="adapt">🎯 Adaptativo (peores 20)</button>
+    <button class="mode" data-m="fail">❌ Solo erróneas</button>
+  </div>
+  <div class="bars" id="bars"></div>
+  <div class="controls">
+    <button class="btn" onclick="render(true)">🔀 Barajar</button>
+    <button class="btn sec" onclick="showAll()">👁️ Ver explicaciones</button>
+    <button class="btn warn" onclick="resetHist()">🗑️ Reiniciar historial</button>
+  </div>
+  <div id="quiz"></div>
+</div>
+<div class="score" id="score"></div>
+<script>
+const LS_KEY='gace_biv_t5t6_v1';
+const UNIDADES={5:'T5 · LCSP General',6:'T6 · Contratos en particular'};
+const BANK=[
+// ============ T5 — LCSP PARTE GENERAL (u:5) ============
+{u:5,t:"La Ley 9/2017 transpone al ordenamiento español las Directivas:",o:["2014/23/UE y 2014/24/UE","2014/24/UE y 2014/25/UE","2004/18/CE y 2004/17/CE","2014/23/UE y 2014/25/UE"],c:0,e:"LCSP: Directivas 2014/23/UE (concesiones) y 2014/24/UE (contratación pública). La 2014/25/UE (sectores del agua, energía, transportes y postales) se transpuso por el RD-ley 3/2020."},
+{u:5,t:"¿Cuál es el umbral SARA vigente desde el 1/1/2026 para los contratos de obras?",o:["5.538.000 €","5.404.000 €","5.350.000 €","6.000.000 €"],c:1,e:"Orden HAC/1517/2025: obras, concesión de obras y concesión de servicios: 5.404.000 €. Suministros y servicios: 140.000 € (AGE) / 216.000 € (resto). Anexo IV: 750.000 €."},
+{u:5,t:"El umbral SARA de un contrato de servicios licitado por un Ayuntamiento es:",o:["140.000 €","216.000 €","100.000 €","750.000 €"],c:1,e:"140.000 € solo para AGE, sus OOAA y la Seguridad Social; para el resto de entes (CCAA y EELL): 216.000 €. Los 750.000 € son para servicios sociales y específicos del Anexo IV."},
+{u:5,t:"El valor estimado del contrato (VEC) se calcula:",o:["Con IVA, sin prórrogas","Sin IVA, incluyendo prórrogas, opciones y modificaciones previstas","Con IVA e incluyendo modificaciones","Sin IVA y sin prórrogas"],c:1,e:"Art. 101: sin IVA, incluyendo eventuales prórrogas, opciones y modificaciones previstas. El presupuesto base de licitación (art. 100) sí incluye el IVA."},
+{u:5,t:"Son Administraciones Públicas a efectos de la LCSP (art. 3.2), entre otros:",o:["Las sociedades mercantiles públicas","Las entidades públicas empresariales","Los organismos autónomos y las universidades públicas","Las fundaciones privadas"],c:2,e:"Art. 3.2: territoriales, gestoras de la Seg. Social, OOAA, universidades públicas, autoridades independientes, consorcios, forales vascas y órganos constitucionales. Las EPEs y sociedades mercantiles públicas son sector público (y las EPE, poder adjudicador), pero NO AAPP."},
+{u:5,t:"Un contrato de creación e interpretación artística celebrado por una Administración Pública es:",o:["Contrato administrativo típico","Contrato administrativo especial","Contrato privado (art. 26)","Negocio excluido de la LCSP"],c:2,e:"Art. 25.1.a y 26: son privados los de servicios financieros, creación e interpretación artística y literaria, espectáculos y suscripciones. Preparación y adjudicación por la LCSP; efectos y extinción por el Derecho privado."},
+{u:5,t:"Los umbrales del contrato menor son:",o:["Obras < 50.000 € y servicios < 18.000 €","Obras < 40.000 € y suministros y servicios < 15.000 €","Obras < 80.000 € y suministros y servicios < 60.000 €","Obras < 2.000.000 € y servicios < 140.000 €"],c:1,e:"Art. 118: obras < 40.000 €; suministros y servicios < 15.000 € (VEC, sin IVA). Los 80.000/60.000 son el simplificado sumario (159.6) y los 2M/140.000 el simplificado ordinario (159.1)."},
+{u:5,t:"Respecto al contrato menor, señale la afirmación INCORRECTA:",o:["No puede durar más de 1 año ni prorrogarse","Debe justificarse que no se altera el objeto para eludir los umbrales","Debe comprobarse que el contratista no supera los umbrales del menor en el ejercicio (límite anual por proveedor)","Se publica trimestralmente en el perfil, salvo los inferiores a 5.000 € por anticipo de caja fija"],c:2,e:"El límite anual por proveedor (antiguo 118.3) fue SUPRIMIDO por el RD-ley 3/2020. Cuidado con temarios desactualizados."},
+{u:5,t:"En el procedimiento abierto SARA, el plazo mínimo de presentación de proposiciones para un contrato de obras es:",o:["26 días naturales","30 días naturales","35 días naturales desde el envío del anuncio al DOUE","52 días naturales"],c:2,e:"Art. 156.2: 35 días para obras, suministros y servicios SARA (30 para concesiones), desde el envío del anuncio al DOUE. Reducible en 5 días si se admite oferta electrónica. No SARA: obras 26, suministros y servicios 15."},
+{u:5,t:"El procedimiento abierto simplificado (art. 159.1) exige, entre otras condiciones:",o:["Que los criterios evaluables mediante juicio de valor no superen el 25% (45% en prestaciones intelectuales)","Que todos los criterios sean automáticos","Que el precio sea el único criterio","Que el juicio de valor no supere el 50%"],c:0,e:"Art. 159.1.b: juicio de valor ≤ 25%; en prestaciones intelectuales (ingeniería, arquitectura) ≤ 45%. Ámbito: obras ≤ 2.000.000 € y suministros/servicios < umbral AGE (140.000 €)."},
+{u:5,t:"En el abierto simplificado sumario (art. 159.6):",o:["Se exige garantía definitiva reducida","Se exime de acreditar solvencia y no se exige garantía definitiva","Se exige clasificación","Solo cabe para prestaciones intelectuales"],c:1,e:"159.6: obras < 80.000 y suministros/servicios < 60.000 (nunca prestaciones intelectuales); ofertas 10 días hábiles (5 en compras corrientes); solo criterios de fórmula; sin solvencia ni garantía definitiva; sin acto público de apertura."},
+{u:5,t:"El procedimiento negociado sin publicidad procede, entre otros casos:",o:["Siempre que el contrato sea inferior al umbral SARA","Por exclusividad técnica o artística, imperiosa urgencia imprevisible o ausencia de ofertas en procedimiento previo","Cuando lo acuerde motivadamente el órgano de contratación","Para cualquier contrato de servicios intelectuales"],c:1,e:"Art. 168: supuestos tasados. La 'imperiosa urgencia' del 168.b.1º exige acontecimientos imprevisibles no imputables al órgano; no confundir con la tramitación urgente (119) ni la emergencia (120)."},
+{u:5,t:"En la tramitación de EMERGENCIA (art. 120):",o:["Los plazos se reducen a la mitad","Puede contratarse verbalmente sin expediente previo y no cabe recurso especial","Se requiere fiscalización previa reforzada","El inicio de la ejecución puede demorarse 6 meses"],c:1,e:"Emergencia (catástrofes, grave peligro, defensa nacional): sin obligación de tramitar expediente, contratación incluso verbal, inicio ≤ 1 mes, no cabe REMC. La reducción a la mitad es la tramitación URGENTE (119)."},
+{u:5,t:"La garantía provisional:",o:["Es obligatoria en todos los contratos","Solo puede exigirse excepcionalmente, con un máximo del 3% del presupuesto base de licitación","Asciende al 5% del precio final","Se constituye siempre mediante retención del precio"],c:1,e:"Art. 106: excepcional y motivada, máx. 3% del PBL sin IVA. La definitiva (art. 107) es la obligatoria: 5% del precio final ofertado sin IVA, más complementaria de hasta otro 5%."},
+{u:5,t:"La garantía definitiva asciende al:",o:["3% del presupuesto base de licitación","5% del precio final ofertado, IVA excluido","10% del valor estimado","5% del presupuesto base, IVA incluido"],c:1,e:"Art. 107.1: 5% del precio final ofertado (o del PBL en precios unitarios), IVA excluido. Cabe garantía complementaria de hasta un 5% adicional (máximo total 10%)."},
+{u:5,t:"El licitador con mejor oferta debe presentar la documentación y constituir la garantía definitiva en el plazo de:",o:["5 días naturales","10 días hábiles desde el requerimiento (7 en el simplificado)","15 días hábiles","1 mes"],c:1,e:"Art. 150.2: 10 días hábiles. Si no cumplimenta: se entiende retirada su oferta (con posible prohibición de contratar) y se requiere al siguiente clasificado. En el simplificado: 7 días hábiles (159.4)."},
+{u:5,t:"En contratos susceptibles de recurso especial, la formalización:",o:["Debe producirse dentro de los 5 días desde la adjudicación","No puede efectuarse antes de 15 días hábiles desde la remisión de la notificación de la adjudicación","Debe producirse el mismo día de la adjudicación","Puede efectuarse en cualquier momento"],c:1,e:"Art. 153.3: ventana de 15 días hábiles para permitir el REMC con suspensión automática. En el resto de contratos: formalización en un máximo de 15 días hábiles desde la notificación. El contrato se PERFECCIONA con la formalización (art. 36)."},
+{u:5,t:"Los contratos administrativos se perfeccionan:",o:["Con la adjudicación","Con su formalización","Con la notificación de la adjudicación","Con la publicación en el perfil"],c:1,e:"Art. 36.1: se perfeccionan con su formalización. Excepción: contratos basados en acuerdo marco y sistemas dinámicos, que se perfeccionan con la adjudicación (salvo susceptibles de REMC)."},
+{u:5,t:"La penalidad diaria por demora del contratista es, salvo previsión distinta en el pliego:",o:["0,20 € por cada 1.000 € del precio","0,60 € por cada 1.000 € del precio, IVA excluido","1 € por cada 1.000 € del precio","El 5% del precio por semana"],c:1,e:"Art. 193.3. Cada vez que las penalidades alcancen un múltiplo del 5% del precio, la Administración puede optar entre resolver o continuar con nuevas penalidades."},
+{u:5,t:"La Administración debe pagar el precio en los ___ siguientes a la aprobación de las certificaciones o documentos de conformidad:",o:["60 días","30 días","45 días","15 días"],c:1,e:"Art. 198.4: 30 días. Demora: intereses + costes de cobro (Ley 3/2004). El contratista principal paga a subcontratistas en máx. 60 días (art. 216)."},
+{u:5,t:"Si la demora de la Administración en el pago supera los 4 meses, el contratista puede:",o:["Resolver el contrato","Suspender el cumplimiento, comunicándolo con 1 mes de antelación","Reclamar el doble de intereses","Ceder el contrato sin autorización"],c:1,e:"Art. 198.5: demora > 4 meses → suspensión con preaviso de 1 mes. La resolución exige demora > 6 meses (art. 198.6). Escalera: 30 días pago → 4 meses suspensión → 6 meses resolución."},
+{u:5,t:"Las modificaciones previstas en el pliego (art. 204) no pueden superar:",o:["El 10% del precio inicial","El 20% del precio inicial","El 50% del precio inicial","El 15% en obras"],c:1,e:"Art. 204.1: hasta el 20% del precio inicial, con cláusula clara, precisa e inequívoca, sin alterar la naturaleza global. Las no previstas del 205 (adicionales o imprevisibles): hasta el 50%."},
+{u:5,t:"Las modificaciones no previstas por prestaciones adicionales o circunstancias imprevisibles (art. 205) tienen como límite:",o:["El 20% del precio inicial","El 50% del precio inicial, aislada o conjuntamente","El 10% del precio inicial","No tienen límite si hay interés público"],c:1,e:"Art. 205.2.a y b: hasta el 50%. Superado el límite o sin causa tasada, procede una nueva licitación. La modificación es obligatoria para el contratista si ≤ 20%; por encima puede pedir la resolución (206)."},
+{u:5,t:"La cesión del contrato exige, entre otros requisitos, que el cedente haya ejecutado al menos:",o:["El 10% del importe","El 20% del importe (o 1/5 del plazo de explotación en concesiones)","El 50% del importe","La totalidad de la fase de preparación"],c:1,e:"Art. 214.2.b. Además: previsión en pliego o autorización, cesionario capaz, solvente y no incurso en prohibición, y escritura pública."},
+{u:5,t:"El recurso especial en materia de contratación procede en contratos de suministros y servicios cuyo VEC sea superior a:",o:["60.000 €","100.000 €","140.000 €","216.000 €"],c:1,e:"Art. 44.1: obras y concesiones > 3.000.000 €; suministros y servicios > 100.000 €. No confundir con los umbrales SARA."},
+{u:5,t:"La interposición del REMC contra el acto de adjudicación produce:",o:["Ningún efecto sobre el procedimiento","La suspensión automática de la tramitación (no puede formalizarse el contrato)","La nulidad del expediente","La caducidad de la licitación"],c:1,e:"Art. 53: suspensión automática solo cuando el acto recurrido es la ADJUDICACIÓN, hasta que el tribunal resuelva o levante la suspensión. Contra otros actos: medidas cautelares potestativas."},
+{u:5,t:"El plazo para interponer el recurso especial es de:",o:["10 días hábiles","15 días hábiles","1 mes","2 meses"],c:1,e:"Art. 50.1: 15 días hábiles (desde publicación de anuncio o pliegos, conocimiento del trámite o remisión de la notificación de la adjudicación, según el acto). Es gratuito y potestativo; lo resuelve el TACRC en el ámbito estatal."},
+{u:5,t:"Los miembros del Tribunal Administrativo Central de Recursos Contractuales son nombrados por:",o:["El Ministro de Hacienda por 4 años","El Consejo de Ministros por 6 años, no prorrogables","Las Cortes Generales por 5 años","El Consejo de Estado por 9 años"],c:1,e:"Art. 45: designación por Consejo de Ministros, mandato de 6 años no prorrogable, con independencia funcional. Contra sus resoluciones: solo contencioso-administrativo."},
+{u:5,t:"Es causa de nulidad de derecho administrativo específica de la LCSP (art. 39):",o:["La desviación de poder","La falta de publicación del anuncio de licitación en el DOUE en contratos SARA","Cualquier defecto de forma","La demora en la formalización"],c:1,e:"Art. 39.2: también la carencia o insuficiencia de crédito (salvo emergencia), la falta de capacidad/solvencia/clasificación o prohibición del adjudicatario, y la formalización sin respetar la ventana del recurso."},
+{u:5,t:"La clasificación empresarial es exigible en:",o:["Todos los contratos de obras","Contratos de obras de VEC igual o superior a 500.000 €","Contratos de servicios de más de 216.000 €","Contratos SARA exclusivamente"],c:1,e:"Art. 77.1.a: obligatoria en obras ≥ 500.000 €. En servicios nunca es exigible (potestativa como medio de acreditación). Los suministros no se clasifican."},
+{u:5,t:"Los acuerdos marco tienen una duración máxima de:",o:["2 años","4 años, salvo casos excepcionales debidamente justificados","5 años improrrogables","6 años"],c:1,e:"Art. 219.2: máximo 4 años salvo casos excepcionales justificados por el objeto. Los sistemas dinámicos de adquisición (223 ss.) son procedimientos íntegramente electrónicos de duración limitada pero abiertos a nuevas empresas."},
+// ============ T6 — CONTRATOS EN PARTICULAR (u:6) ============
+{u:6,t:"En el contrato de obras, el informe de la oficina de supervisión de proyectos es preceptivo cuando la cuantía sea:",o:["Igual o superior a 350.000 €","Igual o superior a 500.000 €","Superior a 1.000.000 €","Siempre"],c:1,e:"Art. 235: preceptivo en contratos de obras ≥ 500.000 €. Por debajo, solo si afecta a la estabilidad, seguridad o estanqueidad de la obra (en cuyo caso también es preceptivo)."},
+{u:6,t:"El acta de comprobación del replanteo debe extenderse en el plazo máximo de:",o:["10 días desde la adjudicación","1 mes desde la formalización del contrato","3 meses desde la aprobación del proyecto","15 días hábiles desde la notificación"],c:1,e:"Art. 237: dentro del mes siguiente a la formalización, salvo casos excepcionales. Marca el inicio de la ejecución de la obra."},
+{u:6,t:"Las certificaciones de obra se expiden:",o:["Trimestralmente","Mensualmente, en los primeros 10 días siguientes al mes que correspondan","Al finalizar cada fase del proyecto","Solo a la recepción"],c:1,e:"Art. 240.1. Son pagos A CUENTA, sujetos a las rectificaciones de la medición final: no suponen aprobación ni recepción de las obras."},
+{u:6,t:"¿Cuál de las siguientes es causa de fuerza mayor en el contrato de obras (art. 239)?",o:["La subida generalizada de los precios de los materiales","Los incendios causados por la electricidad atmosférica","Las lluvias persistentes durante el invierno","La insolvencia del subcontratista"],c:1,e:"Lista tasada del art. 239.2: incendios por electricidad atmosférica; fenómenos naturales de efectos catastróficos; destrozos violentos en tiempo de guerra, robos tumultuosos o alteraciones graves del orden público. Indemnización si no hubo imprudencia del contratista."},
+{u:6,t:"En el contrato de obras NO tiene la consideración de modificación el exceso de mediciones que no supere el:",o:["3% del precio","10% del precio inicial del contrato","20% del presupuesto","5% de cada unidad"],c:1,e:"Art. 242.4.i: variación de unidades realmente ejecutadas hasta el 10% del precio (se recoge en la certificación final). Los precios nuevos contradictorios: hasta el 3% del presupuesto primitivo (242.4.ii)."},
+{u:6,t:"Dentro de qué plazo desde la recepción debe aprobarse la certificación final de las obras:",o:["1 mes","2 meses","3 meses","6 meses"],c:2,e:"Art. 243.1: 3 meses desde la recepción, abonándose a cuenta de la liquidación. La recepción requiere facultativo de la Administración, director de la obra y contratista."},
+{u:6,t:"El plazo de garantía del contrato de obras no puede ser inferior a:",o:["6 meses","1 año, salvo casos especiales","2 años","5 años"],c:1,e:"Art. 243.3. Durante él, el contratista conserva la obra; sin reparos a su término, se extingue su responsabilidad (salvo vicios ocultos: 15 años, art. 244)."},
+{u:6,t:"La responsabilidad del contratista de obras por vicios ocultos que provoquen la ruina se extiende durante:",o:["4 años","10 años","15 años desde la recepción","20 años"],c:2,e:"Art. 244: 15 años a contar desde la recepción, por vicios ocultos debidos a incumplimiento del contrato. Transcurrido el plazo sin daños, queda extinguida."},
+{u:6,t:"Es causa específica de resolución del contrato de obras:",o:["El error del proyecto que afecte al presupuesto en al menos un 10%","La suspensión de la iniciación de las obras por la Administración por plazo superior a 4 meses","La suspensión de las obras por 2 meses","La modificación del 15% del precio"],c:1,e:"Art. 245: demora en la comprobación del replanteo; suspensión de la iniciación > 4 meses; desistimiento o suspensión > 8 meses; errores del proyecto que afecten al presupuesto en al menos un 20%."},
+{u:6,t:"El estudio de viabilidad de una concesión de obras:",o:["Es facultativo","Es previo y preceptivo; si concluye la inviabilidad, es vinculante","Solo se exige en concesiones SARA","Lo aprueba el Consejo de Estado"],c:1,e:"Art. 247. Puede presentarlo un particular: si la Administración lo hace suyo y se adjudica a otro licitador, el autor tiene derecho al resarcimiento de los gastos +5%."},
+{u:6,t:"El riesgo operacional del concesionario implica que:",o:["La Administración garantiza la recuperación de la inversión","No está garantizado que recupere las inversiones ni cubra los costes en condiciones normales de funcionamiento","Solo asume el riesgo de suministro","Puede repercutir cualquier pérdida a la Administración"],c:1,e:"Arts. 14.4 y 15.2: exposición real a las incertidumbres del mercado (demanda, suministro o ambos); la pérdida potencial no puede ser meramente nominal o desdeñable."},
+{u:6,t:"¿Cuál de estas circunstancias da derecho al restablecimiento del equilibrio económico de la concesión?",o:["La caída de la demanda respecto de las previsiones","Las modificaciones impuestas por la Administración por interés público que afecten al régimen financiero","La subida de los tipos de interés","La inflación general"],c:1,e:"Art. 270: ius variandi, factum principis y fuerza mayor (art. 239). El riesgo de demanda y el deterioro económico general los soporta el concesionario: son el riesgo operacional."},
+{u:6,t:"El secuestro o intervención de una concesión tiene una duración máxima de:",o:["1 año","2 años","3 años, incluidas las prórrogas","5 años"],c:2,e:"Arts. 263 y 293: la Administración explota temporalmente con el personal y material del concesionario y por cuenta de este; si al término (máx. 3 años) no garantiza la asunción, procede la resolución."},
+{u:6,t:"La duración máxima de una concesión de obras que comprenda ejecución de obra y explotación es de:",o:["25 años","30 años","40 años","50 años"],c:2,e:"Art. 29.6: 40 años. Concesión de servicios sin obras: 25 años; servicios sanitarios sin obras: 10 años."},
+{u:6,t:"La duración máxima de una concesión de servicios sanitarios sin obras es de:",o:["5 años","10 años","25 años","15 años"],c:1,e:"Art. 29.6.3º: 10 años. La trampa clásica es contestar 25 (regla general de la concesión de servicios sin obras)."},
+{u:6,t:"Antes de contratar una concesión de servicios, la Administración debe:",o:["Convocar consulta popular","Establecer el régimen jurídico del servicio, declarándolo asumido como propio","Crear un organismo autónomo gestor","Obtener dictamen del Consejo de Estado"],c:1,e:"Art. 284.2: régimen jurídico que declare la actividad asumida por la Administración, alcance de las prestaciones y aspectos jurídico-económicos. No cabe conceder servicios que impliquen ejercicio de autoridad."},
+{u:6,t:"El rescate de una concesión de servicios exige:",o:["Solo la voluntad de la Administración","Acreditar que la gestión directa es más eficaz y eficiente que la concesional","Sentencia judicial previa","El consentimiento del concesionario"],c:1,e:"Art. 294.b: el rescate (gestión directa por la Administración) exige justificación de mayor eficacia y eficiencia, y da derecho a indemnización al concesionario."},
+{u:6,t:"Es causa específica de resolución de la concesión de servicios la demora de la Administración superior a ___ en la entrega de la contraprestación o los medios auxiliares pactados:",o:["4 meses","6 meses","8 meses","1 año"],c:1,e:"Art. 294.c: 6 meses. No confundir con obras/suministros/servicios: 4 meses (suspensión de la iniciación o desistimiento) y 8 meses (suspensión)."},
+{u:6,t:"El contrato de suministro puede tener por objeto:",o:["Bienes inmuebles","Bienes muebles, incluida la energía y los equipos informáticos","Programas de ordenador desarrollados a medida","Valores negociables"],c:1,e:"Arts. 16 y 298: solo muebles (adquisición o arrendamiento con/sin opción de compra); energía y equipos: siempre suministro. Software a medida: contrato de SERVICIOS. Inmuebles y valores: legislación patrimonial (excluidos, art. 9)."},
+{u:6,t:"En el suministro, los gastos de entrega y transporte al lugar convenido corren por cuenta de:",o:["La Administración","El contratista, salvo pacto en contrario","Ambos por mitades","El transportista"],c:1,e:"Art. 302. Además, el contratista soporta el riesgo de pérdida o daño de los bienes hasta la entrega (art. 300)."},
+{u:6,t:"La Administración dispone, tras la entrega del suministro, de un plazo para pronunciar la conformidad de:",o:["10 días","15 días","1 mes","3 meses"],c:2,e:"Regla general del art. 210.2: acto formal de recepción o conformidad dentro del mes siguiente a la entrega o realización del objeto del contrato."},
+{u:6,t:"La duración máxima de los contratos de suministros y de servicios, incluidas las prórrogas, es de:",o:["3 años","4 años","5 años","6 años"],c:2,e:"Art. 29.4: 5 años incluidas prórrogas (con excepciones tasadas). La prórroga la acuerda el órgano de contratación y es obligatoria para el contratista si se preavisa con 2 meses; se prohíbe la prórroga tácita."},
+{u:6,t:"En los contratos de servicios cuyo objeto sea el desarrollo de productos protegidos por propiedad intelectual o industrial:",o:["La propiedad queda siempre en el contratista","Salvo disposición en contrario de los pliegos, se cede a la Administración contratante","Se comparte al 50%","Debe subastarse separadamente"],c:1,e:"Art. 308.1. Aun sin cesión, la Administración puede autorizar el uso a los entes del sector público."},
+{u:6,t:"A la extinción de un contrato de servicios:",o:["El personal del contratista se subroga en la Administración","No puede producirse en ningún caso la consolidación del personal del contratista como personal del ente contratante","La Administración elige a los trabajadores que asume","Se convoca proceso selectivo restringido"],c:1,e:"Art. 308.2: prohibición de la contratación encubierta de personal y de la consolidación. El contratista es el único responsable de la prestación."},
+{u:6,t:"En los contratos de servicios con prestaciones directas a favor de la ciudadanía (art. 312):",o:["El precio puede ser el único criterio de adjudicación","La Administración conserva la titularidad y el precio no puede ser el único criterio","Se transfiere la titularidad del servicio al contratista","No se exige continuidad del servicio"],c:1,e:"Art. 312: titularidad y responsabilidad de la Administración, continuidad garantizada y pluralidad obligatoria de criterios. Se diferencia de la concesión en que NO hay transferencia del riesgo operacional."},
+{u:6,t:"Es causa específica de resolución de los contratos de suministros y de servicios:",o:["El desistimiento antes de iniciar la prestación por plazo superior a 4 meses o la suspensión por plazo superior a 8 meses","Cualquier suspensión superior a 1 mes","La modificación del 10%","El cambio del responsable del contrato"],c:0,e:"Arts. 306 y 313: patrón 4 meses (iniciación/desistimiento) y 8 meses (suspensión), común con el contrato de obras (245)."},
+{u:6,t:"Las obras de 'gran reparación' del art. 232 son las que:",o:["Enmiendan menoscabos por el uso natural","Afectan fundamentalmente a la estructura resistente del inmueble","Derriban el inmueble","Permiten un nuevo uso manteniendo la estética"],c:1,e:"Art. 232.1.a: gran reparación = afecta a la estructura resistente. Rehabilitación = nuevo uso manteniendo estética; restauración = conserva estética con valor histórico-artístico; conservación = menoscabo por uso natural."},
+{u:6,t:"Las concesiones de servicios especiales del Anexo IV se adjudican:",o:["Por procedimiento abierto simplificado","Por procedimiento restringido","Por subasta electrónica","Por adjudicación directa"],c:1,e:"Art. 131.2 in fine: las concesiones de servicios especiales del Anexo IV se adjudican por el procedimiento RESTRINGIDO. Su umbral SARA es además especial: 750.000 €."},
+{u:6,t:"Si un particular presenta el estudio de viabilidad de una concesión y esta se adjudica a otro licitador:",o:["No tiene derecho a nada","Tiene derecho al resarcimiento de los gastos del estudio incrementados en un 5%","Se convierte automáticamente en subcontratista","Recibe el 3% del precio de adjudicación"],c:1,e:"Art. 247.5: derecho al resarcimiento de los gastos efectuados por la elaboración del estudio, incrementados en un 5% como compensación, si es utilizado por la Administración."}
+];
+// ===== Motor =====
+let hist=JSON.parse(localStorage.getItem(LS_KEY)||'{}');
+let unidadSel='all', modo='normal';
+function saveHist(){localStorage.setItem(LS_KEY,JSON.stringify(hist))}
+function qid(q){return q.u+'|'+q.t.slice(0,60)}
+function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r}
+function ratio(q){const h=hist[qid(q)];if(!h||h.n===0)return null;return h.ok/h.n}
+function buildPool(){
+  let pool=BANK.filter(q=>unidadSel==='all'||q.u===unidadSel);
+  if(modo==='fail'){pool=pool.filter(q=>{const h=hist[qid(q)];return h&&h.n>0&&h.ok<h.n})}
+  if(modo==='adapt'){pool=[...pool].sort((a,b)=>{const ra=ratio(a),rb=ratio(b);return (ra===null?-1:ra)-(rb===null?-1:rb)}).slice(0,20)}
+  else{pool=shuffle(pool)}
+  return pool.map(q=>{const idx=shuffle(q.o.map((_,i)=>i));return{...q,idx}});
+}
+function render(reshuffle){
+  const tabs=document.getElementById('tabs');
+  tabs.innerHTML='';
+  const mk=(v,l)=>{const b=document.createElement('button');b.className='tab'+(unidadSel===v?' on':'');b.textContent=l;b.onclick=()=>{unidadSel=v;render(true)};tabs.appendChild(b)};
+  mk('all','📋 Todas ('+BANK.length+')');
+  for(const u in UNIDADES){mk(Number(u),UNIDADES[u]+' ('+BANK.filter(q=>q.u==u).length+')')}
+  document.querySelectorAll('.mode').forEach(b=>{b.classList.toggle('on',b.dataset.m===modo);b.onclick=()=>{modo=b.dataset.m;render(true)}});
+  renderBars();
+  const cont=document.getElementById('quiz');cont.innerHTML='';
+  const pool=buildPool();
+  if(pool.length===0){cont.innerHTML='<div class="q"><h3>🎉 No hay preguntas en este modo (ninguna errónea pendiente).</h3></div>';updateScore();return}
+  pool.forEach((q,n)=>{
+    const d=document.createElement('div');d.className='q';
+    const h=hist[qid(q)];
+    d.innerHTML='<div class="meta"><span>'+UNIDADES[q.u]+' · Pregunta '+(n+1)+'/'+pool.length+'</span><span>'+(h&&h.n?('histórico: '+h.ok+'/'+h.n):'nueva')+'</span></div><h3>'+q.t+'</h3>';
+    q.idx.forEach(i=>{
+      const b=document.createElement('button');b.className='opt';b.textContent=q.o[i];
+      b.onclick=()=>{
+        const id=qid(q);hist[id]=hist[id]||{ok:0,n:0};hist[id].n++;
+        d.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+        if(i===q.c){b.classList.add('ok');hist[id].ok++}
+        else{b.classList.add('ko');d.querySelectorAll('.opt').forEach(x=>{if(x.textContent===q.o[q.c])x.classList.add('ok')})}
+        d.querySelector('.exp').classList.add('show');
+        saveHist();renderBars();updateScore();
+      };
+      d.appendChild(b);
+    });
+    const e=document.createElement('div');e.className='exp';e.innerHTML='💡 '+q.e;d.appendChild(e);
+    cont.appendChild(d);
+  });
+  updateScore();
+}
+function renderBars(){
+  const el=document.getElementById('bars');el.innerHTML='';
+  for(const u in UNIDADES){
+    const qs=BANK.filter(q=>q.u==u);
+    let ok=0,n=0;qs.forEach(q=>{const h=hist[qid(q)];if(h){ok+=h.ok;n+=h.n}});
+    const pct=n?Math.round(100*ok/n):0;
+    const col=pct<50?'#dc2626':pct<75?'#ea580c':'#16a34a';
+    el.innerHTML+='<div class="bar"><div class="lbl"><span>'+UNIDADES[u]+'</span><span>'+(n?pct+'% ('+ok+'/'+n+')':'sin datos')+'</span></div><div class="track"><div class="fill" style="width:'+pct+'%;background:'+col+'"></div></div></div>';
+  }
+}
+function updateScore(){
+  let ok=0,n=0;BANK.forEach(q=>{const h=hist[qid(q)];if(h){ok+=h.ok;n+=h.n}});
+  document.getElementById('score').innerHTML=n?('Histórico total: <b>'+ok+'</b> aciertos de <b>'+n+'</b> respuestas ('+Math.round(100*ok/n)+'%)'):'Responde para empezar a registrar tu progreso (se guarda en este navegador).';
+}
+function showAll(){document.querySelectorAll('.exp').forEach(e=>e.classList.add('show'))}
+function resetHist(){if(confirm('¿Borrar todo el historial de este test?')){hist={};saveHist();render(true)}}
+render(true);
+</script>
+</body>
+</html>
