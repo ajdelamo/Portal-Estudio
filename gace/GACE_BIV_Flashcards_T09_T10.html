@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV — Flashcards T9 y T10</title>
+<style>
+:root{--azul:#1e3a8a;--azul2:#3b62c4;--verde:#16a34a;--rojo:#dc2626;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:40px}
+header{background:linear-gradient(135deg,#0f766e,#1e3a8a);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.f{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.83rem;font-weight:600;cursor:pointer}
+.f.on{background:var(--azul);color:#fff}
+.stats{display:flex;gap:10px;margin:8px 0 14px;font-size:.83rem;flex-wrap:wrap}
+.stats span{background:#fff;border-radius:8px;padding:5px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.escena{perspective:1200px;margin:10px 0}
+.carta{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
+.carta.girada{transform:rotateY(180deg)}
+.cara{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.frente{background:#fff;border:3px solid var(--azul2)}
+.frente .cat{position:absolute;top:12px;left:14px;font-size:.72rem;font-weight:700;color:#fff;background:var(--azul2);border-radius:12px;padding:2px 10px}
+.frente .idx{position:absolute;top:12px;right:14px;font-size:.72rem;color:#94a3b8}
+.frente h2{font-size:1.08rem;line-height:1.5;font-weight:600;border:none;color:#1e293b}
+.frente .pista{margin-top:14px;font-size:.75rem;color:#94a3b8}
+.dorso{background:linear-gradient(135deg,#1e3a8a,#3b62c4);color:#fff;transform:rotateY(180deg)}
+.dorso .resp{font-size:1.15rem;font-weight:800;line-height:1.45}
+.dorso .det{margin-top:12px;font-size:.85rem;opacity:.92;line-height:1.5}
+.botones{display:flex;gap:8px;margin:14px 0;justify-content:center;flex-wrap:wrap}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-size:.9rem;font-weight:700;cursor:pointer}
+.btn.mal{background:#fee2e2;color:var(--rojo)}
+.btn.bien{background:#dcfce7;color:#15803d}
+.btn.nav{background:#e2e8f0;color:#334155}
+.btn.accion{background:var(--azul);color:#fff}
+.aviso{text-align:center;font-size:.8rem;color:#64748b;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>🃏 Flashcards BIV · T9 Patrimonio + T10 Responsabilidad</h1>
+  <p>Plazos · artículos · datos-ancla · LPAP y Ley 40/2015 · verificado a 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="filtros" id="filtros"></div>
+  <div class="stats"><span id="st-total"></span><span id="st-dom">✅ dominadas: <b id="ndom">0</b></span><span id="st-rep">🔁 a repasar: <b id="nrep">0</b></span></div>
+  <div class="escena"><div class="carta" id="carta" onclick="girar()">
+    <div class="cara frente"><div class="cat" id="cat"></div><div class="idx" id="idx"></div><h2 id="preg"></h2><div class="pista">👆 toca para ver la respuesta</div></div>
+    <div class="cara dorso"><div class="resp" id="resp"></div><div class="det" id="det"></div></div>
+  </div></div>
+  <div class="botones">
+    <button class="btn mal" onclick="marcar(false)">❌ Repasar</button>
+    <button class="btn bien" onclick="marcar(true)">✅ Me la sé</button>
+  </div>
+  <div class="botones">
+    <button class="btn nav" onclick="mover(-1)">← Anterior</button>
+    <button class="btn accion" onclick="barajar()">🔀 Barajar</button>
+    <button class="btn nav" onclick="mover(1)">Siguiente →</button>
+  </div>
+  <div class="botones"><button class="btn nav" onclick="soloRepaso()" id="btnrep">🎯 Solo las marcadas "repasar"</button>
+  <button class="btn nav" onclick="resetear()">🗑️ Reiniciar</button></div>
+  <div class="aviso">El progreso se guarda en este navegador (localStorage).</div>
+</div>
+<script>
+const LS='gace_biv_fc_t9t10_v1';
+const CARDS=[
+// —— T9 ——
+{c:'T9·Artículos',p:'Dominio público estatal ex Constitutione: ¿artículo y bienes?',r:'Art. 132.2 CE — zona marítimo-terrestre, playas, mar territorial y recursos de la zona económica y plataforma continental',d:'Núcleo indisponible para el legislador. 132.1: inalienabilidad, imprescriptibilidad, inembargabilidad (también comunales).'},
+{c:'T9·Datos',p:'¿El dinero y los valores son patrimonio de las AAPP?',r:'NO: los recursos financieros están excluidos (art. 3.2 LPAP)',d:'Se rigen por la Ley General Presupuestaria. Trampa recurrente.'},
+{c:'T9·Datos',p:'Principio de adquisición patrimonial y su excepción',r:'Se adquiere como PATRIMONIAL (art. 16); excepción: lo expropiado queda implícitamente afectado (66.2)',d:'El dominio público nace con la afectación (expresa o implícita).'},
+{c:'T9·Datos',p:'Afectación vs. desafectación: ¿cuál admite forma implícita?',r:'La AFECTACIÓN (expropiación, ley) · la desafectación es SIEMPRE expresa',d:'Art. 69 LPAP: no se presume por desuso; es la puerta a la enajenación.'},
+{c:'T9·Datos',p:'Mutación demanial (art. 71): ¿qué NO cambia?',r:'El carácter demanial: el bien nunca sale del dominio público',d:'Cambio de destino (o de Administración, mutación subjetiva) manteniendo la triple garantía.'},
+{c:'T9·Datos',p:'Adscripción a organismo público: 2 efectos',r:'Afectación implícita (demanializa) + la titularidad sigue en la AGE',d:'Arts. 73-76 LPAP. Desadscripción → desafectación implícita.'},
+{c:'T9·Plazos',p:'Saldos y depósitos bancarios abandonados: ¿plazo para pasar a la AGE?',r:'20 años sin gestión del titular (art. 18 LPAP)',d:'Los inmuebles vacantes son de la AGE por ministerio de la ley (art. 17), sin plazo.'},
+{c:'T9·Plazos',p:'Caducidad de investigación y deslinde',r:'Investigación: 2 años · deslinde: 18 meses',d:'Premio por denuncia en investigación: 10%. El deslinde firme es título inscribible.'},
+{c:'T9·Plazos',p:'Recuperación posesoria de oficio: demaniales vs. patrimoniales',r:'Demaniales: en cualquier momento · patrimoniales: solo antes de 1 AÑO',d:'Art. 55 LPAP. Pasado el año en patrimoniales: acciones ante los tribunales.'},
+{c:'T9·Plazos',p:'Autorización y concesión demaniales: duraciones máximas',r:'Autorización: 4 años · concesión: 75 años (prórrogas incluidas)',d:'Arts. 92.3 y 93.3 LPAP. Instalaciones fijas → concesión; desmontables ≤4 años → autorización.'},
+{c:'T9·Datos',p:'Usos del dominio público y su título',r:'Común general: sin título · común especial: autorización · privativo: concesión',d:'Común especial = intensidad, peligrosidad o ventaja singular (terraza, andamio).'},
+{c:'T9·Datos',p:'Desahucio administrativo vs. recuperación posesoria',r:'Desahucio: título extinguido (ocupación antes legítima) · recuperación: usurpación ilegítima',d:'Arts. 55-59 LPAP. Ambas son autotutela sin acudir a los tribunales.'},
+{c:'T9·Datos',p:'Herencias a favor de las AAPP: ¿cómo se aceptan?',r:'SIEMPRE a beneficio de inventario (art. 20 LPAP)',d:'Abintestato: hereda el Estado (art. 956 CC); la resolución administrativa es título posesorio e inscribible.'},
+{c:'T9·Datos',p:'Patrimonio Nacional: titular y enajenación',r:'Titular: el ESTADO (no el Rey) · enajenación: solo por Ley de Cortes',d:'Ley 23/1982; afectado al uso y servicio del Rey y la Familia Real; gestiona el Consejo de Administración del Patrimonio Nacional.'},
+{c:'T9·Datos',p:'Bienes comunales: titularidad y garantía',r:'Titularidad local + aprovechamiento vecinal + triple garantía del 132.1 CE',d:'Arts. 79-80 LRBRL y RD 1372/1986. No confundir con bienes de servicio público local.'},
+{c:'T9·Datos',p:'Enajenación de patrimoniales del Estado: regla y excepción',r:'Concurso o subasta (publicidad y concurrencia) · directa solo en supuestos tasados',d:'Gestión: Dirección General del Patrimonio del Estado (Hacienda).'},
+// —— T10 ——
+{c:'T10·Artículos',p:'Responsabilidad patrimonial: fundamento constitucional y regulación vigente',r:'Art. 106.2 CE · arts. 32-37 Ley 40/2015 (sustantivo) + Ley 39/2015 (procedimiento)',d:'Primer sistema objetivo: art. 121 LEF 1954. El art. 121 CE cubre el error judicial y el funcionamiento anormal de la Justicia.'},
+{c:'T10·Datos',p:'Los 4 requisitos de la responsabilidad',r:'Daño efectivo/evaluable/individualizado · antijuridicidad · imputación a una AP · nexo causal',d:'Antijuridicidad = no deber jurídico de soportar (34.1). Sistema objetivo: funcionamiento normal y anormal.'},
+{c:'T10·Datos',p:'¿Fuerza mayor o caso fortuito: cuál exonera?',r:'Solo la FUERZA MAYOR',d:'El caso fortuito (interno al servicio) no exonera. Tampoco indemnizables: riesgos del desarrollo (34.1 párr. 2º). La mera anulación de un acto no genera indemnización (32.1).'},
+{c:'T10·Plazos',p:'Prescripción de la reclamación y sus matices',r:'1 AÑO — personales: desde curación/secuelas · nulidad: desde la sentencia · legislador: desde la publicación de la sentencia',d:'Art. 67.1 Ley 39/2015.'},
+{c:'T10·Plazos',p:'Resolución del procedimiento y silencio',r:'6 meses · silencio DESESTIMATORIO',d:'Art. 91.3. Simplificado (96.4): 30 días si causalidad, valoración y cuantía son inequívocas.'},
+{c:'T10·Datos',p:'Dictamen del Consejo de Estado: ¿cuándo es preceptivo?',r:'Reclamaciones ≥ 50.000 € (art. 81.2 Ley 39/2015)',d:'Tras la audiencia. Informe preceptivo del servicio causante (81.1, 10 días). Justicia: informe CGPJ 2 meses (suspende).'},
+{c:'T10·Datos',p:'Estado legislador — ley inconstitucional (32.4): requisitos',r:'Sentencia firme desestimatoria previa + haber alegado la inconstitucionalidad',d:'Indemnizables: daños de los 5 años anteriores a la publicación de la sentencia (34.1). Resuelve el Consejo de Ministros.'},
+{c:'T10·Datos',p:'Norma contraria al DUE (32.5): requisitos añadidos y estado actual',r:'Francovich: derechos conferidos + violación caracterizada + nexo · STJUE C-278/20: los requisitos españoles vulneran la EFECTIVIDAD',d:'Deben inaplicarse en reclamaciones DUE; reforma en tramitación (Proyecto 121/000071, arts. 67 y 92 L39). A 08/2026 NO aprobada.'},
+{c:'T10·Datos',p:'Daños por contratistas: ¿quién responde?',r:'El CONTRATISTA, salvo órdenes inmediatas y directas o vicios del proyecto de la Administración',d:'32.9 L40 + 196 LCSP. El tercero puede pedir información al órgano de contratación (1 año): interrumpe la prescripción. Audiencia al contratista obligatoria.'},
+{c:'T10·Datos',p:'Daños causados por empleados públicos: vía del perjudicado y regreso',r:'Contra la ADMINISTRACIÓN (36.1) · regreso DE OFICIO si dolo o culpa/negligencia GRAVES (36.2)',d:'Ponderación: resultado dañoso, grado de culpabilidad, relación con el daño. Compatible con disciplinaria y penal.'},
+{c:'T10·Datos',p:'Responsabilidad concurrente de varias AAPP (art. 33)',r:'Gestión conjunta → SOLIDARIA · resto: por competencia, interés y intensidad; si no es posible → solidaria',d:'Conforme al instrumento regulador de la actuación conjunta.'},
+{c:'T10·Datos',p:'Estado juez: supuestos indemnizables',r:'Error judicial (previa declaración) · funcionamiento anormal · prisión preventiva con absolución (294 LOPJ)',d:'Arts. 121 CE, 32.7 L40 y 292-297 LOPJ. La mera revocación de resoluciones no indemniza.'},
+{c:'T10·Datos',p:'Formas de indemnización (34.4)',r:'Dinero (regla) · en especie · pagos periódicos',d:'Las dos últimas: cuando sea más adecuado, convenga al interés público y haya acuerdo con el interesado. Reparación integral: daño emergente + lucro cesante + morales.'},
+{c:'T10·Datos',p:'¿Quién resuelve en la AGE?',r:'El Ministro · el CONSEJO DE MINISTROS en el Estado legislador',d:'Art. 92 Ley 39/2015. La resolución pone fin a la vía administrativa (114.1.e).'},
+{c:'T10·Plazos',p:'Informe del CGPJ en responsabilidad por la Administración de Justicia',r:'2 meses; SUSPENDE el plazo de resolución',d:'Art. 81.3 Ley 39/2015. Tramita el Ministerio de Justicia.'},
+{c:'T10·Datos',p:'Funcionamiento anormal del TC (32.8)',r:'Lo declara el propio TC a instancia de parte; indemniza el Consejo de Ministros',d:'En la tramitación de recursos de amparo y cuestiones de inconstitucionalidad.'}
+];
+let vista=[...CARDS.keys()], pos=0, filtro='Todas';
+let estado=JSON.parse(localStorage.getItem(LS)||'{}');
+const cats=['Todas',...new Set(CARDS.map(c=>c.c.split('·')[0]))];
+function guardar(){localStorage.setItem(LS,JSON.stringify(estado))}
+function pinta(){
+  const fdiv=document.getElementById('filtros');fdiv.innerHTML='';
+  cats.forEach(c=>{const b=document.createElement('button');b.className='f'+(filtro===c?' on':'');b.textContent=c==='Todas'?'📋 Todas':c;b.onclick=()=>{filtro=c;aplicar()};fdiv.appendChild(b)});
+  const i=vista[pos],c=CARDS[i];
+  document.getElementById('cat').textContent=c.c;
+  document.getElementById('idx').textContent=(pos+1)+' / '+vista.length;
+  document.getElementById('preg').textContent=c.p;
+  document.getElementById('resp').textContent=c.r;
+  document.getElementById('det').textContent=c.d;
+  document.getElementById('carta').classList.remove('girada');
+  document.getElementById('st-total').textContent='📇 '+vista.length+' tarjetas';
+  const vals=Object.values(estado);
+  document.getElementById('ndom').textContent=vals.filter(v=>v==='ok').length;
+  document.getElementById('nrep').textContent=vals.filter(v=>v==='ko').length;
+}
+function aplicar(){
+  vista=[...CARDS.keys()].filter(i=>filtro==='Todas'||CARDS[i].c.startsWith(filtro));
+  pos=0;pinta();
+}
+function girar(){document.getElementById('carta').classList.toggle('girada')}
+function mover(d){pos=(pos+d+vista.length)%vista.length;pinta()}
+function marcar(bien){estado[vista[pos]]=bien?'ok':'ko';guardar();mover(1)}
+function barajar(){for(let i=vista.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vista[i],vista[j]]=[vista[j],vista[i]]}pos=0;pinta()}
+function soloRepaso(){
+  const rep=[...CARDS.keys()].filter(i=>estado[i]==='ko'&&(filtro==='Todas'||CARDS[i].c.startsWith(filtro)));
+  if(rep.length===0){alert('🎉 No tienes tarjetas marcadas para repasar en este filtro.');return}
+  vista=rep;pos=0;pinta();
+}
+function resetear(){if(confirm('¿Borrar el progreso de estas flashcards?')){estado={};guardar();aplicar()}}
+aplicar();
+</script>
+</body>
+</html>
