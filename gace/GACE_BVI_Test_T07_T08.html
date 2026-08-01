@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BVI — Test T7 y T8 (Ingresos públicos/tributos, Retribuciones/nóminas) — Cierre Bloque VI</title>
+<style>
+:root{--azul:#86198f;--azul2:#1e293b;--verde:#16a34a;--rojo:#dc2626;--naranja:#ea580c;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:70px}
+header{background:linear-gradient(135deg,#86198f,#1e293b);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.25rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:800px;margin:0 auto;padding:0 14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 6px}
+.tab{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;cursor:pointer}
+.tab.on{background:var(--azul);color:#fff}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 14px}
+.mode{border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:5px 12px;font-size:.8rem;cursor:pointer}
+.mode.on{background:#0f766e;color:#fff;border-color:#0f766e}
+.bars{display:flex;flex-direction:column;gap:6px;margin:10px 0 18px}
+.bar{background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.bar .lbl{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin-bottom:4px}
+.bar .track{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.bar .fill{height:100%;border-radius:4px;transition:width .3s}
+.q{background:#fff;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.q .meta{font-size:.75rem;color:#64748b;margin-bottom:8px;display:flex;justify-content:space-between}
+.q h3{font-size:.98rem;margin-bottom:12px;line-height:1.45}
+.opt{display:block;width:100%;text-align:left;border:2px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:10px 12px;margin:6px 0;font-size:.9rem;cursor:pointer;line-height:1.4}
+.opt:hover{border-color:var(--azul2)}
+.opt.ok{border-color:var(--verde);background:#f0fdf4}
+.opt.ko{border-color:var(--rojo);background:#fef2f2}
+.opt:disabled{cursor:default;opacity:.92}
+.exp{display:none;margin-top:10px;background:#eef2ff;border-left:4px solid var(--azul2);border-radius:0 8px 8px 0;padding:10px 12px;font-size:.85rem}
+.exp.show{display:block}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.btn{border:none;border-radius:8px;padding:8px 16px;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--azul);color:#fff}
+.btn.sec{background:#64748b}
+.btn.warn{background:var(--rojo)}
+.score{position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#fff;padding:10px 16px;text-align:center;font-size:.9rem}
+.score b{color:#4ade80}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧪 Test BVI · T7+T8 — Ingresos públicos/tributos, Retribuciones/nóminas — Cierre Bloque VI</h1>
+  <p>GACE 2027 · Autocorregible y adaptativo · LGT + LTPP + Ley 30/1984 + RD 462/2002 · verificado 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="tabs" id="tabs"></div>
+  <div class="modes">
+    <button class="mode on" data-m="normal">📚 Normal</button>
+    <button class="mode" data-m="adapt">🎯 Adaptativo (peores 20)</button>
+    <button class="mode" data-m="fail">❌ Solo erróneas</button>
+  </div>
+  <div class="bars" id="bars"></div>
+  <div class="controls">
+    <button class="btn" onclick="render(true)">🔀 Barajar</button>
+    <button class="btn sec" onclick="showAll()">👁️ Ver explicaciones</button>
+    <button class="btn warn" onclick="resetHist()">🗑️ Reiniciar historial</button>
+  </div>
+  <div id="quiz"></div>
+</div>
+<div class="score" id="score"></div>
+<script>
+const LS_KEY='gace_bvi_t07t08_v1';
+const UNIDADES={7:'T7 · Ingresos públicos/tributos',8:'T8 · Retribuciones/nóminas'};
+const BANK=[
+// ============ T7 (u:7) ============
+{u:7,t:"La Hacienda Pública estatal se define, conforme al art. 5 LGP, como:",o:["Solo los ingresos tributarios del Estado","El conjunto de derechos y obligaciones de contenido económico cuya titularidad corresponde a la AGE y sus Organismos Autónomos","El patrimonio inmobiliario del Estado","El presupuesto de gastos aprobado por las Cortes"],c:1,e:"Pregunta directa frecuente en examen."},
+{u:7,t:"El principio de no afectación (art. 27 LGP) implica que:",o:["Cada ingreso financia un gasto concreto","Todos los ingresos financian indistintamente todos los gastos, salvo excepción legal expresa","Solo los impuestos están afectados","Es un principio derogado en 2026"],c:1,e:"Las contribuciones especiales son la excepción típica: están afectadas por ley a la obra o servicio que las origina."},
+{u:7,t:"La clasificación económica del Presupuesto de Ingresos (art. 41 LGP) distingue 9 capítulos agrupados en:",o:["Solo corrientes y de capital","Corrientes (Cap.1-5), de capital (Cap.6-7) y financieras (Cap.8-9)","Solo financieras","Directos e indirectos únicamente"],c:1,e:"Cap.1 directos, Cap.2 indirectos, Cap.3 tasas/PP, Cap.4 transf. corrientes, Cap.5 patrimoniales; Cap.6 enajenación, Cap.7 transf. capital; Cap.8 activos financieros, Cap.9 pasivos financieros."},
+{u:7,t:"Los cuatro principios del art. 31.1 CE son:",o:["Legalidad, tipicidad, proporcionalidad y seguridad jurídica","Capacidad económica, igualdad, progresividad y no confiscatoriedad","Eficacia, eficiencia, economía y transparencia","Anualidad, especialidad, unidad y universalidad"],c:1,e:"La progresividad tiene como límite la no confiscatoriedad: la carga tributaria no puede agotar la riqueza del contribuyente."},
+{u:7,t:"La Ley de Presupuestos Generales del Estado:",o:["Puede crear tributos libremente","NO puede crear tributos ex novo; solo modificarlos si una ley tributaria sustantiva lo prevé (art. 134.7 CE)","Solo puede crear tasas","Requiere ley orgánica para cualquier modificación tributaria"],c:1,e:"Pregunta clásica de test sobre reserva de ley tributaria."},
+{u:7,t:"Las contribuciones especiales, a diferencia de los impuestos y las tasas:",o:["Existen a nivel estatal, autonómico y local","NO existen actualmente a nivel estatal; solo operan en el ámbito autonómico y local","Solo existen a nivel estatal","Nunca están afectadas por ley"],c:1,e:"Son ingresos afectados: exclusivamente pueden financiar la obra o servicio que las genera."},
+{u:7,t:"El criterio para distinguir un impuesto de una tasa en un test es:",o:["El importe recaudado","¿Hay actividad administrativa a favor del obligado? Si NO, es impuesto; si SÍ y es coactiva sin alternativa privada, es tasa","La denominación que le dé la norma","El ámbito territorial"],c:1,e:"Si además hay beneficio o plusvalía derivado de una obra pública, sería contribución especial."},
+{u:7,t:"El Impuesto sobre Sociedades y el Impuesto sobre la Renta de No Residentes:",o:["Están cedidos al 50% a las Comunidades Autónomas","NO están cedidos a las Comunidades Autónomas; quedan íntegramente en la Hacienda estatal","Están cedidos al 100% a las Comunidades Autónomas","Son tributos exclusivamente locales"],c:1,e:"Pregunta habitual de test — a diferencia del IRPF y el IVA, cedidos al 50%."},
+{u:7,t:"El Concierto Económico del País Vasco (Ley 12/2002) fue modificado recientemente por:",o:["La Ley 3/2025, de 29 de abril","La LOFCA de 1980","El Real Decreto-ley 6/2023","No ha sido modificado desde 2002"],c:0,e:"Confirmado (BOE-A-2025-8568): introduce nuevas figuras tributarias y eleva el umbral de volumen de operaciones a 12M€."},
+{u:7,t:"El régimen foral de Navarra se articula mediante:",o:["El Concierto Económico","El Convenio Económico (Ley 28/1990), con aportación al Estado","La LOFCA exclusivamente","Un régimen idéntico al común"],c:1,e:"País Vasco: Concierto + Cupo. Navarra: Convenio + Aportación."},
+{u:7,t:"Los impuestos municipales de exacción obligatoria (IBI, IAE, IVTM) se clasifican doctrinalmente como:",o:["Indirectos, Reales y Objetivos (IRO)","Directos, Reales y Objetivos (DRO)","Directos, Personales y Subjetivos (DPS)","Indirectos, Personales y Subjetivos"],c:1,e:"Los tres impuestos obligatorios municipales comparten esta clasificación DRO."},
+{u:7,t:"Una tasa, conforme al art. 7 LTPP, tiene como límite de cuantía:",o:["No tiene límite legal","No puede exceder, en su conjunto, del coste real o previsible del servicio o actividad","Un mínimo equivalente al coste","El doble del coste del servicio"],c:1,e:"La tasa no busca beneficio para la Administración — principio de equivalencia o recuperación de costes."},
+{u:7,t:"Un precio público, a diferencia de una tasa, se establece mediante:",o:["Ley, igual que la tasa","Orden Ministerial, sin necesidad de ley","Real Decreto Legislativo","Reglamento del Consejo de Ministros exclusivamente"],c:1,e:"Al no ser tributo (es voluntario y hay alternativa privada), no rige la reserva de ley tributaria."},
+{u:7,t:"La cuantía mínima de un precio público, conforme al art. 25 LTPP, debe:",o:["Ser inferior al coste en todo caso","Cubrir, como mínimo, los costes económicos del servicio, salvo precios políticos con previsión presupuestaria","No tener ninguna relación con el coste","Superar siempre el doble del coste"],c:1,e:"Inversión de la lógica respecto a la tasa: en el precio público el límite es MÍNIMO, no máximo."},
+{u:7,t:"Ante el impago de un precio público, la Administración:",o:["Debe acudir necesariamente a los tribunales civiles, como en cualquier ingreso de Derecho Privado","Puede exigirlo por vía de apremio administrativa, pese a no ser tributo","No tiene mecanismo de cobro forzoso","Debe condonarlo automáticamente"],c:1,e:"El precio público sigue siendo un ingreso de Derecho Público, aunque no sea tributo."}
+];
+BANK.push(
+// ============ T8 (u:8) ============
+{u:8,t:"El Capítulo III del Título III del EBEP (régimen retributivo):",o:["Está plenamente desarrollado reglamentariamente","NO se ha desarrollado reglamentariamente (salvo el art. 25.2), por lo que sigue rigiendo la Ley 30/1984","Fue derogado en 2023","Solo se aplica al personal laboral"],c:1,e:"Idea-fuerza del tema: el art. 25.2 EBEP (trienios de interinos) es la única excepción vigente."},
+{u:8,t:"La norma que introduce la carrera horizontal y el complemento de carrera es:",o:["El Real Decreto Legislativo 6/2023","El Real Decreto-ley 6/2023, de 19 de diciembre","La Ley 30/1984","El TREBEP originario de 2015"],c:1,e:"Corrección frecuente: es Real Decreto-ley (norma de urgencia), no Real Decreto Legislativo (texto refundido)."},
+{u:8,t:"La subida retributiva del sector público para 2025-2026 (consolidado 2,5% en 2025 y 1,5% adicional en 2026) se aprobó mediante:",o:["El Real Decreto-ley 9/2025, de 29 de julio","El Real Decreto-ley 14/2025, de 2 de diciembre","La Ley de Presupuestos Generales del Estado 2026","El Real Decreto-ley 24/2018"],c:1,e:"El RD-ley 9/2025 regula en realidad el permiso de nacimiento y cuidado — no la subida retributiva."},
+{u:8,t:"La regla de proporcionalidad del art. 24 EBEP establece que el sueldo del subgrupo A1:",o:["No puede superar en más de dos veces el del grupo E","No puede superar en más de tres veces el del grupo E","No tiene ningún límite respecto al grupo E","Debe ser exactamente el doble del grupo E"],c:1,e:"Garantiza la cohesión retributiva del sistema."},
+{u:8,t:"¿Tienen derecho a trienios los funcionarios interinos?",o:["No, nunca","Sí, conforme al art. 25.2 EBEP, único precepto vigente del Cap. III Tít. III","Solo si llevan más de 10 años","Solo en Comunidades Autónomas"],c:1,e:"Es el precepto retributivo del EBEP efectivamente en vigor."},
+{u:8,t:"Las pagas extraordinarias de junio y diciembre incluyen:",o:["Sueldo + trienios + una mensualidad completa de complemento específico","Sueldo (cuantía LPGE) + trienios + una mensualidad completa de complemento de destino","Solo el sueldo","Todos los complementos sin excepción"],c:1,e:"Trampa clásica: las extras incluyen C. destino, NO C. específico."},
+{u:8,t:"El complemento específico se percibe en:",o:["12 mensualidades, igual que el destino","14 pagas: 12 mensuales + 2 adicionales en junio y diciembre del mismo importe (no son pagas extras)","2 pagas al año, como las extraordinarias","Solo cuando hay disponibilidad presupuestaria"],c:1,e:"Las 2 pagas adicionales NO deben confundirse con las pagas extraordinarias."},
+{u:8,t:"El complemento de productividad se caracteriza por ser:",o:["Fijo y periódico","Variable, nunca fijo ni periódico, con cuantía pública para compañeros y sindicatos","Secreto, de conocimiento exclusivo del interesado","Idéntico para todos los funcionarios del mismo nivel"],c:1,e:"Concepto económico 150; modificación de carácter transitorio en nómina; rige el principio de publicidad."},
+{u:8,t:"Los 4 tramos de la carrera horizontal (RD-ley 6/2023) requieren:",o:["5 años el tramo inicial y 6 años adicionales cada uno de los siguientes, con evaluación de desempeño","3 años cada tramo sin evaluación","10 años el primer tramo únicamente","No tienen requisito temporal"],c:0,e:"Tramos 2, 3 y 4 exigen previa evaluación objetiva del desempeño."},
+{u:8,t:"La regla general de devengo de las retribuciones fijas es:",o:["El último día hábil del mes","Mensualidades completas con referencia al primer día hábil del mes","Por horas trabajadas efectivamente","Trimestral"],c:1,e:"Con 5 excepciones tasadas en las que se liquida por días."},
+{u:8,t:"Entre las 5 excepciones que exigen liquidar por días NO se encuentra:",o:["El cese en el servicio activo","La jubilación por Clases Pasivas","El cambio de puesto de trabajo o de Administración","La primera toma de posesión"],c:1,e:"La jubilación (y el fallecimiento y el retiro por Clases Pasivas) son la EXCEPCIÓN a la excepción: se cobra el mes completo."},
+{u:8,t:"El cierre de la nómina ordinaria se produce:",o:["El último día del mes","El día 5 de cada mes","El día 1 de cada mes","El día 15 de cada mes"],c:1,e:"La Habilitación presenta la nómina y el documento O en la Intervención Delegada antes del día 7."},
+{u:8,t:"Las deducciones formalizables de la nómina (IRPF, MUFACE, Clases Pasivas, MEI):",o:["Se entregan directamente a terceros ajenos al Tesoro","Se ingresan en el Tesoro Público mediante compensación contable (ingreso en formalización)","No se descuentan de la nómina","Solo se aplican al personal laboral"],c:1,e:"A diferencia de las no formalizables (sindicales, embargos, anticipos), que van directamente a terceros."},
+{u:8,t:"La fórmula correcta para calcular el NETO de una nómina es:",o:["Íntegro + deducciones","Líquido − deducciones no formalizables","Íntegro − deducciones no formalizables directamente","Líquido + deducciones formalizables"],c:1,e:"Íntegro − formalizables = Líquido. Líquido − no formalizables = Neto (lo que efectivamente cobra el funcionario)."},
+{u:8,t:"Un ingreso en formalización se define como:",o:["Un pago físico de fondos del Tesoro a un tercero","Una anotación contable simultánea de gasto e ingreso, sin movimiento real de fondos en el Tesoro","Una modificación de crédito ordinaria","Un anticipo de caja fija"],c:1,e:"Aplica simultáneamente al presupuesto de gastos (Cap.1) y al de ingresos la cantidad descontada."},
+{u:8,t:"El plazo de prescripción de los derechos económicos del funcionario frente a la Administración (art. 25 LGP) es de:",o:["2 años","3 años","4 años","5 años"],c:2,e:"Mismo plazo que rige para la prescripción general de obligaciones de la Hacienda Pública."},
+{u:8,t:"Los atrasos a favor del personal (art. 34.2 LGP) constituyen una excepción al:",o:["Principio de especialidad","Principio de anualidad (art. 34 LGP)","Principio de unidad de caja","Principio de no afectación"],c:1,e:"Se imputan al presupuesto vigente en el momento de la orden de pago, aunque correspondan a ejercicios anteriores — sin necesidad de crédito extraordinario."}
+);
+const CATS_LABEL=UNIDADES;
+let filtered=[...BANK], mode='normal', curTab=0;
+function loadHist(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'{}')}catch(e){return{}}}
+function saveHist(h){localStorage.setItem(LS_KEY,JSON.stringify(h))}
+function qid(q){return q.u+'|'+q.t.slice(0,60)}
+function buildTabs(){
+  const tabs=document.getElementById('tabs');
+  tabs.innerHTML='<button class="tab on" data-u="0">Todos</button>'+Object.entries(UNIDADES).map(([k,v])=>`<button class="tab" data-u="${k}">${v}</button>`).join('');
+  tabs.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{tabs.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');curTab=+b.dataset.u;applyFilter();render(false)});
+}
+function applyFilter(){
+  let base = curTab===0?[...BANK]:BANK.filter(q=>q.u===curTab);
+  const hist=loadHist();
+  if(mode==='fail'){base=base.filter(q=>{const h=hist[qid(q)];return h&&h.wrong>0&&(h.wrong>=h.right)})}
+  if(mode==='adapt'){base=base.map(q=>{const h=hist[qid(q)]||{right:0,wrong:0};const score=h.right-h.wrong;return{q,score}}).sort((a,b)=>a.score-b.score).slice(0,20).map(x=>x.q)}
+  filtered=base;
+}
+function buildBars(){
+  const hist=loadHist();
+  const bars=document.getElementById('bars');
+  bars.innerHTML=Object.entries(UNIDADES).map(([k,v])=>{
+    const qs=BANK.filter(q=>q.u==k);
+    let right=0,total=0;
+    qs.forEach(q=>{const h=hist[qid(q)];if(h){total+=h.right+h.wrong;right+=h.right}});
+    const pct=total>0?Math.round(100*right/total):0;
+    const col=pct>=70?'#16a34a':pct>=40?'#ea580c':'#dc2626';
+    return `<div class="bar"><div class="lbl"><span>${v}</span><span>${pct}%</span></div><div class="track"><div class="fill" style="width:${pct}%;background:${col}"></div></div></div>`;
+  }).join('');
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function render(doShuffle){
+  applyFilter();
+  if(doShuffle)shuffle(filtered);
+  const quiz=document.getElementById('quiz');
+  quiz.innerHTML='';
+  filtered.forEach((q,idx)=>{
+    const div=document.createElement('div');div.className='q';
+    div.innerHTML=`<div class="meta"><span>${UNIDADES[q.u]}</span><span>#${idx+1}/${filtered.length}</span></div><h3>${q.t}</h3>`+
+      q.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')+
+      `<div class="exp" id="exp${idx}"><b>Explicación:</b> ${q.e}</div>`;
+    quiz.appendChild(div);
+    div.querySelectorAll('.opt').forEach(btn=>{
+      btn.onclick=()=>{
+        if(btn.disabled)return;
+        const opts=div.querySelectorAll('.opt');
+        opts.forEach(o=>o.disabled=true);
+        const hist=loadHist();const id=qid(q);const h=hist[id]||{right:0,wrong:0};
+        if(+btn.dataset.i===q.c){btn.classList.add('ok');h.right++}
+        else{btn.classList.add('ko');opts[q.c].classList.add('ok');h.wrong++}
+        hist[id]=h;saveHist(hist);
+        document.getElementById('exp'+idx).classList.add('show');
+        updateScore();buildBars();
+      };
+    });
+  });
+  updateScore();buildBars();
+}
+function showAll(){document.querySelectorAll('.exp').forEach(e=>e.classList.add('show'))}
+function resetHist(){if(confirm('¿Reiniciar todo el historial de este test?')){localStorage.removeItem(LS_KEY);buildBars();updateScore()}}
+function updateScore(){
+  const hist=loadHist();let right=0,wrong=0;
+  Object.values(hist).forEach(h=>{right+=h.right;wrong+=h.wrong});
+  const total=right+wrong;
+  document.getElementById('score').innerHTML=total>0?`Aciertos históricos: <b>${right}</b> / ${total} (${Math.round(100*right/total)}%)`:'Aún sin respuestas registradas';
+}
+document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>{document.querySelectorAll('.mode').forEach(x=>x.classList.remove('on'));b.classList.add('on');mode=b.dataset.m;render(false)});
+buildTabs();applyFilter();render(false);
+</script>
+</body>
+</html>
