@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV — Flashcards T5 y T6 (Contratos)</title>
+<style>
+:root{--azul:#1e3a8a;--azul2:#3b62c4;--verde:#16a34a;--rojo:#dc2626;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:40px}
+header{background:linear-gradient(135deg,#0f766e,#1e3a8a);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.f{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.83rem;font-weight:600;cursor:pointer}
+.f.on{background:var(--azul);color:#fff}
+.stats{display:flex;gap:10px;margin:8px 0 14px;font-size:.83rem;flex-wrap:wrap}
+.stats span{background:#fff;border-radius:8px;padding:5px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.escena{perspective:1200px;margin:10px 0}
+.carta{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
+.carta.girada{transform:rotateY(180deg)}
+.cara{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.frente{background:#fff;border:3px solid var(--azul2)}
+.frente .cat{position:absolute;top:12px;left:14px;font-size:.72rem;font-weight:700;color:#fff;background:var(--azul2);border-radius:12px;padding:2px 10px}
+.frente .idx{position:absolute;top:12px;right:14px;font-size:.72rem;color:#94a3b8}
+.frente h2{font-size:1.08rem;line-height:1.5;font-weight:600;border:none;color:#1e293b}
+.frente .pista{margin-top:14px;font-size:.75rem;color:#94a3b8}
+.dorso{background:linear-gradient(135deg,#1e3a8a,#3b62c4);color:#fff;transform:rotateY(180deg)}
+.dorso .resp{font-size:1.15rem;font-weight:800;line-height:1.45}
+.dorso .det{margin-top:12px;font-size:.85rem;opacity:.92;line-height:1.5}
+.botones{display:flex;gap:8px;margin:14px 0;justify-content:center;flex-wrap:wrap}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-size:.9rem;font-weight:700;cursor:pointer}
+.btn.mal{background:#fee2e2;color:var(--rojo)}
+.btn.bien{background:#dcfce7;color:#15803d}
+.btn.nav{background:#e2e8f0;color:#334155}
+.btn.accion{background:var(--azul);color:#fff}
+.aviso{text-align:center;font-size:.8rem;color:#64748b;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>🃏 Flashcards BIV · T5+T6 Contratos del Sector Público</h1>
+  <p>Umbrales · plazos · artículos · GACE 2027 · Orden HAC/1517/2025 · verificado a 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="filtros" id="filtros"></div>
+  <div class="stats"><span id="st-total"></span><span id="st-dom">✅ dominadas: <b id="ndom">0</b></span><span id="st-rep">🔁 a repasar: <b id="nrep">0</b></span></div>
+  <div class="escena"><div class="carta" id="carta" onclick="girar()">
+    <div class="cara frente"><div class="cat" id="cat"></div><div class="idx" id="idx"></div><h2 id="preg"></h2><div class="pista">👆 toca para ver la respuesta</div></div>
+    <div class="cara dorso"><div class="resp" id="resp"></div><div class="det" id="det"></div></div>
+  </div></div>
+  <div class="botones">
+    <button class="btn mal" onclick="marcar(false)">❌ Repasar</button>
+    <button class="btn bien" onclick="marcar(true)">✅ Me la sé</button>
+  </div>
+  <div class="botones">
+    <button class="btn nav" onclick="mover(-1)">← Anterior</button>
+    <button class="btn accion" onclick="barajar()">🔀 Barajar</button>
+    <button class="btn nav" onclick="mover(1)">Siguiente →</button>
+  </div>
+  <div class="botones"><button class="btn nav" onclick="soloRepaso()" id="btnrep">🎯 Solo las marcadas "repasar"</button>
+  <button class="btn nav" onclick="resetear()">🗑️ Reiniciar</button></div>
+  <div class="aviso">El progreso se guarda en este navegador (localStorage).</div>
+</div>
+<script>
+const LS='gace_biv_fc_t5t6_v1';
+const CARDS=[
+// —— T5 · Umbrales ——
+{c:'T5·Umbrales',p:'Umbral SARA de obras y concesiones (desde 1/1/2026)',r:'5.404.000 €',d:'Orden HAC/1517/2025. Se aplica a obras, concesión de obras y concesión de servicios.'},
+{c:'T5·Umbrales',p:'Umbral SARA de suministros y servicios: AGE vs. resto',r:'140.000 € (AGE, OOAA, Seg. Social) · 216.000 € (resto)',d:'Servicios sociales y específicos del Anexo IV: 750.000 €.'},
+{c:'T5·Umbrales',p:'Contrato menor: umbrales',r:'Obras < 40.000 € · suministros y servicios < 15.000 €',d:'Art. 118 (VEC sin IVA). Duración ≤ 1 año, sin prórroga ni revisión de precios. Ciencia (DA 54ª): hasta 50.000 €.'},
+{c:'T5·Umbrales',p:'Abierto simplificado (159.1): ámbito',r:'Obras ≤ 2.000.000 € · suministros y servicios < 140.000 €',d:'Además: juicio de valor ≤ 25% (≤ 45% en prestaciones intelectuales). Inscripción en ROLECE. Sin garantía provisional.'},
+{c:'T5·Umbrales',p:'Simplificado SUMARIO (159.6): ámbito',r:'Obras < 80.000 € · suministros y servicios < 60.000 €',d:'Nunca prestaciones intelectuales. Sin solvencia, sin garantía definitiva, solo criterios de fórmula, sin acto público.'},
+{c:'T5·Umbrales',p:'Recurso especial (REMC): umbrales',r:'Obras y concesiones > 3.000.000 € · suministros y servicios > 100.000 €',d:'Art. 44. No confundir con umbrales SARA (5.404.000/140.000/216.000).'},
+{c:'T5·Umbrales',p:'Clasificación obligatoria en obras desde',r:'VEC ≥ 500.000 €',d:'Art. 77. En servicios nunca es exigible. Mismo número que la supervisión del proyecto de obras (art. 235).'},
+{c:'T5·Umbrales',p:'Lotes exceptuables de la regulación armonizada',r:'Obras < 1.000.000 € · suministros/servicios < 80.000 € (máx. 20% del valor acumulado)',d:'Arts. 20.2, 21.2 y 22.2: el resto de lotes sigue SARA si el VEC acumulado supera el umbral.'},
+// —— T5 · Garantías ——
+{c:'T5·Garantías',p:'Garantía provisional: carácter y cuantía máxima',r:'Excepcional · ≤ 3% del PBL (sin IVA)',d:'Art. 106: requiere motivación en el PCAP. Prohibida en el abierto simplificado.'},
+{c:'T5·Garantías',p:'Garantía definitiva: cuantía',r:'5% del precio final ofertado, IVA excluido',d:'Art. 107 (obligatoria). Complementaria: hasta +5% (total máx. 10%). En el sumario (159.6) no se exige.'},
+{c:'T5·Garantías',p:'Formas de constituir la garantía (art. 108)',r:'Efectivo/Deuda Pública · aval · seguro de caución · retención del precio',d:'La retención exige previsión en el PCAP.'},
+{c:'T5·Garantías',p:'Plazo para acordar la devolución de la garantía',r:'2 meses desde el fin del plazo de garantía',d:'Art. 111: si se supera, se devengan intereses.'},
+// —— T5 · Plazos ——
+{c:'T5·Plazos',p:'Ofertas en abierto SARA (obras, suministros y servicios)',r:'35 días naturales desde el envío al DOUE',d:'Art. 156: concesiones 30. −5 días si oferta electrónica; 15 con anuncio de información previa. No SARA: obras 26, sum/serv 15.'},
+{c:'T5·Plazos',p:'Ofertas en abierto simplificado y en el sumario',r:'15 días (20 obras) · sumario: 10 días hábiles (5 compras corrientes)',d:'Art. 159.3 y 159.6.a. Desde la publicación en el perfil.'},
+{c:'T5·Plazos',p:'Plazo de adjudicación desde la apertura de proposiciones',r:'15 días (criterio único precio) · 2 meses (pluralidad de criterios)',d:'Art. 158. Si se supera, los licitadores pueden retirar su oferta.'},
+{c:'T5·Plazos',p:'Requerimiento de documentación y garantía al mejor clasificado',r:'10 días hábiles (7 en el simplificado)',d:'Art. 150.2. Incumplimiento = retirada de la oferta + posible prohibición de contratar; se pasa al siguiente.'},
+{c:'T5·Plazos',p:'Formalización: contratos con REMC vs. sin REMC',r:'NO antes de 15 días hábiles (con REMC) · ≤ 15 días hábiles (resto)',d:'Art. 153.3. El contrato se perfecciona con la FORMALIZACIÓN (art. 36).'},
+{c:'T5·Plazos',p:'Escalera de pagos de la Administración',r:'30 días pago → >4 meses suspensión (preaviso 1 mes) → >6 meses resolución',d:'Art. 198.4, 198.5 y 198.6. Subcontratistas: máx. 60 días (art. 216). ⚠ Tu temario decía 4 meses en el 198.6: incorrecto.'},
+{c:'T5·Plazos',p:'REMC: plazo de interposición y efecto sobre la adjudicación',r:'15 días hábiles · suspensión AUTOMÁTICA si se recurre la adjudicación',d:'Arts. 50 y 53. Gratuito y potestativo. TACRC: mandato 6 años no prorrogable.'},
+{c:'T5·Plazos',p:'Tramitación urgente vs. emergencia',r:'Urgente (119): plazos a la mitad, inicio ≤1 mes · Emergencia (120): sin expediente, verbal, sin REMC, inicio ≤1 mes',d:'La emergencia exige catástrofes, grave peligro o defensa nacional; rendición de cuentas posterior.'},
+// —— T5 · Datos ——
+{c:'T5·Datos',p:'PBL vs. VEC',r:'PBL: máximo de gasto CON IVA · VEC: total SIN IVA con prórrogas, opciones y modificaciones previstas',d:'Arts. 100 y 101. En lotes, el VEC es el acumulado de todos.'},
+{c:'T5·Datos',p:'Penalidad diaria por demora del contratista',r:'0,60 € por cada 1.000 € del precio (IVA excluido)',d:'Art. 193. Cada múltiplo del 5% del precio: opción entre resolver o nuevas penalidades.'},
+{c:'T5·Datos',p:'Modificaciones: límites 204 vs. 205',r:'Previstas: ≤ 20% · No previstas (adicionales/imprevisibles): ≤ 50%',d:'Obligatorias para el contratista hasta el 20% (206). Dictamen del Consejo de Estado: ≥20% y precio ≥ 6.000.000 € (191.3.b).'},
+{c:'T5·Datos',p:'Cesión del contrato: requisitos',r:'Prevista/autorizada · 20% ejecutado (o 1/5 de la explotación) · cesionario apto · escritura pública',d:'Art. 214. En subcontratación (215): penalidad de hasta el 50% del subcontrato por incumplir los requisitos.'},
+{c:'T5·Datos',p:'Prerrogativas de la Administración (art. 190)',r:'Interpretar · resolver dudas · modificar · declarar responsabilidad · suspender · resolver · inspeccionar',d:'Con audiencia del contratista; dictamen del Consejo de Estado en interpretación/nulidad/resolución con oposición y modificaciones >20% en contratos ≥6M€. Acuerdos ejecutivos y fin de vía.'},
+{c:'T5·Datos',p:'Efectos de la resolución imputable a la Administración',r:'Abono de lo ejecutado + 3% del importe de la prestación dejada de realizar',d:'Art. 213.4. Incumplimiento culpable del contratista: incautación de la garantía + daños en lo que excedan.'},
+{c:'T5·Datos',p:'Causas de nulidad ESPECÍFICAS de la LCSP (art. 39)',r:'Falta de aptitud del adjudicatario · falta/insuficiencia de crédito · sin anuncio en DOUE (SARA) · formalización que burla el REMC · infracción grave del DUE',d:'Se suman a las del art. 47.1 Ley 39/2015. Anulabilidad (40): modificaciones ilegales, ventajas indebidas, encargos a medios propios irregulares.'},
+{c:'T5·Datos',p:'Acuerdo marco: duración máxima',r:'4 años (salvo casos excepcionales)',d:'Art. 219. Central de contratación del Estado: DG de Racionalización y Centralización de la Contratación (Hacienda).'},
+{c:'T5·Datos',p:'Contratos privados celebrados por una AP (art. 26)',r:'Servicios financieros · creación e interpretación artística/literaria y espectáculos · suscripciones',d:'Preparación y adjudicación: LCSP; efectos y extinción: Derecho privado. Actos separables → contencioso.'},
+{c:'T5·Datos',p:'Prohibiciones de contratar: duración máxima general',r:'3 años (penal: la que fije la sentencia)',d:'Art. 72-73. Apreciación automática (sentencia/resolución firme) o por expediente (Hacienda). Inscripción en ROLECE.'},
+{c:'T5·Datos',p:'Mesa de contratación: vocales obligatorios',r:'Asesor jurídico + interventor',d:'Art. 326. Preceptiva en abierto, simplificado (no sumario), restringido, negociados con publicidad, diálogo y asociación. Diálogo: mesa especial +1/3 expertos (327).'},
+{c:'T5·Datos',p:'Ofertas anormalmente bajas: trámite esencial',r:'Audiencia al licitador ≥ 5 días hábiles + informe técnico',d:'Art. 149: nunca exclusión automática. Si justifica y se adjudica: cabe garantía complementaria del 5% adicional.'},
+// —— T6 · Contratos en particular ——
+{c:'T6·Obras',p:'Supervisión del proyecto de obras: ¿cuándo es preceptiva?',r:'Cuantía ≥ 500.000 € (o si afecta a estabilidad, seguridad o estanqueidad)',d:'Art. 235. Mismo número-ancla que la clasificación obligatoria (art. 77).'},
+{c:'T6·Obras',p:'Acta de comprobación del replanteo: plazo',r:'1 mes desde la formalización',d:'Art. 237: marca el inicio de la ejecución.'},
+{c:'T6·Obras',p:'Certificaciones de obra: periodicidad y naturaleza',r:'Mensuales, en los 10 primeros días del mes siguiente · pagos A CUENTA',d:'Art. 240: no suponen aprobación ni recepción.'},
+{c:'T6·Obras',p:'Certificación final y plazo de garantía en obras',r:'Certificación final: 3 meses desde la recepción · garantía ≥ 1 año',d:'Art. 243. A la recepción concurren facultativo de la Administración, director de obra y contratista.'},
+{c:'T6·Obras',p:'Vicios ocultos en obras: plazo de responsabilidad',r:'15 años desde la recepción',d:'Art. 244: por ruina debida a incumplimiento del contratista.'},
+{c:'T6·Obras',p:'Causas de fuerza mayor (art. 239)',r:'Rayos (electricidad atmosférica) · fenómenos naturales catastróficos · destrozos violentos (guerra, robos tumultuosos, orden público)',d:'Lista tasada. Derecho a indemnización sin imprudencia del contratista. La lluvia normal o la inflación NO lo son.'},
+{c:'T6·Obras',p:'Exceso de mediciones y precios nuevos: límites sin modificación',r:'Mediciones ≤ 10% del precio · precios nuevos ≤ 3% del presupuesto primitivo',d:'Art. 242.4. Resolución específica (245): error del proyecto ≥ 20% del presupuesto.'},
+{c:'T6·Concesiones',p:'Duraciones máximas de las concesiones (art. 29.6)',r:'Concesión de obras (con obras): 40 años · concesión de servicios: 25 · sanitarios sin obras: 10',d:'Suministros y servicios: 5 años con prórrogas (29.4).'},
+{c:'T6·Concesiones',p:'Estudio de viabilidad de la concesión: naturaleza',r:'Previo y preceptivo; VINCULANTE si concluye la inviabilidad',d:'Art. 247. Presentado por particular no adjudicatario: resarcimiento de gastos +5%.'},
+{c:'T6·Concesiones',p:'Causas que SÍ reequilibran la concesión (art. 270)',r:'Ius variandi · factum principis · fuerza mayor',d:'NO reequilibran: caída de demanda, deterioro económico general, riesgos asumidos en la oferta.'},
+{c:'T6·Concesiones',p:'Secuestro o intervención de la concesión: duración máxima',r:'3 años (incluidas prórrogas)',d:'Arts. 263 y 293: explotación temporal por la Administración con medios del concesionario y por cuenta de este.'},
+{c:'T6·Concesiones',p:'Rescate de la concesión de servicios: requisito',r:'Acreditar que la gestión directa es más eficaz y eficiente',d:'Art. 294: con indemnización al concesionario. El rescate es además acto recurrible en REMC (art. 44).'},
+{c:'T6·Concesiones',p:'Demora de la Administración que resuelve la concesión de servicios',r:'> 6 meses en entregar la contraprestación o los medios auxiliares',d:'Art. 294.c. En obras/suministros/servicios el patrón es 4 meses (inicio) / 8 meses (suspensión).'},
+{c:'T6·Suministro',p:'¿Qué es siempre contrato de suministro?',r:'Entregas sucesivas por precio unitario · equipos informáticos y telecos · fabricación · energía',d:'Art. 16. Software A MEDIDA = servicios. Inmuebles y valores: excluidos (legislación patrimonial, art. 9).'},
+{c:'T6·Suministro',p:'Gastos de entrega y transporte del suministro',r:'Por cuenta del CONTRATISTA, salvo pacto en contrario',d:'Art. 302. El contratista soporta el riesgo hasta la entrega (300).'},
+{c:'T6·Suministro',p:'Plazo de conformidad tras la entrega (regla general)',r:'1 mes (art. 210.2)',d:'Acto formal y positivo de recepción o conformidad.'},
+{c:'T6·Servicios',p:'Dos prohibiciones estructurales del contrato de servicios',r:'Ejercicio de autoridad pública · contratación encubierta de personal',d:'Arts. 17 y 308.2: a la extinción, NUNCA consolidación del personal del contratista en el sector público.'},
+{c:'T6·Servicios',p:'Propiedad intelectual de productos desarrollados en un contrato de servicios',r:'Se cede a la Administración, salvo previsión contraria de los pliegos',d:'Art. 308.1. Aun sin cesión, la Administración puede autorizar el uso al sector público.'},
+{c:'T6·Servicios',p:'Servicios con prestaciones directas a la ciudadanía (art. 312)',r:'Titularidad administrativa · continuidad · el precio nunca puede ser el único criterio',d:'Diferencia con la concesión de servicios: aquí NO se transfiere el riesgo operacional.'},
+{c:'T6·Servicios',p:'Resolución por inactividad de la Administración (obras, suministros, servicios)',r:'4 meses (desistimiento/suspensión de la iniciación) · 8 meses (suspensión del contrato)',d:'Arts. 245, 306 y 313: patrón común a los tres contratos.'},
+{c:'T6·Servicios',p:'Concesiones de servicios especiales del Anexo IV: procedimiento y umbral',r:'Procedimiento RESTRINGIDO · umbral SARA 750.000 €',d:'Art. 131.2 y Anexo IV (servicios sociales, sanitarios, educativos…).'}
+];
+let vista=[...CARDS.keys()], pos=0, filtro='Todas';
+let estado=JSON.parse(localStorage.getItem(LS)||'{}');
+const cats=['Todas',...new Set(CARDS.map(c=>c.c.split('·')[0]))];
+function guardar(){localStorage.setItem(LS,JSON.stringify(estado))}
+function pinta(){
+  const fdiv=document.getElementById('filtros');fdiv.innerHTML='';
+  cats.forEach(c=>{const b=document.createElement('button');b.className='f'+(filtro===c?' on':'');b.textContent=c==='Todas'?'📋 Todas':c;b.onclick=()=>{filtro=c;aplicar()};fdiv.appendChild(b)});
+  const i=vista[pos],c=CARDS[i];
+  document.getElementById('cat').textContent=c.c;
+  document.getElementById('idx').textContent=(pos+1)+' / '+vista.length;
+  document.getElementById('preg').textContent=c.p;
+  document.getElementById('resp').textContent=c.r;
+  document.getElementById('det').textContent=c.d;
+  document.getElementById('carta').classList.remove('girada');
+  document.getElementById('st-total').textContent='📇 '+vista.length+' tarjetas';
+  const vals=Object.values(estado);
+  document.getElementById('ndom').textContent=vals.filter(v=>v==='ok').length;
+  document.getElementById('nrep').textContent=vals.filter(v=>v==='ko').length;
+}
+function aplicar(){
+  vista=[...CARDS.keys()].filter(i=>filtro==='Todas'||CARDS[i].c.startsWith(filtro));
+  pos=0;pinta();
+}
+function girar(){document.getElementById('carta').classList.toggle('girada')}
+function mover(d){pos=(pos+d+vista.length)%vista.length;pinta()}
+function marcar(bien){estado[vista[pos]]=bien?'ok':'ko';guardar();mover(1)}
+function barajar(){for(let i=vista.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vista[i],vista[j]]=[vista[j],vista[i]]}pos=0;pinta()}
+function soloRepaso(){
+  const rep=[...CARDS.keys()].filter(i=>estado[i]==='ko'&&(filtro==='Todas'||CARDS[i].c.startsWith(filtro)));
+  if(rep.length===0){alert('🎉 No tienes tarjetas marcadas para repasar en este filtro.');return}
+  vista=rep;pos=0;pinta();
+}
+function resetear(){if(confirm('¿Borrar el progreso de estas flashcards?')){estado={};guardar();aplicar()}}
+aplicar();
+</script>
+</body>
+</html>
