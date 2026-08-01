@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV T13 — La Jurisdicción Contencioso-Administrativa</title>
+<style>
+:root{
+  --granate:#7f1d1d; --granateclaro:#fef2f2;
+  --azul:#1e3a8a; --azul2:#3b62c4; --azulclaro:#eef2ff;
+  --verde:#166534; --verdeclaro:#f0fdf4;
+  --rojo:#991b1b; --rojoclaro:#fff1f2;
+  --ambar:#92400e; --ambarclaro:#fffbeb;
+  --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1050px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#7f1d1d,#1e3a8a);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.7rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--granate);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--granate)}
+h3{color:var(--azul2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.87rem;background:#fff}
+th{background:var(--granate);color:#fff;padding:8px 10px;text-align:left;font-size:.83rem}
+td{padding:7px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--granateclaro);border-left:5px solid var(--granate);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--granate);font-size:.85rem;margin-bottom:6px}
+.trampa{background:#fff1f2;border-left:5px solid var(--rojo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--rojo);font-size:.85rem;margin-bottom:6px}
+.nuevo{background:var(--verdeclaro);border-left:5px solid var(--verde);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.nuevo .tit{font-weight:700;color:var(--verde);font-size:.85rem;margin-bottom:6px}
+.nota{background:var(--ambarclaro);border-left:5px solid var(--ambar);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:var(--ambar);font-size:.85rem;margin-bottom:6px}
+.art{display:inline-block;background:var(--granate);color:#fff;border-radius:5px;padding:1px 7px;font-size:.77rem;font-weight:600;white-space:nowrap}
+.num{display:inline-block;background:var(--azul);color:#fff;border-radius:5px;padding:1px 8px;font-size:.82rem;font-weight:700;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+.piramide{display:flex;flex-direction:column;align-items:center;gap:5px;margin:18px 0}
+.nivel{color:#fff;text-align:center;padding:10px 14px;border-radius:8px;font-size:.85rem;font-weight:600;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.nivel small{display:block;font-weight:400;font-size:.75rem;opacity:.92;margin-top:2px}
+.n1{width:40%;min-width:260px;background:#7f1d1d}
+.n2{width:54%;min-width:280px;background:#9a3412}
+.n3{width:68%;min-width:300px;background:#1e3a8a}
+.n4{width:82%;min-width:310px;background:#3b62c4}
+.n5{width:96%;min-width:320px;background:#64748b}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{
+  body{background:#fff}
+  header{background:var(--granate)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card{box-shadow:none}
+  h2{page-break-after:avoid}
+  table,.clave,.trampa,.nuevo,.nota{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque IV · Derecho Administrativo</div>
+  <h1>Tema 13 — La Jurisdicción Contencioso-Administrativa</h1>
+  <div class="sub">Ley 29/1998 (LJCA) · reformada por LO 7/2015 (casación) y LO 1/2025 (Tribunales de Instancia)</div>
+  <div class="badge-verif">✅ Verificado a 01/08/2026 · nomenclatura post-LO 1/2025 y sentencia oral incorporadas</div>
+</header>
+<div class="wrap">
+
+<h2>🏛️ 1. Naturaleza, extensión y límites</h2>
+<div class="card"><p><b>Doble anclaje constitucional:</b> <span class="art">Art. 106.1 CE</span> (control judicial de la potestad reglamentaria y de la legalidad administrativa) + <span class="art">Art. 117 CE</span> (potestad jurisdiccional). <b>Caracteres:</b> universalidad del control · carácter revisor <b>atenuado</b> (alcanza inactividad —29— y vía de hecho —30—) · <b>improrrogabilidad</b> (art. 5: apreciación de oficio previa audiencia de 10 días a partes y Ministerio Fiscal).</p></div>
+<div class="grid2">
+<div class="card"><h3 style="margin-top:0">Conoce de (arts. 1-2)</h3><ul class="lista" style="font-size:.88rem">
+<li>Actuación de las AAPP sujeta al Derecho Administrativo</li>
+<li>Disposiciones generales de rango inferior a la ley y <b>Decretos Legislativos ultra vires</b></li>
+<li>Contratos administrativos y <b>actos separables</b> de los privados</li>
+<li><b>Responsabilidad patrimonial</b> (unificación de fuero: nunca civil ni social)</li>
+<li>Corporaciones de Derecho público en funciones públicas · concesionarios (actos de control)</li></ul></div>
+<div class="card"><h3 style="margin-top:0">Excluye (art. 3)</h3><ul class="lista" style="font-size:.88rem">
+<li>Cuestiones de los órdenes civil, penal y social</li>
+<li>Conflictos de jurisdicción</li>
+<li>Los actos de los órganos constitucionales en personal y gestión van al <b>TS</b> (art. 12), no quedan fuera</li></ul>
+<p style="font-size:.85rem"><b>Prejudicialidad (art. 4):</b> alcanza cuestiones no administrativas salvo constitucional, penal y tratados; sin vincular al orden propio.</p></div>
+</div>
+
+<h2>🏢 2. Los órganos tras la LO 1/2025 — nomenclatura crítica</h2>
+<div class="nuevo"><div class="tit">🆕 DATO CRÍTICO — TRIBUNALES DE INSTANCIA (LO 1/2025, despliegue completado 31/12/2025)</div>
+<p>Los Juzgados de lo Contencioso-Administrativo son ahora <b>Secciones de lo Contencioso-Administrativo de los Tribunales de Instancia</b>; los Juzgados Centrales, la <b>Sección de lo C-A del Tribunal Central de Instancia</b> (Madrid, jurisdicción nacional). La LJCA conserva la palabra «Juzgados» en los arts. 8-9, pero debe entenderse hecha a las Secciones. <b>No confundir</b> el Tribunal Central de Instancia con la Audiencia Nacional (sigue existiendo).</p></div>
+<div class="piramide">
+  <div class="nivel n1">TRIBUNAL SUPREMO — Sala 3ª<small>Consejo de Ministros y Comisiones Delegadas · CGPJ · órganos constitucionales (personal y gestión) · CASACIÓN</small></div>
+  <div class="nivel n2">AUDIENCIA NACIONAL — Sala C-A<small>Ministros y Secretarios de Estado (disposiciones y actos; personal de carrera) · AGE nacional &gt; 60.000 € · TEAC</small></div>
+  <div class="nivel n3">TRIBUNALES SUPERIORES DE JUSTICIA — Salas C-A<small>Residual autonómica · disposiciones generales de CCAA y EELL · PLANEAMIENTO URBANÍSTICO · TEAR · apelaciones</small></div>
+  <div class="nivel n4">TRIBUNAL CENTRAL DE INSTANCIA — Sección C-A<small>Personal de Ministros/SdE (no carrera) · sanciones AGE ≤ 60.000 € · Tribunal Administrativo del Deporte</small></div>
+  <div class="nivel n5">TRIBUNALES DE INSTANCIA — Secciones C-A<small>Entidades locales (salvo planeamiento) · autonómico menor · periférica del Estado · extranjería · entradas domiciliarias · medidas sanitarias urgentes (8.6)</small></div>
+</div>
+<div class="clave"><div class="tit">🧠 REGLA RÁPIDA POR CUANTÍA (AGE de ámbito nacional)</div>
+<p>≤ <span class="num">60.000 €</span> → Tribunal Central de Instancia · &gt; <span class="num">60.000 €</span> → Audiencia Nacional · Consejo de Ministros → siempre <b>Tribunal Supremo</b>. Y no confundir: <b>30.000 €</b> (abreviado y apelación) ≠ <b>30.050 €</b> (responsabilidad patrimonial de la periférica, 8.2.c) ≠ <b>60.000 €</b> (frontera TCI/AN y sanciones).</p></div>
+<div class="card"><p><b>Territorial (art. 14):</b> regla general, sede del órgano autor; en <b>personal, propiedades especiales y sanciones</b>: a elección del demandante (sede del órgano o su propio domicilio). Disposiciones y actos de órganos centrales: sede del órgano.</p></div>
+
+<h2>🎯 3. Actividad impugnable y partes</h2>
+<table>
+<tr><th>Objeto</th><th>Régimen</th><th>Plazo (art. 46)</th></tr>
+<tr><td><b>Actos expresos</b> y disposiciones</td><td>Definitivos y trámites cualificados (25)</td><td><span class="num">2 meses</span></td></tr>
+<tr><td><b>Actos presuntos</b></td><td>Silencio administrativo</td><td><span class="num">6 meses</span> (doctrina TC: en silencio desestimatorio el plazo no precluye mientras no haya resolución expresa)</td></tr>
+<tr><td><b>Inactividad</b> <span class="art">29</span></td><td>Reclamación previa; si en <b>3 meses</b> no se ejecuta la prestación debida → recurso. Inejecución de actos firmes: requerimiento y <b>1 mes</b></td><td>2 meses / 20 días (ejecución de actos firmes)</td></tr>
+<tr><td><b>Vía de hecho</b> <span class="art">30</span></td><td>Requerimiento previo <b>potestativo</b> de cesación</td><td><span class="num">10 días</span> tras requerimiento no atendido · <span class="num">20 días</span> sin requerimiento desde el inicio de la actuación</td></tr>
+<tr><td><b>No impugnables</b> <span class="art">28</span></td><td colspan="2">Reproducción de actos firmes y <b>confirmatorios de actos consentidos</b>.</td></tr>
+</table>
+<div class="card"><p><b>Legitimación (art. 19):</b> derecho o interés legítimo · corporaciones y sindicatos (intereses colectivos) · Administraciones entre sí (autonomía) · Ministerio Fiscal solo cuando la ley lo determine · <b>acción popular solo si la ley la reconoce</b>. <span class="art">🆕 19.1.k LO 1/2025</span>: los <b>sindicatos</b> pueden actuar en nombre e interés de su personal funcionario y estatutario <b>afiliado que lo autorice</b> (con afiliación + comunicación previa + autorización expresa, art. 45.2.e). <b>Pasiva (21):</b> la Administración autora + codemandados + las <b>aseguradoras de las AAPP</b> (siempre codemandadas). <b>Postulación:</b> los funcionarios pueden comparecer por sí mismos en cuestiones de personal que no impliquen separación de inamovibles (23.3). <b>Pretensiones (31):</b> anulatoria + plena jurisdicción (situación jurídica individualizada e indemnización).</p></div>
+
+<h2>⚡ 4. El procedimiento abreviado (art. 78) — el artículo más preguntado</h2>
+<div class="clave"><div class="tit">🔑 ÁMBITO (78.1)</div>
+<p>Cuantía ≤ <span class="num">30.000 €</span> · <b>personal</b> (que no implique separación de inamovibles) · <b>extranjería</b> · inadmisión de peticiones de <b>asilo</b> · disciplina deportiva en materia de <b>dopaje</b>. Se inicia por <b>DEMANDA directamente</b> (no escrito de interposición) y rige la <b>oralidad</b>.</p></div>
+<div class="nuevo"><div class="tit">🆕 REFORMAS LO 1/2025 AL ART. 78 (preguntas muy probables)</div>
+<ul class="lista">
+<li><b>Fin de la vista automática:</b> el demandado debe argumentar la disconformidad fáctica y las pruebas necesarias; el juez decide por auto (celebrarla: irrecurrible; denegarla: reposición).</li>
+<li>Sin vista → trámite de <b>conclusiones escritas de 5 días</b> para ambas partes.</li>
+<li><b>Diligencias de preparación de la prueba</b> por el Letrado de la A. de Justicia (evita suspensiones).</li>
+<li><b>SENTENCIA ORAL (in voce)</b> al terminar la vista; si todas las partes presentes manifiestan su voluntad de no recurrir, se declara <b>firme en el acto</b> (78.20).</li>
+<li>Plazo expreso para dictar sentencia: <span class="num">10 días</span> desde la vista (78.22).</li>
+</ul></div>
+<div class="nota"><div class="tit">⚠️ MASC Y CONTENCIOSO (trampa segura)</div>
+<p>Los MASC de la LO 1/2025 (mediación, conciliación…) son requisito de procedibilidad <b>solo en el orden civil y mercantil</b>: su art. 3 <b>excluye</b> los asuntos con entidades del sector público. Decir que «hay que intentar un MASC antes del contencioso» es <b>FALSO</b>; hay un mandato al Gobierno para presentar en 2 años un proyecto que los extienda.</p></div>
+
+<h2>📜 5. Casación, apelación y otros hitos del proceso</h2>
+<table>
+<tr><th>Institución</th><th>Régimen</th></tr>
+<tr><td><b>CASACIÓN</b> <span class="art">86-93</span></td><td>Modelo LO 7/2015: admisión por <b>interés casacional objetivo</b> para formar jurisprudencia (Sección de Admisión de la Sala 3ª; auto si admite, providencia si inadmite). Fases: preparación (ante el órgano a quo, 30 días) → admisión → interposición → oposición → sentencia. La LO 1/2025 <b>no altera</b> la casación contenciosa: exporta su modelo a otros órdenes.</td></tr>
+<tr><td><b>APELACIÓN</b> <span class="art">81</span></td><td>Contra sentencias de las Secciones, ante el TSJ. <b>No apelables</b> las de cuantía ≤ <span class="num">30.000 €</span>, salvo que declaren la inadmisibilidad. Siempre apelables: litigios entre Administraciones e impugnaciones indirectas de reglamentos. STS 19/5/2025: el umbral se extiende a las apelaciones contra autos en ejecución de sentencia.</td></tr>
+<tr><td><b>Medidas cautelares</b> <span class="art">129-136</span></td><td>Cualquier medida (incl. suspensión); criterio: <i>periculum in mora</i> — que el recurso no pierda su finalidad legítima — ponderando los intereses; caución posible. En inactividad y vía de hecho: régimen reforzado (136).</td></tr>
+<tr><td><b>Inadmisibilidad</b> <span class="art">69</span></td><td>Falta de jurisdicción · falta de legitimación · acto no susceptible de impugnación (28) · extemporaneidad · cosa juzgada.</td></tr>
+<tr><td><b>Sentencias sobre reglamentos</b> <span class="art">72-73</span></td><td>La anulación de una disposición general produce efectos <b>erga omnes</b> desde su publicación; pero <b>no revive</b> por sí los actos firmes anteriores que la aplicaron, <b>salvo</b> exclusión o reducción de sanciones no ejecutadas por completo (73). <b>Cuestión de ilegalidad</b> (27): la plantea el juez de sentencia firme estimatoria de recurso indirecto.</td></tr>
+<tr><td><b>Ejecución de sentencias</b> <span class="art">103-113</span></td><td>Juzgar y hacer ejecutar lo juzgado corresponde a los tribunales; ejecución forzosa transcurridos <span class="num">2 meses</span> desde la comunicación de la sentencia (104.2). Los actos dictados para <b>eludir el fallo son NULOS de pleno derecho</b> (103.4). Imposibilidad material o legal: indemnización sustitutoria (105.2).</td></tr>
+</table>
+
+<h2>🎯 6. Datos-ancla y trampas</h2>
+<div class="clave"><div class="tit">📌 MNEMOTECNIA DE PLAZOS «2-6-20-10» + CUANTÍAS «30-60»</div>
+<ul class="lista">
+<li>Interposición: <b>2 meses</b> (expresos y disposiciones) · <b>6 meses</b> (presuntos) · <b>20 días</b> (vía de hecho sin requerimiento) · <b>10 días</b> (vía de hecho con requerimiento no atendido).</li>
+<li>Cuantías: <b>30.000 €</b> = abreviado y apelación · <b>60.000 €</b> = frontera Tribunal Central de Instancia/Audiencia Nacional · <b>30.050 €</b> = responsabilidad patrimonial de la periférica (8.2.c).</li>
+<li>Inactividad: reclamación y <b>3 meses</b> (art. 29.1); actos firmes inejecutados: <b>1 mes</b> y recurso en 20 días.</li>
+<li>Ejecución forzosa de sentencias: <b>2 meses</b> · sentencia del abreviado: <b>10 días</b> · conclusiones escritas: <b>5 días</b>.</li>
+</ul></div>
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS</div>
+<ul class="lista">
+<li>«Los Juzgados de lo Contencioso-Administrativo…» → cuidado: hoy son <b>Secciones de los Tribunales de Instancia</b> (LO 1/2025).</li>
+<li>«El planeamiento urbanístico local lo revisan las Secciones» → NO: <b>TSJ</b> (art. 8.1 in fine).</li>
+<li>«Los MASC son obligatorios antes del contencioso» → NO: excluidos los asuntos del sector público.</li>
+<li>«La casación exige cuantía mínima» → NO desde la LO 7/2015: <b>interés casacional objetivo</b>.</li>
+<li>«La sentencia que anula un reglamento revive los actos firmes que lo aplicaron» → NO, salvo reducción de sanciones no ejecutadas (73).</li>
+<li>«El requerimiento previo en vía de hecho es obligatorio» → NO: <b>potestativo</b> (30).</li>
+<li>«El Ministerio Fiscal interviene en todos los procesos» → NO: solo cuando la ley lo determina.</li>
+<li>«La acción popular existe con carácter general» → NO: solo si una ley la reconoce expresamente.</li>
+</ul></div>
+
+</div>
+<footer>GACE 2027 · Bloque IV · Tema 13 · Material visual de estudio · Verificado a 01/08/2026 (BOE)<br>Fuentes: Ley 29/1998 consolidada · LO 7/2015 · Ley 11/2021 · LO 1/2025 (arts. 3, 21; despliegue Tribunales de Instancia) · STS Sala 3ª 19/5/2025 · CE arts. 106 y 117</footer>
+</body>
+</html>
