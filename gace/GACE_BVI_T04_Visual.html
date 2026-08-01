@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque VI · Tema 4 · Control del gasto público</title>
+<style>
+:root{
+  --v:#7c2d3f; --v2:#9f2942; --vclaro:#fdf2f4; --borde:#f3d0d7;
+  --verde:#166534; --verdeclaro:#f0fdf4; --verdeborde:#bbf7d0;
+  --rojo:#991b1b; --rojoclaro:#fef2f2; --rojoborde:#fecaca;
+  --ambar:#92400e; --ambarclaro:#fffbeb; --ambarborde:#fde68a;
+  --morado:#5b21b6; --moradoclaro:#f5f3ff; --moradoborde:#ddd6fe;
+}
+*{box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;max-width:980px;margin:0 auto;padding:24px;color:#1e293b;line-height:1.5;background:#fff}
+.bloque{color:var(--v);font-weight:700;font-size:.85em;letter-spacing:.05em;text-transform:uppercase}
+h1{color:var(--v);font-size:1.6em;margin:.2em 0 .1em;border-bottom:3px solid var(--v);padding-bottom:.3em}
+.sub{color:#475569;font-size:1.02em;margin-bottom:.6em}
+.badge-verif{display:inline-block;background:var(--vclaro);color:var(--v);border:1px solid var(--borde);border-radius:20px;padding:3px 12px;font-size:.78em;font-weight:600;margin-bottom:1em}
+h2{color:var(--v2);border-left:5px solid var(--v);padding-left:10px;margin-top:1.8em;font-size:1.22em}
+h3{color:var(--v);font-size:1.02em;margin-top:1.2em}
+.card{background:var(--vclaro);border:1px solid var(--borde);border-radius:10px;padding:14px 18px;margin:10px 0}
+.clave{background:var(--verdeclaro);border:1px solid var(--verdeborde);border-left:5px solid var(--verde);border-radius:8px;padding:12px 16px;margin:10px 0}
+.clave b{color:var(--verde)}
+.trampa{background:var(--rojoclaro);border:1px solid var(--rojoborde);border-left:5px solid var(--rojo);border-radius:8px;padding:12px 16px;margin:10px 0}
+.trampa b{color:var(--rojo)}
+.nuevo{background:var(--ambarclaro);border:1px solid var(--ambarborde);border-left:5px solid var(--ambar);border-radius:8px;padding:12px 16px;margin:10px 0}
+.nuevo b{color:var(--ambar)}
+.nota{background:var(--moradoclaro);border:1px solid var(--moradoborde);border-left:5px solid var(--morado);border-radius:8px;padding:12px 16px;margin:10px 0}
+.nota b{color:var(--morado)}
+.art{display:inline-block;background:var(--v);color:#fff;border-radius:5px;padding:1px 8px;font-size:.85em;font-weight:600}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.92em}
+th{background:var(--v);color:#fff;text-align:left;padding:7px 10px}
+td{padding:7px 10px;border-bottom:1px solid var(--borde)}
+tr:nth-child(even) td{background:var(--vclaro)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--borde);border-radius:8px;overflow:hidden;margin:10px 0}
+.vs>div{padding:12px 16px}
+.vs>div:first-child{background:var(--rojoclaro);border-right:1px solid var(--borde)}
+.vs>div:last-child{background:var(--verdeclaro)}
+ul.lista{margin:6px 0;padding-left:22px}
+ul.lista li{margin:4px 0}
+.mini{font-size:.85em;color:#64748b}
+.mnemo{background:#1e293b;color:#f1f5f9;border-radius:8px;padding:12px 16px;margin:10px 0;font-size:.94em}
+.mnemo b{color:#fbbf24}
+footer{margin-top:2.5em;padding-top:1em;border-top:2px solid var(--borde);font-size:.82em;color:#64748b;text-align:center}
+@media print{body{max-width:100%}.card,.clave,.trampa,.nuevo,.nota{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="bloque">📘 GACE 2027 · Bloque VI · Gestión Financiera y Seguridad Social · Tema 4</div>
+<h1>Control del gasto público en España</h1>
+<div class="sub">IGAE: función interventora, control financiero permanente y auditoría pública · El Tribunal de Cuentas</div>
+<div class="badge-verif">✅ Verificado contra BOE a 01/08/2026</div>
+
+<h2>1. Marco normativo y clasificación del control</h2>
+<table>
+<tr><th>Norma</th><th>Contenido</th></tr>
+<tr><td>Constitución Española</td><td>arts. 136 y 153.d: fundamento del Tribunal de Cuentas y de los OCEX autonómicos</td></tr>
+<tr><td>Ley 47/2003, LGP</td><td>Título 6, arts. 140-175: control interno</td></tr>
+<tr><td>LO 2/1982 (LOTCu) + Ley 7/1988 (LFTCu)</td><td>régimen del Tribunal de Cuentas</td></tr>
+<tr><td>RD 2188/1995</td><td>desarrollo reglamentario del control interno de la IGAE</td></tr>
+<tr><td>Ley 38/2003 (LGS)</td><td>control financiero de subvenciones</td></tr>
+</table>
+
+<div class="nota">
+<b>📌 Reformas recientes de la LOTCu:</b> LO 1/2024, de 10 de junio (amnistía) — modifica el art. 39 LOTCu añadiendo como causa de exención de responsabilidad contable haber cometido actos amnistiados [Seguro, confirmado BOE-A-2024-11776]. LO 2/2024, de 1 de agosto (paridad) — modifica el art. 30 LOTCu: 40% mínimo de cada sexo en la designación de Consejeros por cada Cámara, aplicable a designaciones posteriores al 22/08/2024.
+</div>
+<div class="nota">
+<b>📌 Actualidad (jul. 2026):</b> el TJUE (Gran Sala, 16/07/2026, asunto C-523/24) declaró que la ley de amnistía no vulnera el Derecho de la UE en el procedimiento de reintegro por alcance del "procés", siempre que los fondos no procedan del presupuesto de la UE ni se destinen a él. Aplicación práctica reciente del art. 39 LOTCu (reformado por la LO 1/2024). Dato de actualidad, no de examen cerrado.
+</div>
+
+<table>
+<tr><th>Tipo de control</th><th>Sujeto</th><th>Características</th></tr>
+<tr><td>Interno</td><td>IGAE</td><td>Desde dentro de la Administración; triple modalidad: función interventora, control financiero permanente, auditoría pública</td></tr>
+<tr><td>Externo</td><td>Tribunal de Cuentas</td><td>Desde fuera, órgano dependiente de las Cortes; doble función fiscalizadora y jurisdiccional</td></tr>
+<tr><td>Parlamentario</td><td>Cortes Generales</td><td>Control político vía aprobación de PGE y examen de la Cuenta General del Estado</td></tr>
+</table>
+<table>
+<tr><th>Momento</th><th>Ejemplo</th></tr>
+<tr><td>Preventivo (a priori)</td><td>Fiscalización previa de la función interventora</td></tr>
+<tr><td>De ejecución / concomitante</td><td>Control financiero permanente</td></tr>
+<tr><td>A posteriori</td><td>Auditoría pública y fiscalización externa del Tribunal de Cuentas</td></tr>
+</table>
+
+<h2>2. La IGAE: naturaleza y estructura</h2>
+<div class="clave">
+<b>Doble rol de la IGAE:</b> (1) órgano de control interno de la gestión económico-financiera del sector público estatal; (2) centro directivo y gestor de la contabilidad pública (coordina el Plan General de Contabilidad Pública y elabora la Cuenta General del Estado).
+</div>
+<ul class="lista">
+<li><b>Dependencia orgánica:</b> adscrita a la Secretaría de Estado de Presupuestos y Gastos (Ministerio de Hacienda).</li>
+<li><b>Independencia funcional:</b> plena autonomía en el control — actúa como órgano staff, fuera de la jerarquía de los centros gestores.</li>
+<li><b>Límite a la autonomía:</b> en conflicto irresoluble entre Intervención y órgano gestor, decide el <b>Consejo de Ministros</b> — confirma que es control interno.</li>
+</ul>
+<table>
+<tr><th>Órgano/Unidad</th><th>Ámbito</th></tr>
+<tr><td>Interventor/a General</td><td>Máximo responsable, rango de Subsecretaría; ejerce personalmente ciertas fiscalizaciones</td></tr>
+<tr><td>Servicios Centrales</td><td>Oficina Nacional de Auditoría (ONA), Contabilidad, Presupuestaria…</td></tr>
+<tr><td>Intervenciones Delegadas (ID)</td><td>Departamentos, organismos, territorio</td></tr>
+<tr><td>IG de la Defensa / IG de la Seguridad Social</td><td>Dependientes funcionalmente de la IGAE</td></tr>
+</table>
+
+<h2>3. Las tres modalidades de control interno</h2>
+<table>
+<tr><th>Criterio</th><th>Función interventora</th><th>Control financiero permanente</th><th>Auditoría pública</th></tr>
+<tr><td>Momento</td><td>Previo (a priori)</td><td>De ejecución; a veces posterior</td><td>Posterior (a posteriori)</td></tr>
+<tr><td>Objeto</td><td>Solo legalidad</td><td>Legalidad + buena gestión</td><td>Legalidad + buena gestión</td></tr>
+<tr><td>Ámbito</td><td>AGE, OO.AA., Entidades Gestoras/Servicios Comunes SS (no Mutuas)</td><td>Todo el SP estatal (incluye EPE, Mutuas, AAI)</td><td>Todo el SP estatal, según Plan Anual</td></tr>
+<tr><td>Quién</td><td>Interventor Delegado / IGAE</td><td>Intervención Delegada del centro</td><td>IGAE (ONA) o auditores privados</td></tr>
+<tr><td>Planificación</td><td>No precisa plan anual</td><td>Plan Anual de Control Financiero Permanente</td><td>Plan Anual de Auditorías</td></tr>
+</table>
+
+<h2>4. Función interventora (arts. 148-156 LGP)</h2>
+<p>Control <b>previo y exclusivo de legalidad</b> sobre actos que dan lugar a reconocimiento de derechos o gastos. Ámbito: AGE, Organismos Autónomos y Entidades Gestoras/Servicios Comunes de la SS (NO las Mutuas colaboradoras, solo sujetas a control financiero permanente y auditoría).</p>
+<div class="mnemo">Fases <b>A-D-O-P</b> + comprobación material: A (aprobación, reserva crédito) → D (compromiso, vincula a terceros) → O (reconocimiento de la obligación) → Comprobación material (obligatoria ≥50.000€ IVA excl.) → P (pago material).</div>
+<div class="vs">
+<div><b>Fiscalización PLENA</b><br>Examen completo de todos los extremos. Reparo si el defecto afecta a requisitos esenciales del art. 152 LGP.</div>
+<div><b>Fiscalización LIMITADA previa</b><br>Solo extremos esenciales acordados por el Consejo de Ministros (Acuerdo 30/05/2008). Solo favorable/desfavorable; es la regla operativa en la gestión ordinaria.</div>
+</div>
+<div class="trampa">
+<b>Reparo (art. 154 LGP):</b> SUSPENDE la tramitación. Procede por: falta/inadecuación de crédito, incompetencia del órgano, graves irregularidades, omisión de trámites esenciales (nulidad), riesgo de quebranto económico.
+<br><br><b>Discrepancia:</b> si reparó la Intervención Delegada → resuelve la <b>IGAE</b>. Si reparó la IGAE (o confirma el reparo de la ID) → resuelve el <b>Consejo de Ministros</b>.
+</div>
+<div class="nota">
+<b>Omisión de la función interventora (art. 156 LGP):</b> convalidación por el Consejo de Ministros a propuesta <b>INDELEGABLE</b> del Titular del Departamento Ministerial — NO exime de responsabilidad al gestor que omitió la fiscalización.
+</div>
+<p class="mini"><b>Plazo general:</b> 10 días hábiles desde expediente completo. <b>Excluidos de fiscalización previa:</b> contratos menores (si lo acuerda el Consejo de Ministros), gastos de tracto sucesivo tras el período inicial, gastos periódicos ya fiscalizados, gastos &lt;5.000€ por anticipo de caja fija.</p>
+
+<h2>5. Control financiero permanente (arts. 157-161 LGP)</h2>
+<p>Continuado, concomitante/posterior, integral (legalidad + buena gestión) y <b>descentralizado</b> (lo ejerce la Intervención Delegada de cada centro). Exige que exista Intervención Delegada destinada en el centro.</p>
+<div class="clave">
+<b>Cuatro objetivos (art. 159 LGP):</b> legalidad · presupuestario · tesorería · eficacia/eficiencia/economía.
+</div>
+<p>Ámbito: AGE, Organismos Autónomos y Agencias, Autoridades Administrativas Independientes, Entidades Gestoras/Servicios Comunes/<b>Mutuas</b> de la SS, EPE y entes de Derecho Público vinculados.</p>
+<div class="nuevo">
+<b>Plan de Acción departamental (art. 161 LGP):</b> ante debilidades detectadas en informes de control financiero permanente, cada departamento debe remitir su Plan de Acción a la IGAE en el plazo de <b>3 meses</b> desde la recepción de los informes.
+</div>
+<p class="mini">En EPE y entes de Derecho Público, el Consejo de Ministros (propuesta Hacienda, iniciativa IGAE) puede sustituir el control financiero permanente por auditoría pública.</p>
+
+<h2>6. Auditoría pública (arts. 162-166 LGP)</h2>
+<p>Verificación <b>posterior, sistemática y selectiva</b>, mediante Normas de Auditoría del Sector Público.</p>
+<table>
+<tr><th>Modalidad</th><th>Contenido</th></tr>
+<tr><td>Regularidad contable</td><td>Exactitud e integridad contable; incluye la auditoría de <b>cuentas anuales</b></td></tr>
+<tr><td>Cumplimiento</td><td>Control de legalidad de actuaciones y operaciones</td></tr>
+<tr><td>Operativa</td><td>Programas presupuestarios, sistemas y procedimientos, economía/eficacia/eficiencia (3E)</td></tr>
+</table>
+<div class="trampa">
+<b>⚠️ La auditoría de cuentas anuales NO se aplica a la AGE ni a las Entidades Gestoras/Servicios Comunes de la SS</b> — sus cuentas se integran en la Cuenta General del Estado, fiscalizada directamente por el Tribunal de Cuentas.
+</div>
+<p class="mini">Plan Anual de Auditorías (art. 165 LGP), aprobado por la IGAE. Informes a: titular de la entidad, Ministro de Hacienda, titular del departamento; si son de cuentas anuales, también al Tribunal de Cuentas. Control financiero de subvenciones: Ley 38/2003, ejercido por la IGAE.</p>
+
+<h2>7. El Tribunal de Cuentas</h2>
+<div class="clave">
+<b>Naturaleza (art. 136 CE):</b> supremo órgano fiscalizador de las cuentas y de la gestión económica del Estado y del sector público. Dependiente directamente de las Cortes Generales. Único en su orden; coexiste con los OCEX autonómicos (art. 153.d CE).
+</div>
+<table>
+<tr><th>Elemento</th><th>Régimen</th></tr>
+<tr><td>Consejeros de Cuentas</td><td>12: 6 Congreso + 6 Senado, mayoría de <b>3/5</b> de cada Cámara. Mandato: <b>9 años</b>. Independientes e inamovibles</td></tr>
+<tr><td>Presencia equilibrada</td><td>40% mínimo de cada sexo por Cámara (LO 2/2024), aplicable desde el 22/08/2024</td></tr>
+<tr><td>Presidente/a</td><td><b>Nombrado por el REY</b> de entre los Consejeros, a propuesta del Pleno. Mandato: <b>3 años</b></td></tr>
+<tr><td>Fiscal</td><td>Nombrado por el Gobierno; depende del Fiscal General del Estado; forma parte del Pleno</td></tr>
+</table>
+<div class="trampa">
+<b>⚠️ Corrección habitual de apuntes:</b> el Presidente del Tribunal de Cuentas NO es elegido por las Cortes — es <b>nombrado por el Rey</b> de entre los Consejeros, a propuesta del Pleno del Tribunal.
+</div>
+
+<h3>Dos funciones</h3>
+<div class="vs">
+<div><b>Fiscalizadora (art. 2.a LOTCu)</b><br>Permanente y consuntiva. Ámbito: todo el sector público (Estado, CC.AA., EE.LL., SS, partidos políticos con representación parlamentaria). Instrumentos: informes/memorias, mociones y notas — se elevan a las Cortes y se publican en el BOE.</div>
+<div><b>Jurisdiccional (art. 2.b LOTCu)</b><br>Enjuiciamiento de la responsabilidad contable. Necesaria, improrrogable, exclusiva y plena (art. 17 LOTCu). Compatible con potestad disciplinaria y jurisdicción penal (art. 18 LOTCu).</div>
+</div>
+
+<div class="nota">
+<b>Responsabilidad contable:</b> obligación de indemnizar daños por acción/omisión contraria a ley que menoscaba caudales públicos. Criterio de imputación: <b>dolo, culpa o negligencia GRAVES</b>. Puede ser <b>DIRECTA</b> (ejecuta, fuerza, induce o coopera necesariamente) o <b>SUBSIDIARIA</b> (negligencia u omisión que da ocasión al menoscabo).
+</div>
+<table>
+<tr><th>Procedimiento</th><th>Objeto</th></tr>
+<tr><td>Juicio de cuentas</td><td>Irregularidades no constitutivas de alcance</td></tr>
+<tr><td>Reintegro por alcance</td><td>Saldos deudores injustificados o ausencia de numerario/valores</td></tr>
+<tr><td>Expediente de cancelación de fianzas</td><td>Resolución sobre garantías de los cuentadantes</td></tr>
+</table>
+<p class="mini">Exclusiones de la jurisdicción contable (art. 16 LOTCu): asuntos del TC, jurisdicción contencioso-administrativa, hechos delictivos (salvo responsabilidad civil derivada), cuestiones civiles/laborales.</p>
+
+<h3>Cuenta General del Estado (CGE)</h3>
+<table>
+<tr><th>Fase</th><th>Órgano</th><th>Actuación</th></tr>
+<tr><td>1</td><td>IGAE</td><td>Forma la CGE y la eleva al Gobierno para remisión al Tribunal antes del <b>31 de octubre</b> del año siguiente</td></tr>
+<tr><td>2</td><td>Tribunal de Cuentas</td><td>Examina y comprueba; elabora la Declaración Definitiva (con audiencia al Gobierno en la Provisional)</td></tr>
+<tr><td>3</td><td>Cortes Generales</td><td>Examinan y aprueban vía Comisión Mixta para las Relaciones con el Tribunal de Cuentas</td></tr>
+</table>
+
+<h2>8. Datos clave para el examen</h2>
+<div class="grid2">
+<div class="card">
+<b>IGAE</b>
+<ul class="lista">
+<li>Dependencia orgánica de Hacienda + independencia funcional</li>
+<li>Doble rol: control + centro contable</li>
+<li>Función interventora: A-D-O-P, plazo 10 días hábiles</li>
+<li>Reparo suspende; discrepancia: ID→IGAE, IGAE→Consejo de Ministros</li>
+<li>Plan de Acción: 3 meses (control financiero permanente)</li>
+</ul>
+</div>
+<div class="card">
+<b>Tribunal de Cuentas</b>
+<ul class="lista">
+<li>12 Consejeros (6+6, 3/5, 9 años); Presidente: Rey, propuesta Pleno, 3 años</li>
+<li>Dos funciones: fiscalizadora + jurisdiccional</li>
+<li>Responsabilidad contable: dolo/culpa/negligencia GRAVES</li>
+<li>3 procedimientos: juicio de cuentas, reintegro por alcance, cancelación de fianzas</li>
+<li>LO 1/2024 (art. 39, amnistía) y LO 2/2024 (art. 30, paridad)</li>
+</ul>
+</div>
+</div>
+
+<footer>GACE 2027 · Bloque VI · Tema 4 · Material verificado contra BOE a 01/08/2026 · Antonio José De Lamo Villar</footer>
+</body>
+</html>
