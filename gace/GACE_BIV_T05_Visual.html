@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV T5 — Contratos del Sector Público (I)</title>
+<style>
+:root{
+  --azul:#1e3a8a; --azul2:#3b62c4; --azulclaro:#eef2ff;
+  --oro:#a16207; --oroclaro:#fefce8;
+  --verde:#166534; --verdeclaro:#f0fdf4;
+  --rojo:#991b1b; --rojoclaro:#fef2f2;
+  --ambar:#92400e; --ambarclaro:#fffbeb;
+  --morado:#5b21b6; --moradoclaro:#f5f3ff;
+  --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1050px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#a16207,#1e3a8a);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.7rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--oro);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--oro)}
+h3{color:var(--azul2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.87rem;background:#fff}
+th{background:var(--oro);color:#fff;padding:8px 10px;text-align:left;font-size:.83rem}
+td{padding:7px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--oroclaro);border-left:5px solid var(--oro);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--oro);font-size:.85rem;margin-bottom:6px}
+.trampa{background:var(--rojoclaro);border-left:5px solid var(--rojo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--rojo);font-size:.85rem;margin-bottom:6px}
+.nuevo{background:var(--verdeclaro);border-left:5px solid var(--verde);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.nuevo .tit{font-weight:700;color:var(--verde);font-size:.85rem;margin-bottom:6px}
+.nota{background:var(--ambarclaro);border-left:5px solid var(--ambar);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:var(--ambar);font-size:.85rem;margin-bottom:6px}
+.art{display:inline-block;background:var(--oro);color:#fff;border-radius:5px;padding:1px 7px;font-size:.77rem;font-weight:600;white-space:nowrap}
+.num{display:inline-block;background:var(--azul);color:#fff;border-radius:5px;padding:1px 8px;font-size:.82rem;font-weight:700;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+.circulos{display:flex;flex-direction:column;align-items:center;gap:6px;margin:16px 0}
+.circ{width:100%;border-radius:12px;padding:12px 16px;color:#fff;font-size:.88rem}
+.c1{background:#a16207}
+.c2{background:#3b62c4;width:88%}
+.c3{background:#1e3a8a;width:74%}
+.circ b{display:block;font-size:.95rem;margin-bottom:3px}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{
+  body{background:#fff}
+  header{background:var(--oro)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card{box-shadow:none}
+  h2{page-break-after:avoid}
+  table,.clave,.trampa,.nuevo{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque IV · Derecho Administrativo · ⭐ TEMA ESTRELLA DEL EXAMEN</div>
+  <h1>Tema 5 — Los Contratos del Sector Público (I)</h1>
+  <div class="sub">Concepto, clases y elementos · Preparación y adjudicación · Efectos, cumplimiento y extinción · Invalidez y recursos</div>
+  <div class="badge-verif">✅ Verificado contra BOE a 01/08/2026 · umbrales Orden HAC/1517/2025 (desde 1/1/2026) · 4 correcciones sobre tu temario</div>
+</header>
+<div class="wrap">
+
+<h2>⚖️ 1. Marco general de la LCSP</h2>
+<div class="card">
+<p><b>Ley 9/2017, de 8 de noviembre</b>, de Contratos del Sector Público: transpone las Directivas <b>2014/23/UE</b> (concesiones) y <b>2014/24/UE</b> (contratación pública). La Directiva <b>2014/25/UE</b> (agua, energía, transportes, servicios postales) se transpone por el <b>RD-ley 3/2020</b>. Deroga el TRLCSP (RDLeg 3/2011). <b>Entrada en vigor: 9 de marzo de 2018</b>.</p>
+<p><b>Estructura:</b> 4 Libros · <b>347 artículos</b> · 53 DA · 5 DT · 16 DF · 6 anexos. Libro I (1-63) configuración general; Libro II (64-315) contratos de las AAPP — el núcleo del examen; Libro III (316-320) otros entes; Libro IV (321-347) organización.</p>
+</div>
+<div class="clave"><div class="tit">🔑 PRINCIPIOS DEL ART. 1 (pregunta de literal)</div>
+<p><b>Libertad de acceso</b> a las licitaciones · <b>publicidad y transparencia</b> · <b>no discriminación e igualdad de trato</b> · <b>eficiente utilización de los fondos públicos</b> · <b>integridad</b> · incorporación <b>transversal y preceptiva</b> de criterios <b>sociales y medioambientales</b> vinculados al objeto + facilitar el acceso de <b>PYMES</b>.</p></div>
+
+<h2>🎯 2. Ámbito subjetivo: los 3 círculos del art. 3</h2>
+<div class="circulos">
+  <div class="circ c1"><b>SECTOR PÚBLICO (art. 3.1) — el círculo más amplio</b>AGE, CCAA, EELL, Ceuta y Melilla · Seguridad Social · organismos autónomos · universidades públicas · autoridades administrativas independientes · consorcios · fundaciones públicas · mutuas · EPEs · sociedades mercantiles públicas (>50%) · fondos sin personalidad · entidades de interés general controladas · asociaciones de todas ellas. Partidos, sindicatos y patronales: solo contratos SARA (DA 3ª/4ª... régimen especial).</div>
+  <div class="circ c2"><b>PODERES ADJUDICADORES (art. 3.3)</b>Todas las AAPP + fundaciones públicas + mutuas + entidades de interés general no industrial o mercantil con financiación, control o nombramiento mayoritario público + sus asociaciones.</div>
+  <div class="circ c3"><b>ADMINISTRACIONES PÚBLICAS (art. 3.2) — régimen más rígido</b>Territoriales · gestoras de la Seg. Social · OOAA · universidades públicas · autoridades independientes · consorcios · Diputaciones Forales vascas · órganos constitucionales (Congreso, Senado, CGPJ, TC, TCu, Defensor del Pueblo…). ⚠️ Las EPEs y sociedades mercantiles NO son AAPP a efectos LCSP (son poder adjudicador no-AP las EPE... régimen del Libro III).</div>
+</div>
+
+<h2>📑 3. Tipos de contratos y régimen jurídico</h2>
+<table>
+<tr><th>Contrato típico</th><th>Art.</th><th>Objeto esencial</th><th>Clave distintiva</th></tr>
+<tr><td><b>Obras</b></td><td><span class="art">13</span></td><td>Ejecución de obra (bien inmueble con función económica o técnica), con o sin proyecto</td><td>Regla de la <b>obra completa</b></td></tr>
+<tr><td><b>Concesión de obras</b></td><td><span class="art">14</span></td><td>Ejecución de obra + derecho a explotarla (con o sin precio)</td><td><b>Riesgo operacional</b> del concesionario</td></tr>
+<tr><td><b>Concesión de servicios</b></td><td><span class="art">15</span></td><td>Gestión de servicio de titularidad de la Administración</td><td><b>Riesgo operacional</b>; nunca ejercicio de autoridad</td></tr>
+<tr><td><b>Suministro</b></td><td><span class="art">16</span></td><td>Adquisición o arrendamiento (con/sin opción de compra) de <b>bienes muebles</b></td><td>Software a medida = servicios; energía = suministro</td></tr>
+<tr><td><b>Servicios</b></td><td><span class="art">17</span></td><td>Prestaciones de hacer (actividad o resultado ≠ obra/suministro)</td><td>Nunca autoridad pública ni laboral encubierta</td></tr>
+<tr><td><b>Mixto</b></td><td><span class="art">18</span></td><td>Prestaciones de varios tipos</td><td>Rige la <b>prestación principal</b> (mayor VEC)</td></tr>
+</table>
+<div class="grid2">
+<div class="card"><h3 style="margin-top:0">Contratos ADMINISTRATIVOS <span class="art">Art. 25</span></h3><p style="font-size:.88rem">Los 5 típicos celebrados por una AP (con excepciones del 25.1.a: servicios financieros, creación artística, suscripciones) + los <b>especiales</b> (vinculados al giro o tráfico de la Administración: cafetería de edificio público). Régimen íntegro LCSP; jurisdicción <b>contencioso-administrativa</b>.</p></div>
+<div class="card"><h3 style="margin-top:0">Contratos PRIVADOS <span class="art">Art. 26</span></h3><p style="font-size:.88rem">Los de entes que no son AP + (celebrados por AP): servicios financieros, creación e interpretación artística y literaria, espectáculos, suscripciones a revistas y bases de datos. <b>Preparación y adjudicación: LCSP; efectos y extinción: Derecho privado.</b> Jurisdicción civil salvo <b>actos separables</b> (contencioso).</p></div>
+</div>
+
+<h2>💶 4. Umbrales SARA y magnitudes económicas</h2>
+<div class="nuevo"><div class="tit">🆕 UMBRALES SARA VIGENTES — Orden HAC/1517/2025, desde el 1/1/2026</div>
+<table>
+<tr><th>Contrato</th><th>Umbral (VEC, sin IVA)</th></tr>
+<tr><td>Obras, concesión de obras y concesión de servicios</td><td><span class="num">5.404.000 €</span></td></tr>
+<tr><td>Suministros y servicios — <b>AGE</b>, OOAA y Seguridad Social</td><td><span class="num">140.000 €</span></td></tr>
+<tr><td>Suministros y servicios — <b>resto de entes</b> (CCAA, EELL…)</td><td><span class="num">216.000 €</span></td></tr>
+<tr><td>Servicios sociales y específicos del Anexo IV</td><td><span class="num">750.000 €</span></td></tr>
+<tr><td>Contratos subvencionados (art. 23): obras / servicios vinculados</td><td><span class="num">5.404.000 €</span> / <span class="num">216.000 €</span></td></tr>
+</table>
+<p style="font-size:.85rem">Regla de lotes: si el VEC acumulado de todos los lotes alcanza el umbral, <b>todos</b> quedan SARA. Excepción: lotes de obras &lt; <b>1.000.000 €</b> y de suministros/servicios &lt; <b>80.000 €</b>, si los exceptuados no superan el <b>20%</b> del valor acumulado.</p></div>
+<table>
+<tr><th>Magnitud</th><th>Art.</th><th>Contenido</th></tr>
+<tr><td><b>Presupuesto base de licitación (PBL)</b></td><td><span class="art">100</span></td><td>Límite máximo de gasto, <b>IVA incluido</b>. Adecuado a precios de mercado, con desglose de costes.</td></tr>
+<tr><td><b>Valor estimado (VEC)</b></td><td><span class="art">101</span></td><td>Importe total <b>sin IVA</b>, incluyendo <b>prórrogas, opciones y modificaciones previstas</b>; en concesiones, el volumen de negocio del concesionario. Lotes: valor acumulado.</td></tr>
+<tr><td><b>Precio</b></td><td><span class="art">102</span></td><td>Cierto, en euros; adecuado al mercado atendiendo a los <b>costes laborales del convenio</b>.</td></tr>
+</table>
+
+<h2>👥 5. El contratista: aptitud, prohibiciones, solvencia y clasificación</h2>
+<table>
+<tr><th>Requisito</th><th>Claves de examen</th></tr>
+<tr><td><b>Capacidad</b> <span class="art">65-70</span></td><td>Personas físicas o jurídicas; objeto social congruente; extranjeras no comunitarias: sucursal en España + reciprocidad.</td></tr>
+<tr><td><b>Prohibiciones de contratar</b> <span class="art">71-73</span></td><td>Condenas firmes (terrorismo, corrupción, fraude, blanqueo…), sanciones graves, concurso, <b>no estar al corriente con Hacienda y Seg. Social</b>, falsedad, incompatibilidades (Ley 3/2015), incumplimiento culpable con resolución firme, retirada indebida de proposición. Duración máxima general: <b>3 años</b> (penal: la de la sentencia).</td></tr>
+<tr><td><b>Solvencia</b> <span class="art">86-91</span></td><td>Económica (art. 87): volumen anual ≥ <b>1,5 × VEC</b> en el mejor de los 3 últimos ejercicios; seguro; patrimonio neto. Técnica: obras <b>10 años</b> de experiencia acreditable; suministros y servicios <b>3 años</b>.</td></tr>
+<tr><td><b>Clasificación</b> <span class="art">77-83</span></td><td><b>Obligatoria en obras de VEC ≥ 500.000 €</b>; potestativa por debajo y <b>siempre potestativa en servicios</b>. Grupos (letras) → subgrupos → categorías. Vigencia indefinida con justificación anual de mantenimiento (solvencia económica: anual; técnica: cada 3 años).</td></tr>
+<tr><td><b>UTE</b> <span class="art">69</span></td><td>Sin constitución formal previa; escritura pública <b>solo tras la adjudicación</b>; responsabilidad <b>solidaria</b>.</td></tr>
+</table>
+
+<h2>📂 6. Preparación: expediente, tramitación, pliegos y garantías</h2>
+<div class="card"><p><b>Expediente (arts. 116-117):</b> motivación de la necesidad + PCAP y PPT + certificado de existencia de crédito + fiscalización previa + justificación del procedimiento y criterios + (en servicios) informe de insuficiencia de medios. Aprobación por el órgano de contratación con apertura del procedimiento.</p></div>
+<table>
+<tr><th>Tramitación</th><th>Presupuesto</th><th>Efectos</th></tr>
+<tr><td><b>ORDINARIA</b></td><td>Regla general</td><td>Plazos y trámites completos.</td></tr>
+<tr><td><b>URGENTE</b> <span class="art">119</span></td><td>Necesidad inaplazable o interés público que exija acelerar; declaración motivada</td><td>Preferencia en el despacho · <b>plazos reducidos a la mitad</b> (salvo presentación de ofertas SARA) · inicio de ejecución ≤ <b>1 mes</b> desde formalización.</td></tr>
+<tr><td><b>EMERGENCIA</b> <span class="art">120</span></td><td>Acontecimientos catastróficos, grave peligro, defensa nacional</td><td><b>Sin expediente ni tramitación previa</b> · contratación verbal posible · inicio ≤ <b>1 mes</b> · <b>no cabe REMC</b> · rendición de cuentas posterior.</td></tr>
+</table>
+<div class="grid2">
+<div class="card"><h3 style="margin-top:0">Pliegos</h3><p style="font-size:.88rem"><b>PCAG</b>: Consejo de Ministros + dictamen Consejo de Estado.<br><b>PCAP</b> (<span class="art">122</span>): condiciones del contrato concreto; aprobación previa por el órgano de contratación.<br><b>PPT</b> (<span class="art">124-126</span>): características técnicas; prohibido citar marcas salvo «o equivalente».</p></div>
+<div class="card"><h3 style="margin-top:0">Revisión de precios <span class="art">103-105</span></h3><p style="font-size:.88rem">Solo <b>periódica y predeterminada</b> en: obras, suministros de fabricación de armamento y suministros de energía. Requisitos: prevista en PCAP + <b>20% ejecutado Y 2 años transcurridos</b> (obras y concesiones: ambos). Excluye IVA, costes financieros y amortizaciones. Marco: Ley 2/2015 de desindexación.</p></div>
+</div>
+<h3>Garantías (arts. 106-114)</h3>
+<table>
+<tr><th>Garantía</th><th>Cuantía</th><th>Claves</th></tr>
+<tr><td><b>PROVISIONAL</b> <span class="art">106</span></td><td>≤ <span class="num">3% del PBL</span> (sin IVA)</td><td><b>Excepcional</b>: solo con justificación motivada en el PCAP. Prohibida en el abierto simplificado.</td></tr>
+<tr><td><b>DEFINITIVA</b> <span class="art">107</span></td><td><span class="num">5% del precio final ofertado</span> (sin IVA)</td><td><b>Obligatoria</b> (exenciones motivadas: bienes consumibles de entrega simultánea al pago…). En el simplificado sumario del 159.6: no se exige.</td></tr>
+<tr><td><b>COMPLEMENTARIA</b> <span class="art">107.2</span></td><td>Hasta <span class="num">+5%</span> (total máx. 10%)</td><td>Casos especiales (ofertas anormalmente bajas, riesgo especial).</td></tr>
+<tr><td><b>Constitución</b> <span class="art">108</span></td><td colspan="2">Efectivo o Deuda Pública · aval · seguro de caución · retención del precio (si el PCAP lo prevé).</td></tr>
+<tr><td><b>Devolución</b> <span class="art">111</span></td><td colspan="2">Tras cumplimiento y fin del plazo de garantía: acuerdo en <span class="num">2 meses</span>; si no, intereses.</td></tr>
+</table>
+
+<h2>📦 7. El contrato menor (art. 118)</h2>
+<div class="clave"><div class="tit">🔑 RÉGIMEN VIGENTE</div>
+<ul class="lista">
+<li>Obras: VEC <span class="num">&lt; 40.000 €</span> · Suministros y servicios: VEC <span class="num">&lt; 15.000 €</span> (sin IVA). Ciencia (DA 54ª): hasta 50.000 €.</li>
+<li>Tramitación: informe del órgano de contratación justificando que <b>no se altera el objeto para eludir umbrales</b> + aprobación del gasto + factura (+ presupuesto y, en su caso, proyecto en obras).</li>
+<li>Duración ≤ <b>1 año</b> · <b>sin prórroga</b> · <b>sin revisión de precios</b>.</li>
+<li>Publicidad <b>trimestral</b> en el perfil (salvo &lt; 5.000 € por anticipo de caja fija).</li>
+</ul></div>
+<div class="trampa"><div class="tit">⚠️ CORRECCIÓN SOBRE TU TEMARIO (y sobre "Bloques IV y V nuevos")</div>
+<p>El requisito de justificar que el contratista <b>no ha suscrito más contratos menores</b> que superen los umbrales (antiguo art. 118.3) fue <b>SUPRIMIDO por el RD-ley 3/2020</b>. Ya <b>no existe límite anual por proveedor</b>; solo se justifica la no alteración del objeto. Tu temario aún lo exige — desactualizado.</p></div>
+
+<h2>🏁 8. Procedimientos de adjudicación (arts. 131-187)</h2>
+<table>
+<tr><th>Procedimiento</th><th>Cuándo procede</th><th>Plazos y datos clave</th></tr>
+<tr><td><b>ABIERTO</b> <span class="art">156-158</span></td><td>Regla general (con restringido). Cualquier empresario; <b>prohibida la negociación</b></td><td>Ofertas SARA: <span class="num">35 días naturales</span> (obras, suministros y servicios) y 30 en concesiones, desde envío al DOUE (−5 si oferta electrónica; 15 con anuncio previo). No SARA: obras <span class="num">26 días</span>; suministros/servicios <span class="num">15 días</span>. Adjudicación: <b>15 días</b> (solo precio) / <b>2 meses</b> (varios criterios) desde apertura.</td></tr>
+<tr><td><b>ABIERTO SIMPLIFICADO</b> <span class="art">159</span></td><td>Obras VEC ≤ <span class="num">2.000.000 €</span>; suministros y servicios VEC &lt; <span class="num">140.000 €</span> (arts. 21.1.a y 22.1.a). Juicio de valor ≤ <b>25%</b> (≤ <b>45%</b> en prestaciones intelectuales)</td><td>Ofertas: <span class="num">15 días</span> (20 en obras) desde el perfil · inscripción en <b>ROLECE</b> · sin garantía provisional · documentación y garantía definitiva del propuesto: <b>7 días hábiles</b>.</td></tr>
+<tr><td><b>SIMPLIFICADO SUMARIO</b> <span class="art">159.6</span></td><td>Obras &lt; <span class="num">80.000 €</span>; suministros y servicios &lt; <span class="num">60.000 €</span> (nunca prestaciones intelectuales)</td><td>Ofertas: <span class="num">10 días hábiles</span> (5 en compras corrientes) · solo criterios de fórmula · <b>exime de solvencia</b> · <b>sin garantía definitiva</b> · sin acto público de apertura.</td></tr>
+<tr><td><b>RESTRINGIDO</b> <span class="art">160-165</span></td><td>Cualquier contrato; idóneo para servicios intelectuales. Dos fases</td><td>Solicitudes: 30 días (SARA) · candidatos mínimos: <span class="num">5</span> · sin negociación.</td></tr>
+<tr><td><b>LICITACIÓN CON NEGOCIACIÓN</b> <span class="art">167</span></td><td>Supuestos tasados: adaptación de soluciones, diseño o innovación, negociación imprescindible, especificaciones imprecisas, ofertas irregulares previas</td><td>Con anuncio · candidatos mínimos: <span class="num">3</span> · se negocia (nunca los mínimos ni los criterios).</td></tr>
+<tr><td><b>NEGOCIADO SIN PUBLICIDAD</b> <span class="art">168</span></td><td>Sin ofertas previas · <b>exclusividad</b> técnica o artística · <b>imperiosa urgencia</b> · entregas complementarias (≤3 años) · repetición de obras/servicios similares (≤3 años) · adquisiciones en mercados organizados</td><td>Sin anuncio de licitación. Mesa no preceptiva (salvo 168.a.1º).</td></tr>
+<tr><td><b>DIÁLOGO COMPETITIVO</b> <span class="art">172-176</span></td><td>Supuestos del 167 con solución no definible; infraestructuras complejas</td><td>Mesa especial con ≥ <span class="num">1/3 de expertos</span> · candidatos mínimos: 3 · posibles primas.</td></tr>
+<tr><td><b>ASOCIACIÓN PARA LA INNOVACIÓN</b> <span class="art">177-182</span></td><td>Productos o servicios no disponibles en el mercado (I+D)</td><td>Fases sucesivas investigación → desarrollo → adquisición.</td></tr>
+<tr><td><b>CONCURSO DE PROYECTOS</b> <span class="art">183-187</span></td><td>Planos o proyectos (arquitectura, ingeniería, datos)</td><td><b>Jurado</b> con autonomía; después cabe negociado sin publicidad con el ganador.</td></tr>
+</table>
+<div class="trampa"><div class="tit">⚠️ CORRECCIONES SOBRE TU TEMARIO</div>
+<p>1) Art. 156.2: el plazo SARA es <b>35 días para obras, suministros Y servicios</b> (30 solo para concesiones) — tu temario decía «obras 30 / suministros 35». 2) Art. 159.1.b: el límite es que el <b>juicio de valor no supere el 25%</b> (45% intelectuales) — no «criterios automáticos &gt;50%».</p></div>
+<h3>Técnicas de racionalización (arts. 218-230) y mesa de contratación</h3>
+<div class="grid2">
+<div class="card"><p style="font-size:.88rem"><b>Acuerdos marco</b> (219-222): máx. <span class="num">4 años</span> salvo excepciones. <b>Sistemas dinámicos</b> (223-226): totalmente electrónicos, abiertos a nuevas empresas. <b>Centrales de contratación</b> (227-230): DG de Racionalización y Centralización (Hacienda). <b>Subasta electrónica</b> (143): pujas a la baja sobre criterios cuantificables.</p></div>
+<div class="card"><p style="font-size:.88rem"><b>Mesa de contratación</b> (<span class="art">326</span>): preceptiva en abierto, simplificado (no en el sumario: potestativa), restringido, negociados con publicidad, diálogo y asociación. Composición: presidente + vocales (obligatorios: <b>asesor jurídico e interventor</b>) + secretario. AGE: mayoría funcionarios, sin cargos políticos. <b>Diálogo competitivo: mesa especial con ≥1/3 expertos</b> (327).</p></div>
+</div>
+<h3>Criterios de adjudicación y ofertas anormalmente bajas</h3>
+<div class="card"><p style="font-size:.9rem"><b>Mejor relación calidad-precio</b> (<span class="art">145-148</span>): pluralidad de criterios vinculados al objeto; el precio no puede ser único criterio salvo contratos simples; cabe el <b>coste del ciclo de vida</b>. <b>Ofertas anormalmente bajas</b> (<span class="art">149</span>): audiencia al licitador ≥ <b>5 días hábiles</b> para justificar; informe técnico; si no justifica → exclusión; si se adjudica a una oferta incursa que se justificó → posible <b>garantía complementaria del +5%</b>.</p></div>
+<h3>Adjudicación y formalización — el flujo con plazos</h3>
+<table>
+<tr><th>Paso</th><th>Plazo</th></tr>
+<tr><td>Requerimiento al mejor clasificado (documentación + <b>garantía definitiva</b>)</td><td><span class="num">10 días hábiles</span> (7 en simplificado). Si no cumple: se entiende retirada la oferta (+ posible prohibición) y se pasa al siguiente.</td></tr>
+<tr><td>Adjudicación tras recibir la documentación</td><td><span class="num">5 días hábiles</span> siguientes. Notificación a todos + publicación en el perfil en <b>15 días</b>.</td></tr>
+<tr><td><b>Formalización</b> — contratos susceptibles de REMC</td><td><b>NO antes de 15 días hábiles</b> desde la remisión de la notificación de adjudicación (ventana del recurso); tras ella, requerimiento y <b>5 días</b> para firmar.</td></tr>
+<tr><td><b>Formalización</b> — resto de contratos</td><td>≤ <span class="num">15 días hábiles</span> desde la notificación de la adjudicación.</td></tr>
+<tr><td>Publicación de la formalización</td><td>Perfil del contratante + <b>DOUE si SARA</b>. <b>Perfección del contrato = FORMALIZACIÓN</b> (art. 36), no la adjudicación.</td></tr>
+</table>
+
+<h2>⚙️ 9. Efectos y ejecución</h2>
+<div class="clave"><div class="tit">🔑 PRERROGATIVAS DE LA ADMINISTRACIÓN (art. 190)</div>
+<p><b>Interpretar</b> · resolver dudas · <b>modificar por interés público</b> · declarar responsabilidad del contratista · <b>suspender</b> · <b>resolver</b> · inspeccionar. Previa audiencia del contratista e informe jurídico; <b>dictamen del Consejo de Estado</b> si hay oposición del contratista en interpretación, nulidad o resolución, o modificaciones &gt; 20% del precio inicial (en contratos &gt; 6 M€). Acuerdos <b>inmediatamente ejecutivos</b> y fin de la vía administrativa.</p></div>
+<table>
+<tr><th>Regla de ejecución</th><th>Contenido</th></tr>
+<tr><td><b>Riesgo y ventura</b> <span class="art">197</span></td><td>El contratista asume el riesgo de la ejecución (contrapunto: fuerza mayor en obras, art. 239).</td></tr>
+<tr><td><b>Penalidades por demora</b> <span class="art">193</span></td><td><span class="num">0,60 € por cada 1.000 €</span> del precio (IVA excluido) por día de retraso. Si alcanzan un <b>múltiplo del 5%</b> del precio: la Administración opta entre resolución o nuevas penalidades. Se cobran por deducción del precio o sobre la garantía.</td></tr>
+<tr><td><b>Pago del precio</b> <span class="art">198.4</span></td><td><span class="num">30 días</span> desde la aprobación de certificaciones o conformidad. Demora: intereses + costes de cobro (Ley 3/2004). Aprobación de la conformidad: 30 días desde entrega.</td></tr>
+<tr><td><b>Suspensión por impago</b> <span class="art">198.5</span></td><td>Demora &gt; <span class="num">4 meses</span> → el contratista puede suspender, con <b>preaviso de 1 mes</b>.</td></tr>
+<tr><td><b>Resolución por impago</b> <span class="art">198.6</span></td><td>Demora &gt; <span class="num">6 meses</span> → derecho a resolver + indemnización de perjuicios.</td></tr>
+<tr><td><b>Pago a subcontratistas</b> <span class="art">216</span></td><td>≤ <span class="num">60 días</span>; el PCAP puede prever pago directo (DA 51ª).</td></tr>
+</table>
+<div class="trampa"><div class="tit">⚠️ CORRECCIÓN SOBRE TU TEMARIO</div>
+<p>Tu temario asignaba «4 meses» a la resolución del art. 198.6. Lo correcto: <b>4 meses = suspensión (198.5, preaviso 1 mes) · 6 meses = resolución (198.6)</b>. Escalera completa: 30 días pago → intereses → 4 meses suspender → 6 meses resolver.</p></div>
+
+<h2>✏️ 10. Modificación, cesión y subcontratación</h2>
+<table>
+<tr><th>Figura</th><th>Régimen</th><th>Límites numéricos</th></tr>
+<tr><td><b>Modificación PREVISTA</b> <span class="art">204</span></td><td>Cláusula clara, precisa e inequívoca en el PCAP</td><td>≤ <span class="num">20%</span> del precio inicial; sin alterar la naturaleza global.</td></tr>
+<tr><td><b>Modificación NO prevista</b> <span class="art">205</span></td><td>(a) Prestaciones adicionales necesarias; (b) circunstancias imprevisibles; (c) no sustanciales</td><td>(a) y (b): ≤ <span class="num">50%</span> del precio inicial (aislada o conjuntamente). (c): sin límite propio pero sin alterar el carácter (referencias: &lt;15% obras / &lt;10% servicios y suministros y bajo umbral SARA como indicios de no sustancialidad).</td></tr>
+<tr><td><b>Obligatoriedad</b> <span class="art">206</span></td><td>Obligatoria para el contratista si ≤ 20%</td><td>&gt; 20%: puede optar por resolver.</td></tr>
+<tr><td><b>Procedimiento</b> <span class="art">207</span></td><td>Audiencia (5 días) + informe jurídico + Intervención</td><td>Dictamen del Consejo de Estado si ≥ <b>20%</b> y precio ≥ <span class="num">6.000.000 €</span>. Publicidad en perfil (+DOUE si SARA).</td></tr>
+<tr><td><b>CESIÓN</b> <span class="art">214</span></td><td>Prevista en PCAP; cualidades no determinantes de la adjudicación</td><td>Cedente con ≥ <span class="num">20% ejecutado</span> (o 1/5 del plazo de explotación en concesiones) · cesionario capaz y solvente · <b>escritura pública</b>.</td></tr>
+<tr><td><b>SUBCONTRATACIÓN</b> <span class="art">215</span></td><td>Libre salvo prohibición en pliego; comunicación previa</td><td>Penalidad por infracción: hasta <span class="num">50% del subcontrato</span>. El principal responde íntegramente frente a la Administración.</td></tr>
+</table>
+
+<h2>🔚 11. Extinción: cumplimiento y resolución</h2>
+<div class="card"><p><b>Cumplimiento (art. 210):</b> acto formal de <b>recepción o conformidad</b> dentro del <b>mes</b> siguiente a la entrega. Desde la recepción corre el <b>plazo de garantía</b> del PCAP; sin reparos a su término, se extingue la responsabilidad y se devuelve la garantía (acuerdo de devolución: 2 meses).</p></div>
+<div class="grid2">
+<div class="card"><h3 style="margin-top:0">Causas generales de resolución <span class="art">211</span></h3><ul class="lista" style="font-size:.87rem">
+<li>Muerte o incapacidad del contratista individual; extinción de la persona jurídica</li>
+<li>Concurso o insolvencia</li>
+<li>Mutuo acuerdo</li>
+<li>Demora del contratista en los plazos</li>
+<li>Demora de la Administración en el pago &gt; <b>6 meses</b> (198.6)</li>
+<li>Incumplimiento de la obligación principal o de obligaciones esenciales calificadas</li>
+<li>Imposibilidad de ejecutar o lesión grave del interés público</li>
+<li><b>Impago de salarios</b> o incumplimiento de convenio durante la ejecución</li></ul></div>
+<div class="card"><h3 style="margin-top:0">Efectos <span class="art">213</span></h3><ul class="lista" style="font-size:.87rem">
+<li>Incumplimiento culpable del contratista → <b>incautación de la garantía</b> + indemnización de daños en lo que excedan</li>
+<li>Mutuo acuerdo → según lo pactado</li>
+<li>Causa imputable a la Administración → abono de lo ejecutado + <b>3% del importe dejado de realizar</b></li></ul></div>
+</div>
+
+<h2>🚫 12. Invalidez (arts. 38-43) y recurso especial (arts. 44-60)</h2>
+<div class="grid2">
+<div class="card"><h3 style="margin-top:0">Nulidad de derecho administrativo <span class="art">39</span></h3><p style="font-size:.87rem">Las del art. 47.1 Ley 39/2015 <b>+</b>: falta de capacidad, solvencia o clasificación; prohibición de contratar; <b>carencia o insuficiencia de crédito</b> (salvo emergencia); falta de publicación en <b>DOUE</b> siendo SARA; formalización que impida el recurso; incumplimiento grave del DUE declarado por el TJUE; ausencia de menciones esenciales en pliegos.</p></div>
+<div class="card"><h3 style="margin-top:0">Anulabilidad <span class="art">40</span></h3><p style="font-size:.87rem">Demás infracciones (art. 48 Ley 39/2015), en particular: <b>modificaciones que debieron ser nueva adjudicación</b> (incumplen 204-205), ventajas indebidas y <b>encargos a medios propios sin requisitos</b> (art. 32: control análogo + &gt;80% actividad + no capital privado).</p></div>
+</div>
+<div class="clave"><div class="tit">🔑 RECURSO ESPECIAL EN MATERIA DE CONTRATACIÓN (REMC) — LO MÁS PREGUNTADO</div>
+<table>
+<tr><th>Elemento</th><th>Régimen</th></tr>
+<tr><td><b>Ámbito</b> <span class="art">44</span></td><td>Obras y concesiones VEC &gt; <span class="num">3.000.000 €</span> · suministros y servicios VEC &gt; <span class="num">100.000 €</span> · especiales &gt; 100.000 · acuerdos marco y sistemas dinámicos de esos contratos · subvencionados · rescates y modificaciones que debieron relicitarse · encargos ilegales.</td></tr>
+<tr><td><b>Actos recurribles</b></td><td>Anuncios, pliegos, trámites cualificados, <b>adjudicación</b>, modificaciones ilegales, encargos, rescate de concesiones. <b>Excluido: emergencia (art. 120)</b>. Es <b>potestativo y GRATUITO</b>; sustituye a los recursos ordinarios.</td></tr>
+<tr><td><b>Órgano</b> <span class="art">45</span></td><td><b>TACRC</b> (estatal): miembros nombrados por el Consejo de Ministros, mandato de <span class="num">6 años</span> no prorrogable. CCAA: tribunal propio o convenio con TACRC.</td></tr>
+<tr><td><b>Plazo</b> <span class="art">50</span></td><td><span class="num">15 días hábiles</span> (desde publicación del anuncio/pliegos, conocimiento del trámite o remisión de la notificación de adjudicación).</td></tr>
+<tr><td><b>Efecto clave</b> <span class="art">53</span></td><td>Recurso contra la <b>adjudicación</b> → <b>SUSPENSIÓN AUTOMÁTICA</b> de la formalización hasta resolver.</td></tr>
+<tr><td><b>Tramitación</b> <span class="art">55-57</span></td><td>Expediente en 2 días · alegaciones 5 días · resolución en 5 días (máx. total 2 meses). Multa por temeridad o mala fe: hasta <span class="num">30.000 €</span> (entre 1.000 y 30.000).</td></tr>
+<tr><td><b>Contra la resolución</b></td><td>Solo <b>contencioso-administrativo</b>. Cuestión de nulidad (art. 60 supuestos especiales): 30 días / 6 meses desde formalización.</td></tr>
+</table>
+</div>
+<div class="nota"><div class="tit">🧭 ORGANIZACIÓN ADMINISTRATIVA (arts. 323-347)</div>
+<p><b>Junta Consultiva de Contratación Pública del Estado</b> (informes y recomendaciones) · <b>OIReScon</b> (supervisión independiente; informe anual; Estrategia Nacional cada 3 años) · <b>Oficina Nacional de Evaluación</b> (sostenibilidad financiera de concesiones) · <b>Plataforma de Contratación del Sector Público</b> (obligatoria AGE; perfiles del contratante, info accesible 5 años) · <b>ROLECE</b> (inscripción: prueba de aptitud) · <b>Registro de Contratos del Sector Público</b>.</p></div>
+
+<h2>🎯 13. Datos-ancla y trampas del T5</h2>
+<div class="clave"><div class="tit">📌 LA ESCALERA DE NÚMEROS (memoriza en bloque)</div>
+<ul class="lista">
+<li><b>Menor:</b> 40.000 / 15.000 · ≤1 año · sin prórroga. <b>Sumario:</b> &lt;80.000 / &lt;60.000. <b>Simplificado:</b> ≤2M / &lt;140.000.</li>
+<li><b>SARA:</b> 5.404.000 / 140.000 (AGE) / 216.000 (resto) / 750.000 (Anexo IV).</li>
+<li><b>REMC:</b> &gt;3.000.000 obras y concesiones / &gt;100.000 suministros y servicios · 15 días hábiles · suspensión automática.</li>
+<li><b>Garantías:</b> 3% provisional (PBL) · 5% definitiva (precio) · +5% complementaria.</li>
+<li><b>Pagos:</b> 30 días → 4 meses suspensión (preaviso 1 mes) → 6 meses resolución · subcontratistas 60 días.</li>
+<li><b>Modificaciones:</b> 20% previstas · 50% no previstas (a y b) · dictamen CE: ≥20% + ≥6M€.</li>
+<li><b>Clasificación obras:</b> ≥500.000 · <b>cesión:</b> 20% ejecutado · <b>penalidad demora:</b> 0,60‰/día.</li>
+<li><b>Acuerdo marco:</b> 4 años · <b>TACRC:</b> 6 años · <b>prohibiciones:</b> 3 años.</li>
+</ul></div>
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS</div>
+<ul class="lista">
+<li>PBL <b>incluye IVA</b>; VEC <b>no</b> (e incluye prórrogas y modificaciones previstas).</li>
+<li>El contrato se perfecciona con la <b>formalización</b>, no con la adjudicación (art. 36).</li>
+<li>Umbral servicios AGE (140.000) ≠ resto de entes (216.000).</li>
+<li>Suministro menor: &lt;15.000 (no 40.000, que es solo obras).</li>
+<li>Garantía provisional: <b>excepcional</b> y sobre el PBL; la definitiva: obligatoria y sobre el <b>precio ofertado</b>.</li>
+<li>En emergencia (120) <b>no cabe REMC</b>; en urgencia (119) sí, y los plazos van a la mitad.</li>
+<li>La suspensión automática del REMC opera solo si se recurre <b>la adjudicación</b>.</li>
+<li>El límite anual por proveedor en el contrato menor <b>ya no existe</b> (RD-ley 3/2020).</li>
+</ul></div>
+
+</div>
+<footer>GACE 2027 · Bloque IV · Tema 5 · Material visual de estudio · Verificado a 01/08/2026 (BOE)<br>Fuentes: Ley 9/2017 consolidada · Orden HAC/1517/2025 (umbrales 2026) · RD-ley 3/2020 · Ley 2/2015 · Ley 3/2004 · arts. 44-60, 99-130, 131-187, 188-217, 218-230, 323-347 LCSP</footer>
+</body>
+</html>
