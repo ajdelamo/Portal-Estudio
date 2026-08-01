@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BV — Test T1, T2 y T3 (Personal, Derechos/Disciplinario, Selección)</title>
+<style>
+:root{--azul:#0e7490;--azul2:#0891b2;--verde:#16a34a;--rojo:#dc2626;--naranja:#ea580c;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:70px}
+header{background:linear-gradient(135deg,#065f46,#0e7490);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:800px;margin:0 auto;padding:0 14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 6px}
+.tab{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;cursor:pointer}
+.tab.on{background:var(--azul);color:#fff}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 14px}
+.mode{border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:5px 12px;font-size:.8rem;cursor:pointer}
+.mode.on{background:#0f766e;color:#fff;border-color:#0f766e}
+.bars{display:flex;flex-direction:column;gap:6px;margin:10px 0 18px}
+.bar{background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.bar .lbl{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin-bottom:4px}
+.bar .track{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.bar .fill{height:100%;border-radius:4px;transition:width .3s}
+.q{background:#fff;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.q .meta{font-size:.75rem;color:#64748b;margin-bottom:8px;display:flex;justify-content:space-between}
+.q h3{font-size:.98rem;margin-bottom:12px;line-height:1.45}
+.opt{display:block;width:100%;text-align:left;border:2px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:10px 12px;margin:6px 0;font-size:.9rem;cursor:pointer;line-height:1.4}
+.opt:hover{border-color:var(--azul2)}
+.opt.ok{border-color:var(--verde);background:#f0fdf4}
+.opt.ko{border-color:var(--rojo);background:#fef2f2}
+.opt:disabled{cursor:default;opacity:.92}
+.exp{display:none;margin-top:10px;background:#eef2ff;border-left:4px solid var(--azul2);border-radius:0 8px 8px 0;padding:10px 12px;font-size:.85rem}
+.exp.show{display:block}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.btn{border:none;border-radius:8px;padding:8px 16px;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--azul);color:#fff}
+.btn.sec{background:#64748b}
+.btn.warn{background:var(--rojo)}
+.score{position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#fff;padding:10px 16px;text-align:center;font-size:.9rem}
+.score b{color:#4ade80}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧪 Test BV · T1+T2+T3 Personal, Derechos/Disciplinario, Selección</h1>
+  <p>GACE 2027 · Autocorregible y adaptativo · TREBEP + RDL 6/2023 + RD-ley 9/2025 · verificado a 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="tabs" id="tabs"></div>
+  <div class="modes">
+    <button class="mode on" data-m="normal">📚 Normal</button>
+    <button class="mode" data-m="adapt">🎯 Adaptativo (peores 20)</button>
+    <button class="mode" data-m="fail">❌ Solo erróneas</button>
+  </div>
+  <div class="bars" id="bars"></div>
+  <div class="controls">
+    <button class="btn" onclick="render(true)">🔀 Barajar</button>
+    <button class="btn sec" onclick="showAll()">👁️ Ver explicaciones</button>
+    <button class="btn warn" onclick="resetHist()">🗑️ Reiniciar historial</button>
+  </div>
+  <div id="quiz"></div>
+</div>
+<div class="score" id="score"></div>
+<script>
+const LS_KEY='gace_bv_t01t03_v1';
+const UNIDADES={1:'T1 · Personal',2:'T2 · Derechos/Disciplinario',3:'T3 · Selección/OEP'};
+const BANK=[
+// ============ T1 (u:1) ============
+{u:1,t:"El TREBEP fue aprobado por:",o:["Ley 7/2007, de 12 de abril","Real Decreto Legislativo 5/2015, de 30 de octubre","Real Decreto-ley 6/2023","Ley 30/1984"],c:1,e:"Texto Refundido que refunde la Ley 7/2007 (EBEP). Vigente desde el 1 de noviembre de 2015. Legislación básica (art. 149.1.18ª CE)."},
+{u:1,t:"El artículo 8.2 TREBEP clasifica a los empleados públicos en:",o:["3 clases","4 clases: carrera, interinos, laboral y eventual","5 clases, incluyendo el directivo","2 clases: funcionarios y laborales"],c:1,e:"El personal directivo profesional (art. 13) se añade pero NO figura en la enumeración del 8.2."},
+{u:1,t:"La reserva de funciones que impliquen participación en potestades públicas (art. 9.2 TREBEP) corresponde:",o:["A cualquier empleado público","Exclusivamente a los funcionarios públicos","Al personal laboral fijo también","Al personal directivo"],c:1,e:"Exigencia estructural del modelo constitucional (art. 103 CE); su infracción ha sido sancionada por la jurisprudencia."},
+{u:1,t:"Las causas tasadas de nombramiento de un funcionario interino (art. 10 TREBEP) son:",o:["3 causas","4 causas: vacantes, sustitución, programas temporales y acumulación de tareas","5 causas","Ilimitadas, a criterio del órgano"],c:1,e:"Vacantes: máx. 3 años · sustitución: tiempo estrictamente necesario · programas: máx. 3 años + 12 meses · acumulación: máx. 9 meses en 18."},
+{u:1,t:"El plazo máximo del supuesto de 'acumulación de tareas' para nombrar un interino es de:",o:["9 meses dentro de un periodo de 12","9 meses dentro de un periodo de 18","6 meses dentro de un periodo de 12","12 meses dentro de un periodo de 18"],c:1,e:"Trampa clásica: es '9 meses EN 18', no 'en 12'."},
+{u:1,t:"El personal eventual, conforme al artículo 12.4 TREBEP:",o:["Puede constituir mérito para la promoción interna","NO puede constituir mérito para el acceso o la promoción interna","Tiene preferencia en las OEP","Se equipara al personal directivo"],c:1,e:"Es una garantía del principio de mérito y capacidad frente a vías oblicuas de acceso al empleo estable."},
+{u:1,t:"El cese del personal eventual se produce:",o:["Solo mediante expediente disciplinario","En todo caso cuando cesa la autoridad a la que presta la función de confianza","Nunca, es indefinido","Tras 3 años como máximo"],c:1,e:"Además, el nombramiento y cese son libres (art. 12.3). En la AGE corresponde al Subsecretario del Departamento."},
+{u:1,t:"Para ser nombrado personal directivo público profesional en la AGE (art. 126 RDL 6/2023) se exige, con carácter general:",o:["Ser personal laboral fijo","Ser funcionario de carrera del subgrupo A1","Tener el grupo B como mínimo","No se exige ningún requisito de cuerpo"],c:1,e:"Para puestos de régimen laboral no se exige esta condición, pero sí titulación equivalente."},
+{u:1,t:"El plazo de presentación de solicitudes para un puesto de personal directivo profesional (art. 127 RDL 6/2023) es de:",o:["15 días hábiles, como el régimen general","10 días naturales desde la publicación de la convocatoria","1 mes","20 días naturales"],c:1,e:"Frente a los 15 días hábiles generales del RD 364/1995. Duración del nombramiento: máx. 5 años, renovable."},
+{u:1,t:"Los cuatro requisitos ACUMULATIVOS para adquirir la condición de funcionario de carrera (art. 62 TREBEP) son:",o:["Selectivo, nombramiento, acatamiento y toma de posesión","Selectivo, nombramiento, jura y publicación","Selectivo, toma de posesión y jubilación","Nombramiento, acatamiento y antigüedad"],c:0,e:"La falta de cualquiera de ellos impide la adquisición de la condición de funcionario."},
+{u:1,t:"El plazo general de toma de posesión de un funcionario de carrera es de:",o:["1 mes en todo caso","15 días naturales desde la publicación del nombramiento (1 mes si hay cambio de localidad)","10 días hábiles","Al día siguiente del nombramiento"],c:1,e:"Los interinos y eventuales toman posesión al día siguiente del nombramiento."},
+{u:1,t:"¿Cuál de estas causas de pérdida de la condición de funcionario de carrera (art. 63) NO admite reingreso ni rehabilitación ordinaria?",o:["La renuncia","La pérdida de la nacionalidad","La separación del servicio firme","La jubilación por incapacidad"],c:2,e:"La separación es la sanción disciplinaria más grave; a diferencia de la inhabilitación, no admite rehabilitación (salvo vía excepcional distinta)."},
+{u:1,t:"La jubilación forzosa se declara de oficio al cumplir el funcionario:",o:["67 años","70 años","65 años, con posible prolongación hasta los 70","60 años"],c:2,e:"La prolongación requiere solicitud motivada y resolución de la Administración."},
+{u:1,t:"En el procedimiento de prolongación del servicio activo, el silencio administrativo es positivo si:",o:["No se resuelve en 3 meses","No se resuelve en los 15 días anteriores a la fecha de jubilación forzosa","No se resuelve en 1 año","Nunca hay silencio positivo"],c:1,e:"Resolución de 31-12-1996 SEAP: solicitud con 2 meses de antelación; plazo de resolución: 1 mes."},
+{u:1,t:"La rehabilitación REGLADA (art. 68.1 TREBEP) se aplica a los casos de:",o:["Separación del servicio","Pérdida de la nacionalidad y jubilación por incapacidad permanente","Inhabilitación especial","Cualquier causa de pérdida"],c:1,e:"Desaparecida la causa objetiva, la rehabilitación se CONCEDE (derecho reglado, no discrecional). Silencio positivo."},
+{u:1,t:"La rehabilitación EXCEPCIONAL (inhabilitación) tiene un régimen de silencio:",o:["Positivo","Negativo","No existe silencio en este procedimiento","Depende del órgano"],c:1,e:"Art. 68.2: los órganos de gobierno PODRÁN conceder la rehabilitación; si no se resuelve expresamente, se entiende desestimada."},
+{u:1,t:"El Real Decreto-ley 6/2023 fue convalidado por el Congreso el:",o:["19 de diciembre de 2023","10 de enero de 2024","23 de abril de 2024","12 de enero de 2024"],c:1,e:"Publicado en BOE el 20/12/2023; convalidado el 10/01/2024 (Resolución BOE 12/01/2024); tramitación como Proyecto de Ley aún en curso."},
+{u:1,t:"El recurso de inconstitucionalidad contra el RDL 6/2023 (n.º 1863-2024) fue interpuesto por:",o:["El Defensor del Pueblo","Más de 50 diputados del Grupo Parlamentario Popular","El Gobierno de una Comunidad Autónoma","El Consejo General del Poder Judicial"],c:1,e:"Admitido a trámite por Providencia del TC de 23/04/2024. A la fecha de esta revisión no consta sentencia; el RDL sigue plenamente vigente."},
+{u:1,t:"Los niveles de complemento de destino del grupo A1, tras el RDL 6/2023, son:",o:["20-26","24-30","18-24","16-22"],c:1,e:"A1: 24-30 · A2: 20-26 · B: 18-24 · C1: 16-22 · C2: 14-18."},
+{u:1,t:"La creación, modificación y supresión de Cuerpos y Escalas (art. 75 TREBEP) exige:",o:["Real Decreto del Consejo de Ministros","Reserva de LEY de las Cortes Generales o Asambleas de las CCAA","Orden ministerial","Resolución de la SEFP"],c:1,e:"No pueden crearse cuerpos con titulación y funciones idénticas a otros ya existentes."},
+{u:1,t:"El Registro Central de Personal se ubica en:",o:["La Secretaría de Estado de Función Pública","La Dirección General de la Función Pública","El INAP","El Ministerio de Hacienda"],c:1,e:"Regulado por el RD 1405/1986 (modificado por RD 2073/1999). Anotaciones provisionales: 90 días naturales, prorrogables 90 más."},
+// ============ T2 (u:2) ============
+{u:2,t:"La relación entre el empleado público y la Administración se califica como:",o:["Contractual ordinaria","Estatutaria, fijada unilateralmente por la ley","Mercantil","De arrendamiento de servicios"],c:1,e:"Esto explica la inamovilidad del funcionario de carrera y, a la vez, un régimen reforzado de deberes."},
+{u:2,t:"La letra j bis del artículo 14 TREBEP (derechos digitales) fue introducida por:",o:["El RDL 6/2023","La Ley Orgánica 3/2018 (LOPDGDD)","La Ley 4/2023","El RDL 9/2025"],c:1,e:"Incluye intimidad en dispositivos digitales, frente a videovigilancia/geolocalización y desconexión digital."},
+{u:2,t:"La Ley 4/2023 (personas trans y LGTBI) modificó, entre otros, los artículos:",o:["14, 48, 49, 53, 82, 89 y 95 TREBEP","Solo el artículo 14","20 y 21 TREBEP","1 y 2 TREBEP"],c:0,e:"Incorpora identidad sexual, expresión de género y características sexuales como categorías protegidas, incluida la falta muy grave del 95.2.b)."},
+{u:2,t:"La jornada general de trabajo en la AGE, conforme a la Resolución SEFP de 28/02/2019, es de:",o:["35 horas semanales","37,5 horas semanales en cómputo anual","40 horas semanales siempre","30 horas semanales"],c:1,e:"La jornada de especial dedicación es de 40 horas semanales."},
+{u:2,t:"Las vacaciones anuales retribuidas de los funcionarios (art. 50 TREBEP) son de:",o:["20 días naturales","22 días hábiles, con los sábados no computados como hábiles","30 días naturales","25 días hábiles"],c:1,e:"Se incrementan por antigüedad: 15 años → 23 días; 20 → 24; 25 → 25; 30 o más → 26 días."},
+{u:2,t:"Tras el Real Decreto-ley 9/2025, el permiso por nacimiento (art. 49.a TREBEP) tiene una duración de:",o:["16 semanas","19 semanas (32 en monoparentalidad)","12 semanas","24 semanas"],c:1,e:"Estructura 6 semanas obligatorias + 11 flexibles hasta 12 meses + 2 semanas hasta 8 años (novedad del RDL 9/2025)."},
+{u:2,t:"El permiso parental del artículo 49.g) TREBEP, tras el RDL 9/2025, es:",o:["8 semanas retribuidas","8 semanas, NO retribuidas, hasta los 8 años del menor","4 semanas retribuidas","16 semanas no retribuidas"],c:1,e:"Antes de la reforma su carácter retributivo era controvertido (sentencias contradictorias); el RDL 9/2025 lo clarificó como NO retribuido."},
+{u:2,t:"El permiso por asuntos particulares ('moscosos') del artículo 48.k) es de:",o:["6 días al año, con incrementos por trienios desde el 6º","10 días al año fijos","4 días al año","6 días cada 2 años"],c:0,e:"2 días adicionales al 6º trienio + 1 día por cada trienio adicional desde el 8º."},
+{u:2,t:"La licencia por asuntos propios (art. 73 Decreto 315/1964) tiene una duración máxima de:",o:["6 meses cada 2 años, retribuida","3 meses cada 2 años, SIN retribución","1 mes al año, retribuida","No tiene límite temporal"],c:1,e:"A diferencia de los permisos (derecho si concurre la causa), las licencias son discrecionales según necesidades del servicio."},
+{u:2,t:"Los principios éticos del artículo 53 TREBEP y los principios de conducta del artículo 54 TREBEP:",o:["Son meramente programáticos, sin efectos jurídicos","Informan la interpretación y aplicación del régimen disciplinario","Solo se aplican al personal directivo","Han sido derogados por el RDL 6/2023"],c:1,e:"Su infracción puede integrar el tipo disciplinario abierto del art. 95.2.q) TREBEP."},
+{u:2,t:"Según el artículo 54.3 TREBEP, un empleado público debe obedecer las órdenes de sus superiores:",o:["Siempre, sin excepción","Salvo que constituyan una infracción manifiesta del ordenamiento jurídico","Solo si están por escrito","Solo si provienen del máximo superior jerárquico"],c:1,e:"En ese caso debe ponerlo inmediatamente en conocimiento de los órganos de inspección."},
+{u:2,t:"El régimen disciplinario de los empleados públicos se regula, con carácter básico, en:",o:["El Real Decreto 33/1986 exclusivamente","Los artículos 93 a 98 TREBEP (Título VII)","La Ley 39/2015 exclusivamente","El Decreto 315/1964 exclusivamente"],c:1,e:"El RD 33/1986 sigue vigente como norma reglamentaria en lo no opuesto al TREBEP, para faltas graves/leves y procedimiento."},
+{u:2,t:"Las faltas MUY GRAVES de los empleados públicos se tipifican en:",o:["El artículo 7 del Real Decreto 33/1986","El artículo 95.2 TREBEP, catálogo cerrado de rango legal","Cada convenio colectivo","El Decreto 315/1964"],c:1,e:"Las graves (art. 7 RD 33/1986) y las leves (art. 8 RD 33/1986) se regulan reglamentariamente."},
+{u:2,t:"La sanción de apercibimiento (art. 96.1 TREBEP) solo puede imponerse por:",o:["Faltas muy graves","Faltas graves","Faltas leves","Cualquier tipo de falta"],c:2,e:"Separación/despido: solo muy graves. Suspensión firme: máx. 6 años (graves: máx. la mitad, 3 años)."},
+{u:2,t:"La suspensión firme de funciones tiene una duración máxima de:",o:["3 años en todo caso","6 años","1 año","10 años"],c:1,e:"Para faltas graves, no podrá superar la mitad del máximo, es decir, 3 años."},
+{u:2,t:"En el procedimiento disciplinario ordinario, el pliego de cargos debe contestarse en un plazo de:",o:["5 días hábiles","10 días hábiles","15 días naturales","1 mes"],c:1,e:"Tras la propuesta de resolución hay una nueva audiencia de 10 días. El instructor nunca puede coincidir con el órgano que resuelve."},
+{u:2,t:"Conforme al artículo 97 TREBEP, las faltas MUY GRAVES prescriben a los:",o:["6 meses","2 años","3 años","5 años"],c:2,e:"Graves: 2 años. Leves: 6 meses. Estos plazos DEROGARON los del antiguo RD 33/1986 — cuidado con manuales desactualizados."},
+{u:2,t:"Las sanciones impuestas por faltas LEVES prescriben al:",o:["6 meses","1 año","2 años","3 años"],c:1,e:"Sanciones: muy graves 3 años, graves 2 años, leves 1 año. (Distinto del plazo de prescripción de las faltas leves, que es 6 meses)."},
+{u:2,t:"La cancelación de una sanción disciplinaria (art. 93 Decreto 315/1964):",o:["Borra físicamente la anotación del expediente","Anula sus efectos jurídicos a efectos de reincidencia, sin borrar la anotación","Solo aplica a las sanciones leves","Requiere una solicitud judicial"],c:1,e:"Plazos: leves 6 meses, graves 2 años, muy graves 6 años (salvo separación, no cancelable)."},
+{u:2,t:"La suspensión provisional como medida cautelar en el procedimiento disciplinario (art. 90 TREBEP) tiene una duración máxima de:",o:["3 meses","6 meses, salvo paralización imputable al interesado","1 año","No tiene límite"],c:1,e:"Es distinta de la suspensión firme como sanción (hasta 6 años)."},
+{u:2,t:"Las Juntas de Personal (art. 39 TREBEP) se constituyen en unidades electorales con:",o:["Entre 6 y 49 funcionarios","50 o más funcionarios","Más de 100 funcionarios exclusivamente","Cualquier número, a discreción"],c:1,e:"Con 6-49 funcionarios corresponden Delegados de Personal (1 hasta 30; 3 de 31 a 49)."},
+{u:2,t:"Los Acuerdos de negociación colectiva (art. 38 TREBEP), a diferencia de los Pactos:",o:["Tienen eficacia directa desde la firma","Requieren aprobación expresa y formal del órgano de gobierno competente","No producen ningún efecto jurídico","Solo pueden versar sobre retribuciones"],c:1,e:"Los Pactos versan sobre materias del propio órgano administrativo y tienen eficacia directa; los Acuerdos, sobre materias del Consejo de Ministros u órgano equivalente."},
+// ============ T3 (u:3) ============
+{u:3,t:"El objetivo de la planificación de RRHH conforme al artículo 69 TREBEP es:",o:["Reducir el número de funcionarios","Contribuir a la eficacia en la prestación de servicios y a la eficiencia en el uso de recursos","Aumentar la temporalidad","Sustituir a la OEP"],c:1,e:"Mediante la dimensión adecuada de efectivos, su distribución, formación, promoción y movilidad."},
+{u:3,t:"La planificación estratégica plurianual de RRHH en la AGE se regula en:",o:["El artículo 69 TREBEP exclusivamente","El artículo 107 del Real Decreto-ley 6/2023 (LFPAE)","La Ley 30/1984","El artículo 20 TREBEP"],c:1,e:"Desarrollada por la Orden TDF/380/2024, que distingue plan general, planes específicos y planes de reestructuración."},
+{u:3,t:"Conforme a la Orden TDF/380/2024, los planes específicos de RRHH de cada ministerio deben aprobarse:",o:["En el primer trimestre del año","En el último trimestre del año","Cada dos años","Sin plazo determinado"],c:0,e:"El plan general se aprueba en los 2 meses siguientes a los específicos, y todos antes de la Orden de elaboración de los Presupuestos."},
+{u:3,t:"La aprobación conjunta de las Relaciones de Puestos de Trabajo (RPT) en la AGE corresponde a:",o:["Solo al Ministerio de Hacienda","El Ministerio competente en función pública y el de Hacienda, a través de la CECIR","Cada Subsecretario individualmente","El Consejo de Ministros en pleno"],c:1,e:"Comisión Interministerial de Retribuciones (CIR), específicamente su Comisión Ejecutiva (CECIR)."},
+{u:3,t:"El plazo de ejecución de la Oferta de Empleo Público es, con carácter improrrogable, de:",o:["1 año","2 años","3 años","5 años"],c:2,e:"No confundir con el plazo de ejecución de la CONVOCATORIA (máx. 2 años, con la fase de oposición en 1 año)."},
+{u:3,t:"La OEP obliga a convocar las plazas comprometidas más un porcentaje adicional de hasta:",o:["5%","10%","15%","20%"],c:1,e:"Art. 70 TREBEP / art. 108 RDL 6/2023."},
+{u:3,t:"El cupo de reserva para personas con discapacidad en la OEP, tras el Real Decreto-ley 6/2023, es de:",o:["7% de las plazas convocadas","10% de las plazas convocadas, con al menos 2% de discapacidad intelectual","5% de las plazas convocadas","15% de las plazas convocadas"],c:1,e:"El artículo 59 TREBEP fijaba el 7%; el RDL 6/2023 lo elevó al 10%. Trampa habitual: citar el 7% como vigente."},
+{u:3,t:"El cupo de reserva para promoción interna en la OEP es de un porcentaje no inferior al:",o:["10%","20%","30% de las plazas de acceso libre","50%"],c:2,e:"Art. 70 TREBEP."},
+{u:3,t:"La Oferta de Empleo Público para 2026 en la AGE fue aprobada por:",o:["El Real Decreto 651/2025","El Real Decreto 387/2026, de 6 de mayo","Una Orden Ministerial de enero de 2026","El Real Decreto-ley 6/2023"],c:1,e:"BOE de 07/05/2026: 27.232 plazas autorizadas, con eje en transformación digital, servicios esenciales y 1.700 plazas TIC."},
+{u:3,t:"El sistema selectivo NORMAL para el acceso a la condición de funcionario de carrera es:",o:["El concurso de méritos","La oposición (y, junto a ella, el concurso-oposición)","El concurso-oposición exclusivamente","Cualquiera, a elección del aspirante"],c:1,e:"El concurso puro es EXCEPCIONAL y solo procede cuando lo prevea una ley (art. 61 TREBEP / art. 114 RDL 6/2023)."},
+{u:3,t:"En el concurso-oposición, para valorar la fase de concurso es necesario:",o:["Nada en especial","Haber superado la fase de oposición","Ser funcionario ya en la Administración","Superar una entrevista previa"],c:1,e:"Además, la puntuación del concurso no podrá determinar por sí sola el resultado del proceso selectivo."},
+{u:3,t:"No pueden formar parte de los órganos de selección quienes hayan preparado opositores en los últimos:",o:["2 años","3 años","5 años anteriores a la publicación de la convocatoria","10 años"],c:2,e:"Tampoco pueden formar parte: personal político, interinos, laborales no fijos, personal eventual, altos cargos (Ley 3/2015)."},
+{u:3,t:"La Comisión Permanente de Selección actual, regulada por la Orden HFP/266/2023, está compuesta por:",o:["1 Presidente y 10 Vocales","1 Presidente, 45 Vocales y 1 Secretario","Un número variable sin fijar","3 miembros exclusivamente"],c:1,e:"El nombramiento del Presidente corresponde al titular de la SEFP, a propuesta del Director del INAP."},
+{u:3,t:"El plazo de presentación de solicitudes en un proceso selectivo es de:",o:["10 días naturales desde la publicación en el BOE","20 días naturales desde la publicación en el BOE","1 mes desde la publicación en el BOE","15 días hábiles"],c:1,e:"La lista de admitidos/excluidos se dicta en el plazo máximo de 1 mes desde el cierre de solicitudes."},
+{u:3,t:"El plazo mínimo y máximo entre la celebración de dos ejercicios de un proceso selectivo es:",o:["24 horas y 10 días","72 horas y 45 días naturales","1 semana y 2 meses","No hay plazos fijados"],c:1,e:"El anuncio de la siguiente prueba: 12 horas de antelación (mismo ejercicio) o 24 horas (nuevo ejercicio)."},
+{u:3,t:"El nombramiento de los funcionarios de carrera en la AGE, tras superar el proceso selectivo, corresponde a:",o:["El Ministro del ramo","El Secretario de Estado para la Administración Pública (SEAP)","El Director General de la Función Pública","El Consejo de Ministros"],c:1,e:"Cualquier resolución que contravenga esta competencia es nula de pleno derecho. Los nombramientos se publican en el BOE."},
+{u:3,t:"La toma de posesión de un funcionario recién nombrado en Servicios Centrales se realiza ante:",o:["El Delegado del Gobierno","El Subsecretario del departamento","El Director General de la Función Pública","El propio interesado, sin trámite"],c:1,e:"En Servicios Periféricos, la toma de posesión se realiza ante el Delegado del Gobierno."},
+{u:3,t:"El Registro Central de Personal, en relación con la planificación, tiene entre sus finalidades:",o:["Solo sancionar a los funcionarios","Garantizar la constancia registral y disponer de información para la planificación de RRHH","Sustituir a las RPT","Fijar las retribuciones"],c:1,e:"Ubicado en la Dirección General de la Función Pública; plazo de comunicación y de asiento: 3 días hábiles cada uno."},
+{u:3,t:"El modelo de selección de personal tras el Real Decreto-ley 6/2023 (art. 112) debe ser:",o:["Únicamente memorístico","Adaptable, mixto y social","Solo oral","Exclusivamente por concurso"],c:1,e:"Añade a los principios clásicos (igualdad, mérito, capacidad) la accesibilidad y la igualdad socioeconómica."},
+{u:3,t:"Si un aspirante no supera el periodo de prácticas tras superar las pruebas selectivas:",o:["Conserva el derecho al nombramiento igualmente","Pierde todos los derechos al nombramiento como funcionario de carrera","Repite automáticamente el periodo","Pasa a ser personal laboral"],c:1,e:"Si no supera el curso selectivo, la pérdida del derecho requiere resolución motivada de la autoridad convocante."}
+];
+// ===== Motor =====
+let hist=JSON.parse(localStorage.getItem(LS_KEY)||'{}');
+let unidadSel='all', modo='normal';
+function saveHist(){localStorage.setItem(LS_KEY,JSON.stringify(hist))}
+function qid(q){return q.u+'|'+q.t.slice(0,60)}
+function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r}
+function ratio(q){const h=hist[qid(q)];if(!h||h.n===0)return null;return h.ok/h.n}
+function buildPool(){
+  let pool=BANK.filter(q=>unidadSel==='all'||q.u===unidadSel);
+  if(modo==='fail'){pool=pool.filter(q=>{const h=hist[qid(q)];return h&&h.n>0&&h.ok<h.n})}
+  if(modo==='adapt'){pool=[...pool].sort((a,b)=>{const ra=ratio(a),rb=ratio(b);return (ra===null?-1:ra)-(rb===null?-1:rb)}).slice(0,20)}
+  else{pool=shuffle(pool)}
+  return pool.map(q=>{const idx=shuffle(q.o.map((_,i)=>i));return{...q,idx}});
+}
+function render(reshuffle){
+  const tabs=document.getElementById('tabs');
+  tabs.innerHTML='';
+  const mk=(v,l)=>{const b=document.createElement('button');b.className='tab'+(unidadSel===v?' on':'');b.textContent=l;b.onclick=()=>{unidadSel=v;render(true)};tabs.appendChild(b)};
+  mk('all','📋 Todas ('+BANK.length+')');
+  for(const u in UNIDADES){mk(Number(u),UNIDADES[u]+' ('+BANK.filter(q=>q.u==u).length+')')}
+  document.querySelectorAll('.mode').forEach(b=>{b.classList.toggle('on',b.dataset.m===modo);b.onclick=()=>{modo=b.dataset.m;render(true)}});
+  renderBars();
+  const cont=document.getElementById('quiz');cont.innerHTML='';
+  const pool=buildPool();
+  if(pool.length===0){cont.innerHTML='<div class="q"><h3>🎉 No hay preguntas en este modo (ninguna errónea pendiente).</h3></div>';updateScore();return}
+  pool.forEach((q,n)=>{
+    const d=document.createElement('div');d.className='q';
+    const h=hist[qid(q)];
+    d.innerHTML='<div class="meta"><span>'+UNIDADES[q.u]+' · Pregunta '+(n+1)+'/'+pool.length+'</span><span>'+(h&&h.n?('histórico: '+h.ok+'/'+h.n):'nueva')+'</span></div><h3>'+q.t+'</h3>';
+    q.idx.forEach(i=>{
+      const b=document.createElement('button');b.className='opt';b.textContent=q.o[i];
+      b.onclick=()=>{
+        const id=qid(q);hist[id]=hist[id]||{ok:0,n:0};hist[id].n++;
+        d.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+        if(i===q.c){b.classList.add('ok');hist[id].ok++}
+        else{b.classList.add('ko');d.querySelectorAll('.opt').forEach(x=>{if(x.textContent===q.o[q.c])x.classList.add('ok')})}
+        d.querySelector('.exp').classList.add('show');
+        saveHist();renderBars();updateScore();
+      };
+      d.appendChild(b);
+    });
+    const e=document.createElement('div');e.className='exp';e.innerHTML='💡 '+q.e;d.appendChild(e);
+    cont.appendChild(d);
+  });
+  updateScore();
+}
+function renderBars(){
+  const el=document.getElementById('bars');el.innerHTML='';
+  for(const u in UNIDADES){
+    const qs=BANK.filter(q=>q.u==u);
+    let ok=0,n=0;qs.forEach(q=>{const h=hist[qid(q)];if(h){ok+=h.ok;n+=h.n}});
+    const pct=n?Math.round(100*ok/n):0;
+    const col=pct<50?'#dc2626':pct<75?'#ea580c':'#16a34a';
+    el.innerHTML+='<div class="bar"><div class="lbl"><span>'+UNIDADES[u]+'</span><span>'+(n?pct+'% ('+ok+'/'+n+')':'sin datos')+'</span></div><div class="track"><div class="fill" style="width:'+pct+'%;background:'+col+'"></div></div></div>';
+  }
+}
+function updateScore(){
+  let ok=0,n=0;BANK.forEach(q=>{const h=hist[qid(q)];if(h){ok+=h.ok;n+=h.n}});
+  document.getElementById('score').innerHTML=n?('Histórico total: <b>'+ok+'</b> aciertos de <b>'+n+'</b> respuestas ('+Math.round(100*ok/n)+'%)'):'Responde para empezar a registrar tu progreso (se guarda en este navegador).';
+}
+function showAll(){document.querySelectorAll('.exp').forEach(e=>e.classList.add('show'))}
+function resetHist(){if(confirm('¿Borrar todo el historial de este test?')){hist={};saveHist();render(true)}}
+render(true);
+</script>
+</body>
+</html>
