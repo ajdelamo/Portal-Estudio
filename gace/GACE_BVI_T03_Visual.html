@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque VI · Tema 3 · Modificaciones de crédito</title>
+<style>
+:root{
+  --v:#334155; --v2:#475569; --vclaro:#f1f5f9; --borde:#cbd5e1;
+  --verde:#166534; --verdeclaro:#f0fdf4; --verdeborde:#bbf7d0;
+  --rojo:#991b1b; --rojoclaro:#fef2f2; --rojoborde:#fecaca;
+  --ambar:#92400e; --ambarclaro:#fffbeb; --ambarborde:#fde68a;
+  --morado:#5b21b6; --moradoclaro:#f5f3ff; --moradoborde:#ddd6fe;
+}
+*{box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;max-width:980px;margin:0 auto;padding:24px;color:#1e293b;line-height:1.5;background:#fff}
+.bloque{color:var(--v);font-weight:700;font-size:.85em;letter-spacing:.05em;text-transform:uppercase}
+h1{color:var(--v);font-size:1.6em;margin:.2em 0 .1em;border-bottom:3px solid var(--v);padding-bottom:.3em}
+.sub{color:#475569;font-size:1.02em;margin-bottom:.6em}
+.badge-verif{display:inline-block;background:var(--vclaro);color:var(--v);border:1px solid var(--borde);border-radius:20px;padding:3px 12px;font-size:.78em;font-weight:600;margin-bottom:1em}
+h2{color:var(--v2);border-left:5px solid var(--v);padding-left:10px;margin-top:1.8em;font-size:1.22em}
+h3{color:var(--v);font-size:1.02em;margin-top:1.2em}
+.card{background:var(--vclaro);border:1px solid var(--borde);border-radius:10px;padding:14px 18px;margin:10px 0}
+.clave{background:var(--verdeclaro);border:1px solid var(--verdeborde);border-left:5px solid var(--verde);border-radius:8px;padding:12px 16px;margin:10px 0}
+.clave b{color:var(--verde)}
+.trampa{background:var(--rojoclaro);border:1px solid var(--rojoborde);border-left:5px solid var(--rojo);border-radius:8px;padding:12px 16px;margin:10px 0}
+.trampa b{color:var(--rojo)}
+.nuevo{background:var(--ambarclaro);border:1px solid var(--ambarborde);border-left:5px solid var(--ambar);border-radius:8px;padding:12px 16px;margin:10px 0}
+.nuevo b{color:var(--ambar)}
+.nota{background:var(--moradoclaro);border:1px solid var(--moradoborde);border-left:5px solid var(--morado);border-radius:8px;padding:12px 16px;margin:10px 0}
+.nota b{color:var(--morado)}
+.art{display:inline-block;background:var(--v);color:#fff;border-radius:5px;padding:1px 8px;font-size:.85em;font-weight:600}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.92em}
+th{background:var(--v);color:#fff;text-align:left;padding:7px 10px}
+td{padding:7px 10px;border-bottom:1px solid var(--borde)}
+tr:nth-child(even) td{background:var(--vclaro)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--borde);border-radius:8px;overflow:hidden;margin:10px 0}
+.vs>div{padding:12px 16px}
+.vs>div:first-child{background:var(--rojoclaro);border-right:1px solid var(--borde)}
+.vs>div:last-child{background:var(--verdeclaro)}
+ul.lista{margin:6px 0;padding-left:22px}
+ul.lista li{margin:4px 0}
+.mini{font-size:.85em;color:#64748b}
+.mnemo{background:#1e293b;color:#f1f5f9;border-radius:8px;padding:12px 16px;margin:10px 0;font-size:.94em}
+.mnemo b{color:#fbbf24}
+footer{margin-top:2.5em;padding-top:1em;border-top:2px solid var(--borde);font-size:.82em;color:#64748b;text-align:center}
+@media print{body{max-width:100%}.card,.clave,.trampa,.nuevo,.nota{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="bloque">📘 GACE 2027 · Bloque VI · Gestión Financiera y Seguridad Social · Tema 3</div>
+<h1>Gastos plurianuales y modificaciones de crédito</h1>
+<div class="sub">Transferencias · Créditos extraordinarios y suplementos · Ampliaciones · Incorporaciones · Generaciones · Anticipo de tesorería</div>
+<div class="badge-verif">✅ Verificado contra BOE a 01/08/2026</div>
+
+<div class="nota">
+<b>📌 Contexto normativo vigente (junio-agosto 2026):</b> los PGE 2023 (Ley 31/2022, de 23 de diciembre) siguen prorrogados por tercer año consecutivo al amparo del <span class="art">art. 134.4 CE</span>. El <b>Real Decreto-ley 16/2025</b>, de 23 de diciembre, que pretendía extender para 2026 determinadas disposiciones de la Ley 31/2022 (DA 1ª), <b>NO fue convalidado</b> por el Congreso de los Diputados — Resolución de 27 de enero de 2026 (BOE-A-2026-2024) — quedando derogado ex <span class="art">art. 86.2 CE</span>. La prórroga de 2026 opera, por tanto, únicamente sobre la base directa del art. 134.4 CE, con ajustes puntuales de RD-ley 2/2026 (tributario/financiación territorial) y RD-ley 3/2026 (revalorización de pensiones), ambos de 3 de febrero de 2026.
+</div>
+
+<h2>1. Marco normativo y principios presupuestarios excepcionados</h2>
+<table>
+<tr><th>Norma</th><th>Contenido relevante</th></tr>
+<tr><td>Ley 47/2003, LGP</td><td>Título II, arts. 42-63 (esp. 47, 47 bis, 51-60, DA 19ª)</td></tr>
+<tr><td>Ley 31/2022 (PGE 2023, prorrogada)</td><td>arts. 7-11: particularidades anuales del régimen de modificaciones</td></tr>
+<tr><td>Orden HFP/147/2022 (2 marzo)</td><td>documentación y tramitación de modificaciones y compromisos plurianuales; modif. por Orden HAC/372/2024 (añade DA 3ª) y Orden HAC/1506/2024 (art. 3.3, vigor 1-1-2025)</td></tr>
+<tr><td>Orden de 1 de febrero de 1996 (IOC)</td><td>documentos contables; reglas 41-43 modif. por Orden HAP/1357/2013</td></tr>
+</table>
+
+<div class="clave">
+<b>Todas las figuras del tema son excepciones tasadas a los principios del art. 27 LGP.</b> Localizar la excepción es la clave para no confundir figuras en el examen:
+</div>
+<table>
+<tr><th>Principio (art. 27 LGP)</th><th>Excepción del tema</th></tr>
+<tr><td>Especialidad cuantitativa (créditos = límite máximo)</td><td>Créditos extraordinarios, suplementos, ampliaciones, generaciones</td></tr>
+<tr><td>Especialidad cualitativa (finalidad concreta)</td><td>Transferencias de crédito (art. 52)</td></tr>
+<tr><td>Especialidad temporal / anualidad (art. 49 LGP)</td><td>Incorporaciones de remanentes (art. 58); gastos plurianuales (art. 47)</td></tr>
+<tr><td>Presupuesto bruto / no afectación</td><td>Generaciones de crédito (art. 53)</td></tr>
+</table>
+
+<div class="card">
+<b>📌 El Fondo de Contingencia (art. 50 LGP)</b> — pieza de financiación central de este tema.
+<ul class="lista">
+<li>Dotación: <b>2%</b> del límite de gasto no financiero del Estado, cada año.</li>
+<li>Dispone: <b>Consejo de Ministros</b>, a propuesta del Ministro de Hacienda.</li>
+<li>Financia: créditos extraordinarios y suplementos, ampliaciones, incorporaciones y, en ciertos casos, transferencias entre secciones — necesidades no discrecionales e imprevistas.</li>
+</ul>
+</div>
+
+<h2>2. Gastos plurianuales (arts. 47, 47 bis y DA 19ª LGP)</h2>
+<p>Excepción al principio de <b>anualidad</b> (art. 49 LGP): permiten comprometer gasto que se ejecutará en ejercicios posteriores al de autorización — obras, contratos de larga duración, fondos europeos.</p>
+
+<div class="clave">
+<b>Tres requisitos acumulativos (art. 47.1-47.2 LGP):</b>
+<ol>
+<li>La ejecución debe <b>iniciarse en el ejercicio corriente</b>.</li>
+<li>Máximo <b>cuatro</b> ejercicios posteriores al del compromiso.</li>
+<li>El gasto de cada anualidad posterior no puede superar los porcentajes legales sobre el crédito inicial.</li>
+</ol>
+</div>
+
+<table>
+<tr><th>Anualidad</th><th>x+1</th><th>x+2</th><th>x+3</th><th>x+4</th></tr>
+<tr><td><b>% máximo del crédito inicial</b></td><td>70%</td><td>60%</td><td>50%</td><td>50%</td></tr>
+</table>
+<p class="mini">Ejemplo del temario: crédito inicial 1.000.000€ en x → máximos 700.000€ (x+1), 600.000€ (x+2), 500.000€ (x+3), 500.000€ (x+4). Si ya se comprometieron 400.000€ para x+1, solo restan 300.000€ de margen.</p>
+
+<div class="vs">
+<div><b>❌ Excepciones a los límites del art. 47.2</b><br>No se aplican a: carga financiera de la Deuda Pública (cap. 3, intereses) ni a arrendamientos de inmuebles (concepto 202, incluidos mixtos arrendamiento-adquisición).</div>
+<div><b>⚠️ Pero atención — techo propio en la LPGE</b><br>La Ley 31/2022 (prorrogada) sí fija un techo específico para los arrendamientos: <b>máx. 10 anualidades y hasta el 100%</b> del crédito inicial en cada una. Regla anual que matiza la regla estable.</div>
+</div>
+
+<div class="nuevo">
+<b>Art. 47.3 LGP — flexibilización excepcional:</b> el Gobierno, a propuesta del Ministro de Hacienda (iniciativa del Departamento, informe previo de la DG de Presupuestos), puede: (a) ampliar el nº de anualidades; (b) elevar los porcentajes máximos; o (c) autorizar compromisos plurianuales aun sin crédito inicial en el ejercicio.
+</div>
+
+<div class="grid2">
+<div class="card">
+<b>Régimen especial MRR</b> (RD-ley 36/2020)<br>
+Máximo <b>3</b> anualidades posteriores (no 4), porcentajes <b>70%-60%-50%</b>. Las elevaciones excepcionales las acuerda el Gobierno previo informe del <b>Director General del Plan y del MRR</b> (no la DG de Presupuestos).
+</div>
+<div class="card">
+<b>Retención adicional 10% en obra plurianual</b> (art. 47.2 LGP)<br>
+Salvo abono total del precio: retención del <b>10%</b> del importe de adjudicación, documento <span class="art">RC 108</span>, en fase D (adjudicación). Se imputa al último ejercicio del contrato o al siguiente.
+</div>
+</div>
+
+<h3>Insuficiencia sobrevenida de crédito (art. 47 bis LGP)</h3>
+<div class="mnemo">Secuencia escalonada: <b>1) comunicación</b> al tercero tan pronto se conozca → <b>2) reprogramación</b> de obligaciones (reajuste de anualidades, si las disponibilidades lo permiten) → <b>3) resolución</b> del negocio jurídico con las compensaciones que procedan.</div>
+
+<div class="trampa">
+<b>⚠️ Trampas del examen en gastos plurianuales:</b>
+<ul class="lista">
+<li>Prohibido comprometer plurianualmente subvenciones del <span class="art">art. 22.2.a) Ley 38/2003 (LGS)</span> — concesión directa nominativa o por norma con rango de ley.</li>
+<li>Tramitación anticipada (reglas 41-43 IOC): regla 41 permite iniciar el expediente en ejercicio anterior; regla 42 permite ultimar adjudicación y formalización; regla 43 (subvenciones) solo llega hasta el momento inmediatamente anterior al compromiso de gasto.</li>
+<li>El pliego debe incluir condición suspensiva de existencia de crédito adecuado y suficiente + certificado de cumplimiento de los límites del art. 47.</li>
+</ul>
+</div>
+
+<h2>3. Modificaciones de crédito: visión general (art. 51 LGP)</h2>
+<p>Alteran la dotación inicial aprobada por las Cortes Generales — excepción a los principios de <b>especialidad y limitación</b> (art. 27.2 LGP), por eso su régimen es tasado y formal.</p>
+
+<table>
+<tr><th>Figura</th><th>Artículo LGP</th><th>Doc. MC</th></tr>
+<tr><td>Transferencias</td><td>52</td><td>060 / 061</td></tr>
+<tr><td>Generaciones</td><td>53</td><td>080</td></tr>
+<tr><td>Ampliaciones</td><td>54</td><td>050</td></tr>
+<tr><td>Créditos extraordinarios</td><td>55-56</td><td>030</td></tr>
+<tr><td>Suplementos de crédito</td><td>55-56</td><td>040</td></tr>
+<tr><td>Incorporaciones de remanentes</td><td>58</td><td>070</td></tr>
+<tr><td>Anticipo de tesorería (NO es modificación)</td><td>60</td><td>—</td></tr>
+</table>
+<p class="mini">Bajas por anulación (MC 090/095): sin regulación específica en la LGP; operan como instrumento de financiación de otras modificaciones. El anticipo de tesorería no es propiamente una modificación sino una operación no presupuestaria.</p>
+
+<div class="nota">
+<b>Reglas comunes de tramitación</b> (el "ABC" del expediente): (i) iniciativa de la unidad gestora; (ii) memoria justificativa; (iii) documentación específica según tipo; (iv) informe preceptivo de la Intervención Delegada; (v) intervención de la oficina presupuestaria.
+</div>
+
+<div class="clave">
+<b>Particularidades de la LPGE 2023 prorrogada (Ley 31/2022), vigentes en 2026:</b>
+<ul class="lista">
+<li><b>Concentración competencial en el Ministro de Hacienda:</b> autoriza todas las modificaciones de los capítulos 4 (transf. corrientes), 7 (transf. de capital) y 8 (activos financieros), salvo competencia del Consejo de Ministros o remisión de proyecto de ley.</li>
+<li><b>Servicios presupuestarios de fondos europeos:</b> servicio 50 «MRR» en todos los Departamentos; servicio 51 «React-EU» adicional en Sanidad — régimen de modificaciones más flexible.</li>
+</ul>
+</div>
+
+<h2>4. Transferencias de crédito (art. 52 LGP)</h2>
+<p>Trasvasa dotación de un crédito a otro (puede crear créditos nuevos) sin variar el importe total. Excepción a la especialidad <b>cualitativa</b>: es la modificación más frecuente y versátil.</p>
+
+<div class="vs">
+<div><b>❌ Transferencia</b><br>Reasignación entre créditos de <b>distinto</b> nivel de vinculación (orgánica, por programas, o económica). Es modificación de crédito: requiere autorización.</div>
+<div><b>✅ Redistribución</b><br>Reasignación dentro del <b>mismo</b> nivel de vinculación. NO es modificación de crédito, no requiere autorización especial.</div>
+</div>
+
+<table>
+<tr><th>Comparación (3 clasificaciones)</th><th>Si difieren</th><th>Si coinciden y vinculan al mismo nivel</th></tr>
+<tr><td>Orgánica (sección/servicio)</td><td>Transferencia</td><td>Seguir comparando</td></tr>
+<tr><td>Por programas</td><td>Transferencia</td><td>Seguir comparando</td></tr>
+<tr><td>Económica (nivel de vinculación: cap.1→artículo, cap.2→concepto, cap.6→artículo, resto→concepto)</td><td>Transferencia</td><td>Redistribución</td></tr>
+</table>
+
+<div class="grid2">
+<div class="trampa">
+<b>Limitaciones art. 52.1</b>
+<ul class="lista">
+<li>Naturaleza económica: no de financieras (cap. 8-9) al resto; no de capital (cap. 6-7) a corrientes (cap. 1-4)</li>
+<li>Orgánicas: no entre secciones distintas (salvo programa 923R contratación centralizada)</li>
+<li>Origen: no minorar créditos extraordinarios ni ampliados/suplementados en el mismo ejercicio (salvo ampliables de SS y sección 06 Deuda Pública)</li>
+</ul>
+</div>
+<div class="clave">
+<b>Excepciones art. 52.2 (tasadas)</b>
+<ul class="lista">
+<li>Reorganizaciones administrativas</li>
+<li>Traspaso de competencias a CC.AA.</li>
+<li>Convenios entre Ministerios/OO.AA.</li>
+<li>Ley 16/1985 Patrimonio Histórico Español (¡no confundir con Patrimonio Nacional!)</li>
+<li>Transferencias desde 929M (imprevistos, sección 31)</li>
+</ul>
+</div>
+</div>
+
+<div class="nota"><b>Suspendido durante la prórroga:</b> la prohibición capital→corrientes está suspendida por la Ley 31/2022 para gestión de fondos europeos. Tampoco se aplica la prohibición entre secciones si es por redistribución de efectivos de personal.</div>
+<div class="trampa"><b>Nunca</b> las transferencias pueden crear o aumentar subvenciones nominativas, salvo Ley General de Subvenciones o aportaciones a otros entes del sector público.</div>
+
+<table>
+<tr><th>Autoridad</th><th>Competencia</th></tr>
+<tr><td>Titular del Departamento / Presidente-Director OO.AA.</td><td>Misma sección y programa; misma sección/servicio distinto programa — salvo cap.1 o créditos vinculantes → Hacienda</td></tr>
+<tr><td>Ministro de Hacienda</td><td>Resto de supuestos; créditos vinculantes por naturaleza; redistribución de efectivos (REA); cap. 4/7/8 (régimen LPGE)</td></tr>
+<tr><td>Consejo de Ministros</td><td>Entre secciones por reorganización administrativa (único supuesto obligado en LGP); necesidades ineludibles y servicios 50/51 (LPGE)</td></tr>
+</table>
+<p class="mini">Documentos: MC 060 (positiva) / MC 061 (negativa); previa retención RC 101.</p>
+
+<h2>5. Créditos extraordinarios y suplementos (arts. 55-56 LGP) · Anticipo de tesorería (art. 60)</h2>
+<table>
+<tr><th>Figura</th><th>Cuándo procede</th></tr>
+<tr><td><b>Crédito extraordinario</b></td><td>NO existe ninguna dotación para el gasto (inaplazable + no previsto + no cabe transferencia)</td></tr>
+<tr><td><b>Suplemento de crédito</b></td><td>Existe dotación pero es insuficiente (inaplazable + previsto pero insuficiente + no ampliable + no cubrible por transferencia ni generación)</td></tr>
+</table>
+<div class="mnemo"><b>Diferencia clave:</b> «EXTRA-no» (extraordinario = gasto NO previsto). «SUPLE-poco» (suplemento = previsto pero insuficiente).</div>
+
+<table>
+<tr><th>Supuesto</th><th>Financiación</th><th>Autoriza</th></tr>
+<tr><td>Operaciones financieras (cap. 8-9)</td><td>Deuda pública / baja en operaciones financieras</td><td>Cortes Generales (Ley)</td></tr>
+<tr><td>Operaciones no financieras (cap. 1-7)</td><td>Baja en no financieras / Fondo de Contingencia</td><td>Cortes (si baja en créditos) · Consejo de Ministros (si baja en Fondo)</td></tr>
+<tr><td>Ejercicios anteriores SIN anulación previa</td><td>Fondo de Contingencia u otros créditos</td><td>Cortes Generales (Ley)</td></tr>
+<tr><td>Ejercicios anteriores CON anulación previa</td><td>Fondo de Contingencia</td><td>Consejo de Ministros</td></tr>
+</table>
+<p class="mini">Procedimiento del Estado: propuesta del Ministro de Hacienda + informe DG Presupuestos + dictamen del Consejo de Estado (cuando corresponda). El Ministerio de Hacienda remite informe trimestral a las Cortes vía Oficina de Presupuestos.</p>
+
+<h3>Régimen en Organismos Autónomos (art. 56 LGP)</h3>
+<table>
+<tr><th>Autoridad</th><th>Límite</th><th>Condiciones</th></tr>
+<tr><td>Presidente/Director OO.AA.</td><td>≤500.000€ / ≤10% crédito inicial del capítulo</td><td>Excepto cap.1 y créditos vinculantes</td></tr>
+<tr><td>Ministro de Hacienda</td><td>≤1.000.000€ / &lt;20% del capítulo</td><td>Incluye cap.1 y vinculantes si respeta límites</td></tr>
+<tr><td>Consejo de Ministros</td><td>Resto</td><td>—</td></tr>
+<tr><td>Cortes Generales (Ley)</td><td>Obligaciones anteriores sin anulación previa</td><td>art. 56.7 LGP</td></tr>
+</table>
+
+<div class="card">
+<b>Anticipo de Tesorería (art. 60 LGP)</b> — NO es modificación de crédito ni operación presupuestaria.
+<ul class="lista">
+<li>Concede: <b>el Gobierno</b>, a propuesta del Ministro de <b>Economía</b>.</li>
+<li>Límite: <b>1%</b> de los créditos autorizados al Estado por la LPGE.</li>
+<li>Requiere: dictamen favorable del Consejo de Estado, o ley habilitante.</li>
+<li>Si Cortes aprueban el crédito → se imputa a la nueva partida. Si lo deniegan → lo cancela el Gobierno (propuesta Min. Hacienda), imputándolo a créditos cuya minoración cause menor trastorno.</li>
+</ul>
+</div>
+
+<h2>6. Ampliaciones de crédito (art. 54 LGP)</h2>
+<div class="clave">
+<b>Tres requisitos acumulativos:</b> (i) gasto inaplazable; (ii) previsto pero insuficiente; (iii) el crédito tiene la condición legal de <b>ampliable</b>.
+</div>
+<div class="mnemo">La única diferencia con el suplemento es el requisito (iii): si el crédito es ampliable → AMPLIACIÓN; si no → SUPLEMENTO.</div>
+
+<h3>Créditos declarados ampliables (relación típica)</h3>
+<ul class="lista">
+<li>Sección 06 Deuda Pública (todos los créditos) y Sección 07 Clases Pasivas (todos los créditos)</li>
+<li>Subconceptos 160.00 (cuotas SS), 160.01 (MUFACE), 160.02 (ISFAS), 160.03 (MUGEJU)</li>
+<li>Transferencias de OO.AA. al Estado: art. 40 (corrientes) y art. 70 (capital)</li>
+<li>Pago de sentencias judiciales firmes (art. 106.1 Ley 29/1998, LJCA)</li>
+<li>Obligaciones RD-ley 6/2022 arts. 15-20 (Ucrania) y RD-ley 11/2022 art. 31 (La Palma/vulnerabilidad)</li>
+<li>Créditos previstos en el Anexo II de la LPGE</li>
+</ul>
+
+<div class="trampa">
+<b>⚠️ Prohibido ampliar créditos previamente minorados por transferencia</b>, EXCEPTO: (a) sección 06 Deuda Pública, si la ampliación no reduce la capacidad de financiación (art. 27 LO 2/2012) y la minoración vino de traspaso a CC.AA.; (b) ampliaciones por traspaso de competencias a CC.AA.
+</div>
+<p class="mini"><b>Particularidad:</b> todos los créditos ampliables son vinculantes por naturaleza. Competencia general: Ministro de Hacienda (sección 06 → Ministro de Economía). Documento: MC 050.</p>
+
+<h2>7. Incorporaciones de crédito (art. 58 LGP)</h2>
+<p>Incrementa el presupuesto vigente con remanentes del ejercicio anterior pendientes de ejecutar. Excepción a la especialidad <b>temporal (anualidad)</b>. Régimen tasado: solo procede en los 4 supuestos legales.</p>
+<div class="clave">
+<b>Cuatro supuestos tasados (art. 58 LGP):</b>
+<ol>
+<li>Cuando lo disponga una norma con rango de ley (típicamente la LPGE)</li>
+<li>Remanentes de generaciones por aportaciones o ingresos afectados <span class="art">art. 58.b)</span></li>
+<li>Remanentes de créditos retenidos para anticipos de tesorería pendientes de convalidación al cierre</li>
+<li>Remanentes de créditos extraordinarios/suplementos concedidos por ley en el último mes del ejercicio anterior</li>
+</ol>
+</div>
+<div class="trampa">
+<b>Restricción vigente en la prórroga 2026:</b> la LPGE 2023 (Ley 31/2022) deja sin efecto el supuesto del <span class="art">art. 58.b)</span>: no cabe incorporar remanentes de generaciones del ejercicio anterior. <b>Excepción:</b> remanentes del servicio 50 «MRR» sí pueden incorporarse.
+</div>
+<p class="mini">Financiación Estado: Fondo de Contingencia o baja en otras no financieras. Financiación OO.AA.: remanente de tesorería del ejercicio anterior. Autoriza en exclusiva: <b>Ministro de Hacienda</b> (art. 58 en relación con art. 62.1.c). Documento: MC 070.</p>
+
+<h2>8. Generaciones de crédito (art. 53 LGP)</h2>
+<p>Incrementan créditos por obtención de ingresos no previstos o superiores a los contemplados. <b>No necesitan financiación:</b> el propio ingreso es la fuente. Excepción a la especialidad cuantitativa y al presupuesto bruto (no afectación).</p>
+
+<table>
+<tr><th>Ingreso procedente de</th><th>Genera crédito en</th><th>Competencia Estado</th></tr>
+<tr><td>a) Aportaciones para financiar gastos específicos (cap. 4 y 7)</td><td>Aplicación del destino de la aportación</td><td>Titular del Departamento</td></tr>
+<tr><td>b) Reembolsos de préstamos</td><td>Cap. 8 (activos financieros)</td><td>Titular del Departamento</td></tr>
+<tr><td>c) Reintegros de pagos indebidos (ejercicio corriente)</td><td>Aplicaciones del pago indebido</td><td>Titular del Departamento</td></tr>
+<tr><td>d) Ingresos legalmente afectados</td><td>Norma de afectación</td><td>Ministro de Hacienda</td></tr>
+<tr><td>e) Venta de bienes/servicios (cap. 3)</td><td>Gastos para percibir el ingreso (cap. 1-2)</td><td>Ministro de Hacienda</td></tr>
+<tr><td>f) Enajenación de inmovilizado (cap. 6)</td><td>Cap. 6 inversiones reales</td><td>Ministro de Hacienda</td></tr>
+</table>
+<p class="mini"><b>Seis fuentes tasadas, lista cerrada.</b> Documento: MC 080.</p>
+<div class="nota">
+<b>Requisito temporal (regla + 2 excepciones):</b> como regla, generar solo cuando se hayan efectuado los ingresos. Excepciones: (1) subvenciones/aportaciones — basta reconocimiento del derecho o compromiso firme; (2) ingresos del 4º trimestre del ejercicio anterior pueden generar crédito en el corriente.
+</div>
+
+<h2>9. Tramitación de expedientes de modificación</h2>
+<p>Rige la <b>Orden HFP/147/2022</b> (2 marzo), modificada por Orden HAC/372/2024 (25 abril, añade DA 3ª sobre transferencias que afecten al servicio 50 MRR a iniciativa de Hacienda) y Orden HAC/1506/2024 (26 diciembre, art. 3.3 sobre informe DG Plan y MRR, vigor 1-1-2025). Ámbito: Estado, OO.AA. y sector público estatal con presupuesto limitativo — excluida la Seguridad Social.</p>
+
+<div class="card">
+<b>Memoria justificativa — contenido mínimo:</b>
+<ul class="lista">
+<li>Clase de modificación y créditos afectados</li>
+<li>Normas/acuerdos que la amparan (LGP, LPGE o norma con rango de ley)</li>
+<li>Estudio económico: cuantía y suficiencia de la partida financiadora</li>
+<li>Importe exacto y aplicaciones presupuestarias (codificación completa)</li>
+<li>Financiación propuesta</li>
+<li>Efectos en ejercicios posteriores, si aplica</li>
+</ul>
+</div>
+
+<table>
+<tr><th>Informe</th><th>Cuándo es preceptivo</th></tr>
+<tr><td>Oficina Presupuestaria del Departamento/OO.AA.</td><td>Siempre</td></tr>
+<tr><td>Intervención Delegada</td><td>Siempre; si competencia es del titular del Departamento/Presidente OO.AA., debe ser <b>favorable</b> para resolver en esa instancia — si no, se eleva</td></tr>
+<tr><td>DG del Plan y del MRR</td><td>Si afecta al servicio 50 MRR o créditos PRTR (verifica alineación con Reglamento UE 2021/241, no vinculante)</td></tr>
+<tr><td>Consejo de Estado</td><td>Créditos extraordinarios/suplementos de ejercicios anteriores sin anulación previa; condición del anticipo de tesorería (art. 60)</td></tr>
+</table>
+
+<div class="nota">
+<b>Documentos contables (Orden 1-2-1996, IOC)</b> — todos autorizados por el Director General de Presupuestos:
+<table>
+<tr><th>Código</th><th>Modificación</th></tr>
+<tr><td>MC 030</td><td>Créditos extraordinarios</td></tr>
+<tr><td>MC 040</td><td>Suplementos de crédito</td></tr>
+<tr><td>MC 050</td><td>Ampliación de crédito</td></tr>
+<tr><td>MC 060 / 061</td><td>Transferencias positivas / negativas</td></tr>
+<tr><td>MC 070</td><td>Incorporación de remanentes</td></tr>
+<tr><td>MC 080</td><td>Créditos generados por ingresos</td></tr>
+<tr><td>MC 090 / 095</td><td>Bajas / aumentos por rectificación</td></tr>
+</table>
+<p class="mini">Documentos auxiliares de retención: RC 101 (transferencias), RC 106 (bajas por anulación), RC 108 (retención adicional 10% obra plurianual).</p>
+</div>
+
+<h2>10. Cuadro resumen comparativo — repaso final</h2>
+<table>
+<tr><th>Figura</th><th>Art. LGP</th><th>Excepciona</th><th>¿Necesita financiación?</th><th>Efecto en el total</th></tr>
+<tr><td>Transferencias</td><td>52</td><td>Especialidad cualitativa</td><td>No (neutra)</td><td>Neutro</td></tr>
+<tr><td>Generaciones</td><td>53</td><td>Esp. cuantitativa + presup. bruto</td><td>No (financia el ingreso)</td><td>Aumenta</td></tr>
+<tr><td>Ampliaciones</td><td>54</td><td>Especialidad cuantitativa</td><td>Sí (Fondo Conting. o baja)</td><td>Aumenta</td></tr>
+<tr><td>Créditos extraordinarios</td><td>55-56</td><td>Esp. cuantitativa y cualitativa</td><td>Sí</td><td>Aumenta (o neutro si baja)</td></tr>
+<tr><td>Suplementos</td><td>55-56</td><td>Especialidad cuantitativa</td><td>Sí</td><td>Aumenta (o neutro)</td></tr>
+<tr><td>Incorporaciones</td><td>58</td><td>Anualidad</td><td>Sí (Fondo o remanente)</td><td>Aumenta</td></tr>
+<tr><td>Anticipo de tesorería</td><td>60</td><td>No es modificación</td><td>—</td><td>No presupuestario</td></tr>
+</table>
+
+<div class="mnemo">
+<b>Secuencia práctica si el crédito es insuficiente:</b> 1) ampliación → transferencia → suplemento/extraordinario (según haya o no dotación) · 2) si nada cubre: reajuste de anualidades · 3) última ratio: resolución del contrato con compensaciones.
+</div>
+
+<h2>11. Datos clave para el examen — autoevaluación rápida</h2>
+<div class="grid2">
+<div class="card">
+<b>Cifras a memorizar</b>
+<ul class="lista">
+<li>Plurianuales: 4 anualidades, 70-60-50-50 (MRR: 3, 70-60-50)</li>
+<li>Retención obra plurianual: 10% (RC 108)</li>
+<li>Anticipo de tesorería: 1% de los créditos LPGE</li>
+<li>OO.AA.: 500.000€/10% (Presidente) · 1.000.000€/20% (Hacienda)</li>
+<li>Fondo de Contingencia: 2% del gasto no financiero</li>
+</ul>
+</div>
+<div class="card">
+<b>Palabras clave por figura</b>
+<ul class="lista">
+<li>Extraordinario = NO previsto · Suplemento = previsto pero POCO</li>
+<li>Ampliable → ampliación (nunca suplemento)</li>
+<li>Generaciones = INGRESO (no necesitan financiación)</li>
+<li>Incorporaciones rompen la ANUALIDAD</li>
+<li>Transferencias no cambian el TOTAL</li>
+</ul>
+</div>
+</div>
+
+<div class="trampa">
+<b>⚠️ Errores típicos a evitar:</b>
+<ul class="lista">
+<li>Confundir crédito extraordinario (no había partida) con suplemento (había partida insuficiente).</li>
+<li>Olvidar que <b>todo</b> crédito ampliable es vinculante por naturaleza.</li>
+<li>Atribuir el anticipo de tesorería al Ministro de Hacienda cuando lo <b>concede</b> el Gobierno a propuesta del Ministro de <b>Economía</b> (Hacienda solo propone su cancelación).</li>
+<li>No distinguir transferencia de redistribución — la redistribución NO es modificación de crédito.</li>
+<li>Citar el RD-ley 16/2025 como vigente: fue <b>derogado por falta de convalidación</b> (BOE-A-2026-2024, 27-I-2026).</li>
+</ul>
+</div>
+
+<footer>GACE 2027 · Bloque VI · Tema 3 · Material verificado contra BOE a 01/08/2026 · Antonio José De Lamo Villar</footer>
+</body>
+</html>
