@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BVI — Flashcards T4-T6</title>
+<style>
+:root{--azul:#7c2d3f;--azul2:#1e3a5f;--verde:#16a34a;--rojo:#dc2626;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:40px}
+header{background:linear-gradient(135deg,#7c2d3f,#4d7c0f);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.2rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.f{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.83rem;font-weight:600;cursor:pointer}
+.f.on{background:var(--azul);color:#fff}
+.stats{display:flex;gap:10px;margin:8px 0 14px;font-size:.83rem;flex-wrap:wrap}
+.stats span{background:#fff;border-radius:8px;padding:5px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.escena{perspective:1200px;margin:10px 0}
+.carta{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
+.carta.girada{transform:rotateY(180deg)}
+.cara{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.frente{background:#fff;border:3px solid var(--azul2)}
+.frente .cat{position:absolute;top:12px;left:14px;font-size:.72rem;font-weight:700;color:#fff;background:var(--azul2);border-radius:12px;padding:2px 10px}
+.frente .idx{position:absolute;top:12px;right:14px;font-size:.72rem;color:#94a3b8}
+.frente h2{font-size:1.08rem;line-height:1.5;font-weight:600;border:none;color:#1e293b}
+.frente .pista{margin-top:14px;font-size:.75rem;color:#94a3b8}
+.dorso{background:linear-gradient(135deg,#7c2d3f,#4d7c0f);color:#fff;transform:rotateY(180deg)}
+.dorso .resp{font-size:1.15rem;font-weight:800;line-height:1.45}
+.dorso .det{margin-top:12px;font-size:.85rem;opacity:.92;line-height:1.5}
+.botones{display:flex;gap:8px;margin:14px 0;justify-content:center;flex-wrap:wrap}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-size:.9rem;font-weight:700;cursor:pointer}
+.btn.mal{background:#fee2e2;color:var(--rojo)}
+.btn.bien{background:#dcfce7;color:#15803d}
+.btn.nav{background:#e2e8f0;color:#334155}
+.btn.accion{background:var(--azul);color:#fff}
+.aviso{text-align:center;font-size:.8rem;color:#64748b;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>🃏 Flashcards BVI · T4-T6 — Control del gasto, Ejecución, Clasificación económica</h1>
+  <p>Plazos · artículos · datos-ancla · LGP + LOTCu + LGS · verificado 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="filtros" id="filtros"></div>
+  <div class="stats"><span id="st-total"></span><span id="st-dom">✅ dominadas: <b id="ndom">0</b></span><span id="st-rep">🔁 a repasar: <b id="nrep">0</b></span></div>
+  <div class="escena"><div class="carta" id="carta" onclick="girar()">
+    <div class="cara frente"><div class="cat" id="cat"></div><div class="idx" id="idx"></div><h2 id="preg"></h2><div class="pista">👆 toca para ver la respuesta</div></div>
+    <div class="cara dorso"><div class="resp" id="resp"></div><div class="det" id="det"></div></div>
+  </div></div>
+  <div class="botones">
+    <button class="btn mal" onclick="marcar(false)">❌ Repasar</button>
+    <button class="btn bien" onclick="marcar(true)">✅ Me la sé</button>
+  </div>
+  <div class="botones">
+    <button class="btn nav" onclick="mover(-1)">← Anterior</button>
+    <button class="btn accion" onclick="barajar()">🔀 Barajar</button>
+    <button class="btn nav" onclick="mover(1)">Siguiente →</button>
+  </div>
+  <div class="botones"><button class="btn nav" onclick="soloRepaso()" id="btnrep">🎯 Solo las marcadas "repasar"</button>
+  <button class="btn nav" onclick="resetear()">🗑️ Reiniciar</button></div>
+  <div class="aviso">El progreso se guarda en este navegador (localStorage).</div>
+</div>
+<script>
+const LS='gace_bvi_fc_t04t06_v1';
+const CARDS=[
+// —— T4 ——
+{c:'T4·Datos',p:'Doble rol de la IGAE',r:'Órgano de control interno + centro directivo y gestor de la contabilidad pública',d:'Elabora la Cuenta General del Estado y coordina el Plan General de Contabilidad Pública.'},
+{c:'T4·Datos',p:'Quién resuelve un conflicto irresoluble entre Intervención y órgano gestor',r:'El Consejo de Ministros',d:'Confirma que la IGAE es control INTERNO: la última palabra la tiene el Ejecutivo.'},
+{c:'T4·Datos',p:'Ámbito de la función interventora',r:'AGE, Organismos Autónomos y Entidades Gestoras/Servicios Comunes de la SS — NO las Mutuas',d:'Las Mutuas solo están sujetas a control financiero permanente y auditoría.'},
+{c:'T4·Datos',p:'Fases de la función interventora',r:'A (aprobación) - D (compromiso) - O (reconocimiento obligación) - P (pago) + comprobación material',d:'Comprobación material obligatoria desde 50.000€ (IVA excluido).'},
+{c:'T4·Datos',p:'Resolución de la discrepancia según quién reparó',r:'Reparó la ID → resuelve la IGAE · Reparó/confirmó la IGAE → resuelve el Consejo de Ministros',d:'Art. 154 LGP.'},
+{c:'T4·Plazos',p:'Plazo del Plan de Acción tras control financiero permanente (art. 161 LGP)',r:'3 meses desde la recepción de los informes',d:'Cada departamento lo remite a la IGAE con las medidas adoptadas.'},
+{c:'T4·Datos',p:'Excepción a la auditoría de cuentas anuales',r:'NO se aplica a la AGE ni a las Entidades Gestoras/Servicios Comunes de la SS',d:'Sus cuentas se integran en la Cuenta General del Estado, fiscalizada por el TCu.'},
+{c:'T4·Datos',p:'Composición del Tribunal de Cuentas',r:'12 Consejeros (6 Congreso + 6 Senado, 3/5, 9 años) + Fiscal',d:'LO 2/2024: presencia equilibrada, 40% mínimo de cada sexo por Cámara.'},
+{c:'T4·Datos',p:'Nombramiento del Presidente del Tribunal de Cuentas',r:'Lo nombra el REY de entre los Consejeros, a propuesta del Pleno; mandato 3 años',d:'Trampa: NO lo eligen las Cortes directamente.'},
+{c:'T4·Datos',p:'Criterio de imputación de la responsabilidad contable',r:'Dolo, culpa o negligencia GRAVES + menoscabo efectivo y cuantificable',d:'Puede ser DIRECTA (ejecuta/induce/coopera) o SUBSIDIARIA (negligencia que da ocasión al menoscabo).'},
+{c:'T4·Datos',p:'Tres procedimientos jurisdiccionales del Tribunal de Cuentas',r:'Juicio de cuentas, reintegro por alcance, expediente de cancelación de fianzas',d:'LFTCu (Ley 7/1988).'},
+{c:'T4·Plazos',p:'Plazo de remisión de la Cuenta General del Estado al Tribunal de Cuentas',r:'Antes del 31 de octubre del año siguiente',d:'La IGAE la forma y el Gobierno la eleva al Tribunal.'},
+{c:'T4·Datos',p:'Reformas 2024 de la LOTCu',r:'LO 1/2024 (amnistía, art. 39) y LO 2/2024 (paridad, art. 30)',d:'LO 1/2024: exención por actos amnistiados. Confirmado BOE-A-2024-11776.'},
+// —— T5 ——
+{c:'T5·Datos',p:'Distinción gastar vs. pagar',r:'Gastar = reconocer obligación (fases 1-3) · Pagar = salida material de fondos (fases 4-5)',d:'En el Estado, órganos distintos gestionan gasto (Ministerio) y pago (DGTPF).'},
+{c:'T5·Datos',p:'Documento de la fase 3ª: Estado vs. Organismos Autónomos',r:'Estado: OK (con propuesta de pago) · OO.AA.: O (sin propuesta)',d:'Diferencia que se arrastra a las fases mixtas: ADOK/OP vs. ADO/ADOP.'},
+{c:'T5·Datos',p:'Umbral de autorización del Consejo de Ministros (convenios, contratos, subvenciones)',r:'12.000.000€ en los tres casos',d:'Arts. 74.5 LGP, 324 LCSP y 10.2 LGS.'},
+{c:'T5·Datos',p:'Umbrales LCSP 2026 (Orden HAC/1517/2025)',r:'Obras/concesiones: 5.404.000€ · Suministros/servicios: 216.000€ · Otros: 140.000€',d:'Adaptan la LCSP a los Reglamentos Delegados (UE) 2025/2150-2152.'},
+{c:'T5·Datos',p:'Límite de la tramitación anticipada de un contrato',r:'Hasta la adjudicación y formalización (A y D) — nunca el reconocimiento de la obligación',d:'Art. 117 LCSP, regla 42 IOC.'},
+{c:'T5·Datos',p:'Límite de la tramitación anticipada de una subvención',r:'Hasta el momento inmediatamente anterior al compromiso (aprobación de la convocatoria) — nunca la concesión',d:'Regla 43 IOC.'},
+{c:'T5·Plazos',p:'Gastos plurianuales: nº de ejercicios y porcentajes',r:'4 ejercicios posteriores, 70-60-50-50',d:'Excepciones: deuda pública (cap.3) y arrendamientos de inmuebles.'},
+{c:'T5·Datos',p:'Pagos a justificar vs. anticipo de caja fija',r:'PaJ: presupuestario, excepcional · ACF: extrapresupuestario, permanente, solo Cap.2',d:'Arts. 79 y 78 LGP respectivamente.'},
+{c:'T5·Datos',p:'Documento contable de la fase 5ª: Estado vs. OO.AA.',r:'Estado: ROTB (Relación) · OO.AA.: OTB (individual)',d:'El SIC considera el pago realizado al obtener la ROTB.'},
+{c:'T5·Datos',p:'Principio de unidad de caja (art. 26 LGP)',r:'Una única caja, el Tesoro Público, centralizada en el Banco de España',d:'Los OO.AA. necesitan autorización del DGTPF para abrir cuentas en otras entidades.'},
+{c:'T5·Plazos',p:'Plazo de pago de sentencias judiciales firmes (art. 24 LGP)',r:'3 meses desde el reconocimiento de la obligación o la notificación',d:'No confundir con el plazo de prescripción (4 años, art. 25 LGP).'},
+{c:'T5·Plazos',p:'Autorización de cuentas bancarias de OO.AA. fuera del Banco de España (art. 109 LGP)',r:'3 meses, silencio NEGATIVO',d:'La autoriza el DGTPF.'},
+// —— T6 ——
+{c:'T6·Datos',p:'Características de los bienes del Capítulo 2',r:'Fungibles, duración inferior al ejercicio, no inventariables, no amortizables',d:'Se diferencian del Cap. 6, que sí genera patrimonio amortizable.'},
+{c:'T6·Datos',p:'Regla del leasing',r:'SIN opción de compra → Cap. 2 (art. 20) · CON opción de compra → Cap. 6 (art. 64)',d:'Al ejercer la opción, el bien se incorpora al patrimonio.'},
+{c:'T6·Datos',p:'Regla de los seguros',r:'De bienes → Cap. 2 (224) · De personal → Cap. 1 (162.05)',d:'Distinción frecuente en examen.'},
+{c:'T6·Datos',p:'Imputación de las indemnizaciones por razón del servicio',r:'Capítulo 2, artículo 23 — fuera de nómina',d:'Aunque son percepciones del funcionario, no van en el Capítulo 1.'},
+{c:'T6·Datos',p:'Vinculación del Capítulo 2: Estado vs. Organismos Autónomos',r:'Estado: nivel ARTÍCULO (art. 43 LGP) · OO.AA.: nivel CAPÍTULO (art. 44 LGP)',d:'Determina si un movimiento es redistribución (libre) o transferencia (restringida).'},
+{c:'T6·Datos',p:'Criterio Cap. 4 vs. Cap. 7',r:'¿El beneficiario destina los fondos a gasto corriente o a inversión?',d:'Beca de estudio → Cap. 4. Beca de investigación → Cap. 7.'},
+{c:'T6·Datos',p:'Excepción de las transferencias al exterior (arts. 49/79)',r:'NO se consideran créditos vinculantes por naturaleza',d:'A diferencia del resto de transferencias nominativas.'},
+{c:'T6·Datos',p:'Tres requisitos acumulativos de una subvención (art. 2 LGS)',r:'Sin contraprestación directa + sujeta a objetivo + finalidad de fomento de interés público',d:'Distinta de la transferencia, que no está afectada a finalidad concreta.'},
+{c:'T6·Datos',p:'Interés de demora en subvenciones 2026 (art. 38.2 LGS)',r:'4,0625% (interés legal 3,25% + 25%)',d:'DA 42ª Ley 31/2022, mantenida por la prórroga. Verificado.'},
+{c:'T6·Datos',p:'Naturaleza del Anticipo de Caja Fija',r:'Extrapresupuestario y permanente, solo Capítulo 2',d:'El gasto presupuestario se imputa al reponer fondos (documento ADOK), no al librarlos.'},
+{c:'T6·Datos',p:'Límite global del ACF (regla general)',r:'7% del crédito total del Capítulo 2',d:'AECID: 14%. Mº Defensa (exterior): 2,5% del Cap. 6.'},
+{c:'T6·Datos',p:'4 excepciones al límite de 5.000€ en ACF',r:'Telecomunicaciones, energía eléctrica, combustibles, indemnizaciones por razón del servicio',d:'Pueden pagarse por ACF aunque superen los 5.000€.'},
+{c:'T6·Datos',p:'Aprobación de la cuenta justificativa: ACF vs. PaJ',r:'ACF: Jefe de la Unidad Administrativa · PaJ: Ministro o Presidente/Director OA',d:'Diferencia clave de examen.'},
+{c:'T6·Datos',p:'Tres supuestos tasados de los Pagos a Justificar (art. 79 LGP)',r:'Imposibilidad de justificación previa, gastos en el extranjero, ausencia de dependencia ministerial local',d:'Ejemplo típico: expropiaciones (importe definitivo fijado después).'},
+];
+let idx=0, activos=[...CARDS], filtroActual='todas', soloRep=false;
+function loadHist(){try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch(e){return{}}}
+function saveHist(h){localStorage.setItem(LS,JSON.stringify(h))}
+function cid(c){return c.c+'|'+c.p.slice(0,50)}
+function cats(){return [...new Set(CARDS.map(c=>c.c))]}
+function buildFiltros(){
+  const f=document.getElementById('filtros');
+  f.innerHTML='<button class="f on" data-c="todas">Todas</button>'+cats().map(c=>`<button class="f" data-c="${c}">${c}</button>`).join('');
+  f.querySelectorAll('.f').forEach(b=>b.onclick=()=>{f.querySelectorAll('.f').forEach(x=>x.classList.remove('on'));b.classList.add('on');filtroActual=b.dataset.c;soloRep=false;aplicarFiltro();idx=0;mostrar()});
+}
+function aplicarFiltro(){
+  let base = filtroActual==='todas'?[...CARDS]:CARDS.filter(c=>c.c===filtroActual);
+  if(soloRep){const h=loadHist();base=base.filter(c=>{const r=h[cid(c)];return r&&r.estado==='mal'})}
+  activos=base;
+}
+function mostrar(){
+  if(activos.length===0){document.getElementById('preg').textContent='Sin tarjetas en este filtro 🎉';document.getElementById('cat').textContent='';document.getElementById('idx').textContent='';document.getElementById('resp').textContent='';document.getElementById('det').textContent='';return}
+  if(idx<0)idx=activos.length-1; if(idx>=activos.length)idx=0;
+  const c=activos[idx];
+  document.getElementById('carta').classList.remove('girada');
+  document.getElementById('cat').textContent=c.c;
+  document.getElementById('idx').textContent=(idx+1)+'/'+activos.length;
+  document.getElementById('preg').textContent=c.p;
+  document.getElementById('resp').textContent=c.r;
+  document.getElementById('det').textContent=c.d;
+  actualizarStats();
+}
+function girar(){document.getElementById('carta').classList.toggle('girada')}
+function mover(n){idx+=n;mostrar()}
+function marcar(bien){
+  const c=activos[idx];const h=loadHist();h[cid(c)]={estado:bien?'bien':'mal'};saveHist(h);
+  actualizarStats();
+  setTimeout(()=>mover(1),250);
+}
+function barajar(){for(let i=activos.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[activos[i],activos[j]]=[activos[j],activos[i]]}idx=0;mostrar()}
+function soloRepaso(){soloRep=!soloRep;document.getElementById('btnrep').classList.toggle('on',soloRep);aplicarFiltro();idx=0;mostrar()}
+function resetear(){if(confirm('¿Reiniciar el progreso de las flashcards?')){localStorage.removeItem(LS);actualizarStats()}}
+function actualizarStats(){
+  const h=loadHist();let dom=0,rep=0;
+  CARDS.forEach(c=>{const r=h[cid(c)];if(r){if(r.estado==='bien')dom++;else rep++}});
+  document.getElementById('st-total').textContent='Total: '+CARDS.length;
+  document.getElementById('ndom').textContent=dom;
+  document.getElementById('nrep').textContent=rep;
+}
+buildFiltros();aplicarFiltro();mostrar();
+</script>
+</body>
+</html>
