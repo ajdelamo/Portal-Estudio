@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BV — Flashcards T7-T10</title>
+<style>
+:root{--azul:#0369a1;--azul2:#0284c7;--verde:#16a34a;--rojo:#dc2626;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:40px}
+header{background:linear-gradient(135deg,#0369a1,#15803d);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.2rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.f{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.83rem;font-weight:600;cursor:pointer}
+.f.on{background:var(--azul);color:#fff}
+.stats{display:flex;gap:10px;margin:8px 0 14px;font-size:.83rem;flex-wrap:wrap}
+.stats span{background:#fff;border-radius:8px;padding:5px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.escena{perspective:1200px;margin:10px 0}
+.carta{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
+.carta.girada{transform:rotateY(180deg)}
+.cara{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.frente{background:#fff;border:3px solid var(--azul2)}
+.frente .cat{position:absolute;top:12px;left:14px;font-size:.72rem;font-weight:700;color:#fff;background:var(--azul2);border-radius:12px;padding:2px 10px}
+.frente .idx{position:absolute;top:12px;right:14px;font-size:.72rem;color:#94a3b8}
+.frente h2{font-size:1.08rem;line-height:1.5;font-weight:600;border:none;color:#1e293b}
+.frente .pista{margin-top:14px;font-size:.75rem;color:#94a3b8}
+.dorso{background:linear-gradient(135deg,#0369a1,#15803d);color:#fff;transform:rotateY(180deg)}
+.dorso .resp{font-size:1.15rem;font-weight:800;line-height:1.45}
+.dorso .det{margin-top:12px;font-size:.85rem;opacity:.92;line-height:1.5}
+.botones{display:flex;gap:8px;margin:14px 0;justify-content:center;flex-wrap:wrap}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-size:.9rem;font-weight:700;cursor:pointer}
+.btn.mal{background:#fee2e2;color:var(--rojo)}
+.btn.bien{background:#dcfce7;color:#15803d}
+.btn.nav{background:#e2e8f0;color:#334155}
+.btn.accion{background:var(--azul);color:#fff}
+.aviso{text-align:center;font-size:.8rem;color:#64748b;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>🃏 Flashcards BV · T7-T10 — Laboral, Negociación/Huelga, MUFACE, Discapacidad</h1>
+  <p>Plazos · artículos · datos-ancla · IV Convenio + LOLS + RD-ley 17/1977 + TR 4/2000 + RD 2271/2004 · verificado 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="filtros" id="filtros"></div>
+  <div class="stats"><span id="st-total"></span><span id="st-dom">✅ dominadas: <b id="ndom">0</b></span><span id="st-rep">🔁 a repasar: <b id="nrep">0</b></span></div>
+  <div class="escena"><div class="carta" id="carta" onclick="girar()">
+    <div class="cara frente"><div class="cat" id="cat"></div><div class="idx" id="idx"></div><h2 id="preg"></h2><div class="pista">👆 toca para ver la respuesta</div></div>
+    <div class="cara dorso"><div class="resp" id="resp"></div><div class="det" id="det"></div></div>
+  </div></div>
+  <div class="botones">
+    <button class="btn mal" onclick="marcar(false)">❌ Repasar</button>
+    <button class="btn bien" onclick="marcar(true)">✅ Me la sé</button>
+  </div>
+  <div class="botones">
+    <button class="btn nav" onclick="mover(-1)">← Anterior</button>
+    <button class="btn accion" onclick="barajar()">🔀 Barajar</button>
+    <button class="btn nav" onclick="mover(1)">Siguiente →</button>
+  </div>
+  <div class="botones"><button class="btn nav" onclick="soloRepaso()" id="btnrep">🎯 Solo las marcadas "repasar"</button>
+  <button class="btn nav" onclick="resetear()">🗑️ Reiniciar</button></div>
+  <div class="aviso">El progreso se guarda en este navegador (localStorage).</div>
+</div>
+<script>
+const LS='gace_bv_fc_t07t10_v1';
+const CARDS=[
+// —— T7 ——
+{c:'T7·Datos',p:'Definición de personal laboral (art. 11.1 TREBEP)',r:'Contrato de trabajo escrito + legislación laboral + retribución',d:'Se rige por el TRET en lo compatible, y por el TREBEP en código de conducta e incompatibilidades.'},
+{c:'T7·Datos',p:'Reforma del TRET de 2021: norma exacta',r:'Real Decreto-ley 32/2021, de 28 de diciembre (NO "Legislativo")',d:'Reforzó la contratación indefinida y la estabilidad en el empleo.'},
+{c:'T7·Plazos',p:'IV Convenio Único: suscripción / BOE / entrada en vigor',r:'4/03/2019 · 17/05/2019 · 18/05/2019',d:'Efectos económicos desde el 1/1/2019. Vigencia inicial hasta 31/12/2021.'},
+{c:'T7·Datos',p:'Situación del IV Convenio Único en 2026',r:'Denunciado, en ultraactividad indefinida (art. 86.3 ET); V Convenio en negociación sin acuerdo',d:'Denunciado por UGT y CC.OO. tras completar su agenda pactada.'},
+{c:'T7·Datos',p:'Comisión Paritaria del IV Convenio: composición y función',r:'15+15 representantes — máximo órgano de interpretación y vigilancia',d:'Acuerdos económicos requieren aprobación de la CECIR.'},
+{c:'T7·Datos',p:'Los 6 grupos de clasificación profesional',r:'M3 (Máster) · M2 (Grado) · M1 (FP Superior) · E2 (Bachiller/FP Medio) · E1 (ESO/FP Básica) · E0 (sin titulación)',d:'"M" = educación superior (MECES); "E" = secundaria/básica/sin titulación.'},
+{c:'T7·Plazos',p:'Período de prueba por grupo',r:'M3-M2: 3 meses · M1/E2/E1: 1 mes · E0: 15 días laborables',d:'Título VI del IV Convenio Único.'},
+{c:'T7·Datos',p:'Orden de prelación para cubrir vacantes',r:'1º Concurso abierto y permanente · 2º Promoción profesional · 3º Ingreso libre',d:'Concurso abierto: 4 resoluciones anuales; mín. 2 años en el último puesto definitivo.'},
+{c:'T7·Datos',p:'Jornada: cifra del Convenio vs. cifra AGE 2026',r:'37h30/semana (Convenio) vs. 35h/semana desde 16/04/2026 (Resolución SEFP, BOE-A-2026-8287)',d:'En el laboral requiere negociación específica en el marco del Convenio.'},
+{c:'T7·Datos',p:'Despido disciplinario improcedente del laboral fijo por falta muy grave',r:'READMISIÓN OBLIGATORIA (no cabe indemnización sustitutiva)',d:'Conecta con la estabilidad en el empleo del vínculo indefinido en el sector público.'},
+{c:'T7·Datos',p:'¿Aplica la Ley 53/1984 al personal laboral?',r:'SÍ, a todo el personal público, incluido el laboral',d:'Error típico del opositor: creer que es un régimen exclusivo de funcionarios.'},
+{c:'T7·Plazos',p:'Excedencia voluntaria por interés particular (laboral)',r:'1 año de antigüedad; mín. 4 meses / máx. indefinida; nueva solicitud tras 3 años',d:'SIN reserva de puesto ni cómputo de antigüedad.'},
+// —— T8 ——
+{c:'T8·Datos',p:'Dos límites constitucionales de la negociación colectiva',r:'Legalidad presupuestaria (art. 134.2 CE) y reserva de ley (art. 103.3 CE)',d:'El informe favorable de Hacienda es requisito de validez de todo acuerdo con efectos económicos.'},
+{c:'T8·Datos',p:'5 principios de la negociación colectiva (art. 33 TREBEP)',r:'Legalidad, cobertura presupuestaria, obligatoriedad de negociar, buena fe, publicidad',d:'Obligatoriedad de NEGOCIAR, no de alcanzar acuerdo.'},
+{c:'T8·Datos',p:'Diferencia Pacto vs. Acuerdo',r:'Pacto: ámbito del órgano que lo suscribe, eficacia directa · Acuerdo: órganos de gobierno, requiere ratificación',d:'Falta de ratificación → renegociación en 1 mes.'},
+{c:'T8·Datos',p:'Mediación vs. Arbitraje en conflictos colectivos',r:'Mediación: OBLIGATORIA a instancia de parte · Arbitraje: siempre VOLUNTARIO',d:'El laudo arbitral es vinculante una vez aceptado.'},
+{c:'T8·Plazos',p:'Delegados de Personal vs. Juntas de Personal (umbral)',r:'Delegados: 6-49 funcionarios · Juntas: ≥50 funcionarios',d:'Escala de Juntas: 5/9/13/17/21 +2 por 1.000 (máx. 75).'},
+{c:'T8·Plazos',p:'Crédito de horas retribuidas (escala)',r:'15h/20h/30h/35h/40h según tramos de plantilla',d:'Hasta 100 / 101-250 / 251-500 / 501-750 / 751+.'},
+{c:'T8·Datos',p:'Requisitos para delegados sindicales plenos (art. 10.1 LOLS)',r:'Centro >250 trabajadores + presencia sindical en órganos unitarios',d:'Ambos requisitos son acumulativos.'},
+{c:'T8·Datos',p:'Umbral de sindicato más representativo (estatal / autonómico)',r:'Estatal: ≥10% de representantes en toda España · Autonómico: ≥15% + 1.500 representantes + no federado',d:'Actualmente: CC.OO./UGT (estatal); ELA-STV/CIG (autonómico).'},
+{c:'T8·Plazos',p:'Personalidad jurídica de un sindicato',r:'Automática a los 20 días desde el depósito de estatutos',d:'Si no hay defectos, publicación en BOE en 10 días.'},
+{c:'T8·Datos',p:'Quórum para convocar una reunión de empleados públicos',r:'≥40% del colectivo convocado (art. 46 TREBEP)',d:'Fuera de horas de trabajo, salvo acuerdo; no puede perjudicar el servicio.'},
+{c:'T8·Datos',p:'Norma vigente sobre el derecho de huelga',r:'Real Decreto-ley 17/1977, de 4 de marzo (depurado por STC 11/1981)',d:'La ley orgánica exigida por el art. 28.2+81.1 CE sigue sin aprobarse a 2026.'},
+{c:'T8·Plazos',p:'Preaviso de huelga: general vs. servicios públicos',r:'5 días naturales (general) · 10 días naturales + publicidad (servicios públicos)',d:'Art. 4 y 10 RD-ley 17/1977.'},
+{c:'T8·Datos',p:'Comité de Huelga: composición máxima',r:'Máx. 12 personas, solo del centro afectado',d:'Si afecta a varios centros, cada comité designa representantes.'},
+{c:'T8·Datos',p:'¿Quién fija los servicios mínimos?',r:'La autoridad gubernativa (STC 123/1990), no el órgano gestor del servicio',d:'Designación de trabajadores: indiscriminada, sin atender a afiliación sindical.'},
+{c:'T8·Datos',p:'Huelga legal vs. ilegal: sustitución de trabajadores',r:'Legal: esquirolaje externo PROHIBIDO · Ilegal: SÍ cabe sustitución',d:'En ambas, el contrato queda suspendido (ni trabajo ni salario).'},
+{c:'T8·Plazos',p:'Cierre patronal: plazo de comunicación',r:'12 horas a la autoridad laboral',d:'Solo lícito si es defensivo: violencia, ocupación ilegal o inasistencia grave.'},
+// —— T9 ——
+{c:'T9·Datos',p:'Los dos mecanismos del régimen especial de SS de funcionarios',r:'Clases Pasivas (RDLeg 670/1987) + MUFACE (RDLeg 4/2000)',d:'Art. 2 TR 4/2000.'},
+{c:'T9·Datos',p:'Reforma de 2011: funcionarios desde el 1/1/2011',r:'Régimen General de la SS a efectos de PENSIONES; MUFACE para el resto',d:'Art. 20 RD-ley 13/2010.'},
+{c:'T9·Datos',p:'MUFACE: naturaleza y régimen jurídico',r:'Organismo autónomo, rige la Ley 40/2015 (NO la Ley 6/1997, derogada)',d:'Adscrito al Ministerio para la Transformación Digital y de la Función Pública.'},
+{c:'T9·Datos',p:'Copago farmacéutico ordinario MUFACE',r:'30% del PVP en oficina de farmacia',d:'Gratuito en instituciones sanitarias y por accidente de servicio/enfermedad profesional.'},
+{c:'T9·Plazos',p:'IT: retribución días 1-90 vs. desde el día 91',r:'1-90: 100% retribuciones ordinarias · desde 91: mayor entre 80% básicas (+1/6 extra) o 75% complementarias',d:'Contingencias profesionales: 100% desde el día 1.'},
+{c:'T9·Datos',p:'Prestación por gran invalidez',r:'50% de la pensión de jubilación, para remunerar al asistente',d:'Se presume gran invalidez: pérdida total visión ambos ojos, pérdida de ambas manos/pies.'},
+{c:'T9·Datos',p:'Gestión de Clases Pasivas desde el 6/10/2020',r:'INSS (antes: Dirección General de Costes de Personal)',d:'Pago material: TGSS.'},
+{c:'T9·Plazos',p:'Carencia jubilación ordinaria vs. voluntaria',r:'Ordinaria: 15 años · Voluntaria: 60 años + 30 años de servicios',d:'RDLeg 670/1987.'},
+{c:'T9·Datos',p:'Cuota de derechos pasivos (nómina)',r:'3,86% del haber regulador',d:'No confundir con el 1,69% de cotización a MUFACE.'},
+{c:'T9·Datos',p:'Pensión de viudedad: cuantía',r:'50% de la base reguladora, SIN carencia',d:'Incremento de 4 o 2 puntos en determinadas condiciones (RD-ley 28/2018).'},
+{c:'T9·Datos',p:'Pensión de orfandad: 1 hijo vs. varios',r:'1 hijo: 25% · varios: 10% c/u + 15% a prorrata; tope 50%/100%',d:'Sin período de carencia.'},
+{c:'T9·Datos',p:'Pensiones extraordinarias: base reguladora',r:'Al 200% (no al 100%)',d:'Hecho causante: acto de servicio o consecuencia del mismo, sin carencia.'},
+{c:'T9·Datos',p:'Revalorización de pensiones Clases Pasivas 2026',r:'+2,7% (RD-ley 3/2026); tope 3.359,60 €/mes',d:'2025 fue +2,8%; 2024 fue +3,8%.'},
+{c:'T9·Datos',p:'Concierto de asistencia sanitaria MUFACE 2025-2027',r:'ASISA y SegurCaixa Adeslas (DKV no participa)',d:'Presupuesto: 4.808,5 M€. Dos periodos de cambio de entidad: enero y junio.'},
+// —— T10 ——
+{c:'T10·Datos',p:'Reforma del art. 49 CE: fecha y contenido',r:'BOE-A-2024-3099, 17/02/2024 — 3ª reforma constitucional, enfoque de derechos',d:'Sustituye "disminuidos físicos, sensoriales y psíquicos" por autonomía e inclusión.'},
+{c:'T10·Datos',p:'Umbral de discapacidad a efectos de empleo público',r:'Grado ≥33% (art. 4.2 TRLGDPD)',d:'Equiparación automática: IP total/absoluta/gran invalidez SS; jubilación por incapacidad en Clases Pasivas.'},
+{c:'T10·Datos',p:'Cupo OEP general vs. AGE tras RD-ley 6/2023',r:'General (art. 59 TREBEP): 7% · AGE (art. 108 RD-ley 6/2023): 10% (≥2% intelectual)',d:'Objetivo progresivo: 2% de efectivos totales de cada Administración.'},
+{c:'T10·Datos',p:'Artículos 108 vs. 113 del RD-ley 6/2023',r:'108: cupo del 10% en la AGE · 113: adaptaciones y ajustes razonables (incluido uso de prótesis)',d:'Trampa: atribuir ambas cuestiones a un único artículo.'},
+{c:'T10·Datos',p:'Regla de acumulación de plazas no cubiertas',r:'Se activa si cobertura real <3% de las plazas convocadas; máx. 10% de la oferta siguiente',d:'Art. 3.2 RD 2271/2004. No se activa por simple falta de aspirantes.'},
+{c:'T10·Datos',p:'Cupo promoción interna / personal temporal (AGE)',r:'5% / 5% (temporal: solo si ≥20 plazas + fase de oposición)',d:'Arts. 5 y 6 RD 2271/2004. Desiertas → turno ordinario / turno libre respectivamente.'},
+{c:'T10·Datos',p:'Mecanismo de trasvase al turno general',r:'Aspirante del cupo que supera pero no obtiene plaza, con puntuación superior a otros del turno general, se integra en éste',d:'Garantiza igualdad de oportunidades sin plazas adicionales.'},
+{c:'T10·Datos',p:'Norma de adaptación de tiempos y medios (2025)',r:'Orden PJC/804/2025, de 23 de julio (BOE-A-2025-15426)',d:'Desarrolla la remisión pendiente del art. 8 RD 2271/2004 y art. 113 RD-ley 6/2023.'},
+{c:'T10·Datos',p:'Criterio de procedencia de la adaptación',r:'Solo si la discapacidad guarda relación directa con la prueba; no altera contenido ni exigencia',d:'No es automática.'},
+{c:'T10·Datos',p:'Alteración del orden de prelación (art. 9 RD 2271/2004)',r:'Excepción proporcional (dependencia, desplazamiento); no un derecho general a elegir primero',d:'Requiere solicitud motivada y decisión fundada del órgano convocante.'},
+{c:'T10·Datos',p:'Financiación de la adaptación del puesto',r:'A cargo del ministerio u organismo al que esté adscrito el puesto',d:'Sin perjuicio de subvenciones o ayudas adicionales.'},
+{c:'T10·Datos',p:'Destinatarios del informe balance anual',r:'Comisión Superior de Personal y Consejo Nacional de la Discapacidad',d:'Elaborado por el Ministerio para la Transformación Digital y de la Función Pública.'},
+{c:'T10·Datos',p:'Rango jurídico de la CIDPD (ONU)',r:'Tratado internacional (art. 96.1 CE), NO ley orgánica',d:'Función interpretativa reforzada de derechos fundamentales vía art. 10.2 CE.'},
+];
+let idx=0, activos=[...CARDS], filtroActual='todas', soloRep=false;
+function loadHist(){try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch(e){return{}}}
+function saveHist(h){localStorage.setItem(LS,JSON.stringify(h))}
+function cid(c){return c.c+'|'+c.p.slice(0,50)}
+function cats(){return [...new Set(CARDS.map(c=>c.c))]}
+function buildFiltros(){
+  const f=document.getElementById('filtros');
+  f.innerHTML='<button class="f on" data-c="todas">Todas</button>'+cats().map(c=>`<button class="f" data-c="${c}">${c}</button>`).join('');
+  f.querySelectorAll('.f').forEach(b=>b.onclick=()=>{f.querySelectorAll('.f').forEach(x=>x.classList.remove('on'));b.classList.add('on');filtroActual=b.dataset.c;soloRep=false;aplicarFiltro();idx=0;mostrar()});
+}
+function aplicarFiltro(){
+  let base = filtroActual==='todas'?[...CARDS]:CARDS.filter(c=>c.c===filtroActual);
+  if(soloRep){const h=loadHist();base=base.filter(c=>{const r=h[cid(c)];return r&&r.estado==='mal'})}
+  activos=base;
+}
+function mostrar(){
+  if(activos.length===0){document.getElementById('preg').textContent='Sin tarjetas en este filtro 🎉';document.getElementById('cat').textContent='';document.getElementById('idx').textContent='';document.getElementById('resp').textContent='';document.getElementById('det').textContent='';return}
+  if(idx<0)idx=activos.length-1; if(idx>=activos.length)idx=0;
+  const c=activos[idx];
+  document.getElementById('carta').classList.remove('girada');
+  document.getElementById('cat').textContent=c.c;
+  document.getElementById('idx').textContent=(idx+1)+'/'+activos.length;
+  document.getElementById('preg').textContent=c.p;
+  document.getElementById('resp').textContent=c.r;
+  document.getElementById('det').textContent=c.d;
+  actualizarStats();
+}
+function girar(){document.getElementById('carta').classList.toggle('girada')}
+function mover(n){idx+=n;mostrar()}
+function marcar(bien){
+  const c=activos[idx];const h=loadHist();h[cid(c)]={estado:bien?'bien':'mal'};saveHist(h);
+  actualizarStats();
+  setTimeout(()=>mover(1),250);
+}
+function barajar(){for(let i=activos.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[activos[i],activos[j]]=[activos[j],activos[i]]}idx=0;mostrar()}
+function soloRepaso(){soloRep=!soloRep;document.getElementById('btnrep').classList.toggle('on',soloRep);aplicarFiltro();idx=0;mostrar()}
+function resetear(){if(confirm('¿Reiniciar el progreso de las flashcards?')){localStorage.removeItem(LS);actualizarStats()}}
+function actualizarStats(){
+  const h=loadHist();let dom=0,rep=0;
+  CARDS.forEach(c=>{const r=h[cid(c)];if(r){if(r.estado==='bien')dom++;else rep++}});
+  document.getElementById('st-total').textContent='Total: '+CARDS.length;
+  document.getElementById('ndom').textContent=dom;
+  document.getElementById('nrep').textContent=rep;
+}
+buildFiltros();aplicarFiltro();mostrar();
+</script>
+</body>
+</html>
