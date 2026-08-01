@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BV — Flashcards T4-T6</title>
+<style>
+:root{--azul:#3730a3;--azul2:#4f46e5;--verde:#16a34a;--rojo:#dc2626;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:40px}
+header{background:linear-gradient(135deg,#b45309,#3730a3);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.f{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.83rem;font-weight:600;cursor:pointer}
+.f.on{background:var(--azul);color:#fff}
+.stats{display:flex;gap:10px;margin:8px 0 14px;font-size:.83rem;flex-wrap:wrap}
+.stats span{background:#fff;border-radius:8px;padding:5px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.escena{perspective:1200px;margin:10px 0}
+.carta{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
+.carta.girada{transform:rotateY(180deg)}
+.cara{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.frente{background:#fff;border:3px solid var(--azul2)}
+.frente .cat{position:absolute;top:12px;left:14px;font-size:.72rem;font-weight:700;color:#fff;background:var(--azul2);border-radius:12px;padding:2px 10px}
+.frente .idx{position:absolute;top:12px;right:14px;font-size:.72rem;color:#94a3b8}
+.frente h2{font-size:1.08rem;line-height:1.5;font-weight:600;border:none;color:#1e293b}
+.frente .pista{margin-top:14px;font-size:.75rem;color:#94a3b8}
+.dorso{background:linear-gradient(135deg,#b45309,#3730a3);color:#fff;transform:rotateY(180deg)}
+.dorso .resp{font-size:1.15rem;font-weight:800;line-height:1.45}
+.dorso .det{margin-top:12px;font-size:.85rem;opacity:.92;line-height:1.5}
+.botones{display:flex;gap:8px;margin:14px 0;justify-content:center;flex-wrap:wrap}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-size:.9rem;font-weight:700;cursor:pointer}
+.btn.mal{background:#fee2e2;color:var(--rojo)}
+.btn.bien{background:#dcfce7;color:#15803d}
+.btn.nav{background:#e2e8f0;color:#334155}
+.btn.accion{background:var(--azul);color:#fff}
+.aviso{text-align:center;font-size:.8rem;color:#64748b;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>🃏 Flashcards BV · T4-T6 Provisión/Movilidad, Situaciones, Retribuciones</h1>
+  <p>Plazos · artículos · datos-ancla · Ley 30/1984 + RDL 6/2023 + RD 462/2002 · verificado a 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="filtros" id="filtros"></div>
+  <div class="stats"><span id="st-total"></span><span id="st-dom">✅ dominadas: <b id="ndom">0</b></span><span id="st-rep">🔁 a repasar: <b id="nrep">0</b></span></div>
+  <div class="escena"><div class="carta" id="carta" onclick="girar()">
+    <div class="cara frente"><div class="cat" id="cat"></div><div class="idx" id="idx"></div><h2 id="preg"></h2><div class="pista">👆 toca para ver la respuesta</div></div>
+    <div class="cara dorso"><div class="resp" id="resp"></div><div class="det" id="det"></div></div>
+  </div></div>
+  <div class="botones">
+    <button class="btn mal" onclick="marcar(false)">❌ Repasar</button>
+    <button class="btn bien" onclick="marcar(true)">✅ Me la sé</button>
+  </div>
+  <div class="botones">
+    <button class="btn nav" onclick="mover(-1)">← Anterior</button>
+    <button class="btn accion" onclick="barajar()">🔀 Barajar</button>
+    <button class="btn nav" onclick="mover(1)">Siguiente →</button>
+  </div>
+  <div class="botones"><button class="btn nav" onclick="soloRepaso()" id="btnrep">🎯 Solo las marcadas "repasar"</button>
+  <button class="btn nav" onclick="resetear()">🗑️ Reiniciar</button></div>
+  <div class="aviso">El progreso se guarda en este navegador (localStorage).</div>
+</div>
+<script>
+const LS='gace_bv_fc_t04t06_v1';
+const CARDS=[
+// —— T4 ——
+{c:'T4·Datos',p:'Cap. III Tít. V TREBEP (provisión): ¿en vigor?',r:'NO, por la Disposición Final 4ª',d:'Rige materialmente la Ley 30/1984 + RD 364/1995 (RGIPP) hasta ley de desarrollo.'},
+{c:'T4·Datos',p:'Concurso ordinario vs. específico',r:'Ordinario: méritos generales · Específico: + méritos del puesto, memoria y entrevista posibles',d:'Art. 44 RGIPP.'},
+{c:'T4·Datos',p:'Criterios de desempate en concurso',r:'1º mejor puesto desempeñado · 2º mayor grado personal · 3º mayor antigüedad',d:'Orden secuencial, no simultáneo.'},
+{c:'T4·Datos',p:'Personal directivo público profesional AGE',r:'Subdirectores Generales · A1 · libre designación · 5 años renovables',d:'RDL 6/2023, arts. 123-129.'},
+{c:'T4·Plazos',p:'Escalera de plazos en reasignación de efectivos',r:'6+3+1 meses (aprox.)',d:'RD 364/1995, procedimiento escalonado tras amortización/supresión de puestos.'},
+{c:'T4·Datos',p:'Expectativa de destino: ámbito de las obligaciones',r:'PROVINCIAL',d:'Frente a la excedencia forzosa, cuyo ámbito es NACIONAL. Trampa clásica.'},
+{c:'T4·Plazos',p:'Duración máxima de la expectativa de destino',r:'1 año',d:'Tras agotarla sin reingreso → excedencia forzosa (art. 13 RD 365/1995).'},
+{c:'T4·Plazos',p:'Duración de la comisión de servicios',r:'Máx. 1 año, prorrogable',d:'Para cobertura urgente e inaplazable de un puesto.'},
+{c:'T4·Plazos',p:'Plazo para convocar el puesto en adscripción provisional',r:'Máx. 1 año',d:'Si el funcionario no participa → excedencia voluntaria por interés particular de oficio.'},
+{c:'T4·Datos',p:'Movilidad por violencia de género/terrorismo',r:'Sin necesidad de vacante, carácter urgente',d:'Prioriza la protección de la persona sobre los trámites ordinarios.'},
+{c:'T4·Datos',p:'Promoción vertical vs. horizontal',r:'Vertical: ascenso a grupo superior (proceso selectivo) · Horizontal: progresión sin cambiar de grupo',d:'No confundir con carrera vertical/horizontal (referidas al puesto, no al grupo).'},
+{c:'T4·Datos',p:'Carrera horizontal: base normativa',r:'Art. 122 RDL 6/2023',d:'Progresión por tramos sin cambiar de puesto, ligada a evaluación del desempeño. EN VIGOR.'},
+{c:'T4·Plazos',p:'Consolidación de grado personal',r:'2 años continuados o 3 con interrupción en puestos del mismo nivel',d:'Regla general del RGIPP.'},
+{c:'T4·Datos',p:'Permuta: requisitos',r:'Mutuo acuerdo + mismo cuerpo/escala + autorización de ambas Administraciones',d:'Figura excepcional de movilidad bilateral voluntaria.'},
+// —— T5 ——
+{c:'T5·Datos',p:'RD-ley 9/2025: ¿afecta a las situaciones administrativas?',r:'NO — regula permisos (art. 49 y 7.2 TREBEP)',d:'Situaciones administrativas: últimas reformas LO 10/2022 (89.5) y LO 9/2015 (89.6).'},
+{c:'T5·Datos',p:'Catálogo del art. 85 TREBEP: ¿cerrado?',r:'NO, es abierto — el RD 365/1995 añade más situaciones',d:'Expectativa de destino, excedencia forzosa, excedencia voluntaria incentivada.'},
+{c:'T5·Plazos',p:'Reingreso desde servicios especiales',r:'1 mes desde que cesa la causa',d:'Si no se solicita → excedencia voluntaria por interés particular.'},
+{c:'T5·Datos',p:'Transferido vs. por provisión (RD 365/1995)',r:'Transferido: servicio en otras AAPP en origen · Por provisión: conserva plenamente el vínculo de origen',d:'Arts. 10 y 11 RD 365/1995. Separación: Consejo de Estado (transferido) / Ministro (provisión).'},
+{c:'T5·Plazos',p:'Excedencia voluntaria por interés particular',r:'5 años de servicios previos · mín. 2 años de duración (AGE)',d:'NO computa a efectos de trienios, carrera ni Seguridad Social. Sin reserva de puesto.'},
+{c:'T5·Plazos',p:'Excedencia por agrupación familiar',r:'Mín. 2 años / máx. 15 años · sin antigüedad previa exigida',d:'NO computa, sin reserva de puesto.'},
+{c:'T5·Plazos',p:'Excedencia por cuidado de familiares',r:'Máx. 3 años por sujeto causante',d:'SÍ computa a efectos de carrera/trienios/SS; reserva: 2 años mismo puesto, después misma localidad.'},
+{c:'T5·Plazos',p:'Excedencia por violencia de género/sexual (89.5)',r:'Máx. 18 meses, prórrogas de 3 en 3 · retribución íntegra solo 2 meses · reserva de puesto solo 6 meses',d:'LO 10/2022. Titular: la FUNCIONARIA. Sin requisito de antigüedad.'},
+{c:'T5·Plazos',p:'Excedencia voluntaria incentivada',r:'5 años · indemnización 1 mensualidad/año, máx. 12',d:'Art. 18 RD 365/1995. Prohibición de sector público durante esos 5 años.'},
+{c:'T5·Datos',p:'Excedencia forzosa: ámbito de las obligaciones',r:'NACIONAL',d:'Art. 13 RD 365/1995 — frente al ámbito PROVINCIAL de la expectativa de destino.'},
+{c:'T5·Plazos',p:'Suspensión provisional vs. firme',r:'Provisional: máx. 6 meses, 100% básicas · Firme: máx. 6 años (graves 3 / muy graves 3-6), sin retribución',d:'Sin reingreso en 6 meses tras suspensión firme → excedencia forzosa.'},
+{c:'T5·Datos',p:'Regla general de incompatibilidad entre 2 puestos públicos',r:'INCOMPATIBLES, salvo excepciones tasadas',d:'Ley 53/1984. Tope retributivo: sueldo de un Director General.'},
+{c:'T5·Datos',p:'Actividad privada + puesto público',r:'COMPATIBLE con reconocimiento previo · incompatible si específico >30% de básicas',d:'Salvo renuncia expresa al exceso del complemento específico.'},
+{c:'T5·Plazos',p:'Plazo de resolución compatibilidad público-privado',r:'2 meses',d:'Frente a 3 meses (+1) de la compatibilidad público-público (RD 598/1985).'},
+{c:'T5·Datos',p:'Formación sin necesidad de solicitar compatibilidad',r:'Hasta 75 horas/año',d:'Una de las 9 actividades exentas de la Ley 53/1984.'},
+{c:'T5·Datos',p:'Profesor asociado universitario a tiempo parcial',r:'Compatible con cualquier puesto público',d:'Excepción legal expresa por su naturaleza docente de duración determinada.'},
+// —— T6 ——
+{c:'T6·Datos',p:'Norma vigente en materia retributiva básica',r:'Ley 30/1984, arts. 23 y 24 (Cap. III Tít. III TREBEP sin desarrollar)',d:'DF 4ª TREBEP condiciona su eficacia a leyes de función pública aún no aprobadas.'},
+{c:'T6·Datos',p:'Precepto TREBEP de aplicación directa en retribuciones',r:'Art. 25.2 — trienios de interinos desde el 13/05/2007',d:'Único precepto retributivo de aplicación directa sin desarrollo legislativo.'},
+{c:'T6·Datos',p:'Regla de proporcionalidad del sueldo (art. 24 Ley 30/1984)',r:'A1 no puede superar en más de 3 veces el sueldo de Agrupaciones Profesionales',d:'Marco básico del sistema retributivo.'},
+{c:'T6·Datos',p:'Composición mínima de las pagas extraordinarias',r:'Sueldo + trienios + complemento de destino ÍNTEGRO',d:'Trampa: no son solo sueldo y trienios.'},
+{c:'T6·Datos',p:'Cese por jubilación/fallecimiento/retiro: ¿liquidación proporcional?',r:'NO — se computa como MES COMPLETO',d:'Excepción a la regla general de liquidación proporcional por días.'},
+{c:'T6·Datos',p:'Niveles de complemento de destino en la AGE',r:'30 niveles (del 1 al 30)',d:'Retribuye el nivel del puesto, no el cuerpo.'},
+{c:'T6·Datos',p:'Complementos específicos por puesto',r:'UNO solo (aunque pondere varias condiciones concurrentes)',d:'Regla de unicidad del complemento específico.'},
+{c:'T6·Datos',p:'Pagas del complemento específico',r:'14 pagas, devengado en 12',d:'Relevante en liquidaciones proporcionales por cambio o cese.'},
+{c:'T6·Datos',p:'Umbral de incompatibilidad del complemento específico',r:'>30% de las retribuciones básicas (sin trienios)',d:'Incompatible con actividad privada salvo renuncia expresa al exceso.'},
+{c:'T6·Datos',p:'Complemento de productividad: ¿genera derechos adquiridos?',r:'NO, no se consolida',d:'Su asignación en un periodo no crea expectativas para periodos sucesivos.'},
+{c:'T6·Datos',p:'Complemento de desempeño (RD-ley 6/2023): base normativa exacta',r:'Título III, Capítulo I (arts. 116-121)',d:'NO el art. 122 (que regula EXCLUSIVAMENTE la carrera horizontal) — corrección frecuente.'},
+{c:'T6·Datos',p:'Complemento de carrera: cuantía',r:'Igual para todos con el mismo tramo dentro del grupo/subgrupo',d:'Art. 122 RDL 6/2023 — ligado al sistema de tramos de la carrera horizontal.'},
+{c:'T6·Plazos',p:'Plazo posesorio con cambio de residencia',r:'1 mes',d:'Sin cambio de residencia: 3 días hábiles. Retribución íntegra durante el plazo.'},
+{c:'T6·Datos',p:'Residencia eventual: justificación de gastos',r:'NO requiere justificación documental',d:'Diferencia clave frente a las dietas ordinarias. Máx. 80% de la dieta entera.'},
+{c:'T6·Plazos',p:'Umbral de residencia eventual (nacional / extranjero)',r:'>1 mes nacional / >3 meses extranjero',d:'Duración máxima de la propia residencia eventual: 1 año + prórroga ≤1 año.'},
+{c:'T6·Datos',p:'Límite global conjunto de asistencias',r:'Máx. 50% de las retribuciones anuales del puesto',d:'Individuales: órganos colegiados 40%, tribunales 20%, formación 25%.'},
+{c:'T6·Datos',p:'Traslado por sanción disciplinaria: ¿indemnización?',r:'NO — excluido expresamente del régimen indemnizatorio',d:'Art. 23 RD 462/2002.'},
+{c:'T6·Plazos',p:'Caducidad del derecho a indemnización por traslado',r:'1 año + prórrogas semestrales hasta 2 años más',d:'Art. 22 RD 462/2002.'},
+{c:'T6·Datos',p:'Incremento retributivo 2026',r:'1,5% + 0,5% adicional condicionado a IPC≥1,5% (abonable Q1 2027)',d:'RD-ley 14/2025, de 2 de diciembre, al no aprobarse LPGE 2026.'},
+];
+let idx=0, activos=[...CARDS], filtroActual='todas', soloRep=false;
+function loadHist(){try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch(e){return{}}}
+function saveHist(h){localStorage.setItem(LS,JSON.stringify(h))}
+function cid(c){return c.c+'|'+c.p.slice(0,50)}
+function cats(){return [...new Set(CARDS.map(c=>c.c))]}
+function buildFiltros(){
+  const f=document.getElementById('filtros');
+  f.innerHTML='<button class="f on" data-c="todas">Todas</button>'+cats().map(c=>`<button class="f" data-c="${c}">${c}</button>`).join('');
+  f.querySelectorAll('.f').forEach(b=>b.onclick=()=>{f.querySelectorAll('.f').forEach(x=>x.classList.remove('on'));b.classList.add('on');filtroActual=b.dataset.c;soloRep=false;aplicarFiltro();idx=0;mostrar()});
+}
+function aplicarFiltro(){
+  let base = filtroActual==='todas'?[...CARDS]:CARDS.filter(c=>c.c===filtroActual);
+  if(soloRep){const h=loadHist();base=base.filter(c=>{const r=h[cid(c)];return r&&r.estado==='mal'})}
+  activos=base;
+}
+function mostrar(){
+  if(activos.length===0){document.getElementById('preg').textContent='Sin tarjetas en este filtro 🎉';document.getElementById('cat').textContent='';document.getElementById('idx').textContent='';document.getElementById('resp').textContent='';document.getElementById('det').textContent='';return}
+  if(idx<0)idx=activos.length-1; if(idx>=activos.length)idx=0;
+  const c=activos[idx];
+  document.getElementById('carta').classList.remove('girada');
+  document.getElementById('cat').textContent=c.c;
+  document.getElementById('idx').textContent=(idx+1)+'/'+activos.length;
+  document.getElementById('preg').textContent=c.p;
+  document.getElementById('resp').textContent=c.r;
+  document.getElementById('det').textContent=c.d;
+  actualizarStats();
+}
+function girar(){document.getElementById('carta').classList.toggle('girada')}
+function mover(n){idx+=n;mostrar()}
+function marcar(bien){
+  const c=activos[idx];const h=loadHist();h[cid(c)]={estado:bien?'bien':'mal'};saveHist(h);
+  actualizarStats();
+  setTimeout(()=>mover(1),250);
+}
+function barajar(){for(let i=activos.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[activos[i],activos[j]]=[activos[j],activos[i]]}idx=0;mostrar()}
+function soloRepaso(){soloRep=!soloRep;document.getElementById('btnrep').classList.toggle('on',soloRep);aplicarFiltro();idx=0;mostrar()}
+function resetear(){if(confirm('¿Reiniciar el progreso de las flashcards?')){localStorage.removeItem(LS);actualizarStats()}}
+function actualizarStats(){
+  const h=loadHist();let dom=0,rep=0;
+  CARDS.forEach(c=>{const r=h[cid(c)];if(r){if(r.estado==='bien')dom++;else rep++}});
+  document.getElementById('st-total').textContent='Total: '+CARDS.length;
+  document.getElementById('ndom').textContent=dom;
+  document.getElementById('nrep').textContent=rep;
+}
+buildFiltros();aplicarFiltro();mostrar();
+</script>
+</body>
+</html>
