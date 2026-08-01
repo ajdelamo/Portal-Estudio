@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BV T1 — Personal al servicio de las AAPP: concepto, clases y régimen jurídico</title>
+<style>
+:root{
+  --v:#065f46; --v2:#059669; --vclaro:#ecfdf5; --borde:#a7f3d0;
+  --verde:#166534; --verdeclaro:#f0fdf4; --vborde:#bbf7d0;
+  --rojo:#991b1b; --rojoclaro:#fef2f2; --rborde:#fecaca;
+  --ambar:#92400e; --ambarclaro:#fffbeb; --aborde:#fde68a;
+  --morado:#5b21b6; --moradoclaro:#f5f3ff; --mborde:#ddd6fe;
+  --gris:#334155; --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#065f46,#059669);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.7rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--v);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--v2);display:flex;align-items:center;gap:8px}
+h3{color:var(--v2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9rem;background:#fff}
+th{background:var(--v);color:#fff;padding:8px 10px;text-align:left;font-size:.85rem}
+td{padding:8px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--vclaro);border-left:5px solid var(--v2);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--v);font-size:.85rem;letter-spacing:.5px;margin-bottom:6px}
+.trampa{background:var(--rojoclaro);border-left:5px solid var(--rojo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--rojo);font-size:.85rem;margin-bottom:6px}
+.nuevo{background:var(--verdeclaro);border-left:5px solid var(--verde);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.nuevo .tit{font-weight:700;color:var(--verde);font-size:.85rem;margin-bottom:6px}
+.nota{background:var(--ambarclaro);border-left:5px solid var(--ambar);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:var(--ambar);font-size:.85rem;margin-bottom:6px}
+.art{display:inline-block;background:var(--v);color:#fff;border-radius:5px;padding:1px 7px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+.memo{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:14px 0}
+.memo .m{background:#fff;border:2px solid var(--borde);border-radius:10px;padding:12px;font-size:.85rem}
+.memo .m b{color:var(--v);display:block;margin-bottom:4px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:14px 0;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.vs>div{padding:14px 16px}
+.vs .izq{background:var(--vclaro)}
+.vs .der{background:var(--moradoclaro)}
+.vs h4{margin-bottom:8px;font-size:.95rem}
+.vs .izq h4{color:var(--v)}
+.vs .der h4{color:var(--morado)}
+.vs ul{margin-left:18px;font-size:.87rem}
+.vs li{margin:4px 0}
+@media(max-width:720px){.vs{grid-template-columns:1fr}}
+.timeline{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap}
+.tl{flex:1;min-width:200px;background:#fff;border-top:5px solid var(--v2);border-radius:8px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.tl.destacado{border-top-color:var(--rojo);background:var(--rojoclaro)}
+.tl .anio{font-size:1.2rem;font-weight:800;color:var(--v)}
+.tl.destacado .anio{color:var(--rojo)}
+.tl p{font-size:.82rem;margin:4px 0}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{
+  body{background:#fff}
+  header{background:var(--v)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card,.tl{box-shadow:none}
+  h2{page-break-after:avoid}
+  table,.clave,.trampa,.nuevo,.vs,.tl{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque V · Administración de Recursos Humanos</div>
+  <h1>Tema 1 — El personal al servicio de las Administraciones Públicas</h1>
+  <div class="sub">Concepto y clases · Adquisición y pérdida de la relación de servicio · Régimen jurídico</div>
+  <div class="badge-verif">✅ Normativa verificada contra BOE a 01/08/2026 · incluye OEP 2026 (RD 387/2026) y RD-ley 14/2025 (retribuciones)</div>
+</header>
+<div class="wrap">
+
+<h2>🏛️ 1. Fundamento constitucional y el TREBEP</h2>
+<div class="card">
+<p>Doble base constitucional: <span class="art">Art. 23.2 CE</span> — derecho a acceder en condiciones de igualdad a funciones y cargos públicos; <span class="art">Art. 103 CE</span> — la Administración sirve con objetividad los intereses generales (eficacia, jerarquía, descentralización, desconcentración, coordinación) y su acceso se rige por <b>mérito y capacidad</b> (103.3).</p>
+<p><b>TREBEP</b> = Texto Refundido de la Ley del Estatuto Básico del Empleado Público, aprobado por <span class="art">Real Decreto Legislativo 5/2015</span>, de 30 de octubre. Refunde la Ley 7/2007 (EBEP). Legislación básica (<span class="art">art. 149.1.18ª CE</span>). Entró en vigor el <b>1 de noviembre de 2015</b>. Carácter <b>supletorio</b> (art. 2.5) para el personal no incluido en su ámbito.</p>
+</div>
+
+<div class="nuevo"><div class="tit">⭐ EL IMPACTO DEL REAL DECRETO-LEY 6/2023</div>
+<p>El <b>Real Decreto-ley 6/2023</b>, de 19 de diciembre (medidas urgentes PRTR — justicia, función pública, régimen local y mecenazgo), Libro II (arts. 105-129), reforma la función pública en 4 ejes: planificación estratégica, acceso y selección, evaluación del desempeño y carrera, y personal directivo público profesional. Reforma especialmente el <b>art. 10 TREBEP</b> (interinos), los plazos de toma de posesión, los sistemas selectivos y el personal directivo (arts. 123-127).</p>
+<p style="margin-top:6px"><b>Estado a 08/2026:</b> Real Decreto-ley plenamente vigente; convalidado por el Congreso el 10/01/2024 (BOE 12/01/2024); en tramitación parlamentaria como <b>Proyecto de Ley</b> por el procedimiento de urgencia (aún sin concluir). El TC admitió a trámite el <b>recurso de inconstitucionalidad n.º 1863-2024</b> (Providencia 23/04/2024, más de 50 diputados del GP Popular); no consta sentencia a fecha de esta revisión — la norma sigue plenamente aplicable.</p>
+</div>
+
+<h2>👥 2. Concepto y clasificación de los empleados públicos</h2>
+<div class="clave"><div class="tit">🔑 ARTÍCULO 8 TREBEP</div>
+<p><b>8.1 — Concepto:</b> son empleados públicos quienes desempeñan <b>funciones retribuidas</b> en las Administraciones Públicas <b>al servicio de los intereses generales</b>.</p>
+<p><b>8.2 — 4 clases:</b> funcionarios de carrera (art. 9) · funcionarios interinos (art. 10) · personal laboral, fijo/indefinido/temporal (art. 11) · personal eventual (art. 12). A ellas se añade el <b>personal directivo profesional</b> (art. 13 + arts. 123-127 RDL 6/2023), que <i>no</i> figura en la enumeración del 8.2 pero participa del concepto de empleado público.</p></div>
+
+<table>
+<tr><th>Criterio</th><th>F. de carrera (art. 9)</th><th>F. interino (art. 10)</th><th>Personal laboral (art. 11)</th><th>Personal eventual (art. 12)</th></tr>
+<tr><td>Vínculo</td><td>Estatutario, Derecho Administrativo</td><td>Estatutario temporal</td><td>Contrato de trabajo</td><td>Nombramiento de confianza</td></tr>
+<tr><td>Carácter</td><td>Permanente</td><td>Temporal, causa tasada</td><td>Fijo/indefinido/temporal</td><td>No permanente</td></tr>
+<tr><td>Acceso</td><td>Proceso selectivo</td><td>Procedimiento ágil + celeridad</td><td>Oposición/concurso-oposición/concurso</td><td>Libre designación</td></tr>
+<tr><td>Funciones reservadas (9.2)</td><td>Sí</td><td>Sí, las propias de carrera</td><td>No</td><td>No</td></tr>
+<tr><td>Cese</td><td>Art. 63</td><td>Art. 63 + art. 10.3</td><td>Art. 49 ET</td><td>Libre / cese de la autoridad</td></tr>
+<tr><td>¿Mérito para acceso?</td><td>—</td><td>Servicios cuentan trienios</td><td>Servicios cuentan</td><td><b>NO puede constituir mérito</b></td></tr>
+</table>
+
+<h3>Funcionarios de carrera (art. 9)</h3>
+<div class="card"><p><b>Reserva de funciones (9.2):</b> el ejercicio de funciones que impliquen participación en potestades públicas o salvaguardia de intereses generales corresponde <b>exclusivamente</b> a funcionarios públicos.</p></div>
+<div class="grid2">
+<table><tr><th colspan="3">Grupos/Subgrupos (art. 76)</th></tr><tr><th>Grupo</th><th>Titulación</th><th>Nivel CD (RDL 6/2023)</th></tr>
+<tr><td>A1</td><td>Grado (nivel superior)</td><td>24-30</td></tr>
+<tr><td>A2</td><td>Grado (nivel inferior)</td><td>20-26</td></tr>
+<tr><td>B</td><td>Técnico Superior</td><td>18-24</td></tr>
+<tr><td>C1</td><td>Bachiller/Técnico</td><td>16-22</td></tr>
+<tr><td>C2</td><td>Graduado ESO</td><td>14-18</td></tr>
+<tr><td>Agrup. Profesionales</td><td>Sin titulación (D.A. 6ª)</td><td>—</td></tr>
+</table>
+<div class="card"><p><b>Cuerpos y Escalas (art. 75):</b> reserva de <b>LEY</b> (Cortes Generales o Asambleas de CCAA) para su creación, modificación y supresión. No pueden crearse cuerpos con titulación y funciones idénticas a otros existentes.</p>
+<p style="margin-top:8px"><b>Cuerpos Generales</b> (Decreto 315/1964, vigente residual): Técnico, Administrativo, Auxiliar, Subalterno — funciones comunes. <b>Cuerpos Especiales:</b> carrera/profesión peculiar (Abogados del Estado, Inspectores Hacienda...).</p></div>
+</div>
+
+<h3>Funcionarios interinos (art. 10, reformado por RDL 6/2023)</h3>
+<div class="memo">
+<div class="m"><b>a) Vacantes</b>Cuando no sea posible cobertura por carrera. Máx. <b>3 años</b>.</div>
+<div class="m"><b>b) Sustitución transitoria</b>Durante el tiempo estrictamente necesario.</div>
+<div class="m"><b>c) Programas temporales</b>Máx. 3 años, ampliable 12 meses más.</div>
+<div class="m"><b>d) Exceso/acumulación de tareas</b>Máx. 9 meses en un periodo de 18.</div>
+</div>
+<div class="trampa"><div class="tit">⚠️ TRAMPA</div><p>Acumulación de tareas: <b>9 meses en 18</b> (no "en 12"). Vacantes: transcurridos 3 años se produce el fin de la interinidad; excepción si la convocatoria se publicó dentro de esos 3 años y se resuelve en plazo (art. 70 TREBEP).</p></div>
+<p>El nombramiento <b>nunca</b> genera la condición de funcionario de carrera. Selección: pública, principios de igualdad, mérito, capacidad, publicidad y <b>celeridad</b>.</p>
+
+<h3>Personal laboral (art. 11) y personal eventual (art. 12)</h3>
+<div class="vs">
+<div class="izq"><h4>Personal laboral</h4><ul><li>Contrato escrito, legislación laboral (RDLeg 2/2015, ET)</li><li>Fijo (ha superado proceso selectivo) vs. indefinido (figura jurisprudencial por irregularidad, NO fijeza)</li><li>Puestos reservados: art. 15 Ley 30/1984 (naturaleza no permanente, oficios, instrumental...)</li></ul></div>
+<div class="der"><h4>Personal eventual</h4><ul><li>Funciones de <b>confianza o asesoramiento especial</b> exclusivamente</li><li>NO puede ejercer funciones del 9.2 (potestades públicas)</li><li>Nombramiento y cese <b>libres</b>; cesa automáticamente cuando cesa la autoridad</li><li>NO constituye mérito para acceso ni promoción (12.4)</li></ul></div>
+</div>
+
+<h3>Personal directivo público profesional (art. 13 + arts. 123-127 RDL 6/2023)</h3>
+<div class="card">
+<p>En la AGE: titulares de <b>Subdirecciones Generales</b>. Las subdirecciones adjuntas: puestos <b>predirectivos</b>.</p>
+<table><tr><th>Aspecto</th><th>Régimen</th></tr>
+<tr><td>Requisito</td><td>Funcionario de carrera, subgrupo <b>A1</b> (laboral: no exige esto, pero sí nivel de titulación equivalente)</td></tr>
+<tr><td>Nombramiento</td><td><b>Libre designación</b>, sin cobertura provisional</td></tr>
+<tr><td>Plazo de solicitudes</td><td><b>10 días naturales</b> (frente a los 15 días hábiles generales del RD 364/1995)</td></tr>
+<tr><td>Duración</td><td>Máx. <b>5 años</b>, renovable por periodos idénticos</td></tr>
+<tr><td>Plazo de nombramiento</td><td>1 mes desde fin de solicitudes, prorrogable 1 mes más</td></tr>
+<tr><td>Norma de desarrollo</td><td><b>Orden TDF/379/2024</b>, de 26 de abril</td></tr>
+</table>
+<p style="margin-top:8px"><b>Causas de cese:</b> fin del plazo · petición propia · evaluación negativa · supresión del puesto · separación/despido disciplinario · pérdida de requisitos · <b>excepcionalmente, pérdida de confianza</b>.</p>
+</div>
+
+<h2>📥 3. Adquisición de la condición de funcionario de carrera</h2>
+<div class="clave"><div class="tit">🔑 ARTÍCULO 62 TREBEP — 4 requisitos ACUMULATIVOS</div>
+<p>1) Superación del proceso selectivo → 2) Nombramiento por órgano competente (publicado en Diario Oficial) → 3) Acto de acatamiento de la Constitución (y Estatuto de Autonomía, en su caso) → 4) Toma de posesión dentro de plazo.</p></div>
+<table><tr><th>Requisito general de acceso (art. 56)</th><th>Contenido</th></tr>
+<tr><td>Nacionalidad</td><td>Española, sin perjuicio del art. 57 (acceso UE)</td></tr>
+<tr><td>Edad</td><td>16 años cumplidos, no exceder edad de jubilación forzosa</td></tr>
+<tr><td>Capacidad</td><td>Capacidad funcional para las tareas</td></tr>
+<tr><td>Antecedentes</td><td>No separado por expediente disciplinario ni inhabilitado</td></tr>
+<tr><td>Titulación</td><td>La exigida en la convocatoria</td></tr>
+<tr><td>Reserva discapacidad</td><td><b>≥ 7%</b> en el art. 59 TREBEP; <b>elevada al 10%</b> por el RDL 6/2023 (ver Tema 3)</td></tr>
+</table>
+<div class="grid2">
+<div class="card"><p><b>Toma de posesión (Tema 1):</b></p><ul class="lista"><li>Funcionario de carrera: <b>15 días naturales</b> desde publicación del nombramiento</li><li>Con cambio de localidad: <b>1 mes</b></li><li>Interinos y eventuales: al <b>día siguiente</b> del nombramiento</li></ul></div>
+<div class="card"><p><b>Sistemas selectivos (art. 114 RDL 6/2023):</b></p><ul class="lista"><li>Oposición (regla general)</li><li>Concurso-oposición (concurso solo si se superó la oposición)</li><li>Concurso — EXCEPCIONAL, solo por ley</li></ul></div>
+</div>
+<div class="nota"><div class="tit">📌 Oferta de Empleo Público — anticipo (ver Tema 3)</div><p>Ejecución: <b>2 años</b> máx. desde publicación (fases de oposición: 1 año). Reserva promoción interna: <b>≥30%</b>. Reserva discapacidad: <b>≥10%</b> (≥2% discapacidad intelectual).</p></div>
+
+<h2>📤 4. Pérdida de la condición de funcionario de carrera (art. 63)</h2>
+<table><tr><th>Causa</th><th>Precepto</th><th>Reingreso</th></tr>
+<tr><td>Renuncia</td><td>Art. 64</td><td>Sí, nuevo proceso selectivo (no inhabilita)</td></tr>
+<tr><td>Pérdida de la nacionalidad</td><td>Art. 65</td><td>Rehabilitación REGLADA</td></tr>
+<tr><td>Jubilación total</td><td>Art. 67</td><td>Incapacidad: rehabilitación reglada</td></tr>
+<tr><td>Separación del servicio (firme)</td><td>Art. 66 / 96.1.a</td><td><b>NO cabe</b> (sanción más grave, no cancelable)</td></tr>
+<tr><td>Inhabilitación absoluta/especial (firme)</td><td>Art. 66</td><td>Rehabilitación EXCEPCIONAL (68.2)</td></tr>
+</table>
+
+<h3>Renuncia (art. 64)</h3>
+<div class="card"><p>Por escrito + <b>aceptación expresa de la Administración</b> (constitutiva: sin ella no hay efectos). NO se acepta si hay expediente disciplinario en curso o auto de procesamiento/apertura de juicio oral. No inhabilita para reingresar.</p></div>
+
+<h3>Jubilación (art. 67)</h3>
+<div class="grid3">
+<div class="card"><p><b>Voluntaria</b></p><p style="font-size:.85rem">A solicitud; requisitos del régimen de SS aplicable. Clases Pasivas: 60 años + 30 años de servicios (RDLeg 670/1987).</p></div>
+<div class="card"><p><b>Forzosa</b></p><p style="font-size:.85rem"><b>65 años</b>. Prolongación posible hasta <b>70 años</b> a solicitud.</p></div>
+<div class="card"><p><b>Incapacidad permanente</b></p><p style="font-size:.85rem">Lesión/proceso patológico irreversible; a instancia de parte, reconocimiento médico.</p></div>
+</div>
+<table><tr><th>Prolongación del servicio activo (Resolución 31-12-1996)</th><th>Plazo</th></tr>
+<tr><td>Solicitud</td><td>Antelación mínima <b>2 meses</b> a la jubilación forzosa</td></tr>
+<tr><td>Resolución</td><td><b>1 mes</b> desde entrada en registro</td></tr>
+<tr><td>Silencio</td><td><b>Positivo</b> si no se resuelve 15 días antes de la fecha de jubilación</td></tr>
+<tr><td>Fin de la prolongación</td><td>A instancia, con <b>3 meses</b> de antelación</td></tr>
+</table>
+<div class="nota"><div class="tit">📌 Régimen General de la Seguridad Social (art. 67.4)</div><p>Para funcionarios incluidos en el Régimen General (no Clases Pasivas), la edad de jubilación forzosa es la que fije la LGSS para la pensión contributiva sin coeficiente reductor (actualmente en progresión hacia los 67 años).</p></div>
+
+<h3>Rehabilitación (art. 68 TREBEP + RD 2669/1998)</h3>
+<div class="vs">
+<div class="izq"><h4>Reglada (68.1)</h4><p style="font-size:.87rem">Pérdida de nacionalidad e incapacidad permanente. Desaparecida la causa, se <b>CONCEDE</b> (derecho reglado). Silencio: <b>positivo</b>.</p></div>
+<div class="der"><h4>Excepcional (68.2)</h4><p style="font-size:.87rem">Inhabilitación absoluta/especial. Discrecional, según circunstancias y entidad del delito. Silencio: <b>NEGATIVO</b>.</p></div>
+</div>
+<table><tr><th>Fase</th><th>Plazo</th></tr>
+<tr><td>Subsanación</td><td>10 días</td></tr>
+<tr><td>Duración máxima del procedimiento</td><td><b>6 meses</b></td></tr>
+<tr><td>Nueva solicitud tras desestimación (inhabilitación)</td><td><b>2 años</b></td></tr>
+<tr><td>Toma de posesión tras rehabilitación</td><td><b>1 mes</b> (si no: excedencia voluntaria por interés particular)</td></tr>
+</table>
+<p style="font-size:.85rem"><b>Órgano competente:</b> Subsecretario del Ministerio o Delegado del Gobierno (reglada) · <b>Consejo de Ministros</b> (excepcional), previa instrucción de la SEFP.</p>
+
+<h2>⚖️ 5. Régimen jurídico del TREBEP</h2>
+<div class="clave"><div class="tit">🔑 ARTÍCULO 1 — Doble objeto</div><p>1) Bases del régimen estatutario de los funcionarios · 2) Normas aplicables al personal laboral.</p></div>
+<div class="memo">
+<div class="m"><b>Art. 2 — Ámbito</b>AGE, CCAA, Ceuta/Melilla, EELL, OOAA/entes de Derecho Público, Universidades. Carácter <b>supletorio</b> (2.5) para el resto.</div>
+<div class="m"><b>Art. 4 — Legislación específica</b>8 colectivos: Cortes Generales, Órganos Constitucionales, Justicia, FFAA, FCSE, arancel, CNI, Banco de España/FGD.</div>
+<div class="m"><b>Art. 3 — Entidades Locales</b>TREBEP + legislación autonómica. Policía Local: TREBEP + LO 2/1986.</div>
+<div class="m"><b>Art. 5 — Correos</b>Funcionarial: supletorio TREBEP. Laboral: legislación laboral.</div>
+</div>
+<div class="nota"><div class="tit">📌 Los 12 fundamentos de actuación (art. 1.3) — MEMORIZAR EN ORDEN</div>
+<p>Servicio a los ciudadanos · igualdad/mérito/capacidad · sometimiento a la ley y al Derecho · igualdad mujeres-hombres · objetividad/profesionalidad/imparcialidad con inamovilidad · eficacia en la planificación · desarrollo profesional permanente · transparencia · evaluación y responsabilidad · jerarquía · negociación colectiva · cooperación interadministrativa.</p></div>
+
+<h3>Instrumentos de ordenación del personal</h3>
+<table><tr><th>Instrumento</th><th>Contenido clave</th></tr>
+<tr><td><b>RPT</b> (art. 74)</td><td>Denominación, tipo y sistema de provisión, grupo/cuerpo/escala, órgano, complementos, requisitos. Aprobación AGE: <b>CECIR</b> (Función Pública + Hacienda)</td></tr>
+<tr><td><b>Planes de Ordenación de RRHH</b> (art. 69, RDL 6/2023)</td><td>Análisis de necesidades, movilidad, promoción, formación, previsión de OEP</td></tr>
+<tr><td><b>OEP</b> (art. 70)</td><td>Instrumento de necesidades con asignación presupuestaria; convoca hasta un <b>10% adicional</b> a las plazas comprometidas</td></tr>
+<tr><td><b>Evaluación del desempeño</b> (art. 20 + arts. 116-118 RDL 6/2023)</td><td>Mide conducta y rendimiento; efectos en carrera horizontal, formación, provisión, <b>complemento de desempeño</b> (sustituye al de productividad) y continuidad</td></tr>
+</table>
+
+<h3>Registro Central de Personal (RCP)</h3>
+<div class="card">
+<p>Regulado en el <b>RD 1405/1986</b> (modificado por RD 2073/1999). Dependencia: Ministerio competente en Función Pública, a través de la <b>Dirección General de la Función Pública</b>. Organización: Oficina Central + Oficinas Delegadas.</p>
+<p style="margin-top:6px"><b>NRP</b> (Número de Registro de Personal): DNI (8 dígitos) + 2 dígitos de control + código de Cuerpo/Escala/Categoría. <b>Anotaciones provisionales:</b> 90 días naturales, prorrogables por otros 90.</p>
+</div>
+
+<h2>📌 6. Datos clave para el examen</h2>
+<table>
+<tr><th>Dato</th><th>Cifra/Precepto</th></tr>
+<tr><td>TREBEP</td><td>RDLeg 5/2015, de 30 de octubre · refunde Ley 7/2007</td></tr>
+<tr><td>4 clases de empleados</td><td>Art. 8.2 TREBEP</td></tr>
+<tr><td>Interinos: plazos</td><td>Vacantes 3 años · programas 3+12 meses · acumulación 9 meses en 18</td></tr>
+<tr><td>Adquisición: 4 requisitos</td><td>Art. 62 — selectivo, nombramiento, acatamiento, toma de posesión</td></tr>
+<tr><td>Toma de posesión</td><td>15 días naturales (1 mes si cambio de localidad) · interinos/eventuales: al día siguiente</td></tr>
+<tr><td>Pérdida: 5 causas</td><td>Art. 63 — renuncia, pérdida nacionalidad, jubilación total, separación firme, inhabilitación firme</td></tr>
+<tr><td>Jubilación forzosa</td><td>65 años · prolongación hasta 70</td></tr>
+<tr><td>Rehabilitación</td><td>Reglada (nacionalidad/incapacidad, silencio +) / excepcional (inhabilitación, silencio −). Plazo 6 meses</td></tr>
+<tr><td>Personal directivo</td><td>Art. 13 + 123-127 RDL 6/2023 · A1 · 5 años · libre designación · 10 días solicitudes</td></tr>
+<tr><td>OEP 2026 (AGE)</td><td><b>RD 387/2026</b>, de 6 de mayo — 27.232 plazas (sustituye a la OEP 2025, RD 651/2025)</td></tr>
+</table>
+
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS DE EXAMEN</div>
+<ul class="lista">
+<li>El <b>concurso</b> NO es el sistema habitual para funcionarios de carrera — es <b>excepcional y por ley</b>.</li>
+<li>Personal eventual: cesa <b>automáticamente</b> cuando cesa la autoridad que lo nombró (no requiere acto expreso).</li>
+<li>La acumulación de tareas de los interinos es <b>9 meses en 18</b>, no "en 12".</li>
+<li>La separación del servicio <b>no es rehabilitable</b> por la vía ordinaria del art. 68 (a diferencia de la inhabilitación).</li>
+<li>El Real Decreto-ley 6/2023 sigue siendo eso — <b>Real Decreto-ley</b> — no ha culminado su tramitación como Ley ordinaria a fecha de esta revisión (08/2026); no confundir con un "Real Decreto Legislativo".</li>
+</ul>
+</div>
+
+</div>
+<footer>GACE 2027 · Bloque V · Tema 1 · Material verificado contra BOE a 01/08/2026 · Antonio José De Lamo Villar</footer>
+</body>
+</html>
