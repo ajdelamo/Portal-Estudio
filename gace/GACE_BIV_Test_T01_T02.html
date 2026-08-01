@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV — Test T1 y T2 (Fuentes y La Ley)</title>
+<style>
+:root{--azul:#1e3a8a;--azul2:#3b62c4;--verde:#16a34a;--rojo:#dc2626;--naranja:#ea580c;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:70px}
+header{background:linear-gradient(135deg,#1e3a8a,#3b62c4);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:800px;margin:0 auto;padding:0 14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 6px}
+.tab{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;cursor:pointer}
+.tab.on{background:var(--azul);color:#fff}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 14px}
+.mode{border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:5px 12px;font-size:.8rem;cursor:pointer}
+.mode.on{background:#0f766e;color:#fff;border-color:#0f766e}
+.bars{display:flex;flex-direction:column;gap:6px;margin:10px 0 18px}
+.bar{background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.bar .lbl{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin-bottom:4px}
+.bar .track{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.bar .fill{height:100%;border-radius:4px;transition:width .3s}
+.q{background:#fff;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.q .meta{font-size:.75rem;color:#64748b;margin-bottom:8px;display:flex;justify-content:space-between}
+.q h3{font-size:.98rem;margin-bottom:12px;line-height:1.45}
+.opt{display:block;width:100%;text-align:left;border:2px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:10px 12px;margin:6px 0;font-size:.9rem;cursor:pointer;line-height:1.4}
+.opt:hover{border-color:var(--azul2)}
+.opt.ok{border-color:var(--verde);background:#f0fdf4}
+.opt.ko{border-color:var(--rojo);background:#fef2f2}
+.opt:disabled{cursor:default;opacity:.92}
+.exp{display:none;margin-top:10px;background:#eef2ff;border-left:4px solid var(--azul2);border-radius:0 8px 8px 0;padding:10px 12px;font-size:.85rem}
+.exp.show{display:block}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.btn{border:none;border-radius:8px;padding:8px 16px;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--azul);color:#fff}
+.btn.sec{background:#64748b}
+.btn.warn{background:var(--rojo)}
+.score{position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#fff;padding:10px 16px;text-align:center;font-size:.9rem}
+.score b{color:#4ade80}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧪 Test BIV · T1 Fuentes del Derecho + T2 La Ley</h1>
+  <p>GACE 2027 · Autocorregible y adaptativo · Normativa verificada a 01/08/2026 (incluye 4ª reforma CE)</p>
+</header>
+<div class="wrap">
+  <div class="tabs" id="tabs"></div>
+  <div class="modes">
+    <button class="mode on" data-m="normal">📚 Normal</button>
+    <button class="mode" data-m="adapt">🎯 Adaptativo (peores 20)</button>
+    <button class="mode" data-m="fail">❌ Solo erróneas</button>
+  </div>
+  <div class="bars" id="bars"></div>
+  <div class="controls">
+    <button class="btn" onclick="render(true)">🔀 Barajar</button>
+    <button class="btn sec" onclick="showAll()">👁️ Ver explicaciones</button>
+    <button class="btn warn" onclick="resetHist()">🗑️ Reiniciar historial</button>
+  </div>
+  <div id="quiz"></div>
+</div>
+<div class="score" id="score"></div>
+<script>
+const LS_KEY='gace_biv_t1t2_v1';
+const UNIDADES={1:'T1 · Fuentes',2:'T2 · La Ley'};
+const BANK=[
+// ============ T1 — FUENTES (u:1) ============
+{u:1,t:"Según el artículo 9.3 CE, la Constitución garantiza todos los siguientes principios EXCEPTO:",o:["La publicidad de las normas","La eficacia y la desconcentración","La interdicción de la arbitrariedad de los poderes públicos","La irretroactividad de las disposiciones sancionadoras no favorables"],c:1,e:"Eficacia y desconcentración son principios de actuación de la Administración del art. 103.1 CE, no del 9.3. El 9.3 garantiza: legalidad, jerarquía normativa, publicidad, irretroactividad de disposiciones sancionadoras no favorables o restrictivas de derechos, seguridad jurídica, responsabilidad e interdicción de la arbitrariedad."},
+{u:1,t:"La potestad reglamentaria del Gobierno tiene su fundamento constitucional en:",o:["El art. 103.1 CE","El art. 97 CE","El art. 106 CE","El art. 149.1.18ª CE"],c:1,e:"Art. 97 CE: el Gobierno ejerce la función ejecutiva y la potestad reglamentaria de acuerdo con la Constitución y las leyes. El 106 CE regula su control judicial."},
+{u:1,t:"¿En qué artículo de la Ley 39/2015 se recoge la inderogabilidad singular de los reglamentos?",o:["Art. 37.1","Art. 47.2","Art. 128","Art. 131"],c:0,e:"Art. 37.1 Ley 39/2015: las resoluciones administrativas de carácter particular no podrán vulnerar lo establecido en una disposición de carácter general, aunque procedan de un órgano de igual o superior jerarquía."},
+{u:1,t:"Según el art. 1 del Código Civil, las fuentes del ordenamiento jurídico español son:",o:["La Constitución, la ley y el reglamento","La ley, la costumbre y los principios generales del derecho","La ley, la jurisprudencia y la costumbre","La ley, los tratados internacionales y la costumbre"],c:1,e:"Art. 1.1 CC: «Las fuentes del ordenamiento jurídico español son la ley, la costumbre y los principios generales del derecho». La jurisprudencia solo complementa (art. 1.6 CC)."},
+{u:1,t:"La costumbre rige, según el art. 1.3 CC:",o:["Siempre que sea alegada por las partes","En defecto de ley aplicable, si no es contraria a la moral ni al orden público y resulta probada","Con preferencia sobre los principios generales y la ley dispositiva","Solo si un reglamento la reconoce expresamente"],c:1,e:"Art. 1.3 CC exige: defecto de ley aplicable + no contraria a moral u orden público + probada. Prevalece sobre los principios generales (que son residuales, art. 1.4) pero nunca sobre la ley."},
+{u:1,t:"La jurisprudencia, conforme al art. 1.6 CC:",o:["Es fuente directa del ordenamiento","Complementa el ordenamiento con la doctrina reiterada del Tribunal Supremo","Vincula solo cuando emana del Tribunal Constitucional","Crea normas jurídicas con rango reglamentario"],c:1,e:"Art. 1.6 CC: la jurisprudencia complementará el ordenamiento con la doctrina que, de modo reiterado, establezca el TS. No es fuente formal en sentido estricto. La del TC vincula a todos los jueces con una sola sentencia (art. 5.1 LOPJ), pero por otra vía."},
+{u:1,t:"¿Cuántas veces se ha reformado la Constitución Española a fecha de agosto de 2026?",o:["Dos","Tres","Cuatro","Cinco"],c:2,e:"CUATRO: 1992 (art. 13.2, Maastricht), 2011 (art. 135, estabilidad presupuestaria), 2024 (art. 49, personas con discapacidad) y 2026 (art. 69.3, senador propio para Formentera, BOE 20/05/2026)."},
+{u:1,t:"La reforma constitucional de 2026 modificó:",o:["El art. 49, sobre personas con discapacidad","El art. 69.3, para que Formentera elija un senador propio","El art. 135, sobre estabilidad presupuestaria","El art. 68, sobre la circunscripción electoral del Congreso"],c:1,e:"Reforma del art. 69.3 CE (BOE-A-2026-10881, 20/05/2026): Formentera deja de compartir senador con Ibiza. El art. 49 fue la reforma de 2024."},
+{u:1,t:"La reforma del art. 69.3 CE (2026) se tramitó:",o:["Por el procedimiento agravado del art. 168, con referéndum obligatorio","Por el procedimiento del art. 167, sin referéndum, a iniciativa del Parlamento de las Illes Balears","Por decreto-ley convalidado por el Congreso","Por ley orgánica de las Cortes Generales"],c:1,e:"Se usó la vía ordinaria del art. 167 (3/5 de cada Cámara) sin que se solicitara referéndum, partiendo de una proposición de ley del Parlamento balear presentada al amparo del art. 87.2 CE. La reforma constitucional nunca puede hacerse por decreto-ley ni por LO."},
+{u:1,t:"La eficacia de la nueva circunscripción senatorial de Formentera:",o:["Fue inmediata desde la publicación en el BOE","Queda pospuesta hasta las primeras elecciones al Senado posteriores a la entrada en vigor de la reforma","Depende de una reforma previa de la LOREG","Se aplicó a los senadores en ejercicio mediante designación autonómica"],c:1,e:"La disposición transitoria única de la reforma pospone la eficacia de las circunscripciones de Ibiza y Formentera hasta la convocatoria de las primeras elecciones al Senado tras su entrada en vigor (20/05/2026)."},
+{u:1,t:"¿Qué reforma constitucional afectó a un artículo del Capítulo III del Título I (principios rectores)?",o:["La de 1992","La de 2011","La de 2024","La de 2026"],c:2,e:"La reforma de 2024 modificó el art. 49 CE (personas con discapacidad), dentro del Cap. III del Título I. Al no estar en las materias del art. 168 (Título Preliminar, Sección 1ª Cap. II Tít. I, Título II), pudo tramitarse por el 167."},
+{u:1,t:"Los tratados internacionales válidamente celebrados forman parte del ordenamiento interno:",o:["Desde su firma por el Gobierno","Desde su ratificación por el Rey","Una vez publicados oficialmente en España (art. 96.1 CE)","Desde la autorización de las Cortes Generales"],c:2,e:"Art. 96.1 CE: forman parte del ordenamiento interno una vez publicados oficialmente en España. La Ley 25/2014 (art. 31) confirma su prevalencia sobre cualquier norma interna salvo la CE."},
+{u:1,t:"La celebración de un tratado que atribuya a una organización internacional el ejercicio de competencias derivadas de la Constitución exige:",o:["Ley ordinaria","Ley orgánica (art. 93 CE)","Autorización previa de las Cortes por mayoría simple (art. 94.1 CE)","Mera información a las Cámaras (art. 94.2 CE)"],c:1,e:"Art. 93 CE: mediante ley orgánica se podrá autorizar la celebración de tratados que atribuyan a una organización o institución internacional el ejercicio de competencias derivadas de la Constitución (vía de la adhesión a la UE)."},
+{u:1,t:"El principio de primacía del Derecho de la UE se formuló en la sentencia:",o:["Van Gend en Loos (1963)","Costa contra ENEL (1964)","Francovich (1991)","Simmenthal (1978)"],c:1,e:"Costa c. ENEL (15/07/1964) formuló la primacía. Van Gend en Loos (1963) el efecto directo; Francovich (1991) la responsabilidad del Estado por incumplimiento."},
+{u:1,t:"¿Qué acto de Derecho derivado de la UE es obligatorio en todos sus elementos y directamente aplicable sin transposición?",o:["La directiva","El reglamento","La recomendación","El dictamen"],c:1,e:"Art. 288 TFUE: el reglamento tiene alcance general, es obligatorio en todos sus elementos y directamente aplicable. La directiva obliga al resultado y requiere transposición."},
+{u:1,t:"Un reglamento estatal que contradice una ley es:",o:["Anulable en el plazo de cuatro años","Nulo de pleno derecho","Válido hasta su derogación expresa","Convalidable por el Consejo de Ministros"],c:1,e:"Art. 47.2 Ley 39/2015: son nulas de pleno derecho las disposiciones administrativas que vulneren la Constitución, las leyes u otras disposiciones de rango superior. En los reglamentos no hay anulabilidad: siempre nulidad."},
+{u:1,t:"Contra un reglamento NO cabe:",o:["Recurso contencioso-administrativo directo","Recurso indirecto contra sus actos de aplicación","Recurso administrativo (alzada o reposición)","Cuestión de ilegalidad"],c:2,e:"Art. 112.3 Ley 39/2015: contra las disposiciones administrativas de carácter general no cabe recurso en vía administrativa. Sí caben el recurso contencioso directo, el indirecto y la cuestión de ilegalidad (arts. 25-27 LJCA)."},
+{u:1,t:"La jerarquía interna de los reglamentos estatales (art. 24.2 Ley 50/1997) establece que:",o:["Las órdenes ministeriales prevalecen sobre los reales decretos posteriores","Ningún reglamento puede vulnerar otro de rango superior: Real Decreto > Orden Ministerial","Todos los reglamentos estatales tienen el mismo rango","El rango depende de la fecha de publicación"],c:1,e:"Art. 24.2 Ley 50/1997: los reglamentos se ordenan según la jerarquía del órgano que los aprueba: 1º disposiciones aprobadas por Real Decreto (Presidente o Consejo de Ministros); 2º disposiciones por Orden Ministerial."},
+{u:1,t:"La vacatio legis supletoria de las leyes es de:",o:["15 días desde su sanción","20 días desde su completa publicación en el BOE (art. 2.1 CC)","30 días desde su promulgación","3 meses desde su publicación"],c:1,e:"Art. 2.1 CC: entran en vigor a los 20 días de su completa publicación en el BOE si en ellas no se dispone otra cosa. La propia CE entró en vigor el mismo día de su publicación (29/12/1978)."},
+{u:1,t:"Según el art. 23 de la Ley 50/1997, los reglamentos que impongan nuevas obligaciones a quienes desempeñen una actividad económica o profesional deben prever su entrada en vigor:",o:["A los 20 días de su publicación","El 2 de enero o el 1 de julio siguientes a su aprobación","El 1 de enero o el 30 de junio","En la fecha que fije libremente cada ministerio"],c:1,e:"Art. 23 Ley 50/1997: entrada en vigor el 2 de enero o el 1 de julio siguientes a su aprobación (salvo excepciones: normas UE, plazos fijados por otra norma o razones justificadas)."},
+{u:1,t:"El bloque de constitucionalidad (art. 28.1 LOTC) incluye, para enjuiciar una ley:",o:["Únicamente el texto de la Constitución","La CE y, además, los Estatutos de Autonomía y las leyes de delimitación competencial","La CE y toda la legislación ordinaria vigente","La CE y la jurisprudencia del Tribunal Supremo"],c:1,e:"Art. 28.1 LOTC: además de la CE, las leyes que, dentro del marco constitucional, se hubieran dictado para delimitar competencias entre Estado y CCAA (Estatutos de Autonomía, LOFCA…) y los Reglamentos parlamentarios."},
+{u:1,t:"La STC 55/2018 declaró, respecto de los arts. 129 a 133 de la Ley 39/2015 (buena regulación):",o:["Su nulidad total y expulsión del ordenamiento","Que varios apartados son contrarios al orden constitucional de competencias respecto de CCAA, aunque siguen aplicándose a la AGE","Que solo son aplicables a las Entidades Locales","Su plena constitucionalidad sin matices"],c:1,e:"La STC 55/2018 declaró varios apartados de los arts. 129, 130, 132 y 133 contrarios al orden constitucional de competencias en cuanto a su aplicación a CCAA (y parcialmente EELL), sin expulsarlos del ordenamiento: siguen siendo aplicables a la Administración General del Estado."},
+{u:1,t:"El principio de competencia implica que:",o:["La norma de mayor rango siempre prevalece","Cuando opera, no entra en juego la jerarquía: prevalece la norma del ente u órgano competente","Las leyes autonómicas están subordinadas jerárquicamente a las estatales","Los reglamentos estatales prevalecen sobre las leyes autonómicas"],c:1,e:"Jerarquía y competencia son principios distintos: una ley estatal que invade una competencia autonómica exclusiva es inconstitucional aunque tenga rango de ley. Las leyes autonómicas tienen rango de ley y no se subordinan jerárquicamente a las estatales."},
+{u:1,t:"¿Dónde se publican los actos y normas de la Unión Europea?",o:["En el BOE","En el Diario Oficial de la Unión Europea (art. 297 TFUE)","En el Boletín de las Cortes Generales","En el diario oficial de cada Estado miembro"],c:1,e:"Art. 297 TFUE: los actos legislativos se publican en el DOUE. No requieren publicación en el BOE para ser aplicables en España (a diferencia de los tratados internacionales, art. 96.1 CE)."},
+// ============ T2 — LA LEY (u:2) ============
+{u:2,t:"La aprobación, modificación o derogación de una ley orgánica exige:",o:["Mayoría absoluta del Congreso y del Senado","Mayoría absoluta del Congreso en una votación final sobre el conjunto del proyecto","Mayoría de 3/5 de cada Cámara","Mayoría de 2/3 del Congreso"],c:1,e:"Art. 81.2 CE: mayoría absoluta del Congreso (176 de 350) en votación final sobre el conjunto. En el Senado basta la mayoría simple. 3/5 y 2/3 son mayorías de reforma constitucional."},
+{u:2,t:"Son materias reservadas a ley orgánica (art. 81.1 CE):",o:["El desarrollo de todos los derechos del Título I","El desarrollo de los derechos fundamentales y libertades públicas, los Estatutos de Autonomía y el régimen electoral general","Los Presupuestos Generales del Estado","La planificación económica general"],c:1,e:"Art. 81.1: desarrollo de DDFF y libertades públicas (arts. 15-29 según doctrina mayoritaria), Estatutos de Autonomía, régimen electoral general y demás previstas en la CE. Los PGE se aprueban por ley ordinaria específica."},
+{u:2,t:"La relación entre ley orgánica y ley ordinaria se rige por el principio de:",o:["Jerarquía: la LO es superior","Competencia: cada una tiene su ámbito material (STC 5/1981)","Temporalidad: la posterior deroga a la anterior","Especialidad: la LO es siempre especial"],c:1,e:"STC 5/1981: la LO no es jerárquicamente superior; la relación es de competencia material. Las materias conexas incluidas en una LO quedan con rango de ley ordinaria."},
+{u:2,t:"La ley de transferencia o delegación del art. 150.2 CE tiene naturaleza de:",o:["Ley ordinaria","Ley orgánica","Ley marco","Decreto legislativo"],c:1,e:"Art. 150.2 CE: la transferencia o delegación de facultades estatales a las CCAA se hace mediante LEY ORGÁNICA. La ley marco (150.1) y la de armonización (150.3) son ordinarias — la segunda con apreciación del interés general por mayoría absoluta de cada Cámara."},
+{u:2,t:"El plazo máximo de la detención preventiva y su ubicación constitucional son:",o:["72 horas, art. 17.2 CE","72 horas, art. 17.3 CE","48 horas, art. 17.2 CE","24 horas, art. 24 CE"],c:0,e:"Art. 17.2 CE: la detención preventiva no podrá durar más del tiempo estrictamente necesario y, en todo caso, máximo 72 horas. El 17.3 regula los derechos del detenido (información, no declarar, asistencia letrada). Cuidado: algunos temarios lo sitúan mal en el 17.3."},
+{u:2,t:"El principio de congelación de rango significa que:",o:["Las leyes no pueden modificarse durante la legislatura","Una materia regulada por ley solo puede modificarse por norma de rango igual o superior","Los reglamentos quedan congelados al cambiar el Gobierno","Las leyes orgánicas no pueden derogarse"],c:1,e:"Una vez que el legislador regula una materia (aunque la CE no lo exigiera), su rango queda congelado: un reglamento no puede modificarla. En la reserva meramente formal, la propia ley puede deslegalizar la materia."},
+{u:2,t:"La iniciativa legislativa popular exige:",o:["100.000 firmas acreditadas","250.000 firmas acreditadas","500.000 firmas acreditadas (art. 87.3 CE y LO 3/1984)","1.000.000 de firmas acreditadas"],c:2,e:"Art. 87.3 CE y LO 3/1984: no menos de 500.000 firmas acreditadas. Excluidas: materias propias de LO, tributarias, de carácter internacional y prerrogativa de gracia."},
+{u:2,t:"NO cabe iniciativa legislativa popular en materia:",o:["De ordenación del comercio interior","Tributaria","De consumo","De vivienda"],c:1,e:"Art. 87.3 CE: quedan excluidas las materias propias de ley orgánica, las tributarias, las de carácter internacional y la prerrogativa de gracia. Tampoco cabe en la reforma constitucional (el art. 166 solo remite al 87.1 y 87.2)."},
+{u:2,t:"El Senado puede vetar un proyecto de ley:",o:["Por mayoría simple, en el plazo de 2 meses","Por mayoría absoluta, en el plazo de 2 meses (20 días naturales en proyectos urgentes)","Por mayoría de 3/5 en cualquier plazo","No puede vetar, solo enmendar"],c:1,e:"Art. 90.2 y 90.3 CE: veto por mayoría absoluta en 2 meses (20 días naturales si el proyecto es declarado urgente). El Congreso levanta el veto ratificando el texto por mayoría absoluta, o por mayoría simple una vez transcurridos 2 meses."},
+{u:2,t:"La sanción real de las leyes (art. 91 CE):",o:["Es discrecional: el Rey puede negarla","Debe producirse en el plazo de 15 días y es un acto debido","Debe producirse en 30 días","Corresponde al Presidente del Gobierno"],c:1,e:"Art. 91 CE: el Rey sancionará en el plazo de 15 días las leyes aprobadas por las Cortes, y las promulgará y ordenará su inmediata publicación. Es un acto debido: no existe veto regio."},
+{u:2,t:"¿Qué NO puede delegarse en una Comisión Legislativa Permanente (art. 75.2 y 75.3 CE)?",o:["Leyes de consumo","Reforma constitucional, cuestiones internacionales, leyes orgánicas y de bases, y PGE","Leyes de ordenación del territorio","Leyes de función pública"],c:1,e:"Art. 75.3 CE: se exceptúan de la delegación en Comisión la reforma constitucional, las cuestiones internacionales, las leyes orgánicas y de bases y los Presupuestos Generales del Estado."},
+{u:2,t:"El decreto legislativo por el que se aprueba un TEXTO ARTICULADO exige una delegación mediante:",o:["Ley ordinaria de autorización","Ley de bases (art. 82.4 CE)","Ley orgánica","Ley marco"],c:1,e:"Art. 82.4 CE: los textos articulados se delegan por ley de bases que delimita objeto, alcance, principios y criterios. Los textos refundidos, por ley ordinaria (art. 82.5) que especifica si incluye regularizar, aclarar y armonizar."},
+{u:2,t:"La ley de bases NO puede en ningún caso (art. 83 CE):",o:["Fijar un plazo para el ejercicio de la delegación","Autorizar su propia modificación por el texto articulado ni facultar para dictar normas retroactivas","Delimitar el objeto de la delegación","Establecer principios y criterios de la delegación"],c:1,e:"Art. 83 CE: las leyes de bases no podrán autorizar la modificación de la propia ley de bases ni facultar para dictar normas con carácter retroactivo."},
+{u:2,t:"El control del exceso de delegación (ultra vires) en los decretos legislativos corresponde:",o:["Exclusivamente al Tribunal Constitucional","Al TC y también a los tribunales contencioso-administrativos","Solo al Consejo de Estado","Al Congreso mediante veto suspensivo"],c:1,e:"Lo que excede la delegación carece de rango de ley y puede anularse por la jurisdicción contencioso-administrativa sin cuestión de inconstitucionalidad (doctrina STC 51/1982 y STC 13/1992); el TC controla además la constitucionalidad de la norma delegada."},
+{u:2,t:"El presupuesto habilitante del decreto-ley es:",o:["La delegación expresa de las Cortes","La extraordinaria y urgente necesidad (art. 86.1 CE)","La disolución de las Cámaras","La declaración del estado de alarma"],c:1,e:"Art. 86.1 CE. El TC exige urgencia objetiva y una «conexión de sentido» entre la situación y las medidas (STC 29/1982, STC 6/1983). No bastan la conveniencia política ni evitar el trámite parlamentario."},
+{u:2,t:"Un decreto-ley NO puede afectar a:",o:["La legislación de contratos del sector público","Las instituciones básicas del Estado, los derechos del Título I, el régimen de las CCAA y el Derecho electoral general","La normativa presupuestaria de urgencia","Las medidas fiscales coyunturales"],c:1,e:"Art. 86.1 CE: las cuatro materias vedadas. El TC matiza respecto del Título I: lo prohibido es regular el régimen general de los derechos, no cualquier afectación."},
+{u:2,t:"El plazo para que el Congreso convalide o derogue un decreto-ley es de:",o:["15 días desde su publicación","30 días desde su promulgación","2 meses desde su entrada en vigor","10 días desde su comunicación"],c:1,e:"Art. 86.2 CE: sometimiento inmediato a debate y votación de totalidad en el Congreso en los 30 días siguientes a su promulgación. Si no se pronuncia, queda derogado. El Senado no interviene."},
+{u:2,t:"La convalidación de un decreto-ley por el Congreso:",o:["Lo convierte en ley formal","Mantiene su naturaleza de decreto-ley y no subsana eventuales vicios de inconstitucionalidad","Requiere mayoría absoluta","Permite introducir enmiendas parciales"],c:1,e:"La convalidación (mayoría simple, en bloque, sin enmiendas) no transforma el decreto-ley en ley. Solo la tramitación como proyecto de ley por urgencia (art. 86.3) produce una ley nueva que lo sustituye."},
+{u:2,t:"¿Qué órgano interviene en la convalidación del decreto-ley?",o:["Las Cortes Generales en sesión conjunta","Solo el Congreso de los Diputados","El Senado en primera lectura","La Diputación Permanente del Senado"],c:1,e:"Art. 86.2 CE: solo el Congreso. Si está disuelto, interviene su Diputación Permanente (art. 78.2 CE) — la del Congreso, nunca el Senado."},
+{u:2,t:"El recurso de inconstitucionalidad puede interponerse en el plazo de:",o:["3 meses desde la publicación (9 meses si media acuerdo de la Comisión Bilateral)","30 días desde la publicación","1 año desde la entrada en vigor","6 meses desde la sanción"],c:0,e:"Art. 33 LOTC: 3 meses desde la publicación; el 33.2 lo amplía a 9 meses para Estado-CCAA cuando se reúne la Comisión Bilateral de Cooperación y se solicita la negociación para evitar el recurso."},
+{u:2,t:"Están legitimados para interponer recurso de inconstitucionalidad:",o:["Cualquier ciudadano con interés legítimo","El Presidente del Gobierno, el Defensor del Pueblo, 50 diputados, 50 senadores y los órganos de las CCAA","El Ministerio Fiscal y los jueces ordinarios","Los ayuntamientos afectados"],c:1,e:"Art. 162.1.a CE. Los ciudadanos solo acceden al TC por amparo (art. 162.1.b); los jueces plantean cuestión de inconstitucionalidad (art. 163), no recurso."},
+{u:2,t:"La reforma constitucional por la vía del art. 167 CE requiere referéndum:",o:["Siempre, con carácter obligatorio","Solo si lo solicita una décima parte de los miembros de cualquiera de las Cámaras dentro de los 15 días siguientes","Nunca admite referéndum","Solo si lo convoca el Gobierno"],c:1,e:"Art. 167.3 CE: referéndum facultativo a solicitud de 1/10 de diputados o senadores en 15 días. Ninguna de las cuatro reformas (1992, 2011, 2024, 2026) fue sometida a referéndum. En el 168 el referéndum es obligatorio."},
+{u:2,t:"No podrá iniciarse la reforma constitucional (art. 169 CE):",o:["Durante el mandato de un Gobierno en funciones","En tiempo de guerra o vigentes los estados de alarma, excepción o sitio","En los 6 meses previos a unas elecciones generales","Durante la prórroga de los Presupuestos"],c:1,e:"Art. 169 CE. Nota: lo que se prohíbe es INICIAR la reforma; los estados de crisis no suspenden la actividad legislativa ordinaria."},
+{u:2,t:"El Texto Refundido de la Ley General de la Seguridad Social vigente es:",o:["El Real Decreto Legislativo 1/2020","El Real Decreto Legislativo 8/2015","El Real Decreto-ley 8/2015","La Ley 47/2003"],c:1,e:"RDLeg 8/2015, de 30 de octubre. El RDLeg 1/2020 es el TR de la Ley Concursal. Ojo a la forma: Real Decreto LEGISLATIVO (delegación), no Real Decreto-ley (urgencia). El TREBEP es el RDLeg 5/2015."}
+];
+// ===== Motor =====
+let hist=JSON.parse(localStorage.getItem(LS_KEY)||'{}');
+let unidadSel='all', modo='normal';
+function saveHist(){localStorage.setItem(LS_KEY,JSON.stringify(hist))}
+function qid(q){return q.u+'|'+q.t.slice(0,60)}
+function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r}
+function ratio(q){const h=hist[qid(q)];if(!h||h.n===0)return null;return h.ok/h.n}
+function buildPool(){
+  let pool=BANK.filter(q=>unidadSel==='all'||q.u===unidadSel);
+  if(modo==='fail'){pool=pool.filter(q=>{const h=hist[qid(q)];return h&&h.n>0&&h.ok<h.n})}
+  if(modo==='adapt'){pool=[...pool].sort((a,b)=>{const ra=ratio(a),rb=ratio(b);return (ra===null?-1:ra)-(rb===null?-1:rb)}).slice(0,20)}
+  else{pool=shuffle(pool)}
+  return pool.map(q=>{const idx=shuffle(q.o.map((_,i)=>i));return{...q,idx}});
+}
+function render(reshuffle){
+  const tabs=document.getElementById('tabs');
+  tabs.innerHTML='';
+  const mk=(v,l)=>{const b=document.createElement('button');b.className='tab'+(unidadSel===v?' on':'');b.textContent=l;b.onclick=()=>{unidadSel=v;render(true)};tabs.appendChild(b)};
+  mk('all','📋 Todas ('+BANK.length+')');
+  for(const u in UNIDADES){mk(Number(u),UNIDADES[u]+' ('+BANK.filter(q=>q.u==u).length+')')}
+  document.querySelectorAll('.mode').forEach(b=>{b.classList.toggle('on',b.dataset.m===modo);b.onclick=()=>{modo=b.dataset.m;render(true)}});
+  renderBars();
+  const cont=document.getElementById('quiz');cont.innerHTML='';
+  const pool=buildPool();
+  if(pool.length===0){cont.innerHTML='<div class="q"><h3>🎉 No hay preguntas en este modo (ninguna errónea pendiente).</h3></div>';updateScore();return}
+  pool.forEach((q,n)=>{
+    const d=document.createElement('div');d.className='q';
+    const h=hist[qid(q)];
+    d.innerHTML='<div class="meta"><span>'+UNIDADES[q.u]+' · Pregunta '+(n+1)+'/'+pool.length+'</span><span>'+(h&&h.n?('histórico: '+h.ok+'/'+h.n):'nueva')+'</span></div><h3>'+q.t+'</h3>';
+    q.idx.forEach(i=>{
+      const b=document.createElement('button');b.className='opt';b.textContent=q.o[i];
+      b.onclick=()=>{
+        const id=qid(q);hist[id]=hist[id]||{ok:0,n:0};hist[id].n++;
+        d.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+        if(i===q.c){b.classList.add('ok');hist[id].ok++}
+        else{b.classList.add('ko');d.querySelectorAll('.opt').forEach(x=>{if(x.textContent===q.o[q.c])x.classList.add('ok')})}
+        d.querySelector('.exp').classList.add('show');
+        saveHist();renderBars();updateScore();
+      };
+      d.appendChild(b);
+    });
+    const e=document.createElement('div');e.className='exp';e.innerHTML='💡 '+q.e;d.appendChild(e);
+    cont.appendChild(d);
+  });
+  updateScore();
+}
+function renderBars(){
+  const el=document.getElementById('bars');el.innerHTML='';
+  for(const u in UNIDADES){
+    const qs=BANK.filter(q=>q.u==u);
+    let ok=0,n=0;qs.forEach(q=>{const h=hist[qid(q)];if(h){ok+=h.ok;n+=h.n}});
+    const pct=n?Math.round(100*ok/n):0;
+    const col=pct<50?'#dc2626':pct<75?'#ea580c':'#16a34a';
+    el.innerHTML+='<div class="bar"><div class="lbl"><span>'+UNIDADES[u]+'</span><span>'+(n?pct+'% ('+ok+'/'+n+')':'sin datos')+'</span></div><div class="track"><div class="fill" style="width:'+pct+'%;background:'+col+'"></div></div></div>';
+  }
+}
+function updateScore(){
+  let ok=0,n=0;BANK.forEach(q=>{const h=hist[qid(q)];if(h){ok+=h.ok;n+=h.n}});
+  document.getElementById('score').innerHTML=n?('Histórico total: <b>'+ok+'</b> aciertos de <b>'+n+'</b> respuestas ('+Math.round(100*ok/n)+'%)'):'Responde para empezar a registrar tu progreso (se guarda en este navegador).';
+}
+function showAll(){document.querySelectorAll('.exp').forEach(e=>e.classList.add('show'))}
+function resetHist(){if(confirm('¿Borrar todo el historial de este test?')){hist={};saveHist();render(true)}}
+render(true);
+</script>
+</body>
+</html>
