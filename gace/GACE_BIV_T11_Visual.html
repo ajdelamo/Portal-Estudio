@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV T11 — Leyes 39 y 40/2015. El procedimiento administrativo común</title>
+<style>
+:root{
+  --azul:#1d4ed8; --azulclaro:#eff6ff;
+  --azul2:#3b62c4; --marino:#1e3a8a;
+  --verde:#166534; --verdeclaro:#f0fdf4;
+  --rojo:#991b1b; --rojoclaro:#fef2f2;
+  --ambar:#92400e; --ambarclaro:#fffbeb;
+  --morado:#5b21b6; --moradoclaro:#f5f3ff;
+  --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1050px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.6rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--azul);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--azul)}
+h3{color:var(--azul2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.87rem;background:#fff}
+th{background:var(--azul);color:#fff;padding:8px 10px;text-align:left;font-size:.83rem}
+td{padding:7px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--azulclaro);border-left:5px solid var(--azul);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--azul);font-size:.85rem;margin-bottom:6px}
+.trampa{background:var(--rojoclaro);border-left:5px solid var(--rojo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--rojo);font-size:.85rem;margin-bottom:6px}
+.nota{background:var(--ambarclaro);border-left:5px solid var(--ambar);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:var(--ambar);font-size:.85rem;margin-bottom:6px}
+.art{display:inline-block;background:var(--azul);color:#fff;border-radius:5px;padding:1px 7px;font-size:.77rem;font-weight:600;white-space:nowrap}
+.num{display:inline-block;background:var(--marino);color:#fff;border-radius:5px;padding:1px 8px;font-size:.82rem;font-weight:700;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:14px 0;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.vs>div{padding:14px 16px}
+.vs .izq{background:var(--azulclaro)}
+.vs .der{background:var(--moradoclaro)}
+.vs h4{margin-bottom:8px;font-size:.95rem}
+.vs .izq h4{color:var(--azul)}
+.vs .der h4{color:var(--morado)}
+.vs ul{margin-left:18px;font-size:.87rem}
+.vs li{margin:4px 0}
+@media(max-width:720px){.vs{grid-template-columns:1fr}}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+.flujo{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.paso{display:flex;gap:12px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px;align-items:flex-start;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.paso .n{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--azul);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.paso .txt{font-size:.88rem}
+.paso .txt b{color:var(--azul)}
+.paso .plazo{margin-left:auto;flex-shrink:0;background:var(--ambarclaro);color:var(--ambar);border:1px solid #fde68a;border-radius:6px;padding:2px 8px;font-size:.78rem;font-weight:700;white-space:nowrap}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{
+  body{background:#fff}
+  header{background:var(--azul)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card{box-shadow:none}
+  h2{page-break-after:avoid}
+  table,.clave,.trampa,.nota,.vs,.paso{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque IV · Derecho Administrativo · 2º EJERCICIO</div>
+  <h1>Tema 11 — Las Leyes 39/2015 y 40/2015. El procedimiento administrativo común</h1>
+  <div class="sub">Iniciación · ordenación · instrucción · terminación · La obligación de resolver · El silencio administrativo</div>
+  <div class="badge-verif">✅ Verificado a 01/08/2026 · STC 55/2018 y RD 203/2021 incorporados</div>
+</header>
+<div class="wrap">
+
+<h2>⚖️ 1. El modelo dual de 2015</h2>
+<div class="vs">
+  <div class="izq"><h4>LEY 39/2015 (LPAC) — relaciones AD EXTRA</h4><ul>
+  <li>Validez y eficacia de los actos · procedimiento común (incl. sancionador y responsabilidad) · iniciativa legislativa y potestad reglamentaria</li>
+  <li>Estructura: Título Preliminar + 6 Títulos · <b>133 artículos</b></li>
+  <li>T.Prel. 1-2 · TI interesados 3-12 · TII actividad 13-33 · TIII actos 34-46 · TIV procedimiento 47-105 · TV revisión 106-126 · TVI potestad normativa 127-133</li></ul></div>
+  <div class="der"><h4>LEY 40/2015 (LRJSP) — relaciones AD INTRA</h4><ul>
+  <li>Órganos y competencia · principios (art. 3) · potestad sancionadora (25-31) · responsabilidad (32-37) · AGE · sector público institucional · relaciones interadministrativas</li>
+  <li>Ambas: publicadas el 2/10/2015, <b>en vigor el 2/10/2016</b>; derogan la Ley 30/1992</li></ul></div>
+</div>
+<div class="clave"><div class="tit">🔑 STC 55/2018 — LOS 3 PLANOS DEL 149.1.18ª CE</div>
+<p>1) <b>Procedimiento administrativo común en sentido estricto</b> → competencia exclusiva estatal (estructura del iter, silencio, plazos, forma). 2) <b>Procedimientos ratione materiae</b> → el Estado fija bases; desarrollo autonómico. 3) <b>Autoorganización</b> → competencia autonómica. La sentencia recortó la proyección autonómica de los arts. 1.2, 6.4, 9.3, 10.4, DA 2ª… pero la Ley 39/2015 se aplica <b>íntegra a la AGE</b>.</p></div>
+<div class="card"><p><b>Ámbito subjetivo (art. 2):</b> AGE, CCAA, EELL y sector público institucional. Las entidades de Derecho <b>privado</b> vinculadas solo quedan sujetas cuando ejerzan <b>potestades administrativas</b>; las universidades públicas, por su normativa específica y supletoriamente la Ley 39.</p></div>
+
+<h2>⏱️ 2. Términos y plazos (arts. 29-33)</h2>
+<table>
+<tr><th>Regla</th><th>Contenido</th></tr>
+<tr><td><b>Por horas</b> <span class="art">30.1</span></td><td>Horas hábiles las del día hábil; máximo 24 horas (si no, se cuenta en días).</td></tr>
+<tr><td><b>Por días</b> <span class="art">30.2</span></td><td>Días <b>hábiles</b>: se excluyen <b>sábados, domingos y festivos</b>. Solo si se declaran «naturales» se cuentan todos (y debe hacerse constar).</td></tr>
+<tr><td><b>Por meses o años</b> <span class="art">30.4</span></td><td><b>De fecha a fecha</b> (desde el día siguiente a la notificación); si en el mes de vencimiento no hay día equivalente, expira el último día del mes.</td></tr>
+<tr><td><b>Día inhábil final</b> <span class="art">30.5</span></td><td>Se prorroga al <b>primer día hábil siguiente</b>.</td></tr>
+<tr><td><b>Ampliación</b> <span class="art">32</span></td><td>De oficio o a petición, <b>máximo la mitad</b> del plazo, antes del vencimiento, si no se perjudica a terceros. Ni el acuerdo ni su denegación son recurribles.</td></tr>
+<tr><td><b>Urgencia</b> <span class="art">33</span></td><td>Reducción de los plazos <b>a la mitad</b>, salvo los de presentación de solicitudes y recursos. Irrecurrible.</td></tr>
+<tr><td><b>Registro</b> <span class="art">31</span></td><td>Presentación electrónica: todos los días, las 24 horas. A efectos de plazos, los sábados, domingos y festivos son inhábiles.</td></tr>
+</table>
+
+<h2>📬 3. La obligación de resolver y el silencio (arts. 21-25)</h2>
+<div class="clave"><div class="tit">🔑 OBLIGACIÓN DE RESOLVER (art. 21) — SIEMPRE</div>
+<p>La Administración debe dictar resolución expresa y notificarla <b>en todos los procedimientos</b> (excepciones: terminación por pacto, y procedimientos de declaración responsable o comunicación). Plazo máximo: <b>el de la norma reguladora, sin exceder de 6 meses salvo ley o norma UE</b>; en defecto de plazo: <b>3 meses</b>. El vencimiento no exime de resolver (salvo caducidad y prescripción). <b>Suspensión</b> (art. 22): subsanación, informes preceptivos (máx. 3 meses), pronunciamiento previo UE, pruebas técnicas… <b>Ampliación</b> del plazo máximo: hasta otro tanto (23).</p></div>
+<h3>El silencio administrativo, de un vistazo</h3>
+<table>
+<tr><th>Situación</th><th>Sentido del silencio</th><th>Claves</th></tr>
+<tr><td><b>Iniciados a SOLICITUD del interesado</b> <span class="art">24</span></td><td><b>ESTIMATORIO (regla general)</b></td><td>El acto presunto estimatorio es un verdadero acto: solo revisable por los procedimientos de revisión. Certificación del silencio: se expide <b>de oficio en 15 días</b> (24.4).</td></tr>
+<tr><td>Excepciones con silencio <b>DESESTIMATORIO</b></td><td>Negativo</td><td>Derecho de petición (art. 29 CE) · transferencia de <b>facultades sobre dominio público o servicio público</b> · actividades que puedan <b>dañar el medio ambiente</b> · <b>responsabilidad patrimonial</b> · <b>impugnación de actos</b> (recursos) — con la excepción del <b>doble silencio</b> en alzada (estimatorio) · cuando lo establezca una norma con rango de ley o de Derecho UE.</td></tr>
+<tr><td><b>Iniciados DE OFICIO</b> <span class="art">25</span></td><td>Según el efecto</td><td>Susceptibles de producir efectos <b>favorables</b> → desestimación · de efectos <b>desfavorables o de gravamen</b> (sancionadores…) → <b>CADUCIDAD</b>.</td></tr>
+</table>
+<div class="trampa"><div class="tit">⚠️ TRAMPAS DEL SILENCIO</div>
+<p>· El silencio negativo es <b>mera ficción</b> a efectos de recurso: la Administración puede resolver después <b>sin vinculación</b> al sentido del silencio; el positivo solo puede confirmarse (24.3).<br>
+· El silencio positivo <b>no otorga</b> facultades o derechos sin los requisitos esenciales (47.1.f).<br>
+· <b>Doble silencio</b> (24.1 párr. 3º): alzada contra desestimación presunta sin resolver → <b>estimatorio</b> (única vuelta del silencio en recursos).</p></div>
+
+<h2>🏭 4. Las cuatro fases del procedimiento</h2>
+<div class="flujo">
+  <div class="paso"><div class="n">1</div><div class="txt"><b>INICIACIÓN (54-69).</b> De oficio: por <b>propia iniciativa, orden superior, petición razonada</b> de otros órganos <b>o denuncia</b> (55-62; el denunciante no es por ello interesado). A solicitud: contenido del art. 66; <b>subsanación: 10 días</b> (+5 ampliables; art. 68). <b>Actuaciones previas</b> (55) y <b>medidas provisionales</b> (56): antes de la iniciación solo por urgencia inaplazable, y deben confirmarse, modificarse o levantarse en el acuerdo de iniciación, que debe dictarse en los <b>15 días</b> siguientes.</div><div class="plazo">10 días · 15 días</div></div>
+  <div class="paso"><div class="n">2</div><div class="txt"><b>ORDENACIÓN (70-74).</b> <b>Expediente electrónico</b> foliado e indexado (70) · <b>impulso de oficio</b> (71) con despacho por riguroso <b>orden de incoación</b> en asuntos de homogénea naturaleza · concentración de trámites (72) · cumplimentación de trámites: <b>10 días</b> (73) · cuestiones incidentales <b>no suspenden</b>, salvo la recusación (74).</div><div class="plazo">trámites 10 días</div></div>
+  <div class="paso"><div class="n">3</div><div class="txt"><b>INSTRUCCIÓN (75-83).</b> Alegaciones en cualquier momento antes de la audiencia (76) · <b>prueba: 10 a 30 días</b> (+10 extraordinarios; 77) · <b>informes: facultativos y no vinculantes</b> salvo disposición expresa, emisión en <b>10 días</b> (79-80) · <b>audiencia: 10-15 días</b>, tras la instrucción y antes de la propuesta (82) · <b>información pública: mínimo 20 días</b> (83; la incomparecencia no impide recurrir).</div><div class="plazo">prueba 10-30 · audiencia 10-15 · info pública ≥20</div></div>
+  <div class="paso"><div class="n">4</div><div class="txt"><b>TERMINACIÓN (84-95).</b> Resolución (<b>congruente</b>; en solicitudes, sin <i>reformatio in peius</i> — 88.2) · <b>terminación convencional</b> (86) · <b>desistimiento y renuncia</b> (93-94) · <b>caducidad por paralización imputable al interesado</b>: advertencia y <b>3 meses</b> (95) · imposibilidad material sobrevenida. <b>Tramitación simplificada</b> (96): resolución en <b>30 días</b>; si hay dictamen del Consejo de Estado contrario al fondo, se vuelve al ordinario.</div><div class="plazo">caducidad 3 meses · simplificada 30 días</div></div>
+</div>
+<div class="nota"><div class="tit">📌 ESPECIALIDADES SANCIONADORAS Y DE RESPONSABILIDAD (integradas en el procedimiento común)</div>
+<p>Sancionador: separación instructor/resolutor · acuerdo de iniciación con contenido del art. 64 · propuesta de resolución (89) · resolución con los límites del 90 (no hechos distintos; las sanciones <b>no son ejecutivas</b> hasta agotar la vía administrativa, 90.3). Responsabilidad patrimonial: T10. Caducidad sancionadora de oficio: por el art. 25.1.b.</p></div>
+
+<h2>🎯 5. Datos-ancla y trampas</h2>
+<div class="clave"><div class="tit">📌 NÚMEROS DEL TEMA</div>
+<ul class="lista">
+<li>Resolver: <b>6 meses máximo legal / 3 meses en defecto</b> · certificación del silencio: <b>15 días</b> de oficio.</li>
+<li>Subsanación: <b>10 días (+5)</b> · medidas provisionales previas: confirmar en <b>15 días</b>.</li>
+<li>Prueba: <b>10-30 (+10)</b> · informes: <b>10 días</b> · audiencia: <b>10-15</b> · información pública: <b>≥20</b>.</li>
+<li>Ampliación de plazos: <b>mitad</b> · urgencia: plazos <b>a la mitad</b> (salvo solicitudes y recursos).</li>
+<li>Caducidad por causa del interesado: <b>3 meses</b> · simplificada: <b>30 días</b>.</li>
+<li>En vigor: <b>2/10/2016</b> · Ley 39: <b>133 artículos</b>.</li>
+</ul></div>
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS</div>
+<ul class="lista">
+<li>«El plazo en defecto de norma es 6 meses» → NO: <b>3 meses</b>; los 6 son el <b>máximo</b> que puede fijar una norma reglamentaria.</li>
+<li>«Los plazos por meses excluyen sábados» → NO: van <b>de fecha a fecha</b>; solo el día final inhábil se prorroga.</li>
+<li>«Los informes son vinculantes» → NO: regla general, <b>facultativos y no vinculantes</b> (80.1).</li>
+<li>«El denunciante es interesado» → NO por la mera denuncia (62.5).</li>
+<li>«La responsabilidad patrimonial tiene silencio positivo» → NO: es excepción expresa (24.1).</li>
+<li>«El vencimiento del plazo exime de resolver» → NO: la obligación subsiste (21.1).</li>
+<li>«Las cuestiones incidentales suspenden» → NO, salvo la <b>recusación</b> (74).</li>
+</ul></div>
+
+</div>
+<footer>GACE 2027 · Bloque IV · Tema 11 · Material visual de estudio · Verificado a 01/08/2026 (BOE)<br>Fuentes: Ley 39/2015 (arts. 1-2, 21-25, 29-33, 54-96) · Ley 40/2015 (art. 3) · STC 55/2018 · RD 203/2021</footer>
+</body>
+</html>
