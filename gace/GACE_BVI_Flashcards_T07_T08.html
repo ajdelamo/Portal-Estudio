@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BVI — Flashcards T7-T8 (cierre Bloque VI)</title>
+<style>
+:root{--azul:#86198f;--azul2:#1e293b;--verde:#16a34a;--rojo:#dc2626;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:40px}
+header{background:linear-gradient(135deg,#86198f,#1e293b);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.2rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.f{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.83rem;font-weight:600;cursor:pointer}
+.f.on{background:var(--azul);color:#fff}
+.stats{display:flex;gap:10px;margin:8px 0 14px;font-size:.83rem;flex-wrap:wrap}
+.stats span{background:#fff;border-radius:8px;padding:5px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.escena{perspective:1200px;margin:10px 0}
+.carta{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
+.carta.girada{transform:rotateY(180deg)}
+.cara{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.frente{background:#fff;border:3px solid var(--azul2)}
+.frente .cat{position:absolute;top:12px;left:14px;font-size:.72rem;font-weight:700;color:#fff;background:var(--azul2);border-radius:12px;padding:2px 10px}
+.frente .idx{position:absolute;top:12px;right:14px;font-size:.72rem;color:#94a3b8}
+.frente h2{font-size:1.08rem;line-height:1.5;font-weight:600;border:none;color:#1e293b}
+.frente .pista{margin-top:14px;font-size:.75rem;color:#94a3b8}
+.dorso{background:linear-gradient(135deg,#86198f,#1e293b);color:#fff;transform:rotateY(180deg)}
+.dorso .resp{font-size:1.15rem;font-weight:800;line-height:1.45}
+.dorso .det{margin-top:12px;font-size:.85rem;opacity:.92;line-height:1.5}
+.botones{display:flex;gap:8px;margin:14px 0;justify-content:center;flex-wrap:wrap}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-size:.9rem;font-weight:700;cursor:pointer}
+.btn.mal{background:#fee2e2;color:var(--rojo)}
+.btn.bien{background:#dcfce7;color:#15803d}
+.btn.nav{background:#e2e8f0;color:#334155}
+.btn.accion{background:var(--azul);color:#fff}
+.aviso{text-align:center;font-size:.8rem;color:#64748b;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>🃏 Flashcards BVI · T7-T8 — Ingresos públicos/tributos, Retribuciones/nóminas</h1>
+  <p>Plazos · artículos · datos-ancla · LGT + LTPP + Ley 30/1984 · verificado 01/08/2026 · Cierre del Bloque VI</p>
+</header>
+<div class="wrap">
+  <div class="filtros" id="filtros"></div>
+  <div class="stats"><span id="st-total"></span><span id="st-dom">✅ dominadas: <b id="ndom">0</b></span><span id="st-rep">🔁 a repasar: <b id="nrep">0</b></span></div>
+  <div class="escena"><div class="carta" id="carta" onclick="girar()">
+    <div class="cara frente"><div class="cat" id="cat"></div><div class="idx" id="idx"></div><h2 id="preg"></h2><div class="pista">👆 toca para ver la respuesta</div></div>
+    <div class="cara dorso"><div class="resp" id="resp"></div><div class="det" id="det"></div></div>
+  </div></div>
+  <div class="botones">
+    <button class="btn mal" onclick="marcar(false)">❌ Repasar</button>
+    <button class="btn bien" onclick="marcar(true)">✅ Me la sé</button>
+  </div>
+  <div class="botones">
+    <button class="btn nav" onclick="mover(-1)">← Anterior</button>
+    <button class="btn accion" onclick="barajar()">🔀 Barajar</button>
+    <button class="btn nav" onclick="mover(1)">Siguiente →</button>
+  </div>
+  <div class="botones"><button class="btn nav" onclick="soloRepaso()" id="btnrep">🎯 Solo las marcadas "repasar"</button>
+  <button class="btn nav" onclick="resetear()">🗑️ Reiniciar</button></div>
+  <div class="aviso">El progreso se guarda en este navegador (localStorage).</div>
+</div>
+<script>
+const LS='gace_bvi_fc_t07t08_v1';
+const CARDS=[
+// —— T7 ——
+{c:'T7·Datos',p:'Definición de Hacienda Pública estatal (art. 5 LGP)',r:'Conjunto de derechos y obligaciones de contenido económico de la AGE y sus Organismos Autónomos',d:'Pregunta directa frecuente en examen.'},
+{c:'T7·Datos',p:'Principio de no afectación (art. 27 LGP)',r:'REGLA GENERAL: todos los ingresos financian todos los gastos, salvo excepción legal expresa',d:'Excepción típica: contribuciones especiales, afectadas a la obra que las origina.'},
+{c:'T7·Datos',p:'9 capítulos del Presupuesto de Ingresos, agrupados por bloque',r:'Cap.1-5 corrientes · Cap.6-7 capital · Cap.8-9 financieras',d:'Cap.1 directos, Cap.2 indirectos, Cap.3 tasas/PP.'},
+{c:'T7·Datos',p:'4 principios del art. 31.1 CE',r:'Capacidad económica, igualdad, progresividad, no confiscatoriedad',d:'La progresividad tiene como límite la no confiscatoriedad.'},
+{c:'T7·Datos',p:'¿Puede la LPGE crear tributos?',r:'NO puede crearlos ex novo (art. 134.7 CE); solo modificarlos si una ley sustantiva lo prevé',d:'Pregunta clásica de test.'},
+{c:'T7·Datos',p:'Ámbito de las contribuciones especiales',r:'NO existen a nivel estatal actualmente; solo autonómico y local',d:'Son ingresos afectados por ley.'},
+{c:'T7·Datos',p:'Test para distinguir impuesto/tasa/contribución especial',r:'¿Hay actividad a favor del obligado? NO→impuesto. SÍ+coactivo sin alternativa→tasa. SÍ+beneficio de obra→contrib. especial',d:'Esquema mental para resolver preguntas de test.'},
+{c:'T7·Datos',p:'Impuestos NO cedidos a las Comunidades Autónomas',r:'Impuesto sobre Sociedades e IRNR',d:'Quedan íntegramente en la Hacienda estatal — pregunta habitual.'},
+{c:'T7·Datos',p:'Modificación reciente del Concierto Económico del País Vasco',r:'Ley 3/2025, de 29 de abril (BOE-A-2025-8568)',d:'Introduce el Impuesto Complementario y eleva el umbral a 12M€.'},
+{c:'T7·Datos',p:'Régimen foral: País Vasco vs. Navarra',r:'País Vasco: Concierto (Ley 12/2002) + Cupo · Navarra: Convenio (Ley 28/1990) + Aportación',d:'Ambos amparados en la DA 1ª CE.'},
+{c:'T7·Datos',p:'Impuestos municipales de exacción obligatoria',r:'IBI, IAE, IVTM — todos Directos, Reales y Objetivos (DRO)',d:'Potestativos: IIVTNU, ICIO, Gastos Suntuarios.'},
+{c:'T7·Datos',p:'Límite de cuantía de una tasa (art. 7 LTPP)',r:'MÁXIMO: no puede exceder el coste real o previsible del servicio',d:'Principio de equivalencia, no de lucro.'},
+{c:'T7·Datos',p:'Límite de cuantía de un precio público (art. 25 LTPP)',r:'MÍNIMO: debe cubrir al menos el coste, salvo precio político con previsión presupuestaria',d:'Inversión de la lógica respecto a la tasa — error más frecuente en test.'},
+{c:'T7·Datos',p:'Establecimiento: tasa vs. precio público',r:'Tasa: LEY (reserva de ley tributaria) · Precio público: Orden Ministerial',d:'El precio público no es tributo, por eso no requiere ley.'},
+{c:'T7·Datos',p:'Cobro de un precio público impagado',r:'Vía de apremio administrativa, pese a no ser tributo',d:'Sigue siendo ingreso de Derecho Público.'},
+// —— T8 ——
+{c:'T8·Datos',p:'Estado del Cap. III Tít. III EBEP (régimen retributivo)',r:'NO desarrollado reglamentariamente (salvo art. 25.2) — rige la Ley 30/1984',d:'Idea-fuerza del tema.'},
+{c:'T8·Datos',p:'Norma que introduce la carrera horizontal',r:'Real Decreto-ley 6/2023, de 19 de diciembre (NO "Legislativo")',d:'Corrección frecuente de denominación normativa.'},
+{c:'T8·Datos',p:'Norma de la subida retributiva 2025-2026',r:'Real Decreto-ley 14/2025, de 2 de diciembre (+2,5% en 2025, +1,5% en 2026)',d:'NO es el RD-ley 9/2025 (que regula el permiso de nacimiento y cuidado).'},
+{c:'T8·Datos',p:'Regla de proporcionalidad del sueldo (art. 24 EBEP)',r:'Sueldo A1 ≤ 3 veces el sueldo del grupo E',d:'Garantiza la cohesión retributiva del sistema.'},
+{c:'T8·Datos',p:'¿Tienen trienios los funcionarios interinos?',r:'SÍ, art. 25.2 EBEP — único precepto vigente del Cap. III Tít. III',d:'Los eventuales NO, salvo que ya fueran funcionarios de carrera.'},
+{c:'T8·Datos',p:'Composición de las pagas extraordinarias',r:'Sueldo (cuantía LPGE) + trienios + 1 mensualidad completa de C. DESTINO',d:'Trampa: no incluyen C. específico.'},
+{c:'T8·Datos',p:'Pagas del complemento específico',r:'14 pagas: 12 mensuales + 2 adicionales jun/dic (NO son pagas extras)',d:'Solo puede asignarse UNO por puesto.'},
+{c:'T8·Datos',p:'Mnemotecnia de los 4 complementos',r:'DESTINO=dónde · ESPECÍFICO=lo que haces · PRODUCTIVIDAD=cómo · GRATIFICACIÓN=cuándo',d:'Ayuda a diferenciarlos rápidamente en el examen.'},
+{c:'T8·Plazos',p:'4 tramos de la carrera horizontal (RD-ley 6/2023)',r:'Tramo 1: 5 años · Tramos 2, 3, 4: 6 años adicionales cada uno, con evaluación',d:'Complemento de carrera: igual para todos del mismo grupo/tramo.'},
+{c:'T8·Datos',p:'Regla general de devengo de retribuciones fijas',r:'Mensualidades completas, referencia al primer día hábil del mes',d:'5 excepciones: liquidación por días.'},
+{c:'T8·Datos',p:'Excepción a la excepción en cese del servicio',r:'Jubilación, fallecimiento o retiro por Clases Pasivas → se cobra el MES COMPLETO',d:'El resto de ceses se liquidan por días.'},
+{c:'T8·Plazos',p:'Cierre de la nómina ordinaria',r:'Día 5 de cada mes; presentación en Intervención antes del día 7',d:'Órgano: la Habilitación.'},
+{c:'T8·Datos',p:'Deducciones formalizables vs. no formalizables',r:'Formalizables (IRPF, MUFACE, Clases Pasivas, MEI) → Tesoro · No formalizables (sindicales, embargos) → a terceros',d:'Distinción clave para el cálculo del líquido y del neto.'},
+{c:'T8·Datos',p:'Fórmulas de la nómina',r:'Íntegro − Formalizables = Líquido · Líquido − No formalizables = Neto',d:'El neto es lo que efectivamente cobra el funcionario.'},
+{c:'T8·Datos',p:'Definición de ingreso en formalización',r:'Anotación contable simultánea de gasto e ingreso, sin movimiento real de fondos',d:'Solo lo generan las deducciones formalizables.'},
+{c:'T8·Plazos',p:'Prescripción de derechos económicos del funcionario (art. 25 LGP)',r:'4 años',d:'Mismo plazo que la prescripción general de obligaciones de la Hacienda Pública.'},
+{c:'T8·Datos',p:'Atrasos a favor del personal (art. 34.2 LGP)',r:'Excepción al principio de anualidad: se imputan al presupuesto vigente al ordenar el pago',d:'No requieren crédito extraordinario.'},
+];
+let idx=0, activos=[...CARDS], filtroActual='todas', soloRep=false;
+function loadHist(){try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch(e){return{}}}
+function saveHist(h){localStorage.setItem(LS,JSON.stringify(h))}
+function cid(c){return c.c+'|'+c.p.slice(0,50)}
+function cats(){return [...new Set(CARDS.map(c=>c.c))]}
+function buildFiltros(){
+  const f=document.getElementById('filtros');
+  f.innerHTML='<button class="f on" data-c="todas">Todas</button>'+cats().map(c=>`<button class="f" data-c="${c}">${c}</button>`).join('');
+  f.querySelectorAll('.f').forEach(b=>b.onclick=()=>{f.querySelectorAll('.f').forEach(x=>x.classList.remove('on'));b.classList.add('on');filtroActual=b.dataset.c;soloRep=false;aplicarFiltro();idx=0;mostrar()});
+}
+function aplicarFiltro(){
+  let base = filtroActual==='todas'?[...CARDS]:CARDS.filter(c=>c.c===filtroActual);
+  if(soloRep){const h=loadHist();base=base.filter(c=>{const r=h[cid(c)];return r&&r.estado==='mal'})}
+  activos=base;
+}
+function mostrar(){
+  if(activos.length===0){document.getElementById('preg').textContent='Sin tarjetas en este filtro 🎉';document.getElementById('cat').textContent='';document.getElementById('idx').textContent='';document.getElementById('resp').textContent='';document.getElementById('det').textContent='';return}
+  if(idx<0)idx=activos.length-1; if(idx>=activos.length)idx=0;
+  const c=activos[idx];
+  document.getElementById('carta').classList.remove('girada');
+  document.getElementById('cat').textContent=c.c;
+  document.getElementById('idx').textContent=(idx+1)+'/'+activos.length;
+  document.getElementById('preg').textContent=c.p;
+  document.getElementById('resp').textContent=c.r;
+  document.getElementById('det').textContent=c.d;
+  actualizarStats();
+}
+function girar(){document.getElementById('carta').classList.toggle('girada')}
+function mover(n){idx+=n;mostrar()}
+function marcar(bien){
+  const c=activos[idx];const h=loadHist();h[cid(c)]={estado:bien?'bien':'mal'};saveHist(h);
+  actualizarStats();
+  setTimeout(()=>mover(1),250);
+}
+function barajar(){for(let i=activos.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[activos[i],activos[j]]=[activos[j],activos[i]]}idx=0;mostrar()}
+function soloRepaso(){soloRep=!soloRep;document.getElementById('btnrep').classList.toggle('on',soloRep);aplicarFiltro();idx=0;mostrar()}
+function resetear(){if(confirm('¿Reiniciar el progreso de las flashcards?')){localStorage.removeItem(LS);actualizarStats()}}
+function actualizarStats(){
+  const h=loadHist();let dom=0,rep=0;
+  CARDS.forEach(c=>{const r=h[cid(c)];if(r){if(r.estado==='bien')dom++;else rep++}});
+  document.getElementById('st-total').textContent='Total: '+CARDS.length;
+  document.getElementById('ndom').textContent=dom;
+  document.getElementById('nrep').textContent=rep;
+}
+buildFiltros();aplicarFiltro();mostrar();
+</script>
+</body>
+</html>
