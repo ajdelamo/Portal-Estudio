@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BV T8 — Negociación colectiva, representación y huelga</title>
+<style>
+:root{
+  --v:#b91c1c; --v2:#dc2626; --vclaro:#fef2f2; --borde:#fecaca;
+  --verde:#166534; --verdeclaro:#f0fdf4; --vborde:#bbf7d0;
+  --ambar:#92400e; --ambarclaro:#fffbeb; --aborde:#fde68a;
+  --morado:#6d28d9; --moradoclaro:#f5f3ff; --mborde:#ddd6fe;
+  --gris:#334155; --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#b91c1c,#dc2626);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.7rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--v);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--v2);display:flex;align-items:center;gap:8px}
+h3{color:var(--v2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem;background:#fff}
+th{background:var(--v);color:#fff;padding:8px 10px;text-align:left;font-size:.83rem}
+td{padding:7px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--vclaro);border-left:5px solid var(--v2);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--v);font-size:.85rem;letter-spacing:.5px;margin-bottom:6px}
+.trampa{background:var(--moradoclaro);border-left:5px solid var(--morado);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--morado);font-size:.85rem;margin-bottom:6px}
+.nuevo{background:var(--verdeclaro);border-left:5px solid var(--verde);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.nuevo .tit{font-weight:700;color:var(--verde);font-size:.85rem;margin-bottom:6px}
+.nota{background:var(--ambarclaro);border-left:5px solid var(--ambar);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:var(--ambar);font-size:.85rem;margin-bottom:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:14px 0;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.vs>div{padding:14px 16px}
+.vs .izq{background:var(--vclaro)}
+.vs .der{background:var(--moradoclaro)}
+.vs h4{margin-bottom:8px;font-size:.95rem}
+.vs .izq h4{color:var(--v)}
+.vs .der h4{color:var(--morado)}
+.vs ul{margin-left:18px;font-size:.87rem}
+.vs li{margin:4px 0}
+@media(max-width:720px){.vs{grid-template-columns:1fr}}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{body{background:#fff}header{background:var(--v)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.card{box-shadow:none}h2{page-break-after:avoid}table,.clave,.trampa,.nuevo,.vs{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque V · Administración de Recursos Humanos</div>
+  <h1>Tema 8 — Negociación colectiva, representación y huelga</h1>
+  <div class="sub">Mesas de negociación · Pactos y Acuerdos · Delegados y Juntas de Personal · Derecho de huelga</div>
+  <div class="badge-verif">✅ Verificado a 01/08/2026 · fuente revisada 14/07/2026</div>
+</header>
+<div class="wrap">
+
+<h2>🤝 1. Negociación colectiva</h2>
+<div class="clave"><div class="tit">🔑 DOS LÍMITES CONSTITUCIONALES</div><p>1) <b>Legalidad presupuestaria</b> (art. 134.2 CE): informe favorable de Hacienda = requisito de validez de todo acuerdo con repercusión en gasto de personal. 2) <b>Reserva de ley</b> (art. 103.3 CE): más amplia en lo funcionarial que en lo laboral. El Gobierno conserva potestad normativa si fracasa la negociación.</p></div>
+<p style="font-size:.85rem">Laboral: legislación laboral + art. 32 TREBEP. Funcionarial: íntegramente TREBEP (arts. 31-46), con exclusión expresa del ET.</p>
+
+<h3>Principios (art. 33 TREBEP)</h3>
+<div class="card"><p style="font-size:.85rem">1. Legalidad · 2. Cobertura presupuestaria (informe Hacienda) · 3. Obligatoriedad de negociar (no de acordar) · 4. Buena fe negocial · 5. Publicidad y transparencia (BOE/boletín).</p></div>
+
+<h3>Mesas de negociación</h3>
+<table><tr><th>Mesa General de Negociación de las AA.PP. (art. 36.1)</th><th>Mesas Generales por Administración (art. 36.3)</th></tr>
+<tr><td>Ámbito supraadministrativo; presidida por la AGE; negocia normas básicas y retribuciones de la LPGE</td><td>Una por Administración (AGE, CC.AA., EE.LL.); condiciones comunes de todo su personal</td></tr>
+</table>
+<p style="font-size:.85rem">Constitución válida: mayoría absoluta de los órganos unitarios en el ámbito. Máximo 15 miembros por parte. Inicio: fecha acordada o, en su defecto, máx. 1 mes desde que lo promueva la mayoría de una parte. Art. 35 TREBEP modificado por el <b>Real Decreto-ley 1/2015</b> (no "Real Decreto Legislativo").</p>
+
+<div class="vs">
+<div class="izq"><h4>Pactos</h4><ul><li>Ámbito competencial del órgano que lo suscribe</li><li>Aplicación directa; NO requiere ratificación</li><li>Eficacia inmediata tras la firma</li></ul></div>
+<div class="der"><h4>Acuerdos</h4><ul><li>Competencia de los órganos de gobierno</li><li>Requieren aprobación/ratificación formal</li><li>Si hay reserva de ley: tramitación legislativa</li></ul></div>
+</div>
+<p style="font-size:.85rem">Falta de ratificación → renegociación en 1 mes. Fracaso total → la Administración fija unilateralmente las condiciones. Suspensión unilateral: solo por causa grave de interés público + alteración sustancial de circunstancias económicas.</p>
+
+<h3>Solución extrajudicial de conflictos</h3>
+<table><tr><th>Mecanismo</th><th>Régimen</th></tr>
+<tr><td>Mediación</td><td>OBLIGATORIA si lo solicita una parte; propuestas libremente aceptables/rechazables</td></tr>
+<tr><td>Arbitraje</td><td>VOLUNTARIO; laudo vinculante para las partes</td></tr>
+</table>
+
+<h2>🗳️ 2. Representación de los empleados públicos</h2>
+<table><tr><th>Órgano</th><th>Umbral y escala</th></tr>
+<tr><td>Delegados de Personal (art. 39.2 TREBEP)</td><td>6-49 funcionarios: hasta 30 → 1 delegado; 31-49 → 3 delegados (mancomunados)</td></tr>
+<tr><td>Juntas de Personal (art. 39.3 TREBEP)</td><td>≥50: 5/9/13/17/21 según tramo, +2 por 1.000 (máx. 75)</td></tr>
+</table>
+<p style="font-size:.85rem"><b>Crédito horario</b> (art. 41.1.d): 15h/20h/30h/35h/40h según plantilla. <b>Mandato:</b> 4 años, prorrogable automáticamente. <b>Sistema:</b> Juntas → lista cerrada + proporcional; Delegados → lista abierta + mayoritario.</p>
+<div class="trampa"><div class="tit">⚠️ Personal laboral: Delegados y Comités de Empresa</div><p>Delegados de Personal (art. 62 ET): 11-30 → 1; 31-49 → 3; 6-10 → 1 si lo deciden por mayoría. Comités de Empresa (arts. 63/66 ET): ≥50 trabajadores, 5-75 miembros, mandato 4 años. NO confundir con las Juntas de Personal funcionariales (umbral distinto: 50 vs. 50, pero escalas diferentes).</p></div>
+
+<h3>Secciones y delegados sindicales (LOLS)</h3>
+<table><tr><th>Tipo de sección (LOLS)</th><th>Requisitos y derechos</th></tr>
+<tr><td>Facultades mínimas (art. 8.1)</td><td>Constitución válida sin más requisitos: reuniones, cuotas, información</td></tr>
+<tr><td>Facultades medias (art. 8.2)</td><td>Sindicatos más representativos: tablón, negociación, local en centros &gt;250</td></tr>
+<tr><td>Facultades máximas — delegados sindicales (art. 10.1/10.3)</td><td>Centro &gt;250 trabajadores + presencia en comités/juntas → delegados con crédito horario</td></tr>
+</table>
+<p style="font-size:.85rem">Escala legal art. 10.2 LOLS (≥10% votos): 250-750→1 · 751-2.000→2 · 2.001-5.000→3 · +5.001→4. Escala AGE 2017 (Acuerdo MGN-AGE 30/05/2017): 1/2/3/4/5. &lt;10% pero ≥5%: 1 delegado.</p>
+
+<h2>🏛️ 3. Participación institucional y libertad sindical</h2>
+<table><tr><th>Nivel (LOLS)</th><th>Umbral de representatividad</th></tr>
+<tr><td>Estatal (art. 6.2.a)</td><td>≥10% del total de representantes en toda España — actualmente CC.OO. y UGT</td></tr>
+<tr><td>Autonómico (art. 7.1)</td><td>≥15% en la CC.AA. + mín. 1.500 representantes + no federado estatal — ELA-STV y CIG</td></tr>
+</table>
+<p style="font-size:.85rem">Personalidad jurídica sindical: automática a los <b>20 días</b> desde el depósito de estatutos. Excluidos de sindicación: Fuerzas Armadas e Institutos armados (art. 28.1 CE); jueces/magistrados/fiscales en activo (art. 127.1 CE, pueden asociarse profesionalmente).</p>
+<div class="clave"><div class="tit">🔑 Derecho de reunión (art. 46 TREBEP)</div><p>Quórum: ≥40% del colectivo convocado. Fuera del horario de trabajo salvo acuerdo. La reunión no puede perjudicar la prestación de servicios.</p></div>
+
+<h2>✊ 4. El derecho de huelga</h2>
+<div class="trampa"><div class="tit">⚠️ Corrección sistemática de denominación</div><p>La norma vigente sobre huelga es el <b>Real Decreto-ley 17/1977</b>, de 4 de marzo (NO "Real Decreto Legislativo 17/1977" — error frecuente). Depurado por la STC 11/1981. La ley orgánica de huelga exigida por el art. 28.2 en relación con el art. 81.1 CE sigue SIN aprobarse a 2026 (Proposición de Ley 122/000276, sin tramitación completada).</p></div>
+
+<table><tr><th>Tipo (por significado jurídico)</th><th>Nota</th></tr>
+<tr><td>Legítima y legal</td><td>Todos los elementos materiales y formales — plena protección</td></tr>
+<tr><td>Legítima pero ilegal</td><td>Finalidad legítima, faltan requisitos formales (p. ej. sin preaviso)</td></tr>
+<tr><td>Ilegítima e ilegal</td><td>Faltan ambos</td></tr>
+<tr><td>Ilegítima pero legal</td><td>Requisitos formales cumplidos, finalidad ilegítima (huelga política)</td></tr>
+</table>
+<p style="font-size:.85rem"><b>Ilegales</b> (art. 11 RD-ley 17/1977): motivos políticos, solidaridad sin interés profesional directo, alterar convenio vigente, incumplir el procedimiento pactado. <b>Abusivas</b> (art. 7.2): rotatorias, sectores estratégicos, huelga de celo — mismos efectos que las ilegales.</p>
+
+<h3>Procedimiento</h3>
+<table><tr><th>Elemento</th><th>Regla</th></tr>
+<tr><td>Preaviso general</td><td>5 días naturales mínimo</td></tr>
+<tr><td>Preaviso servicios públicos</td><td>10 días naturales + publicidad para usuarios</td></tr>
+<tr><td>Comité de Huelga</td><td>Solo trabajadores del propio centro; máx. 12 personas</td></tr>
+</table>
+
+<div class="vs">
+<div class="izq"><h4>Huelga LEGAL</h4><ul><li>Contrato suspendido (ni trabajo ni salario)</li><li>NO sustitución por trabajadores ajenos (esquirolaje externo prohibido)</li><li>Alta especial SS; perjuicios NO indemnizables</li></ul></div>
+<div class="der"><h4>Huelga ILEGAL</h4><ul><li>Contrato también suspendido</li><li>Participación activa → causa de despido</li><li>SÍ cabe sustitución; perjuicios SÍ indemnizables</li></ul></div>
+</div>
+<p style="font-size:.85rem">Deducción de haberes por huelga: NO tiene carácter sancionador (art. 30 TREBEP).</p>
+
+<h3>Servicios esenciales</h3>
+<div class="clave"><div class="tit">🔑 STC 123/1990</div><p>Fijación de servicios mínimos: corresponde a la <b>autoridad gubernativa</b> (no al órgano gestor del servicio, por falta de neutralidad). Designación de trabajadores: indiscriminada, al margen de afiliación sindical. Arbitraje obligatorio: puede acordarlo el Gobierno ante perjuicio grave a la economía nacional.</p></div>
+
+<h3>Cierre patronal (arts. 12-13 RD-ley 17/1977)</h3>
+<p style="font-size:.85rem">Solo LÍCITO si es defensivo: peligro de violencia/daños graves, ocupación ilegal del centro, o inasistencia/irregularidades que impidan gravemente la producción. Comunicación a la autoridad laboral: 12 horas.</p>
+
+<h2>📌 5. Datos clave para el examen</h2>
+<table>
+<tr><th>Dato</th><th>Cifra</th></tr>
+<tr><td>Mesa General de Negociación: máximo por parte</td><td>15 miembros</td></tr>
+<tr><td>Delegados de Personal (funcionarios)</td><td>6-49 (1 hasta 30, 3 de 31-49)</td></tr>
+<tr><td>Juntas de Personal: mínimo</td><td>50 funcionarios</td></tr>
+<tr><td>Personalidad jurídica sindical</td><td>20 días desde depósito de estatutos</td></tr>
+<tr><td>Delegados sindicales (art. 10.1 LOLS)</td><td>Centro &gt;250 trabajadores + presencia en órganos unitarios</td></tr>
+<tr><td>Quórum reunión de empleados</td><td>≥40% del colectivo convocado</td></tr>
+<tr><td>Preaviso huelga general / servicios públicos</td><td>5 / 10 días naturales</td></tr>
+<tr><td>Comité de Huelga: máximo</td><td>12 personas</td></tr>
+<tr><td>Cierre patronal: comunicación</td><td>12 horas</td></tr>
+</table>
+
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS DE EXAMEN</div>
+<ul class="lista">
+<li>Es <b>Real Decreto-ley 17/1977</b> (huelga), <b>20/2012</b> y <b>1/2015</b> — NO "Real Decreto Legislativo" en ninguno de los tres. Error sistemático muy repetido en materiales de estudio.</li>
+<li>La ley orgánica de huelga exigida por la CE sigue sin aprobarse; el RD-ley 17/1977 preconstitucional sigue vigente en lo no declarado inconstitucional por la STC 11/1981.</li>
+<li>Servicios mínimos: los fija la autoridad gubernativa, NO el órgano de gestión del servicio afectado.</li>
+<li>Deducción de haberes por huelga: no es sanción disciplinaria (art. 30 TREBEP).</li>
+<li>Mediación obligatoria a instancia de parte ≠ arbitraje, que es siempre voluntario.</li>
+</ul>
+</div>
+
+</div>
+<footer>GACE 2027 · Bloque V · Tema 8 · Material verificado contra BOE a 01/08/2026 · Antonio José De Lamo Villar</footer>
+</body>
+</html>
