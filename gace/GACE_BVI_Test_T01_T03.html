@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BVI — Test T1, T2 y T3 (Presupuesto/LGP/LOEPSF, LPGE, Modificaciones de crédito)</title>
+<style>
+:root{--azul:#134e4a;--azul2:#0f766e;--verde:#16a34a;--rojo:#dc2626;--naranja:#ea580c;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:70px}
+header{background:linear-gradient(135deg,#134e4a,#334155);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.25rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:800px;margin:0 auto;padding:0 14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 6px}
+.tab{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;cursor:pointer}
+.tab.on{background:var(--azul);color:#fff}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 14px}
+.mode{border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:5px 12px;font-size:.8rem;cursor:pointer}
+.mode.on{background:#0f766e;color:#fff;border-color:#0f766e}
+.bars{display:flex;flex-direction:column;gap:6px;margin:10px 0 18px}
+.bar{background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.bar .lbl{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin-bottom:4px}
+.bar .track{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.bar .fill{height:100%;border-radius:4px;transition:width .3s}
+.q{background:#fff;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.q .meta{font-size:.75rem;color:#64748b;margin-bottom:8px;display:flex;justify-content:space-between}
+.q h3{font-size:.98rem;margin-bottom:12px;line-height:1.45}
+.opt{display:block;width:100%;text-align:left;border:2px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:10px 12px;margin:6px 0;font-size:.9rem;cursor:pointer;line-height:1.4}
+.opt:hover{border-color:var(--azul2)}
+.opt.ok{border-color:var(--verde);background:#f0fdf4}
+.opt.ko{border-color:var(--rojo);background:#fef2f2}
+.opt:disabled{cursor:default;opacity:.92}
+.exp{display:none;margin-top:10px;background:#eef2ff;border-left:4px solid var(--azul2);border-radius:0 8px 8px 0;padding:10px 12px;font-size:.85rem}
+.exp.show{display:block}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.btn{border:none;border-radius:8px;padding:8px 16px;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--azul);color:#fff}
+.btn.sec{background:#64748b}
+.btn.warn{background:var(--rojo)}
+.score{position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#fff;padding:10px 16px;text-align:center;font-size:.9rem}
+.score b{color:#4ade80}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧪 Test BVI · T1+T2+T3 — Presupuesto/LGP/LOEPSF, LPGE, Modificaciones de crédito</h1>
+  <p>GACE 2027 · Autocorregible y adaptativo · Ley 47/2003 + LO 2/2012 + Ley 31/2022 (prorrogada) · verificado 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="tabs" id="tabs"></div>
+  <div class="modes">
+    <button class="mode on" data-m="normal">📚 Normal</button>
+    <button class="mode" data-m="adapt">🎯 Adaptativo (peores 20)</button>
+    <button class="mode" data-m="fail">❌ Solo erróneas</button>
+  </div>
+  <div class="bars" id="bars"></div>
+  <div class="controls">
+    <button class="btn" onclick="render(true)">🔀 Barajar</button>
+    <button class="btn sec" onclick="showAll()">👁️ Ver explicaciones</button>
+    <button class="btn warn" onclick="resetHist()">🗑️ Reiniciar historial</button>
+  </div>
+  <div id="quiz"></div>
+</div>
+<div class="score" id="score"></div>
+<script>
+const LS_KEY='gace_bvi_t01t03_v1';
+const UNIDADES={1:'T1 · Presupuesto/LGP/LOEPSF',2:'T2 · LPGE anual',3:'T3 · Modificaciones de crédito'};
+const BANK=[
+// ============ T1 (u:1) ============
+{u:1,t:"La prórroga de los PGE 2023 (Ley 31/2022) en 2026 se produce por tercer año consecutivo al amparo de:",o:["El art. 134.4 CE","Una ley orgánica específica","Un Real Decreto-ley de prórroga","El art. 135 CE"],c:0,e:"Prórroga automática ex art. 134.4 CE, confirmada por Acuerdo de Consejo de Ministros de 23/12/2025, ante la falta de aprobación de nuevos PGE."},
+{u:1,t:"Las reglas fiscales de la LOEPSF, suspendidas entre 2020 y 2023, se reactivaron:",o:["El 1 de enero de 2024","El 1 de enero de 2023","Nunca se han reactivado","El 1 de enero de 2025"],c:0,e:"Tras la cláusula general de salvaguardia (crisis COVID), las reglas se reactivan desde 1/1/2024."},
+{u:1,t:"El nuevo marco de gobernanza fiscal de la UE (Reglamentos (UE) 2024/1263 y 2024/1264 y Directiva 2024/1265) entró en vigor el:",o:["30 de abril de 2024","1 de enero de 2025","1 de enero de 2024","26 de noviembre de 2024"],c:0,e:"Desplaza —sin derogar— la antigua regla de gasto del art. 12 LOEPSF por la 'senda de gasto neto' de cada Estado."},
+{u:1,t:"La senda de gasto neto del Plan Fiscal-Estructural de España, validada por la Comisión el 26/11/2024, fija para 2025-2028 unos incrementos anuales de:",o:["3,7% / 3,5% / 3,2% / 3,0%","5% cada año","0% (congelación total)","2% / 2% / 2% / 2%"],c:0,e:"Senda decreciente a 7 años en su versión ampliada; los cuatro primeros años son 3,7-3,5-3,2-3,0%."},
+{u:1,t:"La Orden que dicta las normas para la elaboración de los PGE para 2027 es:",o:["Orden HAC/557/2026, de 3 de junio (BOE 5-VI-2026)","Orden HAC/974/2025","Orden HFP/147/2022","No existe orden para 2027"],c:0,e:"La Orden HAC/974/2025 (PGE 2026) quedó sin aplicación al no remitirse nunca el proyecto de PGE 2026 a las Cortes."},
+{u:1,t:"El art. 134 CE, en su apartado 7, establece que la Ley de Presupuestos:",o:["Puede crear tributos libremente","No puede crear tributos; solo puede modificarlos si una ley tributaria sustantiva lo prevé","Solo puede modificar tributos autonómicos","Necesita ley orgánica para modificar tributos"],c:1,e:"Límite clásico de examen: distinguir 'crear' (prohibido) de 'modificar cuando otra ley lo habilite' (permitido)."},
+{u:1,t:"El art. 135 CE, reformado el 27 de septiembre de 2011, consagra:",o:["La estabilidad presupuestaria de todas las AA.PP. y la prioridad absoluta del pago de la deuda pública","Solo el principio de anualidad","La prohibición de déficit en cualquier circunstancia","La reserva de ley en materia tributaria"],c:0,e:"Reforma exprés de 2011; el pago de intereses y capital de la deuda pública goza de prioridad absoluta sobre cualquier otro gasto."},
+{u:1,t:"La Ley General Presupuestaria (Ley 47/2003) se estructura en:",o:["7 Títulos, 26 disposiciones adicionales y 5 disposiciones transitorias","10 Títulos sin disposiciones adicionales","3 Títulos y un anexo único","5 Títulos y 15 disposiciones adicionales"],c:0,e:"Estructura básica a memorizar como dato de examen."},
+{u:1,t:"Conforme al art. 2 LGP, el subsector empresarial y fundacional del sector público estatal tiene presupuesto:",o:["Limitativo","Estimativo","Mixto según el ejercicio","Inexistente"],c:1,e:"El subsector administrativo tiene presupuesto limitativo (los créditos son límite); el empresarial y fundacional, estimativo (previsión, no límite)."},
+{u:1,t:"El Fondo de Contingencia de Ejecución Presupuestaria (art. 50 LGP) se dota anualmente con:",o:["El 2% del límite de gasto no financiero del Estado","El 5% del PIB","Un importe fijo de 1.000 millones de euros","El 10% de los ingresos tributarios"],c:0,e:"Su disposición exige acuerdo del Consejo de Ministros a propuesta del Ministro de Hacienda."},
+{u:1,t:"Los 6 principios del art. 26 LGP incluyen todos ESTOS excepto:",o:["Unidad de caja","Especialidad triple","No afectación","Reserva de ley tributaria"],c:3,e:"La reserva de ley tributaria no es un principio presupuestario de la LGP, sino un principio constitucional distinto (art. 133 CE)."},
+{u:1,t:"La regla general de déficit estructural de la LOEPSF (LO 2/2012) es del:",o:["0%, con una excepción del 0,4% del PIB","3% del PIB en todo caso","1% del PIB sin excepciones","No existe límite de déficit estructural"],c:0,e:"El límite de deuda pública conjunta es del 60% del PIB, repartido 44/13/3 entre Estado/CC.AA./Corporaciones Locales."},
+{u:1,t:"La reforma de la LO 2/2012 por la LO 2/2024, respecto al procedimiento del art. 15, establece que si el Senado rechaza el objetivo de estabilidad:",o:["El procedimiento se reinicia por completo","El Congreso vuelve a votar por mayoría simple, sin reiniciar el procedimiento","El objetivo queda definitivamente rechazado","Se aplica automáticamente el objetivo del año anterior"],c:1,e:"Agiliza el procedimiento frente a la redacción original de la LOEPSF."},
+{u:1,t:"Las medidas del Capítulo IV LOEPSF ante incumplimiento se ordenan, de menor a mayor intensidad, en:",o:["Preventivas → correctivas → coercitivas","Coercitivas → correctivas → preventivas","Solo existen medidas coercitivas","Correctivas → preventivas → coercitivas"],c:0,e:"Escalado gradual según la gravedad y persistencia del incumplimiento."},
+{u:1,t:"El destino del superávit presupuestario conforme al art. 32 LOEPSF es:",o:["Reducción de endeudamiento neto o dotación del Fondo de Reserva de la Seguridad Social","Reparto directo entre los ciudadanos","Incremento automático del gasto del año siguiente","Financiación de infraestructuras exclusivamente"],c:0,e:"El destino queda tasado por la propia LOEPSF; no es de libre disposición."}
+];
+BANK.push(
+// ============ T2 (u:2) ============
+{u:2,t:"La Ley de Presupuestos Generales del Estado (LPGE) tiene, por su naturaleza, el rango de:",o:["Ley orgánica","Ley ordinaria de tramitación preferente","Decreto-ley","Reglamento"],c:1,e:"Trampa clásica: NO es ley orgánica. Su iniciativa legislativa corresponde en EXCLUSIVA al Gobierno."},
+{u:2,t:"Según la doctrina de la STC 76/1992 sobre el contenido eventual de la LPGE, el criterio determinante para admitir una materia distinta del contenido necesario es:",o:["Que sea de vigencia temporal limitada a un año","Su conexión directa o relación de instrumentalidad con los ingresos y gastos del Estado o con la política económica del Gobierno","Que lo pida cualquier grupo parlamentario","No existe ningún criterio, todo cabe"],c:1,e:"El Tribunal Constitucional NO usa la temporalidad como criterio determinante, sino la conexión económica."},
+{u:2,t:"El ámbito subjetivo de la LPGE, conforme al art. 2 LGP, comprende:",o:["Solo la Administración General del Estado","La AGE y el sector público institucional estatal","Todas las Administraciones Públicas de España","Solo los Organismos Autónomos"],c:1,e:"Incluye organismos autónomos, entidades públicas empresariales, sociedades mercantiles estatales, fundaciones del sector público, etc."},
+{u:2,t:"Los 7 principios de programación y gestión de la LO 2/2012 (mnemotecnia E-S-P-T-E-R-L) son:",o:["Estabilidad, Sostenibilidad, Plurianualidad, Transparencia, Eficiencia, Responsabilidad, Lealtad","Eficacia, Simplicidad, Publicidad, Temporalidad, Especialidad, Reserva, Legalidad","Solo estabilidad y sostenibilidad","Anualidad, unidad, universalidad, especialidad"],c:0,e:"Los 7 principios se recogen en los arts. 3 a 9 de la LO 2/2012."},
+{u:2,t:"El techo de gasto no financiero requiere informe previo del CPFF (Consejo de Política Fiscal y Financiera) antes del:",o:["1 de agosto","1 de enero","31 de diciembre","1 de octubre"],c:0,e:"El techo de gasto excluye las transferencias a Comunidades Autónomas y Entidades Locales."},
+{u:2,t:"La norma que rige la elaboración de los PGE para 2027 es:",o:["Orden HAC/557/2026, de 3 de junio (BOE-A-2026-12037)","Orden HAC/974/2025","Orden HFP/147/2022","No se ha dictado ninguna orden"],c:0,e:"La Orden HAC/974/2025 (para PGE 2026) quedó sin efecto práctico al no remitirse nunca el proyecto a las Cortes."},
+{u:2,t:"En la tramitación parlamentaria en el Senado, el plazo constitucional para su intervención en el proyecto de LPGE es de:",o:["2 meses (art. 90.2 CE)","1 mes","15 días","No hay plazo específico"],c:0,e:"Si el Senado opone veto, el Congreso puede ratificar el texto por mayoría absoluta inmediatamente, o por mayoría simple transcurridos 2 meses desde la interposición del veto."},
+{u:2,t:"La prórroga presupuestaria del art. 38 LGP implica que:",o:["Se prorrogan automáticamente todos los créditos, incluidos los de programas o líneas de subvención que terminan su vigencia","NO se prorrogan los créditos para servicios o programas que terminan en el ejercicio cuyos Presupuestos se prorrogan","Solo se prorrogan los gastos de personal","La prórroga requiere ley expresa cada vez"],c:1,e:"Es una prórroga automática de vigencia limitada, no una réplica íntegra del presupuesto anterior."},
+{u:2,t:"La estructura de clasificación del presupuesto de gastos comprende tres clasificaciones: orgánica, por programas y económica. La de ingresos, en cambio, comprende:",o:["Las mismas tres clasificaciones","Solo dos: orgánica y económica (no existe clasificación por programas)","Solo la clasificación económica","Cuatro clasificaciones, una más que en gastos"],c:1,e:"Trampa frecuente: los ingresos no se clasifican por programas, a diferencia de los gastos."},
+{u:2,t:"Dentro de los capítulos de gastos (1 a 9), el capítulo 5 corresponde a:",o:["Gastos de personal","Fondo de Contingencia y otros imprevistos","Transferencias de capital","Activos financieros"],c:1,e:"Cap. 1: personal; cap. 2: gastos corrientes en bienes y servicios; cap. 5: Fondo de Contingencia."},
+{u:2,t:"Las secciones 06 (Deuda Pública) y 07 (Clases Pasivas) del presupuesto se caracterizan por contener créditos:",o:["No ampliables y vinculados al nivel de concepto","Ampliables y vinculantes por naturaleza en su totalidad","Solo estimativos, no limitativos","Sujetos a congelación automática"],c:1,e:"Todos los créditos ampliables son, además, vinculantes por naturaleza — dato de examen recurrente."},
+{u:2,t:"La sección 02 (Cortes Generales) goza de una singularidad presupuestaria derivada de:",o:["Su autonomía presupuestaria propia conforme al art. 72 CE","Estar excluida del presupuesto del Estado","Depender directamente del Tribunal de Cuentas","No tener presupuesto asignado"],c:0,e:"Las Cámaras elaboran y aprueban su propio presupuesto, que se integra después en el proyecto de PGE."},
+{u:2,t:"Una 'aplicación presupuestaria', en el desglose de créditos, se define como:",o:["Únicamente el importe total de una sección","La suma de la clasificación orgánica más económica sin cifra","El concepto de gasto (código de clasificación) más la cifra que se le asigna","Un sinónimo de 'programa presupuestario'"],c:2,e:"Ejemplo de codificación del temario: 16.03 132A 226.01 (sección.servicio, programa, concepto económico)."},
+{u:2,t:"Las operaciones de desglose, reasignación y redistribución de crédito, a diferencia de las modificaciones presupuestarias del art. 51 LGP, se caracterizan por:",o:["Requerir siempre autorización de las Cortes Generales","No ser modificaciones de crédito, al mantenerse dentro del mismo nivel de vinculación","Aumentar siempre el crédito total","Estar prohibidas por la LGP"],c:1,e:"Solo si se altera el nivel de vinculación (distinta sección, programa o clasificación económica al nivel correspondiente) hay verdadera modificación de crédito."},
+{u:2,t:"Los órganos que intervienen en la elaboración de los PGE incluyen, entre otros:",o:["La Comisión de Políticas de Gasto y las Comisiones de Análisis de Programas","Únicamente el Consejo de Ministros","Solo la Intervención General del Estado","El Tribunal de Cuentas en fase de elaboración"],c:0,e:"También intervienen la Dirección General de Presupuestos y la Secretaría de Estado de Presupuestos y Gastos."},
+{u:2,t:"En 2026, la situación de los PGE respecto a la prórroga es:",o:["Se trata de la 3ª prórroga consecutiva de los PGE 2023 (Ley 31/2022)","Es la primera prórroga desde 2020","Los PGE 2026 se aprobaron y están vigentes","No existe prórroga; España carece de presupuesto"],c:0,e:"PGE 2023 prorrogados en 2024, 2025 y 2026, siempre al amparo del art. 134.4 CE."}
+);
+BANK.push(
+// ============ T3 (u:3) ============
+{u:3,t:"El Real Decreto-ley 16/2025, de 23 de diciembre, que pretendía extender para 2026 determinadas disposiciones de la Ley 31/2022:",o:["Fue convalidado sin problemas por el Congreso","NO fue convalidado por el Congreso (Resolución de 27/01/2026, BOE-A-2026-2024) y quedó derogado","Sigue plenamente vigente en 2026","Fue sustituido por una ley orgánica"],c:1,e:"La prórroga de 2026 opera solo sobre la base directa del art. 134.4 CE, con ajustes de los RD-ley 2/2026 y 3/2026 (ambos de 3 de febrero)."},
+{u:3,t:"Los gastos plurianuales constituyen una excepción al principio de:",o:["Especialidad cualitativa","Anualidad (art. 49 LGP)","No afectación","Unidad de caja"],c:1,e:"Regulados en los arts. 47, 47 bis y DA 19ª LGP."},
+{u:3,t:"Conforme al art. 47.2 LGP, el número máximo de anualidades posteriores para un compromiso plurianual es de:",o:["Dos","Tres","Cuatro","Seis"],c:2,e:"Con porcentajes máximos del 70% (x+1), 60% (x+2) y 50% (x+3 y x+4) sobre el crédito inicial."},
+{u:3,t:"Las excepciones a los límites del art. 47.2 LGP se aplican a:",o:["La carga financiera de la Deuda Pública (cap. 3, intereses) y los arrendamientos de inmuebles (concepto 202)","Todos los gastos de personal","Las subvenciones nominativas","Ningún gasto está exceptuado"],c:0,e:"No obstante, la propia LPGE fija un techo específico para los arrendamientos: máx. 10 anualidades, hasta el 100% cada una."},
+{u:3,t:"El régimen especial de gastos plurianuales financiados con cargo al Mecanismo de Recuperación y Resiliencia (MRR) admite, como regla, un máximo de:",o:["3 anualidades posteriores, con porcentajes 70-60-50","4 anualidades, igual que el régimen general","5 anualidades","2 anualidades"],c:0,e:"Las elevaciones excepcionales las acuerda el Gobierno previo informe del Director General del Plan y del MRR, no de la DG de Presupuestos."},
+{u:3,t:"En los contratos de obra plurianuales (salvo abono total del precio), el art. 47.2 LGP impone una retención adicional de:",o:["El 5% del importe de adjudicación, documento RC 106","El 10% del importe de adjudicación, documento RC 108, en fase D","El 20% del importe de adjudicación","No existe retención adicional"],c:1,e:"Se imputa al último ejercicio del contrato o al siguiente, según el pago de la certificación final."},
+{u:3,t:"Ante una insuficiencia sobrevenida de crédito para cumplir compromisos plurianuales (art. 47 bis LGP), la secuencia de actuación del órgano gestor es:",o:["Resolución directa del contrato sin más trámite","Comunicación al tercero → reprogramación de obligaciones → resolución, si procede, con compensaciones","Reprogramación → comunicación → resolución","Solo cabe esperar al siguiente ejercicio"],c:1,e:"Secuencia escalonada de tres pasos que evita la resolución automática del contrato."},
+{u:3,t:"Las transferencias de crédito (art. 52 LGP) constituyen una excepción al principio de:",o:["Especialidad cualitativa","Especialidad cuantitativa","Anualidad","Presupuesto bruto"],c:0,e:"Permiten gastar en una finalidad distinta a la inicialmente prevista, sin alterar el importe total del presupuesto."},
+{u:3,t:"La diferencia esencial entre una transferencia de crédito y una redistribución de crédito radica en:",o:["El importe económico de la operación","Si la reasignación se produce dentro del mismo nivel de vinculación (redistribución) o entre niveles distintos (transferencia)","La autoridad que la autoriza, que siempre es la misma","No existe diferencia jurídica relevante"],c:1,e:"La redistribución NO es modificación de crédito y no requiere autorización especial."},
+{u:3,t:"Entre las limitaciones del art. 52.1 LGP a las transferencias de crédito se encuentra:",o:["No cabe transferir desde operaciones financieras (cap. 8-9) al resto, ni desde operaciones de capital (cap. 6-7) a corrientes (cap. 1-4)","Solo se prohíben las transferencias entre distintos Ministerios","No existen limitaciones legales","Se prohíbe cualquier transferencia superior a 100.000€"],c:0,e:"Tampoco caben transferencias entre distintas secciones (salvo excepciones tasadas) ni minorar créditos extraordinarios o ya ampliados/suplementados en el mismo ejercicio."},
+{u:3,t:"Entre las excepciones tasadas del art. 52.2 LGP a las limitaciones de las transferencias se encuentra:",o:["Las reorganizaciones administrativas y el traspaso de competencias a Comunidades Autónomas","Cualquier transferencia solicitada por un Ministerio","Las transferencias entre Organismos Autónomos sin más requisito","No existen excepciones"],c:0,e:"También: convenios entre Ministerios/OO.AA., Ley 16/1985 del Patrimonio Histórico Español (no confundir con Patrimonio Nacional), y transferencias desde el programa 929M."},
+{u:3,t:"La diferencia clave entre crédito extraordinario y suplemento de crédito (arts. 55-56 LGP) es:",o:["El extraordinario se refiere a gasto NO previsto (no existe partida); el suplemento, a gasto previsto pero con dotación insuficiente","No hay diferencia relevante entre ambos","El suplemento solo se usa en Organismos Autónomos","El extraordinario requiere siempre ley orgánica"],c:0,e:"Mnemotecnia: 'EXTRA-no' (no previsto) y 'SUPLE-poco' (previsto pero insuficiente)."},
+{u:3,t:"El anticipo de tesorería (art. 60 LGP) tiene como límite cuantitativo:",o:["El 1% de los créditos autorizados al Estado por la LPGE","El 10% del Fondo de Contingencia","Sin límite legal","El 5% del PIB"],c:0,e:"Lo concede el Gobierno, a propuesta del Ministro de Economía (no de Hacienda); no es una modificación de crédito ni operación presupuestaria."},
+{u:3,t:"Para que proceda una ampliación de crédito (art. 54 LGP) se exigen tres requisitos acumulativos, entre ellos:",o:["Que el crédito tenga la condición legal de ampliable","Que el gasto sea aplazable al siguiente ejercicio","Que exista superávit presupuestario","Que lo autorice directamente el Rey"],c:0,e:"Los otros dos requisitos son: gasto inaplazable y gasto previsto pero con dotación insuficiente."},
+{u:3,t:"Entre los créditos declarados ampliables de forma típica se encuentran los de las secciones:",o:["06 (Deuda Pública) y 07 (Clases Pasivas)","01 (Casa de S.M. el Rey) y 02 (Cortes Generales)","Todas las secciones ministeriales por igual","Ninguna sección tiene créditos ampliables"],c:0,e:"También los subconceptos 160.00 (cuotas SS), 160.01 (MUFACE), 160.02 (ISFAS) y 160.03 (MUGEJU)."},
+{u:3,t:"Las incorporaciones de crédito (art. 58 LGP) constituyen una excepción al principio de:",o:["Especialidad temporal (anualidad)","Especialidad cualitativa","Presupuesto bruto","Unidad de caja"],c:0,e:"Incrementan el presupuesto vigente con remanentes del ejercicio anterior pendientes de ejecutar, en cuatro supuestos tasados."},
+{u:3,t:"Durante la vigencia de la prórroga de la LPGE 2023 en 2026, el supuesto del art. 58.b) LGP (incorporación de remanentes de generaciones del ejercicio anterior) queda:",o:["Reforzado con nuevos supuestos","Sin efecto, salvo para remanentes del servicio 50 'Mecanismo de Recuperación y Resiliencia'","Sin ninguna excepción aplicable","Ampliado a todos los servicios sin distinción"],c:1,e:"Restricción estructural de la Ley 31/2022 que se mantiene por la prórroga."},
+{u:3,t:"Las generaciones de crédito (art. 53 LGP), a diferencia de las restantes modificaciones, se caracterizan por:",o:["Necesitar siempre financiación externa","No necesitar financiación, ya que el propio ingreso obtenido es la fuente","Requerir autorización de las Cortes en todo caso","Estar prohibidas en los Organismos Autónomos"],c:1,e:"Excepción tanto a la especialidad cuantitativa como al principio de presupuesto bruto (no afectación); seis fuentes tasadas y cerradas."},
+{u:3,t:"Como regla general, la generación de crédito solo puede realizarse cuando se hayan efectuado los ingresos correspondientes; una excepción reconocida es:",o:["Los ingresos del cuarto trimestre del ejercicio anterior, que pueden generar crédito en el ejercicio corriente","Los ingresos de cualquier trimestre de cualquier ejercicio","No existen excepciones al requisito temporal","Solo los ingresos tributarios están exceptuados"],c:0,e:"También cabe generar crédito, en subvenciones/aportaciones, con el mero reconocimiento del derecho o compromiso firme, sin ingreso efectivo."},
+{u:3,t:"La tramitación de los expedientes de modificación de crédito se rige por la Orden HFP/147/2022, modificada, entre otras, por la Orden HAC/1506/2024, que entró en vigor el:",o:["1 de enero de 2025","1 de enero de 2024","25 de abril de 2024","3 de junio de 2026"],c:0,e:"Modificó el art. 3.3 sobre el informe de la Dirección General del Plan y del MRR."},
+{u:3,t:"El informe de la Intervención Delegada en un expediente de modificación de crédito es:",o:["Potestativo, salvo que lo pida el interesado","Preceptivo en todo caso, y favorable si la competencia corresponde al titular del Departamento o al Presidente/Director del Organismo Autónomo para poder resolver en esa instancia","Solo exigible en créditos extraordinarios","Sustituible por el informe de la Abogacía del Estado"],c:1,e:"Si no es favorable en esos casos, el expediente debe elevarse a la autoridad superior."}
+);
+const CATS_LABEL=UNIDADES;
+let filtered=[...BANK], mode='normal', curTab=0;
+function loadHist(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'{}')}catch(e){return{}}}
+function saveHist(h){localStorage.setItem(LS_KEY,JSON.stringify(h))}
+function qid(q){return q.u+'|'+q.t.slice(0,60)}
+function buildTabs(){
+  const tabs=document.getElementById('tabs');
+  tabs.innerHTML='<button class="tab on" data-u="0">Todos</button>'+Object.entries(UNIDADES).map(([k,v])=>`<button class="tab" data-u="${k}">${v}</button>`).join('');
+  tabs.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{tabs.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');curTab=+b.dataset.u;applyFilter();render(false)});
+}
+function applyFilter(){
+  let base = curTab===0?[...BANK]:BANK.filter(q=>q.u===curTab);
+  const hist=loadHist();
+  if(mode==='fail'){base=base.filter(q=>{const h=hist[qid(q)];return h&&h.wrong>0&&(h.wrong>=h.right)})}
+  if(mode==='adapt'){base=base.map(q=>{const h=hist[qid(q)]||{right:0,wrong:0};const score=h.right-h.wrong;return{q,score}}).sort((a,b)=>a.score-b.score).slice(0,20).map(x=>x.q)}
+  filtered=base;
+}
+function buildBars(){
+  const hist=loadHist();
+  const bars=document.getElementById('bars');
+  bars.innerHTML=Object.entries(UNIDADES).map(([k,v])=>{
+    const qs=BANK.filter(q=>q.u==k);
+    let right=0,total=0;
+    qs.forEach(q=>{const h=hist[qid(q)];if(h){total+=h.right+h.wrong;right+=h.right}});
+    const pct=total>0?Math.round(100*right/total):0;
+    const col=pct>=70?'#16a34a':pct>=40?'#ea580c':'#dc2626';
+    return `<div class="bar"><div class="lbl"><span>${v}</span><span>${pct}%</span></div><div class="track"><div class="fill" style="width:${pct}%;background:${col}"></div></div></div>`;
+  }).join('');
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function render(doShuffle){
+  applyFilter();
+  if(doShuffle)shuffle(filtered);
+  const quiz=document.getElementById('quiz');
+  quiz.innerHTML='';
+  filtered.forEach((q,idx)=>{
+    const div=document.createElement('div');div.className='q';
+    div.innerHTML=`<div class="meta"><span>${UNIDADES[q.u]}</span><span>#${idx+1}/${filtered.length}</span></div><h3>${q.t}</h3>`+
+      q.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')+
+      `<div class="exp" id="exp${idx}"><b>Explicación:</b> ${q.e}</div>`;
+    quiz.appendChild(div);
+    div.querySelectorAll('.opt').forEach(btn=>{
+      btn.onclick=()=>{
+        if(btn.disabled)return;
+        const opts=div.querySelectorAll('.opt');
+        opts.forEach(o=>o.disabled=true);
+        const hist=loadHist();const id=qid(q);const h=hist[id]||{right:0,wrong:0};
+        if(+btn.dataset.i===q.c){btn.classList.add('ok');h.right++}
+        else{btn.classList.add('ko');opts[q.c].classList.add('ok');h.wrong++}
+        hist[id]=h;saveHist(hist);
+        document.getElementById('exp'+idx).classList.add('show');
+        updateScore();buildBars();
+      };
+    });
+  });
+  updateScore();buildBars();
+}
+function showAll(){document.querySelectorAll('.exp').forEach(e=>e.classList.add('show'))}
+function resetHist(){if(confirm('¿Reiniciar todo el historial de este test?')){localStorage.removeItem(LS_KEY);buildBars();updateScore()}}
+function updateScore(){
+  const hist=loadHist();let right=0,wrong=0;
+  Object.values(hist).forEach(h=>{right+=h.right;wrong+=h.wrong});
+  const total=right+wrong;
+  document.getElementById('score').innerHTML=total>0?`Aciertos históricos: <b>${right}</b> / ${total} (${Math.round(100*right/total)}%)`:'Aún sin respuestas registradas';
+}
+document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>{document.querySelectorAll('.mode').forEach(x=>x.classList.remove('on'));b.classList.add('on');mode=b.dataset.m;render(false)});
+buildTabs();applyFilter();render(false);
+</script>
+</body>
+</html>
