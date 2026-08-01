@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BVI T1 — El presupuesto. LGP. Estabilidad presupuestaria</title>
+<style>
+:root{
+  --v:#134e4a; --v2:#0f766e; --vclaro:#f0fdfa; --borde:#99f6e4;
+  --verde:#166534; --verdeclaro:#f0fdf4; --vborde:#bbf7d0;
+  --rojo:#991b1b; --rojoclaro:#fef2f2; --rborde:#fecaca;
+  --ambar:#92400e; --ambarclaro:#fffbeb; --aborde:#fde68a;
+  --morado:#6d28d9; --moradoclaro:#f5f3ff; --mborde:#ddd6fe;
+  --gris:#334155; --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#134e4a,#0f766e);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.65rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--v);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--v2);display:flex;align-items:center;gap:8px}
+h3{color:var(--v2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem;background:#fff}
+th{background:var(--v);color:#fff;padding:8px 10px;text-align:left;font-size:.83rem}
+td{padding:7px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--vclaro);border-left:5px solid var(--v2);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--v);font-size:.85rem;letter-spacing:.5px;margin-bottom:6px}
+.trampa{background:var(--rojoclaro);border-left:5px solid var(--rojo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--rojo);font-size:.85rem;margin-bottom:6px}
+.nuevo{background:var(--moradoclaro);border-left:5px solid var(--morado);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.nuevo .tit{font-weight:700;color:var(--morado);font-size:.85rem;margin-bottom:6px}
+.nota{background:var(--ambarclaro);border-left:5px solid var(--ambar);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:var(--ambar);font-size:.85rem;margin-bottom:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{body{background:#fff}header{background:var(--v)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.card{box-shadow:none}h2{page-break-after:avoid}table,.clave,.trampa,.nuevo{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque VI · Gestión Financiera</div>
+  <h1>Tema 1 — El presupuesto. La Ley General Presupuestaria. Estabilidad presupuestaria</h1>
+  <div class="sub">Concepto y clases · principios rectores · arts. 134-135 CE · LOEPSF · marco europeo 2024</div>
+  <div class="badge-verif">✅ Verificado a 01/08/2026 · prórroga PGE y Orden HAC/557/2026 confirmadas en BOE</div>
+</header>
+<div class="wrap">
+
+<h2>🗺️ 1. Marco normativo y contexto vigente</h2>
+<div class="nota"><div class="tit">📌 CONTEXTO 2026 — clave de actualidad</div><p>España está en <b>3ª prórroga automática consecutiva</b> de la Ley 31/2022 (PGE 2023), aplicada en 2024, 2025 y 2026 (art. 134.4 CE; Acuerdo Consejo de Ministros 23/12/2025). Las reglas fiscales, suspendidas 2020-2023, están reactivadas desde el 1/1/2024. El nuevo marco europeo de gobernanza (abril 2024) ha desplazado —sin derogar— buena parte de la LOEPSF hacia los Planes Fiscales-Estructurales: el Plan español se validó el 26/11/2024.</p></div>
+<table><tr><th>Plano</th><th>Norma</th><th>Función</th></tr>
+<tr><td>Constitucional</td><td>Arts. 134 y 135 CE</td><td>Bases del sistema presupuestario y de estabilidad</td></tr>
+<tr><td>Legal estatal</td><td>Ley 47/2003 (LGP)</td><td>Régimen presupuestario, económico-financiero, contable y de control</td></tr>
+<tr><td>Orgánico</td><td>LO 2/2012 (LOEPSF)</td><td>Reglas fiscales para todas las AAPP</td></tr>
+<tr><td>Europeo</td><td>Reglamentos (UE) 2024/1263, 2024/1264, Directiva 2024/1265</td><td>Nuevo marco de gobernanza económica (desde 30/04/2024)</td></tr>
+</table>
+
+<h2>💰 2. Concepto, naturaleza y clases del presupuesto</h2>
+<div class="clave"><div class="tit">🔑 DEFINICIÓN LEGAL (art. 32 LGP)</div><p>Los PGE son «la expresión cifrada, conjunta y sistemática de los derechos y obligaciones a liquidar durante el ejercicio por cada uno de los órganos y entidades que forman parte del sector público estatal».</p></div>
+<p style="font-size:.85rem">La ley de presupuestos tiene <b>reserva absoluta de ley</b>: no cabe decreto-ley ni decreto legislativo (STC 27/1981 y sucesivas). Doble naturaleza: instrumento de política económica + norma jurídica que autoriza el gasto (techo) y estima el ingreso (previsión, no garantía).</p>
+
+<h3>Clases de presupuesto</h3>
+<table><tr><th>Criterio</th><th>Tipos</th></tr>
+<tr><td>Momento temporal</td><td>A priori (PGE) vs. a posteriori (Cuenta General del Estado)</td></tr>
+<tr><td>Amplitud temporal</td><td>Ordinario vs. extraordinario</td></tr>
+<tr><td>Vinculación de créditos</td><td><b>Limitativo</b> (techo máximo, sector administrativo) vs. <b>estimativo</b> (orientativo, sector empresarial/fundacional)</td></tr>
+</table>
+<table><tr><th>Equilibrio</th><th>Significado</th></tr>
+<tr><td>Formal o contable</td><td>Gastos = Ingresos (lo cumplen todos los presupuestos)</td></tr>
+<tr><td>Económico</td><td>Gastos ordinarios = Ingresos ordinarios (sin déficit ni endeudamiento)</td></tr>
+<tr><td>Estructural</td><td>Saldo ajustado del ciclo y medidas excepcionales — concepto operativo del art. 135 CE y la LOEPSF</td></tr>
+</table>
+<p style="font-size:.85rem"><b>Ciclo presupuestario:</b> Previsión (año −1, Ley de Presupuestos) → Ejecución (año 0) → Control (años +1/+2, Cuenta General del Estado / Tribunal de Cuentas).</p>
+
+<h3>Ideologías y técnicas presupuestarias</h3>
+<div class="grid2">
+<div class="card"><p><b>Presupuesto clásico</b></p><p style="font-size:.85rem">Adam Smith. Principios políticos (competencia, universalidad, unidad, especialidad, anualidad), contables (bruto, unidad de caja, especificación, ejercicio cerrado) y económicos (equilibrio, neutralidad).</p></div>
+<div class="card"><p><b>Estabilización económica (keynesiano)</b></p><p style="font-size:.85rem">Compensatorio (discrecional) · Cíclico (equilibrio a largo plazo) · Estabilización automática (IRPF/IS/consumo/SS como ingresos; desempleo como gasto).</p></div>
+</div>
+<p style="font-size:.85rem"><b>Presupuesto por programas</b> (Orden 17/06/1983, plena aplicación PGE 1984): planificación → programación → presupuestación → control. Jerarquía de objetivos: finalidades → misiones → fines → objetivos cuantificados. <b>Presupuesto base cero:</b> rompe el incrementalismo; niveles mínimo/corriente/mejora.</p>
+
+<h2>📜 3. Marco constitucional (arts. 134-135 CE)</h2>
+<table><tr><th>Apartado</th><th>Contenido</th></tr>
+<tr><td>134.1</td><td>Elaboración: Gobierno · Examen, enmienda y aprobación: Cortes Generales</td></tr>
+<tr><td>134.2</td><td>Anualidad, universalidad, consignación de beneficios fiscales</td></tr>
+<tr><td>134.3</td><td>Presentación ante el Congreso: 3 meses antes de expirar los del año anterior (LGP art. 37.1: 1 de octubre)</td></tr>
+<tr><td>134.4</td><td><b>Prórroga automática</b> si no se aprueban antes del primer día del ejercicio</td></tr>
+<tr><td>134.5</td><td>Modificaciones posteriores: exigen proyecto de ley</td></tr>
+<tr><td>134.6</td><td>Toda enmienda con aumento de gasto/disminución de ingresos requiere conformidad del Gobierno</td></tr>
+<tr><td>134.7</td><td>La Ley de Presupuestos NO puede crear tributos; sí modificarlos si una ley sustantiva lo prevé</td></tr>
+</table>
+<div class="clave"><div class="tit">🔑 Reglas de tramitación</div><p>Reserva absoluta de ley + aprobación siempre en <b>Pleno</b> (art. 75 CE, no cabe en Comisión). Doctrina TC: «ley ómnibus limitada» — contenido necesario (aprobar gastos/ingresos) + contenido eventual (conexión directa con la ejecución o política económica).</p></div>
+
+<div class="nuevo"><div class="tit">🆕 Art. 135 CE — estabilidad presupuestaria (reforma 27/09/2011)</div>
+<table><tr><th>Apartado</th><th>Contenido</th></tr>
+<tr><td>135.1</td><td>Todas las AAPP se adecuan al principio de estabilidad presupuestaria</td></tr>
+<tr><td>135.2</td><td>Estado y CC.AA.: no déficit estructural superior a los márgenes UE</td></tr>
+<tr><td>135.3</td><td>Prioridad ABSOLUTA del pago de intereses y capital de la deuda</td></tr>
+<tr><td>135.4</td><td>Excepciones: catástrofes, recesión grave, emergencia extraordinaria (mayoría absoluta del Congreso)</td></tr>
+<tr><td>135.5</td><td>Remisión a ley orgánica de desarrollo: LO 2/2012</td></tr>
+</table></div>
+
+<h2>📘 4. La Ley 47/2003, General Presupuestaria (LGP)</h2>
+<div class="trampa"><div class="tit">⚠️ Exclusión relevante</div><p>La LGP NO se aplica a las <b>Cortes Generales</b>, que gozan de autonomía presupuestaria propia (art. 72 CE; arts. 1 y 3.3 LGP).</p></div>
+<p style="font-size:.85rem">Estructura: Exposición de Motivos + <b>7 Títulos</b>, 26 Disposiciones Adicionales, 5 Disposiciones Transitorias.</p>
+<table><tr><th>Título</th><th>Contenido</th></tr>
+<tr><td>I</td><td>Ámbito y Hacienda Pública estatal</td></tr>
+<tr><td>II</td><td>PGE: principios, programación, elaboración, modificaciones de crédito</td></tr>
+<tr><td>III</td><td>Relaciones financieras con UE, CC.AA. y EE.LL.</td></tr>
+<tr><td>IV</td><td>Tesoro Público, Deuda del Estado, operaciones financieras</td></tr>
+<tr><td>V</td><td>Contabilidad del sector público estatal</td></tr>
+<tr><td>VI</td><td>Control (IGAE): función interventora, control financiero, auditoría</td></tr>
+<tr><td>VII</td><td>Responsabilidades por daños a la Hacienda Pública</td></tr>
+</table>
+
+<h3>Clasificación del sector público estatal (art. 3 LGP)</h3>
+<table><tr><th>Subsector</th><th>Presupuesto</th><th>Entidades</th></tr>
+<tr><td>Administrativo</td><td><b>LIMITATIVO</b></td><td>AGE, OO.AA., AAI, Agencias Estatales, Entidades Gestoras SS, Mutuas</td></tr>
+<tr><td>Empresarial</td><td>ESTIMATIVO</td><td>EPE, Sociedades Mercantiles Estatales</td></tr>
+<tr><td>Fundacional</td><td>ESTIMATIVO</td><td>Fundaciones del sector público estatal</td></tr>
+</table>
+
+<h3>Principios presupuestarios (art. 26 LGP)</h3>
+<table><tr><th>Principio</th><th>Contenido</th></tr>
+<tr><td>Programación</td><td>Remisión a los principios de la LOEPSF</td></tr>
+<tr><td>Anualidad</td><td>Presupuesto anual en escenario plurianual</td></tr>
+<tr><td>Unidad de caja</td><td>Todos los recursos → Tesoro Público</td></tr>
+<tr><td>Unidad de patrimonio</td><td>Un único patrimonio: la Hacienda Pública</td></tr>
+<tr><td>Especialidad</td><td>Cualitativa (art. 42) + Cuantitativa (art. 46) + Temporal (art. 49)</td></tr>
+<tr><td>No afectación</td><td>Recursos al conjunto de obligaciones, salvo habilitación expresa</td></tr>
+</table>
+<p style="font-size:.85rem"><b>Fondo de Contingencia</b> (art. 50 LGP): 2% del total de gastos para operaciones no financieras, excluidas transferencias a CC.AA. y EE.LL.</p>
+
+<h2>⚖️ 5. La LOEPSF (LO 2/2012)</h2>
+<div class="clave"><div class="tit">🔑 CONCEPTO CLAVE — déficit estructural</div><p>Déficit Total = Déficit Estructural + Déficit Coyuntural. La LOEPSF desarrolla el art. 135 CE; rango de <b>ley orgánica</b>; 6 Capítulos; aplica a TODO el sector público (SEC 2010).</p></div>
+
+<h3>7 principios (Capítulo II, arts. 3-9)</h3>
+<table><tr><th>Principio</th><th>Idea clave</th></tr>
+<tr><td>Estabilidad presupuestaria</td><td>Equilibrio o superávit estructural (SAP) / equilibrio financiero (RE)</td></tr>
+<tr><td>Sostenibilidad financiera</td><td>Financiar compromisos presentes y futuros; incluye deuda comercial (PMP)</td></tr>
+<tr><td>Plurianualidad</td><td>Marco a 3 años</td></tr>
+<tr><td>Transparencia</td><td>Información suficiente de situación financiera</td></tr>
+<tr><td>Eficiencia</td><td>Valorar repercusiones de toda actuación con impacto en gasto</td></tr>
+<tr><td>Responsabilidad</td><td>Asumir consecuencias de incumplir normativa europea</td></tr>
+<tr><td>Lealtad institucional</td><td>Respeto a competencias de otras AAPP</td></tr>
+</table>
+
+<h3>Reglas fiscales (Capítulo III)</h3>
+<table><tr><th>Regla</th><th>Contenido</th></tr>
+<tr><td>Déficit (art. 11)</td><td>Ninguna AP en déficit estructural; excepción 0,4% PIB por reformas estructurales; supuestos 135.4 CE</td></tr>
+<tr><td>Deuda (art. 13)</td><td>Máx. 60% PIB: 44% AGE + 13% CC.AA. + 3% EE.LL.</td></tr>
+<tr><td>Gasto (art. 12)</td><td>Variación del gasto computable ≤ tasa de referencia del PIB de medio plazo</td></tr>
+</table>
+<div class="nota"><div class="tit">📌 Desplazamiento por el marco europeo 2024</div><p>La regla de gasto del art. 12 LOEPSF convive —sin derogarse— con la senda de gasto neto primario del Plan Fiscal-Estructural español: <b>3,7% (2025) · 3,5% (2026) · 3,2% (2027) · 3,0% (2028)</b>.</p></div>
+
+<h3>Procedimiento de fijación de objetivos (art. 15)</h3>
+<p style="font-size:.85rem">Gobierno (a propuesta de Hacienda) fija objetivos, previo informe AIReF → remisión a Cortes → Congreso y Senado se pronuncian. <b>Novedad LO 2/2024, de 1 de agosto</b> (art. 15.6): si el Senado rechaza los objetivos, se someten a nueva votación en el Pleno del Congreso, aprobándose por mayoría simple, sin reiniciar el procedimiento.</p>
+
+<h3>Medidas de disciplina (Capítulo IV) — escalera progresiva</h3>
+<table><tr><th>Tipo</th><th>Contenido</th></tr>
+<tr><td>Preventivas (18-19)</td><td>Advertencia, no disponibilidad y retención de créditos</td></tr>
+<tr><td>Correctivas (20-24)</td><td>Plan Económico-Financiero o Plan de Reequilibrio</td></tr>
+<tr><td>Coercitivas (25-26)</td><td>Sustitución/intervención, ejecución forzosa (autorización del Senado para CC.AA.), disolución de órganos</td></tr>
+</table>
+<p style="font-size:.85rem"><b>Destino del superávit</b> (art. 32): Estado/CC.AA./EE.LL. → reducción del endeudamiento neto. Seguridad Social → Fondo de Reserva.</p>
+
+<h2>🇪🇺 6. Nuevo marco europeo de gobernanza (2024)</h2>
+<div class="clave"><div class="tit">🔑 EN VIGOR DESDE EL 30/04/2024</div><p>Reglamento (UE) 2024/1263 (deroga el 1466/97, brazo preventivo) + Reglamento (UE) 2024/1264 (modifica 1467/97, brazo corrector) + Directiva (UE) 2024/1265 (marcos presupuestarios nacionales).</p></div>
+<p style="font-size:.85rem">Instrumento único: <b>Planes Fiscales-Estructurales nacionales a medio plazo</b> (4 años, prorrogable a 7). Valores TFUE mantenidos: déficit 3% PIB, deuda 60% PIB. Nuevo indicador: senda de gasto neto. España obtuvo la ampliación a <b>7 años</b>; Plan presentado 15/10/2024, validado por la Comisión 26/11/2024, aval del Consejo 21/01/2025. Deuda: 102,5% PIB (2024) → 90,6% (2031).</p>
+
+<h2>📌 7. Datos clave para el examen</h2>
+<table>
+<tr><th>Dato</th><th>Cifra</th></tr>
+<tr><td>Plazo presentación PGE (134.3 CE / LGP 37.1)</td><td>3 meses antes / 1 de octubre</td></tr>
+<tr><td>Estructura LGP</td><td>7 Títulos, 26 DA, 5 DT</td></tr>
+<tr><td>Fondo de Contingencia (LGP art. 50)</td><td>2% del gasto no financiero</td></tr>
+<tr><td>Reforma art. 135 CE</td><td>27/09/2011</td></tr>
+<tr><td>Estructura LOEPSF</td><td>6 Capítulos</td></tr>
+<tr><td>Límite deuda pública</td><td>60% PIB (44+13+3)</td></tr>
+<tr><td>Excepción déficit estructural por reformas</td><td>0,4% PIB</td></tr>
+<tr><td>Marco europeo 2024: en vigor desde</td><td>30/04/2024</td></tr>
+<tr><td>Plan Fiscal-Estructural España: validado</td><td>26/11/2024 (senda a 7 años)</td></tr>
+<tr><td>PGE vigentes 2026</td><td>Ley 31/2022 (PGE 2023), 3ª prórroga automática</td></tr>
+</table>
+
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS DE EXAMEN</div>
+<ul class="lista">
+<li>La Ley de Presupuestos tiene RESERVA ABSOLUTA de ley: nunca decreto-ley ni decreto legislativo.</li>
+<li>La LGP NO se aplica a las Cortes Generales (autonomía presupuestaria propia, art. 72 CE).</li>
+<li>Deuda vs. gasto: el límite del 60% PIB es de DEUDA; la regla de GASTO es distinta (variación ≤ tasa de referencia del PIB).</li>
+<li>El marco europeo 2024 NO deroga la LOEPSF: la desplaza materialmente en la práctica (regla de gasto vs. senda de gasto neto).</li>
+<li>Reforma LO 2/2024 (no confundir con LO 2/2012): solo modifica el art. 15.6 (procedimiento tras rechazo del Senado), no toca las reglas fiscales.</li>
+</ul>
+</div>
+
+</div>
+<footer>GACE 2027 · Bloque VI · Tema 1 · Material verificado contra BOE a 01/08/2026 · Antonio José De Lamo Villar</footer>
+</body>
+</html>
