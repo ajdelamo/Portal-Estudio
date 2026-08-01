@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV — Flashcards T7 y T8</title>
+<style>
+:root{--azul:#1e3a8a;--azul2:#3b62c4;--verde:#16a34a;--rojo:#dc2626;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:40px}
+header{background:linear-gradient(135deg,#0f766e,#1e3a8a);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.f{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.83rem;font-weight:600;cursor:pointer}
+.f.on{background:var(--azul);color:#fff}
+.stats{display:flex;gap:10px;margin:8px 0 14px;font-size:.83rem;flex-wrap:wrap}
+.stats span{background:#fff;border-radius:8px;padding:5px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.escena{perspective:1200px;margin:10px 0}
+.carta{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
+.carta.girada{transform:rotateY(180deg)}
+.cara{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.frente{background:#fff;border:3px solid var(--azul2)}
+.frente .cat{position:absolute;top:12px;left:14px;font-size:.72rem;font-weight:700;color:#fff;background:var(--azul2);border-radius:12px;padding:2px 10px}
+.frente .idx{position:absolute;top:12px;right:14px;font-size:.72rem;color:#94a3b8}
+.frente h2{font-size:1.08rem;line-height:1.5;font-weight:600;border:none;color:#1e293b}
+.frente .pista{margin-top:14px;font-size:.75rem;color:#94a3b8}
+.dorso{background:linear-gradient(135deg,#1e3a8a,#3b62c4);color:#fff;transform:rotateY(180deg)}
+.dorso .resp{font-size:1.15rem;font-weight:800;line-height:1.45}
+.dorso .det{margin-top:12px;font-size:.85rem;opacity:.92;line-height:1.5}
+.botones{display:flex;gap:8px;margin:14px 0;justify-content:center;flex-wrap:wrap}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-size:.9rem;font-weight:700;cursor:pointer}
+.btn.mal{background:#fee2e2;color:var(--rojo)}
+.btn.bien{background:#dcfce7;color:#15803d}
+.btn.nav{background:#e2e8f0;color:#334155}
+.btn.accion{background:var(--azul);color:#fff}
+.aviso{text-align:center;font-size:.8rem;color:#64748b;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>🃏 Flashcards BIV · T7 Subvenciones + T8 Expropiación</h1>
+  <p>Plazos · artículos · datos-ancla · Ley 38/2003 y LEF · verificado a 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="filtros" id="filtros"></div>
+  <div class="stats"><span id="st-total"></span><span id="st-dom">✅ dominadas: <b id="ndom">0</b></span><span id="st-rep">🔁 a repasar: <b id="nrep">0</b></span></div>
+  <div class="escena"><div class="carta" id="carta" onclick="girar()">
+    <div class="cara frente"><div class="cat" id="cat"></div><div class="idx" id="idx"></div><h2 id="preg"></h2><div class="pista">👆 toca para ver la respuesta</div></div>
+    <div class="cara dorso"><div class="resp" id="resp"></div><div class="det" id="det"></div></div>
+  </div></div>
+  <div class="botones">
+    <button class="btn mal" onclick="marcar(false)">❌ Repasar</button>
+    <button class="btn bien" onclick="marcar(true)">✅ Me la sé</button>
+  </div>
+  <div class="botones">
+    <button class="btn nav" onclick="mover(-1)">← Anterior</button>
+    <button class="btn accion" onclick="barajar()">🔀 Barajar</button>
+    <button class="btn nav" onclick="mover(1)">Siguiente →</button>
+  </div>
+  <div class="botones"><button class="btn nav" onclick="soloRepaso()" id="btnrep">🎯 Solo las marcadas "repasar"</button>
+  <button class="btn nav" onclick="resetear()">🗑️ Reiniciar</button></div>
+  <div class="aviso">El progreso se guarda en este navegador (localStorage).</div>
+</div>
+<script>
+const LS='gace_biv_fc_t7t8_v1';
+const CARDS=[
+// —— T7 ——
+{c:'T7·Datos',p:'Las 4 formas de actividad administrativa',r:'Policía (limita) · fomento (estimula) · servicio público (presta) · arbitral (media)',d:'Jordana de Pozas + doctrina posterior. Principios de intervención: art. 4 Ley 40/2015 (necesidad, proporcionalidad, mínima restricción).'},
+{c:'T7·Artículos',p:'Declaración responsable y comunicación: ¿artículo y efecto?',r:'Art. 69 Ley 39/2015 · efectos desde el día de la presentación',d:'Control posterior; la inexactitud esencial impide continuar. Ley 17/2009 (Paraguas) y Ley 25/2009 (Ómnibus).'},
+{c:'T7·Plazos',p:'Prescripción sancionadora general (art. 30 Ley 40/2015)',r:'Infracciones: 3/2 años/6 meses · sanciones: 3/2/1 año',d:'⚠ En subvenciones: 4 años para infracciones Y sanciones (art. 65 LGS).'},
+{c:'T7·Datos',p:'Concepto de subvención: los 3 requisitos (art. 2.1 LGS)',r:'Sin contraprestación directa · sujeta a objetivo · finalidad de fomento',d:'NO son subvención (2.4): premios sin previa solicitud, becas al personal, aportaciones globales entre AAPP, subvenciones electorales.'},
+{c:'T7·Datos',p:'Órganos concedentes de subvenciones en la AGE',r:'Ministros y Secretarios de Estado (art. 10.1 LGS)',d:'Requiere Plan Estratégico de Subvenciones previo (art. 8.1). Local: Alcalde o Pleno.'},
+{c:'T7·Datos',p:'Supuestos de concesión DIRECTA (art. 22.2 LGS)',r:'Nominativas en presupuestos · impuestas por norma legal · razones excepcionales acreditadas',d:'En la AGE el supuesto c) exige Real Decreto (art. 28). La regla general es la concurrencia competitiva.'},
+{c:'T7·Plazos',p:'Concurrencia competitiva: plazo de resolución y sentido del silencio',r:'6 meses desde la publicación de la convocatoria · silencio DESESTIMATORIO',d:'Arts. 25.4 y 25.5 LGS — excepción a la regla del silencio positivo del art. 24 Ley 39/2015.'},
+{c:'T7·Plazos',p:'Justificación de la subvención: plazo ordinario',r:'3 meses desde el fin del plazo de ejecución',d:'Art. 30 LGS y 71 RD 887/2006. Modalidades: cuenta justificativa (normal, con auditor, simplificada), módulos, estados contables.'},
+{c:'T7·Plazos',p:'Reintegro: prescripción vs. caducidad',r:'Prescripción del derecho: 4 años · caducidad del procedimiento: 12 meses',d:'Arts. 39 y 42.4 LGS. Interés de demora DESDE EL PAGO de la subvención (37.1).'},
+{c:'T7·Plazos',p:'Conservación de documentos por el beneficiario',r:'4 años (art. 14.1.g LGS)',d:'Obligaciones del 14: cumplir, justificar, someterse a comprobación, comunicar otras ayudas, estar al corriente, contabilidad, reintegrar.'},
+{c:'T7·Datos',p:'Entidad colaboradora: rasgo esencial',r:'Actúa en nombre y por cuenta del concedente; los fondos NO se integran en su patrimonio',d:'Art. 12 LGS; convenio de colaboración previo.'},
+{c:'T7·Datos',p:'BDNS: ¿desde cuándo es obligatoria y qué efecto tiene?',r:'Desde el 1/1/2016; sin remisión no hay publicación del extracto ni eficacia',d:'Art. 20 LGS. Control financiero: IGAE (interno) + Tribunal de Cuentas (externo).'},
+{c:'T7·Datos',p:'Gestión directa de servicios públicos locales (85.2.A LRBRL)',r:'Propia entidad · organismo autónomo · EPEL · sociedad mercantil 100% pública',d:'EPEL y sociedad exigen memoria de mayor sostenibilidad y eficiencia (Ley 27/2013). Indirecta: concesión de servicios o contrato de servicios (ya no existe el contrato de gestión de servicios públicos).'},
+{c:'T7·Datos',p:'Creación de un servicio público local: ¿órgano y mayoría?',r:'Pleno por MAYORÍA ABSOLUTA (art. 47.2.k LRBRL)',d:'Publicatio: reserva de recursos y servicios esenciales por ley (art. 128.2 CE).'},
+{c:'T7·Datos',p:'Consorcio vs. mancomunidad',r:'Consorcio: varias AAPP (y privadas sin ánimo de lucro), adscripción OBLIGATORIA · mancomunidad: solo municipios',d:'Arts. 118-127 Ley 40/2015 y 44 LRBRL.'},
+{c:'T7·Datos',p:'Autorización vs. concesión',r:'Autorización: remueve límites a un derecho PREEXISTENTE · concesión: crea el derecho EX NOVO',d:'Clave doctrinal en actividad de policía.'},
+// —— T8 ——
+{c:'T8·Artículos',p:'Fundamento constitucional de la expropiación y competencia',r:'Art. 33.3 CE · competencia exclusiva plena del Estado (149.1.18ª, sin "básica")',d:'Causa de utilidad pública o interés social + correspondiente indemnización + conforme a las leyes. LEF 16/12/1954 + REF 26/4/1957.'},
+{c:'T8·Datos',p:'¿Quiénes pueden ser expropiantes (art. 2 LEF)?',r:'Estado, CCAA, Provincia y Municipio',d:'Los concesionarios pueden ser BENEFICIARIOS. Por interés social puede ser beneficiario cualquier persona. Representante estatal: Delegado del Gobierno.'},
+{c:'T8·Datos',p:'Identificación del expropiado (art. 3 LEF): orden de prelación',r:'Registros públicos → registros fiscales → notoriedad',d:'Si no comparece, incapaz sin representante o propiedad litigiosa: interviene el MINISTERIO FISCAL (art. 5).'},
+{c:'T8·Plazos',p:'Necesidad de ocupación: información pública y resolución',r:'15 días de información pública · resolución en 20 días',d:'Arts. 18-20 LEF. El acuerdo INICIA el expediente (21). Alzada con EFECTO SUSPENSIVO (22).'},
+{c:'T8·Plazos',p:'Expropiación parcial antieconómica: solicitud de expropiación total',r:'10 días (art. 23 LEF)',d:'Si no se accede, se indemnizan los perjuicios en el justiprecio.'},
+{c:'T8·Plazos',p:'Justiprecio: cadena de plazos',r:'Mutuo acuerdo 15 días → hoja del expropiado 20 → respuesta Admón. 20 → aceptación 10',d:'Arts. 24, 29-30 LEF. Sin acuerdo → Jurado Provincial de Expropiación.'},
+{c:'T8·Datos',p:'Jurado Provincial de Expropiación: presidente y efecto de su resolución',r:'Magistrado (designado por el Presidente de la Audiencia) · agota la vía administrativa',d:'Vocales: Abogado del Estado, 2 técnicos, vocal sectorial, Notario, Interventor. Congruencia con las hojas de aprecio.'},
+{c:'T8·Plazos',p:'Plazo de pago del justiprecio',r:'6 meses (art. 48 LEF) · exento de impuestos',d:'Rehúse o litigio → consignación (art. 50) con derecho a lo no discutido. Acta de ocupación + pago = título inscribible (53).'},
+{c:'T8·Datos',p:'Premio de afección',r:'5% adicional, AUTOMÁTICO (art. 47 LEF)',d:'Sobre el justiprecio (valor del bien y conceptos indemnizables).'},
+{c:'T8·Plazos',p:'Intereses de demora en la expropiación (arts. 56-57)',r:'6 meses sin fijar el justiprecio → interés legal · 6 meses sin pagar tras fijarlo → interés legal',d:'Dos supuestos distintos: demora en la fijación y demora en el pago.'},
+{c:'T8·Plazos',p:'Retasación: plazo vigente',r:'4 AÑOS sin pago ni consignación (art. 58, red. Ley 17/2012)',d:'⚠ Los temarios antiguos dicen 2 años (redacción original). Pagado o consignado, ya no procede.'},
+{c:'T8·Plazos',p:'Reversión: los 4 números',r:'5 años (no ejecución) · 2 años (suspensión) · 20 años (límite desafectación) · 10 años (afectación que la excluye)',d:'Art. 54 LEF (red. Ley 38/1999). Ejercicio: 3 meses desde la notificación. Precio: indemnización actualizada por IPC (55).'},
+{c:'T8·Datos',p:'Urgencia (art. 52): ¿quién la declara y qué invierte?',r:'Consejo de Ministros (con retención de crédito) · primero se OCUPA, después se paga',d:'Lleva implícita la necesidad de ocupación. No cabe contra actuaciones de emergencia... ojo: eso es LCSP; aquí sí cabe recurso.'},
+{c:'T8·Plazos',p:'Urgencia: aviso del acta previa y plazo de ocupación',r:'Aviso ≥ 8 días · ocupación ≤ 15 días desde la consignación del depósito previo',d:'Hojas de depósito previo + indemnización por rápida ocupación; el justiprecio se tramita después.'},
+{c:'T8·Datos',p:'Vía de hecho expropiatoria: defensa del particular',r:'Tutela sumaria posesoria (interdictos) + contencioso (art. 125 LEF)',d:'Ocupación sin título o procedimiento pierde los privilegios de la expropiación regular.'},
+{c:'T8·Datos',p:'¿Pueden expropiarse los bienes de dominio público?',r:'NO: mutación demanial',d:'Son inalienables (art. 132 CE). La expropiación recae sobre propiedad privada y derechos patrimoniales legítimos.'}
+];
+let vista=[...CARDS.keys()], pos=0, filtro='Todas';
+let estado=JSON.parse(localStorage.getItem(LS)||'{}');
+const cats=['Todas',...new Set(CARDS.map(c=>c.c.split('·')[0]))];
+function guardar(){localStorage.setItem(LS,JSON.stringify(estado))}
+function pinta(){
+  const fdiv=document.getElementById('filtros');fdiv.innerHTML='';
+  cats.forEach(c=>{const b=document.createElement('button');b.className='f'+(filtro===c?' on':'');b.textContent=c==='Todas'?'📋 Todas':c;b.onclick=()=>{filtro=c;aplicar()};fdiv.appendChild(b)});
+  const i=vista[pos],c=CARDS[i];
+  document.getElementById('cat').textContent=c.c;
+  document.getElementById('idx').textContent=(pos+1)+' / '+vista.length;
+  document.getElementById('preg').textContent=c.p;
+  document.getElementById('resp').textContent=c.r;
+  document.getElementById('det').textContent=c.d;
+  document.getElementById('carta').classList.remove('girada');
+  document.getElementById('st-total').textContent='📇 '+vista.length+' tarjetas';
+  const vals=Object.values(estado);
+  document.getElementById('ndom').textContent=vals.filter(v=>v==='ok').length;
+  document.getElementById('nrep').textContent=vals.filter(v=>v==='ko').length;
+}
+function aplicar(){
+  vista=[...CARDS.keys()].filter(i=>filtro==='Todas'||CARDS[i].c.startsWith(filtro));
+  pos=0;pinta();
+}
+function girar(){document.getElementById('carta').classList.toggle('girada')}
+function mover(d){pos=(pos+d+vista.length)%vista.length;pinta()}
+function marcar(bien){estado[vista[pos]]=bien?'ok':'ko';guardar();mover(1)}
+function barajar(){for(let i=vista.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vista[i],vista[j]]=[vista[j],vista[i]]}pos=0;pinta()}
+function soloRepaso(){
+  const rep=[...CARDS.keys()].filter(i=>estado[i]==='ko'&&(filtro==='Todas'||CARDS[i].c.startsWith(filtro)));
+  if(rep.length===0){alert('🎉 No tienes tarjetas marcadas para repasar en este filtro.');return}
+  vista=rep;pos=0;pinta();
+}
+function resetear(){if(confirm('¿Borrar el progreso de estas flashcards?')){estado={};guardar();aplicar()}}
+aplicar();
+</script>
+</body>
+</html>
