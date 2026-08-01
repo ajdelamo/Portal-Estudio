@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV — Test T9 y T10 (Patrimonio y Responsabilidad Patrimonial)</title>
+<style>
+:root{--azul:#1e3a8a;--azul2:#3b62c4;--verde:#16a34a;--rojo:#dc2626;--naranja:#ea580c;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:70px}
+header{background:linear-gradient(135deg,#1e3a8a,#3b62c4);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:800px;margin:0 auto;padding:0 14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 6px}
+.tab{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;cursor:pointer}
+.tab.on{background:var(--azul);color:#fff}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 14px}
+.mode{border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:5px 12px;font-size:.8rem;cursor:pointer}
+.mode.on{background:#0f766e;color:#fff;border-color:#0f766e}
+.bars{display:flex;flex-direction:column;gap:6px;margin:10px 0 18px}
+.bar{background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.bar .lbl{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin-bottom:4px}
+.bar .track{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.bar .fill{height:100%;border-radius:4px;transition:width .3s}
+.q{background:#fff;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.q .meta{font-size:.75rem;color:#64748b;margin-bottom:8px;display:flex;justify-content:space-between}
+.q h3{font-size:.98rem;margin-bottom:12px;line-height:1.45}
+.opt{display:block;width:100%;text-align:left;border:2px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:10px 12px;margin:6px 0;font-size:.9rem;cursor:pointer;line-height:1.4}
+.opt:hover{border-color:var(--azul2)}
+.opt.ok{border-color:var(--verde);background:#f0fdf4}
+.opt.ko{border-color:var(--rojo);background:#fef2f2}
+.opt:disabled{cursor:default;opacity:.92}
+.exp{display:none;margin-top:10px;background:#eef2ff;border-left:4px solid var(--azul2);border-radius:0 8px 8px 0;padding:10px 12px;font-size:.85rem}
+.exp.show{display:block}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.btn{border:none;border-radius:8px;padding:8px 16px;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--azul);color:#fff}
+.btn.sec{background:#64748b}
+.btn.warn{background:var(--rojo)}
+.score{position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#fff;padding:10px 16px;text-align:center;font-size:.9rem}
+.score b{color:#4ade80}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧪 Test BIV · T9 Patrimonio + T10 Responsabilidad Patrimonial</h1>
+  <p>GACE 2027 · Autocorregible y adaptativo · Ley 33/2003 y arts. 32-37 Ley 40/2015 · verificado a 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="tabs" id="tabs"></div>
+  <div class="modes">
+    <button class="mode on" data-m="normal">📚 Normal</button>
+    <button class="mode" data-m="adapt">🎯 Adaptativo (peores 20)</button>
+    <button class="mode" data-m="fail">❌ Solo erróneas</button>
+  </div>
+  <div class="bars" id="bars"></div>
+  <div class="controls">
+    <button class="btn" onclick="render(true)">🔀 Barajar</button>
+    <button class="btn sec" onclick="showAll()">👁️ Ver explicaciones</button>
+    <button class="btn warn" onclick="resetHist()">🗑️ Reiniciar historial</button>
+  </div>
+  <div id="quiz"></div>
+</div>
+<div class="score" id="score"></div>
+<script>
+const LS_KEY='gace_biv_t9t10_v1';
+const UNIDADES={9:'T9 · Patrimonio',10:'T10 · Resp. Patrimonial'};
+const BANK=[
+// ============ T9 (u:9) ============
+{u:9,t:"Según el art. 132.2 CE, son bienes de dominio público estatal en todo caso:",o:["Los montes públicos y las vías pecuarias","La zona marítimo-terrestre, las playas, el mar territorial y los recursos naturales de la zona económica y la plataforma continental","Los ríos y los acuíferos","Las carreteras del Estado"],c:1,e:"Es el núcleo indisponible que ni el legislador puede desafectar. Los demás bienes son demaniales si la ley lo determina."},
+{u:9,t:"Los recursos financieros de la Hacienda (dinero, valores, créditos):",o:["Son bienes patrimoniales","No forman parte del patrimonio de las AAPP (art. 3.2 LPAP)","Son bienes demaniales","Son bienes comunales"],c:1,e:"Exclusión expresa: se rigen por su normativa específica (LGP). Trampa clásica de examen."},
+{u:9,t:"Los principios del dominio público del art. 132.1 CE son:",o:["Publicidad, transparencia y concurrencia","Inalienabilidad, imprescriptibilidad e inembargabilidad","Eficacia, jerarquía y coordinación","Necesidad, proporcionalidad y mínima restricción"],c:1,e:"Triple garantía aplicable también a los bienes comunales. Los patrimoniales, en cambio, son enajenables, prescriptibles y embargables (con límites)."},
+{u:9,t:"Conforme al art. 16 LPAP, los bienes y derechos que adquieren las Administraciones:",o:["Se entienden siempre demaniales","Se adquieren con carácter patrimonial, salvo disposición legal en contrario","Se afectan automáticamente al servicio público","Ingresan en el Patrimonio Nacional"],c:1,e:"El dominio público nace con la afectación. Excepción: los bienes expropiados quedan implícitamente afectados al fin expropiatorio (art. 66.2)."},
+{u:9,t:"La desafectación de los bienes demaniales:",o:["Puede ser tácita por el desuso prolongado","Debe ser expresa y motivada; no se presume (art. 69 LPAP)","La declara el Consejo de Estado","Es innecesaria para enajenar"],c:1,e:"La afectación sí admite forma implícita (expropiación, ley); la desafectación no: es la puerta de salida del dominio público y exige acto expreso."},
+{u:9,t:"La mutación demanial (art. 71 LPAP) consiste en:",o:["La conversión del bien demanial en patrimonial","El cambio de destino del bien dentro del dominio público, sin perder su carácter demanial","La transferencia de titularidad a un particular","La venta entre Administraciones"],c:1,e:"Desafectación de un fin y afectación simultánea a otro: el bien nunca sale del dominio público ni pierde la triple garantía."},
+{u:9,t:"La adscripción de bienes de la AGE a un organismo público:",o:["Transfiere la titularidad al organismo","Lleva implícita la afectación (el bien pasa a dominio público) sin alterar la titularidad","Convierte el bien en patrimonial","Requiere ley"],c:1,e:"Arts. 73-76 LPAP. La desadscripción lleva implícita la desafectación."},
+{u:9,t:"Los inmuebles que carecen de dueño:",o:["Pertenecen al municipio donde radiquen","Pertenecen a la AGE por ministerio de la ley (art. 17 LPAP)","Pertenecen a la Comunidad Autónoma","Son res nullius apropiables por ocupación"],c:1,e:"Sin necesidad de acto administrativo, aunque sin asumir cargas hasta la incorporación efectiva. Los saldos y depósitos bancarios sin gestión durante 20 AÑOS corresponden también a la AGE (art. 18)."},
+{u:9,t:"La aceptación de herencias por las Administraciones Públicas se entiende hecha:",o:["Pura y simplemente","Siempre a beneficio de inventario (art. 20 LPAP)","Con renuncia a los legados","Previa subasta"],c:1,e:"Protege al patrimonio público de las deudas del causante. En ausencia de herederos: sucesión abintestato a favor del Estado (art. 956 CC)."},
+{u:9,t:"El procedimiento de investigación de bienes caduca si no se resuelve en:",o:["6 meses","18 meses","2 años (art. 47 LPAP)","4 años"],c:2,e:"El deslinde caduca a los 18 meses. Premio por denuncia en la investigación: 10% del valor de los bienes incorporados."},
+{u:9,t:"El plazo de caducidad del procedimiento de deslinde es de:",o:["1 año","18 meses (art. 52 LPAP)","2 años","30 meses"],c:1,e:"Mientras se tramita no puede iniciarse procedimiento judicial con la misma pretensión; la resolución firme es título para inscribir en el Registro."},
+{u:9,t:"La recuperación posesoria de oficio de un bien PATRIMONIAL usurpado exige que no haya transcurrido:",o:["6 meses desde la usurpación","1 año desde la usurpación (art. 55.3 LPAP)","4 años","Ningún plazo: puede recuperarse en cualquier momento"],c:1,e:"Pasado el año, la Administración debe acudir a los tribunales con acciones civiles. Los DEMANIALES se recuperan de oficio en cualquier momento."},
+{u:9,t:"El desahucio administrativo procede cuando:",o:["Cualquier particular ocupa un bien público sin título","El título habilitante de una ocupación inicialmente legítima del dominio público se ha extinguido (arts. 58-59 LPAP)","El arrendatario de un bien patrimonial no paga la renta","Hay ruina inminente"],c:1,e:"Diferencia con la recuperación posesoria: esta combate ocupaciones ilegítimas desde el origen; el desahucio, ocupaciones cuyo título decayó."},
+{u:9,t:"El uso común especial del dominio público requiere:",o:["Concesión demanial","Autorización (máximo 4 años, art. 92.3 LPAP)","Ningún título","Contrato de concesión de servicios"],c:1,e:"Intensidad, peligrosidad o ventaja singular sin exclusión de otros (terraza, andamio). El uso privativo con instalaciones fijas exige CONCESIÓN demanial."},
+{u:9,t:"El plazo máximo de las concesiones demaniales, incluidas las prórrogas, es de:",o:["25 años","50 años","75 años (art. 93.3 LPAP)","99 años"],c:2,e:"Otorgamiento en régimen de concurrencia; revocación/rescate por interés público con indemnización, a diferencia de la autorización (revocable sin indemnización en general)."},
+{u:9,t:"Los bienes del Patrimonio Nacional:",o:["Son propiedad del Rey","Son de titularidad del Estado, afectados al uso y servicio del Rey y de la Familia Real (Ley 23/1982)","Pertenecen a la Casa Real como persona jurídica","Son bienes patrimoniales enajenables por el Gobierno"],c:1,e:"Inalienables, imprescriptibles e inembargables. Su enajenación exigiría LEY de las Cortes Generales. Gestión: Consejo de Administración del Patrimonio Nacional."},
+{u:9,t:"Los bienes comunales:",o:["Son bienes patrimoniales de los municipios","Son de titularidad local con aprovechamiento del común de los vecinos, y gozan de la triple garantía del art. 132.1 CE","Pertenecen a los vecinos en copropiedad","Son enajenables por el Pleno"],c:1,e:"Mencionados expresamente en el 132.1 CE junto al dominio público. Regulación local: arts. 79-80 LRBRL y Reglamento de Bienes."},
+{u:9,t:"La enajenación de inmuebles patrimoniales del Estado se realiza, como regla general:",o:["Por adjudicación directa","Por concurso o subasta, con publicidad y concurrencia","Por permuta obligatoria","Mediante sorteo"],c:1,e:"La enajenación directa solo en supuestos tasados (cuantía limitada, otra Administración, especial idoneidad…). Gestiona la Dirección General del Patrimonio del Estado."},
+{u:9,t:"Un bien expropiado que se destina al fin de utilidad pública que motivó la expropiación:",o:["Es bien patrimonial hasta su afectación expresa","Queda implícitamente afectado y es demanial (art. 66.2 LPAP)","Debe inscribirse como comunal","Requiere mutación demanial"],c:1,e:"Excepción al principio de adquisición patrimonial del art. 16: la afectación es implícita."},
+{u:9,t:"¿Qué potestad permite delimitar un inmueble público de linderos imprecisos?",o:["Investigación","Deslinde (arts. 50-54 LPAP)","Recuperación posesoria","Desahucio"],c:1,e:"Con anotación preventiva en el Registro; su resolución firme es título suficiente para la inscripción e incluso la inmatriculación."},
+{u:9,t:"El premio por denuncia en el procedimiento de investigación asciende al:",o:["5% del valor de los bienes","10% del valor de los bienes incorporados","20%","No existe premio"],c:1,e:"Para denunciantes sin obligación de actuar por razón de su cargo (art. 48 LPAP)."},
+{u:9,t:"Las autorizaciones demaniales se caracterizan por:",o:["Duración máxima de 75 años","Precariedad, duración máxima de 4 años y revocabilidad por interés público sin indemnización general","Transmisibilidad libre","Otorgarse siempre por subasta"],c:1,e:"Art. 92 LPAP. Para ocupaciones con instalaciones desmontables o muebles ≤ 4 años basta autorización; las fijas exigen concesión."},
+{u:9,t:"¿Cuál de estos NO es un principio de gestión de los bienes patrimoniales (art. 8 LPAP)?",o:["Eficiencia y economía","Rentabilidad","Publicidad y concurrencia en su tráfico","Inembargabilidad absoluta"],c:3,e:"Los patrimoniales son embargables (con los límites del art. 30.3: no si están materialmente afectados a un servicio o sus rendimientos afectados a un fin)."},
+{u:9,t:"La sucesión abintestato a favor del Estado se regula en:",o:["El art. 956 del Código Civil y la LPAP","La Ley General Presupuestaria","El art. 132 CE","La Ley de Expropiación Forzosa"],c:0,e:"A falta de herederos legítimos hereda el Estado; la declaración administrativa es título para la posesión e inscripción."},
+// ============ T10 (u:10) ============
+{u:10,t:"El fundamento constitucional de la responsabilidad patrimonial de las AAPP es:",o:["El art. 103.1 CE","El art. 106.2 CE","El art. 121 CE","El art. 9.3 CE"],c:1,e:"Art. 106.2: indemnización por toda lesión, salvo fuerza mayor, causada por el funcionamiento de los servicios públicos. El 121 es la responsabilidad por error judicial y funcionamiento anormal de la Justicia."},
+{u:10,t:"El sistema español de responsabilidad patrimonial es:",o:["Subjetivo: exige culpa del funcionario","Objetivo: cubre el funcionamiento normal y anormal de los servicios públicos","Solo por funcionamiento anormal","Civil, regido por el art. 1902 CC"],c:1,e:"Primera consagración: art. 121 LEF 1954. Hoy: arts. 32-37 Ley 40/2015 (sustantivo) + Ley 39/2015 (procedimiento). Límite: la antijuridicidad del daño."},
+{u:10,t:"Los 4 requisitos de la responsabilidad patrimonial son:",o:["Daño, culpa, dolo y nexo","Daño efectivo, evaluable e individualizado; antijuridicidad; imputación a una AP; nexo causal","Lesión, sentencia, reclamación y pago","Daño, denuncia, informe y dictamen"],c:1,e:"La ausencia de cualquiera excluye la responsabilidad. Antijuridicidad = no existir deber jurídico de soportar el daño (art. 34.1)."},
+{u:10,t:"¿Qué exonera de responsabilidad a la Administración?",o:["El caso fortuito","La fuerza mayor","Ambos por igual","Ninguno de los dos"],c:1,e:"Art. 106.2 CE y 32.1: solo la fuerza mayor (externa, imprevisible e inevitable). El caso fortuito, interno al servicio, NO exonera. También excluyen: deber de soportar y riesgos del desarrollo (34.1)."},
+{u:10,t:"La anulación de un acto administrativo en vía administrativa o judicial:",o:["Genera automáticamente derecho a indemnización","No presupone, por sí misma, derecho a indemnización (art. 32.1 in fine)","Obliga al pago de intereses","Impide reclamar responsabilidad"],c:1,e:"Habrá que acreditar además los cuatro requisitos, señaladamente la antijuridicidad del daño."},
+{u:10,t:"Los 'riesgos del desarrollo' (art. 34.1 párr. 2º Ley 40/2015):",o:["Son siempre indemnizables","No son indemnizables: daños imprevisibles o inevitables según el estado de la ciencia o de la técnica","Se indemnizan al 50%","Solo se aplican a productos sanitarios"],c:1,e:"Sin perjuicio de las prestaciones asistenciales o económicas que las leyes establezcan. Cláusula introducida por la Ley 4/1999 y mantenida en 2015."},
+{u:10,t:"El plazo para reclamar responsabilidad patrimonial es de:",o:["6 meses","1 año desde el hecho o la manifestación del efecto lesivo (art. 67.1 Ley 39/2015)","4 años","2 años"],c:1,e:"Daños personales: desde la curación o la determinación del alcance de las secuelas. Nulidad de actos: desde la notificación de la sentencia. Estado legislador: desde la publicación de la sentencia."},
+{u:10,t:"El plazo máximo para resolver el procedimiento de responsabilidad patrimonial y el sentido del silencio son:",o:["3 meses; positivo","6 meses; desestimatorio (art. 91.3 Ley 39/2015)","1 año; desestimatorio","6 meses; estimatorio"],c:1,e:"La responsabilidad patrimonial es una de las excepciones expresas al silencio positivo del art. 24.1 Ley 39/2015."},
+{u:10,t:"El dictamen del Consejo de Estado en los procedimientos de responsabilidad patrimonial es preceptivo cuando:",o:["Siempre","La reclamación sea igual o superior a 50.000 € o lo establezca una ley (art. 81.2 Ley 39/2015)","La reclamación supere los 6.000 €","Se reclame contra un Ministro"],c:1,e:"Se solicita TRAS el trámite de audiencia. También es preceptivo el informe del servicio presuntamente causante (81.1, 10 días)."},
+{u:10,t:"El procedimiento simplificado de responsabilidad patrimonial (art. 96.4) procede cuando:",o:["La reclamación es inferior a 50.000 €","El instructor considera inequívocos la causalidad, la valoración y la cuantía; se resuelve en 30 días","El interesado lo solicita","Hay conformidad del Consejo de Estado"],c:1,e:"Se acuerda de oficio, suspendiendo el procedimiento general. Plazo de resolución: 30 días."},
+{u:10,t:"La responsabilidad por ley declarada inconstitucional (art. 32.4) exige:",o:["Solo la sentencia del TC","Sentencia firme desestimatoria previa contra la actuación dañosa, habiendo alegado la inconstitucionalidad luego declarada","Reclamación en 4 años","Informe del Consejo de Estado favorable"],c:1,e:"Indemnizables: daños de los 5 AÑOS anteriores a la publicación de la sentencia (34.1); reclamación: 1 año desde esa publicación; resuelve el Consejo de Ministros."},
+{u:10,t:"Además de los requisitos del 32.4, la responsabilidad por norma contraria al Derecho de la UE (32.5) exige:",o:["Dictamen de la Comisión Europea","Los tres requisitos Francovich: norma que confiera derechos, violación suficientemente caracterizada y nexo causal","Condena penal previa","Denuncia ante el TJUE"],c:1,e:"⚠ La STJUE 28/06/2022 (C-278/20) declaró que los requisitos españoles (sentencia firme previa con alegación, límite de 5 años, cómputo del año) vulneran el principio de EFECTIVIDAD: deben inaplicarse en reclamaciones por infracción del DUE. Reforma en tramitación (Proyecto 121/000071)."},
+{u:10,t:"En los daños causados por contratistas de la Administración, la regla general es:",o:["Responde siempre la Administración","Responde el contratista, salvo daños por órdenes inmediatas y directas de la Administración o por vicios del proyecto por ella elaborado","Responden ambos solidariamente","No hay responsabilidad"],c:1,e:"Arts. 32.9 Ley 40/2015 y 196 LCSP. El tercero puede requerir al órgano de contratación (1 año) que informe de quién responde: interrumpe la prescripción (196.3). Audiencia al contratista obligatoria (82.5 Ley 39/2015)."},
+{u:10,t:"Si el daño lo causa un empleado público en ejercicio de sus funciones, el perjudicado:",o:["Debe demandar al empleado ante la jurisdicción civil","Se dirige directamente contra la Administración (art. 36.1 Ley 40/2015)","Puede elegir entre demandar al empleado o a la Administración","Debe interponer querella"],c:1,e:"Responsabilidad directa de la Administración. Después, esta ejerce DE OFICIO la acción de regreso contra el empleado si medió dolo o culpa o negligencia GRAVES (36.2)."},
+{u:10,t:"Para cuantificar la responsabilidad exigida en vía de regreso al empleado se ponderan:",o:["Su antigüedad y su sueldo","El resultado dañoso, el grado de culpabilidad y su relación profesional con el daño (art. 36.2)","Las cargas familiares","El informe del sindicato"],c:1,e:"La resolución pone fin a la vía administrativa (36.5), sin perjuicio de pasar el tanto de culpa a los tribunales (36.6). Compatible con la responsabilidad disciplinaria y penal."},
+{u:10,t:"En la responsabilidad concurrente de varias Administraciones por gestión conjunta:",o:["Cada una responde de su parte","La responsabilidad es solidaria, conforme al instrumento regulador de la actuación conjunta (art. 33.1)","Responde solo la de mayor presupuesto","Responde el Estado subsidiariamente"],c:1,e:"Fuera de la gestión conjunta: distribución según competencia, interés público tutelado e intensidad de la intervención; si no es posible determinarla → solidaria (33.2)."},
+{u:10,t:"La responsabilidad por prisión preventiva seguida de absolución se regula en:",o:["El art. 294 LOPJ (funcionamiento de la Administración de Justicia)","El art. 32.5 Ley 40/2015","El art. 121 LEF","La LO 6/1984"],c:0,e:"Base: art. 121 CE y arts. 292-297 LOPJ. El error judicial exige previa declaración judicial que lo reconozca. Informe del CGPJ: 2 meses, suspende el plazo (81.3 Ley 39/2015)."},
+{u:10,t:"El daño moral:",o:["No es indemnizable en vía administrativa","Es indemnizable si puede valorarse económicamente con criterios razonables","Solo se indemniza en vía penal","Se presume en todo caso"],c:1,e:"La indemnización cubre daño emergente, lucro cesante (prueba rigurosa, no expectativas especulativas) y daños morales. Cálculo con criterios de la legislación fiscal y expropiatoria (art. 34.2)."},
+{u:10,t:"Las formas de pago de la indemnización (art. 34.4 Ley 40/2015) son:",o:["Solo en dinero","En dinero (regla), en especie o mediante pagos periódicos, cuando resulte más adecuado y con acuerdo del interesado","En deuda pública","Mediante exenciones fiscales"],c:1,e:"La compensación en especie y los pagos periódicos exigen que convenga al interés público y acuerdo con el interesado."},
+{u:10,t:"El órgano competente para resolver la responsabilidad del Estado legislador en la AGE es:",o:["El Ministro de Justicia","El Consejo de Ministros (art. 92 Ley 39/2015)","El Consejo de Estado","El Tribunal Constitucional"],c:1,e:"En el resto de supuestos de la AGE resuelve el Ministro respectivo. La resolución pone fin a la vía administrativa."},
+{u:10,t:"La reclamación de responsabilidad patrimonial iniciada de oficio (art. 65 Ley 39/2015):",o:["No es posible","Es posible: se notifica a los presuntos lesionados, con 10 días para alegaciones y prueba","Requiere denuncia previa","Solo procede en daños sanitarios"],c:1,e:"El procedimiento se instruye aunque los lesionados no se personen. Cabe también terminación convencional fijando cuantía y modo de indemnización (86.5 y 91.1)."},
+{u:10,t:"La valoración de daños de manifestación progresiva se refiere al momento en que:",o:["Se produjo el hecho causante","Se determina definitivamente su alcance (consolidación de secuelas)","Se presenta la reclamación","Se dicta la resolución"],c:1,e:"Coherente con el cómputo del año de prescripción en daños personales: desde la curación o la determinación del alcance de las secuelas (67.1)."},
+{u:10,t:"El informe del servicio cuyo funcionamiento haya ocasionado la presunta lesión:",o:["Es facultativo","Es preceptivo y debe emitirse en 10 días (art. 81.1 Ley 39/2015)","Solo se pide en daños graves","Lo emite el Consejo de Estado"],c:1,e:"Especialidad probatoria del procedimiento de responsabilidad. El dictamen del Consejo de Estado: solo reclamaciones ≥ 50.000 €."},
+{u:10,t:"El funcionamiento anormal del Tribunal Constitucional (art. 32.8 Ley 40/2015):",o:["No genera responsabilidad","Genera indemnización que fija el Consejo de Ministros, previa declaración del propio TC a instancia de parte","La declara el Tribunal Supremo","Se tramita ante el CGPJ"],c:1,e:"Referido a la tramitación de amparos y cuestiones de inconstitucionalidad; procedimiento por el Ministerio de Justicia con audiencia al Consejo de Estado."}
+];
+// ===== Motor =====
+let hist=JSON.parse(localStorage.getItem(LS_KEY)||'{}');
+let unidadSel='all', modo='normal';
+function saveHist(){localStorage.setItem(LS_KEY,JSON.stringify(hist))}
+function qid(q){return q.u+'|'+q.t.slice(0,60)}
+function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r}
+function ratio(q){const h=hist[qid(q)];if(!h||h.n===0)return null;return h.ok/h.n}
+function buildPool(){
+  let pool=BANK.filter(q=>unidadSel==='all'||q.u===unidadSel);
+  if(modo==='fail'){pool=pool.filter(q=>{const h=hist[qid(q)];return h&&h.n>0&&h.ok<h.n})}
+  if(modo==='adapt'){pool=[...pool].sort((a,b)=>{const ra=ratio(a),rb=ratio(b);return (ra===null?-1:ra)-(rb===null?-1:rb)}).slice(0,20)}
+  else{pool=shuffle(pool)}
+  return pool.map(q=>{const idx=shuffle(q.o.map((_,i)=>i));return{...q,idx}});
+}
+function render(reshuffle){
+  const tabs=document.getElementById('tabs');
+  tabs.innerHTML='';
+  const mk=(v,l)=>{const b=document.createElement('button');b.className='tab'+(unidadSel===v?' on':'');b.textContent=l;b.onclick=()=>{unidadSel=v;render(true)};tabs.appendChild(b)};
+  mk('all','📋 Todas ('+BANK.length+')');
+  for(const u in UNIDADES){mk(Number(u),UNIDADES[u]+' ('+BANK.filter(q=>q.u==u).length+')')}
+  document.querySelectorAll('.mode').forEach(b=>{b.classList.toggle('on',b.dataset.m===modo);b.onclick=()=>{modo=b.dataset.m;render(true)}});
+  renderBars();
+  const cont=document.getElementById('quiz');cont.innerHTML='';
+  const pool=buildPool();
+  if(pool.length===0){cont.innerHTML='<div class="q"><h3>🎉 No hay preguntas en este modo (ninguna errónea pendiente).</h3></div>';updateScore();return}
+  pool.forEach((q,n)=>{
+    const d=document.createElement('div');d.className='q';
+    const h=hist[qid(q)];
+    d.innerHTML='<div class="meta"><span>'+UNIDADES[q.u]+' · Pregunta '+(n+1)+'/'+pool.length+'</span><span>'+(h&&h.n?('histórico: '+h.ok+'/'+h.n):'nueva')+'</span></div><h3>'+q.t+'</h3>';
+    q.idx.forEach(i=>{
+      const b=document.createElement('button');b.className='opt';b.textContent=q.o[i];
+      b.onclick=()=>{
+        const id=qid(q);hist[id]=hist[id]||{ok:0,n:0};hist[id].n++;
+        d.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+        if(i===q.c){b.classList.add('ok');hist[id].ok++}
+        else{b.classList.add('ko');d.querySelectorAll('.opt').forEach(x=>{if(x.textContent===q.o[q.c])x.classList.add('ok')})}
+        d.querySelector('.exp').classList.add('show');
+        saveHist();renderBars();updateScore();
+      };
+      d.appendChild(b);
+    });
+    const e=document.createElement('div');e.className='exp';e.innerHTML='💡 '+q.e;d.appendChild(e);
+    cont.appendChild(d);
+  });
+  updateScore();
+}
+function renderBars(){
+  const el=document.getElementById('bars');el.innerHTML='';
+  for(const u in UNIDADES){
+    const qs=BANK.filter(q=>q.u==u);
+    let ok=0,n=0;qs.forEach(q=>{const h=hist[qid(q)];if(h){ok+=h.ok;n+=h.n}});
+    const pct=n?Math.round(100*ok/n):0;
+    const col=pct<50?'#dc2626':pct<75?'#ea580c':'#16a34a';
+    el.innerHTML+='<div class="bar"><div class="lbl"><span>'+UNIDADES[u]+'</span><span>'+(n?pct+'% ('+ok+'/'+n+')':'sin datos')+'</span></div><div class="track"><div class="fill" style="width:'+pct+'%;background:'+col+'"></div></div></div>';
+  }
+}
+function updateScore(){
+  let ok=0,n=0;BANK.forEach(q=>{const h=hist[qid(q)];if(h){ok+=h.ok;n+=h.n}});
+  document.getElementById('score').innerHTML=n?('Histórico total: <b>'+ok+'</b> aciertos de <b>'+n+'</b> respuestas ('+Math.round(100*ok/n)+'%)'):'Responde para empezar a registrar tu progreso (se guarda en este navegador).';
+}
+function showAll(){document.querySelectorAll('.exp').forEach(e=>e.classList.add('show'))}
+function resetHist(){if(confirm('¿Borrar todo el historial de este test?')){hist={};saveHist();render(true)}}
+render(true);
+</script>
+</body>
+</html>
