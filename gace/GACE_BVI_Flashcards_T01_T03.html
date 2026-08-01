@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BVI — Flashcards T1-T3</title>
+<style>
+:root{--azul:#134e4a;--azul2:#0f766e;--verde:#16a34a;--rojo:#dc2626;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:40px}
+header{background:linear-gradient(135deg,#134e4a,#334155);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.2rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.f{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.83rem;font-weight:600;cursor:pointer}
+.f.on{background:var(--azul);color:#fff}
+.stats{display:flex;gap:10px;margin:8px 0 14px;font-size:.83rem;flex-wrap:wrap}
+.stats span{background:#fff;border-radius:8px;padding:5px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.escena{perspective:1200px;margin:10px 0}
+.carta{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
+.carta.girada{transform:rotateY(180deg)}
+.cara{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.frente{background:#fff;border:3px solid var(--azul2)}
+.frente .cat{position:absolute;top:12px;left:14px;font-size:.72rem;font-weight:700;color:#fff;background:var(--azul2);border-radius:12px;padding:2px 10px}
+.frente .idx{position:absolute;top:12px;right:14px;font-size:.72rem;color:#94a3b8}
+.frente h2{font-size:1.08rem;line-height:1.5;font-weight:600;border:none;color:#1e293b}
+.frente .pista{margin-top:14px;font-size:.75rem;color:#94a3b8}
+.dorso{background:linear-gradient(135deg,#134e4a,#334155);color:#fff;transform:rotateY(180deg)}
+.dorso .resp{font-size:1.15rem;font-weight:800;line-height:1.45}
+.dorso .det{margin-top:12px;font-size:.85rem;opacity:.92;line-height:1.5}
+.botones{display:flex;gap:8px;margin:14px 0;justify-content:center;flex-wrap:wrap}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-size:.9rem;font-weight:700;cursor:pointer}
+.btn.mal{background:#fee2e2;color:var(--rojo)}
+.btn.bien{background:#dcfce7;color:#15803d}
+.btn.nav{background:#e2e8f0;color:#334155}
+.btn.accion{background:var(--azul);color:#fff}
+.aviso{text-align:center;font-size:.8rem;color:#64748b;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>🃏 Flashcards BVI · T1-T3 — Presupuesto/LGP/LOEPSF, LPGE, Modificaciones de crédito</h1>
+  <p>Plazos · artículos · datos-ancla · Ley 47/2003 + LO 2/2012 + Ley 31/2022 (prorrogada) · verificado 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="filtros" id="filtros"></div>
+  <div class="stats"><span id="st-total"></span><span id="st-dom">✅ dominadas: <b id="ndom">0</b></span><span id="st-rep">🔁 a repasar: <b id="nrep">0</b></span></div>
+  <div class="escena"><div class="carta" id="carta" onclick="girar()">
+    <div class="cara frente"><div class="cat" id="cat"></div><div class="idx" id="idx"></div><h2 id="preg"></h2><div class="pista">👆 toca para ver la respuesta</div></div>
+    <div class="cara dorso"><div class="resp" id="resp"></div><div class="det" id="det"></div></div>
+  </div></div>
+  <div class="botones">
+    <button class="btn mal" onclick="marcar(false)">❌ Repasar</button>
+    <button class="btn bien" onclick="marcar(true)">✅ Me la sé</button>
+  </div>
+  <div class="botones">
+    <button class="btn nav" onclick="mover(-1)">← Anterior</button>
+    <button class="btn accion" onclick="barajar()">🔀 Barajar</button>
+    <button class="btn nav" onclick="mover(1)">Siguiente →</button>
+  </div>
+  <div class="botones"><button class="btn nav" onclick="soloRepaso()" id="btnrep">🎯 Solo las marcadas "repasar"</button>
+  <button class="btn nav" onclick="resetear()">🗑️ Reiniciar</button></div>
+  <div class="aviso">El progreso se guarda en este navegador (localStorage).</div>
+</div>
+<script>
+const LS='gace_bvi_fc_t01t03_v1';
+const CARDS=[
+// —— T1 ——
+{c:'T1·Datos',p:'Base constitucional de la prórroga automática de los PGE',r:'Art. 134.4 CE — 2026 es la 3ª prórroga consecutiva de los PGE 2023 (Ley 31/2022)',d:'Acuerdo de Consejo de Ministros de 23/12/2025.'},
+{c:'T1·Datos',p:'Reactivación de las reglas fiscales LOEPSF tras la suspensión COVID',r:'1 de enero de 2024',d:'Suspendidas 2020-2023 por la cláusula general de salvaguardia.'},
+{c:'T1·Plazos',p:'Entrada en vigor del nuevo marco de gobernanza fiscal UE (Rgtos. 2024/1263, 2024/1264, Dir. 2024/1265)',r:'30 de abril de 2024',d:'Desplaza —sin derogar— la regla de gasto del art. 12 LOEPSF por la "senda de gasto neto" nacional.'},
+{c:'T1·Datos',p:'Senda de gasto neto de España 2025-2028 (validada 26/11/2024)',r:'3,7% / 3,5% / 3,2% / 3,0%',d:'Plan Fiscal-Estructural, senda a 7 años en su versión ampliada.'},
+{c:'T1·Datos',p:'Orden de elaboración de los PGE 2027',r:'Orden HAC/557/2026, de 3 de junio (BOE-A-2026-12037)',d:'La Orden HAC/974/2025 (PGE 2026) quedó sin aplicación al no remitirse el proyecto a las Cortes.'},
+{c:'T1·Datos',p:'Art. 134.7 CE — límite tributario de la LPGE',r:'No puede CREAR tributos; solo modificarlos si una ley sustantiva lo prevé',d:'Distinguir crear (prohibido) de modificar habilitado (permitido).'},
+{c:'T1·Datos',p:'Contenido del art. 135 CE (reforma 27/09/2011)',r:'Estabilidad presupuestaria de todas las AA.PP. + prioridad absoluta del pago de la deuda pública',d:'Reforma exprés, la más rápida de la Constitución española.'},
+{c:'T1·Datos',p:'Estructura de la LGP (Ley 47/2003)',r:'7 Títulos, 26 disposiciones adicionales, 5 disposiciones transitorias',d:'Dato estructural de memorización directa.'},
+{c:'T1·Datos',p:'Subsectores del sector público estatal según su tipo de presupuesto',r:'Administrativo: limitativo · Empresarial y fundacional: estimativo',d:'Art. 2 LGP.'},
+{c:'T1·Datos',p:'Fondo de Contingencia (art. 50 LGP): dotación y quién dispone',r:'2% del límite de gasto no financiero del Estado; dispone el Consejo de Ministros',d:'A propuesta del Ministro de Hacienda.'},
+{c:'T1·Datos',p:'Reglas fiscales de la LOEPSF: déficit y deuda',r:'Déficit estructural: 0% (excepción 0,4% PIB) · Deuda: máx. 60% PIB (reparto 44/13/3)',d:'44% Estado, 13% CC.AA., 3% Corporaciones Locales.'},
+{c:'T1·Datos',p:'LO 2/2024: reforma del procedimiento del art. 15 LOEPSF',r:'Si el Senado rechaza el objetivo, el Congreso re-vota por mayoría simple sin reiniciar el procedimiento',d:'Agiliza el trámite frente a la redacción original.'},
+{c:'T1·Datos',p:'Destino del superávit presupuestario (art. 32 LOEPSF)',r:'Reducción de endeudamiento neto o Fondo de Reserva de la Seguridad Social',d:'Destino tasado, no de libre disposición.'},
+// —— T2 ——
+{c:'T2·Datos',p:'Naturaleza jurídica de la LPGE',r:'Ley ORDINARIA de tramitación preferente (NO orgánica); iniciativa exclusiva del Gobierno',d:'Trampa clásica de examen.'},
+{c:'T2·Datos',p:'Criterio de la STC 76/1992 sobre contenido eventual de la LPGE',r:'Conexión/instrumentalidad con ingresos, gastos o política económica — NO la temporalidad',d:'El Tribunal Constitucional descarta expresamente el criterio temporal como determinante.'},
+{c:'T2·Datos',p:'Ámbito subjetivo de la LPGE (art. 2 LGP)',r:'AGE + sector público institucional estatal',d:'Incluye OO.AA., entidades públicas empresariales, sociedades mercantiles y fundaciones estatales.'},
+{c:'T2·Datos',p:'Mnemotecnia de los 7 principios de programación y gestión (LO 2/2012)',r:'E-S-P-T-E-R-L: Estabilidad, Sostenibilidad, Plurianualidad, Transparencia, Eficiencia, Responsabilidad, Lealtad',d:'Arts. 3 a 9 LO 2/2012.'},
+{c:'T2·Plazos',p:'Informe del CPFF sobre el techo de gasto',r:'Antes del 1 de agosto; excluye transferencias a CC.AA. y EE.LL.',d:'Consejo de Política Fiscal y Financiera.'},
+{c:'T2·Plazos',p:'Plazo del Senado en la tramitación de la LPGE',r:'2 meses (art. 90.2 CE)',d:'Veto → ratificación del Congreso por mayoría absoluta inmediata, o simple tras 2 meses.'},
+{c:'T2·Datos',p:'Efecto de la prórroga presupuestaria sobre programas que terminan (art. 38 LGP)',r:'NO se prorrogan los créditos de servicios o programas que terminan su vigencia',d:'La prórroga no es una réplica íntegra del presupuesto anterior.'},
+{c:'T2·Datos',p:'Clasificaciones del presupuesto: gastos vs. ingresos',r:'Gastos: 3 (orgánica, programas, económica) · Ingresos: solo 2 (orgánica, económica)',d:'Trampa: los ingresos NO tienen clasificación por programas.'},
+{c:'T2·Datos',p:'Capítulo 5 de gastos',r:'Fondo de Contingencia y otros imprevistos',d:'Cap.1 personal, cap.2 bienes y servicios corrientes.'},
+{c:'T2·Datos',p:'Particularidad de las secciones 06 y 07',r:'Deuda Pública y Clases Pasivas: créditos ampliables y vinculantes por naturaleza en su totalidad',d:'Todo crédito ampliable es, además, vinculante por naturaleza.'},
+{c:'T2·Datos',p:'Autonomía presupuestaria de la sección 02 (Cortes Generales)',r:'Art. 72 CE — elaboran y aprueban su propio presupuesto, integrado luego en el proyecto de PGE',d:'Singularidad frente al resto de secciones.'},
+{c:'T2·Datos',p:'Definición de "aplicación presupuestaria"',r:'Concepto de gasto (código de clasificación) + la cifra que se le asigna',d:'Ejemplo: 16.03 132A 226.01.'},
+{c:'T2·Datos',p:'Situación de la prórroga en 2026',r:'3ª prórroga consecutiva de los PGE 2023 (2024, 2025 y 2026)',d:'Siempre al amparo del art. 134.4 CE.'},
+// —— T3 ——
+{c:'T3·Datos',p:'RD-ley 16/2025 (23 dic.): situación tras la votación de convalidación',r:'NO convalidado — Resolución del Congreso 27/01/2026 (BOE-A-2026-2024); derogado ex art. 86.2 CE',d:'La prórroga 2026 opera solo sobre el art. 134.4 CE, con ajustes de RD-ley 2/2026 y 3/2026.'},
+{c:'T3·Plazos',p:'Gastos plurianuales: nº máximo de anualidades y porcentajes (art. 47.2 LGP)',r:'4 anualidades: 70% (x+1) / 60% (x+2) / 50% (x+3) / 50% (x+4)',d:'En MRR: 3 anualidades, 70-60-50.'},
+{c:'T3·Datos',p:'Excepciones a los límites del art. 47.2 LGP',r:'Deuda Pública (cap. 3, intereses) y arrendamientos de inmuebles (concepto 202)',d:'La LPGE fija techo propio para arrendamientos: máx. 10 anualidades, 100% cada una.'},
+{c:'T3·Plazos',p:'Retención adicional en obra plurianual',r:'10% del importe de adjudicación, documento RC 108, en fase D',d:'Salvo modalidad de abono total del precio.'},
+{c:'T3·Datos',p:'Secuencia ante insuficiencia sobrevenida (art. 47 bis LGP)',r:'1) Comunicación al tercero → 2) reprogramación → 3) resolución con compensaciones',d:'Evita la resolución automática del contrato.'},
+{c:'T3·Datos',p:'Transferencia vs. redistribución de crédito',r:'Transferencia: entre niveles de vinculación distintos, requiere autorización · Redistribución: mismo nivel, NO es modificación de crédito',d:'Comparar clasificación orgánica, por programas y económica al nivel de vinculación.'},
+{c:'T3·Datos',p:'Excepciones tasadas del art. 52.2 LGP a las limitaciones de transferencias',r:'Reorganización administrativa, traspaso a CC.AA., convenios, Ley 16/1985 Patrimonio Histórico, programa 929M',d:'No confundir Patrimonio Histórico Español con Patrimonio Nacional.'},
+{c:'T3·Datos',p:'Diferencia crédito extraordinario vs. suplemento',r:'Extraordinario = gasto NO previsto (sin partida) · Suplemento = previsto pero insuficiente',d:'Mnemotecnia: "EXTRA-no" / "SUPLE-poco".'},
+{c:'T3·Datos',p:'Anticipo de tesorería (art. 60 LGP): quién concede y límite',r:'Concede el Gobierno a propuesta del Ministro de ECONOMÍA; límite 1% de los créditos LPGE',d:'NO es modificación de crédito ni operación presupuestaria.'},
+{c:'T3·Datos',p:'Tres requisitos acumulativos de la ampliación de crédito (art. 54 LGP)',r:'Inaplazable + previsto pero insuficiente + crédito declarado ampliable',d:'Si es ampliable → ampliación, nunca suplemento.'},
+{c:'T3·Datos',p:'Créditos declarados ampliables (relación típica)',r:'Sección 06 (Deuda Pública), sección 07 (Clases Pasivas), subconceptos 160.00-160.03 (SS/MUFACE/ISFAS/MUGEJU)',d:'Todos son, además, vinculantes por naturaleza.'},
+{c:'T3·Datos',p:'Restricción del art. 58.b) LGP durante la prórroga 2026',r:'Sin efecto, salvo remanentes del servicio 50 "Mecanismo de Recuperación y Resiliencia"',d:'No cabe incorporar remanentes de generaciones del ejercicio anterior, salvo esa excepción.'},
+{c:'T3·Datos',p:'Particularidad de las generaciones de crédito (art. 53 LGP)',r:'No necesitan financiación: el propio ingreso es la fuente; 6 fuentes tasadas y cerradas',d:'Excepción a la especialidad cuantitativa y al presupuesto bruto.'},
+{c:'T3·Datos',p:'Excepción al requisito temporal de las generaciones de crédito',r:'Ingresos del 4º trimestre del ejercicio anterior pueden generar crédito en el ejercicio corriente',d:'También: subvenciones con mero reconocimiento del derecho o compromiso firme.'},
+];
+let idx=0, activos=[...CARDS], filtroActual='todas', soloRep=false;
+function loadHist(){try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch(e){return{}}}
+function saveHist(h){localStorage.setItem(LS,JSON.stringify(h))}
+function cid(c){return c.c+'|'+c.p.slice(0,50)}
+function cats(){return [...new Set(CARDS.map(c=>c.c))]}
+function buildFiltros(){
+  const f=document.getElementById('filtros');
+  f.innerHTML='<button class="f on" data-c="todas">Todas</button>'+cats().map(c=>`<button class="f" data-c="${c}">${c}</button>`).join('');
+  f.querySelectorAll('.f').forEach(b=>b.onclick=()=>{f.querySelectorAll('.f').forEach(x=>x.classList.remove('on'));b.classList.add('on');filtroActual=b.dataset.c;soloRep=false;aplicarFiltro();idx=0;mostrar()});
+}
+function aplicarFiltro(){
+  let base = filtroActual==='todas'?[...CARDS]:CARDS.filter(c=>c.c===filtroActual);
+  if(soloRep){const h=loadHist();base=base.filter(c=>{const r=h[cid(c)];return r&&r.estado==='mal'})}
+  activos=base;
+}
+function mostrar(){
+  if(activos.length===0){document.getElementById('preg').textContent='Sin tarjetas en este filtro 🎉';document.getElementById('cat').textContent='';document.getElementById('idx').textContent='';document.getElementById('resp').textContent='';document.getElementById('det').textContent='';return}
+  if(idx<0)idx=activos.length-1; if(idx>=activos.length)idx=0;
+  const c=activos[idx];
+  document.getElementById('carta').classList.remove('girada');
+  document.getElementById('cat').textContent=c.c;
+  document.getElementById('idx').textContent=(idx+1)+'/'+activos.length;
+  document.getElementById('preg').textContent=c.p;
+  document.getElementById('resp').textContent=c.r;
+  document.getElementById('det').textContent=c.d;
+  actualizarStats();
+}
+function girar(){document.getElementById('carta').classList.toggle('girada')}
+function mover(n){idx+=n;mostrar()}
+function marcar(bien){
+  const c=activos[idx];const h=loadHist();h[cid(c)]={estado:bien?'bien':'mal'};saveHist(h);
+  actualizarStats();
+  setTimeout(()=>mover(1),250);
+}
+function barajar(){for(let i=activos.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[activos[i],activos[j]]=[activos[j],activos[i]]}idx=0;mostrar()}
+function soloRepaso(){soloRep=!soloRep;document.getElementById('btnrep').classList.toggle('on',soloRep);aplicarFiltro();idx=0;mostrar()}
+function resetear(){if(confirm('¿Reiniciar el progreso de las flashcards?')){localStorage.removeItem(LS);actualizarStats()}}
+function actualizarStats(){
+  const h=loadHist();let dom=0,rep=0;
+  CARDS.forEach(c=>{const r=h[cid(c)];if(r){if(r.estado==='bien')dom++;else rep++}});
+  document.getElementById('st-total').textContent='Total: '+CARDS.length;
+  document.getElementById('ndom').textContent=dom;
+  document.getElementById('nrep').textContent=rep;
+}
+buildFiltros();aplicarFiltro();mostrar();
+</script>
+</body>
+</html>
