@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV T3 — El Reglamento</title>
+<style>
+:root{
+  --azul:#1e3a8a; --azul2:#3b62c4; --azulclaro:#eef2ff; --borde:#c7d2fe;
+  --teal:#0f766e; --tealclaro:#f0fdfa;
+  --verde:#166534; --verdeclaro:#f0fdf4;
+  --rojo:#991b1b; --rojoclaro:#fef2f2;
+  --ambar:#92400e; --ambarclaro:#fffbeb;
+  --morado:#5b21b6; --moradoclaro:#f5f3ff;
+  --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#0f766e,#1e3a8a);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.7rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--teal);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--teal)}
+h3{color:var(--azul2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.89rem;background:#fff}
+th{background:var(--teal);color:#fff;padding:8px 10px;text-align:left;font-size:.84rem}
+td{padding:8px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--tealclaro);border-left:5px solid var(--teal);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--teal);font-size:.85rem;margin-bottom:6px}
+.trampa{background:var(--rojoclaro);border-left:5px solid var(--rojo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--rojo);font-size:.85rem;margin-bottom:6px}
+.nuevo{background:var(--verdeclaro);border-left:5px solid var(--verde);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.nuevo .tit{font-weight:700;color:var(--verde);font-size:.85rem;margin-bottom:6px}
+.nota{background:var(--ambarclaro);border-left:5px solid var(--ambar);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:var(--ambar);font-size:.85rem;margin-bottom:6px}
+.art{display:inline-block;background:var(--teal);color:#fff;border-radius:5px;padding:1px 7px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:14px 0;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.vs>div{padding:14px 16px}
+.vs .izq{background:var(--tealclaro)}
+.vs .der{background:var(--moradoclaro)}
+.vs h4{margin-bottom:8px;font-size:.95rem}
+.vs .izq h4{color:var(--teal)}
+.vs .der h4{color:var(--morado)}
+.vs ul{margin-left:18px;font-size:.87rem}
+.vs li{margin:4px 0}
+@media(max-width:720px){.vs{grid-template-columns:1fr}}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+.flujo{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.paso{display:flex;gap:12px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px;align-items:flex-start;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.paso .num{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.paso .txt{font-size:.88rem}
+.paso .txt b{color:var(--teal)}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{
+  body{background:#fff}
+  header{background:var(--teal)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card{box-shadow:none}
+  h2{page-break-after:avoid}
+  table,.clave,.trampa,.nuevo,.vs,.paso{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque IV · Derecho Administrativo</div>
+  <h1>Tema 3 — El Reglamento</h1>
+  <div class="sub">Concepto, clases y límites · Control de los reglamentos ilegales</div>
+  <div class="badge-verif">✅ Normativa verificada contra BOE a 01/08/2026 · literal del art. 37 Ley 39/2015 corregido</div>
+</header>
+<div class="wrap">
+
+<h2>📜 1. Concepto y naturaleza</h2>
+<div class="card">
+<p><b>Reglamento:</b> toda disposición de carácter general dictada por la Administración en ejercicio de la potestad reglamentaria (<span class="art">Art. 97 CE</span>), con rango <b>inferior a la ley</b>. Es la fuente cuantitativamente dominante del ordenamiento; contenido predominantemente técnico y vigencia a menudo coyuntural.</p>
+</div>
+<h3>Cómo distinguirlo del acto administrativo (criterios jurisprudenciales)</h3>
+<div class="vs">
+  <div class="izq"><h4>Criterio de CONSUNCIÓN</h4><p style="font-size:.88rem">Si se agota con su cumplimiento → <b>acto administrativo</b> (aunque tenga muchos destinatarios: ej. una convocatoria).</p></div>
+  <div class="der"><h4>Criterio de ORDINAMENTALIDAD</h4><p style="font-size:.88rem">Si se integra en el ordenamiento para aplicarse a una serie <b>indeterminada de casos futuros</b> → <b>reglamento</b>.</p></div>
+</div>
+
+<h2>🗂️ 2. Clases de reglamentos</h2>
+<h3>Por su relación con la ley (la clasificación clave del examen)</h3>
+<table>
+<tr><th>Clase</th><th>Concepto</th><th>Dato de examen</th></tr>
+<tr><td><b>EJECUTIVOS</b> (secundum legem)</td><td>Desarrollan o complementan una ley previa.</td><td>Exigen <b>dictamen preceptivo del Consejo de Estado</b> (art. 22.3 LO 3/1980).</td></tr>
+<tr><td><b>INDEPENDIENTES</b> (praeter legem)</td><td>Regulan materias sin ley previa. Solo caben en el ámbito <b>organizativo/doméstico</b> de la Administración; nunca en materias con reserva de ley ni afectando derechos.</td><td>No requieren dictamen del Consejo de Estado.</td></tr>
+<tr><td><b>DE NECESIDAD</b> (contra legem)</td><td>Dictados en situaciones extraordinarias (catástrofes, epidemias); pueden suspender temporalmente la aplicación de leyes. Vigencia limitada a la emergencia.</td><td>Su fundamento es el estado de necesidad; cesan al cesar la emergencia.</td></tr>
+</table>
+<div class="grid2">
+<div class="card"><h3 style="margin-top:0">Por sus efectos</h3><p style="font-size:.88rem"><b>Jurídicos (ad extra):</b> crean, modifican o extinguen derechos y obligaciones de los ciudadanos; requieren habilitación legal.<br><b>Organizativos (ad intra):</b> organización interna y relaciones de sujeción especial (funcionarios, internos, estudiantes).</p></div>
+<div class="card"><h3 style="margin-top:0">Jerarquía estatal <span class="art">Art. 24.2 Ley 50/1997</span></h3><p style="font-size:.88rem"><b>1º</b> Disposiciones aprobadas por <b>Real Decreto</b> (del Presidente o del Consejo de Ministros)<br><b>2º</b> Disposiciones aprobadas por <b>Orden Ministerial</b><br>Ningún reglamento puede vulnerar otro de rango superior.</p></div>
+</div>
+
+<h2>🏛️ 3. Titulares de la potestad reglamentaria</h2>
+<table>
+<tr><th>Nivel</th><th>Órganos y formas</th><th>Base</th></tr>
+<tr><td><b>Estado</b></td><td>Gobierno: Reales Decretos (Consejo de Ministros / Presidente); Ministros: Órdenes Ministeriales en el ámbito propio. Potestad <b>originaria</b> (deriva directamente de la CE).</td><td><span class="art">Art. 97 CE</span> · <span class="art">Ley 50/1997</span> · <span class="art">Art. 128 Ley 39/2015</span></td></tr>
+<tr><td><b>CCAA</b></td><td>Consejo de Gobierno: Decretos; Consejeros: Órdenes. Potestad originaria en sus competencias, limitada por CE, Estatuto y legislación básica estatal.</td><td>Estatutos de Autonomía · <span class="art">Art. 137 CE</span></td></tr>
+<tr><td><b>Entidades Locales</b></td><td><b>Ordenanzas</b> (aprobadas por el <b>PLENO</b>) · <b>Reglamentos orgánicos</b> · <b>Bandos</b> del Alcalde (<span class="art">Art. 21.1.e LRBRL</span>).</td><td><span class="art">Art. 4 Ley 7/1985</span> · <span class="art">Arts. 137 y 140 CE</span></td></tr>
+</table>
+
+<h2>🚧 4. Límites de la potestad reglamentaria</h2>
+<div class="grid2">
+<div class="card"><h3 style="margin-top:0">Límites FORMALES</h3>
+<ul class="lista" style="font-size:.9rem">
+<li><b>Competencia:</b> solo órganos con potestad atribuida; la incompetencia → nulidad de pleno derecho (<span class="art">Art. 47.2 Ley 39/2015</span>).</li>
+<li><b>Irretroactividad</b> de disposiciones sancionadoras no favorables o restrictivas de derechos (<span class="art">Art. 9.3 CE</span>); sí cabe la retroactividad favorable.</li>
+<li><b>Procedimiento de elaboración</b> (<span class="art">Art. 26 Ley 50/1997</span>): su omisión esencial acarrea nulidad.</li>
+</ul></div>
+<div class="card"><h3 style="margin-top:0">Límites MATERIALES</h3>
+<ul class="lista" style="font-size:.9rem">
+<li><b>Jerarquía normativa:</b> no contradecir CE, leyes ni reglamentos superiores.</li>
+<li><b>Reserva de ley:</b> no regular materias reservadas (ni ad extra sin habilitación).</li>
+<li><b>Principios generales del Derecho</b> e interdicción de la arbitrariedad.</li>
+<li><b>Materia propia:</b> imposible regular materias ajenas a la competencia del ente.</li>
+</ul></div>
+</div>
+<h3>El procedimiento de elaboración estatal (art. 26 Ley 50/1997)</h3>
+<div class="flujo">
+  <div class="paso"><div class="num">1</div><div class="txt"><b>Planificación:</b> inclusión en el <b>Plan Anual Normativo</b> (art. 25 Ley 50/1997).</div></div>
+  <div class="paso"><div class="num">2</div><div class="txt"><b>Consulta pública PREVIA</b> (web): antes de redactar el texto, sobre problemas, necesidad y objetivos.</div></div>
+  <div class="paso"><div class="num">3</div><div class="txt"><b>Redacción</b> + <b>Memoria del Análisis de Impacto Normativo (MAIN)</b>: oportunidad, adecuación a los principios de buena regulación, impacto económico-presupuestario, cargas, impacto de género, etc.</div></div>
+  <div class="paso"><div class="num">4</div><div class="txt"><b>Informes preceptivos</b> (Secretaría General Técnica siempre) y, en su caso, aprobación previa del Ministerio competente en función pública.</div></div>
+  <div class="paso"><div class="num">5</div><div class="txt"><b>Audiencia e información pública</b> cuando afecte a derechos e intereses legítimos.</div></div>
+  <div class="paso"><div class="num">6</div><div class="txt"><b>Dictamen del CONSEJO DE ESTADO</b> — preceptivo en los <b>reglamentos ejecutivos</b> (art. 22.3 LO 3/1980).</div></div>
+  <div class="paso"><div class="num">7</div><div class="txt"><b>Aprobación</b> por el órgano competente y <b>publicación en el BOE</b> (eficacia: art. 131 Ley 39/2015).</div></div>
+</div>
+<div class="nota"><div class="tit">⚡ TRAMITACIÓN URGENTE (art. 27 Ley 50/1997)</div>
+<p>Acordada por el <b>Consejo de Ministros</b> (transposición de directivas u otras circunstancias extraordinarias): plazos <b>reducidos a la mitad</b>; <b>no</b> es precisa la consulta pública previa; la audiencia e información pública pasa a <b>7 días</b>; la falta de dictamen o informe preceptivo en plazo no impide continuar.</p></div>
+<h3>Principios de buena regulación (art. 129 Ley 39/2015)</h3>
+<div class="card"><p style="font-size:.92rem"><b>Necesidad · Eficacia · Proporcionalidad · Seguridad jurídica · Transparencia · Eficiencia</b> — su justificación debe constar en el preámbulo de la norma. Es legislación básica (art. 149.1.18ª CE), con el alcance matizado por la STC 55/2018 respecto de CCAA (siguen aplicándose a la AGE).</p></div>
+<div class="clave"><div class="tit">🔑 INDEROGABILIDAD SINGULAR — LITERAL EXACTO (art. 37 Ley 39/2015)</div>
+<p><b>37.1:</b> «Las resoluciones administrativas de carácter particular no podrán vulnerar lo establecido en una disposición de carácter general, <b>aunque aquéllas procedan de un órgano de igual o superior jerarquía al que dictó la disposición general</b>».<br>
+<b>37.2:</b> «<b>Son nulas</b> las resoluciones administrativas que vulneren lo establecido en una disposición reglamentaria, así como aquellas que incurran en alguna de las causas del art. 47».<br>
+<i>Ratio: proteger la igualdad — no cabe la dispensa singular.</i></p></div>
+<div class="trampa"><div class="tit">⚠️ CORRECCIÓN SOBRE TU TEMARIO</div>
+<p>Tu Temario Claude (T3) cita el art. 37.1 como «aunque aquéllas <i>tengan igual o superior rango</i> a éstas». El literal vigente habla de <b>órgano de igual o superior jerarquía</b>, no de rango de la resolución. En un test de literales, esa diferencia es una pregunta.</p></div>
+
+<h2>⚖️ 5. Control de los reglamentos ilegales</h2>
+<div class="clave"><div class="tit">🔑 REGLA DE PARTIDA: NULIDAD DE PLENO DERECHO (art. 47.2 Ley 39/2015)</div>
+<p>El reglamento que vulnera la CE, las leyes u otra disposición superior, regula materias reservadas a la ley o establece retroactividad sancionadora desfavorable es <b>nulo de pleno derecho</b>: imprescriptible, declarable de oficio o a instancia de parte, insanable por el tiempo o el consentimiento, y con <b>efectos en cadena</b> sobre lo que en él se base.</p></div>
+<table>
+<tr><th>Vía de control</th><th>Mecanismo</th><th>Claves</th></tr>
+<tr><td><b>Inaplicación judicial</b></td><td>Los jueces y tribunales <b>no aplican</b> los reglamentos contrarios a la ley (<span class="art">Art. 6 LOPJ</span>).</td><td>A diferencia de las leyes, no hace falta acudir al TC.</td></tr>
+<tr><td><b>Revisión de oficio</b></td><td><span class="art">Art. 106.2 Ley 39/2015</span>: en cualquier momento, previo <b>dictamen favorable</b> del Consejo de Estado u órgano consultivo autonómico.</td><td>De oficio: caducidad a los <b>6 meses</b> sin resolver. No cabe recurso administrativo contra reglamentos (<span class="art">Art. 112.3</span>).</td></tr>
+<tr><td><b>Recurso directo</b></td><td>Contencioso-administrativo contra el propio reglamento.</td><td>Plazo general: <b>2 meses</b> desde la publicación (art. 46 LJCA).</td></tr>
+<tr><td><b>Recurso indirecto</b></td><td>Contra los <b>actos de aplicación</b>, fundado en la ilegalidad del reglamento.</td><td>Sin límite temporal ligado a la publicación del reglamento.</td></tr>
+<tr><td><b>Cuestión de ilegalidad</b></td><td><span class="art">Arts. 25-27 LJCA</span>: el juez que estima un recurso indirecto y no es competente para anular el reglamento la plantea al tribunal que sí lo es.</td><td>Excepción (<span class="art">Art. 27.3 LJCA</span>): el <b>TS</b> anula directamente sin plantearla. También si el propio órgano es competente (27.2).</td></tr>
+<tr><td><b>TC</b></td><td>Conflictos de competencia; impugnación del Título IX; amparo si vulnera DDFF.</td><td>Vía excepcional.</td></tr>
+</table>
+
+<h2>🌱 6. PGD y tratados (remisión)</h2>
+<div class="card"><p style="font-size:.92rem">El epígrafe oficial de T3 incluye <b>principios generales del Derecho</b> y <b>tratados internacionales</b>: estudiados en detalle en el <b>Tema 1 visual</b> (art. 1.4 CC, cuatro funciones; arts. 93-96 CE, Ley 25/2014). Repasa allí la tabla de principios con anclaje normativo (confianza legítima y buena fe: art. 3.1.e Ley 40/2015; proporcionalidad: art. 4 Ley 40/2015).</p></div>
+
+<h2>🎯 7. Lo que preguntan + trampas</h2>
+<div class="clave"><div class="tit">📌 DATOS-ANCLA</div>
+<ul class="lista">
+<li>Reglamento ejecutivo → <b>dictamen del Consejo de Estado</b> (art. 22.3 LO 3/1980).</li>
+<li>Ordenanzas locales las aprueba el <b>Pleno</b>; los bandos, el Alcalde (art. 21.1.e LRBRL).</li>
+<li>Recurso directo: <b>2 meses</b>; revisión de oficio de disposiciones: caducidad <b>6 meses</b> (de oficio).</li>
+<li>Contra reglamentos <b>no cabe recurso administrativo</b> (art. 112.3 Ley 39/2015).</li>
+<li>6 principios de buena regulación (art. 129): necesidad, eficacia, proporcionalidad, seguridad jurídica, transparencia, eficiencia.</li>
+<li>Urgencia (art. 27 Ley 50/1997): plazos a la mitad, sin consulta previa, audiencia 7 días.</li>
+</ul></div>
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS</div>
+<ul class="lista">
+<li>«El reglamento ilegal es anulable» → NO: <b>siempre nulo de pleno derecho</b> (47.2).</li>
+<li>«El reglamento independiente puede regular derechos de los ciudadanos» → NO: solo ámbito organizativo.</li>
+<li>«El juez ordinario debe plantear cuestión para inaplicar un reglamento» → NO: lo inaplica por sí (art. 6 LOPJ); la <b>cuestión de ilegalidad</b> es otra cosa (tras estimar recurso indirecto, para la anulación erga omnes).</li>
+<li>«El dictamen del Consejo de Estado es preceptivo en todos los reglamentos» → NO: en los <b>ejecutivos</b>.</li>
+<li>«La Administración puede dispensar del reglamento en un caso concreto si el órgano es superior» → NO: inderogabilidad singular (art. 37).</li>
+</ul></div>
+
+</div>
+<footer>GACE 2027 · Bloque IV · Tema 3 · Material visual de estudio · Normativa verificada a 01/08/2026 (BOE)<br>Fuentes: CE · Ley 39/2015 (arts. 37, 47.2, 106, 112.3, 127-133) · Ley 50/1997 (arts. 23-27, mod. LO 1/2025) · LO 3/1980 del Consejo de Estado · Ley 7/1985 · LJCA (arts. 25-27, 46) · LOPJ (art. 6) · STC 55/2018</footer>
+</body>
+</html>
