@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BV T9 — MUFACE y Clases Pasivas</title>
+<style>
+:root{
+  --v:#6d28d9; --v2:#7c3aed; --vclaro:#f5f3ff; --borde:#ddd6fe;
+  --verde:#166534; --verdeclaro:#f0fdf4; --vborde:#bbf7d0;
+  --rojo:#991b1b; --rojoclaro:#fef2f2; --rborde:#fecaca;
+  --ambar:#92400e; --ambarclaro:#fffbeb; --aborde:#fde68a;
+  --gris:#334155; --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#6d28d9,#7c3aed);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.7rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--v);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--v2);display:flex;align-items:center;gap:8px}
+h3{color:var(--v2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem;background:#fff}
+th{background:var(--v);color:#fff;padding:8px 10px;text-align:left;font-size:.83rem}
+td{padding:7px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--vclaro);border-left:5px solid var(--v2);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--v);font-size:.85rem;letter-spacing:.5px;margin-bottom:6px}
+.trampa{background:var(--rojoclaro);border-left:5px solid var(--rojo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--rojo);font-size:.85rem;margin-bottom:6px}
+.nuevo{background:var(--verdeclaro);border-left:5px solid var(--verde);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.nuevo .tit{font-weight:700;color:var(--verde);font-size:.85rem;margin-bottom:6px}
+.nota{background:var(--ambarclaro);border-left:5px solid var(--ambar);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:var(--ambar);font-size:.85rem;margin-bottom:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{body{background:#fff}header{background:var(--v)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.card{box-shadow:none}h2{page-break-after:avoid}table,.clave,.trampa,.nuevo{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque V · Administración de Recursos Humanos</div>
+  <h1>Tema 9 — Seguridad Social de los funcionarios. MUFACE y Clases Pasivas</h1>
+  <div class="sub">Acción protectora · derechos pasivos · pensiones</div>
+  <div class="badge-verif">✅ Verificado a 01/08/2026 · fuente revisada 14/07/2026</div>
+</header>
+<div class="wrap">
+
+<h2>🏛️ 1. Marco normativo y campo de aplicación</h2>
+<div class="clave"><div class="tit">🔑 DOS MECANISMOS COMPLEMENTARIOS (art. 2 TR 4/2000)</div><p><b>Clases Pasivas</b> (RDLeg 670/1987): pensiones de vejez, incapacidad, muerte/supervivencia. <b>MUFACE</b> (RDLeg 4/2000): prestaciones sanitarias, económicas y sociales.</p></div>
+<div class="trampa"><div class="tit">⚠️ Reforma de 2011 — art. 20 RD-ley 13/2010</div><p>Funcionarios ingresados desde el <b>1/1/2011</b>: Régimen General de la SS a efectos de PENSIONES; siguen en MUFACE a efectos de las demás prestaciones. Los anteriores a 2011 (con continuidad): Clases Pasivas + MUFACE.</p></div>
+
+<h2>🩺 2. MUFACE: naturaleza, incorporación y cotización</h2>
+<table><tr><th>Elemento</th><th>Dato</th></tr>
+<tr><td>Naturaleza</td><td>Organismo autónomo, adscrito al Ministerio para la Transformación Digital y de la Función Pública</td></tr>
+<tr><td>Régimen jurídico</td><td>Ley 40/2015 (NO la Ley 6/1997, derogada)</td></tr>
+<tr><td>Incorporación</td><td>Obligatoria en la toma de posesión; comunicación en 1 mes</td></tr>
+</table>
+<p style="font-size:.85rem"><b>Cotización:</b> cuota mensual = (base anual × tipo) / 14; doble en junio y diciembre. Tipo funcionario 2026: <b>1,69%</b>. Exentos: jubilados y excedentes por cuidado de familiares. <b>Prescripción</b> (cotizaciones, devoluciones y reintegro de prestaciones indebidas): <b>4 años</b> en los tres casos.</p>
+
+<h3>Asistencia sanitaria</h3>
+<table><tr><th>Concepto</th><th>Régimen</th></tr>
+<tr><td>Copago farmacéutico ordinario</td><td>30% del PVP en oficina de farmacia; gratuito en instituciones sanitarias</td></tr>
+<tr><td>Accidente de servicio/enfermedad profesional</td><td>Dispensación gratuita</td></tr>
+<tr><td>Concierto vigente</td><td>CASN 2025-2027: ASISA + SegurCaixa Adeslas (DKV no participa); 1/5/2025-31/12/2027; 4.808,5 M€</td></tr>
+</table>
+
+<h2>💰 3. Acción protectora de MUFACE</h2>
+<table><tr><th>Período de IT</th><th>Retribución</th></tr>
+<tr><td>Días 1-90</td><td>100% de las retribuciones ordinarias del mes de inicio</td></tr>
+<tr><td>Desde el día 91</td><td>La mayor entre: 80% de básicas (+1/6 paga extra) del mes 3, o 75% de complementarias del mes 3</td></tr>
+<tr><td>Contingencias profesionales</td><td>100% desde el 1er día</td></tr>
+<tr><td>Riesgo embarazo/lactancia (&lt;9 meses)</td><td>Equiparado a enfermedad profesional; 100% de complementarias del mes 3</td></tr>
+</table>
+<table><tr><th>Grado de incapacidad</th><th>Efecto</th></tr>
+<tr><td>IP Parcial</td><td>No jubilación; percibe la totalidad de los haberes del puesto</td></tr>
+<tr><td>IP Total / Absoluta</td><td>Origina jubilación; posible rehabilitación</td></tr>
+<tr><td>Gran Invalidez</td><td>Jubilación + prestación adicional del <b>50% de la pensión de jubilación</b> (remuneración del asistente)</td></tr>
+</table>
+
+<div class="grid2">
+<div class="card"><p><b>Protección a la familia</b></p><p style="font-size:.85rem">Subsidio parto múltiple: carencia 6 meses + fórmula (haber regulador×42/365×[hijos-1]). Prestación pago único: 4/8/12 veces SMI mensual (2/3/4+ hijos) — SMI 2026: 1.221 €/mes.</p></div>
+<div class="card"><p><b>Servicios y asistencia social</b></p><p style="font-size:.85rem">Subsidio jubilación: 1 mensualidad de básicas × 0,5. Subsidio defunción: mín. 751,28 €. Ayuda sepelio: 450,76 € (comunicación ≤3 meses).</p></div>
+</div>
+
+<h2>👴 4. Derechos pasivos — Clases Pasivas del Estado</h2>
+<div class="clave"><div class="tit">🔑 NORMA Y ÁMBITO</div><p>RDLeg 670/1987 (TR Ley de Clases Pasivas). 9 colectivos cubiertos; los 2 principales: funcionarios civiles del Estado + militares de carrera. <b>Gestión desde el 6/10/2020: INSS</b> (antes: Dirección General de Costes de Personal). Pago material: <b>TGSS</b>.</p></div>
+
+<h3>Pensión ordinaria de jubilación</h3>
+<table><tr><th>Elemento</th><th>Dato</th></tr>
+<tr><td>Carencia</td><td>15 años de servicios efectivos</td></tr>
+<tr><td>Jubilación voluntaria</td><td>≥60 años + ≥30 años de servicios efectivos (últimos 5 años en Clases Pasivas si se combinan regímenes)</td></tr>
+<tr><td>Cuota de derechos pasivos</td><td>3,86% del haber regulador (cuota mensual = haber × 3,86% / 14)</td></tr>
+<tr><td>Porcentaje máximo</td><td>100% con ≥35 años de servicios</td></tr>
+<tr><td>Reducción por IP con &lt;20 años servicio</td><td>5% por año que falte hasta 20 (máx. 25%)</td></tr>
+<tr><td>Revalorización 2026 / tope mensual</td><td>+2,7% (RD-ley 3/2026) / 3.359,60 €/mes (47.034,40 €/año)</td></tr>
+</table>
+<p style="font-size:.85rem">Haberes reguladores 2026 (Anexo III RD-ley 16/2025): A1 = 52.697,07 € · A2 = 41.473,91 € (cifras verificadas en fuente oficial; B/C1/C2/AP estimadas por aplicación de subidas oficiales).</p>
+
+<h3>Pensiones a favor de familiares</h3>
+<table><tr><th>Pensión</th><th>Cuantía y requisitos</th></tr>
+<tr><td>Viudedad</td><td>50% de la base reguladora; SIN carencia; extinción por nuevo matrimonio/pareja; mínimo 40% en concurrencia por divorcio</td></tr>
+<tr><td>Orfandad</td><td>&lt;21 años (o 25 con condiciones de ingresos); 1 hijo: 25%; varios: 10% c/u + 15% a prorrata; tope 50%/100% (con/sin cónyuge)</td></tr>
+<tr><td>A favor de los padres</td><td>15% cada uno; solo si no hay cónyuge/pareja/hijos con derecho; ingresos familiares &lt;2×SMI</td></tr>
+</table>
+<div class="nuevo"><div class="tit">📌 Pensiones extraordinarias</div><p>Hecho causante: acto de servicio o consecuencia del mismo. SIN carencia. Haber/base reguladora al <b>200%</b>. Se computan como servicios efectivos los años que faltan hasta la jubilación forzosa. Presunción de acto de servicio: lugar + tiempo de trabajo (iuris tantum).</p></div>
+
+<h3>Incompatibilidades de la pensión (art. 33 TR 670/1987)</h3>
+<table><tr><th>Supuesto</th><th>Régimen</th></tr>
+<tr><td>Jubilación activa (edad forzosa + 100% haber)</td><td>Compatible; pensión al 50% (100% si ≥1 trabajador contratado)</td></tr>
+<tr><td>Pensión por IP + actividad distinta</td><td>Compatible; pensión reducida al 75% (&gt;20 años servicio) o 55% (≤20 años)</td></tr>
+<tr><td>Actividad artística / derechos de autor</td><td>Compatible al 100%</td></tr>
+</table>
+
+<h2>📌 5. Datos clave para el examen</h2>
+<table>
+<tr><th>Dato</th><th>Cifra</th></tr>
+<tr><td>Norma MUFACE / Clases Pasivas</td><td>RDLeg 4/2000 / RDLeg 670/1987</td></tr>
+<tr><td>Gestión Clases Pasivas desde</td><td>6/10/2020 — INSS</td></tr>
+<tr><td>Cuota derechos pasivos</td><td>3,86% del haber regulador</td></tr>
+<tr><td>Carencia jubilación ordinaria</td><td>15 años</td></tr>
+<tr><td>Jubilación voluntaria</td><td>60 años + 30 años de servicios</td></tr>
+<tr><td>Viudedad</td><td>50% base reguladora, sin carencia</td></tr>
+<tr><td>Gran invalidez</td><td>+50% de la pensión de jubilación</td></tr>
+<tr><td>Revalorización 2026</td><td>+2,7%</td></tr>
+</table>
+
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS DE EXAMEN</div>
+<ul class="lista">
+<li>MUFACE se rige por la <b>Ley 40/2015</b>, no por la Ley 6/1997 (derogada) — trampa habitual en materiales desactualizados.</li>
+<li>La reforma de 2011 traslada las PENSIONES al Régimen General de la SS; las demás prestaciones (sanitarias, IT) siguen en MUFACE.</li>
+<li>Gestión de Clases Pasivas: INSS desde 2020 (antes Dirección General de Costes de Personal) — reconocimiento y propuesta de pago; el pago material lo hace la TGSS.</li>
+<li>Pensión extraordinaria: haber/base reguladora al 200%, no al 100% como la ordinaria.</li>
+<li>Jubilación activa compatible al 100% solo si hay al menos 1 trabajador contratado por cuenta ajena.</li>
+</ul>
+</div>
+
+</div>
+<footer>GACE 2027 · Bloque V · Tema 9 · Material verificado contra BOE a 01/08/2026 · Antonio José De Lamo Villar</footer>
+</body>
+</html>
