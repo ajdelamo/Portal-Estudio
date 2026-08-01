@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV T10 — La Responsabilidad Patrimonial</title>
+<style>
+:root{
+  --indigo:#4338ca; --indigoclaro:#eef2ff;
+  --azul:#1e3a8a; --azul2:#3b62c4;
+  --verde:#166534; --verdeclaro:#f0fdf4;
+  --rojo:#991b1b; --rojoclaro:#fef2f2;
+  --ambar:#92400e; --ambarclaro:#fffbeb;
+  --morado:#5b21b6; --moradoclaro:#f5f3ff;
+  --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1050px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#4338ca,#1e3a8a);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.7rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--indigo);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--indigo)}
+h3{color:var(--azul2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.87rem;background:#fff}
+th{background:var(--indigo);color:#fff;padding:8px 10px;text-align:left;font-size:.83rem}
+td{padding:7px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--indigoclaro);border-left:5px solid var(--indigo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--indigo);font-size:.85rem;margin-bottom:6px}
+.trampa{background:var(--rojoclaro);border-left:5px solid var(--rojo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--rojo);font-size:.85rem;margin-bottom:6px}
+.nuevo{background:var(--verdeclaro);border-left:5px solid var(--verde);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.nuevo .tit{font-weight:700;color:var(--verde);font-size:.85rem;margin-bottom:6px}
+.nota{background:var(--ambarclaro);border-left:5px solid var(--ambar);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:var(--ambar);font-size:.85rem;margin-bottom:6px}
+.art{display:inline-block;background:var(--indigo);color:#fff;border-radius:5px;padding:1px 7px;font-size:.77rem;font-weight:600;white-space:nowrap}
+.jur{display:inline-block;background:#0f766e;color:#fff;border-radius:5px;padding:1px 7px;font-size:.77rem;font-weight:600;white-space:nowrap}
+.num{display:inline-block;background:var(--azul);color:#fff;border-radius:5px;padding:1px 8px;font-size:.82rem;font-weight:700;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+.memo{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:14px 0}
+.memo .m{background:#fff;border:2px solid #c7d2fe;border-radius:10px;padding:12px;font-size:.85rem}
+.memo .m b{color:var(--indigo);display:block;margin-bottom:4px}
+.flujo{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.paso{display:flex;gap:12px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px;align-items:flex-start;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.paso .n{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--indigo);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.paso .txt{font-size:.88rem}
+.paso .txt b{color:var(--indigo)}
+.paso .plazo{margin-left:auto;flex-shrink:0;background:var(--ambarclaro);color:var(--ambar);border:1px solid #fde68a;border-radius:6px;padding:2px 8px;font-size:.78rem;font-weight:700;white-space:nowrap}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{
+  body{background:#fff}
+  header{background:var(--indigo)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card{box-shadow:none}
+  h2{page-break-after:avoid}
+  table,.clave,.trampa,.nuevo,.nota,.paso{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque IV · Derecho Administrativo · 2º EJERCICIO</div>
+  <h1>Tema 10 — La Responsabilidad Patrimonial de las AAPP</h1>
+  <div class="sub">Arts. 32-37 Ley 40/2015 (sustantivo) · especialidades procedimentales Ley 39/2015 · arts. 106.2 y 121 CE</div>
+  <div class="badge-verif">✅ Verificado a 01/08/2026 · incluye la capa STJUE C-278/20 y el estado de la reforma (que tu temario no recoge)</div>
+</header>
+<div class="wrap">
+
+<h2>🏛️ 1. Fundamento y evolución</h2>
+<div class="card"><p><b>Art. 106.2 CE:</b> «Los particulares, en los términos establecidos por la ley, tendrán derecho a ser indemnizados por toda lesión que sufran en cualquiera de sus bienes y derechos, salvo en los casos de <b>fuerza mayor</b>, siempre que la lesión sea consecuencia del <b>funcionamiento de los servicios públicos</b>». Complemento: <b>art. 121 CE</b> (error judicial y funcionamiento anormal de la Administración de Justicia) y art. 9.3 (responsabilidad de los poderes públicos).</p>
+<p><b>Hitos:</b> irresponsabilidad histórica → construcción civilista (arts. 1902-1903 CC) → <b>LEF 1954 (art. 121): primer sistema OBJETIVO</b> → LRJAE 1957 → Ley 30/1992 (+ reforma Ley 4/1999: riesgos del desarrollo) → <b>Leyes 39 y 40/2015</b> (sustantivo en la 40; procedimiento en la 39; ya sin reglamento separado — derogado el RD 429/1993).</p></div>
+
+<h2>⚖️ 2. Los 4 requisitos materiales (art. 32 Ley 40/2015)</h2>
+<div class="memo">
+  <div class="m"><b>1. DAÑO efectivo, evaluable e individualizado</b>Real y cierto (no hipotético) · valorable económicamente (incluye daños morales) · referido a persona o grupo (no cargas generales).</div>
+  <div class="m"><b>2. ANTIJURIDICIDAD</b>El particular <b>no tiene el deber jurídico de soportar</b> el daño (art. 34.1). Es el núcleo del sistema: responsabilidad OBJETIVA (funcionamiento normal o anormal), pero no universal.</div>
+  <div class="m"><b>3. IMPUTACIÓN a una AP</b>Actos, actuaciones materiales, omisiones, retrasos y conductas del personal en ejercicio de sus funciones.</div>
+  <div class="m"><b>4. NEXO CAUSAL directo</b>Causalidad adecuada; la culpa de la víctima o de tercero puede romperlo o moderarlo (concurrencia de causas).</div>
+</div>
+<div class="clave"><div class="tit">🔑 EXCLUSIONES</div>
+<p>· <b>Fuerza mayor</b> (art. 106.2 CE y 32.1) — el <i>caso fortuito</i> (interno al servicio) NO exonera.<br>
+· <b>Deber jurídico de soportar</b> el daño conforme a la ley (34.1).<br>
+· <b>Riesgos del desarrollo</b> (34.1 párr. 2º): daños imprevisibles o inevitables según el estado de la ciencia o la técnica en el momento de producirse.<br>
+· La <b>mera anulación</b> de actos o disposiciones <b>no presupone</b> derecho a indemnización (32.1 in fine).</p></div>
+<div class="card"><p><b>Indemnización (art. 34):</b> reparación integral — daño emergente + lucro cesante (prueba rigurosa; no expectativas especulativas) + daños morales. <b>Valoración</b> conforme a criterios de la legislación fiscal y de expropiación forzosa; <b>intereses de demora</b> desde la reclamación. <b>Formas (34.4):</b> dinero (regla), <b>en especie</b> o <b>pagos periódicos</b>, cuando resulte más adecuado y convenga al interés público, con acuerdo del interesado. <b>Responsabilidad concurrente (art. 33):</b> actuación conjunta → <b>solidaria</b> (según el instrumento de la fórmula conjunta); en otro caso se distribuye por competencia, interés público tutelado e intensidad de la intervención; si no es posible → solidaria.</p></div>
+
+<h2>🏭 3. El procedimiento (especialidades Ley 39/2015)</h2>
+<div class="flujo">
+  <div class="paso"><div class="n">1</div><div class="txt"><b>Iniciación:</b> a instancia de parte (<span class="art">Art. 67</span>: lesiones, causalidad, evaluación económica, momento del daño + prueba) o <b>de oficio</b> (<span class="art">Art. 65</span>: alegaciones de los lesionados en 10 días).</div><div class="plazo">prescripción: 1 AÑO</div></div>
+  <div class="paso"><div class="n">2</div><div class="txt"><b>Instrucción:</b> prueba (10-30 días + 10 extraordinarios) · <b>informe del servicio</b> presunto causante, <b>preceptivo</b> (<span class="art">Art. 81.1</span>: 10 días) · en Justicia: <b>informe del CGPJ</b> (2 meses, suspende el plazo).</div></div>
+  <div class="paso"><div class="n">3</div><div class="txt"><b>Audiencia</b> (10-15 días) — <b>anterior</b> al dictamen del Consejo de Estado. Con contratistas: audiencia obligatoria al contratista (82.5).</div></div>
+  <div class="paso"><div class="n">4</div><div class="txt"><b>Dictamen del Consejo de Estado</b> (u órgano autonómico): <b>preceptivo si la reclamación es ≥ 50.000 €</b> o lo establece una ley (<span class="art">Art. 81.2</span>). Se emite en 2 meses.</div><div class="plazo">≥ 50.000 €</div></div>
+  <div class="paso"><div class="n">5</div><div class="txt"><b>Terminación:</b> resolución (pronunciamiento sobre causalidad, valoración y cuantía), <b>terminación convencional</b> (acuerdo indemnizatorio, 86.5) o silencio.</div><div class="plazo">6 MESES · silencio NEGATIVO</div></div>
+  <div class="paso"><div class="n">6</div><div class="txt"><b>Simplificado</b> (<span class="art">Art. 96.4</span>): si la causalidad, valoración y cuantía son <b>inequívocas</b> → resolución en <b>30 días</b>.</div><div class="plazo">30 días</div></div>
+  <div class="paso"><div class="n">7</div><div class="txt"><b>Fin de la vía administrativa</b> (art. 114.1.e) → recurso potestativo de reposición o contencioso-administrativo. Competencia AGE: <b>Ministro</b> (o <b>Consejo de Ministros</b> en Estado legislador).</div></div>
+</div>
+<div class="clave"><div class="tit">🔑 EL PLAZO DE PRESCRIPCIÓN DEL AÑO (art. 67.1) — MATICES DE EXAMEN</div>
+<p>· Regla: <b>1 año desde el hecho o la manifestación</b> de su efecto lesivo.<br>
+· <b>Daños personales:</b> desde la <b>curación o la determinación del alcance de las secuelas</b>.<br>
+· <b>Nulidad de acto o disposición:</b> 1 año desde la <b>notificación de la sentencia o resolución</b> anulatoria.<br>
+· <b>Estado legislador:</b> 1 año desde la <b>publicación de la sentencia</b> (BOE/DOUE) que declara la inconstitucionalidad o la infracción del DUE.</p></div>
+
+<h2>🏛️ 4. Supuestos especiales</h2>
+<table>
+<tr><th>Supuesto</th><th>Base</th><th>Régimen</th></tr>
+<tr><td><b>Estado LEGISLADOR — actos no expropiatorios</b></td><td><span class="art">32.3 Ley 40/2015</span></td><td>Indemnización solo si el propio acto legislativo la establece. Resuelve el <b>Consejo de Ministros</b>.</td></tr>
+<tr><td><b>Ley INCONSTITUCIONAL</b></td><td><span class="art">32.4</span></td><td>Requisitos: <b>sentencia firme desestimatoria</b> previa contra la actuación que causó el daño + haber <b>alegado la inconstitucionalidad</b> en ese proceso. Indemnizables: daños de los <b>5 años anteriores</b> a la publicación de la sentencia (34.1).</td></tr>
+<tr><td><b>Norma contraria al DUE</b></td><td><span class="art">32.5</span></td><td>Mismos requisitos + los <b>tres de Francovich</b>: norma que confiera derechos, violación suficientemente caracterizada y nexo causal. <b>⚠️ Ver recuadro STJUE.</b></td></tr>
+<tr><td><b>Funcionamiento anormal del TC</b></td><td><span class="art">32.8</span></td><td>En amparos y cuestiones: indemniza el Consejo de Ministros, previa declaración del propio TC a instancia de parte.</td></tr>
+<tr><td><b>Estado JUEZ</b></td><td><span class="art">Art. 121 CE · 32.7 · LOPJ 292-297</span></td><td><b>Error judicial</b> (exige previa declaración judicial), <b>funcionamiento anormal</b> de la Administración de Justicia y <b>prisión preventiva</b> seguida de absolución (art. 294 LOPJ). La mera revocación de resoluciones no indemniza. Informe CGPJ: 2 meses.</td></tr>
+<tr><td><b>CONTRATISTAS y concesionarios</b></td><td><span class="art">32.9 · art. 196 LCSP</span></td><td>Regla: responde el <b>contratista</b>. Excepciones — responde la Administración: daños por <b>órdenes inmediatas y directas</b> o por <b>vicios del proyecto</b> por ella elaborado. El tercero puede pedir al órgano de contratación (en 1 año) que informe de quién responde: <b>interrumpe la prescripción</b> (196.3).</td></tr>
+<tr><td><b>PERSONAL de las AAPP</b></td><td><span class="art">36</span></td><td>El perjudicado se dirige <b>siempre contra la Administración</b> (responsabilidad directa, 36.1). Después, <b>acción de regreso DE OFICIO</b> contra el empleado si hubo <b>dolo o culpa o negligencia GRAVES</b> (36.2), ponderando: resultado dañoso, grado de culpabilidad y relación con el daño. Compatible con la disciplinaria (TREBEP) y la penal (art. 37).</td></tr>
+</table>
+<div class="nuevo"><div class="tit">🆕 LA CAPA QUE FALTA EN TU TEMARIO — STJUE 28/06/2022 (C-278/20) Y REFORMA EN TRAMITACIÓN</div>
+<ul class="lista">
+<li>La <b>STJUE Comisión c. España</b> declaró que el régimen del Estado legislador por infracción del DUE (arts. 32.5 y concordantes de la Ley 40/2015 y 67.1 Ley 39/2015) <b>vulnera el principio de efectividad</b>: exigir sentencia firme desestimatoria previa con alegación de la infracción, limitar la indemnización a los 5 años anteriores y computar el año desde la publicación de la sentencia del TJUE hace <b>excesivamente difícil</b> la reparación.</li>
+<li>Consecuencia práctica hoy: esos requisitos deben <b>inaplicarse o interpretarse conforme al DUE</b> en las reclamaciones por infracción del Derecho de la Unión; para la ley inconstitucional (32.4), el literal sigue aplicándose.</li>
+<li><b>Reforma en tramitación</b> (Proyecto de Ley 121/000071, presentado el 9/10/2025): modifica los arts. 67 y 92 Ley 39/2015 y el régimen de los arts. 32 y ss. Ley 40/2015. A 01/08/2026 <b>no está aprobada</b>: en el examen, el régimen vigente es el literal de 2015 + la doctrina de la STJUE.</li>
+</ul></div>
+
+<h2>🎯 5. Datos-ancla y trampas</h2>
+<div class="clave"><div class="tit">📌 NÚMEROS DEL TEMA</div>
+<ul class="lista">
+<li>Prescripción: <b>1 año</b> (personales: curación/secuelas) · resolución: <b>6 meses</b>, silencio <b>negativo</b> · simplificado: <b>30 días</b>.</li>
+<li>Dictamen del Consejo de Estado: <b>≥ 50.000 €</b> · informe CGPJ: <b>2 meses</b> (suspende).</li>
+<li>Estado legislador: daños de los <b>5 años</b> anteriores a la sentencia; reclamación en <b>1 año</b> desde su publicación; resuelve el <b>Consejo de Ministros</b>.</li>
+<li>Contratistas: información al tercero en <b>1 año</b>, interrumpe la prescripción (196.3 LCSP).</li>
+<li>Regreso contra el personal: solo <b>dolo o culpa GRAVE</b>, de oficio.</li>
+</ul></div>
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS</div>
+<ul class="lista">
+<li>«La fuerza mayor y el caso fortuito exoneran» → NO: solo la <b>fuerza mayor</b>; el caso fortuito (interno al servicio) no exonera.</li>
+<li>«La anulación de un acto genera indemnización automática» → NO (32.1 in fine).</li>
+<li>«El perjudicado puede demandar directamente al funcionario» → NO: responsabilidad <b>directa de la Administración</b> (36.1); luego regreso de oficio si dolo o culpa grave.</li>
+<li>«El silencio en responsabilidad patrimonial es positivo» → NO: <b>desestimatorio</b> (excepción del art. 24.1).</li>
+<li>«El dictamen del Consejo de Estado es siempre preceptivo» → NO: solo reclamaciones <b>≥ 50.000 €</b> (o ley que lo exija).</li>
+<li>«Los daños por contratistas los paga siempre la Administración» → NO: regla general, el <b>contratista</b>; la Administración solo por órdenes directas o vicios del proyecto.</li>
+<li>«La prisión preventiva seguida de absolución nunca se indemniza» → SÍ: art. 294 LOPJ (funcionamiento de la Administración de Justicia).</li>
+<li>«Los requisitos del 32.5 se aplican tal cual» → cuidado: la <b>STJUE C-278/20</b> los declaró contrarios al principio de efectividad; reforma en tramitación.</li>
+</ul></div>
+
+</div>
+<footer>GACE 2027 · Bloque IV · Tema 10 · Material visual de estudio · Verificado a 01/08/2026 (BOE, Congreso, TJUE)<br>Fuentes: CE arts. 106.2 y 121 · Ley 40/2015 arts. 32-37 · Ley 39/2015 arts. 61, 65, 67, 81, 82, 91, 92, 96.4 · LCSP art. 196 · LOPJ arts. 292-297 · STJUE 28/06/2022 (C-278/20) · Proyecto de Ley 121/000071</footer>
+</body>
+</html>
