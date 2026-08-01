@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV T4 — El Acto Administrativo</title>
+<style>
+:root{
+  --azul:#1e3a8a; --azul2:#3b62c4; --azulclaro:#eef2ff;
+  --naranja:#c2410c; --naranjaclaro:#fff7ed;
+  --verde:#166534; --verdeclaro:#f0fdf4;
+  --rojo:#991b1b; --rojoclaro:#fef2f2;
+  --ambar:#92400e; --ambarclaro:#fffbeb;
+  --morado:#5b21b6; --moradoclaro:#f5f3ff;
+  --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#c2410c,#1e3a8a);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.7rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--naranja);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--naranja)}
+h3{color:var(--azul2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.88rem;background:#fff}
+th{background:var(--naranja);color:#fff;padding:8px 10px;text-align:left;font-size:.84rem}
+td{padding:8px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--naranjaclaro);border-left:5px solid var(--naranja);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--naranja);font-size:.85rem;margin-bottom:6px}
+.trampa{background:var(--rojoclaro);border-left:5px solid var(--rojo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--rojo);font-size:.85rem;margin-bottom:6px}
+.nota{background:var(--ambarclaro);border-left:5px solid var(--ambar);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:var(--ambar);font-size:.85rem;margin-bottom:6px}
+.art{display:inline-block;background:var(--naranja);color:#fff;border-radius:5px;padding:1px 7px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.jur{display:inline-block;background:#0f766e;color:#fff;border-radius:5px;padding:1px 7px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:14px 0;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.vs>div{padding:14px 16px}
+.vs .izq{background:#fee2e2}
+.vs .der{background:#fef9c3}
+.vs h4{margin-bottom:8px;font-size:.95rem}
+.vs .izq h4{color:var(--rojo)}
+.vs .der h4{color:var(--ambar)}
+.vs ul{margin-left:18px;font-size:.87rem}
+.vs li{margin:4px 0}
+@media(max-width:720px){.vs{grid-template-columns:1fr}}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+.memo{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:14px 0}
+.memo .m{background:#fff;border:2px solid #fed7aa;border-radius:10px;padding:12px;font-size:.85rem}
+.memo .m b{color:var(--naranja);display:block;margin-bottom:4px}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{
+  body{background:#fff}
+  header{background:var(--naranja)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card{box-shadow:none}
+  h2{page-break-after:avoid}
+  table,.clave,.trampa,.vs{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque IV · Derecho Administrativo</div>
+  <h1>Tema 4 — El Acto Administrativo</h1>
+  <div class="sub">Concepto, clases y elementos · Eficacia y validez · Motivación y notificación</div>
+  <div class="badge-verif">✅ Normativa verificada contra BOE a 01/08/2026 · Ley 39/2015 y Ley 40/2015</div>
+</header>
+<div class="wrap">
+
+<h2>📄 1. Concepto y caracteres</h2>
+<div class="card">
+<p><b>Definición doctrinal (Zanobini/Garrido Falla)</b> — la Ley 39/2015 no lo define: «toda declaración de <b>voluntad, deseo, conocimiento o juicio</b> realizada por un sujeto de la Administración Pública en el ejercicio de una <b>potestad administrativa</b>» (distinta de la reglamentaria — García de Enterría).</p>
+<p><b>Notas:</b> dictado por una AP (art. 2.3 Ley 39/2015; excepcionalmente entidades privadas del sector público con potestades atribuidas por ley) · en ejercicio de potestad administrativa · declaración intelectual formal.</p>
+</div>
+
+<h2>🗂️ 2. Clases de actos (con su consecuencia práctica)</h2>
+<table>
+<tr><th>Criterio</th><th>Clases</th><th>Consecuencia de examen</th></tr>
+<tr><td><b>Posición en el procedimiento</b></td><td><b>Resoluciones</b> (definitivos) vs. <b>actos de trámite</b></td><td>Trámite: no recurribles salvo <b>cualificados</b> (<span class="art">Art. 112.1</span>): deciden el fondo, impiden continuar, o causan indefensión o perjuicio irreparable. Contra el resto de trámites: alegaciones (art. 76).</td></tr>
+<tr><td><b>Agotamiento de la vía</b></td><td>Ponen fin a la vía administrativa (<span class="art">Art. 114</span>) o no</td><td>Fin de vía: resoluciones de alzada, órganos sin superior, resolución de responsabilidad patrimonial, pactos finalizadores, etc. Estatal (114.2): Gobierno y sus miembros, Ministros y Secretarios de Estado; Directores generales o superior <b>en materia de personal</b>.</td></tr>
+<tr><td><b>Firmeza</b></td><td>Firmes vs. no firmes</td><td>Firme por consentido (plazos agotados): solo cabe el <b>recurso extraordinario de revisión</b> (supuestos tasados, art. 125).</td></tr>
+<tr><td><b>Potestad</b></td><td>Reglados vs. <b>discrecionales</b></td><td>Discrecionalidad ≠ arbitrariedad (art. 9.3 CE); control por los elementos reglados, los hechos determinantes y los PGD. Motivación obligatoria (art. 35.1.i).</td></tr>
+<tr><td><b>Efectos</b></td><td>Favorables vs. de gravamen</td><td>Favorables: solo revocables por <b>revisión de oficio</b> (Título V). Gravamen: revocables (<span class="art">Art. 109.1</span>) si no es contrario a igualdad, interés público u ordenamiento.</td></tr>
+<tr><td><b>Producción</b></td><td>Expresos · tácitos · <b>presuntos</b> (silencio, arts. 24-25)</td><td>Regla: por <b>escrito</b> a través de medios electrónicos (<span class="art">Art. 36.1</span>); verbales si la naturaleza lo exige. Actos plúrimos refundibles (36.3).</td></tr>
+<tr><td><b>Destinatarios</b></td><td>Singulares · plúrimos · generales</td><td>Convocatoria de oposiciones = acto general (no reglamento: se consume con su cumplimiento).</td></tr>
+</table>
+
+<h2>🧩 3. Elementos del acto (arts. 34-36 Ley 39/2015)</h2>
+<div class="memo">
+  <div class="m"><b>SUBJETIVO</b>Órgano <b>competente</b> (art. 34.1) por materia, territorio y jerarquía (art. 8 Ley 40/2015: irrenunciable e improrrogable) + titular imparcial (abstención/recusación, arts. 23-24 Ley 40/2015).</div>
+  <div class="m"><b>OBJETIVO</b>Contenido <b>posible, lícito y determinado</b>, adecuado a los fines (art. 34.2). Imposible → nulidad (47.1.c); constitutivo de infracción penal → nulidad (47.1.d).</div>
+  <div class="m"><b>CAUSAL</b>Presupuestos de hecho y de derecho que justifican el acto. Falsedad del presupuesto → invalidez.</div>
+  <div class="m"><b>TELEOLÓGICO</b>Fin de interés público previsto por la norma. Fin distinto (aunque público) = <b>desviación de poder</b> → ANULABILIDAD (art. 48.1).</div>
+  <div class="m"><b>FORMAL</b>Procedimiento legalmente establecido (34.1); omisión total y absoluta → nulidad (47.1.e). Exteriorización por escrito (36).</div>
+</div>
+<div class="clave"><div class="tit">🔑 INCOMPETENCIA: LA DISTINCIÓN MÁS PREGUNTADA</div>
+<p>· Por razón de <b>MATERIA o TERRITORIO</b> (manifiesta) → <b>NULIDAD</b> de pleno derecho (<span class="art">Art. 47.1.b</span>).<br>
+· <b>JERÁRQUICA</b> → <b>ANULABILIDAD</b>, convalidable por el órgano superior competente (<span class="art">Art. 52.3</span>).</p></div>
+<div class="card"><h3 style="margin-top:0">Causas de abstención (art. 23.2 Ley 40/2015)</h3>
+<p style="font-size:.9rem">Interés personal · administrador de sociedad interesada o litigio pendiente · parentesco: <b>consanguinidad hasta 4º grado, afinidad hasta 2º</b> · amistad íntima o enemistad manifiesta · haber intervenido como perito o testigo · relación de servicio con el interesado. La no abstención <b>no invalida automáticamente</b> el acto (art. 23.4); cabe recusación en cualquier momento (art. 24).</p></div>
+
+<h2>📝 4. Motivación (art. 35 Ley 39/2015)</h2>
+<div class="card"><p>Exteriorización de la causa «con sucinta referencia de hechos y fundamentos de derecho». Garantía del interesado + control de legalidad. En potestades discrecionales es la única barrera frente a la arbitrariedad (<span class="jur">STC 14/2002</span>); suficiente, no exhaustiva (<span class="jur">STS 27/04/1988</span>). Cabe motivación <i>in aliunde</i> por referencia a informes incorporados al expediente (35.2).</p></div>
+<h3>Actos de motivación obligatoria (art. 35.1 — lista examinable)</h3>
+<ul class="lista">
+<li>a) Los que <b>limiten derechos subjetivos o intereses legítimos</b>.</li>
+<li>b) Los que resuelvan <b>procedimientos de revisión de oficio</b>, <b>recursos administrativos</b> y procedimientos de arbitraje y los que declaren su inadmisión.</li>
+<li>c) Los que se <b>separen del criterio seguido en actuaciones precedentes o del dictamen de órganos consultivos</b>.</li>
+<li>d) Los acuerdos de <b>suspensión de actos</b> y la adopción de <b>medidas provisionales</b> (art. 56).</li>
+<li>e) Los acuerdos de aplicación de la <b>tramitación de urgencia</b>, <b>ampliación de plazos</b> y realización de <b>actuaciones complementarias</b>.</li>
+<li>f) Los que <b>rechacen pruebas</b> propuestas por los interesados.</li>
+<li>g) Los que acuerden la terminación del procedimiento por <b>imposibilidad material sobrevenida</b> y el <b>desistimiento de la Administración</b> en procedimientos de oficio.</li>
+<li>h) Las <b>propuestas de resolución de procedimientos sancionadores</b> y los actos que resuelvan procedimientos sancionadores o de responsabilidad patrimonial.</li>
+<li>i) Los dictados en el ejercicio de <b>potestades discrecionales</b> y los que deban serlo por disposición legal o reglamentaria expresa.</li>
+</ul>
+<div class="trampa"><div class="tit">⚠️ TRAMPA</div><p>La falta de motivación exigible genera, como regla, <b>ANULABILIDAD</b> (defecto de forma con indefensión, art. 48.2) — NO nulidad de pleno derecho, salvo indefensión absoluta equiparable a prescindir del procedimiento.</p></div>
+
+<h2>⚡ 5. Eficacia, notificación y ejecución forzosa</h2>
+<div class="clave"><div class="tit">🔑 VALIDEZ ≠ EFICACIA</div>
+<p><b>Validez</b>: conformidad con el ordenamiento. <b>Eficacia</b>: producción de efectos. Los actos <b>se presumen válidos y producen efectos desde que se dictan</b> (<span class="art">Art. 39.1</span> — autotutela declarativa), salvo eficacia demorada (39.2): contenido del acto (condición/plazo), <b>notificación o publicación</b>, o aprobación superior. La notificación es condición de <b>eficacia, no de validez</b>.</p></div>
+<div class="grid2">
+<div class="card"><h3 style="margin-top:0">Retroactividad (art. 39.3) — excepcional</h3><p style="font-size:.9rem">Solo: (1) actos dictados en <b>sustitución de actos anulados</b>; (2) actos <b>favorables</b> si los supuestos de hecho ya existían y no se lesionan derechos de terceros.</p></div>
+<div class="card"><h3 style="margin-top:0">Suspensión</h3><p style="font-size:.9rem">La interposición de recurso <b>NO suspende</b> la ejecución (<span class="art">Art. 117.1</span>). Suspensión cautelar excepcional: perjuicios de imposible o difícil reparación o nulidad del 47.1 (117.2); en vía judicial, art. 130 LJCA.</p></div>
+</div>
+<h3>Notificación (arts. 40-46)</h3>
+<table>
+<tr><th>Regla</th><th>Contenido</th></tr>
+<tr><td><b>Plazo</b> <span class="art">Art. 40.2</span></td><td>Cursada en <b>10 días</b> desde que se dicta el acto. Contenido: texto íntegro, indicación de si pone fin a la vía, recursos procedentes, órgano y plazo — sin perjuicio de que el interesado pueda usar cualquier otro recurso.</td></tr>
+<tr><td><b>Notificación defectuosa</b> <span class="art">Art. 40.3</span></td><td>Con el texto íntegro pero sin los demás requisitos: surte efecto desde que el interesado realice actuaciones que supongan conocimiento o interponga recurso.</td></tr>
+<tr><td><b>Medios</b> <span class="art">Arts. 41-43</span></td><td>Preferencia <b>electrónica</b>; obligatoria para los sujetos del art. 14.2 (personas jurídicas, entidades sin personalidad, profesionales colegiados, empleados públicos). Papel: dos intentos — si nadie se hace cargo, segundo intento <b>dentro de los 3 días siguientes y en hora distinta</b> (41.5). Electrónica: rechazada tras <b>10 días naturales</b> sin acceder (43.2).</td></tr>
+<tr><td><b>Infructuosa</b> <span class="art">Art. 44</span></td><td>Interesados desconocidos, domicilio ignorado o intentada sin efecto → anuncio en el <b>BOE</b> (supletorio: boletines autonómicos o provinciales).</td></tr>
+<tr><td><b>Publicación</b> <span class="art">Art. 45</span></td><td>Sustituye a la notificación: destinatarios indeterminados o procedimientos de <b>concurrencia competitiva</b> (si la convocatoria así lo indica).</td></tr>
+</table>
+<h3>Ejecución forzosa (arts. 97-105)</h3>
+<div class="card"><p style="font-size:.92rem"><b>Requisitos previos:</b> acto previo que sirva de título (art. 97: prohibición de actuación material sin él — <i>vía de hecho</i>) + <b>apercibimiento</b> previo (art. 99) + proporcionalidad. <b>Ejecutoriedad</b> = autotutela ejecutiva (arts. 38-39 y 98).</p></div>
+<table>
+<tr><th>Medio (art. 100)</th><th>Cuándo</th><th>Claves</th></tr>
+<tr><td><b>Apremio sobre el patrimonio</b></td><td>Cantidades líquidas debidas</td><td>Vía del Reglamento General de Recaudación.</td></tr>
+<tr><td><b>Ejecución subsidiaria</b></td><td>Actos no personalísimos realizables por tercero</td><td>La Administración lo hace por sí o por tercero, <b>a costa del obligado</b> (art. 102).</td></tr>
+<tr><td><b>Multa coercitiva</b></td><td>Cuando la ley lo autorice expresamente</td><td>Reiterable por lapsos de tiempo; <b>independiente y compatible con la sanción</b> (art. 103).</td></tr>
+<tr><td><b>Compulsión sobre las personas</b></td><td>Obligaciones personalísimas de no hacer o soportar</td><td>Solo si la ley lo autoriza expresamente y con respeto a la dignidad y derechos fundamentales (art. 104).</td></tr>
+</table>
+
+<h2>🚨 6. Invalidez: nulidad vs. anulabilidad</h2>
+<h3>Las 7 causas de nulidad de pleno derecho (art. 47.1 — literales de examen)</h3>
+<ul class="lista">
+<li><b>a)</b> Los que <b>lesionen derechos y libertades susceptibles de amparo constitucional</b> (arts. 14-29 + 30.2 CE).</li>
+<li><b>b)</b> Dictados por órgano <b>manifiestamente incompetente por razón de la materia o del territorio</b>.</li>
+<li><b>c)</b> Los de <b>contenido imposible</b>.</li>
+<li><b>d)</b> Constitutivos de <b>infracción penal</b> o dictados como consecuencia de esta.</li>
+<li><b>e)</b> Dictados <b>prescindiendo total y absolutamente del procedimiento</b> o de las normas esenciales para la formación de la voluntad de los <b>órganos colegiados</b>.</li>
+<li><b>f)</b> Actos expresos o presuntos contrarios al ordenamiento por los que se <b>adquieren facultades o derechos careciendo de los requisitos esenciales</b>.</li>
+<li><b>g)</b> Cualquier otro que se establezca <b>expresamente en una disposición con rango de Ley</b>.</li>
+</ul>
+<div class="vs">
+  <div class="izq"><h4>NULIDAD (art. 47)</h4><ul>
+  <li>Efectos <b>ex tunc</b> (retroactivos)</li>
+  <li><b>Imprescriptible</b>: revisión de oficio en cualquier momento (art. 106)</li>
+  <li><b>No convalidable</b> ni sanable</li>
+  <li>Invocable por cualquiera; apreciable de oficio</li></ul></div>
+  <div class="der"><h4>ANULABILIDAD (art. 48)</h4><ul>
+  <li>Efectos <b>ex nunc</b> (desde la declaración)</li>
+  <li>Sujeta a <b>plazos de recurso</b>; declaración de lesividad: 4 años (art. 107)</li>
+  <li><b>Convalidable</b> (art. 52, efectos desde su fecha)</li>
+  <li>Regla general: <b>cualquier infracción del ordenamiento, incluida la desviación de poder</b> (48.1)</li></ul></div>
+</div>
+<div class="clave"><div class="tit">🔑 DEFECTOS DE FORMA Y PLAZO (arts. 48.2 y 48.3)</div>
+<p>El defecto de forma solo anula si el acto <b>carece de los requisitos indispensables para alcanzar su fin</b> o causa <b>indefensión</b>; si no, es una <b>irregularidad no invalidante</b>. La actuación fuera de plazo solo anula <b>cuando lo imponga la naturaleza del término o plazo</b>.</p></div>
+<h3>Técnicas de conservación (arts. 49-52)</h3>
+<table>
+<tr><th>Técnica</th><th>Artículo</th><th>Contenido</th></tr>
+<tr><td><b>Transmisibilidad</b></td><td>49</td><td>La invalidez de un acto no se transmite a los sucesivos independientes; la parcial no invalida las partes independientes del vicio.</td></tr>
+<tr><td><b>Conversión</b></td><td>50</td><td>El acto nulo o anulable que contenga los elementos de otro distinto produce los efectos de este.</td></tr>
+<tr><td><b>Conservación</b></td><td>51</td><td>Se conservan los actos y trámites cuyo contenido se habría mantenido igual sin la infracción.</td></tr>
+<tr><td><b>Convalidación</b></td><td>52</td><td>Solo de actos <b>anulables</b>. Incompetencia jerárquica → convalida el superior; falta de autorización → otorgamiento posterior.</td></tr>
+</table>
+
+<h2>🎯 7. Lo que preguntan + trampas</h2>
+<div class="clave"><div class="tit">📌 DATOS-ANCLA</div>
+<ul class="lista">
+<li>Eficacia: <b>desde que se dictan</b> (39.1); notificación cursada en <b>10 días</b> (40.2).</li>
+<li>Notificación electrónica: rechazo tras <b>10 días naturales</b> (43.2); papel: 2º intento en <b>3 días</b>, hora distinta (41.5); infructuosa → <b>BOE</b> (44).</li>
+<li>Nulidad: <b>7 causas</b> del 47.1 (memoriza las letras). Reglamentos: 47.2, siempre nulidad.</li>
+<li>Desviación de poder → anulabilidad (48.1). Incompetencia jerárquica → anulable convalidable (52.3).</li>
+<li>4 medios de ejecución forzosa (art. 100): apremio, subsidiaria, multa coercitiva, compulsión.</li>
+<li>Multa coercitiva <b>compatible e independiente</b> de la sanción (103.2).</li>
+</ul></div>
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS</div>
+<ul class="lista">
+<li>«Prescindir de un trámite = nulidad» → NO: solo la omisión <b>total y absoluta</b> del procedimiento (47.1.e); un trámite omitido suele ser anulabilidad o irregularidad.</li>
+<li>«La incompetencia siempre es nulidad» → NO: solo la manifiesta por materia o territorio; la jerárquica es anulable.</li>
+<li>«El recurso suspende el acto» → NO (117.1): la suspensión es excepcional.</li>
+<li>«Los actos favorables se revocan libremente» → NO: exigen revisión de oficio (106) o lesividad (107); lo revocable libremente (con límites) son los de gravamen (109.1).</li>
+<li>«La notificación es requisito de validez» → NO: de <b>eficacia</b>.</li>
+<li>«La multa coercitiva es una sanción» → NO: medio de ejecución forzosa, compatible con la sanción.</li>
+</ul></div>
+
+</div>
+<footer>GACE 2027 · Bloque IV · Tema 4 · Material visual de estudio · Normativa verificada a 01/08/2026 (BOE)<br>Fuentes: Ley 39/2015 (arts. 34-52, 97-105, 112-114, 117) · Ley 40/2015 (arts. 8-13, 23-24) · CE arts. 103, 105 · RD 203/2021 · STC 14/2002</footer>
+</body>
+</html>
