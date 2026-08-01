@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV — Flashcards T11-T13</title>
+<style>
+:root{--azul:#1e3a8a;--azul2:#3b62c4;--verde:#16a34a;--rojo:#dc2626;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:40px}
+header{background:linear-gradient(135deg,#0f766e,#1e3a8a);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.f{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.83rem;font-weight:600;cursor:pointer}
+.f.on{background:var(--azul);color:#fff}
+.stats{display:flex;gap:10px;margin:8px 0 14px;font-size:.83rem;flex-wrap:wrap}
+.stats span{background:#fff;border-radius:8px;padding:5px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.escena{perspective:1200px;margin:10px 0}
+.carta{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
+.carta.girada{transform:rotateY(180deg)}
+.cara{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.frente{background:#fff;border:3px solid var(--azul2)}
+.frente .cat{position:absolute;top:12px;left:14px;font-size:.72rem;font-weight:700;color:#fff;background:var(--azul2);border-radius:12px;padding:2px 10px}
+.frente .idx{position:absolute;top:12px;right:14px;font-size:.72rem;color:#94a3b8}
+.frente h2{font-size:1.08rem;line-height:1.5;font-weight:600;border:none;color:#1e293b}
+.frente .pista{margin-top:14px;font-size:.75rem;color:#94a3b8}
+.dorso{background:linear-gradient(135deg,#1e3a8a,#3b62c4);color:#fff;transform:rotateY(180deg)}
+.dorso .resp{font-size:1.15rem;font-weight:800;line-height:1.45}
+.dorso .det{margin-top:12px;font-size:.85rem;opacity:.92;line-height:1.5}
+.botones{display:flex;gap:8px;margin:14px 0;justify-content:center;flex-wrap:wrap}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-size:.9rem;font-weight:700;cursor:pointer}
+.btn.mal{background:#fee2e2;color:var(--rojo)}
+.btn.bien{background:#dcfce7;color:#15803d}
+.btn.nav{background:#e2e8f0;color:#334155}
+.btn.accion{background:var(--azul);color:#fff}
+.aviso{text-align:center;font-size:.8rem;color:#64748b;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>🃏 Flashcards BIV · T11-T13 Procedimiento y Contencioso</h1>
+  <p>Plazos · artículos · datos-ancla · Ley 39/2015 y LJCA · verificado a 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="filtros" id="filtros"></div>
+  <div class="stats"><span id="st-total"></span><span id="st-dom">✅ dominadas: <b id="ndom">0</b></span><span id="st-rep">🔁 a repasar: <b id="nrep">0</b></span></div>
+  <div class="escena"><div class="carta" id="carta" onclick="girar()">
+    <div class="cara frente"><div class="cat" id="cat"></div><div class="idx" id="idx"></div><h2 id="preg"></h2><div class="pista">👆 toca para ver la respuesta</div></div>
+    <div class="cara dorso"><div class="resp" id="resp"></div><div class="det" id="det"></div></div>
+  </div></div>
+  <div class="botones">
+    <button class="btn mal" onclick="marcar(false)">❌ Repasar</button>
+    <button class="btn bien" onclick="marcar(true)">✅ Me la sé</button>
+  </div>
+  <div class="botones">
+    <button class="btn nav" onclick="mover(-1)">← Anterior</button>
+    <button class="btn accion" onclick="barajar()">🔀 Barajar</button>
+    <button class="btn nav" onclick="mover(1)">Siguiente →</button>
+  </div>
+  <div class="botones"><button class="btn nav" onclick="soloRepaso()" id="btnrep">🎯 Solo las marcadas "repasar"</button>
+  <button class="btn nav" onclick="resetear()">🗑️ Reiniciar</button></div>
+  <div class="aviso">El progreso se guarda en este navegador (localStorage).</div>
+</div>
+<script>
+const LS='gace_biv_fc_t11t13_v1';
+const CARDS=[
+// —— T11 ——
+{c:'T11·Plazos',p:'Plazo máximo para resolver: regla, tope y defecto',r:'El de la norma; máximo 6 meses salvo ley o norma UE; en defecto: 3 MESES',d:'Art. 21. La obligación de resolver subsiste vencido el plazo. Certificación del silencio: de oficio en 15 días (24.4).'},
+{c:'T11·Datos',p:'Silencio negativo: los 5 grupos de excepciones (art. 24.1)',r:'Derecho de petición · dominio público y servicio público · medio ambiente · responsabilidad patrimonial · impugnación de actos',d:'Más las leyes o el DUE que lo prevean. Doble silencio en alzada → ESTIMATORIO.'},
+{c:'T11·Datos',p:'Silencio en procedimientos de oficio (art. 25)',r:'Efectos favorables → desestimación · gravamen/sancionadores → CADUCIDAD',d:'La caducidad no impide un nuevo procedimiento si no prescribió la infracción.'},
+{c:'T11·Plazos',p:'Cómputo: días vs. meses',r:'Días: hábiles (fuera sábados, domingos, festivos) · meses: de fecha a fecha',d:'Art. 30. Día final inhábil → primer hábil siguiente. Ampliación: máx. la MITAD (32); urgencia: plazos a la mitad salvo solicitudes y recursos (33).'},
+{c:'T11·Plazos',p:'Subsanación de solicitudes y medidas provisionales previas',r:'Subsanación: 10 días (+5) · provisionalísimas: confirmar en 15 días',d:'Arts. 68 y 56.2.'},
+{c:'T11·Plazos',p:'Instrucción: prueba, informes, audiencia, información pública',r:'Prueba 10-30 (+10) · informes 10 días (facultativos y no vinculantes) · audiencia 10-15 · info pública ≥20',d:'Arts. 77, 80, 82, 83. La audiencia va tras la instrucción, antes de la propuesta.'},
+{c:'T11·Plazos',p:'Caducidad por inactividad del interesado y tramitación simplificada',r:'3 meses tras la advertencia (95) · simplificada: resolución en 30 días (96)',d:'Simplificada: si el Consejo de Estado dictamina en contra del fondo → vuelta al ordinario.'},
+{c:'T11·Datos',p:'Formas de iniciación de oficio',r:'Propia iniciativa · orden superior · petición razonada · denuncia',d:'Arts. 58-62. El denunciante no es interesado por la mera denuncia (62.5).'},
+{c:'T11·Datos',p:'STC 55/2018: los 3 planos del 149.1.18ª',r:'Común estricto (Estado) · ratione materiae (bases + desarrollo CCAA) · autoorganización (CCAA)',d:'La Ley 39/2015 se aplica íntegra a la AGE; el recorte es frente a CCAA.'},
+{c:'T11·Datos',p:'Sanciones: ¿cuándo son ejecutivas?',r:'Cuando no quepa recurso ORDINARIO en vía administrativa (90.3)',d:'Especialidad frente a la ejecutividad general del art. 38. La recusación es la única incidental suspensiva (74).'},
+{c:'T11·Datos',p:'Reformatio in peius en solicitudes',r:'Prohibida: la resolución no puede agravar la situación inicial (88.2)',d:'También en recursos (119.3).'},
+{c:'T11·Datos',p:'Entrada en vigor de las Leyes 39 y 40/2015',r:'2 de octubre de 2016 (registro y archivo electrónico: 2/4/2021)',d:'Publicadas el 2/10/2015; derogan la Ley 30/1992. Ley 39: 133 artículos.'},
+// —— T12 ——
+{c:'T12·Datos',p:'Art. 13 vs. art. 53: ¿qué catálogo es cada uno?',r:'13: derechos de las PERSONAS · 53: derechos del INTERESADO en el procedimiento',d:'53: estado de la tramitación, identificar autoridades, no aportar documentos ya en poder de la Administración, alegar, asesor…'},
+{c:'T12·Datos',p:'Revisión de actos nulos (106): requisito esencial',r:'Dictamen previo y FAVORABLE del Consejo de Estado (u órgano autonómico)',d:'En cualquier momento; de oficio (caducidad 6 meses) o acción de nulidad del interesado (silencio negativo); inadmisión motivada posible.'},
+{c:'T12·Plazos',p:'Lesividad de actos anulables favorables (107)',r:'Declaración en 4 AÑOS desde el acto · caducidad del procedimiento: 6 MESES · después, impugnación en el contencioso',d:'La Administración no puede anular por sí sola sus actos anulables favorables.'},
+{c:'T12·Datos',p:'Revocación vs. rectificación (109)',r:'Revocación: actos de GRAVAMEN, dentro de la prescripción · rectificación de errores materiales: en cualquier momento',d:'Límites de toda revisión (110): equidad, buena fe, derechos de particulares, leyes.'},
+{c:'T12·Plazos',p:'Alzada: plazos y silencio',r:'1 mes (expresos; presuntos: en cualquier momento) · resolver 3 meses · silencio negativo salvo DOBLE SILENCIO',d:'Arts. 121-122. Contra su resolución, solo revisión extraordinaria.'},
+{c:'T12·Plazos',p:'Reposición: plazos y efecto de barrera',r:'1 mes interposición · 1 mes resolución · no cabe contencioso hasta resolución expresa o presunta',d:'Arts. 123-124. Potestativo; contra su resolución no cabe otra reposición.'},
+{c:'T12·Plazos',p:'Recurso extraordinario de revisión: causas y plazos',r:'4 causas tasadas · 4 años (error de hecho documental) · 3 meses (documentos nuevos, falsedad, delito)',d:'Arts. 125-126: dictamen del Consejo de Estado preceptivo salvo inadmisión motivada; resolver 3 meses.'},
+{c:'T12·Plazos',p:'Suspensión del acto recurrido: silencio positivo especial',r:'Estimada si no se resuelve en 1 MES desde la entrada de la solicitud (117.3)',d:'Base: perjuicios de imposible o difícil reparación o causa de nulidad del 47.1.'},
+{c:'T12·Datos',p:'¿Recursos administrativos contra reglamentos?',r:'NO cabe ninguno (112.3): contencioso directo o indirecto',d:'El error en la calificación del recurso no impide tramitarlo (115.2).'},
+{c:'T12·Datos',p:'Obligados a relacionarse electrónicamente (14.2)',r:'Personas jurídicas · entidades sin personalidad · profesionales colegiados · empleados públicos · representantes',d:'Las personas físicas no obligadas eligen. Ampliable reglamentariamente (14.3).'},
+// —— T13 ——
+{c:'T13·Datos',p:'Nomenclatura post-LO 1/2025 de los órganos unipersonales',r:'Secciones de lo C-A de los Tribunales de Instancia · Sección de lo C-A del Tribunal Central de Instancia',d:'La LJCA mantiene «Juzgados» en los arts. 8-9 pero se entiende hecha a las Secciones. La Audiencia Nacional subsiste como órgano distinto.'},
+{c:'T13·Datos',p:'Regla de cuantías 30-60 del contencioso',r:'30.000 € = abreviado y apelación · 60.000 € = frontera TCI/AN · 30.050 € = resp. patrimonial periférica',d:'Consejo de Ministros → siempre Tribunal Supremo. TEAC → AN; TEAR → TSJ; planeamiento urbanístico → TSJ.'},
+{c:'T13·Plazos',p:'Plazos de interposición «2-6-20-10» (art. 46)',r:'2 meses (expresos y disposiciones) · 6 meses (presuntos) · 20 días (vía de hecho sin requerimiento) · 10 días (requerimiento no atendido)',d:'Inactividad (29): reclamación previa + 3 meses; actos firmes inejecutados: requerimiento + 1 mes, recurso en 20 días.'},
+{c:'T13·Datos',p:'Ámbito del procedimiento abreviado (78.1)',r:'≤30.000 € · personal · extranjería · inadmisión de asilo · dopaje',d:'Se inicia por DEMANDA; oralidad. El artículo más preguntado de la LJCA.'},
+{c:'T13·Datos',p:'Novedades LO 1/2025 en el art. 78',r:'Vista no automática (auto del juez) · conclusiones escritas 5 días · SENTENCIA ORAL con firmeza en el acto · sentencia en 10 días',d:'El auto que acuerda la vista es irrecurrible; el que la deniega, reposición.'},
+{c:'T13·Datos',p:'¿Los MASC son obligatorios antes del contencioso?',r:'NO: solo orden civil y mercantil; excluido el sector público',d:'Mandato al Gobierno de proyecto de ley en 2 años para extenderlos. Trampa segura de examen.'},
+{c:'T13·Datos',p:'Casación contenciosa: presupuesto de admisión',r:'INTERÉS CASACIONAL OBJETIVO (LO 7/2015), sin cuantía mínima',d:'Sección de Admisión de la Sala 3ª: auto (admite) / providencia (inadmite). LO 1/2025 no la altera.'},
+{c:'T13·Datos',p:'Legitimación: novedades y límites',r:'19.1.k: sindicatos por sus afiliados que lo autoricen · acción popular solo si la ley la prevé · aseguradoras SIEMPRE codemandadas',d:'45.2.e: afiliación + comunicación previa + autorización expresa. Ministerio Fiscal: solo cuando la ley lo determine.'},
+{c:'T13·Datos',p:'Actos no impugnables (art. 28)',r:'Reproducción de actos firmes y confirmatorios de actos consentidos',d:'Causas de inadmisibilidad (69): jurisdicción, legitimación, acto no impugnable, plazo, cosa juzgada.'},
+{c:'T13·Datos',p:'Sentencia que anula un reglamento: efectos (72-73)',r:'Erga omnes desde su publicación, pero NO revive actos firmes anteriores (salvo sanciones no ejecutadas)',d:'Cuestión de ilegalidad (27): del juez del recurso indirecto estimado al tribunal del directo.'},
+{c:'T13·Plazos',p:'Ejecución de sentencias: plazo y blindaje',r:'Ejecución forzosa a los 2 MESES de la comunicación · actos que eluden el fallo: NULOS (103.4)',d:'Imposibilidad material o legal de ejecutar: indemnización sustitutoria (105.2).'},
+{c:'T13·Datos',p:'Vía de hecho: requerimiento y esencia',r:'Requerimiento POTESTATIVO de cesación; actuación material sin título',d:'Plazos: 10 días (tras requerimiento) / 20 días (sin él). Medidas cautelares reforzadas (136).'},
+{c:'T13·Datos',p:'Autorizaciones judiciales del art. 8.6',r:'Entrada en domicilio para ejecución forzosa · medidas sanitarias urgentes con destinatarios identificados · CNMC y tributaria',d:'Competencia de las Secciones de lo C-A del Tribunal de Instancia.'},
+{c:'T13·Datos',p:'Competencia territorial: la elección del demandante',r:'En personal, propiedades especiales y sanciones: sede del órgano O domicilio del demandante',d:'Regla general: sede del órgano autor del acto originario (art. 14).'}
+];
+let vista=[...CARDS.keys()], pos=0, filtro='Todas';
+let estado=JSON.parse(localStorage.getItem(LS)||'{}');
+const cats=['Todas',...new Set(CARDS.map(c=>c.c.split('·')[0]))];
+function guardar(){localStorage.setItem(LS,JSON.stringify(estado))}
+function pinta(){
+  const fdiv=document.getElementById('filtros');fdiv.innerHTML='';
+  cats.forEach(c=>{const b=document.createElement('button');b.className='f'+(filtro===c?' on':'');b.textContent=c==='Todas'?'📋 Todas':c;b.onclick=()=>{filtro=c;aplicar()};fdiv.appendChild(b)});
+  const i=vista[pos],c=CARDS[i];
+  document.getElementById('cat').textContent=c.c;
+  document.getElementById('idx').textContent=(pos+1)+' / '+vista.length;
+  document.getElementById('preg').textContent=c.p;
+  document.getElementById('resp').textContent=c.r;
+  document.getElementById('det').textContent=c.d;
+  document.getElementById('carta').classList.remove('girada');
+  document.getElementById('st-total').textContent='📇 '+vista.length+' tarjetas';
+  const vals=Object.values(estado);
+  document.getElementById('ndom').textContent=vals.filter(v=>v==='ok').length;
+  document.getElementById('nrep').textContent=vals.filter(v=>v==='ko').length;
+}
+function aplicar(){
+  vista=[...CARDS.keys()].filter(i=>filtro==='Todas'||CARDS[i].c.startsWith(filtro));
+  pos=0;pinta();
+}
+function girar(){document.getElementById('carta').classList.toggle('girada')}
+function mover(d){pos=(pos+d+vista.length)%vista.length;pinta()}
+function marcar(bien){estado[vista[pos]]=bien?'ok':'ko';guardar();mover(1)}
+function barajar(){for(let i=vista.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vista[i],vista[j]]=[vista[j],vista[i]]}pos=0;pinta()}
+function soloRepaso(){
+  const rep=[...CARDS.keys()].filter(i=>estado[i]==='ko'&&(filtro==='Todas'||CARDS[i].c.startsWith(filtro)));
+  if(rep.length===0){alert('🎉 No tienes tarjetas marcadas para repasar en este filtro.');return}
+  vista=rep;pos=0;pinta();
+}
+function resetear(){if(confirm('¿Borrar el progreso de estas flashcards?')){estado={};guardar();aplicar()}}
+aplicar();
+</script>
+</body>
+</html>
