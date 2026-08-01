@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque VI · Tema 8 · Retribuciones, nóminas e ingresos en formalización</title>
+<style>
+:root{
+  --v:#1e293b; --v2:#475569; --vclaro:#f1f5f9; --borde:#cbd5e1;
+  --verde:#166534; --verdeclaro:#f0fdf4; --verdeborde:#bbf7d0;
+  --rojo:#991b1b; --rojoclaro:#fef2f2; --rojoborde:#fecaca;
+  --ambar:#92400e; --ambarclaro:#fffbeb; --ambarborde:#fde68a;
+  --morado:#5b21b6; --moradoclaro:#f5f3ff; --moradoborde:#ddd6fe;
+}
+*{box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;max-width:980px;margin:0 auto;padding:24px;color:#1e293b;line-height:1.5;background:#fff}
+.bloque{color:var(--v);font-weight:700;font-size:.85em;letter-spacing:.05em;text-transform:uppercase}
+h1{color:var(--v);font-size:1.6em;margin:.2em 0 .1em;border-bottom:3px solid var(--v);padding-bottom:.3em}
+.sub{color:#475569;font-size:1.02em;margin-bottom:.6em}
+.badge-verif{display:inline-block;background:var(--vclaro);color:var(--v);border:1px solid var(--borde);border-radius:20px;padding:3px 12px;font-size:.78em;font-weight:600;margin-bottom:1em}
+h2{color:var(--v2);border-left:5px solid var(--v);padding-left:10px;margin-top:1.8em;font-size:1.22em}
+h3{color:var(--v);font-size:1.02em;margin-top:1.2em}
+.card{background:var(--vclaro);border:1px solid var(--borde);border-radius:10px;padding:14px 18px;margin:10px 0}
+.clave{background:var(--verdeclaro);border:1px solid var(--verdeborde);border-left:5px solid var(--verde);border-radius:8px;padding:12px 16px;margin:10px 0}
+.clave b{color:var(--verde)}
+.trampa{background:var(--rojoclaro);border:1px solid var(--rojoborde);border-left:5px solid var(--rojo);border-radius:8px;padding:12px 16px;margin:10px 0}
+.trampa b{color:var(--rojo)}
+.nuevo{background:var(--ambarclaro);border:1px solid var(--ambarborde);border-left:5px solid var(--ambar);border-radius:8px;padding:12px 16px;margin:10px 0}
+.nuevo b{color:var(--ambar)}
+.nota{background:var(--moradoclaro);border:1px solid var(--moradoborde);border-left:5px solid var(--morado);border-radius:8px;padding:12px 16px;margin:10px 0}
+.nota b{color:var(--morado)}
+.art{display:inline-block;background:var(--v);color:#fff;border-radius:5px;padding:1px 8px;font-size:.85em;font-weight:600}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.92em}
+th{background:var(--v);color:#fff;text-align:left;padding:7px 10px}
+td{padding:7px 10px;border-bottom:1px solid var(--borde)}
+tr:nth-child(even) td{background:var(--vclaro)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--borde);border-radius:8px;overflow:hidden;margin:10px 0}
+.vs>div{padding:12px 16px}
+.vs>div:first-child{background:var(--rojoclaro);border-right:1px solid var(--borde)}
+.vs>div:last-child{background:var(--verdeclaro)}
+ul.lista{margin:6px 0;padding-left:22px}
+ul.lista li{margin:4px 0}
+.mini{font-size:.85em;color:#64748b}
+.mnemo{background:#1e293b;color:#f1f5f9;border-radius:8px;padding:12px 16px;margin:10px 0;font-size:.94em}
+.mnemo b{color:#fbbf24}
+footer{margin-top:2.5em;padding-top:1em;border-top:2px solid var(--borde);font-size:.82em;color:#64748b;text-align:center}
+@media print{body{max-width:100%}.card,.clave,.trampa,.nuevo,.nota{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="bloque">📘 GACE 2027 · Bloque VI · Gestión Financiera y Seguridad Social · Tema 8 (cierre del bloque)</div>
+<h1>Retribuciones, nóminas e ingresos en formalización</h1>
+<div class="sub">Retribuciones básicas y complementarias · Estructura de la nómina · Altas/bajas · Devengo y liquidación</div>
+<div class="badge-verif">✅ Verificado contra BOE a 01/08/2026</div>
+
+<div class="trampa">
+<b>⚠️ Corrección de la fuente:</b> el temario cita repetidamente "Real Decreto Legislativo 6/2023", "9/2025" y "24/2018" — los tres son en realidad <b>Real Decreto-ley</b> (norma de urgencia, no texto refundido). Además, el RD-ley que aprueba la subida retributiva 2025-2026 <b>no es el 9/2025</b> (que regula el permiso de nacimiento y cuidado) sino el <b>Real Decreto-ley 14/2025, de 2 de diciembre</b> [Seguro, BOE-A-2025-24445]: +2,5% consolidado en 2025 respecto a 31/12/2024, y +1,5% adicional en 2026.
+</div>
+
+<h2>1. Marco normativo</h2>
+<div class="clave">
+<b>Idea-fuerza del tema:</b> el EBEP (RDLeg 5/2015) regula los conceptos retributivos modernos, pero su Cap. III Tít. III <b>NO se ha desarrollado reglamentariamente</b>. Por eso en 2026 sigue rigiendo la <b>Ley 30/1984 (arts. 23-24)</b>: sueldo, trienios, complemento de destino, específico, productividad, gratificaciones. Única excepción vigente del EBEP: <span class="art">art. 25.2</span> (trienios de interinos).
+</div>
+<table>
+<tr><th>Norma</th><th>Contenido</th></tr>
+<tr><td>Ley 30/1984, arts. 23-24</td><td>Régimen retributivo aplicable en tanto no se desarrolle el EBEP</td></tr>
+<tr><td>RD-ley 6/2023, de 19 de diciembre</td><td>Introduce la carrera horizontal y el complemento de carrera</td></tr>
+<tr><td>RD-ley 14/2025, de 2 de diciembre</td><td>Subida retributiva sector público: +2,5% (2025) + 1,5% (2026)</td></tr>
+<tr><td>RD-ley 24/2018, de 21 de diciembre</td><td>Precedente de medidas urgentes retributivas al margen de la LPGE</td></tr>
+<tr><td>RD 462/2002</td><td>Indemnizaciones por razón del servicio</td></tr>
+<tr><td>RD 364/1995, art. 70</td><td>Grado personal y garantía retributiva del C. destino</td></tr>
+</table>
+
+<h2>2. Retribuciones básicas</h2>
+<p>Derecho adquirido, solo modificables por ley, cuantías fijadas anualmente en la LPGE, iguales para todos los funcionarios del mismo subgrupo.</p>
+<table>
+<tr><th>Concepto</th><th>Régimen</th></tr>
+<tr><td>Sueldo</td><td>Retribuye la pertenencia al subgrupo (A1/A2/B/C1/C2/AP). Regla de proporcionalidad: sueldo A1 ≤ 3× sueldo grupo E (art. 24 EBEP)</td></tr>
+<tr><td>Trienios</td><td>Antigüedad, 3 años. Devengo: día 1 del mes siguiente al cumplimiento. Reconoce: el Subsecretario</td></tr>
+<tr><td>Pagas extraordinarias</td><td>Junio y diciembre: sueldo (cuantía LPGE) + trienios + 1 mensualidad completa de C. destino</td></tr>
+</table>
+<div class="clave">
+<b>Los interinos SÍ tienen derecho a trienios (art. 25.2 EBEP)</b> — único precepto vigente del Cap. III Tít. III. Los eventuales NO, salvo que ya fueran funcionarios de carrera.
+</div>
+<p class="mini">Prorrata de pagas extras: (cuantía semestral / 182 o 183 días) × días de servicio. Jubilación/fallecimiento por Clases Pasivas: se cobra el mes COMPLETO.</p>
+
+<h2>3. Retribuciones complementarias</h2>
+<div class="mnemo">
+DESTINO = DÓNDE estás (nivel 1-30) · ESPECÍFICO = LO QUE haces (dificultad, riesgo, responsabilidad) · PRODUCTIVIDAD = CÓMO lo haces (rendimiento, variable) · GRATIFICACIÓN = CUÁNDO lo haces (fuera de jornada, excepcional).
+</div>
+<table>
+<tr><th>Complemento</th><th>Pagas/año</th><th>Clave</th></tr>
+<tr><td>Destino</td><td>12 + 1 mensualidad en cada extra</td><td>Nivel 1-30. Grado personal: 2 años continuados o 3 con interrupción → garantía retributiva</td></tr>
+<tr><td>Específico</td><td><b>14</b> (12 + 2 adicionales jun/dic, NO son extras)</td><td>Solo UNO por puesto. Cuantía inicial: Consejo de Ministros/RPT</td></tr>
+<tr><td>Productividad</td><td>Variable, nunca fijo ni periódico</td><td>Concepto 150. Cuantía pública (sindicatos). Modificación transitoria</td></tr>
+<tr><td>Gratificaciones</td><td>Excepcional</td><td>Concepto 151. Nunca fijas ni periódicas. Vinculantes por naturaleza</td></tr>
+</table>
+<div class="trampa">
+<b>⚠️ No confundir:</b> las pagas extraordinarias incluyen C. <b>destino</b>, no C. específico. El C. específico se percibe en 14 pagas propias, distintas de las 2 extraordinarias.
+</div>
+
+<h2>4. Carrera horizontal — complemento de carrera (RD-ley 6/2023)</h2>
+<table>
+<tr><th>Tramo</th><th>Requisito temporal</th></tr>
+<tr><td>1 — Inicial</td><td>5 años de servicios efectivos</td></tr>
+<tr><td>2 — Intermedio</td><td>6 años adicionales, previa evaluación de desempeño</td></tr>
+<tr><td>3 — Avanzado</td><td>6 años adicionales, previa evaluación</td></tr>
+<tr><td>4 — Superior</td><td>6 años adicionales, previa evaluación</td></tr>
+</table>
+<p class="mini">Complemento de carrera: cuantía idéntica para todos del mismo grupo/tramo — carácter permanente, a diferencia de la productividad (variable y personal). No requiere cambio de puesto.</p>
+
+<h2>5. Devengo y liquidación</h2>
+<div class="clave">
+<b>Regla general:</b> mensualidades completas, con referencia al <b>primer día hábil del mes</b>.
+</div>
+<div class="trampa">
+<b>5 excepciones — liquidación por días:</b> cese en servicio activo (salvo fallecimiento/jubilación/retiro por Clases Pasivas, que es mes completo), cambio de puesto/Administración, 1ª toma de posesión, reingreso al servicio activo, incorporación tras licencia sin retribución.
+</div>
+<p class="mini">Valor día = retribuciones íntegras mensuales / días naturales del mes. Plazo posesorio: 3 días hábiles (misma localidad) / 1 mes (distinta localidad) — retribuciones íntegras del puesto de origen durante el plazo.</p>
+
+<h2>6. Nóminas: estructura y confección</h2>
+<p>Cierre de la nómina ordinaria: <b>día 5</b> de cada mes. 3 partes: Cuerpo (datos, perceptores, retribuciones íntegras, deducciones) + Resumen (hoja firmada por Habilitado y Jefe de dependencia) + Estado justificativo (VR/VD: 1 altas, 2 bajas, 3 modificaciones).</p>
+<div class="vs">
+<div><b>Deducciones formalizables</b><br>IRPF, Clases Pasivas, MUFACE/ISFAS/MUGEJU, MEI. Se ingresan en el Tesoro (ingreso en formalización).</div>
+<div><b>Deducciones no formalizables</b><br>Retenciones judiciales, cuotas sindicales, cuota obrera SS, reintegro de anticipos. El Habilitado las paga directamente a terceros.</div>
+</div>
+<div class="mnemo">
+ÍNTEGRO = suma de retribuciones brutas.<br>LÍQUIDO = ÍNTEGRO − Deducciones formalizables.<br>NETO = LÍQUIDO − Deducciones no formalizables (lo que cobra el funcionario).
+</div>
+
+<h2>7. Altas, bajas y procedimiento de pago</h2>
+<table>
+<tr><th>Supuesto de alta</th><th>Documentación clave</th></tr>
+<tr><td>Nuevo ingreso</td><td>Título + nombramiento (BOE) + acta de toma de posesión + declaración de incompatibilidades</td></tr>
+<tr><td>Alta por traslado</td><td><b>Certificado de baja en nómina</b> de la dependencia de origen (imprescindible, evita doble percepción)</td></tr>
+<tr><td>Reingreso</td><td>Resolución + toma de posesión + liquidación de trienios del Dpto. de origen</td></tr>
+</table>
+<table>
+<tr><th>Fase</th><th>Órgano</th><th>Plazo</th></tr>
+<tr><td>Confección</td><td>Habilitación</td><td>Cierre día 5; presentación en Intervención antes del día 7</td></tr>
+<tr><td>Fiscalización previa</td><td>Intervención Delegada</td><td>Registro SIC3, propuesta de pago a DGTPF</td></tr>
+<tr><td>Pago material</td><td>DGTPF / entidad bancaria</td><td>Transferencia (habitual) o cheque nominativo</td></tr>
+<tr><td>Justificación</td><td>Habilitación</td><td>Cuenta justificativa dentro del mes siguiente; aprueba el <b>Ministro</b></td></tr>
+</table>
+
+<h2>8. Ingresos en formalización</h2>
+<div class="clave">
+<b>Definición:</b> anotación contable simultánea de un gasto (Cap. 1) y un ingreso (presupuesto de ingresos), <b>sin movimiento real de fondos</b> en el Tesoro. Solo generan ingreso en formalización las deducciones formalizables (IRPF, MUFACE, ISFAS, Clases Pasivas, MEI).
+</div>
+<table>
+<tr><th>Concepto</th><th>Importe</th><th>Aplicación</th></tr>
+<tr><td>Retribuciones íntegras</td><td>2.000€</td><td>Gasto Cap. 1</td></tr>
+<tr><td>IRPF</td><td>−300€</td><td>Ingreso en formalización</td></tr>
+<tr><td>MUFACE</td><td>−40€</td><td>Ingreso en formalización</td></tr>
+<tr><td>Clases Pasivas</td><td>−70€</td><td>Ingreso en formalización</td></tr>
+<tr><td><b>Líquido pagado</b></td><td><b>1.590€</b></td><td>Movimiento real de fondos</td></tr>
+</table>
+<p class="mini">Las deducciones NO formalizables (sindicales, embargos, anticipos) NO generan ingreso en formalización — el dinero va directo al tercero, sin pasar por el presupuesto de ingresos.</p>
+
+<h2>9. Prescripción y atrasos</h2>
+<div class="clave">
+<b>Prescripción de derechos económicos (art. 25 LGP): 4 años.</b> Aplica al reconocimiento/liquidación y al derecho a exigir el pago de obligaciones ya reconocidas.
+</div>
+<div class="nuevo">
+<b>Atrasos a favor del personal (art. 34.2 LGP) — excepción al principio de anualidad (art. 34 LGP):</b> se imputan al presupuesto vigente en el momento de la orden de pago, aunque correspondan a ejercicios anteriores. No exige crédito extraordinario.
+</div>
+
+<h2>10. Datos clave para el examen</h2>
+<div class="trampa">
+<b>⚠️ Errores típicos:</b>
+<ul class="lista">
+<li>Confundir "Real Decreto-ley" con "Real Decreto Legislativo" en 6/2023, 14/2025 y 24/2018 — son decretos-ley de urgencia, no textos refundidos.</li>
+<li>Atribuir la subida retributiva 2025-2026 al RD-ley 9/2025 (que en realidad regula el permiso de nacimiento y cuidado) en vez del RD-ley 14/2025.</li>
+<li>Confundir las indemnizaciones por razón del servicio (Cap. 2, NO en nómina) con retribuciones (Cap. 1).</li>
+<li>Pensar que el C. específico se paga en las 2 pagas extraordinarias — se paga en 14 pagas propias.</li>
+</ul>
+</div>
+
+<footer>GACE 2027 · Bloque VI · Tema 8 · Material verificado contra BOE a 01/08/2026 · Antonio José De Lamo Villar</footer>
+</body>
+</html>
