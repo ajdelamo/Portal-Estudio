@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV — Test T3 y T4 (Reglamento y Acto Administrativo)</title>
+<style>
+:root{--azul:#1e3a8a;--azul2:#3b62c4;--verde:#16a34a;--rojo:#dc2626;--naranja:#ea580c;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:70px}
+header{background:linear-gradient(135deg,#1e3a8a,#3b62c4);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.3rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:800px;margin:0 auto;padding:0 14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 6px}
+.tab{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;cursor:pointer}
+.tab.on{background:var(--azul);color:#fff}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 14px}
+.mode{border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:5px 12px;font-size:.8rem;cursor:pointer}
+.mode.on{background:#0f766e;color:#fff;border-color:#0f766e}
+.bars{display:flex;flex-direction:column;gap:6px;margin:10px 0 18px}
+.bar{background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.bar .lbl{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin-bottom:4px}
+.bar .track{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.bar .fill{height:100%;border-radius:4px;transition:width .3s}
+.q{background:#fff;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.q .meta{font-size:.75rem;color:#64748b;margin-bottom:8px;display:flex;justify-content:space-between}
+.q h3{font-size:.98rem;margin-bottom:12px;line-height:1.45}
+.opt{display:block;width:100%;text-align:left;border:2px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:10px 12px;margin:6px 0;font-size:.9rem;cursor:pointer;line-height:1.4}
+.opt:hover{border-color:var(--azul2)}
+.opt.ok{border-color:var(--verde);background:#f0fdf4}
+.opt.ko{border-color:var(--rojo);background:#fef2f2}
+.opt:disabled{cursor:default;opacity:.92}
+.exp{display:none;margin-top:10px;background:#eef2ff;border-left:4px solid var(--azul2);border-radius:0 8px 8px 0;padding:10px 12px;font-size:.85rem}
+.exp.show{display:block}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.btn{border:none;border-radius:8px;padding:8px 16px;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--azul);color:#fff}
+.btn.sec{background:#64748b}
+.btn.warn{background:var(--rojo)}
+.score{position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#fff;padding:10px 16px;text-align:center;font-size:.9rem}
+.score b{color:#4ade80}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧪 Test BIV · T3 El Reglamento + T4 El Acto Administrativo</h1>
+  <p>GACE 2027 · Autocorregible y adaptativo · Normativa verificada a 01/08/2026 (Ley 39/2015 y Ley 40/2015)</p>
+</header>
+<div class="wrap">
+  <div class="tabs" id="tabs"></div>
+  <div class="modes">
+    <button class="mode on" data-m="normal">📚 Normal</button>
+    <button class="mode" data-m="adapt">🎯 Adaptativo (peores 20)</button>
+    <button class="mode" data-m="fail">❌ Solo erróneas</button>
+  </div>
+  <div class="bars" id="bars"></div>
+  <div class="controls">
+    <button class="btn" onclick="render(true)">🔀 Barajar</button>
+    <button class="btn sec" onclick="showAll()">👁️ Ver explicaciones</button>
+    <button class="btn warn" onclick="resetHist()">🗑️ Reiniciar historial</button>
+  </div>
+  <div id="quiz"></div>
+</div>
+<div class="score" id="score"></div>
+<script>
+const LS_KEY='gace_biv_t3t4_v1';
+const UNIDADES={3:'T3 · Reglamento',4:'T4 · Acto Admvo.'};
+const BANK=[
+// ============ T3 — REGLAMENTO (u:3) ============
+{u:3,t:"Los reglamentos ejecutivos se caracterizan por:",o:["Regular materias organizativas internas sin ley previa","Desarrollar o complementar una ley previa y exigir dictamen del Consejo de Estado","Suspender la aplicación de leyes en situaciones de emergencia","No poder ser controlados judicialmente"],c:1,e:"Reglamento ejecutivo (secundum legem): desarrolla una ley previa; su elaboración exige dictamen preceptivo del Consejo de Estado (art. 22.3 LO 3/1980). El independiente opera en el ámbito organizativo; el de necesidad, en emergencias."},
+{u:3,t:"Los reglamentos independientes (praeter legem) solo pueden dictarse válidamente:",o:["En cualquier materia no regulada por ley","En el ámbito organizativo o doméstico de la Administración","En materia sancionadora leve","Cuando exista urgencia extraordinaria"],c:1,e:"Sin ley previa solo cabe regular el ámbito organizativo interno y relaciones de sujeción especial; nunca materias con reserva de ley ni afectar derechos de los ciudadanos ad extra."},
+{u:3,t:"La jerarquía de los reglamentos estatales del art. 24.2 de la Ley 50/1997 es:",o:["Orden Ministerial > Real Decreto","1º disposiciones aprobadas por Real Decreto; 2º disposiciones aprobadas por Orden Ministerial","Real Decreto = Orden Ministerial (mismo rango)","Depende de la fecha de aprobación"],c:1,e:"Art. 24.2 Ley 50/1997: los reglamentos se ordenan por la jerarquía del órgano: primero Real Decreto (Presidente del Gobierno o Consejo de Ministros), después Orden Ministerial."},
+{u:3,t:"¿Qué órgano aprueba las ordenanzas municipales?",o:["El Alcalde","La Junta de Gobierno Local","El Pleno del Ayuntamiento","La Diputación Provincial"],c:2,e:"Las ordenanzas se aprueban por el Pleno (arts. 22.2.d y 49 LRBRL). Los bandos son del Alcalde (art. 21.1.e LRBRL)."},
+{u:3,t:"El literal del art. 37.1 de la Ley 39/2015 dispone que las resoluciones administrativas de carácter particular no podrán vulnerar lo establecido en una disposición de carácter general:",o:["aunque aquéllas tengan igual o superior rango a éstas","aunque aquéllas procedan de un órgano de igual o superior jerarquía al que dictó la disposición general","salvo autorización expresa del órgano superior","salvo que concurra interés público debidamente motivado"],c:1,e:"Literal exacto del art. 37.1: «aunque aquéllas procedan de un órgano de igual o superior jerarquía al que dictó la disposición general». Ojo: algunos temarios reproducen la fórmula antigua con 'rango'."},
+{u:3,t:"Según el art. 37.2 de la Ley 39/2015, las resoluciones administrativas que vulneren lo establecido en una disposición reglamentaria son:",o:["Anulables","Nulas","Irregularidades no invalidantes","Válidas hasta su revisión de oficio"],c:1,e:"Art. 37.2: «Son nulas las resoluciones administrativas que vulneren lo establecido en una disposición reglamentaria, así como aquellas que incurran en alguna de las causas recogidas en el artículo 47»."},
+{u:3,t:"El dictamen del Consejo de Estado en el procedimiento de elaboración de reglamentos es preceptivo:",o:["En todos los reglamentos estatales","En los reglamentos ejecutivos","Solo en los reglamentos organizativos","Solo cuando lo acuerde el Consejo de Ministros"],c:1,e:"Es preceptivo para los reglamentos que se dicten en ejecución de las leyes (art. 22.3 LO 3/1980 del Consejo de Estado). Los independientes u organizativos no lo requieren."},
+{u:3,t:"Los principios de buena regulación del art. 129 de la Ley 39/2015 son:",o:["Legalidad, jerarquía, publicidad, seguridad, responsabilidad e interdicción de la arbitrariedad","Necesidad, eficacia, proporcionalidad, seguridad jurídica, transparencia y eficiencia","Eficacia, jerarquía, descentralización, desconcentración y coordinación","Objetividad, imparcialidad, transparencia, buena fe y confianza legítima"],c:1,e:"Art. 129.1: necesidad, eficacia, proporcionalidad, seguridad jurídica, transparencia y eficiencia. La primera lista es el art. 9.3 CE; la tercera, el art. 103.1 CE."},
+{u:3,t:"En la tramitación urgente de iniciativas normativas (art. 27 Ley 50/1997):",o:["Los plazos se reducen a la mitad y no es precisa la consulta pública previa","Se suprime el dictamen del Consejo de Estado","Se suprime la audiencia en todo caso","Solo puede acordarla el Congreso"],c:0,e:"La acuerda el Consejo de Ministros; plazos a la mitad; sin consulta pública previa; la audiencia e información pública se reduce a 7 días; la falta de emisión de dictámenes en plazo no impide continuar."},
+{u:3,t:"La consulta pública previa del procedimiento de elaboración normativa se realiza:",o:["Después de aprobar el proyecto en Consejo de Ministros","Antes de la elaboración del texto, a través del portal web","Simultáneamente a la audiencia pública","Solo para los reglamentos ejecutivos"],c:1,e:"La consulta pública previa se sustancia ANTES de elaborar el proyecto o anteproyecto, recabando la opinión sobre los problemas, la necesidad y los objetivos de la norma (arts. 26.2 Ley 50/1997 y 133 Ley 39/2015)."},
+{u:3,t:"Un reglamento que vulnera una ley es:",o:["Anulable en el plazo de 4 años","Nulo de pleno derecho (art. 47.2 Ley 39/2015)","Válido si lo convalida el Consejo de Ministros","Inaplicable solo tras sentencia del TC"],c:1,e:"Art. 47.2: nulidad de pleno derecho de las disposiciones que vulneren la CE, las leyes u otras de rango superior, regulen materias reservadas a la ley o establezcan retroactividad sancionadora desfavorable."},
+{u:3,t:"Los jueces y tribunales, ante un reglamento contrario a la ley:",o:["Deben plantear cuestión de inconstitucionalidad","No lo aplican, conforme al art. 6 LOPJ","Deben suspender el procedimiento y elevar consulta al Consejo de Estado","Lo aplican hasta su derogación expresa"],c:1,e:"Art. 6 LOPJ: los jueces no aplicarán los reglamentos contrarios a la Constitución, a la ley o al principio de jerarquía normativa. La cuestión de inconstitucionalidad es solo para normas con rango de ley."},
+{u:3,t:"La revisión de oficio de disposiciones administrativas nulas (art. 106.2 Ley 39/2015) exige:",o:["Dictamen favorable del Consejo de Estado u órgano consultivo autonómico","Sentencia firme previa","Autorización de las Cortes Generales","Informe de la Abogacía del Estado"],c:0,e:"Art. 106.2: en cualquier momento, previo dictamen FAVORABLE del Consejo de Estado u órgano consultivo equivalente. Iniciada de oficio, la falta de resolución en 6 meses produce caducidad (106.5)."},
+{u:3,t:"Contra una disposición administrativa de carácter general cabe:",o:["Recurso de alzada","Recurso de reposición","Recurso contencioso-administrativo directo en 2 meses desde su publicación","Recurso extraordinario de revisión"],c:2,e:"No cabe recurso en vía administrativa contra disposiciones generales (art. 112.3 Ley 39/2015). El recurso contencioso directo se interpone en 2 meses desde la publicación (art. 46.1 LJCA)."},
+{u:3,t:"El recurso indirecto contra reglamentos consiste en:",o:["Impugnar el reglamento ante el Consejo de Estado","Impugnar los actos de aplicación fundándose en la ilegalidad del reglamento","Un recurso per saltum ante el Tribunal Supremo","Una reclamación previa a la vía judicial"],c:1,e:"Se impugna el acto de aplicación alegando que el reglamento en que se funda es ilegal (art. 26 LJCA). No está sujeto al plazo de 2 meses desde la publicación del reglamento, porque lo recurrido es el acto."},
+{u:3,t:"La cuestión de ilegalidad (arts. 25-27 LJCA) la plantea:",o:["Cualquier ciudadano ante el TS","El juez que estimó un recurso indirecto y no es competente para anular el reglamento, ante el tribunal que sí lo es","La Administración autora del reglamento","El Ministerio Fiscal en todo caso"],c:1,e:"Art. 27.1 LJCA. Excepciones: si el propio órgano es competente para conocer del recurso directo, anula él mismo (27.2); y el TS anula sin plantearla (27.3)."},
+{u:3,t:"Los bandos municipales son dictados por:",o:["El Pleno","La Junta de Gobierno","El Alcalde (art. 21.1.e LRBRL)","El Secretario municipal"],c:2,e:"El art. 21.1.e LRBRL atribuye al Alcalde dictar bandos. Las ordenanzas y el reglamento orgánico corresponden al Pleno."},
+{u:3,t:"Un reglamento de necesidad se caracteriza por:",o:["Desarrollar una ley de urgencia","Poder excepcionar temporalmente la aplicación de leyes en situaciones de emergencia, con vigencia limitada a esta","Requerir convalidación del Congreso en 30 días","Tener rango de ley mientras dure la emergencia"],c:1,e:"Los reglamentos de necesidad (contra legem) se fundan en el estado de necesidad (catástrofes, epidemias); su vigencia se limita a la duración de la emergencia. No se convalidan (eso es el decreto-ley) ni tienen rango de ley."},
+{u:3,t:"La potestad reglamentaria de las Entidades Locales se reconoce en:",o:["El art. 4 de la Ley 7/1985 (LRBRL)","El art. 128 de la Ley 39/2015 exclusivamente","El art. 97 CE","El art. 24 de la Ley 50/1997"],c:0,e:"Art. 4.1.a LRBRL: potestad reglamentaria y de autoorganización de municipios, provincias e islas, como expresión de la autonomía local (arts. 137 y 140 CE)."},
+{u:3,t:"El criterio de 'ordinamentalidad' sirve para:",o:["Distinguir ley y reglamento","Distinguir reglamento y acto administrativo: el reglamento se integra en el ordenamiento para una serie indeterminada de casos","Clasificar los reglamentos por su jerarquía","Determinar la retroactividad de las disposiciones"],c:1,e:"Si la disposición se integra en el ordenamiento y se aplica a una serie indefinida de supuestos futuros → reglamento; si se agota con su cumplimiento (consunción) → acto administrativo (aunque sea general, como una convocatoria)."},
+{u:3,t:"¿Puede un reglamento establecer la retroactividad de una disposición sancionadora no favorable?",o:["Sí, si lo justifica el interés público","No: sería nulo de pleno derecho","Sí, con dictamen del Consejo de Estado","Solo por Orden Ministerial"],c:1,e:"Arts. 9.3 CE y 47.2 Ley 39/2015: la retroactividad de disposiciones sancionadoras no favorables o restrictivas de derechos individuales determina la nulidad de pleno derecho. Cabe en cambio la retroactividad favorable."},
+{u:3,t:"La Memoria del Análisis de Impacto Normativo (MAIN):",o:["Es facultativa en todos los casos","Acompaña a los proyectos normativos y analiza oportunidad, impactos económicos, cargas y adecuación a los principios de buena regulación","Solo se exige para las leyes","La elabora el Consejo de Estado"],c:1,e:"Art. 26.3 Ley 50/1997 (desarrollado por el RD 931/2017): la MAIN es preceptiva y analiza oportunidad, adecuación al orden competencial, impacto económico-presupuestario, cargas administrativas, impacto de género y otros."},
+{u:3,t:"El Plan Anual Normativo está regulado en:",o:["El art. 25 de la Ley 50/1997","El art. 132 de la Ley 39/2015","Ambos: el art. 25 Ley 50/1997 para el Estado y el art. 132 Ley 39/2015 con carácter general","El art. 97 CE"],c:2,e:"El art. 132 Ley 39/2015 impone la planificación normativa anual con carácter general (con el alcance matizado por la STC 55/2018) y el art. 25 Ley 50/1997 la regula para la AGE."},
+{u:3,t:"¿Qué ocurre si la Administración aprueba un reglamento ejecutivo omitiendo el dictamen del Consejo de Estado?",o:["Nada, es un trámite facultativo","El reglamento incurre en nulidad de pleno derecho por omisión de un trámite esencial","El reglamento es anulable en 4 años","Se convalida con la publicación en el BOE"],c:1,e:"La omisión del dictamen preceptivo del Consejo de Estado en reglamentos ejecutivos es un vicio esencial del procedimiento que determina la nulidad de la disposición (art. 47.2 Ley 39/2015; jurisprudencia constante del TS)."},
+// ============ T4 — ACTO ADMINISTRATIVO (u:4) ============
+{u:4,t:"Los actos de trámite son recurribles autónomamente cuando (art. 112.1 Ley 39/2015):",o:["Siempre que lo pida el interesado","Deciden directa o indirectamente el fondo, impiden continuar el procedimiento o producen indefensión o perjuicio irreparable","Solo cuando causen daños económicos","Nunca: hay que esperar a la resolución"],c:1,e:"Son los actos de trámite cualificados. Contra los demás actos de trámite solo caben alegaciones (art. 76) para su consideración en la resolución."},
+{u:4,t:"Ponen fin a la vía administrativa, entre otros (art. 114.1 Ley 39/2015):",o:["Todas las resoluciones de cualquier órgano","Las resoluciones de los recursos de alzada y las de los órganos sin superior jerárquico","Los actos de trámite cualificados","Las propuestas de resolución"],c:1,e:"Art. 114.1: resoluciones de alzada, órganos sin superior jerárquico (salvo ley en contrario), acuerdos finalizadores, resolución de responsabilidad patrimonial y de procedimientos complementarios sancionadores, y las que disponga una norma."},
+{u:4,t:"En el ámbito estatal, los actos de los Directores Generales ponen fin a la vía administrativa:",o:["Siempre","Nunca","En materia de personal (art. 114.2.c Ley 39/2015)","Solo si lo acuerda el Ministro"],c:2,e:"Art. 114.2: ponen fin a la vía los actos del Gobierno y sus miembros, Ministros y Secretarios de Estado, y los de órganos directivos con nivel de Director general o superior EN MATERIA DE PERSONAL."},
+{u:4,t:"La incompetencia manifiesta por razón de la materia o del territorio determina:",o:["Anulabilidad convalidable","Nulidad de pleno derecho (art. 47.1.b)","Irregularidad no invalidante","Revocación automática"],c:1,e:"Art. 47.1.b. En cambio, la incompetencia jerárquica es anulable y convalidable por el órgano superior competente (art. 52.3)."},
+{u:4,t:"El parentesco que constituye causa de abstención (art. 23.2 Ley 40/2015) es:",o:["Consanguinidad hasta 2º grado y afinidad hasta 4º","Consanguinidad hasta 4º grado y afinidad hasta 2º","Consanguinidad y afinidad hasta 3er grado","Solo cónyuge y hermanos"],c:1,e:"Art. 23.2.b: parentesco de consanguinidad dentro del CUARTO grado o de afinidad dentro del SEGUNDO, con interesados, administradores o asesores. Truco: 'sangre 4, política 2'."},
+{u:4,t:"La actuación de una autoridad en la que concurre causa de abstención:",o:["Implica siempre la nulidad del acto","No implicará necesariamente la invalidez de los actos en que haya intervenido (art. 23.4 Ley 40/2015)","Determina la caducidad del procedimiento","Convierte el acto en inexistente"],c:1,e:"Art. 23.4: la no abstención no determina automáticamente la invalidez; podrá fundarla si fue determinante (p. ej., indefensión o pérdida de imparcialidad decisiva). Además genera responsabilidad del infractor (23.5)."},
+{u:4,t:"La desviación de poder es:",o:["Causa de nulidad de pleno derecho","El ejercicio de potestades administrativas para fines distintos de los fijados por el ordenamiento; causa de ANULABILIDAD (art. 48.1)","Un supuesto de vía de hecho","Una irregularidad no invalidante"],c:1,e:"Art. 48.1: son anulables los actos que incurran en cualquier infracción del ordenamiento, INCLUSO la desviación de poder. Aunque el fin perseguido sea también público, si no es el previsto por la norma, hay desviación."},
+{u:4,t:"¿Cuál de estos actos NO exige motivación obligatoria según el art. 35.1?",o:["Los que limiten derechos subjetivos","Los que se separen del dictamen de órganos consultivos","Los dictados en ejercicio de potestades discrecionales","Los actos favorables dictados en ejercicio de potestades regladas conforme al criterio precedente"],c:3,e:"El art. 35.1 lista: limitativos de derechos, resolución de recursos y revisión de oficio, separación de criterio o dictamen, suspensión y medidas provisionales, urgencia y ampliación, rechazo de pruebas, terminación por imposibilidad y desistimiento de la Administración, sancionadores y de responsabilidad, y discrecionales. Un acto reglado favorable y conforme al precedente no está en la lista."},
+{u:4,t:"Los actos administrativos producen efectos, como regla general:",o:["Desde su notificación","Desde la fecha en que se dictan (art. 39.1)","A los 20 días de su publicación","Desde su firmeza"],c:1,e:"Art. 39.1: se presumen válidos y producen efectos desde que se dictan, salvo que en ellos se disponga otra cosa. La eficacia queda demorada cuando esté supeditada a notificación, publicación o aprobación superior (39.2)."},
+{u:4,t:"La retroactividad de los actos administrativos (art. 39.3) cabe:",o:["Nunca","En actos sancionadores firmes","En actos dictados en sustitución de actos anulados y en actos favorables, si los supuestos de hecho ya existían y no se lesiona a terceros","Siempre que lo motive el órgano"],c:2,e:"Art. 39.3: excepcionalmente, eficacia retroactiva en esos dos supuestos con esas dos condiciones."},
+{u:4,t:"La notificación debe ser cursada en el plazo de:",o:["10 días a partir de la fecha en que el acto haya sido dictado (art. 40.2)","15 días desde la resolución","1 mes desde la resolución","72 horas"],c:0,e:"Art. 40.2: dentro de los 10 días a partir de la fecha en que el acto se dicte. Debe contener el texto íntegro, si agota o no la vía administrativa, recursos, órgano y plazos."},
+{u:4,t:"En la notificación en papel, si nadie se hace cargo en el primer intento:",o:["Se publica directamente en el BOE","Se repite por una sola vez y en hora distinta dentro de los 3 días siguientes (art. 42.2)","Se entiende rechazada","Se deja aviso y surte efectos a los 10 días"],c:1,e:"Art. 42.2: segundo intento dentro de los 3 días siguientes, en hora distinta (si el primero fue antes de las 15:00, el segundo después, o viceversa, con al menos 3 horas de diferencia). Agotados los intentos → notificación infructuosa → anuncio en BOE (art. 44)."},
+{u:4,t:"La notificación electrónica se entiende rechazada cuando:",o:["El interesado no accede a su contenido en 10 días naturales desde la puesta a disposición (art. 43.2)","No se abre en 5 días hábiles","El correo rebota dos veces","Nunca se entiende rechazada"],c:0,e:"Art. 43.2: transcurridos 10 días NATURALES sin acceder al contenido, se entiende rechazada, y el trámite se da por efectuado (art. 41.5)."},
+{u:4,t:"Cuando los interesados sean desconocidos o se ignore el lugar de notificación, esta se hará mediante:",o:["Edicto en el tablón del Ayuntamiento exclusivamente","Anuncio en el Boletín Oficial del Estado (art. 44)","Publicación en el diario oficial autonómico","Comparecencia obligatoria"],c:1,e:"Art. 44: notificación infructuosa → anuncio en el BOE (facultativamente, además, en boletines autonómicos/provinciales o tablones). El anuncio en el BOE es el que produce efectos."},
+{u:4,t:"Los cuatro medios de ejecución forzosa del art. 100 de la Ley 39/2015 son:",o:["Apremio, embargo, sanción y desahucio administrativo","Apremio sobre el patrimonio, ejecución subsidiaria, multa coercitiva y compulsión sobre las personas","Ejecución directa, subasta, multa y requerimiento","Vía de hecho, apremio, compulsión y clausura"],c:1,e:"Art. 100.1. Se elige el menos restrictivo de la libertad individual (proporcionalidad) y siempre previo apercibimiento (art. 99)."},
+{u:4,t:"La multa coercitiva:",o:["Es una sanción administrativa encubierta","Es independiente de las sanciones y compatible con ellas (art. 103.2)","Sustituye a la sanción principal","Solo puede imponerse una vez"],c:1,e:"Art. 103: reiterable por lapsos de tiempo suficientes para cumplir, exige ley que la autorice y es independiente y compatible con la sanción. No tiene naturaleza sancionadora."},
+{u:4,t:"La compulsión sobre las personas procede para:",o:["Cualquier obligación de pago","Obligaciones personalísimas de no hacer o soportar, con autorización legal expresa y respeto a la dignidad (art. 104)","Obligaciones realizables por un tercero","La ejecución de sentencias"],c:1,e:"Art. 104. Si la obligación personalísima de hacer no se cumple, se resarcen daños y perjuicios (104.2). Las obligaciones realizables por tercero van por ejecución subsidiaria (art. 102)."},
+{u:4,t:"¿Cuál de los siguientes es causa de NULIDAD de pleno derecho (art. 47.1)?",o:["La desviación de poder","Un defecto de forma que causa indefensión","Lesionar derechos y libertades susceptibles de amparo constitucional","Dictar un acto fuera de plazo"],c:2,e:"Art. 47.1.a. La desviación de poder y los defectos de forma con indefensión son anulabilidad (art. 48); la extemporaneidad solo anula si lo impone la naturaleza del plazo (48.3)."},
+{u:4,t:"Los actos dictados 'prescindiendo total y absolutamente del procedimiento legalmente establecido' son:",o:["Anulables","Nulos de pleno derecho (art. 47.1.e)","Irregulares no invalidantes","Convalidables"],c:1,e:"Art. 47.1.e: también los dictados infringiendo las reglas esenciales para la formación de la voluntad de los órganos colegiados. La omisión de UN trámite no esencial no equivale a prescindir totalmente del procedimiento."},
+{u:4,t:"Los actos expresos o presuntos contrarios al ordenamiento por los que se adquieren facultades o derechos careciendo de los requisitos esenciales son:",o:["Anulables","Nulos de pleno derecho (art. 47.1.f)","Válidos si el silencio fue estimatorio","Revocables discrecionalmente"],c:1,e:"Art. 47.1.f — clave en silencio administrativo: el silencio positivo no permite adquirir facultades o derechos si faltan los requisitos ESENCIALES para su adquisición."},
+{u:4,t:"El defecto de forma determina la anulabilidad:",o:["Siempre","Solo cuando el acto carezca de los requisitos indispensables para alcanzar su fin o produzca indefensión (art. 48.2)","Nunca","Solo en los procedimientos sancionadores"],c:1,e:"Art. 48.2. En los demás casos: irregularidad no invalidante (principio de antiformalismo)."},
+{u:4,t:"La convalidación de los actos (art. 52 Ley 39/2015):",o:["Procede tanto en actos nulos como anulables","Solo procede en actos anulables y produce efectos desde su fecha, salvo el art. 39.3","Tiene siempre efectos retroactivos","La realiza el Consejo de Estado"],c:1,e:"Art. 52.1: la Administración podrá convalidar los actos ANULABLES subsanando los vicios. Los nulos son inconvalidables. Efectos desde la fecha de convalidación, salvo los supuestos de retroactividad del 39.3."},
+{u:4,t:"El acto nulo que contenga los elementos constitutivos de otro distinto producirá los efectos de este. Es la técnica de:",o:["Conservación (art. 51)","Conversión (art. 50)","Convalidación (art. 52)","Transmisibilidad (art. 49)"],c:1,e:"Art. 50: conversión de actos viciados. La conservación (51) mantiene los trámites que se habrían repetido igual; la convalidación (52) sana anulables; la transmisibilidad (49) limita el contagio de la invalidez."},
+{u:4,t:"La interposición de un recurso administrativo:",o:["Suspende automáticamente la ejecución del acto impugnado","No suspende la ejecución, salvo que se acuerde cautelarmente (art. 117)","Suspende solo las sanciones","Suspende si lo pide el interesado"],c:1,e:"Art. 117.1: la interposición no suspende la ejecución. El órgano puede suspender de oficio o a instancia de parte si hay perjuicios de imposible o difícil reparación o se invoca causa de nulidad del 47.1. Excepción notable: sanciones no ejecutivas hasta agotar la vía administrativa (art. 90.3)."}
+];
+// ===== Motor =====
+let hist=JSON.parse(localStorage.getItem(LS_KEY)||'{}');
+let unidadSel='all', modo='normal';
+function saveHist(){localStorage.setItem(LS_KEY,JSON.stringify(hist))}
+function qid(q){return q.u+'|'+q.t.slice(0,60)}
+function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r}
+function ratio(q){const h=hist[qid(q)];if(!h||h.n===0)return null;return h.ok/h.n}
+function buildPool(){
+  let pool=BANK.filter(q=>unidadSel==='all'||q.u===unidadSel);
+  if(modo==='fail'){pool=pool.filter(q=>{const h=hist[qid(q)];return h&&h.n>0&&h.ok<h.n})}
+  if(modo==='adapt'){pool=[...pool].sort((a,b)=>{const ra=ratio(a),rb=ratio(b);return (ra===null?-1:ra)-(rb===null?-1:rb)}).slice(0,20)}
+  else{pool=shuffle(pool)}
+  return pool.map(q=>{const idx=shuffle(q.o.map((_,i)=>i));return{...q,idx}});
+}
+function render(reshuffle){
+  const tabs=document.getElementById('tabs');
+  tabs.innerHTML='';
+  const mk=(v,l)=>{const b=document.createElement('button');b.className='tab'+(unidadSel===v?' on':'');b.textContent=l;b.onclick=()=>{unidadSel=v;render(true)};tabs.appendChild(b)};
+  mk('all','📋 Todas ('+BANK.length+')');
+  for(const u in UNIDADES){mk(Number(u),UNIDADES[u]+' ('+BANK.filter(q=>q.u==u).length+')')}
+  document.querySelectorAll('.mode').forEach(b=>{b.classList.toggle('on',b.dataset.m===modo);b.onclick=()=>{modo=b.dataset.m;render(true)}});
+  renderBars();
+  const cont=document.getElementById('quiz');cont.innerHTML='';
+  const pool=buildPool();
+  if(pool.length===0){cont.innerHTML='<div class="q"><h3>🎉 No hay preguntas en este modo (ninguna errónea pendiente).</h3></div>';updateScore();return}
+  pool.forEach((q,n)=>{
+    const d=document.createElement('div');d.className='q';
+    const h=hist[qid(q)];
+    d.innerHTML='<div class="meta"><span>'+UNIDADES[q.u]+' · Pregunta '+(n+1)+'/'+pool.length+'</span><span>'+(h&&h.n?('histórico: '+h.ok+'/'+h.n):'nueva')+'</span></div><h3>'+q.t+'</h3>';
+    q.idx.forEach(i=>{
+      const b=document.createElement('button');b.className='opt';b.textContent=q.o[i];
+      b.onclick=()=>{
+        const id=qid(q);hist[id]=hist[id]||{ok:0,n:0};hist[id].n++;
+        d.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+        if(i===q.c){b.classList.add('ok');hist[id].ok++}
+        else{b.classList.add('ko');d.querySelectorAll('.opt').forEach(x=>{if(x.textContent===q.o[q.c])x.classList.add('ok')})}
+        d.querySelector('.exp').classList.add('show');
+        saveHist();renderBars();updateScore();
+      };
+      d.appendChild(b);
+    });
+    const e=document.createElement('div');e.className='exp';e.innerHTML='💡 '+q.e;d.appendChild(e);
+    cont.appendChild(d);
+  });
+  updateScore();
+}
+function renderBars(){
+  const el=document.getElementById('bars');el.innerHTML='';
+  for(const u in UNIDADES){
+    const qs=BANK.filter(q=>q.u==u);
+    let ok=0,n=0;qs.forEach(q=>{const h=hist[qid(q)];if(h){ok+=h.ok;n+=h.n}});
+    const pct=n?Math.round(100*ok/n):0;
+    const col=pct<50?'#dc2626':pct<75?'#ea580c':'#16a34a';
+    el.innerHTML+='<div class="bar"><div class="lbl"><span>'+UNIDADES[u]+'</span><span>'+(n?pct+'% ('+ok+'/'+n+')':'sin datos')+'</span></div><div class="track"><div class="fill" style="width:'+pct+'%;background:'+col+'"></div></div></div>';
+  }
+}
+function updateScore(){
+  let ok=0,n=0;BANK.forEach(q=>{const h=hist[qid(q)];if(h){ok+=h.ok;n+=h.n}});
+  document.getElementById('score').innerHTML=n?('Histórico total: <b>'+ok+'</b> aciertos de <b>'+n+'</b> respuestas ('+Math.round(100*ok/n)+'%)'):'Responde para empezar a registrar tu progreso (se guarda en este navegador).';
+}
+function showAll(){document.querySelectorAll('.exp').forEach(e=>e.classList.add('show'))}
+function resetHist(){if(confirm('¿Borrar todo el historial de este test?')){hist={};saveHist();render(true)}}
+render(true);
+</script>
+</body>
+</html>
