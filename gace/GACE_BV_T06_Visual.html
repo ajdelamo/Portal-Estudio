@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BV T6 — Sistema de retribuciones e indemnizaciones</title>
+<style>
+:root{
+  --v:#3730a3; --v2:#4f46e5; --vclaro:#eef2ff; --borde:#c7d2fe;
+  --verde:#166534; --verdeclaro:#f0fdf4; --vborde:#bbf7d0;
+  --rojo:#991b1b; --rojoclaro:#fef2f2; --rborde:#fecaca;
+  --ambar:#92400e; --ambarclaro:#fffbeb; --aborde:#fde68a;
+  --morado:#a21caf; --moradoclaro:#fdf4ff; --mborde:#f0abfc;
+  --gris:#334155; --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#3730a3,#4f46e5);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.7rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--v);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--v2);display:flex;align-items:center;gap:8px}
+h3{color:var(--v2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.86rem;background:#fff}
+th{background:var(--v);color:#fff;padding:8px 10px;text-align:left;font-size:.84rem}
+td{padding:7px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--vclaro);border-left:5px solid var(--v2);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--v);font-size:.85rem;letter-spacing:.5px;margin-bottom:6px}
+.trampa{background:var(--rojoclaro);border-left:5px solid var(--rojo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--rojo);font-size:.85rem;margin-bottom:6px}
+.nuevo{background:var(--verdeclaro);border-left:5px solid var(--verde);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.nuevo .tit{font-weight:700;color:var(--verde);font-size:.85rem;margin-bottom:6px}
+.nota{background:#fff7ed;border-left:5px solid #c2410c;border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:#c2410c;font-size:.85rem;margin-bottom:6px}
+.art{display:inline-block;background:var(--v);color:#fff;border-radius:5px;padding:1px 7px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+.memo{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:14px 0}
+.memo .m{background:#fff;border:2px solid var(--borde);border-radius:10px;padding:12px;font-size:.85rem}
+.memo .m b{color:var(--v);display:block;margin-bottom:4px}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{
+  body{background:#fff}
+  header{background:var(--v)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card{box-shadow:none}
+  h2{page-break-after:avoid}
+  table,.clave,.trampa,.nuevo{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque V · Administración de Recursos Humanos</div>
+  <h1>Tema 6 — Sistema de retribuciones. Indemnizaciones por razón del servicio</h1>
+  <div class="sub">Retribuciones básicas y complementarias · RD-ley 6/2023 · RD 462/2002</div>
+  <div class="badge-verif">✅ Verificado a 01/08/2026 · cuantías vigentes desde 01/01/2026 (RD-ley 14/2025)</div>
+</header>
+<div class="wrap">
+
+<h2>⚖️ 1. Marco normativo — transición retributiva</h2>
+<div class="clave"><div class="tit">🔑 REGLA DE ORO</div>
+<p>El Cap. III Tít. III TREBEP (retribuciones) está condicionado por su <b>Disposición Final 4ª</b> a las Leyes de Función Pública de desarrollo → siguen SIN aprobarse. El sistema retributivo se rige, en la práctica, por la <b>Ley 30/1984</b> (arts. 23-24). Excepción de aplicación directa: <span class="art">art. 25.2 TREBEP</span> (trienios de interinos).</p></div>
+<table><tr><th>Norma</th><th>Aporta</th></tr>
+<tr><td>Ley 30/1984, arts. 23-24</td><td>Marco retributivo VIGENTE (sueldo, trienios, complementos)</td></tr>
+<tr><td>RDLeg 5/2015 (TREBEP)</td><td>Cap. III Tít. III no desarrollado; art. 25.2 de aplicación directa</td></tr>
+<tr><td>RD-ley 6/2023</td><td>Complemento de carrera (art. 122) y de desempeño (arts. 116-121) — sustituirán progresivamente al de productividad</td></tr>
+<tr><td>RD-ley 14/2025, de 2 diciembre</td><td>Incremento retributivo 2026 al no aprobarse LPGE</td></tr>
+</table>
+
+<h2>💰 2. Retribuciones básicas</h2>
+<div class="card"><p>Retribuyen la adscripción a grupo/subgrupo y la antigüedad. Uniformes en todas las AAPP para un mismo grupo. Comprenden: <b>sueldo, trienios y pagas extraordinarias</b>.</p></div>
+
+<h3>2.1 El sueldo (art. 23 Ley 30/1984)</h3>
+<p style="font-size:.85rem">Regla de proporcionalidad (art. 24): el sueldo de A1 no puede superar en más de <b>3 veces</b> el de Agrupaciones Profesionales.</p>
+<table><tr><th>Grupo/Subgrupo</th><th>Sueldo mensual</th><th>Sueldo anual (12 m.)</th></tr>
+<tr><td>A1</td><td>1.387,24 €</td><td>16.646,88 €</td></tr>
+<tr><td>A2</td><td>1.199,52 €</td><td>14.394,24 €</td></tr>
+<tr><td>B</td><td>1.048,55 €</td><td>12.582,60 €</td></tr>
+<tr><td>C1</td><td>900,63 €</td><td>10.807,56 €</td></tr>
+<tr><td>C2</td><td>749,58 €</td><td>8.994,96 €</td></tr>
+<tr><td>Agrup. Profesionales</td><td>686,07 €</td><td>8.232,84 €</td></tr>
+</table>
+
+<h3>2.2 Los trienios (art. 23.b Ley 30/1984)</h3>
+<table><tr><th>Grupo/Subgrupo</th><th>Trienio mensual</th><th>Trienio anual (12 m.)</th></tr>
+<tr><td>A1</td><td>53,39 €</td><td>640,68 €</td></tr>
+<tr><td>A2</td><td>43,54 €</td><td>522,48 €</td></tr>
+<tr><td>B</td><td>38,20 €</td><td>458,40 €</td></tr>
+<tr><td>C1</td><td>32,96 €</td><td>395,52 €</td></tr>
+<tr><td>C2</td><td>22,44 €</td><td>269,28 €</td></tr>
+<tr><td>Agrup. Profesionales</td><td>16,90 €</td><td>202,80 €</td></tr>
+</table>
+<div class="nuevo"><div class="tit">📌 Trienios de interinos — art. 25.2 TREBEP</div><p>Derecho reconocido desde el <b>13/05/2007</b> (entrada en vigor TREBEP), de aplicación directa sin desarrollo legislativo. Rompe la idea de que "el interino nunca cobra trienios".</p></div>
+<ul class="lista" style="font-size:.87rem">
+<li><b>Servicios previos</b> (Ley 70/1978 + RD 1461/1982): se reconocen en cualquier AAPP y vínculo (laboral/interino/eventual), previa solicitud.</li>
+<li><b>Cambio de grupo:</b> fracción de tiempo se acumula en el grupo nuevo; los trienios ya perfeccionados NO se pierden.</li>
+<li><b>Servicios simultáneos:</b> no se duplica el cómputo.</li>
+<li><b>Efectividad:</b> día 1 del mes siguiente al cumplimiento.</li>
+<li><b>Competencia:</b> Subsecretarios (servicios centrales) / Delegados-Subdelegados de Gobierno (periféricos).</li>
+</ul>
+
+<h3>2.3 Pagas extraordinarias</h3>
+<div class="clave"><div class="tit">🔑 COMPOSICIÓN MÍNIMA</div><p>2 pagas (junio y diciembre) = <b>sueldo + trienios + complemento de destino íntegro</b>. Trampa frecuente: creer que solo incluyen sueldo y trienios.</p></div>
+<table><tr><th>Supuesto de reducción proporcional</th><th>Regla</th></tr>
+<tr><td>Servicios &lt;6 meses en el semestre</td><td>÷182 días (junio, 183 bisiesto) o ÷183 (diciembre) × días efectivos</td></tr>
+<tr><td>Licencia sin sueldo</td><td>El tiempo NO computa → reduce la cuantía</td></tr>
+<tr><td>Cambio a otra AAPP ≠ AGE</td><td>Liquidación proporcional a la fecha del cambio</td></tr>
+<tr><td>Cese en servicio activo</td><td>Se devenga proporcional el día del cese</td></tr>
+<tr><td><b>Excepción:</b> jubilación, fallecimiento, retiro</td><td>Mes completo (NO proporcional)</td></tr>
+</table>
+
+<h2>🧩 3. Retribuciones complementarias</h2>
+<div class="card"><p>Retribuyen "qué puesto" y "cómo rinde". Varían entre Administraciones. Complementos obligatorios en la RPT: <b>destino</b> y <b>específico</b>.</p></div>
+
+<div class="grid2">
+<div class="card"><p><b>3.1 Complemento de destino</b></p><p style="font-size:.85rem">Nivel del puesto (no del cuerpo). <b>30 niveles</b> en la AGE (1-30). Se integra ÍNTEGRO en las pagas extras. Los funcionarios no pueden obtener puestos fuera del intervalo de su grupo.</p></div>
+<div class="card"><p><b>3.2 Complemento específico</b></p><p style="font-size:.85rem">Dificultad técnica, dedicación, responsabilidad, incompatibilidad, peligrosidad. <b>Único por puesto</b> (aunque valore varias condiciones). Se percibe en <b>14 pagas</b>, devengado en 12.</p></div>
+</div>
+<div class="trampa"><div class="tit">⚠️ TRAMPA — específico &gt;30%</div><p>Si el complemento específico supera el <b>30%</b> de las retribuciones básicas (excluidos trienios) → incompatibilidad TOTAL con actividad privada (salvo renuncia expresa al exceso).</p></div>
+
+<div class="grid2">
+<div class="card"><p><b>3.3 Complemento de productividad</b></p><p style="font-size:.85rem">Rendimiento especial. <b>NO genera derechos adquiridos</b> ni se consolida. Límite: % de costes de personal fijado en LPGE. Cantidades de conocimiento público en el departamento.</p></div>
+<div class="card"><p><b>3.4 Gratificaciones por servicios extraordinarios</b></p><p style="font-size:.85rem">Doble prohibición: NI fijas en cuantía NI periódicas en devengo. Estrictamente coyunturales, dentro de crédito presupuestario.</p></div>
+</div>
+
+<div class="nuevo"><div class="tit">🆕 3.5 Complemento de carrera y de desempeño — RD-ley 6/2023</div>
+<table><tr><th>Complemento</th><th>Base normativa</th><th>Vinculado a</th></tr>
+<tr><td>De desempeño</td><td>Título III, Cap. I (arts. 116-121)</td><td>Resultado de la evaluación del desempeño (art. 119); sustituirá al de productividad (DT 7ª)</td></tr>
+<tr><td>De carrera</td><td>Título III, Cap. II, art. 122</td><td>Tramo reconocido de carrera horizontal; igual cuantía para todo el grupo/subgrupo con el mismo tramo</td></tr>
+</table></div>
+
+<h2>📅 4. Devengo y liquidación</h2>
+<div class="clave"><div class="tit">🔑 REGLA GENERAL</div><p>Retribuciones fijas y periódicas → <b>mensualidades completas</b>, referidas al primer día hábil del mes.</p></div>
+<div class="trampa"><div class="tit">⚠️ Liquidación por días — SOLO 4 supuestos tasados</div>
+<ul class="lista">
+<li>Toma de posesión del primer destino / reingreso / fin de licencia sin sueldo</li>
+<li>Inicio de licencia sin sueldo</li>
+<li>Cambio de puesto a AAPP distinta de la AGE</li>
+<li>Cese en servicio activo — <b>EXCEPTO</b> jubilación, fallecimiento o retiro → mes completo</li>
+</ul></div>
+<p style="font-size:.85rem"><b>Plazo posesorio con retribución íntegra:</b> 3 días hábiles sin cambio de residencia / 1 mes con cambio de residencia.</p>
+<p style="font-size:.85rem"><b>Retribución diferida</b> (art. 29 TREBEP): aportaciones a planes de pensiones de empleo, no es retribución inmediata.</p>
+
+<h2>👤 5. Regímenes especiales</h2>
+<table><tr><th>Colectivo</th><th>Régimen</th></tr>
+<tr><td>Interinos</td><td>Básicas del grupo + trienios (art. 25.2 TREBEP) + complementarias del puesto (excluidas las de la condición de carrera). STS 15/11/2018: reconocimiento de grado personal a interinos</td></tr>
+<tr><td>Eventual</td><td>Depende de si ostenta o no condición de funcionario de carrera</td></tr>
+<tr><td>En prácticas — sin relación previa</td><td>Curso: sueldo+extras del grupo al que aspira. Prácticas en puesto: + complementarias del puesto</td></tr>
+<tr><td>En prácticas — con relación previa</td><td>Opción A: retribuciones de origen + trienios. Opción B: retribuciones de prácticas del nuevo cuerpo + trienios</td></tr>
+</table>
+
+<h2>✈️ 6. Indemnizaciones por razón del servicio (RD 462/2002)</h2>
+<div class="clave"><div class="tit">🔑 NATURALEZA</div><p>NO retribuyen trabajo: <b>resarcen gastos</b>. Principio de legalidad: toda concesión fuera de RD 462/2002 es <b>nula</b>.</p></div>
+
+<h3>6.1 Comisiones de servicio y grupos (Anexo I)</h3>
+<table><tr><th>Grupo</th><th>Incluye</th></tr>
+<tr><td>Grupo 1</td><td>Altos Cargos, Oficiales Generales, Magistrados TS, Embajadores, Rectores, Subdirectores Generales</td></tr>
+<tr><td>Grupo 2</td><td>Carrera judicial/fiscal, médicos forenses, funcionarios A1/A2/B</td></tr>
+<tr><td>Grupo 3</td><td>Funcionarios C1/C2/Agrupaciones Profesionales</td></tr>
+</table>
+
+<h3>6.2 Dietas (Anexo II — congeladas desde 2005)</h3>
+<table><tr><th>Grupo</th><th>Alojamiento/día</th><th>Manutención/día</th><th>Dieta entera/día</th></tr>
+<tr><td>Grupo 1</td><td>102,56 €</td><td>53,34 €</td><td>155,90 €</td></tr>
+<tr><td>Grupo 2</td><td>65,97 €</td><td>37,40 €</td><td>103,37 €</td></tr>
+<tr><td>Grupo 3</td><td>48,92 €</td><td>28,21 €</td><td>77,13 €</td></tr>
+</table>
+<table><tr><th>Momento</th><th>Manutención</th></tr>
+<tr><td>Comisión ≤1 día, general</td><td>SIN indemnización</td></tr>
+<tr><td>Comisión ≤1 día pero ≥5h, inicio&lt;14h, fin&gt;16h</td><td><b>50%</b> manutención</td></tr>
+<tr><td>Día de salida, antes de 14h</td><td>100%</td></tr>
+<tr><td>Día de salida, 14h-22h</td><td>50%</td></tr>
+<tr><td>Día de salida, después de 22h</td><td>0%</td></tr>
+<tr><td>Día de regreso, antes de 14h</td><td>0%</td></tr>
+<tr><td>Día de regreso, después de 14h</td><td>50% (+50% si &gt;22h con factura)</td></tr>
+</table>
+
+<h3>6.3 Residencia eventual (art. 16)</h3>
+<div class="clave"><div class="tit">🔑 CLAVE</div><p>Máx. <b>80%</b> de la dieta entera. Porcentaje SIEMPRE expreso en la orden. <b>SIN justificación documental</b> (diferencia clave frente a dietas ordinarias).</p></div>
+<table><tr><th>Territorio</th><th>Umbral que genera residencia eventual</th></tr>
+<tr><td>Nacional</td><td>Duración prevista &gt;1 mes</td></tr>
+<tr><td>Extranjero</td><td>Duración prevista &gt;3 meses</td></tr>
+</table>
+<p style="font-size:.85rem">Duración máxima de la propia residencia eventual: <b>1 año</b>, prorrogable ≤1 año más.</p>
+
+<h3>6.4 Gastos de viaje y asistencias</h3>
+<table><tr><th>Concepto</th><th>Límite</th><th>Base</th></tr>
+<tr><td>Órganos colegiados/Consejos Admón.</td><td>Máx. 40%</td><td rowspan="4">Retribuciones anuales del puesto principal (sin antigüedad)</td></tr>
+<tr><td>Tribunales de selección</td><td>Máx. 20%</td></tr>
+<tr><td>Formación no habitual (máx. 75h/año)</td><td>Máx. 25%</td></tr>
+<tr><td><b>Límite global conjunto</b></td><td><b>Máx. 50%</b></td></tr>
+</table>
+<p style="font-size:.85rem">Exceso → ingreso en el Tesoro Público. Compatibles con dietas de desplazamiento. Clasificación de tribunales por el MTDFP: 1ª cat. (A1), 2ª (A2/C1), 3ª (C2/Agrup.).</p>
+
+<h3>6.5 Traslados de residencia (nacional)</h3>
+<table><tr><th>Elemento</th><th>Regla</th></tr>
+<tr><td>Traslado forzoso</td><td>Gastos de viaje titular+familia + 3 dietas c/u + transporte de mobiliario</td></tr>
+<tr><td>Exclusión</td><td>Traslado por sanción disciplinaria → SIN indemnización</td></tr>
+<tr><td>Caducidad</td><td>1 año; prórrogas semestrales hasta 2 años más</td></tr>
+</table>
+
+<h3>6.6 Traslados al extranjero (art. 26, modif. enero 2023)</h3>
+<table><tr><th>Umbral de destino</th><th>Efecto</th></tr>
+<tr><td>&gt;18 meses</td><td>+ gastos familia, transporte muebles, indemnización de instalación</td></tr>
+<tr><td>Regreso tras &gt;4 años</td><td>Derecho a indemnización de instalación</td></tr>
+<tr><td>Cese voluntario &lt;18 meses</td><td>REINTEGRO de pasajes de familia y transporte de muebles; sin gastos de regreso propio ni familiar</td></tr>
+</table>
+
+<h3>6.7 Indemnización por razón de residencia</h3>
+<p style="font-size:.85rem">Cantidad mensual (12 mensualidades, NO paga extra) por servicio en territorios especiales. De menor a mayor cuantía: <b>Baleares/Valle de Arán → Gran Canaria/Tenerife → resto Canarias → Ceuta y Melilla</b>.</p>
+
+<h2>📌 7. Datos clave para el examen</h2>
+<table>
+<tr><th>Dato</th><th>Cifra</th></tr>
+<tr><td>Incremento retributivo 2026 (RD-ley 14/2025)</td><td>1,5% + 0,5% condicionado a IPC≥1,5%</td></tr>
+<tr><td>Niveles de complemento de destino AGE</td><td>30 (del 1 al 30)</td></tr>
+<tr><td>Específico incompatible con privada si supera</td><td>30% de básicas (sin trienios)</td></tr>
+<tr><td>Pagas del complemento específico</td><td>14 (devengado en 12)</td></tr>
+<tr><td>Residencia eventual — máximo</td><td>80% dieta entera</td></tr>
+<tr><td>Comisión ordinaria — máximo</td><td>1 mes nacional / 3 meses extranjero</td></tr>
+<tr><td>Límite global asistencias</td><td>50% retribuciones anuales del puesto</td></tr>
+<tr><td>Trienios de interinos — desde</td><td>13/05/2007 (art. 25.2 TREBEP)</td></tr>
+<tr><td>Caducidad indemnización traslado</td><td>1 año + prórrogas hasta 2 años más</td></tr>
+</table>
+
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS DE EXAMEN</div>
+<ul class="lista">
+<li>El sistema retributivo NO se rige por el TREBEP: sigue vigente la <b>Ley 30/1984</b> (arts. 23-24) por falta de desarrollo del Capítulo III Título III.</li>
+<li>Pagas extraordinarias incluyen sueldo + trienios + <b>complemento de destino</b> (no solo sueldo y trienios).</li>
+<li>El complemento de desempeño se regula en el <b>Cap. I (arts. 116-121)</b>, NO en el art. 122 (que es exclusivamente carrera horizontal) — error frecuente en materiales de estudio.</li>
+<li>Residencia eventual: SIN justificación documental (a diferencia de las dietas ordinarias, que sí requieren justificar el alojamiento).</li>
+<li>Cese por jubilación/fallecimiento/retiro: se liquida por MES COMPLETO, no proporcional — excepción a la regla de liquidación por días.</li>
+</ul>
+</div>
+
+</div>
+<footer>GACE 2027 · Bloque V · Tema 6 · Material verificado contra BOE a 01/08/2026 · Antonio José De Lamo Villar</footer>
+</body>
+</html>
