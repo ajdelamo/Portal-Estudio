@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque VI · Tema 5 · Ejecución del presupuesto de gasto</title>
+<style>
+:root{
+  --v:#1e3a5f; --v2:#2c5282; --vclaro:#eff6ff; --borde:#bfdbfe;
+  --verde:#166534; --verdeclaro:#f0fdf4; --verdeborde:#bbf7d0;
+  --rojo:#991b1b; --rojoclaro:#fef2f2; --rojoborde:#fecaca;
+  --ambar:#92400e; --ambarclaro:#fffbeb; --ambarborde:#fde68a;
+  --morado:#5b21b6; --moradoclaro:#f5f3ff; --moradoborde:#ddd6fe;
+}
+*{box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;max-width:980px;margin:0 auto;padding:24px;color:#1e293b;line-height:1.5;background:#fff}
+.bloque{color:var(--v);font-weight:700;font-size:.85em;letter-spacing:.05em;text-transform:uppercase}
+h1{color:var(--v);font-size:1.6em;margin:.2em 0 .1em;border-bottom:3px solid var(--v);padding-bottom:.3em}
+.sub{color:#475569;font-size:1.02em;margin-bottom:.6em}
+.badge-verif{display:inline-block;background:var(--vclaro);color:var(--v);border:1px solid var(--borde);border-radius:20px;padding:3px 12px;font-size:.78em;font-weight:600;margin-bottom:1em}
+h2{color:var(--v2);border-left:5px solid var(--v);padding-left:10px;margin-top:1.8em;font-size:1.22em}
+h3{color:var(--v);font-size:1.02em;margin-top:1.2em}
+.card{background:var(--vclaro);border:1px solid var(--borde);border-radius:10px;padding:14px 18px;margin:10px 0}
+.clave{background:var(--verdeclaro);border:1px solid var(--verdeborde);border-left:5px solid var(--verde);border-radius:8px;padding:12px 16px;margin:10px 0}
+.clave b{color:var(--verde)}
+.trampa{background:var(--rojoclaro);border:1px solid var(--rojoborde);border-left:5px solid var(--rojo);border-radius:8px;padding:12px 16px;margin:10px 0}
+.trampa b{color:var(--rojo)}
+.nuevo{background:var(--ambarclaro);border:1px solid var(--ambarborde);border-left:5px solid var(--ambar);border-radius:8px;padding:12px 16px;margin:10px 0}
+.nuevo b{color:var(--ambar)}
+.nota{background:var(--moradoclaro);border:1px solid var(--moradoborde);border-left:5px solid var(--morado);border-radius:8px;padding:12px 16px;margin:10px 0}
+.nota b{color:var(--morado)}
+.art{display:inline-block;background:var(--v);color:#fff;border-radius:5px;padding:1px 8px;font-size:.85em;font-weight:600}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.92em}
+th{background:var(--v);color:#fff;text-align:left;padding:7px 10px}
+td{padding:7px 10px;border-bottom:1px solid var(--borde)}
+tr:nth-child(even) td{background:var(--vclaro)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--borde);border-radius:8px;overflow:hidden;margin:10px 0}
+.vs>div{padding:12px 16px}
+.vs>div:first-child{background:var(--rojoclaro);border-right:1px solid var(--borde)}
+.vs>div:last-child{background:var(--verdeclaro)}
+ul.lista{margin:6px 0;padding-left:22px}
+ul.lista li{margin:4px 0}
+.mini{font-size:.85em;color:#64748b}
+.mnemo{background:#1e293b;color:#f1f5f9;border-radius:8px;padding:12px 16px;margin:10px 0;font-size:.94em}
+.mnemo b{color:#fbbf24}
+footer{margin-top:2.5em;padding-top:1em;border-top:2px solid var(--borde);font-size:.82em;color:#64748b;text-align:center}
+@media print{body{max-width:100%}.card,.clave,.trampa,.nuevo,.nota{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="bloque">📘 GACE 2027 · Bloque VI · Gestión Financiera y Seguridad Social · Tema 5</div>
+<h1>Ejecución del presupuesto de gasto</h1>
+<div class="sub">Órganos competentes · Fases A-D-O-P · Contratación y subvenciones · Documentos contables · Tesorería del Estado</div>
+<div class="badge-verif">✅ Verificado contra BOE a 01/08/2026</div>
+
+<div class="clave">
+<b>Distinción fundamental: GASTAR ≠ PAGAR.</b> Gastar = reconocer una obligación frente a un tercero (fases 1ª-3ª, sin movimiento de fondos). Pagar = salida material de fondos del Tesoro (fases 4ª-5ª). En el Estado, el órgano que gestiona el gasto (Ministerio) es distinto del que gestiona el pago (DGTPF) — de ahí la propuesta de pago (documento K). En los Organismos Autónomos, el mismo órgano gestiona ambas fases.
+</div>
+
+<h2>1. Órganos competentes</h2>
+<table>
+<tr><th>Ámbito</th><th>Competencia de gasto (art. 74 LGP)</th><th>Competencia de pago (art. 75 LGP)</th></tr>
+<tr><td>Estado</td><td>Ministros y titulares de órganos con dotaciones diferenciadas</td><td>DGTPF, bajo la superior autoridad del Ministro de Economía</td></tr>
+<tr><td>Organismos Autónomos</td><td>Presidentes o Directores</td><td>Presidentes o Directores</td></tr>
+<tr><td>Seguridad Social</td><td>Directores de Entidades Gestoras/Servicios Comunes</td><td>Director General de la Tesorería General de la SS</td></tr>
+</table>
+<div class="vs">
+<div><b>Delegación</b><br>Traslado del EJERCICIO de la competencia; la titularidad se mantiene en el órgano delegante. Vía reglamentaria.</div>
+<div><b>Desconcentración</b><br>Traslado de titularidad Y ejercicio. Requiere Real Decreto del Consejo de Ministros.</div>
+</div>
+
+<div class="nuevo">
+<b>Autorización previa del Consejo de Ministros — umbral común 12.000.000€:</b>
+<ul class="lista">
+<li><b>Convenios y contratos-programa</b> (art. 74.5 LGP): gasto derivado &gt;12M€</li>
+<li><b>Contratos del sector público</b> (art. 324 LCSP): valor estimado ≥12M€; leasing/arrendamiento con opción de compra &gt;4 anualidades; acuerdos marco/SDA ≥12M€. Umbral supletorio si no se fija otro: 900.000€</li>
+<li><b>Subvenciones</b> (art. 10.2 LGS): cuantía &gt;12M€ (en concurrencia competitiva, la autorización recae sobre la convocatoria, no cada resolución)</li>
+</ul>
+</div>
+
+<h2>2. Las cinco fases del procedimiento (art. 73 LGP)</h2>
+<table>
+<tr><th>Etapa</th><th>Fase</th><th>Efecto jurídico</th></tr>
+<tr><td rowspan="3">Ordenación del gasto</td><td>1ª Aprobación (A)</td><td>Reserva de crédito</td></tr>
+<tr><td>2ª Compromiso (D)</td><td>Vincula frente a terceros</td></tr>
+<tr><td>3ª Reconocimiento de la obligación (O/OK)</td><td>Crédito exigible</td></tr>
+<tr><td rowspan="2">Ordenación del pago</td><td>4ª Ordenación del pago</td><td>Mandato formal de pago</td></tr>
+<tr><td>5ª Pago material</td><td>Extinción de la obligación</td></tr>
+</table>
+
+<h3>Fase 1ª — Aprobación (autorización)</h3>
+<p>Acto <b>interno, jurídico y contable</b> (no recurrible por particulares). Única fase en la que se admite importe <b>aproximado</b>. Requiere retención previa de crédito: documento <span class="art">RC 100</span>. Documento: <b>A</b>.</p>
+<h3>Fase 2ª — Compromiso (disposición)</h3>
+<p>Acto <b>externo, jurídico y contable</b> (ya es recurrible por terceros). Coincide con la adjudicación/formalización del contrato o la concesión de la subvención. Importe determinado o determinable. Documento: <b>D</b>.</p>
+<h3>Fase 3ª — Reconocimiento de la obligación</h3>
+<p>Exige acreditación documental de la prestación ("servicio hecho"): certificaciones de obra, actas de recepción, facturas conformadas.</p>
+<div class="vs">
+<div><b>Estado</b><br>Documento <b>OK</b>: reconocimiento + propuesta de pago (K) integrada, remitida a la Ordenación de Pagos.</div>
+<div><b>Organismos Autónomos</b><br>Documento <b>O</b>: sin propuesta de pago, pues el mismo órgano gestiona gasto y pago.</div>
+</div>
+<h3>Fase 4ª — Ordenación del pago</h3>
+<p>El Ordenador General de Pagos ordena el pago por el importe líquido (tras deducciones: IRPF, SS…). Competencia: DGTPF (Estado) / Presidente-Director (OO.AA.) / Director TGSS (SS).</p>
+<h3>Fase 5ª — Pago material</h3>
+<p>Salida material/virtual de fondos, en la Caja Pagadora de la DGTPF. Extingue la obligación por cumplimiento.</p>
+<div class="vs">
+<div><b>Estado</b><br>Documento <b>ROTB</b> (Relación de Órdenes de Transferencia Bancaria). El SIC considera el pago realizado al obtener la ROTB.</div>
+<div><b>Organismos Autónomos</b><br>Documento <b>OTB</b> (Orden de Transferencia Bancaria), individual por organismo.</div>
+</div>
+<p class="mini"><b>Formas de pago:</b> transferencia bancaria (regla general); cheque nominativo no a la orden (excepcional, previa solicitud y autorización DGTPF); pago en formalización (cantidad líquida cero, compensación de deudas).</p>
+
+<div class="nota">
+<b>Fases mixtas/acumuladas:</b> la IOC permite acumular fases en un mismo documento. Diferencia clave: Estado → <b>ADOK</b> / <b>OP</b>; Organismos Autónomos → <b>ADO</b> / <b>ADOP</b> (sin K, por no requerir propuesta de pago separada).
+</div>
+
+<h2>3. Contratación administrativa: paralelismo con las fases</h2>
+<div class="clave">
+<b>Umbrales armonizados vigentes desde 1/1/2026</b> (Orden HAC/1517/2025, de 18 de diciembre, adapta la LCSP a los Reglamentos Delegados (UE) 2025/2150-2152):
+<table>
+<tr><th>Supuesto</th><th>Umbral 2026</th><th>Umbral anterior</th></tr>
+<tr><td>Obras y concesiones</td><td>5.404.000€</td><td>5.538.000€</td></tr>
+<tr><td>Suministros y servicios</td><td>216.000€</td><td>221.000€</td></tr>
+<tr><td>Otros supuestos (arts. 21-22 LCSP)</td><td>140.000€</td><td>143.000€</td></tr>
+</table>
+</div>
+
+<h3>Tramitación anticipada (art. 117 LCSP, regla 42 IOC)</h3>
+<p>Permite avanzar hasta la adjudicación y formalización (fases A y D). <b>Nunca</b> llega al reconocimiento de la obligación. Requiere: condición suspensiva de existencia de crédito en el PCAP + certificado de cumplimiento de límites plurianuales.</p>
+
+<h2>4. Gestión de subvenciones: tramitación contable</h2>
+<table>
+<tr><th>Tipo</th><th>Secuencia contable</th></tr>
+<tr><td>Nominativas (no plurianuales)</td><td>RC + AD + OK (o RC + ADOK si se acumula)</td></tr>
+<tr><td>Paccionadas (convenios/contratos-programa)</td><td>RC → A → D (formalización del pacto) → OK</td></tr>
+<tr><td>No nominativas con convocatoria</td><td>RC → A (previa a publicación en BOE) → D (concesión) → OK</td></tr>
+</table>
+<div class="trampa">
+<b>Tramitación anticipada de subvenciones (regla 43 IOC):</b> como máximo hasta el momento inmediatamente anterior al compromiso del gasto (aprobación de la convocatoria) — <b>nunca</b> se puede dictar el acuerdo de concesión.
+</div>
+
+<h2>5. Gastos plurianuales en la ejecución</h2>
+<p>Tres requisitos (art. 47 LGP): no ser subvención nominativa del art. 22.2.a LGS; ejecución iniciada en el propio ejercicio; no superar límites y anualidades. <b>Máximo 4 ejercicios</b> posteriores, porcentajes <b>70-60-50-50</b>. Excepciones: carga financiera de la Deuda (cap. 3, intereses) y arrendamientos de inmuebles.</p>
+
+<h2>6. Procedimientos especiales de pago</h2>
+<div class="vs">
+<div><b>Pagos a justificar (art. 79 LGP)</b><br>Se libra fondos sin documentación justificativa previa, por urgencia o imposibilidad. Pago presupuestario con <b>control diferido</b>: exige rendición de cuenta justificativa y regularización posterior.</div>
+<div><b>Anticipos de caja fija (art. 78 LGP)</b><br>Provisión <b>extrapresupuestaria y permanente</b> a pagadurías/cajas para gastos periódicos o repetitivos. El gasto presupuestario se imputa al reponer fondos, no al librarlos.</div>
+</div>
+
+<h2>7. Documentos contables: síntesis</h2>
+<table>
+<tr><th>Fase</th><th>Documento Estado</th><th>Documento OO.AA.</th></tr>
+<tr><td>Retención previa</td><td colspan="2">RC 100</td></tr>
+<tr><td>1ª Aprobación</td><td colspan="2">A</td></tr>
+<tr><td>2ª Compromiso</td><td colspan="2">D</td></tr>
+<tr><td>3ª Reconocimiento</td><td>OK (O+K)</td><td>O</td></tr>
+<tr><td>4ª/5ª Ordenación/Pago</td><td>ROTB</td><td>OTB</td></tr>
+</table>
+
+<h2>8. Tesorería del Estado (Título IV LGP, arts. 90-110)</h2>
+<div class="clave">
+<b>Principio de unidad de caja (art. 26 LGP):</b> una única caja —el Tesoro Público— custodia todos los fondos y valores de la Hacienda estatal. Centraliza fondos en la cuenta del Tesoro en el Banco de España.
+</div>
+<ul class="lista">
+<li><b>DGTPF:</b> recaudación de derechos económicos, pago de obligaciones, servicio financiero de la Deuda, gestión de la cuenta del Tesoro, autorización de cuentas bancarias de OO.AA.</li>
+<li>OO.AA. pueden abrir cuentas en otras entidades solo con autorización previa del DGTPF (<span class="art">art. 109 LGP</span>): plazo de resolución <b>3 meses</b>, silencio <b>negativo</b>.</li>
+</ul>
+<table>
+<tr><th>Plazo</th><th>Contenido</th></tr>
+<tr><td>3 meses (art. 24 LGP)</td><td>Pago de obligaciones derivadas de sentencia judicial firme, desde reconocimiento o notificación</td></tr>
+<tr><td>4 años (art. 25 LGP)</td><td>Prescripción del derecho al reconocimiento/liquidación y al cobro de obligaciones de la Hacienda Pública</td></tr>
+<tr><td>3 meses, silencio negativo (art. 109 LGP)</td><td>Autorización de cuentas bancarias de OO.AA. fuera del Banco de España</td></tr>
+</table>
+
+<h2>9. Saldos presupuestarios (útiles en supuestos prácticos)</h2>
+<div class="mnemo">
+Saldo de crédito disponible = Crédito Total − Créditos Retenidos − Gastos Aprobados<br>
+Saldo de autorizaciones = Gastos aprobados − Gastos comprometidos<br>
+Saldo de disposiciones = Gastos comprometidos − Obligaciones reconocidas<br>
+Remanente de crédito = Crédito Total − Obligaciones reconocidas<br>
+Obligaciones pendientes de pago = Obligaciones reconocidas − Pagos realizados
+</div>
+
+<h2>10. Datos clave para el examen</h2>
+<div class="trampa">
+<b>⚠️ Errores típicos:</b>
+<ul class="lista">
+<li>Confundir gastar (fases 1-3) con pagar (fases 4-5).</li>
+<li>Olvidar que en el Estado la fase 3ª genera OK (con K) y en OO.AA. genera O (sin K) — la diferencia se arrastra a las fases mixtas: ADOK vs. ADO, OP vs. ADOP.</li>
+<li>Confundir tramitación anticipada de contratos (llega hasta formalización) con la de subvenciones (llega solo hasta la convocatoria, nunca la concesión).</li>
+<li>Atribuir la Ordenación General de Pagos del Estado a Hacienda: es el DGTPF, bajo la superior autoridad del Ministro de <b>Economía</b>.</li>
+</ul>
+</div>
+
+<footer>GACE 2027 · Bloque VI · Tema 5 · Material verificado contra BOE a 01/08/2026 · Antonio José De Lamo Villar</footer>
+</body>
+</html>
