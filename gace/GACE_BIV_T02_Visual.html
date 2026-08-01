@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BIV T2 — La Ley</title>
+<style>
+:root{
+  --azul:#1e3a8a; --azul2:#3b62c4; --azulclaro:#eef2ff; --borde:#c7d2fe;
+  --verde:#166534; --verdeclaro:#f0fdf4;
+  --rojo:#991b1b; --rojoclaro:#fef2f2;
+  --ambar:#92400e; --ambarclaro:#fffbeb;
+  --morado:#5b21b6; --moradoclaro:#f5f3ff;
+  --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#5b21b6,#3b62c4);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.7rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--morado);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--morado)}
+h3{color:var(--azul2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.88rem;background:#fff}
+th{background:var(--morado);color:#fff;padding:8px 10px;text-align:left;font-size:.84rem}
+td{padding:8px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--azulclaro);border-left:5px solid var(--azul2);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--azul);font-size:.85rem;margin-bottom:6px}
+.trampa{background:var(--rojoclaro);border-left:5px solid var(--rojo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--rojo);font-size:.85rem;margin-bottom:6px}
+.nuevo{background:var(--verdeclaro);border-left:5px solid var(--verde);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.nuevo .tit{font-weight:700;color:var(--verde);font-size:.85rem;margin-bottom:6px}
+.nota{background:var(--ambarclaro);border-left:5px solid var(--ambar);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:var(--ambar);font-size:.85rem;margin-bottom:6px}
+.art{display:inline-block;background:var(--morado);color:#fff;border-radius:5px;padding:1px 7px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.jur{display:inline-block;background:#0f766e;color:#fff;border-radius:5px;padding:1px 7px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:14px 0;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.vs>div{padding:14px 16px}
+.vs .izq{background:var(--azulclaro)}
+.vs .der{background:var(--moradoclaro)}
+.vs h4{margin-bottom:8px;font-size:.95rem}
+.vs .izq h4{color:var(--azul)}
+.vs .der h4{color:var(--morado)}
+.vs ul{margin-left:18px;font-size:.87rem}
+.vs li{margin:4px 0}
+@media(max-width:720px){.vs{grid-template-columns:1fr}}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+/* Flujo procedimiento */
+.flujo{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.paso{display:flex;gap:12px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px;align-items:flex-start;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.paso .num{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--morado);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.paso .txt{font-size:.88rem}
+.paso .txt b{color:var(--morado)}
+.paso .plazo{margin-left:auto;flex-shrink:0;background:var(--ambarclaro);color:var(--ambar);border:1px solid #fde68a;border-radius:6px;padding:2px 8px;font-size:.78rem;font-weight:700;white-space:nowrap}
+.memo{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:14px 0}
+.memo .m{background:#fff;border:2px solid var(--borde);border-radius:10px;padding:12px;font-size:.85rem}
+.memo .m b{color:var(--azul);display:block;margin-bottom:4px}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{
+  body{background:#fff}
+  header{background:var(--morado)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card{box-shadow:none}
+  h2{page-break-after:avoid}
+  table,.clave,.trampa,.nuevo,.vs,.paso{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque IV · Derecho Administrativo</div>
+  <h1>Tema 2 — La Ley</h1>
+  <div class="sub">Tipos de leyes · Reserva de ley · Decreto-Ley y Decreto Legislativo</div>
+  <div class="badge-verif">✅ Normativa verificada contra BOE a 01/08/2026</div>
+</header>
+<div class="wrap">
+
+<h2>📖 1. Concepto y posición de la ley</h2>
+<div class="card">
+<p><b>Ley (sentido formal):</b> acto normativo aprobado y publicado con ese nombre por las <b>Cortes Generales</b> (<span class="art">Art. 66.2 CE</span>) o por las Asambleas Legislativas de las CCAA, conforme al procedimiento establecido. Su privilegio deriva del <b>principio democrático</b>: emana del representante directo del pueblo soberano.</p>
+<p>Ocupa el <b>segundo nivel</b> de la jerarquía, bajo la CE, con el <b>mismo rango</b> que decreto-ley y decreto legislativo. Las diferencias entre normas con rango de ley se rigen por <b>competencia material</b>, no jerarquía.</p>
+</div>
+<h3>Las 6 características esenciales</h3>
+<table>
+<tr><th>Característica</th><th>Contenido</th></tr>
+<tr><td><b>Subordinación a la CE</b></td><td>Plena libertad dentro del marco constitucional (arts. 9.1 y 9.3 CE).</td></tr>
+<tr><td><b>Primacía (universalidad material)</b></td><td>Puede regular cualquier materia; ningún ámbito le está vedado.</td></tr>
+<tr><td><b>Presunción de legitimidad</b></td><td>Se presume constitucional mientras el TC no declare lo contrario.</td></tr>
+<tr><td><b>Fuerza de ley</b></td><td><b>Activa</b>: deroga normas inferiores y anteriores. <b>Pasiva</b>: resiste a normas de rango inferior.</td></tr>
+<tr><td><b>Sometimiento judicial</b></td><td>Jueces sometidos al «imperio de la ley» (<span class="art">Art. 117 CE</span>). Solo el TC puede expulsarla del ordenamiento; el juez ordinario solo puede plantear cuestión de inconstitucionalidad.</td></tr>
+<tr><td><b>Generalidad y abstracción</b></td><td>Dirigida a una pluralidad indeterminada de personas o situaciones.</td></tr>
+</table>
+
+<h2>👑 2. Supremacía constitucional: reforma y control</h2>
+<div class="vs">
+  <div class="izq"><h4>REFORMA ORDINARIA — Art. 167 CE</h4><ul>
+  <li>Mayoría de <b>3/5 de cada Cámara</b></li>
+  <li>Si hay desacuerdo: comisión paritaria → nuevo texto</li>
+  <li>Si persiste: Congreso por <b>2/3</b> si el Senado aprobó por mayoría absoluta</li>
+  <li>Referéndum <b>FACULTATIVO</b>: si lo pide <b>1/10</b> de miembros de cualquier Cámara en 15 días</li>
+  <li><i>Vía usada en las reformas de 1992, 2011, 2024 y 2026</i></li></ul></div>
+  <div class="der"><h4>REFORMA AGRAVADA — Art. 168 CE</h4><ul>
+  <li>Para: revisión total, Título Preliminar, Sección 1ª Cap. II Tít. I (arts. 15-29) y Título II (Corona)</li>
+  <li>Principio: <b>2/3 de cada Cámara</b> + <b>disolución inmediata</b> de las Cortes</li>
+  <li>Nuevas Cámaras ratifican y aprueban el texto por <b>2/3</b></li>
+  <li>Referéndum <b>OBLIGATORIO</b></li></ul></div>
+</div>
+<div class="nota"><div class="tit">⛔ LÍMITE TEMPORAL (art. 169 CE)</div>
+<p>No puede <b>iniciarse</b> la reforma en tiempo de <b>guerra</b> ni vigentes los estados de <b>alarma, excepción o sitio</b>. (No hay límites materiales expresos: toda la CE es reformable.)</p></div>
+<h3>Instrumentos de control de constitucionalidad</h3>
+<table>
+<tr><th>Instrumento</th><th>Objeto</th><th>Legitimados / Plazo</th></tr>
+<tr><td><b>Recurso de inconstitucionalidad</b><br><span class="art">Art. 161.1.a CE</span></td><td>Leyes y normas con fuerza de ley</td><td>Presidente del Gobierno, Defensor del Pueblo, <b>50 diputados, 50 senadores</b>, órganos ejecutivos y Asambleas de las CCAA (<span class="art">Art. 162.1.a CE</span>). Plazo: <b>3 meses</b> desde publicación (ampliable a <b>9 meses</b> con Comisión Bilateral, art. 33.2 LOTC).</td></tr>
+<tr><td><b>Cuestión de inconstitucionalidad</b><br><span class="art">Art. 163 CE</span></td><td>Norma con rango de ley aplicable al caso, de cuya validez dependa el fallo</td><td>Cualquier <b>órgano judicial</b>, de oficio o a instancia de parte. Sin plazo.</td></tr>
+<tr><td><b>Recurso de amparo</b><br><span class="art">Art. 161.1.b CE</span></td><td>Violación de derechos de los <b>arts. 14 a 29 + 30.2 CE</b></td><td>Persona con interés legítimo, Defensor del Pueblo, Ministerio Fiscal.</td></tr>
+<tr><td><b>Conflictos de competencia</b></td><td>Entre Estado y CCAA o de estas entre sí</td><td>Gobierno y ejecutivos autonómicos.</td></tr>
+</table>
+<p>Las sentencias del TC tienen <b>valor de cosa juzgada desde el día siguiente a su publicación en el BOE</b>, sin recurso; las que declaran inconstitucionalidad tienen efectos <b>erga omnes</b> (<span class="art">Art. 164 CE</span>).</p>
+
+<h2>⚖️ 3. Ley Orgánica vs. Ley Ordinaria</h2>
+<div class="vs">
+  <div class="izq"><h4>LEY ORGÁNICA — Art. 81 CE</h4><ul>
+  <li><b>Materias tasadas (81.1)</b>: desarrollo de <b>derechos fundamentales y libertades públicas</b> (arts. 15-29), <b>Estatutos de Autonomía</b>, <b>régimen electoral general</b> y demás previstas en la CE (Defensor del Pueblo 54, estados excepcionales 116, TC 165, CGPJ 122, Consejo de Estado 107, FCSE 104, transferencia 150.2…)</li>
+  <li><b>Mayoría ABSOLUTA del Congreso (176/350)</b> en votación final sobre el conjunto (81.2)</li>
+  <li>En el Senado: mayoría simple</li></ul></div>
+  <div class="der"><h4>LEY ORDINARIA</h4><ul>
+  <li>Todas las materias <b>no reservadas</b> a LO</li>
+  <li><b>Mayoría simple</b></li>
+  <li>Cabe aprobación en <b>Comisión Legislativa Permanente</b> (<span class="art">Art. 75.2 CE</span>), salvo: reforma constitucional, cuestiones internacionales, LO, leyes de bases y PGE</li></ul></div>
+</div>
+<div class="clave"><div class="tit">🔑 RELACIÓN LO–LEY ORDINARIA: COMPETENCIA, NO JERARQUÍA</div>
+<p>· Solo el <b>«desarrollo directo»</b> del contenido esencial de un derecho fundamental exige LO; la mera «afectación» no (<span class="jur">STC 6/1982</span>, <span class="jur">STC 127/1994</span>).<br>
+· La LO no puede invadir materias ordinarias; las «materias conexas» reguladas en una LO quedan con <b>rango de ley ordinaria</b> (<span class="jur">STC 5/1981</span>).<br>
+· Las Cortes no pueden ampliar a su antojo el ámbito de la LO (<span class="jur">STC 76/1983</span>, LOAPA).</p></div>
+<h3>Leyes del art. 150 CE (articulación Estado-CCAA)</h3>
+<table>
+<tr><th>Figura</th><th>Artículo</th><th>Contenido</th><th>Naturaleza</th></tr>
+<tr><td><b>Ley Marco</b></td><td><span class="art">150.1</span></td><td>Atribuye a CCAA la facultad de dictar normas legislativas en materias estatales, dentro de principios, bases y directrices de la propia ley.</td><td>Ley ordinaria</td></tr>
+<tr><td><b>Ley de Transferencia o Delegación</b></td><td><span class="art">150.2</span></td><td>Transfiere o delega facultades de titularidad estatal susceptibles de ello; prevé medios financieros y controles.</td><td><b>Ley Orgánica</b></td></tr>
+<tr><td><b>Ley de Armonización</b></td><td><span class="art">150.3</span></td><td>Armoniza normas de las CCAA, incluso en competencias autonómicas, cuando lo exija el interés general.</td><td>Ley ordinaria (el interés general se aprecia por <b>mayoría absoluta de cada Cámara</b>)</td></tr>
+</table>
+<div class="card"><b>Leyes de las CCAA:</b> potestad legislativa de las Asambleas autonómicas (arts. 152.1 y 153.a CE) sobre materias atribuidas por CE y Estatutos. Mismo rango que la ley estatal, ámbitos competenciales distintos. Subordinadas a la CE y a su Estatuto.</div>
+
+<h2>🔒 4. La reserva de ley y la congelación de rango</h2>
+<table>
+<tr><th>Tipo</th><th>Contenido</th><th>Ejemplo</th></tr>
+<tr><td><b>Reserva ABSOLUTA</b></td><td>Regulación íntegra por ley; el reglamento no puede complementar.</td><td><span class="art">Art. 25.1 CE</span> (infracciones y sanciones) · <span class="art">Art. 31.1 CE</span> (tributos)</td></tr>
+<tr><td><b>Reserva RELATIVA</b></td><td>La ley regula lo esencial; remite al reglamento el desarrollo. La habitual en Derecho Administrativo.</td><td><span class="art">Art. 53.1 CE</span> (derechos del Cap. II Tít. I) · <span class="art">Art. 33.3 CE</span> (expropiación)</td></tr>
+<tr><td><b>Reserva de LEY ORGÁNICA</b></td><td>Subespecie cualificada: exige específicamente LO.</td><td><span class="art">Art. 81.1 CE</span></td></tr>
+</table>
+<div class="clave"><div class="tit">🔑 CONGELACIÓN DE RANGO (reserva formal)</div>
+<p>Una vez que una materia ha sido regulada por ley — aunque la CE no lo exigiera —, solo otra norma de <b>rango igual o superior</b> puede modificarla o derogarla. Diferencia con la reserva material: en la reserva formal, la propia ley puede <b>deslegalizar</b> la materia y devolverla al reglamento; en la material, nunca.</p></div>
+<h3>Tabla de memorización: materias con reserva de ley en la CE</h3>
+<table>
+<tr><th>Artículo CE</th><th>Materia</th><th>Tipo</th></tr>
+<tr><td><span class="art">17.2</span></td><td>Detención preventiva: <b>máximo 72 horas</b></td><td>Absoluta</td></tr>
+<tr><td><span class="art">18.2</span></td><td>Inviolabilidad del domicilio</td><td>Absoluta</td></tr>
+<tr><td><span class="art">22.4</span></td><td>Disolución de asociaciones: solo resolución judicial motivada</td><td>Absoluta</td></tr>
+<tr><td><span class="art">25.1</span></td><td>Legalidad sancionadora (infracciones y sanciones)</td><td>Cuasi-absoluta</td></tr>
+<tr><td><span class="art">28.2</span></td><td>Derecho de huelga</td><td>LO para desarrollo; relativa el resto</td></tr>
+<tr><td><span class="art">31.1 y 31.3</span></td><td>Legalidad tributaria (prestaciones patrimoniales públicas)</td><td>Absoluta para el establecimiento; relativa en elementos</td></tr>
+<tr><td><span class="art">33.3</span></td><td>Expropiación forzosa</td><td>Relativa</td></tr>
+<tr><td><span class="art">53.1</span></td><td>Regulación de los derechos del Cap. II del Tít. I</td><td>Relativa</td></tr>
+</table>
+<div class="trampa"><div class="tit">⚠️ CORRECCIÓN SOBRE TU TEMARIO</div>
+<p>El plazo máximo de <b>72 horas de la detención preventiva está en el art. 17.2 CE</b>, no en el 17.3 (que regula los derechos del detenido: información, no declarar, asistencia letrada). Tu tabla del Temario Claude lo atribuía al 17.3 — corregido aquí.</p></div>
+
+<h2>🏭 5. El procedimiento legislativo ordinario (arts. 87-91 CE)</h2>
+<h3>Iniciativa legislativa (art. 87 CE)</h3>
+<table>
+<tr><th>Titular</th><th>Instrumento</th><th>Detalle</th></tr>
+<tr><td><b>Gobierno</b></td><td><b>Proyecto de ley</b></td><td>Aprobado en Consejo de Ministros; <b>prioridad</b> en la tramitación (art. 89 CE).</td></tr>
+<tr><td>Congreso y Senado</td><td>Proposición de ley</td><td>Toma en consideración previa.</td></tr>
+<tr><td>Asambleas de las CCAA</td><td>Proposición de ley ante el Congreso, o solicitud al Gobierno</td><td><span class="art">Art. 87.2 CE</span> — <b>vía usada por el Parlamento balear para la reforma constitucional de 2026</b>.</td></tr>
+<tr><td><b>Iniciativa Legislativa Popular</b></td><td><b>500.000 firmas</b> acreditadas (LO 3/1984)</td><td><b>Excluidas</b>: materias de LO, tributarias, internacionales y prerrogativa de gracia (art. 87.3). Tampoco cabe ILP para la reforma constitucional (arts. 166 y 87.1-2 CE).</td></tr>
+</table>
+<h3>Fases (flujo completo)</h3>
+<div class="flujo">
+  <div class="paso"><div class="num">1</div><div class="txt"><b>Congreso — Mesa:</b> calificación, admisión y publicación en el BOCG. Posible tramitación urgente.</div></div>
+  <div class="paso"><div class="num">2</div><div class="txt"><b>Ponencia:</b> informe sobre el texto y las enmiendas.</div></div>
+  <div class="paso"><div class="num">3</div><div class="txt"><b>Comisión:</b> debate por artículos → dictamen. Puede tener competencia legislativa plena (art. 75.2 CE) salvo reforma constitucional, cuestiones internacionales, LO, bases y PGE.</div></div>
+  <div class="paso"><div class="num">4</div><div class="txt"><b>Pleno del Congreso:</b> debate y votación del dictamen.</div><div class="plazo">mayoría simple</div></div>
+  <div class="paso"><div class="num">5</div><div class="txt"><b>Senado (art. 90 CE):</b> (a) aprueba; (b) introduce <b>enmiendas</b> (mayoría simple); o (c) <b>VETA por mayoría absoluta</b>. El Congreso levanta el veto por <b>mayoría absoluta</b> (de inmediato) o por <b>mayoría simple transcurridos 2 meses</b>; las enmiendas se aceptan o rechazan por mayoría simple.</div><div class="plazo">2 meses · 20 días naturales si urgente</div></div>
+  <div class="paso"><div class="num">6</div><div class="txt"><b>Rey (art. 91 CE):</b> sanción y promulgación — acto debido, sin posibilidad de veto — y orden de publicación.</div><div class="plazo">15 días</div></div>
+  <div class="paso"><div class="num">7</div><div class="txt"><b>BOE:</b> publicación y entrada en vigor a los <b>20 días</b> salvo disposición contraria (art. 2.1 CC).</div><div class="plazo">vacatio 20 días</div></div>
+</div>
+
+<h2>🏛️ 6. Decreto Legislativo (arts. 82-85 CE)</h2>
+<div class="card"><p><b>Concepto:</b> norma con rango de ley dictada por el Gobierno en virtud de <b>delegación expresa de las Cortes</b>. Potestad <b>delegada</b>, no propia. Forma: <b>Real Decreto Legislativo</b>. Denominación oficial: «Decreto Legislativo» (art. 85 CE).</p></div>
+<div class="vs">
+  <div class="izq"><h4>TEXTO ARTICULADO</h4><ul><li>Delegación mediante <b>LEY DE BASES</b> (art. 82.4): delimita objeto, alcance, principios y criterios</li><li>Crea una regulación nueva</li></ul></div>
+  <div class="der"><h4>TEXTO REFUNDIDO</h4><ul><li>Delegación mediante <b>LEY ORDINARIA</b> (art. 82.5): especifica si es mera formulación de texto único o incluye <b>«regularizar, aclarar y armonizar»</b></li><li>Unifica normas dispersas. Ej.: TRLPI (RDLeg 1/1996), TRLGSS (RDLeg 8/2015), TRLCon (RDLeg 1/2020)</li></ul></div>
+</div>
+<div class="clave"><div class="tit">🔑 REQUISITOS Y LÍMITES DE LA DELEGACIÓN (arts. 82-83 CE)</div>
+<ul class="lista">
+<li><b>Expresa</b>, para <b>materia concreta</b> y con <b>plazo determinado</b>. Prohibidas las delegaciones en blanco o por tiempo indeterminado.</li>
+<li>Se <b>agota con su uso</b> (publicación del decreto legislativo).</li>
+<li><b>Prohibida la subdelegación</b> a autoridades distintas del Gobierno (art. 82.3).</li>
+<li><b>No cabe en materias de LO</b> (art. 82.1).</li>
+<li>Límites de la Ley de Bases (art. 83): no puede autorizar su propia modificación ni facultar normas <b>retroactivas</b>.</li>
+</ul></div>
+<div class="card"><b>Controles:</b> dictamen del <b>Consejo de Estado</b> · comunicación al Congreso (art. 82.6) y fórmulas adicionales de control · <b>TC</b> (recurso/cuestión) · <b>tribunales contencioso-administrativos</b> sobre el exceso de delegación (<b><i>ultra vires</i></b>): lo que excede la delegación carece de rango de ley (<span class="jur">STC 51/1982</span>, <span class="jur">STC 13/1992</span> y STS 17/12/2001).</div>
+
+<h2>⚡ 7. Decreto-Ley (art. 86 CE)</h2>
+<div class="card"><p><b>Concepto:</b> disposición legislativa <b>PROVISIONAL</b> con rango de ley que el Gobierno dicta por potestad <b>propia</b> ante una <b>«extraordinaria y urgente necesidad»</b>. Forma: <b>Real Decreto-ley</b>. Vigencia definitiva condicionada al Congreso.</p></div>
+<div class="clave"><div class="tit">🔑 PRESUPUESTO HABILITANTE — DOCTRINA DEL TC</div>
+<p>No bastan la conveniencia política ni evitar el debate parlamentario. El TC exige una necesidad relativa objetiva y un control de <b>«conexión de sentido»</b> entre la urgencia y las medidas. <span class="jur">STC 29/1982</span> (no es vía libre del Ejecutivo) · <span class="jur">STC 6/1983</span> (urgencia objetiva, no subjetiva) · <span class="jur">STC 111/1983</span> (caso RUMASA: admitido en crisis grave e imprevisible).</p></div>
+<h3>Las 4 materias vedadas (art. 86.1) — «NO PUEDE AFECTAR»</h3>
+<div class="memo">
+  <div class="m"><b>1. Instituciones básicas del Estado</b>Ordenamiento de Corona, Cortes, Gobierno, TC, CGPJ…</div>
+  <div class="m"><b>2. Derechos, deberes y libertades del Título I</b>El TC matiza: prohíbe regular su régimen general, no cualquier afectación.</div>
+  <div class="m"><b>3. Régimen de las CCAA</b>La organización territorial exige consenso parlamentario.</div>
+  <div class="m"><b>4. Derecho electoral general</b>Reservado además a LO.</div>
+</div>
+<h3>Control parlamentario (arts. 86.2 y 86.3)</h3>
+<div class="flujo">
+  <div class="paso"><div class="num">1</div><div class="txt">Aprobación en <b>Consejo de Ministros</b> y publicación en el BOE → entra en vigor con carácter <b>provisional</b>.</div></div>
+  <div class="paso"><div class="num">2</div><div class="txt">Sometimiento <b>inmediato</b> al <b>Congreso</b> (solo el Congreso; el Senado no interviene) para debate y votación de totalidad.</div><div class="plazo">30 días desde la promulgación</div></div>
+  <div class="paso"><div class="num">3</div><div class="txt"><b>CONVALIDACIÓN</b> por mayoría simple, en bloque y sin enmiendas → vigencia definitiva. <b>No se convierte en ley</b> ni sana vicios de inconstitucionalidad. <b>O DEROGACIÓN</b> → pierde vigencia <i>ex nunc</i>. Si el Congreso no se pronuncia en 30 días → queda derogado.</div></div>
+  <div class="paso"><div class="num">4</div><div class="txt">Opción adicional (86.3): <b>tramitación como proyecto de ley por urgencia</b> dentro del plazo — permite enmiendas; la ley resultante sustituye al decreto-ley.</div></div>
+</div>
+
+<h2>🗂️ 8. Cuadro maestro: las 4 normas con rango de ley</h2>
+<table>
+<tr><th>Criterio</th><th>Ley Orgánica</th><th>Ley Ordinaria</th><th>Decreto-Ley</th><th>Decreto Legislativo</th></tr>
+<tr><td><b>Quién</b></td><td>Cortes</td><td>Cortes / Asambleas CCAA</td><td>Gobierno (potestad propia)</td><td>Gobierno (delegación de Cortes)</td></tr>
+<tr><td><b>Base CE</b></td><td>Art. 81</td><td>Arts. 66, 87-91</td><td>Art. 86</td><td>Arts. 82-85</td></tr>
+<tr><td><b>Votación</b></td><td>Mayoría absoluta Congreso (176), votación de conjunto</td><td>Mayoría simple</td><td>Convalidación en 30 días (mayoría simple)</td><td>Sin votación posterior; control TC + contencioso</td></tr>
+<tr><td><b>Presupuesto</b></td><td>Materia del 81.1</td><td>Materia no reservada a LO</td><td>Extraordinaria y urgente necesidad</td><td>Ley de bases o ley ordinaria de autorización</td></tr>
+<tr><td><b>Límites</b></td><td>Solo sus materias</td><td>No invadir LO</td><td>4 materias vedadas del 86.1</td><td>No materias de LO; límites de la delegación</td></tr>
+<tr><td><b>Vigencia</b></td><td>Indefinida</td><td>Indefinida</td><td><b>Provisional</b> hasta convalidación</td><td>Indefinida</td></tr>
+<tr><td><b>Ejemplos</b></td><td>LO 10/1995 (CP) · LO 5/1985 (LOREG) · LO 3/1981 (Defensor del Pueblo)</td><td>Ley 39/2015 · Ley 40/2015</td><td>RD-ley 8/2020 (COVID)</td><td>RDLeg 1/1996 (TRLPI) · RDLeg 8/2015 (TRLGSS) · RDLeg 5/2015 (TREBEP)</td></tr>
+</table>
+<div class="trampa"><div class="tit">⚠️ CORRECCIÓN SOBRE TU TEMARIO</div>
+<p>Tu cuadro comparativo citaba «Real Decreto <b>Ley</b> 1/1996 (LPI)» y «Real Decreto <b>Ley</b> 1/2020 (TR LGSS)». Doble error: son Reales Decretos <b>Legislativos</b>, y el <b>TR de la Ley General de la Seguridad Social es el RDLeg 8/2015</b> (el RDLeg 1/2020 es el TR de la <b>Ley Concursal</b>).</p></div>
+
+<h2>🎯 9. Lo que preguntan + trampas</h2>
+<div class="clave"><div class="tit">📌 DATOS-ANCLA PARA MEMORIZAR</div>
+<ul class="lista">
+<li><b>3/5</b> reforma ordinaria · <b>2/3 + disolución + referéndum obligatorio</b> agravada · referéndum facultativo: <b>1/10</b> de una Cámara.</li>
+<li>Recurso de inconstitucionalidad: <b>50 diputados / 50 senadores</b>, 3 meses (9 con Comisión Bilateral).</li>
+<li>LO: mayoría absoluta del <b>Congreso</b> = <b>176 votos</b>; el Senado no necesita mayoría absoluta.</li>
+<li>ILP: <b>500.000 firmas</b>; 4 exclusiones del 87.3.</li>
+<li>Senado: <b>2 meses</b> (20 días naturales si urgencia); veto por <b>mayoría absoluta</b>.</li>
+<li>Sanción regia: <b>15 días</b>, acto debido.</li>
+<li>Decreto-ley: <b>30 días</b> para convalidar o derogar; solo interviene el <b>Congreso</b>.</li>
+<li>Vacatio legis: <b>20 días</b> (art. 2.1 CC).</li>
+</ul></div>
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS</div>
+<ul class="lista">
+<li>«La LO es jerárquicamente superior» → NO: <b>competencia</b> (STC 5/1981).</li>
+<li>«La convalidación convierte el decreto-ley en ley» → NO: sigue siendo decreto-ley; solo la tramitación del 86.3 produce una <b>ley nueva</b>.</li>
+<li>«El Senado convalida el decreto-ley» → NO: solo el <b>Congreso</b>.</li>
+<li>«La delegación legislativa puede ser tácita o indefinida» → NO: expresa, materia concreta, plazo (art. 82.3).</li>
+<li>«El texto refundido se autoriza por ley de bases» → NO: la ley de bases es para <b>textos articulados</b>; la refundición se autoriza por <b>ley ordinaria</b>.</li>
+<li>«El referéndum del 167 es obligatorio» → NO: solo si lo pide 1/10 de una Cámara. Ninguna de las 4 reformas (1992, 2011, 2024, 2026) tuvo referéndum.</li>
+<li>«Los estados de alarma/excepción/sitio impiden aprobar leyes» → NO: solo impiden <b>iniciar una reforma constitucional</b> (art. 169).</li>
+</ul></div>
+<div class="nuevo"><div class="tit">🆕 CONEXIÓN CON LA ACTUALIDAD (verificado 08/2026)</div>
+<p>La reforma constitucional de 2026 (art. 69.3, Formentera) es un ejemplo completo de procedimiento del <b>art. 167</b> con <b>iniciativa autonómica del art. 87.2</b>: proposición del Parlamento balear → Congreso 26/03/2026 (&gt;3/5) → Senado 22/04/2026 (&gt;3/5) → sin solicitud de referéndum → sanción 19/05/2026 → BOE 20/05/2026, entrada en vigor el mismo día. Perfecta para pregunta de examen actualizada.</p></div>
+
+</div>
+<footer>GACE 2027 · Bloque IV · Tema 2 · Material visual de estudio · Normativa verificada a 01/08/2026 (BOE)<br>Fuentes: CE (texto consolidado con reforma BOE-A-2026-10881) · LOTC (arts. 27-35) · LO 3/1984 (ILP) · Código Civil art. 2 · Reglamentos del Congreso y del Senado</footer>
+</body>
+</html>
