@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BV T2 — Derechos y deberes. Régimen disciplinario</title>
+<style>
+:root{
+  --v:#4c1d95; --v2:#7c3aed; --vclaro:#f5f3ff; --borde:#ddd6fe;
+  --verde:#166534; --verdeclaro:#f0fdf4; --vborde:#bbf7d0;
+  --rojo:#991b1b; --rojoclaro:#fef2f2; --rborde:#fecaca;
+  --ambar:#92400e; --ambarclaro:#fffbeb; --aborde:#fde68a;
+  --morado:#0f766e; --moradoclaro:#f0fdfa; --mborde:#99f6e4;
+  --gris:#334155; --fondo:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--fondo);color:#1e293b;line-height:1.55;padding-bottom:60px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#4c1d95,#7c3aed);color:#fff;padding:34px 18px 26px;text-align:center}
+header .bloque{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+header h1{font-size:1.7rem;margin:8px 0 4px}
+header .sub{font-size:.95rem;opacity:.9}
+.badge-verif{display:inline-block;margin-top:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:.78rem}
+h2{color:var(--v);font-size:1.25rem;margin:38px 0 14px;padding-bottom:6px;border-bottom:3px solid var(--v2);display:flex;align-items:center;gap:8px}
+h3{color:var(--v2);font-size:1.05rem;margin:20px 0 8px}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.89rem;background:#fff}
+th{background:var(--v);color:#fff;padding:8px 10px;text-align:left;font-size:.85rem}
+td{padding:7px 10px;border:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clave{background:var(--vclaro);border-left:5px solid var(--v2);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.clave .tit{font-weight:700;color:var(--v);font-size:.85rem;letter-spacing:.5px;margin-bottom:6px}
+.trampa{background:var(--rojoclaro);border-left:5px solid var(--rojo);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.trampa .tit{font-weight:700;color:var(--rojo);font-size:.85rem;margin-bottom:6px}
+.nuevo{background:var(--verdeclaro);border-left:5px solid var(--verde);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.nuevo .tit{font-weight:700;color:var(--verde);font-size:.85rem;margin-bottom:6px}
+.nota{background:var(--ambarclaro);border-left:5px solid var(--ambar);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9rem}
+.nota .tit{font-weight:700;color:var(--ambar);font-size:.85rem;margin-bottom:6px}
+.art{display:inline-block;background:var(--v);color:#fff;border-radius:5px;padding:1px 7px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+.memo{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:14px 0}
+.memo .m{background:#fff;border:2px solid var(--borde);border-radius:10px;padding:12px;font-size:.85rem}
+.memo .m b{color:var(--v);display:block;margin-bottom:4px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:14px 0;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.vs>div{padding:14px 16px}
+.vs .izq{background:var(--vclaro)}
+.vs .der{background:var(--moradoclaro)}
+.vs h4{margin-bottom:8px;font-size:.95rem}
+.vs .izq h4{color:var(--v)}
+.vs .der h4{color:var(--morado)}
+.vs ul{margin-left:18px;font-size:.87rem}
+.vs li{margin:4px 0}
+@media(max-width:720px){.vs{grid-template-columns:1fr}}
+ul.lista{margin:8px 0 8px 22px}
+ul.lista li{margin:5px 0}
+footer{margin-top:50px;text-align:center;font-size:.78rem;color:#64748b;padding:0 18px}
+@media print{
+  body{background:#fff}
+  header{background:var(--v)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card{box-shadow:none}
+  h2{page-break-after:avoid}
+  table,.clave,.trampa,.nuevo,.vs{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="bloque">GACE 2027 · Bloque V · Administración de Recursos Humanos</div>
+  <h1>Tema 2 — Derechos y deberes del personal. Régimen disciplinario</h1>
+  <div class="sub">Derechos individuales y colectivos · Jornada, vacaciones y permisos · Código de Conducta · Faltas, sanciones y procedimiento</div>
+  <div class="badge-verif">✅ Verificado a 01/08/2026 · incluye RD-ley 9/2025 (permisos) y RD-ley 14/2025 (retribuciones)</div>
+</header>
+<div class="wrap">
+
+<h2>⚖️ 1. Marco general: la relación estatutaria</h2>
+<div class="card">
+<p>El empleo público NO es una relación laboral ordinaria sino <b>estatutaria</b>: derechos y deberes fijados <b>unilateralmente por la ley</b>, no por contrato negociable. Justifica la <b>inamovilidad</b> del funcionario de carrera y, a la vez, un régimen reforzado de deberes y responsabilidad disciplinaria.</p>
+<p><b>Base constitucional:</b> <span class="art">art. 23.2 CE</span> (acceso en igualdad) · <span class="art">art. 28 CE</span> (libertad sindical y huelga) · <span class="art">art. 35 CE</span> (trabajo y remuneración) · <span class="art">art. 37 CE</span> (negociación colectiva) · <span class="art">art. 103.3 CE</span> (estatuto, mérito/capacidad, incompatibilidades, imparcialidad).</p>
+</div>
+<div class="nuevo"><div class="tit">⭐ REFORMAS RECIENTES DEL TREBEP EN ESTA MATERIA</div>
+<p>LO 3/2018 (LOPDGDD, derechos digitales, art. 14 j bis) · RDL 6/2019 (permiso nacimiento igualitario) · Ley 4/2023 (trans/LGTBI, arts. 14, 48, 49, 53, 82, 89, 95) · RDL 5/2023 (Directiva UE 2019/1158: permiso parental, ampliación art. 48) · RDL 2/2024 (art. 47, jornada) · LO 2/2024 (paridad, arts. 49, 83, 89) · Ley 2/2024 (art. 48) · <b>RDL 9/2025, de 29 de julio (BOE 30/07/2025)</b> — la reforma más reciente y más preguntable: permiso por nacimiento a <b>19 semanas</b> y permiso parental de <b>8 semanas NO retribuidas</b>.</p></div>
+
+<h2>👤 2. Derechos individuales (art. 14 TREBEP)</h2>
+<div class="card"><p>Catálogo de las letras a) a p): inamovilidad de carrera · desempeño efectivo · progresión y promoción según mérito/capacidad · retribuciones e indemnizaciones · participación e información · defensa jurídica · formación continua (preferentemente en horario laboral) · respeto a intimidad/identidad/imagen/dignidad · no discriminación · conciliación · <b>j bis) intimidad digital</b> · libertad de expresión · seguridad y salud · vacaciones/descansos/permisos/licencias · jubilación · prestaciones SS · libre asociación profesional.</p></div>
+<div class="grid2">
+<div class="card"><p><b>Letra j bis (LO 3/2018 LOPDGDD):</b></p><p style="font-size:.87rem">Intimidad en dispositivos digitales · frente a videovigilancia y geolocalización · <b>desconexión digital</b> fuera del horario laboral.</p></div>
+<div class="card"><p><b>Letras h) e i) — Ley 4/2023:</b></p><p style="font-size:.87rem">Amplían la no discriminación y protección frente al acoso a <b>identidad sexual, expresión de género y características sexuales</b>. Proyección directa en el art. 95.2.b) (falta muy grave).</p></div>
+</div>
+
+<h2>✊ 3. Derechos individuales de ejercicio colectivo (art. 15)</h2>
+<table><tr><th>Derecho</th><th>Base y claves</th></tr>
+<tr><td>Libertad sindical</td><td>Art. 28.1 CE + LO 11/1985 (LOLS). Libertad positiva y negativa</td></tr>
+<tr><td>Negociación colectiva</td><td>Art. 37.1 CE. Arts. 31-38 TREBEP</td></tr>
+<tr><td>Huelga</td><td>Art. 28.2 CE, con garantía de <b>servicios esenciales</b> (STC 11/1981: la deducción de haberes NO es sanción)</td></tr>
+<tr><td>Conflictos colectivos</td><td>Art. 45 — mediación y arbitraje posibles</td></tr>
+<tr><td>Reunión (art. 46)</td><td>Convocan: sindicatos, Delegados, Juntas, Comités o <b>≥40%</b> del colectivo convocado</td></tr>
+</table>
+
+<h2>🕐 4. Jornada, teletrabajo y vacaciones</h2>
+<table><tr><th>Concepto</th><th>Régimen (Resolución SEFP 28/02/2019 + art. 47/47 bis TREBEP)</th></tr>
+<tr><td>Jornada general AGE</td><td><b>37,5 h/semana</b> en cómputo anual · dedicación especial: 40 h</td></tr>
+<tr><td>Horario fijo</td><td>9:00-17:00 (L-J) y 9:00-14:30 (V); jornada de tarde: 15:00-20:30</td></tr>
+<tr><td>Jornada intensiva verano</td><td>16 junio-15 septiembre (conciliación: 1 junio-30 septiembre) · 8:00-15:00</td></tr>
+<tr><td>Reducción de jornada voluntaria</td><td>Hasta el 50% (art. 48.2), retribución proporcional (75% con horario 9:00-14:00)</td></tr>
+<tr><td>Teletrabajo (art. 47 bis, RDL 29/2020)</td><td>Autorización individual, voluntario, reversible, compatible con presencial. Desarrollo: RD 203/2021</td></tr>
+<tr><td>Bolsa de horas</td><td><b>5%</b> de la jornada anual, recuperable en <b>3 meses</b>, para cuidado de familiares de 1er grado</td></tr>
+</table>
+<div class="clave"><div class="tit">🔑 VACACIONES (art. 50 TREBEP)</div>
+<p><b>22 días hábiles</b>/año (sábados NO hábiles) + adicionales por antigüedad. Mínimo 5 días hábiles consecutivos; al menos la mitad entre el <b>15 de junio y el 15 de septiembre</b>. Plazo final: <b>31 de enero</b> del año siguiente. Postergación por IT/nacimiento/riesgo: hasta <b>18 meses</b>. Compensación económica SOLO si la relación termina por causa ajena a la voluntad (máx. 18 meses en incapacidad/fallecimiento).</p></div>
+<table><tr><th>Antigüedad</th><th>Días</th></tr><tr><td>15 años</td><td>23</td></tr><tr><td>20 años</td><td>24</td></tr><tr><td>25 años</td><td>25</td></tr><tr><td>30 o más</td><td>26</td></tr></table>
+
+<h2>📋 5. Permisos (arts. 48 y 49 TREBEP)</h2>
+<div class="nota"><div class="tit">📌 Diferencia clave</div><p>Art. 48 = situaciones generales (potestad de autoorganización más amplia). Art. 49 = conciliación, violencia de género y terrorismo (transposición de directivas UE, régimen más rígido).</p></div>
+<h3>Art. 48 — permisos más preguntados</h3>
+<table>
+<tr><th>Permiso</th><th>Duración</th></tr>
+<tr><td>Accidente/enfermedad grave/hospitalización (cónyuge, pareja de hecho, 1er grado, conviviente)</td><td><b>5 días hábiles</b></td></tr>
+<tr><td>Mismo supuesto, 2º grado</td><td><b>4 días hábiles</b></td></tr>
+<tr><td>Fallecimiento (1er grado/cónyuge/pareja de hecho)</td><td>3 días (misma localidad) / 5 días (distinta)</td></tr>
+<tr><td>Fallecimiento (2º grado)</td><td>2 días (misma localidad) / 4 días (distinta)</td></tr>
+<tr><td>Traslado de domicilio sin cambio de residencia</td><td>1 día</td></tr>
+<tr><td>Lactancia de hijo &lt;12 meses</td><td>1 hora/día divisible o reducción de jornada; acumulable</td></tr>
+<tr><td>Cuidado familiar 1er grado, enfermedad muy grave</td><td>Hasta <b>50%</b> jornada retribuida, máx. <b>1 mes</b></td></tr>
+<tr><td>Asuntos particulares ("moscosos")</td><td><b>6 días</b>/año + 2 al 6º trienio + 1 por trienio adicional desde el 8º</td></tr>
+<tr><td>Matrimonio / pareja de hecho</td><td><b>15 días naturales</b></td></tr>
+<tr><td>24/31 diciembre en festivo/sábado</td><td>+2 días · festivo nacional en sábado: +1 día</td></tr>
+</table>
+
+<h3>Art. 49 — conciliación (RÉGIMEN ACTUALIZADO 2025)</h3>
+<div class="trampa"><div class="tit">⚠️ ATENCIÓN — cifras vigentes desde el RD-ley 9/2025 (29 julio 2025)</div>
+<p>Las cifras antiguas de "16 semanas" o "permiso parental sin duración fijada" están <b>OBSOLETAS</b>. Vigente desde el 30/07/2025:</p></div>
+<table>
+<tr><th>Permiso (art. 49)</th><th>Duración</th><th>Estructura</th></tr>
+<tr><td>a) Nacimiento (madre biológica)</td><td><b>19 semanas</b> (32 monoparentalidad)</td><td>6 obligatorias + 11 flexibles hasta 12 meses + 2 hasta 8 años</td></tr>
+<tr><td>b) Adopción/guarda/acogimiento</td><td>19 semanas (32 monoparentalidad)</td><td>Igual estructura 6+11+2</td></tr>
+<tr><td>c) Progenitor diferente de la madre biológica</td><td>19 semanas (32 monoparentalidad)</td><td>Derecho individual, no transferible</td></tr>
+<tr><td>d) Violencia de género</td><td>Reducción/reordenación jornada</td><td>Retribución íntegra si reducción ≤1/3 o ≥1/2</td></tr>
+<tr><td>e) Víctimas del terrorismo</td><td>Reducción/reordenación jornada</td><td>Ley 29/2011</td></tr>
+<tr><td><b>g) Permiso parental</b></td><td><b>8 semanas, NO RETRIBUIDAS</b></td><td>Hasta que el menor cumpla 8 años; preaviso 15 días</td></tr>
+</table>
+<div class="nota"><div class="tit">📌 Ampliaciones del permiso de nacimiento</div><p>+2 semanas por discapacidad del hijo/a (1 por progenitor) · +1 semana por hijo adicional en partos múltiples (por progenitor) · hasta +13 semanas por prematuridad/hospitalización. Preaviso para disfrute interrumpido: 15 días.</p></div>
+
+<h3>Licencias (distintas de los permisos)</h3>
+<div class="vs">
+<div class="izq"><h4>Permisos</h4><ul><li>DERECHO si concurre la causa</li><li>Generalmente retribuidos</li><li>Arts. 48-49 TREBEP</li></ul></div>
+<div class="der"><h4>Licencias</h4><ul><li>DISCRECIONALES (necesidades del servicio)</li><li>Suelen NO ser retribuidas</li><li>Decreto 315/1964, arts. 72-75 (vigencia residual)</li></ul></div>
+</div>
+<table><tr><th>Licencia</th><th>Duración/retribución</th></tr>
+<tr><td>Estudios sobre función pública (art. 72)</td><td>Retribuida (sueldo + complemento familiar)</td></tr>
+<tr><td>Asuntos propios (art. 73)</td><td>Máx. <b>3 meses cada 2 años</b>, SIN retribución</td></tr>
+<tr><td>Riesgo embarazo/lactancia (art. 22 RDLeg 4/2000)</td><td>Hasta cambio de puesto o inicio del permiso por nacimiento</td></tr>
+</table>
+
+<h2>📜 6. Deberes y Código de Conducta (arts. 52-54)</h2>
+<div class="clave"><div class="tit">🔑 ARTÍCULO 52 — precepto-pórtico</div><p>Desempeñar con diligencia las tareas, velar por los intereses generales. <b>15 principios:</b> objetividad, integridad, neutralidad, responsabilidad, imparcialidad, confidencialidad, dedicación, transparencia, ejemplaridad, austeridad, accesibilidad, eficacia, honradez, promoción del entorno cultural/medioambiental, respeto a la igualdad mujeres-hombres.</p></div>
+<div class="grid2">
+<div class="card"><p><b>Art. 53 — 12 principios ÉTICOS</b></p><p style="font-size:.85rem">Respeto CE y ordenamiento · interés general con objetividad · lealtad y buena fe · respeto a derechos fundamentales · <b>abstención</b> por interés personal/conflicto · no contraer obligaciones económicas con conflicto · no aceptar tratos de favor · eficacia/economía/eficiencia · no influir sin justa causa en trámites · diligencia y resolución en plazo · dedicación al servicio · <b>secreto</b> de materias clasificadas.</p></div>
+<div class="card"><p><b>Art. 54 — 11 principios de CONDUCTA</b></p><p style="font-size:.85rem">Trato respetuoso · diligencia y cumplimiento de jornada · <b>obediencia salvo infracción manifiesta</b> del ordenamiento · información a los ciudadanos · austeridad en recursos públicos · rechazo de regalos · conservación documental · formación actualizada · seguridad y salud · propuestas de mejora · atención en la lengua oficial solicitada.</p></div>
+</div>
+<div class="nota"><div class="tit">📌 Función integradora del régimen disciplinario</div><p>Los principios del Código NO son meramente programáticos: el art. 52 dispone que informan la interpretación del régimen disciplinario. Su infracción puede integrar el tipo abierto del <span class="art">art. 95.2.q) TREBEP</span>.</p></div>
+
+<h2>🚨 7. Régimen disciplinario</h2>
+<div class="card"><p><b>Normas aplicables, por orden:</b> TREBEP arts. 93-98 (Título VII) → <b>RD 33/1986</b> (RRDFAE, vigente en lo no opuesto — tipifica faltas graves y leves) → Ley 39/2015 (supletoria en procedimiento) → Ley 40/2015 arts. 25-31 (principios de la potestad sancionadora) → Decreto 315/1964 art. 93 (cancelación).</p></div>
+<div class="nota"><div class="tit">📌 Compatibilidad de responsabilidades (art. 93.4)</div><p>La disciplinaria es compatible con la penal y la patrimonial (no <i>bis in idem</i> = misma identidad de sujeto, hecho y fundamento). Prejudicialidad penal: puede suspenderse hasta la resolución penal; la Administración queda vinculada por los hechos probados.</p></div>
+
+<h3>Principios del art. 94 TREBEP (6)</h3>
+<div class="memo">
+<div class="m"><b>Legalidad y tipicidad</b>Predeterminación normativa de faltas y sanciones</div>
+<div class="m"><b>Irretroactividad</b>Salvo retroactividad FAVORABLE, incluidos plazos de prescripción</div>
+<div class="m"><b>Proporcionalidad</b>Criterios del art. 96.3</div>
+<div class="m"><b>Culpabilidad</b>Dolo o culpa — NO responsabilidad objetiva</div>
+<div class="m"><b>Presunción de inocencia</b>Carga de la prueba en la Administración</div>
+<div class="m"><b>Non bis in idem / in dubio pro reo</b>Identidad sujeto-hecho-fundamento</div>
+</div>
+
+<h3>Faltas: clasificación tripartita (art. 95.1)</h3>
+<table><tr><th>Gravedad</th><th>Norma tipificadora</th><th>Ejemplos clave</th></tr>
+<tr><td><b>Muy graves</b></td><td>Art. 95.2 TREBEP — catálogo CERRADO legal (a-p + remisión a leyes)</td><td>Incumplir deber de respeto a la CE · discriminación/acoso · abandono del servicio · acuerdos manifiestamente ilegales · negligencia en secretos oficiales · desobediencia abierta · incompatibilidades con situación efectiva · <b>acoso laboral</b> (letra o)</td></tr>
+<tr><td><b>Graves</b></td><td>Art. 7 RD 33/1986 (vigente en lo no opuesto)</td><td>Desobediencia debida · abuso de autoridad · incumplimiento de jornada ≥10h/mes · 3ª falta de asistencia injustificada tras 2 sanciones leves</td></tr>
+<tr><td><b>Leves</b></td><td>Art. 8 RD 33/1986</td><td>Incumplimiento injustificado del horario (sin ser grave) · falta de asistencia 1 día · incorrección · descuido/negligencia</td></tr>
+</table>
+<div class="nota"><div class="tit">📌 Modificación clave — Ley 4/2023</div><p>El art. 95.2.b) incorpora expresamente identidad sexual, expresión de género y características sexuales como causas de discriminación/acoso tipificadas como falta muy grave.</p></div>
+
+<h3>Sanciones (art. 96.1)</h3>
+<table><tr><th>Sanción</th><th>Aplicable a</th><th>Límite</th></tr>
+<tr><td>Separación del servicio / Despido disciplinario</td><td>Solo faltas MUY GRAVES</td><td>Despido: inhabilita para nuevo contrato similar</td></tr>
+<tr><td>Suspensión firme (funciones o empleo/sueldo)</td><td>Muy graves y graves</td><td><b>Máx. 6 años</b> (graves: no más de la mitad, 3 años)</td></tr>
+<tr><td>Traslado forzoso</td><td>Muy graves (con cambio localidad) y graves (sin cambio)</td><td>Prohibición de reingreso hasta 3 años (muy graves)</td></tr>
+<tr><td>Demérito</td><td>Todas las gravedades</td><td>Penaliza carrera/promoción/movilidad</td></tr>
+<tr><td>Apercibimiento</td><td>Solo LEVES</td><td>—</td></tr>
+</table>
+<p style="font-size:.85rem"><b>Criterios de graduación (96.3):</b> intencionalidad/descuido/negligencia · daño al interés público (cuantificable) · reiteración/reincidencia · grado de participación.</p>
+
+<h3>Procedimiento disciplinario (art. 98 + RD 33/1986)</h3>
+<div class="vs">
+<div class="izq"><h4>Ordinario (graves y muy graves)</h4><ul><li>Información reservada (opcional)</li><li>Incoación</li><li>Instrucción (declaración, prueba, informes)</li><li><b>Pliego de cargos → 10 días hábiles</b> para alegar</li><li>Propuesta de resolución → audiencia final <b>10 días</b></li><li>Resolución motivada</li></ul></div>
+<div class="der"><h4>Sumario (leves)</h4><ul><li>Sin pliego de cargos formal</li><li><b>Audiencia al interesado</b></li><li>Resolución motivada</li><li>Recurso disponible</li></ul></div>
+</div>
+<table><tr><th>Medida cautelar</th><th>Plazo</th></tr><tr><td>Suspensión provisional (art. 90 TREBEP)</td><td>Máx. <b>6 meses</b>, salvo paralización imputable al interesado</td></tr></table>
+<div class="trampa"><div class="tit">⚠️ Separación instrucción/resolución</div><p>El instructor NUNCA puede coincidir con el órgano que resuelve. El nombramiento de instructor/secretario es recusable (arts. 23-24 Ley 40/2015).</p></div>
+
+<h3>Prescripción (art. 97 TREBEP) — CUIDADO CON MANUALES ANTIGUOS</h3>
+<div class="trampa"><div class="tit">⚠️ Los plazos del RD 33/1986 fueron DEROGADOS por el art. 97 TREBEP</div><p>No confundir: los plazos vigentes son estos ↓</p></div>
+<div class="grid2">
+<table><tr><th colspan="2">FALTAS</th></tr><tr><th>Gravedad</th><th>Plazo</th></tr><tr><td>Muy graves</td><td>3 años</td></tr><tr><td>Graves</td><td>2 años</td></tr><tr><td>Leves</td><td><b>6 meses</b></td></tr></table>
+<table><tr><th colspan="2">SANCIONES</th></tr><tr><th>Gravedad</th><th>Plazo</th></tr><tr><td>Muy graves</td><td>3 años</td></tr><tr><td>Graves</td><td>2 años</td></tr><tr><td>Leves</td><td><b>1 año</b></td></tr></table>
+</div>
+<p style="font-size:.85rem">Cómputo faltas: desde la comisión (o cese, si continuada). Cómputo sanciones: desde la firmeza. Interrupción: inicio del procedimiento con conocimiento del interesado. Reanudación: paralización &gt;6 meses no imputable al responsable.</p>
+
+<h3>Anotación y cancelación (art. 93 Decreto 315/1964)</h3>
+<table><tr><th>Sanción</th><th>Plazo de cancelación</th></tr>
+<tr><td>Leves</td><td>6 meses</td></tr>
+<tr><td>Graves (salvo separación)</td><td>2 años</td></tr>
+<tr><td>Muy graves (salvo separación)</td><td>6 años</td></tr>
+<tr><td>Separación del servicio</td><td><b>NO cancelable</b> por vía ordinaria</td></tr>
+</table>
+<p style="font-size:.85rem">La cancelación NO borra físicamente la anotación: anula sus efectos a efectos de <b>reincidencia</b>. Se practica de oficio en el Registro Central de Personal.</p>
+
+<h3>Extinción de la responsabilidad disciplinaria</h3>
+<div class="card"><p>5 causas: <b>cumplimiento</b> de la sanción · <b>fallecimiento</b> (responsabilidad personalísima, NO se transmite a herederos) · <b>prescripción</b> (art. 97) · <b>pérdida de la condición de funcionario</b> (art. 63) · <b>indulto/amnistía</b>. Compatible con exigencia de responsabilidad civil y penal.</p></div>
+
+<h2>🤝 8. Negociación colectiva y representación</h2>
+<table><tr><th>Mesa (arts. 34-36)</th><th>Ámbito</th></tr>
+<tr><td>Mesa General de las AAPP</td><td>Materias comunes a todas las Administraciones</td></tr>
+<tr><td>Mesas Generales de cada AAPP</td><td>Común (funcionarios+laborales) y específica de funcionarios</td></tr>
+<tr><td>Mesas Sectoriales</td><td>Docentes, sanitarios, Justicia, Cortes Generales...</td></tr>
+</table>
+<div class="vs">
+<div class="izq"><h4>Pactos (art. 38)</h4><ul><li>Materias del propio órgano administrativo</li><li>Eficacia directa desde la firma</li></ul></div>
+<div class="der"><h4>Acuerdos (art. 38)</h4><ul><li>Materias del Consejo de Ministros/Gobierno autonómico</li><li>Requieren <b>aprobación expresa y formal</b></li></ul></div>
+</div>
+<table><tr><th>Órgano de representación</th><th>Censo</th></tr>
+<tr><td>Delegados de Personal</td><td><b>6 a 49</b> funcionarios (hasta 30: 1 Delegado; 31-49: 3)</td></tr>
+<tr><td>Juntas de Personal</td><td><b>≥50</b> funcionarios (5 a 75 miembros según escala)</td></tr>
+<tr><td>Comités de Empresa</td><td>≥50 empleados laborales (Estatuto de los Trabajadores)</td></tr>
+</table>
+<p style="font-size:.85rem"><b>Crédito horario (art. 41):</b> hasta 100 funcionarios → 15 h/mes · 101-250 → 20 h · 251-500 → 30 h · 501-750 → 35 h · &gt;750 → 40 h. Garantía: no traslado/sanción por el mandato ni durante el año siguiente a su expiración.</p>
+
+<h2>📌 9. Datos clave para el examen</h2>
+<table>
+<tr><th>Dato</th><th>Cifra/Precepto</th></tr>
+<tr><td>Vacaciones</td><td>22 días hábiles + antigüedad (15/20/25/30 años → 23/24/25/26)</td></tr>
+<tr><td>Permiso nacimiento (49.a/b/c)</td><td><b>19 semanas</b> (32 monoparentalidad) — RD-ley 9/2025</td></tr>
+<tr><td>Permiso parental (49.g)</td><td><b>8 semanas, NO retribuido</b>, hasta 8 años del menor</td></tr>
+<tr><td>Asuntos particulares</td><td>6 días + 2 al 6º trienio + 1/trienio desde el 8º</td></tr>
+<tr><td>Licencia asuntos propios</td><td>3 meses cada 2 años, SIN retribución</td></tr>
+<tr><td>Prescripción faltas</td><td>3/2/0,5 años (muy graves/graves/leves)</td></tr>
+<tr><td>Prescripción sanciones</td><td>3/2/1 años</td></tr>
+<tr><td>Cancelación sanciones</td><td>6 años/2 años/6 meses</td></tr>
+<tr><td>Suspensión firme</td><td>Máx. 6 años (graves: máx. 3)</td></tr>
+<tr><td>Pliego de cargos</td><td>10 días hábiles para alegar</td></tr>
+<tr><td>Suspensión provisional cautelar</td><td>Máx. 6 meses (art. 90)</td></tr>
+</table>
+
+<div class="trampa"><div class="tit">⚠️ TRAMPAS TÍPICAS DE EXAMEN</div>
+<ul class="lista">
+<li>El permiso parental (49.g) es de <b>8 semanas y NO retribuido</b> — antes de la reforma de 2025 su carácter retributivo era discutido; hoy está clarificado.</li>
+<li>Los plazos de prescripción disciplinaria son los del <b>art. 97 TREBEP</b> (3/2/0,5 años en faltas), NO los antiguos del RD 33/1986 que aparecen en manuales desactualizados.</li>
+<li>El apercibimiento SOLO puede imponerse por faltas <b>leves</b>.</li>
+<li>La separación del servicio y el despido disciplinario SOLO proceden por faltas <b>muy graves</b>.</li>
+<li>La cancelación de sanciones <b>no borra</b> la anotación, solo anula sus efectos de cara a la reincidencia.</li>
+</ul>
+</div>
+
+</div>
+<footer>GACE 2027 · Bloque V · Tema 2 · Material verificado contra BOE a 01/08/2026 · Antonio José De Lamo Villar</footer>
+</body>
+</html>
