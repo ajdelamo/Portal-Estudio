@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque VI · Tema 6 · Clasificación económica del gasto</title>
+<style>
+:root{
+  --v:#4d7c0f; --v2:#65a30d; --vclaro:#f7fee7; --borde:#d9f99d;
+  --verde:#166534; --verdeclaro:#f0fdf4; --verdeborde:#bbf7d0;
+  --rojo:#991b1b; --rojoclaro:#fef2f2; --rojoborde:#fecaca;
+  --ambar:#92400e; --ambarclaro:#fffbeb; --ambarborde:#fde68a;
+  --morado:#5b21b6; --moradoclaro:#f5f3ff; --moradoborde:#ddd6fe;
+}
+*{box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;max-width:980px;margin:0 auto;padding:24px;color:#1e293b;line-height:1.5;background:#fff}
+.bloque{color:var(--v);font-weight:700;font-size:.85em;letter-spacing:.05em;text-transform:uppercase}
+h1{color:var(--v);font-size:1.6em;margin:.2em 0 .1em;border-bottom:3px solid var(--v);padding-bottom:.3em}
+.sub{color:#475569;font-size:1.02em;margin-bottom:.6em}
+.badge-verif{display:inline-block;background:var(--vclaro);color:var(--v);border:1px solid var(--borde);border-radius:20px;padding:3px 12px;font-size:.78em;font-weight:600;margin-bottom:1em}
+h2{color:var(--v2);border-left:5px solid var(--v);padding-left:10px;margin-top:1.8em;font-size:1.22em}
+h3{color:var(--v);font-size:1.02em;margin-top:1.2em}
+.card{background:var(--vclaro);border:1px solid var(--borde);border-radius:10px;padding:14px 18px;margin:10px 0}
+.clave{background:var(--verdeclaro);border:1px solid var(--verdeborde);border-left:5px solid var(--verde);border-radius:8px;padding:12px 16px;margin:10px 0}
+.clave b{color:var(--verde)}
+.trampa{background:var(--rojoclaro);border:1px solid var(--rojoborde);border-left:5px solid var(--rojo);border-radius:8px;padding:12px 16px;margin:10px 0}
+.trampa b{color:var(--rojo)}
+.nuevo{background:var(--ambarclaro);border:1px solid var(--ambarborde);border-left:5px solid var(--ambar);border-radius:8px;padding:12px 16px;margin:10px 0}
+.nuevo b{color:var(--ambar)}
+.nota{background:var(--moradoclaro);border:1px solid var(--moradoborde);border-left:5px solid var(--morado);border-radius:8px;padding:12px 16px;margin:10px 0}
+.nota b{color:var(--morado)}
+.art{display:inline-block;background:var(--v);color:#fff;border-radius:5px;padding:1px 8px;font-size:.85em;font-weight:600}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.92em}
+th{background:var(--v);color:#fff;text-align:left;padding:7px 10px}
+td{padding:7px 10px;border-bottom:1px solid var(--borde)}
+tr:nth-child(even) td{background:var(--vclaro)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--borde);border-radius:8px;overflow:hidden;margin:10px 0}
+.vs>div{padding:12px 16px}
+.vs>div:first-child{background:var(--rojoclaro);border-right:1px solid var(--borde)}
+.vs>div:last-child{background:var(--verdeclaro)}
+ul.lista{margin:6px 0;padding-left:22px}
+ul.lista li{margin:4px 0}
+.mini{font-size:.85em;color:#64748b}
+.mnemo{background:#1e293b;color:#f1f5f9;border-radius:8px;padding:12px 16px;margin:10px 0;font-size:.94em}
+.mnemo b{color:#fbbf24}
+footer{margin-top:2.5em;padding-top:1em;border-top:2px solid var(--borde);font-size:.82em;color:#64748b;text-align:center}
+@media print{body{max-width:100%}.card,.clave,.trampa,.nuevo,.nota{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="bloque">📘 GACE 2027 · Bloque VI · Gestión Financiera y Seguridad Social · Tema 6</div>
+<h1>Clasificación económica del gasto</h1>
+<div class="sub">Cap. 2 (bienes y servicios) · Cap. 6 (inversión) · Cap. 4/7 (transferencias) · Anticipos de caja fija · Pagos a justificar</div>
+<div class="badge-verif">✅ Verificado contra BOE a 01/08/2026</div>
+
+<h2>1. Los nueve capítulos (art. 40 LGP)</h2>
+<table>
+<tr><th>Cap.</th><th>Denominación</th><th>Contenido esencial</th></tr>
+<tr><td>1</td><td>Gastos de personal</td><td>Retribuciones, cotizaciones SS. Excluye indemnizaciones (art. 23 → Cap. 2)</td></tr>
+<tr><td><b>2</b></td><td><b>Gastos corrientes en bienes y servicios</b></td><td>Funcionamiento ordinario ★</td></tr>
+<tr><td>3</td><td>Gastos financieros</td><td>Intereses de la deuda pública</td></tr>
+<tr><td><b>4</b></td><td><b>Transferencias corrientes</b></td><td>Sin contraprestación, financian gasto corriente ★</td></tr>
+<tr><td>5</td><td>Fondo de Contingencia</td><td>Reserva para necesidades no previstas</td></tr>
+<tr><td><b>6</b></td><td><b>Inversiones reales</b></td><td>Creación/adquisición de bienes de capital ★</td></tr>
+<tr><td><b>7</b></td><td><b>Transferencias de capital</b></td><td>Sin contraprestación, financian inversión ★</td></tr>
+<tr><td>8</td><td>Activos financieros</td><td>Adquisición de deuda, préstamos concedidos</td></tr>
+<tr><td>9</td><td>Pasivos financieros</td><td>Amortización de deuda, devolución de fianzas</td></tr>
+</table>
+
+<h2>2. Gastos corrientes en bienes y servicios (Cap. 2)</h2>
+<div class="clave">
+<b>Características de los bienes del Cap. 2:</b> fungibles · duración inferior al ejercicio · no inventariables o reiterativos · no amortizables · no patrimoniales.
+</div>
+<table>
+<tr><th>Artículo</th><th>Contenido y ejemplos</th></tr>
+<tr><td>20</td><td>Arrendamientos y cánones — leasing SIN opción de compra, renting</td></tr>
+<tr><td>21</td><td>Reparaciones simples (las que alargan vida útil o incrementan capacidad → Cap. 6)</td></tr>
+<tr><td>22</td><td>Material no inventariable (220), suministros (221: luz, combustible, agua), comunicaciones (222), seguros de bienes (224), tributos (225)</td></tr>
+<tr><td>23</td><td>Indemnizaciones por razón del servicio: dietas (230), locomoción (231), traslados forzosos (232) — RD 462/2002. NO van en nómina (Cap.1)</td></tr>
+<tr><td>24</td><td>Publicaciones oficiales</td></tr>
+<tr><td>25</td><td>Conciertos de asistencia sanitaria (MUFACE, ISFAS, MUGEJU)</td></tr>
+<tr><td>29</td><td>MRR — gastos del Plan de Recuperación (Next Generation EU)</td></tr>
+</table>
+<div class="mnemo">
+<b>LEASING:</b> SIN opción de compra → Cap. 2 (art. 20). CON opción de compra → Cap. 6 (art. 64).<br>
+<b>SEGUROS:</b> de bienes → Cap. 2 (224). De personal → Cap. 1 (162.05).
+</div>
+<div class="trampa">
+<b>Vinculación de créditos del Cap. 2:</b> en el <b>Estado</b> vincula a nivel <b>ARTÍCULO</b> (art. 43 LGP); en <b>Organismos Autónomos</b> vincula a nivel <b>CAPÍTULO</b> (art. 44 LGP). Determina si un movimiento es redistribución (sin límites) o transferencia (con restricciones).
+</div>
+
+<h2>3. Inversiones reales (Cap. 6)</h2>
+<table>
+<tr><th>Característica</th><th>Explicación</th></tr>
+<tr><td>Genera activos</td><td>Físicos o intangibles, parte del patrimonio</td></tr>
+<tr><td>Amortizable</td><td>Se amortiza a lo largo de su vida útil</td></tr>
+<tr><td>No recurrente</td><td>Ligado a proyectos específicos</td></tr>
+</table>
+<table>
+<tr><th>Artículo</th><th>Contenido</th></tr>
+<tr><td>60</td><td>Inversión NUEVA en infraestructuras de uso general (carreteras, puertos…)</td></tr>
+<tr><td>61</td><td>Inversión de REPOSICIÓN en infraestructuras de uso general</td></tr>
+<tr><td>62</td><td>Inversión NUEVA de funcionamiento operativo (edificios, maquinaria, mobiliario)</td></tr>
+<tr><td>63</td><td>Inversión de REPOSICIÓN de funcionamiento operativo</td></tr>
+<tr><td>64</td><td>Inversiones inmateriales: software amortizable, leasing CON opción de compra, propiedad industrial</td></tr>
+<tr><td>65-67</td><td>Inversiones militares (mismos criterios 60-64)</td></tr>
+</table>
+<p class="mini"><b>Nota:</b> los fondos de bibliotecas se imputan al Cap. 6 (inventariables y duraderos), aunque puedan parecer material de oficina.</p>
+
+<h3>Cap. 2 vs. Cap. 6 — tabla comparativa (muy preguntada)</h3>
+<table>
+<tr><th>Criterio</th><th>Cap. 2 — corriente</th><th>Cap. 6 — inversión</th></tr>
+<tr><td>Finalidad</td><td>Funcionamiento diario</td><td>Creación de patrimonio</td></tr>
+<tr><td>Amortización</td><td>No amortizable</td><td>Amortizable</td></tr>
+<tr><td>Periodicidad</td><td>Recurrente</td><td>Puntual (por proyecto)</td></tr>
+<tr><td>Vinculación Estado</td><td>Nivel ARTÍCULO</td><td>Nivel CAPÍTULO</td></tr>
+<tr><td>Vinculación OO.AA.</td><td>Nivel CAPÍTULO</td><td>Nivel CAPÍTULO</td></tr>
+</table>
+
+<h2>4. Transferencias: corrientes (Cap. 4) y de capital (Cap. 7)</h2>
+<div class="clave">
+<b>Criterio de distinción Cap. 4 vs. Cap. 7:</b> ¿el beneficiario destina los fondos a gasto corriente o a inversión? Beca de estudio → Cap. 4. Beca de investigación → Cap. 7. Subvención para ambulancia (bien de capital) → Cap. 7.
+</div>
+<table>
+<tr><th>Corriente (Cap. 4)</th><th>Capital (Cap. 7)</th><th>Destinatario</th></tr>
+<tr><td>40</td><td>70</td><td>Administración del Estado</td></tr>
+<tr><td>41</td><td>71</td><td>Organismos Autónomos</td></tr>
+<tr><td>42</td><td>72</td><td>Seguridad Social</td></tr>
+<tr><td>45</td><td>75</td><td>Comunidades Autónomas</td></tr>
+<tr><td>46</td><td>76</td><td>Corporaciones Locales</td></tr>
+<tr><td>47</td><td>77</td><td>Empresas privadas</td></tr>
+<tr><td>48</td><td>78</td><td>Familias e instituciones sin fines de lucro</td></tr>
+<tr><td>49</td><td>79</td><td>Al exterior (agentes fuera del territorio, cuotas a OO.II.)</td></tr>
+</table>
+<div class="trampa">
+<b>⚠️ Excepción arts. 49/79:</b> las transferencias al exterior NO se consideran créditos vinculantes por naturaleza, a diferencia del resto de transferencias nominativas.
+</div>
+
+<h3>Transferencias vs. subvenciones</h3>
+<div class="vs">
+<div><b>Transferencias</b><br>Entregas NO afectadas a finalidad concreta, para operaciones no singularizadas. Rige la LGP.</div>
+<div><b>Subvenciones</b><br>Entregas SÍ afectadas al cumplimiento de un objetivo (art. 2 LGS: sin contraprestación + sujeta a objetivo + fomento de interés público). Rige la LGS 38/2003 y su Reglamento (RD 887/2006).</div>
+</div>
+<table>
+<tr><th>Procedimiento</th><th>Descripción</th></tr>
+<tr><td>Concurrencia competitiva (regla general)</td><td>Comparación de solicitudes según criterios de bases y convocatoria</td></tr>
+<tr><td>Concesión directa (excepción)</td><td>Nominativas; impuestas por norma con rango de ley; razones de interés público/social/humanitario</td></tr>
+</table>
+<div class="nuevo">
+<b>Interés de demora en subvenciones (art. 38.2 LGS), vigente 2026:</b> [Seguro] interés legal del dinero <b>3,25%</b> + 25% = <b>4,0625%</b> (DA 42ª Ley 31/2022, mantenida por la prórroga).
+</div>
+<p class="mini">Subvención &gt;12M€ requiere autorización previa del Consejo de Ministros (art. 10.2 LGS). Bases reguladoras por Orden Ministerial, previo informe jurídico e Intervención; publicidad vía BDNS (Base de Datos Nacional de Subvenciones).</p>
+
+<h2>5. Anticipo de Caja Fija (ACF, art. 78 LGP)</h2>
+<div class="clave">
+<b>Naturaleza:</b> provisión de fondos <b>extrapresupuestaria y permanente</b> a Cajas Pagadoras para gastos corrientes (SOLO Cap. 2) periódicos o repetitivos. El gasto presupuestario se imputa en la <b>reposición</b> (documento ADOK), no al librar los fondos.
+</div>
+<table>
+<tr><th>Ámbito</th><th>Límite global</th></tr>
+<tr><td>Regla general (Ministerios y OO.AA.)</td><td>7% del crédito total del Cap. 2</td></tr>
+<tr><td>AECID</td><td>14% del crédito total del Cap. 2</td></tr>
+<tr><td>Mº Defensa (material en el exterior)</td><td>2,5% de los créditos del Cap. 6 (DA 5ª LGP)</td></tr>
+</table>
+<table>
+<tr><th>Importe del gasto</th><th>Procedimiento</th></tr>
+<tr><td>&lt;600€</td><td>Obligatoriamente por ACF (si el sistema está establecido)</td></tr>
+<tr><td>600€-5.000€</td><td>ACF o procedimiento ordinario, a elección</td></tr>
+<tr><td>&gt;5.000€ (IVA incl.)</td><td>Procedimiento ORDINARIO, salvo 4 excepciones tasadas</td></tr>
+</table>
+<div class="trampa">
+<b>4 excepciones al límite de 5.000€</b> (pueden pagarse por ACF aunque lo superen): telecomunicaciones (222), energía eléctrica (221.01), combustibles (221.03), indemnizaciones por razón del servicio (art. 23). Prohibido fraccionar un gasto en varios pagos o acumular varios gastos en un justificante.
+</div>
+<p class="mini">Establece el sistema: TDM o Presidente/Director OO.AA., previo informe de la Intervención Delegada (competencia indelegable de forma ordinaria). Disposición: transferencia (preferente), cheque nominativo, o efectivo (excepcional). Firma mancomunada Cajero + funcionario designado para TB/cheque.</p>
+
+<h2>6. Pagos «a justificar» (PaJ, art. 79 LGP)</h2>
+<div class="clave">
+<b>Naturaleza:</b> procedimiento <b>PRESUPUESTARIO</b> (se imputa desde el inicio, documento ADOK) y <b>excepcional</b>. A diferencia del ACF: cualquier capítulo, sin límite de cuantía, no permanente.
+</div>
+<div class="nuevo">
+<b>Tres supuestos tasados (art. 79 LGP):</b> imposibilidad de aportar justificación previa (ej. expropiaciones) · gastos en el extranjero · ausencia de dependencia ministerial en la localidad.
+</div>
+<table>
+<tr><th>Plazo de rendición de cuenta justificativa</th><th>Base + ampliación</th></tr>
+<tr><td>Regla general (desde recepción de fondos)</td><td>3 meses + 3 meses = 6 meses máx.</td></tr>
+<tr><td>Expropiaciones y gastos en el extranjero</td><td>6 meses + 6 meses = 12 meses máx.</td></tr>
+</table>
+
+<h2>7. ACF vs. PaJ — cuadro comparativo global</h2>
+<table>
+<tr><th>Criterio</th><th>ACF</th><th>PaJ</th></tr>
+<tr><td>Naturaleza</td><td>Extrapresupuestario, permanente</td><td>Presupuestario, excepcional</td></tr>
+<tr><td>Gastos que atiende</td><td>Solo Cap. 2</td><td>Cualquier capítulo</td></tr>
+<tr><td>Límite cuantía/operación</td><td>&lt;5.000€ (salvo 4 excepciones)</td><td>Sin límite</td></tr>
+<tr><td>Límite global</td><td>7% Cap. 2</td><td>Sin límite global</td></tr>
+<tr><td>Documento inicial</td><td>PMP (no presupuestario)</td><td>ADOK (presupuestario)</td></tr>
+<tr><td>Imputación presupuestaria</td><td>Al reponer fondos</td><td>Al librar fondos</td></tr>
+<tr><td><b>Aprueba la Cuenta Justificativa</b></td><td><b>Jefe de la Unidad Administrativa</b></td><td><b>Ministro o Presidente/Director OA</b></td></tr>
+<tr><td>Exención fiscalización previa (&lt;5.000€, art. 151 LGP)</td><td>Sí, siempre</td><td>Sí, solo en gastos en el extranjero</td></tr>
+</table>
+<p class="mini">En ambos: informe de la Intervención Delegada <b>preceptivo pero NO vinculante</b>. Destinatario final: Tribunal de Cuentas (control externo). PaJ: sobrantes no invertidos al cierre se reintegran al Tesoro mediante Modelo 069.</p>
+
+<h2>8. Datos clave para el examen</h2>
+<div class="grid2">
+<div class="card">
+<b>Capítulos</b>
+<ul class="lista">
+<li>Cap. 2 corriente ↔ Cap. 6 inversión (¿genera patrimonio amortizable?)</li>
+<li>Cap. 4 corriente ↔ Cap. 7 capital (¿el receptor invierte o gasta?)</li>
+<li>Leasing: sin opción→Cap.2, con opción→Cap.6</li>
+<li>Vinculación Cap.2 Estado=artículo, OO.AA.=capítulo</li>
+</ul>
+</div>
+<div class="card">
+<b>ACF y PaJ</b>
+<ul class="lista">
+<li>ACF: extrapresup., permanente, solo Cap.2, 7% límite</li>
+<li>PaJ: presupuestario, excepcional, cualquier capítulo</li>
+<li>Aprobación CJ: ACF→Jefe U.A. · PaJ→Ministro/P·D</li>
+<li>Interés demora subvenciones 2026: 4,0625%</li>
+</ul>
+</div>
+</div>
+
+<footer>GACE 2027 · Bloque VI · Tema 6 · Material verificado contra BOE a 01/08/2026 · Antonio José De Lamo Villar</footer>
+</body>
+</html>
