@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE · BVI — Test T4, T5 y T6 (Control del gasto, Ejecución, Clasificación económica)</title>
+<style>
+:root{--azul:#7c2d3f;--azul2:#1e3a5f;--verde:#16a34a;--rojo:#dc2626;--naranja:#ea580c;--fondo:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--fondo);color:#1e293b;padding-bottom:70px}
+header{background:linear-gradient(135deg,#7c2d3f,#4d7c0f);color:#fff;padding:22px 16px;text-align:center}
+header h1{font-size:1.25rem}
+header p{font-size:.85rem;opacity:.9;margin-top:4px}
+.wrap{max-width:800px;margin:0 auto;padding:0 14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 6px}
+.tab{border:2px solid var(--azul2);background:#fff;color:var(--azul);border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;cursor:pointer}
+.tab.on{background:var(--azul);color:#fff}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 14px}
+.mode{border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:5px 12px;font-size:.8rem;cursor:pointer}
+.mode.on{background:#0f766e;color:#fff;border-color:#0f766e}
+.bars{display:flex;flex-direction:column;gap:6px;margin:10px 0 18px}
+.bar{background:#fff;border-radius:8px;padding:8px 12px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.bar .lbl{display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;margin-bottom:4px}
+.bar .track{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.bar .fill{height:100%;border-radius:4px;transition:width .3s}
+.q{background:#fff;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.q .meta{font-size:.75rem;color:#64748b;margin-bottom:8px;display:flex;justify-content:space-between}
+.q h3{font-size:.98rem;margin-bottom:12px;line-height:1.45}
+.opt{display:block;width:100%;text-align:left;border:2px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:10px 12px;margin:6px 0;font-size:.9rem;cursor:pointer;line-height:1.4}
+.opt:hover{border-color:var(--azul2)}
+.opt.ok{border-color:var(--verde);background:#f0fdf4}
+.opt.ko{border-color:var(--rojo);background:#fef2f2}
+.opt:disabled{cursor:default;opacity:.92}
+.exp{display:none;margin-top:10px;background:#eef2ff;border-left:4px solid var(--azul2);border-radius:0 8px 8px 0;padding:10px 12px;font-size:.85rem}
+.exp.show{display:block}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.btn{border:none;border-radius:8px;padding:8px 16px;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--azul);color:#fff}
+.btn.sec{background:#64748b}
+.btn.warn{background:var(--rojo)}
+.score{position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#fff;padding:10px 16px;text-align:center;font-size:.9rem}
+.score b{color:#4ade80}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧪 Test BVI · T4+T5+T6 — Control del gasto, Ejecución del presupuesto, Clasificación económica</h1>
+  <p>GACE 2027 · Autocorregible y adaptativo · LGP + LOTCu + LGS · verificado 01/08/2026</p>
+</header>
+<div class="wrap">
+  <div class="tabs" id="tabs"></div>
+  <div class="modes">
+    <button class="mode on" data-m="normal">📚 Normal</button>
+    <button class="mode" data-m="adapt">🎯 Adaptativo (peores 20)</button>
+    <button class="mode" data-m="fail">❌ Solo erróneas</button>
+  </div>
+  <div class="bars" id="bars"></div>
+  <div class="controls">
+    <button class="btn" onclick="render(true)">🔀 Barajar</button>
+    <button class="btn sec" onclick="showAll()">👁️ Ver explicaciones</button>
+    <button class="btn warn" onclick="resetHist()">🗑️ Reiniciar historial</button>
+  </div>
+  <div id="quiz"></div>
+</div>
+<div class="score" id="score"></div>
+<script>
+const LS_KEY='gace_bvi_t04t06_v1';
+const UNIDADES={4:'T4 · Control del gasto',5:'T5 · Ejecución del gasto',6:'T6 · Clasificación económica'};
+const BANK=[
+// ============ T4 (u:4) ============
+{u:4,t:"La LO 1/2024, de 10 de junio (amnistía), modifica el art. 39 LOTCu para:",o:["Suprimir la responsabilidad contable","Añadir como causa de exención de responsabilidad contable haber cometido actos amnistiados","Ampliar el plazo de prescripción contable","Suprimir el Tribunal de Cuentas"],c:1,e:"Confirmado en BOE-A-2024-11776. Aplicable a los actos amnistiados en los términos de la propia ley de amnistía."},
+{u:4,t:"La IGAE tiene un doble rol que consiste en:",o:["Solo control interno","Órgano de control interno + centro directivo y gestor de la contabilidad pública","Solo gestión de la contabilidad","Control externo del sector público"],c:1,e:"Coordina el Plan General de Contabilidad Pública y elabora la Cuenta General del Estado."},
+{u:4,t:"Cuando surge un conflicto irresoluble entre la Intervención y el órgano gestor, la decisión final corresponde a:",o:["El Tribunal de Cuentas","El Consejo de Ministros","El Congreso de los Diputados","El propio Interventor General"],c:1,e:"Confirma que se trata de control INTERNO: la última palabra la tiene el vértice del Poder Ejecutivo."},
+{u:4,t:"La función interventora se aplica sobre:",o:["Todo el sector público estatal sin excepción","AGE, Organismos Autónomos y Entidades Gestoras/Servicios Comunes de la SS (no las Mutuas)","Solo la AGE","Solo las sociedades mercantiles estatales"],c:1,e:"Las Mutuas colaboradoras, las EPE, las fundaciones y las sociedades mercantiles estatales quedan fuera de la función interventora."},
+{u:4,t:"Las cuatro fases clásicas de la función interventora son:",o:["A-D-O-P","Solo fiscalización previa","Reparo-discrepancia-convalidación","Ingreso-gasto-pago-cobro"],c:0,e:"A (aprobación) - D (disposición/compromiso) - O (reconocimiento de la obligación) - P (pago), más la comprobación material."},
+{u:4,t:"El reparo formulado por una Intervención Delegada, si el gestor discrepa, lo resuelve:",o:["El Consejo de Ministros directamente","La IGAE","El Tribunal de Cuentas","Las Cortes Generales"],c:1,e:"Si el reparo lo formuló directamente la IGAE, o la discrepancia persiste tras confirmar la IGAE el reparo de la ID, resuelve el Consejo de Ministros."},
+{u:4,t:"La convalidación de un expediente tramitado con omisión de la función interventora (art. 156 LGP) corresponde a:",o:["El Consejo de Ministros, a propuesta indelegable del Titular del Departamento Ministerial","La propia Intervención Delegada","El Ministro de Hacienda directamente, sin más trámite","Las Cortes Generales"],c:0,e:"La convalidación NO exime de responsabilidad al gestor que omitió la fiscalización."},
+{u:4,t:"El control financiero permanente se caracteriza por ser:",o:["Previo, exclusivo de legalidad","Continuo, concomitante/posterior, integral y descentralizado","Solo posterior y centralizado","Idéntico a la función interventora"],c:1,e:"Lo ejerce de forma continuada la Intervención Delegada de cada centro; abarca legalidad + buena gestión."},
+{u:4,t:"El Plan de Acción que cada departamento debe elaborar tras un informe de control financiero permanente debe remitirse a la IGAE en el plazo de:",o:["1 mes","3 meses","6 meses","1 año"],c:1,e:"Art. 161 LGP: plazo de 3 meses desde la recepción de los informes."},
+{u:4,t:"La auditoría de cuentas anuales, como submodalidad de la auditoría de regularidad contable:",o:["Se aplica a todas las entidades del sector público estatal sin excepción","NO se aplica a la AGE ni a las Entidades Gestoras y Servicios Comunes de la SS","Solo se aplica a la AGE","Está reservada al Tribunal de Cuentas exclusivamente"],c:1,e:"Las cuentas de la AGE y de las Entidades Gestoras/Servicios Comunes de la SS se integran en la Cuenta General del Estado, fiscalizada directamente por el Tribunal de Cuentas."},
+{u:4,t:"Los Consejeros de Cuentas del Tribunal de Cuentas son designados:",o:["Por el Gobierno, 12 consejeros","6 por el Congreso y 6 por el Senado, por mayoría de 3/5 de cada Cámara, mandato de 9 años","Por el Rey directamente","Por el Consejo General del Poder Judicial"],c:1,e:"La Ley Orgánica 2/2024 añade el requisito de presencia equilibrada: 40% mínimo de cada sexo en cada Cámara."},
+{u:4,t:"El Presidente del Tribunal de Cuentas:",o:["Es elegido directamente por las Cortes Generales","Es nombrado por el Rey de entre los Consejeros, a propuesta del Pleno del Tribunal, por 3 años","Es designado por el Gobierno","Es el Consejero de mayor antigüedad automáticamente"],c:1,e:"Trampa clásica de examen: no lo eligen las Cortes, sino que lo nombra el Rey a propuesta del Pleno."},
+{u:4,t:"El criterio de imputación de la responsabilidad contable exige:",o:["Cualquier grado de culpa, por leve que sea","Dolo, culpa o negligencia GRAVES","Solo dolo","Responsabilidad objetiva, sin necesidad de culpa"],c:1,e:"Además debe existir un menoscabo efectivo y cuantificable en los caudales o efectos públicos."},
+{u:4,t:"La responsabilidad contable DIRECTA corresponde a:",o:["Quien por negligencia da ocasión indirecta al menoscabo","Quien ejecuta, fuerza o induce a ejecutar la acción, o coopera necesariamente","Solo a los funcionarios de carrera","Nunca a particulares"],c:1,e:"La responsabilidad SUBSIDIARIA es la de quien por negligencia o demora da ocasión directa o indirecta al menoscabo."},
+{u:4,t:"La Cuenta General del Estado debe ser remitida por el Gobierno al Tribunal de Cuentas antes del:",o:["31 de marzo del año siguiente","30 de junio del año siguiente","31 de octubre del año siguiente","31 de diciembre del mismo ejercicio"],c:2,e:"La IGAE la forma y eleva al Gobierno; el Tribunal la examina y elabora la Declaración Definitiva."}
+];
+BANK.push(
+// ============ T5 (u:5) ============
+{u:5,t:"La distinción entre 'gastar' y 'pagar' implica que:",o:["Son sinónimos en el procedimiento presupuestario","Gastar es reconocer una obligación (fases 1-3, sin movimiento de fondos); pagar es la salida material de fondos (fases 4-5)","Pagar siempre precede a gastar","No existe distinción jurídica relevante"],c:1,e:"En el Estado, el órgano que gestiona el gasto es distinto del que gestiona el pago (DGTPF), de ahí la propuesta de pago (documento K)."},
+{u:5,t:"En el Estado, la fase 3ª del procedimiento de ejecución del gasto genera el documento:",o:["O, igual que en los Organismos Autónomos","OK, que integra el reconocimiento de la obligación y la propuesta de pago","D","ROTB"],c:1,e:"En los Organismos Autónomos se emite documento O, sin propuesta de pago, porque el mismo órgano gestiona gasto y pago."},
+{u:5,t:"La autorización previa del Consejo de Ministros para la suscripción de convenios y contratos-programa (art. 74.5 LGP) se exige quando el gasto derivado supera:",o:["1.000.000€","6.000.000€","12.000.000€","20.000.000€"],c:2,e:"El mismo umbral de 12M€ rige para contratos (art. 324 LCSP) y subvenciones (art. 10.2 LGS)."},
+{u:5,t:"Los umbrales armonizados de la LCSP para obras y concesiones, vigentes desde el 1 de enero de 2026, son:",o:["5.404.000€","5.538.000€","6.000.000€","4.500.000€"],c:0,e:"Fijados por la Orden HAC/1517/2025, adaptando los Reglamentos Delegados (UE) 2025/2150-2152; el umbral de suministros/servicios es 216.000€."},
+{u:5,t:"La tramitación anticipada de un contrato (art. 117 LCSP) puede llegar como máximo hasta:",o:["El reconocimiento de la obligación","La adjudicación y formalización del contrato (fases A y D)","El pago material","Solo hasta la fase de aprobación"],c:1,e:"Nunca puede llegar al reconocimiento de la obligación en un expediente tramitado anticipadamente."},
+{u:5,t:"La tramitación anticipada de una subvención (regla 43 IOC), a diferencia de la de un contrato, puede llegar como máximo hasta:",o:["La concesión de la subvención","El momento inmediatamente anterior al compromiso del gasto (aprobación de la convocatoria)","El pago", "El reconocimiento de la obligación"],c:1,e:"Nunca se puede dictar el acuerdo de concesión en un expediente de subvención tramitado anticipadamente."},
+{u:5,t:"Los gastos plurianuales (art. 47 LGP) admiten, como máximo, un número de ejercicios posteriores de:",o:["2","3","4","6"],c:2,e:"Con porcentajes 70-60-50-50 sobre el crédito inicial; excepciones: deuda pública (cap. 3, intereses) y arrendamientos de inmuebles."},
+{u:5,t:"Los pagos a justificar (art. 79 LGP) son un procedimiento:",o:["Extrapresupuestario y permanente","Presupuestario y excepcional, con control diferido","Idéntico al anticipo de caja fija","Solo aplicable al Capítulo 2"],c:1,e:"El anticipo de caja fija (art. 78 LGP), por el contrario, es extrapresupuestario y permanente, limitado al Capítulo 2."},
+{u:5,t:"En la fase 5ª (pago material), el documento contable en el Estado es:",o:["OTB","ROTB (Relación de Órdenes de Transferencia Bancaria)","OK","RC 100"],c:1,e:"En los Organismos Autónomos, el documento es OTB (individual por organismo, sin la 'R' de relación)."},
+{u:5,t:"El principio de unidad de caja (art. 26 LGP) implica que:",o:["Cada Ministerio tiene su propia caja independiente","Existe una única caja, el Tesoro Público, centralizada en la cuenta del Banco de España","Solo los Organismos Autónomos tienen caja única","No existe centralización de fondos"],c:1,e:"Los Organismos Autónomos necesitan autorización previa del DGTPF para abrir cuentas en otras entidades bancarias."},
+{u:5,t:"El plazo para que la Administración pague las obligaciones derivadas de sentencia judicial firme (art. 24 LGP) es de:",o:["1 mes","3 meses","6 meses","1 año"],c:1,e:"Contados desde el reconocimiento de la obligación o la notificación de la resolución judicial."},
+{u:5,t:"El plazo de prescripción del derecho al reconocimiento o liquidación de obligaciones de la Hacienda Pública (art. 25 LGP) es de:",o:["2 años","3 años","4 años","5 años"],c:2,e:"El mismo plazo rige para exigir el pago de obligaciones ya reconocidas."},
+{u:5,t:"La autorización para que un Organismo Autónomo abra una cuenta bancaria distinta de la del Banco de España (art. 109 LGP) tiene un plazo de resolución de:",o:["1 mes, silencio positivo","3 meses, silencio negativo","6 meses, silencio positivo","No tiene plazo"],c:1,e:"Compete al DGTPF autorizar previamente la apertura de dichas cuentas."},
+{u:5,t:"En las fases mixtas o acumuladas, la diferencia entre Estado y Organismos Autónomos se traduce en:",o:["No existe diferencia alguna","Estado: ADOK/OP; Organismos Autónomos: ADO/ADOP","Estado: ADO; Organismos Autónomos: ADOK","Solo los Organismos Autónomos usan fases mixtas"],c:1,e:"La diferencia se arrastra de la fase 3ª: el Estado incluye la K (propuesta de pago) y los Organismos Autónomos no."}
+);
+BANK.push(
+// ============ T6 (u:6) ============
+{u:6,t:"Los bienes imputables al Capítulo 2 del presupuesto de gastos se caracterizan por ser:",o:["Inventariables y amortizables","Fungibles, de duración inferior al ejercicio, no inventariables ni amortizables","Bienes de capital de larga duración","Exclusivamente inmuebles"],c:1,e:"Se diferencian así de los bienes del Capítulo 6 (inversión), que sí son patrimoniales y amortizables."},
+{u:6,t:"Un contrato de leasing SIN opción de compra se imputa a:",o:["Capítulo 6, artículo 64","Capítulo 2, artículo 20","Capítulo 1","Capítulo 4"],c:1,e:"Si el leasing tiene opción de compra, se imputa al Capítulo 6, artículo 64 (inversión inmaterial), al incorporarse el bien al patrimonio al ejercer la opción."},
+{u:6,t:"Las indemnizaciones por razón del servicio (dietas, locomoción) se imputan al:",o:["Capítulo 1, en nómina","Capítulo 2, artículo 23, fuera de nómina","Capítulo 4","Capítulo 6"],c:1,e:"Aunque son percepciones del funcionario, no se recogen en nómina sino en el Capítulo 2 (Real Decreto 462/2002)."},
+{u:6,t:"La vinculación de los créditos del Capítulo 2 en el Estado se produce a nivel:",o:["Capítulo","Artículo","Concepto","Subconcepto"],c:1,e:"En los Organismos Autónomos, en cambio, la vinculación del Capítulo 2 se produce a nivel de CAPÍTULO (art. 44 LGP)."},
+{u:6,t:"Los gastos de inversión del Capítulo 6 se caracterizan, entre otros rasgos, por ser:",o:["No amortizables y recurrentes","Amortizables, generadores de activos, no recurrentes","Idénticos en naturaleza a los del Capítulo 2","Exclusivos de los Organismos Autónomos"],c:1,e:"Están ligados a proyectos específicos, no se repiten periódicamente y forman parte del patrimonio."},
+{u:6,t:"El criterio para distinguir entre transferencias corrientes (Cap. 4) y de capital (Cap. 7) es:",o:["El importe económico de la operación","Si el beneficiario destina los fondos a gasto corriente o a inversión/adquisición de bienes de capital","La naturaleza pública o privada del beneficiario","El número de anualidades"],c:1,e:"Ejemplo: una beca de estudio es Cap. 4; una beca de investigación, Cap. 7; una subvención para adquirir una ambulancia, Cap. 7."},
+{u:6,t:"Las transferencias a Comunidades Autónomas y Corporaciones Locales se codifican, respectivamente, en los artículos:",o:["40/70 y 41/71","45/75 y 46/76","47/77 y 48/78","42/72 y 43/73"],c:1,e:"45 (corrientes)/75 (capital) para CC.AA.; 46/76 para Corporaciones Locales."},
+{u:6,t:"Las transferencias al exterior (artículos 49 y 79) tienen la particularidad de que:",o:["Son siempre créditos vinculantes por naturaleza, como el resto","NO se consideran créditos vinculantes por naturaleza, a diferencia del resto de transferencias nominativas","No pueden concederse nunca","Requieren siempre ley orgánica"],c:1,e:"Dato específico frecuente en preguntas sobre vinculación de créditos."},
+{u:6,t:"La subvención es, conforme al art. 2 LGS, toda disposición dineraria que cumple tres requisitos acumulativos, entre ellos:",o:["Ser reintegrable en todo caso","Entrega sin contraprestación directa, sujeta al cumplimiento de un objetivo, con finalidad de fomento de interés público","Requerir siempre concurrencia competitiva","Estar limitada a personas físicas"],c:1,e:"El tercer requisito es la finalidad de fomento de actividad de utilidad pública o interés social."},
+{u:6,t:"El interés de demora aplicable a las subvenciones (art. 38.2 LGS), vigente en 2026, es:",o:["3,25%","4,0625% (interés legal 3,25% + 25%)","5%","10%"],c:1,e:"Verificado: el interés legal del dinero se mantiene en 3,25% por la prórroga de los PGE 2023 (DA 42ª Ley 31/2022)."},
+{u:6,t:"El Anticipo de Caja Fija (ACF) tiene, entre sus rasgos esenciales, ser:",o:["Presupuestario y excepcional","Extrapresupuestario y permanente, limitado al Capítulo 2","Aplicable a cualquier capítulo sin límite","Idéntico al pago a justificar"],c:1,e:"El gasto presupuestario se imputa solo en el momento de la reposición de fondos (documento ADOK)."},
+{u:6,t:"El límite global del ACF, como regla general para Ministerios y Organismos Autónomos, es del:",o:["5% del crédito del Capítulo 2","7% del crédito total del Capítulo 2","10% del crédito total del Capítulo 2","14% del crédito total del Capítulo 2"],c:1,e:"La AECID tiene un límite específico superior: 14% del crédito del Capítulo 2."},
+{u:6,t:"Entre las 4 excepciones que permiten pagar por ACF aunque el gasto supere los 5.000€ se encuentra:",o:["Cualquier gasto de personal","Energía eléctrica (subconcepto 221.01)","Cualquier gasto de inversión","Las subvenciones nominativas"],c:1,e:"Las otras tres excepciones son: telecomunicaciones (222), combustibles (221.03) e indemnizaciones por razón del servicio (art. 23)."},
+{u:6,t:"La aprobación de la cuenta justificativa se atribuye, según el sistema, a:",o:["En ambos casos, al Ministro","ACF: Jefe de la Unidad Administrativa; PaJ: Ministro o Presidente/Director del Organismo Autónomo","ACF: Tribunal de Cuentas; PaJ: IGAE","En ambos casos, a la Intervención Delegada"],c:1,e:"Diferencia clave de examen: el PaJ lo aprueba quien expidió el ADOK inicial (Ministro o P/D)."},
+{u:6,t:"Los Pagos a Justificar proceden en tres supuestos tasados (art. 79 LGP), entre ellos:",o:["Cualquier gasto superior a 100.000€","Imposibilidad de aportar documentación justificativa previa (p. ej., expropiaciones)","Gastos de personal exclusivamente","Solo gastos de inversión"],c:1,e:"Los otros dos supuestos: gastos en el extranjero y ausencia de dependencia ministerial en la localidad."}
+);
+const CATS_LABEL=UNIDADES;
+let filtered=[...BANK], mode='normal', curTab=0;
+function loadHist(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'{}')}catch(e){return{}}}
+function saveHist(h){localStorage.setItem(LS_KEY,JSON.stringify(h))}
+function qid(q){return q.u+'|'+q.t.slice(0,60)}
+function buildTabs(){
+  const tabs=document.getElementById('tabs');
+  tabs.innerHTML='<button class="tab on" data-u="0">Todos</button>'+Object.entries(UNIDADES).map(([k,v])=>`<button class="tab" data-u="${k}">${v}</button>`).join('');
+  tabs.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{tabs.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');curTab=+b.dataset.u;applyFilter();render(false)});
+}
+function applyFilter(){
+  let base = curTab===0?[...BANK]:BANK.filter(q=>q.u===curTab);
+  const hist=loadHist();
+  if(mode==='fail'){base=base.filter(q=>{const h=hist[qid(q)];return h&&h.wrong>0&&(h.wrong>=h.right)})}
+  if(mode==='adapt'){base=base.map(q=>{const h=hist[qid(q)]||{right:0,wrong:0};const score=h.right-h.wrong;return{q,score}}).sort((a,b)=>a.score-b.score).slice(0,20).map(x=>x.q)}
+  filtered=base;
+}
+function buildBars(){
+  const hist=loadHist();
+  const bars=document.getElementById('bars');
+  bars.innerHTML=Object.entries(UNIDADES).map(([k,v])=>{
+    const qs=BANK.filter(q=>q.u==k);
+    let right=0,total=0;
+    qs.forEach(q=>{const h=hist[qid(q)];if(h){total+=h.right+h.wrong;right+=h.right}});
+    const pct=total>0?Math.round(100*right/total):0;
+    const col=pct>=70?'#16a34a':pct>=40?'#ea580c':'#dc2626';
+    return `<div class="bar"><div class="lbl"><span>${v}</span><span>${pct}%</span></div><div class="track"><div class="fill" style="width:${pct}%;background:${col}"></div></div></div>`;
+  }).join('');
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function render(doShuffle){
+  applyFilter();
+  if(doShuffle)shuffle(filtered);
+  const quiz=document.getElementById('quiz');
+  quiz.innerHTML='';
+  filtered.forEach((q,idx)=>{
+    const div=document.createElement('div');div.className='q';
+    div.innerHTML=`<div class="meta"><span>${UNIDADES[q.u]}</span><span>#${idx+1}/${filtered.length}</span></div><h3>${q.t}</h3>`+
+      q.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')+
+      `<div class="exp" id="exp${idx}"><b>Explicación:</b> ${q.e}</div>`;
+    quiz.appendChild(div);
+    div.querySelectorAll('.opt').forEach(btn=>{
+      btn.onclick=()=>{
+        if(btn.disabled)return;
+        const opts=div.querySelectorAll('.opt');
+        opts.forEach(o=>o.disabled=true);
+        const hist=loadHist();const id=qid(q);const h=hist[id]||{right:0,wrong:0};
+        if(+btn.dataset.i===q.c){btn.classList.add('ok');h.right++}
+        else{btn.classList.add('ko');opts[q.c].classList.add('ok');h.wrong++}
+        hist[id]=h;saveHist(hist);
+        document.getElementById('exp'+idx).classList.add('show');
+        updateScore();buildBars();
+      };
+    });
+  });
+  updateScore();buildBars();
+}
+function showAll(){document.querySelectorAll('.exp').forEach(e=>e.classList.add('show'))}
+function resetHist(){if(confirm('¿Reiniciar todo el historial de este test?')){localStorage.removeItem(LS_KEY);buildBars();updateScore()}}
+function updateScore(){
+  const hist=loadHist();let right=0,wrong=0;
+  Object.values(hist).forEach(h=>{right+=h.right;wrong+=h.wrong});
+  const total=right+wrong;
+  document.getElementById('score').innerHTML=total>0?`Aciertos históricos: <b>${right}</b> / ${total} (${Math.round(100*right/total)}%)`:'Aún sin respuestas registradas';
+}
+document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>{document.querySelectorAll('.mode').forEach(x=>x.classList.remove('on'));b.classList.add('on');mode=b.dataset.m;render(false)});
+buildTabs();applyFilter();render(false);
+</script>
+</body>
+</html>
