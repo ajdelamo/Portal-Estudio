@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 1 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque IV · Tema 1 · Fuentes del Derecho Administrativo</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+// U1 — Concepto, fuentes y clasificaciones
+{u:1,t:"Según Garrido Falla, las fuentes del Derecho Administrativo son:",o:["«Aquellas formas o actos en que el Derecho se manifiesta en su vigencia»","«Aquellos órganos con capacidad para producir normas jurídicas»","«Los modos de conocimiento del Derecho vigente»","«Las normas escritas y no escritas que integran el ordenamiento jurídico-administrativo»"],c:0,e:"Definición literal de Garrido Falla: «aquellas formas o actos en que el Derecho se manifiesta en su vigencia». La opción de los órganos describe las fuentes materiales; la de los modos de conocimiento, las fuentes de conocimiento, que quedan excluidas."},
+{u:1,t:"¿Cuál de los siguientes NO se considera fuente del Derecho Administrativo?",o:["Un Reglamento de la Unión Europea publicado en el Diario Oficial", "La costumbre, en defecto de ley aplicable y siempre que resulte probada", "Una concesión de aguas otorgada aplicando la legislación de Aguas", "Un tratado internacional válidamente celebrado y publicado en el BOE"],c:2,e:"Quedan excluidos los actos individuales que resultan de la producción normativa (ejemplo del tema: legislación de Montes, Aguas o Minas). La ley es fuente; la concesión concreta que la aplica, no."},
+{u:1,t:"Por su procedencia, la Ley se clasifica como fuente:",o:["DE la Administración, porque es la Administración quien la ejecuta", "PARA la Administración, y da lugar a normas heterónomas desde el punto de vista administrativo", "Exclusiva del Derecho Administrativo, porque normalmente solo contiene materia jurídico-administrativa", "DE la Administración, como expresión del principio de autonomía administrativa"],c:1,e:"Fuentes PARA la Administración: dictadas por un órgano distinto de los administrativos (la Ley) → normas heterónomas. Fuentes DE la Administración: los Reglamentos, expresión de la autonomía administrativa (potestad reglamentaria)."},
+{u:1,t:"Por la materia regulada, los Reglamentos son fuentes:",o:["Eventuales","Exclusivas","Indirectas","Subsidiarias"],c:1,e:"Exclusivas: normalmente solo contienen materia jurídico-administrativa (los Reglamentos). Eventuales: pueden ser administrativas o no (la Ley)."},
+{u:1,t:"¿Cuál de las siguientes es una fuente INDIRECTA?",o:["La costumbre, por ser una fuente no escrita", "Los principios generales del Derecho, por su carácter informador", "Un tratado internacional firmado pero aún no publicado oficialmente en España", "Un Reglamento de la UE, porque procede de un ordenamiento externo al Estado y no del legislador nacional"],c:2,e:"Fuentes indirectas: tratados firmados pero no publicados (al publicarse pasan a ser directas, art. 96.1 CE), jurisprudencia y doctrina científica. Costumbre y principios generales son fuentes directas no escritas."},
+{u:1,t:"En la clasificación por orden de aplicación, ¿cuál de estas es fuente SUBSIDIARIA?",o:["Los Reglamentos, porque solo se aplican en defecto de ley", "Los Reglamentos de la UE, porque requieren norma interna de desarrollo", "Los principios generales del Derecho", "Las normas con rango de ley dictadas por el Gobierno"],c:2,e:"Subsidiarias: costumbre, principios generales del Derecho y jurisprudencia (complementaria). Primarias: Constitución, Reglamentos UE, tratados, leyes y normas con rango de ley, reglamentos."},
+{u:1,t:"Las fuentes MATERIALES del Derecho responden a la pregunta:",o:["¿Cómo se manifiesta el Derecho?","¿Quién crea el Derecho?","¿Dónde se publica el Derecho?","¿En qué orden se aplica el Derecho?"],c:1,e:"Materiales: instituciones o fuerzas sociales con capacidad de producir normas (Parlamento, Gobierno, CCAA, EELL). Formales: cauces por los que se manifiesta el Derecho (Constitución, ley, reglamento…)."},
+{u:1,t:"Respecto de los tratados internacionales, la intervención de las Cortes Generales consiste en:",o:["Ratificarlos en todo caso antes de su publicación oficial en el BOE", "Autorizarlos (arts. 93 y 94.1 CE) o ser informadas de ellos (art. 94.2 CE)", "Ratificarlos por ley orgánica cuando afecten a derechos fundamentales", "Prestar el consentimiento del Estado mediante acuerdo de ambas Cámaras"],c:1,e:"Las Cortes no ratifican: autorizan (LO del art. 93; autorización del 94.1) o son informadas (94.2). El consentimiento del Estado lo manifiesta el Rey (art. 63.2 CE). Imprecisión frecuente en temarios."},
+{u:1,t:"La plenitud del ordenamiento jurídico se garantiza, entre otros, por:",o:["El art. 1.7 CC, que impone a jueces y tribunales el deber inexcusable de resolver","El art. 9.1 CE, que sujeta a todos a la Constitución","El art. 1.2 CC, que declara carentes de validez las disposiciones que contradigan otra de rango superior","El art. 3.1 CC, que fija los criterios de interpretación"],c:0,e:"Plenitud = no hay vacíos absolutos: el juez debe resolver siempre ateniéndose al sistema de fuentes (art. 1.7 CC). El 1.2 CC expresa la coherencia/jerarquía."},
+{u:1,t:"¿Cuál de estos es un carácter EXTRÍNSECO de la norma?",o:["Generalidad, porque se dirige a destinatarios indeterminados", "Obligatoriedad, porque vincula a todos sus destinatarios", "Publicación oficial", "Racionalidad, porque responde a una finalidad justificada"],c:2,e:"Intrínsecos: racionalidad, obligatoriedad, generalidad. Extrínsecos: órgano competente, procedimiento y publicación oficial."},
+{u:1,t:"El principio que rige la actuación de la Administración, por contraste con la autonomía de la voluntad del Derecho Civil, es:",o:["Vinculación negativa: puede hacer todo lo que la ley no prohíba","Vinculación positiva: solo puede hacer lo que la norma le autoriza","Discrecionalidad plena dentro del interés general","Autotutela declarativa"],c:1,e:"Legalidad como vinculación positiva de la Administración (arts. 9.1 y 103.1 CE). El particular se rige por la vinculación negativa."},
+// U2 — Título Preliminar del Código Civil
+{u:2,t:"Según el art. 1.1 del Código Civil, son fuentes del ordenamiento jurídico español:",o:["La ley, la costumbre, los principios generales del derecho y la jurisprudencia","La ley, la costumbre y los principios generales del derecho","La Constitución, la ley y el reglamento","La ley, la costumbre, la equidad y los principios generales"],c:1,e:"Solo tres fuentes (art. 1.1 CC). La jurisprudencia «complementará» el ordenamiento (art. 1.6), no es fuente; la equidad se pondera en la aplicación (art. 3.2)."},
+{u:2,t:"Según el art. 1.3 CC, la costumbre solo regirá:",o:["En defecto de ley aplicable, siempre que no sea contraria a la moral o al orden público y que resulte probada", "En defecto de ley y de principios generales del derecho, siempre que sea inmemorial y no contraria al orden público", "Cuando la ley se remita expresamente a ella, siempre que resulte probada por quien la invoque", "En defecto de ley aplicable, siempre que sea notoria y conocida, aunque no resulte probada en el proceso"],c:0,e:"Tres requisitos: subsidiaria (en defecto de ley), lícita (no contraria a la moral u orden público) y probada."},
+{u:2,t:"Los usos jurídicos tienen la consideración de costumbre:",o:["Siempre, porque reflejan la práctica reiterada del tráfico jurídico", "Nunca, porque solo sirven para interpretar declaraciones de voluntad", "Cuando no sean meramente interpretativos de una declaración de voluntad", "Solo si están recogidos en un reglamento o en una ordenanza local"],c:2,e:"Art. 1.3 CC, párrafo segundo: los usos jurídicos que no sean meramente interpretativos de una declaración de voluntad tendrán la consideración de costumbre."},
+{u:2,t:"Según el art. 1.5 CC, las normas de los tratados internacionales serán de aplicación directa en España:",o:["Desde su firma por el Gobierno en nombre del Estado español", "Desde la autorización de las Cortes Generales, cuando esta sea preceptiva", "Una vez hayan pasado a formar parte del ordenamiento interno mediante su publicación íntegra en el BOE", "Desde su entrada en vigor en el plano internacional, aunque todavía no se hayan publicado en el Boletín Oficial del Estado"],c:2,e:"Art. 1.5 CC, en conexión con el art. 96.1 CE: publicación íntegra en el BOE."},
+{u:2,t:"Según el art. 1.6 CC, la jurisprudencia:",o:["Es fuente del ordenamiento desde una sola sentencia del Tribunal Supremo","Complementará el ordenamiento con la doctrina que, de modo reiterado, establezca el Tribunal Supremo","Complementará el ordenamiento con la doctrina que, de modo reiterado, establezcan el Tribunal Supremo y los Tribunales Superiores de Justicia","Es fuente subsidiaria de primer grado, antes que la costumbre"],c:1,e:"«Complementará», «de modo reiterado» (al menos dos sentencias), «Tribunal Supremo». Palabras clave del literal."},
+{u:2,t:"Si una ley no establece plazo de entrada en vigor, esta se produce:",o:["Al día siguiente de su completa publicación en el Boletín Oficial del Estado","A los veinte días de su completa publicación en el BOE","A los treinta días de su publicación","A los veinte días hábiles desde su sanción"],c:1,e:"Art. 2.1 CC: veinte días desde su completa publicación en el BOE, si en ellas no se dispone otra cosa (vacatio legis). Son días naturales."},
+{u:2,t:"Derogada la Ley B, que a su vez había derogado la Ley A, ¿qué ocurre con la Ley A?",o:["Recobra vigencia automáticamente","Recobra vigencia solo si la Ley A era especial","No recobra vigencia por la simple derogación de la Ley B","Recobra vigencia si así lo declara un reglamento dictado en desarrollo de la Ley B"],c:2,e:"Art. 2.2 CC: por la simple derogación de una ley no recobran vigencia las que esta hubiera derogado."},
+{u:2,t:"Según el art. 2.3 CC, las leyes:",o:["Nunca tienen efecto retroactivo","No tendrán efecto retroactivo si no dispusieren lo contrario","Tienen efecto retroactivo, salvo que sean sancionadoras o restrictivas de derechos","Solo son retroactivas si son leyes orgánicas"],c:1,e:"La retroactividad es posible si se dispone expresamente, con el límite del art. 9.3 CE (disposiciones sancionadoras no favorables o restrictivas de derechos individuales)."},
+{u:2,t:"Según el art. 3.1 CC, ¿a qué criterio se atenderá «fundamentalmente» al interpretar las normas?",o:["Al sentido propio de sus palabras","A los antecedentes históricos y legislativos","A la realidad social del tiempo en que han de ser aplicadas","Al espíritu y finalidad de aquéllas"],c:3,e:"Criterio teleológico o finalista: «atendiendo fundamentalmente al espíritu y finalidad de aquéllas». Los otros tres son criterios que también enumera el 3.1."},
+{u:2,t:"Según el art. 3.2 CC, las resoluciones de los Tribunales podrán descansar exclusivamente en la equidad:",o:["Nunca","Cuando la ley expresamente lo permita","Cuando no exista costumbre aplicable","Cuando lo solicite el interesado"],c:1,e:"La equidad se ponderará en la aplicación de las normas, pero solo puede ser fundamento exclusivo cuando la ley expresamente lo permita."},
+{u:2,t:"¿Cuál de las siguientes leyes PUEDE aplicarse por analogía según el art. 4.2 CC?",o:["Las leyes penales, cuando la analogía favorezca al reo", "Las leyes excepcionales, si existe identidad de razón", "Las leyes de ámbito temporal, durante su vigencia", "Las leyes ordinarias de carácter general"],c:3,e:"Art. 4.2 CC: las leyes penales, las excepcionales y las de ámbito temporal no se aplicarán a supuestos ni en momentos distintos de los comprendidos expresamente en ellas. En Derecho sancionador administrativo, además, art. 27.4 Ley 40/2015."},
+{u:2,t:"Un acto realizado al amparo del texto de una norma que persigue un resultado prohibido por el ordenamiento se considera:",o:["Nulo de pleno derecho por ser contrario a una norma imperativa o prohibitiva, salvo que esta disponga otro efecto (art. 6.3 CC)", "Ejecutado en fraude de ley, sin que impida la debida aplicación de la norma eludida (art. 6.4 CC)", "Válido, por estar amparado en el texto de una norma, salvo que una ley disponga otra cosa", "Anulable a instancia del perjudicado, en el plazo de cuatro años desde su celebración"],c:1,e:"Fraude de ley (art. 6.4 CC): norma de cobertura + norma defraudada; consecuencia, se aplica la norma eludida. El 6.3 se refiere a actos directamente contrarios a normas imperativas o prohibitivas."},
+{u:2,t:"Según el art. 6.3 CC, los actos contrarios a las normas imperativas y a las prohibitivas son:",o:["Anulables, salvo que la norma infringida disponga expresamente otra cosa", "Nulos de pleno derecho, salvo que en ellas se establezca un efecto distinto para el caso de contravención", "Inexistentes, sin necesidad de declaración judicial ni de plazo alguno", "Válidos, aunque el infractor quede sujeto a la sanción que la norma infringida prevea para el caso de contravención"],c:1,e:"Nulidad de pleno derecho como regla, salvo que la propia norma prevea otro efecto."},
+// U3 — Constitución, reformas, principios del 9.3, jerarquía y competencia
+{u:3,t:"¿Cuál de los siguientes principios NO figura en el art. 9.3 CE?",o:["Publicidad de las normas","Seguridad jurídica","Eficacia","Responsabilidad"],c:2,e:"Art. 9.3 CE: legalidad, jerarquía normativa, publicidad, irretroactividad de las disposiciones sancionadoras no favorables o restrictivas de derechos individuales, seguridad jurídica, responsabilidad e interdicción de la arbitrariedad. La eficacia es del art. 103.1 CE."},
+{u:3,t:"El art. 9.3 CE garantiza la irretroactividad de:",o:["Todas las normas desfavorables, restrictivas o gravosas para los ciudadanos, cualquiera que sea su materia", "Las disposiciones sancionadoras no favorables o restrictivas de derechos individuales", "Las leyes tributarias y las sancionadoras de cualquier rango", "Toda disposición de rango reglamentario que imponga obligaciones"],c:1,e:"Fórmula literal y limitada. Otras normas desfavorables no caen en esta prohibición; se enjuician desde la seguridad jurídica."},
+{u:3,t:"¿Cuántas reformas ha tenido la Constitución española a 6 de octubre de 2026?",o:["Dos (1992 y 2011)","Tres (1992, 2011 y 2024)","Cuatro (1992, 2011, 2024 y 2026)","Cinco, incluida la del art. 43"],c:2,e:"Art. 13.2 (1992), art. 135 (2011), art. 49 (2024) y art. 69.3 (BOE 20/05/2026, senador de Formentera). La del art. 43 sigue en tramitación."},
+{u:3,t:"La reforma constitucional de 2026 afectó al artículo:",o:["49, sobre personas con discapacidad","135, sobre estabilidad presupuestaria","69.3, para dar un senador propio a Formentera","43, sobre interrupción voluntaria del embarazo"],c:2,e:"Reforma del art. 69.3 CE por el art. 167, sin referéndum, a iniciativa del Parlamento balear (art. 87.2 CE). BOE 20/05/2026."},
+{u:3,t:"La Constitución de 1978 se publicó en el BOE y entró en vigor:",o:["El 31 de octubre de 1978","El 6 de diciembre de 1978","El 27 de diciembre de 1978","El 29 de diciembre de 1978"],c:3,e:"31/10 aprobación por las Cortes; 6/12 referéndum; 27/12 sanción; 29/12 publicación y entrada en vigor el mismo día."},
+{u:3,t:"Entre una ley orgánica y una ley ordinaria, la relación se rige por el principio de:",o:["Jerarquía, porque la ley orgánica exige mayoría absoluta del Congreso en una votación final sobre el conjunto", "Competencia material: el art. 81 CE reserva ciertas materias a la ley orgánica", "Especialidad, porque la ley orgánica es siempre norma especial", "Sucesión temporal, porque prevalece siempre la ley posterior"],c:1,e:"No hay jerarquía entre LO y ley ordinaria: ambas tienen rango de ley y se distribuyen materias (art. 81 CE). Trampa clásica."},
+{u:3,t:"Una ley estatal que invade una competencia exclusiva de una Comunidad Autónoma es:",o:["Válida, por la superioridad jerárquica del Derecho estatal","Inconstitucional por vulnerar el principio de competencia","Válida pero de aplicación supletoria","Nula solo si la ley autonómica es anterior"],c:1,e:"Entre Estado y CCAA opera la competencia, no la jerarquía. El art. 149.3 CE da prevalencia al Derecho estatal solo en lo no atribuido en exclusiva a las CCAA."},
+{u:3,t:"El decreto-ley se diferencia del decreto legislativo en que:",o:["El decreto-ley tiene rango reglamentario y el decreto legislativo, rango de ley", "El decreto-ley exige extraordinaria y urgente necesidad y convalidación por el Congreso en 30 días (art. 86 CE)", "El decreto legislativo exige extraordinaria y urgente necesidad y convalidación por el Congreso en 30 días", "El decreto legislativo carece de rango de ley hasta que lo ratifican las Cortes Generales"],c:1,e:"Ambos tienen rango de ley y forma de Real Decreto. Decreto legislativo: delegación de las Cortes (arts. 82-85). Decreto-ley: urgencia, provisional, convalidación en 30 días."},
+{u:3,t:"Para la reforma constitucional del art. 167 CE, si no se alcanzan los 3/5 de cada Cámara ni acuerdo en la comisión mixta, el texto puede aprobarse por:",o:["Mayoría absoluta del Congreso y del Senado, con referéndum posterior", "2/3 del Congreso, siempre que haya obtenido mayoría absoluta en el Senado", "2/3 de ambas Cámaras, con disolución y referéndum obligatorio", "3/5 del Congreso, siempre que haya obtenido mayoría simple en el Senado"],c:1,e:"Art. 167.2 CE. Referéndum solo si lo pide 1/10 de cualquier Cámara en 15 días (167.3). El art. 168 es el procedimiento agravado."},
+{u:3,t:"El art. 5.1 de la Ley Orgánica del Poder Judicial establece que jueces y tribunales interpretarán leyes y reglamentos conforme a:",o:["La jurisprudencia reiterada del Tribunal Supremo en cualquier orden jurisdiccional, como exige el art. 1.6 del Código Civil", "La interpretación que resulte de las resoluciones del Tribunal Constitucional en todo tipo de procesos", "Los dictámenes del Consejo de Estado sobre la constitucionalidad de las normas", "La doctrina del Consejo General del Poder Judicial expresada en sus informes"],c:1,e:"La Constitución vincula a todos los jueces y tribunales, que la aplican conforme a la interpretación del TC en todo tipo de procesos."},
+{u:3,t:"La publicación oficial de las normas es un requisito de:",o:["Validez","Eficacia","Existencia","Legalidad material"],c:1,e:"Publicidad (art. 9.3 CE; art. 131 Ley 39/2015): requisito de eficacia. Trampa frecuente."},
+{u:3,t:"Según el art. 23 de la Ley 50/1997, las disposiciones que impongan nuevas obligaciones a quienes ejerzan una actividad económica o profesional preverán su entrada en vigor:",o:["A los veinte días de su publicación","El 1 de enero o el 1 de julio siguientes a su aprobación","El 2 de enero o el 1 de julio siguientes a su aprobación","El primer día del trimestre siguiente"],c:2,e:"2 de enero o 1 de julio siguientes a su aprobación, con excepciones. Excepción a la vacatio general de veinte días del art. 2.1 CC."},
+// U4 — Bloque de constitucionalidad, tratados y Derecho UE
+{u:4,t:"Según el art. 28.1 LOTC, forman parte del parámetro de constitucionalidad, además de la Constitución:",o:["Las leyes dictadas para delimitar las competencias del Estado y de las CCAA o para regular o armonizar el ejercicio de estas", "Todos los tratados sobre derechos humanos ratificados por España, en virtud de lo dispuesto en el art. 10.2 de la Constitución", "Los reglamentos ejecutivos del Gobierno que desarrollan las leyes básicas dictadas al amparo del art. 149.1 CE", "La jurisprudencia reiterada del Tribunal Supremo sobre el reparto de competencias entre el Estado y las CCAA"],c:0,e:"Bloque de constitucionalidad: Estatutos de Autonomía, leyes del art. 150, leyes de delimitación (149.1.29.ª, 152.1, 157.3), leyes básicas. Los tratados del 10.2 sirven para interpretar derechos, no figuran en el 28.1."},
+{u:4,t:"¿Cuál de las siguientes normas forma parte del bloque de constitucionalidad?",o:["La Ley 39/2015","La LOFCA, dictada al amparo del art. 157.3 CE","Un Real Decreto de estructura ministerial","La Ley 25/2014, de Tratados"],c:1,e:"Normas de delimitación de competencias previstas por la CE: 149.1.29.ª (policías autonómicas), 152.1 (demarcaciones judiciales), 157.3 (competencias financieras → LOFCA)."},
+{u:4,t:"Los tratados internacionales que atribuyan a una organización internacional el ejercicio de competencias derivadas de la Constitución requieren:",o:["Autorización previa de las Cortes (art. 94.1 CE)","Ley orgánica (art. 93 CE)","Simple información a las Cámaras (art. 94.2 CE)","Reforma constitucional previa (art. 95 CE)"],c:1,e:"Art. 93 CE: ley orgánica (así se autorizó la adhesión a las Comunidades Europeas)."},
+{u:4,t:"Un tratado que implique obligaciones financieras para la Hacienda Pública requiere:",o:["Ley orgánica","Autorización previa de las Cortes Generales","Mera información inmediata al Congreso y al Senado","Dictamen vinculante del Consejo de Estado"],c:1,e:"Art. 94.1.d) CE. Los demás tratados no incluidos en el 93 ni en el 94.1 solo exigen información inmediata (94.2)."},
+{u:4,t:"Si un tratado contiene estipulaciones contrarias a la Constitución:",o:["Prevalece el tratado, por su carácter supralegal, una vez publicado en el BOE", "Su celebración exige la previa revisión constitucional (art. 95 CE)", "Se aplica parcialmente en todo lo que no contradiga la Constitución", "Basta con que las Cortes lo autoricen mediante ley orgánica (art. 93 CE)"],c:1,e:"Art. 95 CE; el Gobierno o cualquiera de las Cámaras puede requerir al TC. Así ocurrió con Maastricht → reforma de 1992."},
+{u:4,t:"La posición de los tratados internacionales en el sistema de fuentes es:",o:["Supraconstitucional","Infraconstitucional pero supralegal","Igual rango que la ley ordinaria","Rango reglamentario salvo autorización por ley orgánica"],c:1,e:"Art. 96.1 CE y art. 31 Ley 25/2014: prevalecen sobre cualquier norma interna salvo la Constitución."},
+{u:4,t:"Según el art. 288 TFUE, el acto de la UE que obliga en cuanto al resultado, dejando a los Estados la elección de forma y medios, es:",o:["El Reglamento","La Directiva","La Decisión","La Recomendación"],c:1,e:"La Directiva requiere transposición. El Reglamento es directamente aplicable y obligatorio en todos sus elementos; la Decisión obliga en todos sus elementos a sus destinatarios."},
+{u:4,t:"El principio de efecto directo del Derecho de la UE se formuló en la sentencia:",o:["Costa c. ENEL (1964)","Van Gend en Loos (1963)","Francovich (1991)","Simmenthal (1978)"],c:1,e:"Van Gend en Loos, 05/02/1963: efecto directo. Costa c. ENEL, 15/07/1964: primacía. Francovich, 19/11/1991: responsabilidad del Estado."},
+{u:4,t:"Ante una norma interna contraria al Derecho de la UE, el juez nacional:",o:["Anula la norma interna","Inaplica la norma interna","Plantea siempre cuestión de inconstitucionalidad","Aplica la norma interna hasta que la derogue el legislador"],c:1,e:"La primacía es una regla de aplicación preferente: la norma interna se inaplica, no se anula."},
+{u:4,t:"El Tribunal Constitucional distinguió entre primacía del Derecho de la UE y supremacía de la Constitución en:",o:["La STC 55/2018","La Declaración 1/2004","La Declaración 1/1992","La STC 28/1991"],c:1,e:"Declaración 1/2004 (Tratado por el que se establece una Constitución para Europa): primacía = aplicación preferente; supremacía = validez."},
+{u:4,t:"Una directiva no transpuesta en plazo, clara, precisa e incondicional, puede ser invocada:",o:["Por un particular frente a otro particular (efecto horizontal)","Por un particular frente al Estado (efecto vertical ascendente)","Por el Estado frente a un particular (efecto vertical descendente)","Por nadie hasta su transposición"],c:1,e:"Efecto directo vertical ascendente: el particular frente al Estado que incumplió el deber de transponer."},
+// U5 — Reglamento, costumbre, PGD, jurisprudencia y supuesto
+{u:5,t:"El reglamento contrario a la ley es:",o:["Anulable (art. 48 Ley 39/2015)","Nulo de pleno derecho (art. 47.2 Ley 39/2015)","Válido y eficaz hasta que lo anule un tribunal del orden contencioso-administrativo","Ineficaz pero válido"],c:1,e:"Art. 47.2 Ley 39/2015: nulidad de pleno derecho de las disposiciones que vulneren la CE, las leyes u otras disposiciones de rango superior, regulen materias reservadas a la ley o establezcan la retroactividad de disposiciones sancionadoras no favorables o restrictivas de derechos."},
+{u:5,t:"Contra las disposiciones administrativas de carácter general:",o:["Cabe recurso de alzada ante el superior jerárquico del órgano que dictó la disposición general","Cabe recurso potestativo de reposición","No cabe recurso en vía administrativa (art. 112.3 Ley 39/2015)","Cabe recurso extraordinario de revisión"],c:2,e:"Art. 112.3 Ley 39/2015. Sí cabe recurrir el acto de aplicación alegando la nulidad de la disposición (ante el órgano que la dictó) y el recurso contencioso directo o indirecto."},
+{u:5,t:"Según el art. 37.1 Ley 39/2015, las resoluciones administrativas de carácter particular no pueden vulnerar una disposición general aunque procedan de un órgano:",o:["De igual o superior rango a la disposición general infringida", "De igual o superior jerarquía al que dictó la disposición general", "De otra Administración Pública con competencia en la materia", "Colegiado, con competencia para aprobar la disposición general"],c:1,e:"Literal: «aunque aquéllas procedan de un órgano de igual o superior jerarquía al que dictó la disposición general». Inderogabilidad singular; la resolución es nula (37.2)."},
+{u:5,t:"Según el art. 24.2 Ley 50/1997, la jerarquía de los reglamentos estatales es:",o:["Orden ministerial > Real Decreto del Consejo de Ministros","Real Decreto del Presidente del Gobierno o acordado en Consejo de Ministros > Orden ministerial","Real Decreto acordado en Consejo de Ministros > Real Decreto del Presidente > Orden ministerial","Todos tienen el mismo rango"],c:1,e:"1.º disposiciones aprobadas por real decreto del Presidente del Gobierno o acordado en Consejo de Ministros; 2.º disposiciones aprobadas por orden ministerial."},
+{u:5,t:"Según el art. 128.2 Ley 39/2015, los reglamentos NO pueden:",o:["Desarrollar o precisar lo previsto en una ley sancionadora", "Tipificar infracciones administrativas ni establecer sanciones o tributos", "Regular la organización interna de los servicios administrativos de su propio Departamento", "Aprobarse por el Gobierno sin habilitación legal expresa previa"],c:1,e:"Tampoco delitos, faltas, penas, exacciones parafiscales u otras prestaciones personales o patrimoniales de carácter público. Sí pueden desarrollar o precisar lo previsto en la ley (art. 27.3 Ley 40/2015)."},
+{u:5,t:"La costumbre contra legem en Derecho Administrativo:",o:["Se admite si está probada","Se tolera en defecto de reglamento","Está prohibida","Prevalece sobre el reglamento si es anterior"],c:2,e:"Secundum legem: admitida. Praeter legem: tolerable. Contra legem: prohibida (art. 1.3 CC: solo en defecto de ley)."},
+{u:5,t:"¿Cuál de estas NO es una función de los principios generales del Derecho?",o:["Normativa o supletoria","Interpretativa","Derogatoria","Informadora"],c:2,e:"Cuatro funciones: normativa (supletoria), interpretativa, integradora e informadora (art. 1.4 CC: «sin perjuicio de su carácter informador»)."},
+{u:5,t:"El principio de confianza legítima aparece recogido expresamente en:",o:["El art. 9.3 CE, junto a la seguridad jurídica", "El art. 103.1 CE, junto a la objetividad", "El art. 3.1.e) Ley 40/2015", "El art. 1.4 CC, como principio informador"],c:2,e:"Art. 3.1.e) Ley 40/2015: buena fe, confianza legítima y lealtad institucional. No está en la lista del 9.3 CE."},
+{u:5,t:"Un reglamento ejecutivo de una ley estatal aprobado sin el preceptivo dictamen del Consejo de Estado:",o:["Es válido, porque el dictamen del Consejo de Estado es siempre facultativo", "Es anulable, siempre que se acredite que la omisión causó indefensión", "Es nulo de pleno derecho por omisión de un trámite esencial", "Es una mera irregularidad no invalidante, subsanable a posteriori"],c:2,e:"Art. 26 Ley 50/1997 y art. 22.3 LO 3/1980: dictamen preceptivo en reglamentos ejecutivos. Su omisión determina la nulidad del reglamento."},
+{u:5,t:"Durante un procedimiento sancionador entra en vigor una norma que reduce la sanción prevista. ¿Qué norma se aplica?",o:["La vigente al tiempo de los hechos, por exigencia de la seguridad jurídica", "La nueva, por la retroactividad de las disposiciones sancionadoras favorables (art. 26.2 Ley 40/2015)", "La vigente al tiempo de los hechos, salvo que la nueva norma tenga rango de ley y lo disponga expresamente", "La nueva, solo si el procedimiento sancionador aún no se había iniciado"],c:1,e:"Las disposiciones sancionadoras producen efecto retroactivo en cuanto favorezcan al presunto infractor o al infractor, también respecto de las sanciones pendientes de cumplimiento (art. 26.2 Ley 40/2015)."},
+{u:5,t:"Un interesado quiere atacar una Orden Ministerial ilegal publicada hace un mes, sin que se le haya aplicado todavía. La vía adecuada es:",o:["Recurso de alzada ante el Ministro, en el plazo de un mes desde su publicación", "Recurso contencioso-administrativo directo contra la Orden, en el plazo de dos meses desde su publicación", "Recurso potestativo de reposición ante el propio Ministro, en el plazo de un mes desde su publicación en el BOE", "Recurso extraordinario de revisión, en el plazo de cuatro años desde su publicación"],c:1,e:"No cabe recurso administrativo contra disposiciones generales (art. 112.3 Ley 39/2015). Recurso directo: dos meses desde la publicación (art. 46.1 LJCA). Más adelante, recurso indirecto contra el acto de aplicación (art. 26 LJCA)."},
+{u:5,t:"La STC 55/2018 respecto de los arts. 129, 130, 132 y 133 de la Ley 39/2015:",o:["Los anuló en su totalidad por invadir competencias de las CCAA y de las Entidades Locales", "Declaró algunos apartados contrarios al orden competencial respecto de CCAA y EELL, pero siguen aplicándose a la AGE", "Los declaró plenamente constitucionales y aplicables a todas las Administraciones Públicas, incluidas las CCAA y las Entidades Locales", "Los declaró inaplicables a la AGE, aunque siguen vigentes para las CCAA y las EELL"],c:1,e:"Clave para GACE: los preceptos siguen plenamente aplicables a la Administración General del Estado."}
+];
+
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Concepto y clases de fuentes",2:"Título Preliminar del Código Civil",3:"Constitución, 9.3 y jerarquía",4:"Bloque, tratados y Derecho UE",5:"Reglamento, PGD y supuesto"};
+const TABS={1:"Fuentes",2:"Código Civil",3:"Constitución",4:"Tratados y UE",5:"Reglamento"};
+const SK="gace27_biv_t01_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
