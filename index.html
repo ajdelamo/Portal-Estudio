@@ -8,102 +8,96 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh}
 header{background:#fff;border-bottom:1px solid #d3d1c7;padding:28px 24px 22px;text-align:center}
-header h1{font-size:18px;font-weight:600;color:#1a1a18;letter-spacing:.01em}
+header h1{font-size:18px;font-weight:600;color:#1a1a18}
 header p{margin-top:5px;color:#888780;font-size:12px}
-.wrap{max-width:720px;margin:0 auto;padding:28px 16px 60px}
-.section-label{font-size:11px;font-weight:600;color:#888780;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #d3d1c7}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:28px}
-.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:18px 18px 14px;text-decoration:none;color:#1a1a18;display:flex;flex-direction:column;gap:6px;transition:border-color .15s,box-shadow .15s}
-.card:hover{border-color:#185fa5;box-shadow:0 2px 8px rgba(24,95,165,.10)}
-.badge{font-size:10px;font-weight:600;color:#185fa5;background:#e6f1fb;padding:2px 8px;border-radius:5px;letter-spacing:.04em;align-self:flex-start}
+.wrap{max-width:720px;margin:0 auto;padding:24px 16px 60px}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:14px}
+.section-label{font-size:12px;font-weight:600;color:#5f5e5a;margin:4px 0 10px;padding-bottom:6px;border-bottom:1px solid #d3d1c7}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-bottom:28px}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:16px 16px 13px;text-decoration:none;color:#1a1a18;display:flex;flex-direction:column;gap:6px;transition:border-color .15s,box-shadow .15s}
+a.card:hover,a.card:focus-visible{border-color:#185fa5;box-shadow:0 2px 8px rgba(24,95,165,.10);outline:none}
+.badge{font-size:10.5px;font-weight:600;color:#185fa5;background:#e6f1fb;padding:2px 8px;border-radius:5px;align-self:flex-start}
 .badge.gace{color:#0f6e56;background:#eaf3de}
 .badge.ingles{color:#854f0b;background:#faeeda}
-.card h2{font-size:14px;font-weight:600;color:#1a1a18;line-height:1.4}
+.card h2{font-size:14px;font-weight:600;line-height:1.4}
 .card p{font-size:12px;color:#888780;line-height:1.55}
-.go{margin-top:6px;font-size:12px;color:#185fa5;font-weight:600}
+.go{margin-top:auto;padding-top:4px;font-size:12px;color:#185fa5;font-weight:600}
+.block-title{font-size:13px;font-weight:600;color:#1a1a18;margin:0 0 8px}
+.info{background:#fff;border:1px solid #d3d1c7;border-radius:12px;padding:16px 18px;margin-bottom:18px;font-size:13px;line-height:1.6}
+.info h3{font-size:13px;font-weight:600;margin-bottom:6px}
+.info ul,.info ol{margin-left:18px}
+.info li{margin:2px 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+td,th{padding:6px 8px;border-bottom:1px solid #eceae4;text-align:left;vertical-align:top}
+th{font-weight:600;color:#5f5e5a}
+.pend{color:#b4b2a9;font-size:12px}
+.empty{background:#fff;border:1.5px dashed #d3d1c7;border-radius:12px;padding:22px;text-align:center;color:#888780;font-size:13px;margin-bottom:28px}
 footer{text-align:center;color:#b4b2a9;font-size:11px;padding:20px;border-top:1px solid #d3d1c7}
 </style>
 </head>
 <body>
 <header>
   <h1>📚 Portal de Estudio · Antonio</h1>
-  <p>Tests adaptativos con seguimiento de progreso · Grado en Derecho · GACE 2027 · Inglés</p>
+  <p>Grado en Derecho · GACE 2027 · Inglés</p>
 </header>
 <div class="wrap">
 
-  <div class="section-label">Grado en Derecho — UI1</div>
+  <div class="section-label">Grado en Derecho · UI1 · Curso 2026/2027</div>
   <div class="grid">
-    <a class="card" href="grado/fdd.html">
-      <span class="badge">TEORÍA Y FILOSOFÍA DEL DERECHO</span>
-      <h2>FDD · Test Adaptativo</h2>
-      <p>81 preguntas, 6 unidades. Filtros por error y modo adaptativo top-20.</p>
-      <span class="go">Abrir test →</span>
+    <a class="card" href="grado/derecho_constitucional.html">
+      <span class="badge ">1.er TRIMESTRE</span>
+      <h2>Derecho Constitucional</h2>
+      <p>6 unidades didácticas · examen ordinario 11-13 de diciembre de 2026.</p>
+      <span class="go">Abrir asignatura</span>
     </a>
-    <a class="card" href="grado/due.html">
-      <span class="badge">DERECHO DE LA UNIÓN EUROPEA</span>
-      <h2>DUE · Test Adaptativo</h2>
-      <p>101 preguntas, 6 unidades. Filtros por error y modo adaptativo top-20.</p>
-      <span class="go">Abrir test →</span>
+    <a class="card" href="grado/comunicacion_ingles.html">
+      <span class="badge ">1.er TRIMESTRE</span>
+      <h2>Comunicación Profesional en Inglés</h2>
+      <p>6 unidades · nivel A2 → B1.1 · gramática y escritura profesional.</p>
+      <span class="go">Abrir asignatura</span>
+    </a>
+    <a class="card" href="grado/practicas_iniciacion.html">
+      <span class="badge ">ANUAL</span>
+      <h2>Prácticas de Iniciación Profesional</h2>
+      <p>Simuladores y porfolio · primera entrega MP1-MP2 hasta el 9 de diciembre.</p>
+      <span class="go">Abrir asignatura</span>
     </a>
   </div>
 
-  <div class="section-label">GACE 2027 — Oposición Gestión Administrativa</div>
+  <div class="section-label">GACE 2027 · Gestión de la Administración Civil del Estado</div>
+  <p class="block-title">Bloque IV · Tema 1 · Las fuentes del Derecho Administrativo</p>
   <div class="grid">
-    <a class="card" href="gace/LPAC.html">
-      <span class="badge gace">BLOQUE IV · LEY 39/2015</span>
-      <h2>LPACAP · Test Adaptativo</h2>
-      <p>103 preguntas, 11 bloques. Filtros por error y modo adaptativo top-20.</p>
-      <span class="go">Abrir test →</span>
+    <a class="card" href="gace/GACE_BIV_T01_Visual.html">
+      <span class="badge gace">TEMA</span>
+      <h2>Documento de estudio</h2>
+      <p>Temario y material visual fusionados, con correcciones y aplicación al supuesto práctico.</p>
+      <span class="go">Abrir tema</span>
     </a>
-    <a class="card" href="gace/GACE_BVI_01.html">
-      <span class="badge gace">BLOQUE VI · SEMANA 01</span>
-      <h2>Gestión Financiera · Test Adaptativo</h2>
-      <p>72 preguntas · T51, T52, T55, T53, T56 · LGP y presupuesto.</p>
-      <span class="go">Abrir test →</span>
+    <a class="card" href="gace/GACE_BIV_T01_Test.html">
+      <span class="badge gace">TEST</span>
+      <h2>Test adaptativo</h2>
+      <p>59 preguntas en 5 bloques · modo adaptativo y repaso de erróneas.</p>
+      <span class="go">Abrir test</span>
     </a>
-    <a class="card" href="gace/GACE_BVI_02.html">
-      <span class="badge gace">BLOQUE VI · SEMANA 02</span>
-      <h2>Control, Ingresos y Retribuciones · Test Adaptativo</h2>
-      <p>52 preguntas · T54, T57, T58 + repaso integrador · Cierre de BVI.</p>
-      <span class="go">Abrir test →</span>
-    </a>
-    <a class="card" href="gace/GACE_BV_03.html">
-      <span class="badge gace">BLOQUE V · SEMANA 03</span>
-      <h2>Personal, Régimen Disciplinario y Planificación de RRHH · Test Adaptativo</h2>
-      <p>39 preguntas · T41, T42, T43 · TREBEP (RDL 5/2015) + RDL 6/2023. Arranque de BV.</p>
-      <span class="go">Abrir test →</span>
-    </a>
-    <a class="card" href="gace/GACE_BVI_Flashcards.html">
-      <span class="badge gace">BLOQUE VI · MAPA NORMATIVO</span>
-      <h2>Flashcards · Artículo ↔ Contenido</h2>
-      <p>124 tarjetas · 98 artículos + 26 normas · Doble sentido, filtro por ley, progreso guardado.</p>
-      <span class="go">Abrir flashcards →</span>
-    </a>
-    <a class="card" href="gace/GACE_Repaso_General_2027.html">
-      <span class="badge gace">REPASO ACUMULADO</span>
-      <h2>Repaso General GACE 2027</h2>
-      <p>Crece cada semana. Repaso de todo lo estudiado desde junio 2026.</p>
-      <span class="go">Abrir test →</span>
-    </a>
-    <a class="card" href="gace/GACE_Simulacro_2026_Jul.html">
-      <span class="badge gace">SIMULACRO · JULIO 2026</span>
-      <h2>Simulacro Oficial · 60 preguntas</h2>
-      <p>Preguntas de convocatorias 2019, 2022 y 2024. Timer 60 min. Penalización estándar (−1/3).</p>
-      <span class="go">Iniciar simulacro →</span>
+    <a class="card" href="gace/GACE_BIV_T01_Flashcards.html">
+      <span class="badge gace">FLASHCARDS</span>
+      <h2>Flashcards</h2>
+      <p>54 tarjetas · artículos literales, listas y claves del supuesto.</p>
+      <span class="go">Abrir flashcards</span>
     </a>
   </div>
 
-  <div class="section-label">Inglés — B1 → Fluidez</div>
+  <div class="section-label">Inglés · B1 → fluidez</div>
   <div class="grid">
     <a class="card" href="ingles/Ingles_S01.html">
       <span class="badge ingles">SEMANA 01</span>
-      <h2>Vocabulario · Comprensión · Gramática</h2>
-      <p>23 preguntas · Vocabulario EU Parliament · Falsos amigos · Too vs Very · At/In.</p>
-      <span class="go">Abrir test →</span>
+      <h2>Vocabulario · comprensión · gramática</h2>
+      <p>23 preguntas · vocabulario EU Parliament · falsos amigos · too vs very · at/in.</p>
+      <span class="go">Abrir test</span>
     </a>
   </div>
 
 </div>
-<footer>Generado y mantenido por Antonio · ajdelamo/Portal-Estudio</footer>
+<footer>Portal de Estudio · ajdelamo/Portal-Estudio</footer>
 </body>
 </html>
