@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 1 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque IV · Tema 1 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "Definición de fuentes del Derecho Administrativo (Garrido Falla)", "b": "«Aquellas formas o actos en que el Derecho se manifiesta en su vigencia»."}, {"u": 1, "f": "Tres cosas que NO son fuente", "b": "1) Hechos y actos que crean o disciplinan situaciones jurídicas concretas.\n2) Fuentes de conocimiento (BOE como lugar de consulta, recopilaciones).\n3) Actos individuales que resultan de la producción normativa (concesión aplicando la ley de Aguas, Montes o Minas)."}, {"u": 1, "f": "Fuentes PARA la Administración vs. fuentes DE la Administración", "b": "PARA: dictadas por órgano distinto de la Administración → normas heterónomas (la Ley).\nDE: expresión de la autonomía administrativa, potestad reglamentaria (los Reglamentos)."}, {"u": 1, "f": "Fuentes exclusivas vs. eventuales", "b": "Exclusivas: normalmente solo contienen materia administrativa (Reglamentos).\nEventuales: pueden ser administrativas o no (la Ley)."}, {"u": 1, "f": "Fuentes indirectas (3)", "b": "Tratados firmados pero no publicados · jurisprudencia (TS y TC) · doctrina científica."}, {"u": 1, "f": "Fuentes primarias (a-e)", "b": "a) Constitución · b) Reglamentos UE · c) Tratados válidamente celebrados y publicados · d) Leyes formales y materiales · e) Reglamentos."}, {"u": 1, "f": "Fuentes subsidiarias (f-h)", "b": "f) Costumbre · g) Principios generales del Derecho · h) Jurisprudencia (en rigor, complementaria)."}, {"u": 1, "f": "¿Las Cortes «ratifican» los tratados?", "b": "No. Los AUTORIZAN (arts. 93 y 94.1 CE) o son informadas (94.2). El consentimiento del Estado lo presta el Rey (art. 63.2 CE)."}, {"u": 1, "f": "Caracteres del ordenamiento", "b": "Unidad (presidido por la CE) · coherencia (sin antinomias) · plenitud (sin vacíos: art. 1.7 CC)."}, {"u": 2, "f": "Art. 1.1 CC", "b": "Fuentes: la ley, la costumbre y los principios generales del derecho. (La jurisprudencia NO.)"}, {"u": 2, "f": "Art. 1.3 CC · requisitos de la costumbre", "b": "En defecto de ley aplicable · no contraria a la moral ni al orden público · probada.\nUsos jurídicos no meramente interpretativos = costumbre."}, {"u": 2, "f": "Art. 1.4 CC", "b": "Principios generales: en defecto de ley o costumbre, sin perjuicio de su carácter informador del ordenamiento."}, {"u": 2, "f": "Art. 1.5 CC", "b": "Tratados: aplicación directa solo tras su publicación íntegra en el BOE."}, {"u": 2, "f": "Art. 1.6 CC · palabras clave", "b": "«Complementará» · «de modo reiterado» · «Tribunal Supremo» · al interpretar y aplicar ley, costumbre y principios generales."}, {"u": 2, "f": "Art. 1.7 CC", "b": "Deber inexcusable de jueces y tribunales de resolver en todo caso, ateniéndose al sistema de fuentes (plenitud)."}, {"u": 2, "f": "Art. 2.1 CC · vacatio legis", "b": "20 días desde la completa publicación en el BOE, salvo que la ley disponga otra cosa. Días naturales."}, {"u": 2, "f": "Art. 2.2 CC · derogación", "b": "Solo por ley posterior. Expresa o tácita (lo incompatible sobre la misma materia). La derogada no revive por derogar a la derogante."}, {"u": 2, "f": "Art. 2.3 CC", "b": "Las leyes no tendrán efecto retroactivo si no dispusieren lo contrario (límite: art. 9.3 CE)."}, {"u": 2, "f": "Art. 3.1 CC · cinco criterios de interpretación", "b": "Literal (sentido propio de las palabras) · sistemático (contexto) · histórico (antecedentes) · sociológico (realidad social) · teleológico (espíritu y finalidad) ← «fundamentalmente»."}, {"u": 2, "f": "Art. 3.2 CC · equidad", "b": "Se pondera en la aplicación; las resoluciones solo pueden descansar exclusivamente en ella cuando la ley expresamente lo permita."}, {"u": 2, "f": "Art. 4 CC · analogía", "b": "4.1: supuesto no contemplado + otro semejante + identidad de razón.\n4.2: NO en leyes penales, excepcionales ni de ámbito temporal."}, {"u": 2, "f": "Art. 6.3 CC", "b": "Actos contrarios a normas imperativas y prohibitivas: nulos de pleno derecho, salvo que la norma establezca otro efecto."}, {"u": 2, "f": "Art. 6.4 CC · fraude de ley", "b": "Acto al amparo del texto de una norma (cobertura) que persigue un resultado prohibido → no impide aplicar la norma eludida."}, {"u": 3, "f": "Art. 9.3 CE · los siete principios en orden", "b": "Legalidad · jerarquía normativa · publicidad · irretroactividad de disposiciones sancionadoras no favorables o restrictivas de derechos individuales · seguridad jurídica · responsabilidad · interdicción de la arbitrariedad."}, {"u": 3, "f": "Principios del art. 103.1 CE", "b": "Eficacia, jerarquía, descentralización, desconcentración y coordinación, con sometimiento pleno a la ley y al Derecho. (NO están en el 9.3.)"}, {"u": 3, "f": "Fechas de la Constitución de 1978", "b": "31/10 Cortes · 6/12 referéndum · 27/12 sanción · 29/12 BOE y entrada en vigor."}, {"u": 3, "f": "Las cuatro reformas constitucionales", "b": "1992 art. 13.2 (sufragio pasivo municipal UE) · 2011 art. 135 (estabilidad presupuestaria) · 2024 art. 49 (discapacidad) · 2026 art. 69.3 (senador Formentera, BOE 20/05/2026). Todas por el art. 167."}, {"u": 3, "f": "Reforma de 2026 · datos clave", "b": "Iniciativa del Parlamento balear (art. 87.2 CE) · Formentera, senador propio · eficacia pospuesta a las primeras elecciones al Senado · sin referéndum."}, {"u": 3, "f": "Art. 167 CE · reforma ordinaria", "b": "3/5 de cada Cámara → comisión mixta → 2/3 Congreso + mayoría absoluta Senado. Referéndum si lo pide 1/10 de una Cámara en 15 días."}, {"u": 3, "f": "Art. 168 CE · reforma agravada", "b": "Revisión total, Título Preliminar, Cap. II Secc. 1.ª del Título I, Título II: 2/3 de cada Cámara + disolución + 2/3 nuevas Cámaras + referéndum obligatorio."}, {"u": 3, "f": "Jerarquía vs. competencia", "b": "Jerarquía: misma autoridad, la inferior contraria es nula.\nCompetencia: autoridades o materias distintas (Estado/CCAA, LO/ley ordinaria); la jerarquía no entra en juego."}, {"u": 3, "f": "Decreto-ley vs. decreto legislativo", "b": "Ambos: rango de ley, forma de RD.\nDecreto legislativo (82-85 CE): delegación de las Cortes.\nDecreto-ley (86 CE): urgencia, convalidación del Congreso en 30 días, límites materiales."}, {"u": 3, "f": "Art. 23 Ley 50/1997 · entrada en vigor", "b": "Normas que impongan nuevas obligaciones a actividades económicas o profesionales: 2 de enero o 1 de julio siguientes a su aprobación."}, {"u": 3, "f": "Art. 5.1 LOPJ", "b": "La CE vincula a jueces y tribunales, que aplican leyes y reglamentos conforme a la interpretación del TC en todo tipo de procesos."}, {"u": 4, "f": "Art. 28.1 LOTC · bloque de constitucionalidad", "b": "Además de la CE: leyes que delimitan competencias Estado-CCAA o regulan o armonizan su ejercicio."}, {"u": 4, "f": "Integrantes del bloque de constitucionalidad", "b": "CE y Estatutos · leyes de los arts. 149.1.29.ª, 152.1 y 157.3 (LOFCA) · leyes del art. 150 (marco, transferencia, armonización) · leyes básicas · otras de delimitación."}, {"u": 4, "f": "Tratados: art. 93 / 94.1 / 94.2 CE", "b": "93: cesión de competencias → ley orgánica.\n94.1: políticos, militares, territorio, Título I, Hacienda, modifican leyes → autorización previa.\n94.2: resto → información inmediata."}, {"u": 4, "f": "Art. 95 CE", "b": "Tratado contrario a la CE → revisión constitucional previa; Gobierno o Cámaras pueden pedir declaración al TC (Maastricht → 1992)."}, {"u": 4, "f": "Art. 96.1 CE", "b": "Tratados válidamente celebrados y publicados forman parte del ordenamiento; infraconstitucionales y supralegales (art. 31 Ley 25/2014)."}, {"u": 4, "f": "Art. 288 TFUE", "b": "Reglamento: general, obligatorio, directamente aplicable · Directiva: obliga al resultado, transposición · Decisión: obligatoria para sus destinatarios · Recomendación y dictamen: no vinculantes."}, {"u": 4, "f": "Tres sentencias del TJUE con fecha", "b": "Van Gend en Loos 05/02/1963 (efecto directo) · Costa c. ENEL 15/07/1964 (primacía) · Francovich 19/11/1991 (responsabilidad del Estado)."}, {"u": 4, "f": "Primacía vs. supremacía", "b": "Primacía DUE = aplicación preferente (se inaplica la norma interna). Supremacía CE = validez. Declaración TC 1/2004."}, {"u": 5, "f": "Reglamento ilegal · consecuencia", "b": "Nulidad de pleno derecho (art. 47.2 Ley 39/2015), nunca anulabilidad."}, {"u": 5, "f": "Art. 112.3 Ley 39/2015", "b": "No cabe recurso administrativo contra disposiciones generales; sí contra el acto de aplicación alegando su nulidad (ante el órgano que la dictó)."}, {"u": 5, "f": "Art. 37.1 Ley 39/2015 · inderogabilidad singular", "b": "Resoluciones particulares no pueden vulnerar una disposición general aunque procedan de un órgano de igual o superior JERARQUÍA. Son nulas (37.2)."}, {"u": 5, "f": "Art. 24.2 Ley 50/1997", "b": "1.º RD del Presidente o acordado en Consejo de Ministros · 2.º Orden ministerial."}, {"u": 5, "f": "Art. 128.2 Ley 39/2015 · lo vedado al reglamento", "b": "Materias reservadas a la ley · tipificar delitos, faltas o infracciones · penas o sanciones · tributos, exacciones parafiscales y prestaciones patrimoniales públicas."}, {"u": 5, "f": "Art. 129 Ley 39/2015 · principios de buena regulación", "b": "Necesidad · eficacia · proporcionalidad · seguridad jurídica · transparencia · eficiencia."}, {"u": 5, "f": "STC 55/2018", "b": "Apartados de los arts. 129, 130, 132 y 133 L39 contrarios al orden competencial respecto de CCAA y EELL; plenamente aplicables a la AGE."}, {"u": 5, "f": "Costumbre en Derecho Administrativo", "b": "Secundum legem: admitida · praeter legem: tolerable · contra legem: prohibida. Papel marginal por la vinculación positiva."}, {"u": 5, "f": "Cuatro funciones de los principios generales", "b": "Normativa (supletoria) · interpretativa · integradora · informadora."}, {"u": 5, "f": "Art. 26 Ley 40/2015 · retroactividad sancionadora", "b": "26.1: rigen las normas vigentes al producirse los hechos.\n26.2: retroactividad de lo favorable, también para sanciones pendientes de cumplimiento."}, {"u": 5, "f": "Supuesto: OM que tipifica sanciones y se aplica a hechos anteriores", "b": "Reserva de ley (25.1 CE, 128.2 L39, 25 y 27 L40) + irretroactividad (9.3 CE, 26.1 L40) → nulidad de pleno derecho (47.2 L39). Contencioso directo 2 meses (46.1 LJCA) o indirecto (26 LJCA)."}, {"u": 5, "f": "Cierre fijo del supuesto", "b": "«A tenor de lo expuesto, podríamos entender que…» … «Salvo mejor criterio fundado en Derecho.»"}];
+const UNAMES={"1": "Fuentes y clasificaciones", "2": "Código Civil", "3": "Constitución y principios", "4": "Tratados y Derecho UE", "5": "Reglamento y supuesto"};
+const SK="gace27_biv_t01_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
