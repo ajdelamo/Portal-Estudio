@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 2 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque IV · Tema 2 · La ley y las normas con rango de ley</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+// U1 — Concepto de ley, reforma y control
+{u:1,t:"Según el art. 66.2 CE, la potestad legislativa del Estado la ejercen:",o:["Las Cortes Generales","El Congreso de los Diputados, con intervención consultiva del Senado","Las Cortes Generales y, por delegación permanente, el Gobierno","El Gobierno y las Cortes Generales conjuntamente"],c:0,e:"Art. 66.2 CE: las Cortes Generales ejercen la potestad legislativa del Estado. El Gobierno solo dicta normas con rango de ley por delegación (82) o urgencia (86)."},
+{u:1,t:"La «fuerza pasiva» de la ley significa que:",o:["Puede derogar cualquier norma anterior de rango igual o inferior","Resiste la derogación o modificación por normas de rango inferior","Se presume constitucional mientras el TC no declare lo contrario","Vincula a los jueces, que solo pueden plantear cuestión de inconstitucionalidad"],c:1,e:"Fuerza activa: innovar y derogar normas de rango igual o inferior. Fuerza pasiva: resistencia frente a normas inferiores."},
+{u:1,t:"¿Quién puede expulsar una ley del ordenamiento por ser contraria a la Constitución?",o:["Cualquier juez, inaplicándola al caso concreto","El Tribunal Supremo, en recurso de casación","Exclusivamente el Tribunal Constitucional","El Consejo de Estado, mediante dictamen vinculante"],c:2,e:"Monopolio de rechazo del TC. El juez ordinario solo puede plantear cuestión de inconstitucionalidad (art. 163 CE)."},
+{u:1,t:"En la reforma del art. 167 CE, el referéndum se celebra:",o:["Siempre, tras la aprobación por ambas Cámaras","Si lo solicita 1/10 de los miembros de cualquiera de las Cámaras en 15 días","Si lo solicita 1/5 de los diputados en 30 días","Solo si la reforma se aprueba finalmente por la vía de los 2/3 del Congreso con mayoría absoluta del Senado"],c:1,e:"Art. 167.3 CE. El referéndum obligatorio es el del procedimiento agravado (168.3)."},
+{u:1,t:"¿Cuál de estas partes de la CE se reforma por el procedimiento agravado del art. 168?",o:["El Título III, de las Cortes Generales","El Título II, de la Corona","El Título VIII, de la organización territorial","El Capítulo III del Título I, principios rectores"],c:1,e:"Art. 168: revisión total, Título Preliminar, Sección 1.ª del Cap. II del Título I (arts. 15-29) y Título II (Corona)."},
+{u:1,t:"Según el art. 169 CE, durante un estado de alarma:",o:["No pueden aprobarse leyes orgánicas","No puede iniciarse la reforma constitucional","Solo puede legislarse mediante decreto-ley","Se suspenden los plazos del recurso de inconstitucionalidad"],c:1,e:"Art. 169 CE: no podrá iniciarse la reforma en tiempo de guerra o de vigencia de los estados del art. 116. No impide legislar."},
+{u:1,t:"El plazo general para interponer recurso de inconstitucionalidad es:",o:["Dos meses desde la publicación de la ley","Tres meses desde la publicación, ampliable a nueve con acuerdo de la Comisión Bilateral","Tres meses desde la entrada en vigor de la ley, sin posibilidad de ampliación en ningún caso","Seis meses desde la publicación de la ley en el BOE"],c:1,e:"Art. 33 LOTC: tres meses; hasta nueve meses si se reúne la Comisión Bilateral (33.2)."},
+{u:1,t:"¿Quién NO está legitimado para interponer recurso de inconstitucionalidad según el art. 162.1.a CE?",o:["El Defensor del Pueblo","Cincuenta senadores","El Ministerio Fiscal","Las Asambleas de las Comunidades Autónomas"],c:2,e:"El Ministerio Fiscal está legitimado para el amparo (162.1.b), no para el recurso de inconstitucionalidad."},
+{u:1,t:"Según el art. 164 CE, las sentencias del TC tienen valor de cosa juzgada:",o:["Desde la fecha en que se dictan","A partir del día siguiente de su publicación en el BOE","A los veinte días de su publicación en el BOE","Desde su notificación a las partes del proceso"],c:1,e:"Art. 164.1 CE: a partir del día siguiente de su publicación, sin recurso alguno."},
+{u:1,t:"El recurso previo de inconstitucionalidad, suprimido por la LO 4/1985:",o:["Sigue suprimido para cualquier tipo de norma","Fue restablecido por la LO 12/2015 solo para proyectos de Estatutos de Autonomía y su reforma","Fue restablecido para todos los proyectos de ley orgánica","Fue restablecido por la LO 12/2015 para tratados internacionales y para proyectos de leyes de armonización"],c:1,e:"LO 12/2015 lo restableció exclusivamente para Estatutos de Autonomía (art. 79 LOTC)."},
+{u:1,t:"Que la CE no establezca una «reserva reglamentaria» significa que:",o:["El reglamento no puede regular ninguna materia sin ley previa","La ley puede regular cualquier materia, sin ámbitos vedados al legislador","El Gobierno no tiene potestad reglamentaria originaria","Los reglamentos solo pueden ser ejecutivos de una ley"],c:1,e:"Primacía o universalidad material de la ley: no hay materias reservadas al reglamento frente a la ley."},
+// U2 — LO, ordinaria y reserva de ley
+{u:2,t:"La aprobación de una ley orgánica exige:",o:["Mayoría absoluta de cada Cámara en votación final","Mayoría absoluta del Congreso en una votación final sobre el conjunto del proyecto","Mayoría de tres quintos del Congreso en votación final","Mayoría absoluta del Congreso en cada uno de los artículos del proyecto"],c:1,e:"Art. 81.2 CE. En el Senado basta la mayoría simple."},
+{u:2,t:"¿Cuál de estas materias NO está reservada a ley orgánica por la CE?",o:["El Consejo de Estado (art. 107)","El Defensor del Pueblo (art. 54)","El Gobierno y su composición (art. 98)","Los estados de alarma, excepción y sitio (art. 116)"],c:2,e:"El art. 98.4 remite a «la ley» (Ley 50/1997, ordinaria). Los otros tres exigen LO."},
+{u:2,t:"Las leyes ordinarias pueden aprobarse en Comisión con competencia legislativa plena, salvo:",o:["Las leyes de presupuestos, tributarias y de bases","La reforma constitucional, cuestiones internacionales, leyes orgánicas y de bases, y Presupuestos","Las leyes orgánicas, las leyes de armonización, las de transferencia y las que afecten a derechos del Título I","Las leyes que afecten a derechos del Título I y las tributarias"],c:1,e:"Art. 75.3 CE."},
+{u:2,t:"Según la doctrina del TC, exige ley orgánica:",o:["Cualquier ley que afecte de algún modo, aunque sea indirectamente, a un derecho fundamental o libertad pública","El desarrollo directo de los derechos fundamentales y libertades públicas","Toda regulación de los derechos del Capítulo II del Título I","La regulación de los derechos de los arts. 14 a 38 CE"],c:1,e:"«Desarrollo directo», no mera afectación (STC 6/1982, STC 127/1994)."},
+{u:2,t:"Los preceptos sobre materias conexas incluidos en una ley orgánica:",o:["Tienen rango de ley orgánica y solo otra LO puede modificarlos","Tienen rango de ley ordinaria y pueden modificarse por ley ordinaria","Son nulos por exceder el ámbito de la ley orgánica","Adquieren rango orgánico si se aprueban en la votación final"],c:1,e:"STC 5/1981: las materias conexas tienen rango ordinario si la LO las identifica como tales."},
+{u:2,t:"La relación entre ley orgánica y ley ordinaria se rige, según el TC, por el principio de:",o:["Jerarquía normativa","Competencia material","Especialidad","Prevalencia de la ley orgánica en caso de duda"],c:1,e:"No hay jerarquía. La frase del temario sobre «aplicación preferente» no recoge doctrina del TC."},
+{u:2,t:"La «congelación de rango» supone que:",o:["Una materia regulada por ley solo puede modificarse por norma de rango igual o superior","El reglamento queda congelado y sin aplicación hasta que las Cortes dicten la ley de desarrollo correspondiente","La ley no puede modificarse durante la legislatura en que se aprobó","Los decretos-leyes no pueden modificar leyes orgánicas"],c:0,e:"Reserva formal: cabe deslegalización por la propia ley; en la reserva material, nunca."},
+{u:2,t:"¿Qué artículo de la CE fija el plazo máximo de 72 horas de la detención preventiva?",o:["Art. 17.1","Art. 17.2","Art. 17.3","Art. 17.4"],c:1,e:"17.2: máximo 72 horas. 17.3: derechos del detenido. 17.4: habeas corpus."},
+{u:2,t:"La exigencia de resolución judicial para entrar en un domicilio (art. 18.2 CE) es:",o:["Una reserva absoluta de ley","Una reserva relativa de ley","Una reserva de jurisdicción","Una reserva de ley orgánica"],c:2,e:"18.2 y 22.4 exigen resolución judicial: reservas de jurisdicción, no de ley."},
+{u:2,t:"El TC califica la reserva de ley en materia tributaria (art. 31.3 CE) como:",o:["Absoluta, sin ninguna posibilidad de colaboración reglamentaria en ninguno de los elementos del tributo","Relativa, aunque la creación del tributo y sus elementos esenciales deben estar en la ley","Inexistente para las tasas y precios públicos","De ley orgánica para los impuestos estatales"],c:1,e:"Reserva relativa con núcleo indisponible (creación y elementos esenciales)."},
+{u:2,t:"Las materias reservadas a ley orgánica pueden ser reguladas por:",o:["Decreto legislativo si la ley de delegación es orgánica","Decreto-ley en caso de extraordinaria y urgente necesidad","Ninguna de esas vías ni por iniciativa legislativa popular","Ley autonómica si el Estatuto lo prevé"],c:2,e:"Arts. 82.1, 86.1 y 87.3 CE; tampoco las CCAA."},
+// U3 — Leyes del art. 150 y leyes autonómicas
+{u:3,t:"La ley marco del art. 150.1 CE atribuye a las CCAA la facultad de dictar:",o:["Normas legislativas en materias de competencia estatal, en el marco de principios, bases y directrices","Reglamentos ejecutivos de leyes estatales en materias autonómicas","Normas legislativas en materias de competencia exclusiva autonómica, dentro de los límites que fije el Estatuto","Facultades de ejecución en materias de titularidad estatal"],c:0,e:"Literal del 150.1. La transferencia de facultades materiales es la del 150.2."},
+{u:3,t:"¿Qué tipo de ley exige el art. 150.2 CE para transferir o delegar facultades a las CCAA?",o:["Ley ordinaria aprobada en Pleno","Ley de bases","Ley orgánica","Ley ordinaria aprobada por mayoría absoluta de cada Cámara"],c:2,e:"Art. 150.2: «mediante ley orgánica»."},
+{u:3,t:"En las leyes de armonización (art. 150.3), la necesidad de armonizar la aprecian:",o:["Las Cortes Generales, por mayoría absoluta de cada Cámara","El Congreso, por mayoría absoluta","El Gobierno, previo dictamen del Consejo de Estado","Las Cortes Generales, por mayoría de tres quintos de cada Cámara"],c:0,e:"Art. 150.3 CE, in fine."},
+{u:3,t:"¿Cuál de las leyes del art. 150 CE no se ha empleado nunca?",o:["La ley de transferencia o delegación","La ley marco","La ley de armonización, que se aplicó con la LOAPA","Todas se han empleado al menos una vez"],c:1,e:"La ley marco es una medida no empleada aún. La LOAPA fue una ley de armonización fallida."},
+{u:3,t:"La ley de transferencia del 150.2 es más importante que la ley marco porque:",o:["Se aprueba por mayoría simple y su tramitación es más ágil","Transfiere una competencia material completa, con facultades normativas, ejecutivas o de gestión","Transfiere la titularidad de la competencia de forma irrevocable, de modo que el Estado ya no puede recuperarla","No está sujeta a control del Estado una vez aprobada"],c:1,e:"La titularidad sigue en el Estado, que conserva formas de control."},
+{u:3,t:"El control del Gobierno sobre las funciones delegadas a las CCAA (art. 153.b CE) requiere:",o:["Previo dictamen del Consejo de Estado","Previa autorización de las Cortes Generales","Previo informe del Tribunal Constitucional","Previo acuerdo de la Comisión Bilateral"],c:0,e:"Art. 153.b CE."},
+{u:3,t:"Las leyes de transferencia a Canarias y a la Comunidad Valenciana de 1982 son:",o:["Leyes ordinarias 11 y 12/1982","Leyes orgánicas 11 y 12/1982","Leyes marco 11 y 12/1982","Leyes de armonización 11 y 12/1982"],c:1,e:"LO 11/1982 (LOTRACA) y LO 12/1982 (LOTRAVA). El temario las llama «leyes»: corrección."},
+{u:3,t:"La STC 76/1983, de 5 de agosto, sobre la LOAPA declaró, entre otras cosas, que:",o:["El legislador puede interpretar la Constitución con carácter general si lo hace por ley orgánica","No cabe dictar leyes que interpreten la Constitución, función que corresponde al TC","Las leyes de armonización deben aprobarse siempre como leyes orgánicas","Las leyes de armonización solo caben en materias de competencia estatal"],c:1,e:"La LOAPA no podía ser ni ley orgánica ni ley de armonización."},
+{u:3,t:"La LOAPA pudo ser impugnada antes de su entrada en vigor porque:",o:["Era una ley de armonización y estas leyes se someten siempre a control previo del TC antes de su publicación","Existía entonces el recurso previo de inconstitucionalidad contra proyectos de ley orgánica","La Mesa del Congreso la remitió de oficio al TC","El Consejo de Estado emitió dictamen desfavorable"],c:1,e:"Recurso previo, suprimido después por la LO 4/1985."},
+{u:3,t:"La relación entre ley autonómica y ley estatal se rige por:",o:["La jerarquía: la ley estatal prevalece siempre sobre la autonómica, aunque regule materia ajena","El principio de competencia, con las reglas de cierre del art. 149.3 CE","La especialidad: prevalece la más específica","La temporalidad: prevalece la posterior"],c:1,e:"Mismo rango, ámbitos distintos; control del TC."},
+// U4 — Decreto legislativo
+{u:4,t:"La delegación para formar un texto articulado se otorga mediante:",o:["Ley ordinaria","Ley de bases","Ley orgánica","Decreto-ley convalidado"],c:1,e:"Art. 82.2 CE. La refundición, por ley ordinaria."},
+{u:4,t:"La ley que autoriza un texto refundido debe precisar:",o:["Los principios y criterios que han de seguirse en la redacción del articulado","Si se trata de mera formulación de un texto único o si incluye regularizar, aclarar y armonizar","Las bases de la nueva regulación y su plazo de vigencia","Las materias de ley orgánica que pueden incluirse en el texto"],c:1,e:"Art. 82.5 CE. Lo primero es propio de la ley de bases (82.4)."},
+{u:4,t:"La delegación legislativa se agota:",o:["Al terminar la legislatura en que se otorgó, aunque el Gobierno no haya llegado a ejercerla","Por el uso que de ella haga el Gobierno mediante la publicación de la norma","Cuando el Consejo de Estado emite su dictamen","Cuando el Congreso convalida el texto aprobado"],c:1,e:"Art. 82.3 CE."},
+{u:4,t:"¿Cuál de estas delegaciones sería válida según el art. 82 CE?",o:["Delegación al Gobierno para refundir textos sobre una materia concreta en un plazo de un año","Delegación al Ministro de Hacienda para refundir los textos tributarios","Delegación al Gobierno, sin plazo, para articular una ley de bases","Delegación al Gobierno para aprobar por decreto legislativo una ley orgánica"],c:0,e:"Expresa, materia concreta y plazo, al Gobierno y fuera de materia orgánica."},
+{u:4,t:"Según el art. 83 CE, las leyes de bases NO pueden:",o:["Fijar el plazo para el ejercicio de la delegación","Autorizar la modificación de la propia ley de bases ni facultar para dictar normas retroactivas","Establecer fórmulas adicionales de control parlamentario sobre el texto que finalmente apruebe el Gobierno","Delimitar el objeto y alcance de la delegación"],c:1,e:"Art. 83 CE."},
+{u:4,t:"El exceso de delegación (ultra vires) de un decreto legislativo puede ser controlado:",o:["Solo por el Tribunal Constitucional","Por el TC y también por la jurisdicción contencioso-administrativa","Solo por el Congreso de los Diputados","Por el Consejo de Estado, mediante dictamen vinculante emitido antes de la publicación"],c:1,e:"Lo que excede no tiene rango de ley (STC 51/1982; art. 1.1 LJCA)."},
+{u:4,t:"El art. 82.6 CE prevé que las leyes de delegación puedan establecer:",o:["Fórmulas adicionales de control, sin perjuicio de la competencia de los Tribunales","La convalidación del decreto legislativo por el Congreso en los 30 días siguientes a su publicación","Un recurso especial ante el Tribunal Supremo","La posibilidad de subdelegar en los Ministros"],c:0,e:"Literal del 82.6."},
+{u:4,t:"La legislación delegada transfiere:",o:["La titularidad de la potestad legislativa a la Administración","El ejercicio de la potestad legislativa al Gobierno, sin transferir la titularidad","La titularidad y el ejercicio de la potestad legislativa al Gobierno durante todo el plazo fijado","El ejercicio de la potestad reglamentaria a los Ministros"],c:1,e:"El temario dice «a favor de la Administración»: corrección, es el Gobierno."},
+{u:4,t:"El Texto Refundido de la Ley General de la Seguridad Social vigente es el:",o:["Real Decreto-ley 1/2020","Real Decreto Legislativo 1/2020","Real Decreto Legislativo 8/2015","Real Decreto Legislativo 5/2015"],c:2,e:"RDLeg 1/2020 = TR Ley Concursal; RDLeg 5/2015 = TREBEP."},
+{u:4,t:"Si una proposición de ley es contraria a una delegación legislativa en vigor:",o:["La delegación queda derogada automáticamente","El Gobierno está facultado para oponerse a su tramitación","El Senado debe vetarla por mayoría absoluta","La Mesa del Congreso debe inadmitirla de oficio"],c:1,e:"Art. 84 CE."},
+// U5 — Decreto-ley, procedimiento legislativo y supuesto
+{u:5,t:"El decreto-ley debe someterse a debate y votación de totalidad en el Congreso:",o:["En los 30 días siguientes a su publicación en el BOE","En los 30 días siguientes a su promulgación","En el plazo de un mes desde su entrada en vigor","En los 30 días hábiles siguientes a su aprobación"],c:1,e:"Art. 86.2 CE: «treinta días siguientes a su promulgación»."},
+{u:5,t:"¿Qué órgano interviene en la convalidación del decreto-ley?",o:["Las Cortes Generales en sesión conjunta","El Congreso y, después, el Senado","Solo el Congreso de los Diputados","La Diputación Permanente del Senado"],c:2,e:"Art. 86.2 CE."},
+{u:5,t:"El límite del decreto-ley respecto de los derechos se refiere a:",o:["Los derechos fundamentales de los arts. 15 a 29","Los derechos, deberes y libertades de los ciudadanos regulados en el Título I","Únicamente los derechos susceptibles de recurso de amparo, es decir, los de los arts. 14 a 30.2","Los derechos del Capítulo II del Título I"],c:1,e:"Todo el Título I; la STC 182/1997 interpreta «afectar» como regular su régimen general."},
+{u:5,t:"La convalidación de un decreto-ley produce que:",o:["Se convierta en ley ordinaria","Adquiera vigencia definitiva sin dejar de ser decreto-ley","Se sanen sus posibles vicios de inconstitucionalidad","Pueda ser enmendado por el Senado"],c:1,e:"Solo la tramitación como proyecto de ley (86.3) produce una ley nueva."},
+{u:5,t:"Si el Congreso no convalida un decreto-ley, este:",o:["Queda derogado con efectos retroactivos desde su publicación","Queda derogado desde ese momento, sin efectos retroactivos","Se tramita automáticamente como proyecto de ley","Sigue vigente hasta que lo anule el Tribunal Constitucional"],c:1,e:"Ej. reales: RD-ley 2/2026 y RD-ley 8/2026, derogados en 2026."},
+{u:5,t:"La tramitación de un decreto-ley como proyecto de ley (art. 86.3) se hace:",o:["Por el procedimiento ordinario, en cualquier momento","Por el procedimiento de urgencia, durante el plazo de 30 días","Por el procedimiento de lectura única, tras la convalidación","Por el procedimiento de urgencia, en los 30 días posteriores a la convalidación"],c:1,e:"Art. 86.3 CE: durante el plazo del apartado anterior."},
+{u:5,t:"Según la doctrina del TC, el presupuesto habilitante del decreto-ley exige:",o:["Una situación de grave crisis económica declarada por el Congreso","Una necesidad objetiva explicitada y una conexión de sentido con las medidas","Que la urgencia sea apreciada libremente por el Gobierno, sin posible control posterior del Tribunal Constitucional","Que la medida no pueda adoptarse por ley en menos de seis meses"],c:1,e:"SSTC 29/1982, 6/1983, 111/1983."},
+{u:5,t:"Plazo del Senado para vetar o enmendar un proyecto declarado urgente:",o:["Diez días naturales","Veinte días naturales","Un mes","Dos meses"],c:1,e:"Art. 90.3 CE: 20 días naturales. Ordinario: 2 meses."},
+{u:5,t:"El veto del Senado se levanta por el Congreso:",o:["Por mayoría absoluta, o por mayoría simple transcurridos dos meses","Por mayoría de tres quintos en cualquier momento, o por mayoría absoluta transcurrido un mes","Por mayoría simple de forma inmediata","Por mayoría absoluta transcurrido un mes"],c:0,e:"Art. 90.2 CE."},
+{u:5,t:"La iniciativa legislativa popular NO puede versar sobre:",o:["Materias de competencia autonómica","Materias de ley orgánica, tributarias, internacionales y la prerrogativa de gracia","Únicamente materias propias de ley orgánica y las leyes de presupuestos generales del Estado","Materias reservadas a ley y materias penales"],c:1,e:"Art. 87.3 CE; requiere 500.000 firmas."},
+{u:5,t:"Un decreto-ley habilita al Ministro de Hacienda para aprobar un texto refundido. Esta habilitación es:",o:["Válida, porque el decreto-ley tiene rango de ley","Inválida: la delegación corresponde a las Cortes por ley y al Gobierno, sin subdelegación","Válida si el Congreso convalida el decreto-ley","Válida siempre que el texto refundido se someta a dictamen preceptivo del Pleno del Consejo de Estado"],c:1,e:"Arts. 82.2 y 82.3 CE."},
+{u:5,t:"Un reglamento regula de nuevo una materia que ya estaba regulada por ley, sin habilitación. Es:",o:["Válido, porque la CE no reservaba esa materia a la ley","Nulo de pleno derecho por vulnerar la congelación de rango","Anulable si causa indefensión","Válido si se aprueba por real decreto del Consejo de Ministros"],c:1,e:"Art. 47.2 Ley 39/2015; salvo deslegalización por ley."}
+];
+
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Concepto de ley, reforma y control",2:"Ley orgánica, ordinaria y reserva",3:"Leyes del art. 150 y autonómicas",4:"Decreto legislativo",5:"Decreto-ley, procedimiento y supuesto"};
+const TABS={1:"Ley y control",2:"LO y reserva",3:"Art. 150",4:"Decreto legislativo",5:"Decreto-ley"};
+const SK="gace27_biv_t02_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
