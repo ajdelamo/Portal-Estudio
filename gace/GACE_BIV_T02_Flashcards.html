@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 2 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque IV · Tema 2 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "Definición de ley (temario)", "b": "Norma escrita de contenido general, aprobada por los órganos constitucionalmente habilitados, oficialmente publicada, de obligado cumplimiento y dirigida al conjunto de la sociedad."}, {"u": 1, "f": "Los seis caracteres de la ley", "b": "Subordinación a la CE · primacía (universalidad material) · presunción de legitimidad · fuerza de ley (activa y pasiva) · sometimiento judicial · generalidad y abstracción."}, {"u": 1, "f": "Fuerza activa vs. fuerza pasiva", "b": "Activa: deroga o modifica normas anteriores de rango igual o inferior.\nPasiva: resiste la derogación por normas de rango inferior."}, {"u": 1, "f": "Art. 167 CE · reforma ordinaria", "b": "3/5 de cada Cámara → comisión paritaria → 2/3 Congreso + mayoría absoluta Senado. Referéndum si lo pide 1/10 de una Cámara en 15 días."}, {"u": 1, "f": "Art. 168 CE · qué se reforma por esta vía", "b": "Revisión total · Título Preliminar · Sección 1.ª Cap. II Título I (arts. 15-29) · Título II (Corona)."}, {"u": 1, "f": "Art. 168 CE · procedimiento", "b": "2/3 de cada Cámara + disolución inmediata → nuevas Cámaras ratifican y aprueban por 2/3 → referéndum obligatorio."}, {"u": 1, "f": "Art. 169 CE", "b": "No puede INICIARSE la reforma en tiempo de guerra ni durante los estados de alarma, excepción o sitio."}, {"u": 1, "f": "Recurso de inconstitucionalidad · legitimados y plazo", "b": "Presidente del Gobierno, Defensor del Pueblo, 50 diputados, 50 senadores, órganos ejecutivos y Asambleas de las CCAA.\n3 meses (9 con Comisión Bilateral)."}, {"u": 1, "f": "Art. 164.1 CE · sentencias del TC", "b": "Cosa juzgada a partir del día siguiente de su publicación en el BOE; sin recurso; las de inconstitucionalidad, efectos frente a todos."}, {"u": 1, "f": "Recurso previo de inconstitucionalidad", "b": "Suprimido por LO 4/1985 (así se impugnó la LOAPA). Restablecido por LO 12/2015 solo para Estatutos de Autonomía (art. 79 LOTC)."}, {"u": 2, "f": "Art. 81.1 CE · materias de ley orgánica", "b": "Desarrollo de derechos fundamentales y libertades públicas · Estatutos de Autonomía · régimen electoral general · las demás previstas en la CE."}, {"u": 2, "f": "Art. 81.2 CE · mayoría", "b": "Mayoría absoluta del Congreso (176) en una votación final sobre el conjunto del proyecto. Senado: mayoría simple."}, {"u": 2, "f": "Cinco ejemplos de «las demás previstas en la CE»", "b": "Defensor del Pueblo (54) · suspensión de derechos (55.2) · estados excepcionales (116) · Poder Judicial (122) · TC (165). También: Consejo de Estado (107), FCS (104), referéndum (92), ILP (87.3), 150.2, 93, 157.3."}, {"u": 2, "f": "Quién NO puede regular materias de ley orgánica", "b": "El Gobierno (ni decreto-ley, 86.1, ni decreto legislativo, 82.1) · las CCAA · la iniciativa legislativa popular (87.3)."}, {"u": 2, "f": "Art. 75.3 CE · no se aprueban en Comisión", "b": "Reforma constitucional · cuestiones internacionales · leyes orgánicas · leyes de bases · Presupuestos Generales del Estado."}, {"u": 2, "f": "LO y ley ordinaria · relación", "b": "Competencia material, no jerarquía.\nDesarrollo directo (STC 6/1982, 127/1994) · materias conexas con rango ordinario (STC 5/1981) · no ampliar la LO (STC 76/1983)."}, {"u": 2, "f": "Tres tipos de reserva de ley", "b": "Absoluta (delitos y penas 25.1; creación de tributos 133.1) · relativa (53.1, 33.3, 31.3) · de ley orgánica (81.1)."}, {"u": 2, "f": "Congelación de rango", "b": "Materia regulada por ley → solo norma de rango igual o superior la modifica. La propia ley puede deslegalizarla (reserva formal); la reserva material de la CE, nunca."}, {"u": 2, "f": "Art. 17.2 CE", "b": "Detención preventiva: máximo 72 horas. (17.3: derechos del detenido; 17.4: habeas corpus.)"}, {"u": 2, "f": "Arts. 18.2 y 22.4 CE: ¿reserva de ley?", "b": "No: son reservas de JURISDICCIÓN (exigen resolución judicial)."}, {"u": 3, "f": "Las tres leyes del art. 150", "b": "150.1 ley marco (ordinaria) · 150.2 transferencia o delegación (ORGÁNICA) · 150.3 armonización (ordinaria; necesidad apreciada por mayoría absoluta de cada Cámara)."}, {"u": 3, "f": "Art. 150.1 · literal clave", "b": "Las Cortes, en materias de competencia estatal, atribuyen a las CCAA la facultad de dictar normas legislativas en el marco de principios, bases y directrices de una ley estatal; cada ley marco fija el control de las Cortes."}, {"u": 3, "f": "Ley marco · rasgos", "b": "Ley ordinaria · no excluye la potestad reglamentaria · titularidad sigue en el Estado (recuperable por ley contraria) · nunca empleada · solo en competencias legislativas plenas del Estado · inspirada en el art. 71 de la Ley de Bonn (Muñoz Machado)."}, {"u": 3, "f": "Art. 150.2 · literal clave", "b": "El Estado podrá transferir o delegar, mediante LEY ORGÁNICA, facultades de titularidad estatal susceptibles de ello; la ley preverá medios financieros y formas de control."}, {"u": 3, "f": "Ley de transferencia · rasgos", "b": "Competencia material completa (normativa, ejecutiva, gestión) · medios financieros · formas de control · art. 153.b: control del Gobierno previo dictamen del Consejo de Estado · el Gobierno puede suspender dando cuenta a las Cortes."}, {"u": 3, "f": "Ejemplos de leyes de transferencia", "b": "LO 11/1982 (Canarias) · LO 12/1982 (C. Valenciana) · LO 9/1992 (CCAA del art. 143)."}, {"u": 3, "f": "Art. 150.3 · literal clave", "b": "Leyes que establezcan los principios para armonizar disposiciones de las CCAA, aun en materias de su competencia, si lo exige el interés general; necesidad apreciada por las Cortes por mayoría absoluta de cada Cámara."}, {"u": 3, "f": "LOAPA", "b": "Única ley de armonización intentada. STC 76/1983, de 5 de agosto: no cabe dictar leyes que interpreten la CE; no podía ser ni LO ni de armonización. Impugnada por recurso previo."}, {"u": 3, "f": "Leyes autonómicas", "b": "Mismo rango que la estatal · relación por competencia, no jerarquía · control del TC · reglas de cierre del art. 149.3."}, {"u": 4, "f": "Art. 85 CE", "b": "«Las disposiciones del Gobierno que contengan legislación delegada recibirán el título de Decretos Legislativos.»"}, {"u": 4, "f": "Texto articulado vs. texto refundido", "b": "Articulado: delegación por LEY DE BASES; ley nueva conforme a las bases.\nRefundido: delegación por LEY ORDINARIA; texto único o «regularizar, aclarar y armonizar»."}, {"u": 4, "f": "Art. 82.3 · requisitos de la delegación", "b": "Expresa · materia concreta · plazo · se agota por el uso (publicación) · nunca implícita ni indefinida · sin subdelegación a autoridades distintas del Gobierno."}, {"u": 4, "f": "Art. 83 · límites de la ley de bases", "b": "No puede autorizar su propia modificación ni facultar para dictar normas con carácter retroactivo."}, {"u": 4, "f": "Art. 84", "b": "Si una proposición o enmienda es contraria a una delegación en vigor, el Gobierno puede oponerse a su tramitación."}, {"u": 4, "f": "Controles del decreto legislativo", "b": "Consejo de Estado (dictamen) · fórmulas adicionales del 82.6 · TC · jurisdicción contencioso-administrativa sobre el ultra vires (STC 51/1982)."}, {"u": 4, "f": "Legislación delegada · qué se transfiere y a quién", "b": "El EJERCICIO (no la titularidad) de la potestad legislativa, al GOBIERNO (no a la Administración)."}, {"u": 4, "f": "Ejemplos de textos refundidos", "b": "RDLeg 1/1996 (Propiedad Intelectual) · RDLeg 5/2015 (TREBEP) · RDLeg 8/2015 (LGSS) · RDLeg 1/2020 (Ley Concursal)."}, {"u": 5, "f": "Art. 86.1 · cuatro materias vedadas", "b": "Instituciones básicas del Estado · derechos, deberes y libertades del TÍTULO I · régimen de las CCAA · Derecho electoral general."}, {"u": 5, "f": "Presupuesto habilitante · doctrina TC", "b": "Necesidad objetiva y explicitada + «conexión de sentido». STC 29/1982 · 6/1983 · 111/1983 (RUMASA) · 182/1997 («afectar» = regular el régimen general)."}, {"u": 5, "f": "Art. 86.2 · convalidación", "b": "Congreso (solo él) · debate y votación de totalidad · 30 días siguientes a la promulgación · procedimiento especial y sumario."}, {"u": 5, "f": "Efectos de convalidar / no convalidar", "b": "Convalidado: vigencia definitiva, sigue siendo decreto-ley, no sana vicios.\nNo convalidado: derogado desde ese momento (ex nunc)."}, {"u": 5, "f": "Art. 86.3", "b": "Durante los 30 días, las Cortes pueden tramitarlo como proyecto de ley por URGENCIA: permite enmiendas y la ley resultante lo sustituye."}, {"u": 5, "f": "Decretos-leyes derogados en 2026", "b": "RD-ley 16/2025 (derogado 27/01/2026) · RD-ley 2/2026 (no convalidado 26/02/2026) · RD-ley 8/2026 (derogado 28/04/2026)."}, {"u": 5, "f": "Iniciativa legislativa (art. 87)", "b": "Gobierno (proyectos, prioridad) · Congreso y Senado (proposiciones) · Asambleas CCAA (hasta 3 miembros) · ILP: 500.000 firmas; no LO, tributarias, internacionales ni gracia."}, {"u": 5, "f": "Art. 90 · el Senado", "b": "2 meses (20 días naturales si urgente): aprobar, enmendar (mayoría simple) o vetar (mayoría absoluta). Congreso levanta veto: mayoría absoluta ya, o simple a los 2 meses."}, {"u": 5, "f": "Art. 91 · el Rey", "b": "Sanciona en 15 días, promulga y ordena la publicación inmediata. Acto debido: no hay veto."}, {"u": 5, "f": "Supuesto: decreto-ley que regula el derecho de reunión", "b": "Materia vedada (86.1; STC 182/1997) y reservada a LO (81.1). La convalidación no sana el vicio. Solo el TC lo declara."}, {"u": 5, "f": "Supuesto: decreto legislativo fuera de la ley de bases", "b": "Ultra vires: lo que excede no tiene rango de ley; control del TC y de la jurisdicción contencioso-administrativa."}];
+const UNAMES={"1": "Ley, reforma y control", "2": "LO, ordinaria y reserva", "3": "Leyes del art. 150", "4": "Decreto legislativo", "5": "Decreto-ley y procedimiento"};
+const SK="gace27_biv_t02_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
