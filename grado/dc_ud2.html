@@ -1,0 +1,608 @@
+<title>Practica la UD 2 · Derecho Constitucional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F4; --surface:#FFFFFF; --ink:#1B2433; --muted:#566173; --line:#D5DCE4;
+  --accent:#2346A0; --accent-ink:#FFFFFF; --ok:#1E7F5C; --ok-bg:#E3F4EC; --ko:#B3261E; --ko-bg:#FBE9E7;
+  --mark:#FFE45C;
+  --serif:"Literata", Georgia, "Times New Roman", serif;
+  --sans:"Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+    --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+    --mark:rgba(255,228,92,.38); color-scheme:dark;
+  }
+}
+
+:root[data-theme="dark"]{ color-scheme:dark;
+  --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+  --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+  --mark:rgba(255,228,92,.38);
+}
+:root{ box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+html{ scroll-padding-top:env(safe-area-inset-top,0px); }
+*,*::before,*::after{ box-sizing:inherit; }
+body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.5; }
+.wrap{ max-width:660px; margin:0 auto; padding:20px 16px 48px; }
+h1{ font-family:var(--serif); font-weight:600; font-size:1.9rem; line-height:1.15; margin:8px 0 6px; letter-spacing:-.01em; }
+.lead{ color:var(--muted); margin:0 0 18px; max-width:60ch; }
+.mark{ background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); padding:8px 0 10px; margin:0 -16px 8px; }
+.tabs{ display:flex; gap:6px; overflow-x:auto; padding:0 16px; scrollbar-width:none; }
+.tabs::-webkit-scrollbar{ display:none; }
+.tab{ flex:0 0 auto; border:1px solid var(--line); background:var(--surface); color:var(--ink); font:500 .92rem var(--sans); padding:8px 14px; border-radius:999px; cursor:pointer; }
+.tab[aria-selected="true"]{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.panel{ display:none; }
+.panel.on{ display:block; }
+.card{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; margin-bottom:14px; }
+.meta{ display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:.88rem; margin-bottom:10px; flex-wrap:wrap; }
+.prompt{ font-family:var(--serif); font-size:1.22rem; line-height:1.45; margin:0 0 14px; }
+.opts{ display:grid; gap:8px; }
+.opt{ text-align:left; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:10px; padding:11px 13px; font:1rem var(--serif); cursor:pointer; }
+.opt:hover:not(:disabled){ border-color:var(--accent); }
+.opt.ok{ background:var(--ok-bg); border-color:var(--ok); }
+.opt.ko{ background:var(--ko-bg); border-color:var(--ko); }
+.opt:disabled{ cursor:default; }
+.row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.btn{ border:0; background:var(--accent); color:var(--accent-ink); font:600 .95rem var(--sans); padding:10px 16px; border-radius:10px; cursor:pointer; }
+.btn.ghost{ background:transparent; color:var(--accent); border:1px solid var(--line); }
+.btn:disabled{ opacity:.45; cursor:default; }
+.fb{ margin-top:12px; padding:12px 14px; border-radius:10px; font-size:.95rem; display:none; }
+.fb.show{ display:block; }
+.fb.ok{ background:var(--ok-bg); color:var(--ink); border-left:4px solid var(--ok); }
+.fb.ko{ background:var(--ko-bg); color:var(--ink); border-left:4px solid var(--ko); }
+.es{ color:var(--muted); font-style:italic; margin-top:6px; }
+input[type=text], textarea{ width:100%; font:1.05rem var(--serif); color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+textarea{ min-height:240px; line-height:1.5; resize:vertical; }
+input:focus, textarea:focus, .btn:focus-visible, .opt:focus-visible, .tab:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+.hint{ color:var(--muted); font-size:.9rem; margin:0 0 10px; }
+.stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin:12px 0; }
+.stat{ border:1px solid var(--line); border-radius:10px; padding:10px; }
+.stat b{ display:block; font-family:var(--serif); font-size:1.5rem; }
+.stat span{ color:var(--muted); font-size:.85rem; }
+.review{ margin:12px 0 0; padding:0; list-style:none; }
+.review li{ border-top:1px solid var(--line); padding:10px 0; font-size:.95rem; }
+.checks{ list-style:none; padding:0; margin:12px 0 0; }
+.checks li{ padding:6px 0 6px 28px; position:relative; font-size:.95rem; }
+.checks li::before{ content:""; position:absolute; left:4px; top:11px; width:12px; height:12px; border-radius:50%; border:2px solid var(--line); }
+.checks li.pass::before{ background:var(--ok); border-color:var(--ok); }
+.checks li.fail::before{ border-color:var(--ko); }
+.seg{ display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.progress{ height:4px; background:var(--line); border-radius:2px; overflow:hidden; margin-bottom:12px; }
+.progress i{ display:block; height:100%; background:var(--accent); width:0; transition:width .25s; }
+details summary{ cursor:pointer; color:var(--accent); font-weight:500; }
+.model{ font-family:var(--serif); white-space:pre-wrap; background:var(--bg); border-radius:10px; padding:12px; margin-top:8px; }
+@media (prefers-reduced-motion: reduce){ .progress i{ transition:none; } }
+</style>
+
+<div class="wrap">
+  <h1>Practica la UD 2 de Constitucional</h1>
+  <p class="lead">La Constitución de 1978 y las fuentes del derecho. Los fallos vuelven a salir hasta que los aciertes. El test usa el formato del examen final: 30 preguntas, 4 opciones, cada fallo resta 0,33.</p>
+  <nav aria-label="Modos de práctica">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-p="exam" aria-selected="true">Test tipo examen</button>
+      <button class="tab" role="tab" data-p="lit" aria-selected="false">Artículos literales</button>
+      <button class="tab" role="tab" data-p="con" aria-selected="false">Conceptos</button>
+      <button class="tab" role="tab" data-p="cls" aria-selected="false">¿Qué procedimiento o fuente?</button>
+      <button class="tab" role="tab" data-p="vf" aria-selected="false">Verdadero o falso</button>
+      <button class="tab" role="tab" data-p="write" aria-selected="false">Aplicación (PEC)</button>
+    </div>
+  </nav>
+
+  <section class="panel on" id="p-exam">
+    <div id="exam-start" class="card">
+      <p class="prompt">30 preguntas al azar de un banco de 100 (incluye 7 de repaso de la UD 1), con 4 opciones (A, B, C, D), como en el examen final.</p>
+      <p class="hint">Las respuestas siguen el texto de la unidad, que es contra lo que se corrige el examen, aunque el documento de estudio señale alguna imprecisión. Cada corrección trae <b>Por qué</b>, <b>Recuerda</b> y el apartado de la unidad.</p>
+      <p class="hint">Acierto +1, fallo −0,33, en blanco 0. Con 4 opciones, contestar al azar tiene valor esperado cero. Si descartas una opción, responder vale +0,11; si descartas dos, +0,34. Regla: responde solo si puedes descartar al menos una.</p>
+      <div id="exam-history" class="hint"></div>
+      <div class="row"><button class="btn" id="exam-go">Empezar test</button></div>
+    </div>
+    <div id="exam-run" class="card" hidden>
+      <div class="progress"><i id="exam-bar"></i></div>
+      <div class="meta"><span id="exam-count"></span><span id="exam-score"></span></div>
+      <p class="prompt" id="exam-q"></p>
+      <div class="opts" id="exam-opts"></div>
+      <div class="fb" id="exam-fb"></div>
+      <div class="row"><button class="btn ghost" id="exam-blank">Dejar en blanco</button><button class="btn" id="exam-next" disabled>Siguiente</button></div>
+    </div>
+    <div id="exam-end" class="card" hidden></div>
+  </section>
+
+  <section class="panel" id="p-lit">
+    <div class="card">
+      <div class="progress"><i id="lit-bar"></i></div>
+      <div class="meta"><span id="lit-count"></span><span id="lit-art"></span></div>
+      <p class="prompt" id="lit-q"></p>
+      <input type="text" id="lit-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Palabra que falta">
+      <div class="fb" id="lit-fb"></div>
+      <div class="row"><button class="btn" id="lit-check">Comprobar</button><button class="btn ghost" id="lit-next" disabled>Siguiente</button></div>
+      <p class="hint" style="margin-top:12px">No importan las tildes ni las mayúsculas. Al corregir verás el artículo completo.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="p-con">
+    <div class="card">
+      <div class="progress"><i id="con-bar"></i></div>
+      <div class="meta"><span id="con-count"></span><span id="con-kind"></span></div>
+      <p class="prompt" id="con-q"></p>
+      <div class="fb" id="con-fb"></div>
+      <div class="row" id="con-row1"><button class="btn" id="con-show">Ver respuesta</button></div>
+      <div class="row" id="con-row2" hidden><button class="btn" id="con-good">Lo sabía</button><button class="btn ghost" id="con-bad">Repasar otra vez</button></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-cls">
+    <div class="card">
+      <div class="progress"><i id="cls-bar"></i></div>
+      <div class="meta"><span id="cls-count"></span><span>¿Qué procedimiento de reforma o qué tipo de fuente?</span></div>
+      <p class="prompt" id="cls-q"></p>
+      <div class="row" id="cls-btns"></div>
+      <div class="fb" id="cls-fb"></div>
+      <div class="row"><button class="btn ghost" id="cls-next" disabled>Siguiente</button></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-vf">
+    <div class="card">
+      <div class="progress"><i id="vf-bar"></i></div>
+      <div class="meta"><span id="vf-count"></span><span>Afirmaciones con trampa</span></div>
+      <p class="prompt" id="vf-q"></p>
+      <div class="row"><button class="btn" id="vf-t">Verdadero</button><button class="btn" id="vf-f">Falso</button></div>
+      <div class="fb" id="vf-fb"></div>
+      <div class="row"><button class="btn ghost" id="vf-next" disabled>Siguiente</button></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-write">
+    <div class="card">
+      <div class="seg"><button class="btn" id="w-a">Supuesto 1: reforma</button><button class="btn ghost" id="w-b">Supuesto 2: tratados</button></div>
+      <p class="prompt" id="w-task"></p>
+      <label class="hint" for="w-body">Tu respuesta</label>
+      <textarea id="w-body" spellcheck="true"></textarea>
+      <div class="meta"><span id="w-words">0 palabras</span><span>El borrador se guarda en este navegador</span></div>
+      <ul class="checks" id="w-checks"></ul>
+      <p class="hint">La comprobación es mecánica: detecta que cites y nombres lo necesario, no que el razonamiento sea correcto. Compáralo con el modelo.</p>
+      <details><summary>Ver una respuesta modelo</summary><div class="model" id="w-model"></div></details>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ===== BANCOS UD2 ===== */
+var EXAM=[
+{q:"Según la clase, ¿qué artículos forman la parte dogmática de la Constitución?",o:["Los artículos 1 a 55, con el preámbulo","Los artículos 10 a 55","Los artículos 1 a 9","Los artículos 56 a 169"],w:"La parte dogmática incluye preámbulo, Título Preliminar y Título Primero; la orgánica, los títulos segundo a décimo.",r:"Dogmática 1 a 55 · orgánica 56 a 169.",s:"Clase UD2"},
+{q:"¿Qué artículos abarca el Título Tercero, de las Cortes Generales?",o:["Del 66 al 96","Del 56 al 65","Del 97 al 107","Del 108 al 116"],w:"56 a 65 es la Corona; 97 a 107, el Gobierno; 108 a 116, relaciones Gobierno y Cortes.",r:"Cortes Generales: 66 a 96.",s:"Clase UD2"},
+{q:"¿Cuántas disposiciones transitorias tiene la Constitución?",o:["Nueve","Cuatro","Una","Diez"],w:"Cuatro adicionales, nueve transitorias, una derogatoria y una final.",r:"4 adicionales · 9 transitorias · 1 derogatoria · 1 final.",s:"Clase UD2"},
+{q:"¿Qué ejemplo de costumbre pone la profesora?",o:["Los turnos de riego de la huerta valenciana y el Tribunal de las Aguas","La jurisprudencia del Tribunal Supremo","Los reglamentos de las Cámaras","Los convenios colectivos"],w:"También cita el Consejo de Hombres Buenos de la Huerta de Murcia.",r:"Costumbre: Tribunal de las Aguas (Valencia) y Hombres Buenos (Murcia).",s:"Clase UD2"},
+{q:"¿Qué caso del Tribunal de Justicia de la Unión Europea usa la profesora como ejemplo de cuestión prejudicial en materia de consumo?",o:["El caso Aziz, sobre cláusulas abusivas en hipotecas","El caso Melloni, sobre la orden europea de detención","El caso Costa contra ENEL","El caso Van Gend en Loos"],w:"Melloni es su ejemplo de conflicto entre norma interna y europea.",r:"Aziz: cuestión prejudicial y consumidores. Melloni: conflicto y primacía.",s:"Clase UD2"},
+{q:"¿Qué procedimiento de reforma se ha usado en las cuatro reformas de la Constitución?",o:["El del artículo 167","El del artículo 168","El 167 en 1992 y 2011 y el 168 en 2024 y 2026","Ninguno: se reformaron por ley orgánica"],w:"Ninguna afecta a las materias del 168, y en ninguna se pidió referéndum.",r:"1992, 2011, 2024 y 2026: artículo 167.",s:"Clase UD2"},
+{q:"¿Qué tratado obligó a reformar el artículo 13.2 en 1992?",o:["El Tratado de Maastricht","El Tratado de Lisboa","El Tratado de Roma","El Tratado de Ámsterdam"],w:"Reconocía el sufragio pasivo en las elecciones municipales a ciudadanos de la Unión.",r:"1992: Maastricht, «y pasivo».",s:"Clase UD2"},
+{q:"¿En qué fecha aprobaron las Cortes la Constitución de 1978?",o:["31 de octubre de 1978","6 de diciembre de 1978","27 de diciembre de 1978","29 de diciembre de 1978"],w:"Las Cortes la aprobaron el 31 de octubre; el 6 de diciembre fue el referéndum; el 27, la sanción; el 29, la publicación.",r:"31 oct (Cortes) · 6 dic (referéndum) · 27 dic (sanción) · 29 dic (vigor).",s:"2.1"},
+{q:"¿Cuándo entra en vigor la Constitución de 1978?",o:["El 29 de diciembre de 1978, con su publicación en el Boletín Oficial del Estado","El 27 de diciembre de 1978, con la sanción del rey","El 6 de diciembre de 1978, con el referéndum","El 1 de enero de 1979"],w:"Entra en vigor el mismo día de su publicación, el 29 de diciembre.",r:"Vigor = publicación (29 de diciembre).",s:"2.1.2"},
+{q:"¿Por qué el 6 de diciembre es el «Día de la Constitución»?",o:["Porque ese día de 1978 se celebró el referéndum de ratificación","Porque ese día el rey sancionó la Constitución","Porque ese día se publicó en el Boletín Oficial del Estado","Porque ese día la aprobaron las Cortes"],w:"El referéndum nacional se celebró el 6 de diciembre de 1978.",r:"6 de diciembre = referéndum.",s:"2.1.2"},
+{q:"¿Qué porcentaje del censo electoral ratificó la Constitución, según la unidad?",o:["El 59 %","El 88 %","El 67,1 %","El 92 %"],w:"Votó sí el 88 % de los votantes, que equivale al 59 % del censo; la participación fue del 67,1 %.",r:"88 % de votantes = 59 % del censo; participación 67,1 %.",s:"2.1.2"},
+{q:"¿Qué norma fue el instrumento clave de la transición según la unidad?",o:["La Ley 1/1977, de 4 de enero, para la Reforma Política","El Real Decreto de 3 de noviembre de 1978","La Ley de Amnistía de 1977","La Ley Orgánica 2/1979 del Tribunal Constitucional"],w:"La Ley para la Reforma Política permitió pasar «de la ley a la ley a través de la ley».",r:"Ley 1/1977, hoy derogada.",s:"2.1.1"},
+{q:"¿Quién definió la transición como el paso «de la ley a la ley a través de la ley»?",o:["Torcuato Fernández Miranda","Adolfo Suárez","Manuel Fraga Iribarne","Gregorio Peces-Barba"],w:"Fernández Miranda era entonces presidente de las Cortes.",r:"Fernández Miranda, presidente de las Cortes.",s:"2.1.1"},
+{q:"¿Cuándo se celebró el referéndum sobre la Ley para la Reforma Política?",o:["El 15 de diciembre de 1976","El 15 de junio de 1977","El 6 de diciembre de 1978","El 4 de enero de 1977"],w:"El 15 de diciembre de 1976, con resultado afirmativo por mayoría abrumadora.",r:"15/12/1976 referéndum; 4/1/1977 la ley; 15/6/1977 elecciones.",s:"2.1.1"},
+{q:"¿Qué mayoría exigía la Ley para la Reforma Política para aprobar una reforma constitucional?",o:["Mayoría absoluta en cada Cámara y referéndum","Tres quintos de cada Cámara","Dos tercios de cada Cámara y disolución","Mayoría simple del Congreso"],w:"Según la unidad: iniciativa del Gobierno y el Congreso, mayoría absoluta en cada Cámara y referendo.",r:"Reforma Política: mayoría absoluta + referéndum.",s:"2.1.1"},
+{q:"¿Cómo votó el Consejo Nacional del Movimiento el proyecto de Ley para la Reforma Política?",o:["80 a favor, 13 en contra y 6 abstenciones","325 a favor, 6 en contra y 14 abstenciones","88 % a favor","Por unanimidad"],w:"La unidad da esas cifras: 80, 13 y 6.",r:"Consejo Nacional: 80 · 13 · 6.",s:"2.1.1"},
+{q:"¿Cuántos diputados y senadores se eligieron el 15 de junio de 1977?",o:["350 diputados y 207 senadores","350 diputados y 248 senadores","400 diputados y 207 senadores","300 diputados y 150 senadores"],w:"350 diputados y 207 senadores elegidos; el rey designó además 41 senadores.",r:"350 + 207 elegidos + 41 de designación real.",s:"2.1.1"},
+{q:"¿Cuántos senadores designó el rey en 1977?",o:["41","40","27","207"],w:"En uso del artículo 2, número 3, último inciso de la Ley para la Reforma Política.",r:"41 senadores reales.",s:"2.1.1"},
+{q:"¿Qué partido ganó las elecciones de 1977?",o:["La Unión de Centro Democrático, de Adolfo Suárez","El Partido Socialista Obrero Español","Alianza Popular","El Partido Comunista de España"],w:"La unidad lo dice: el partido formado desde el Gobierno por Suárez.",r:"1977: UCD.",s:"2.1.1"},
+{q:"¿Cuándo aprobó el Pleno del Congreso la creación de la Comisión de Asuntos Constitucionales y Libertades Públicas?",o:["El 26 de julio de 1977","El 1 de agosto de 1977","El 15 de junio de 1977","El 31 de octubre de 1978"],w:"26 de julio: la Comisión; 1 de agosto: la ponencia.",r:"Comisión 26/7/1977 · ponencia 1/8/1977.",s:"2.1.2"},
+{q:"¿Quién representó al Partido Socialista Obrero Español en la ponencia constitucional?",o:["Gregorio Peces-Barba","Jordi Solé Tura","Miquel Roca","Gabriel Cisneros"],w:"Solé Tura fue por el Partido Comunista; Roca por Minoría Catalana; Cisneros por la Unión de Centro Democrático.",r:"Ponencia: 3 UCD, 1 PSOE, 1 PCE, 1 Minoría Catalana, 1 AP.",s:"2.1.2"},
+{q:"¿Cuántos miembros tenía la ponencia constitucional del Congreso?",o:["Siete","Cinco","Nueve","Once"],w:"Herrero de Miñón, Cisneros, Pérez Llorca, Peces-Barba, Solé Tura, Roca y Fraga: siete.",r:"Siete ponentes.",s:"2.1.2"},
+{q:"¿Cómo se votó la Constitución en el Congreso el 31 de octubre de 1978, según la unidad?",o:["Solo 6 votos en contra y 14 abstenciones","13 votos en contra y 6 abstenciones","Por unanimidad","88 % a favor"],w:"Además, cinco diputados no acudieron a la votación.",r:"Congreso: 6 no, 14 abstenciones.",s:"2.1.2"},
+{q:"¿Qué norma convocó el referéndum constitucional?",o:["Un Real Decreto de 3 de noviembre","Una ley orgánica de 31 de octubre","La propia Ley para la Reforma Política","Un decreto-ley de 27 de diciembre"],w:"Por Real Decreto de 3 de noviembre se convocó el preceptivo referéndum.",r:"Real Decreto de 3 de noviembre de 1978.",s:"2.1.2"},
+{q:"¿Qué derogó expresamente la disposición derogatoria de la Constitución?",o:["Las leyes fundamentales, incluida la Ley para la Reforma Política","Solo el Código Civil","Únicamente la Ley de Cortes de 1942","Nada: la Constitución carece de disposición derogatoria"],w:"Puso fin expresamente al conjunto de leyes fundamentales, incluida la Ley para la Reforma Política.",r:"La Reforma Política fue derogada por la Constitución.",s:"2.1.2"},
+{q:"¿Cuál de estas características NO atribuye la unidad a la Constitución de 1978?",o:["Flexible","Rígida","Derivada","Normativa"],w:"Es rígida: su reforma exige los procedimientos de los artículos 167 y 168.",r:"Integradora, escrita, popular, derivada, codificada, rígida, extensa, de aplicación directa, normativa.",s:"2.1.3"},
+{q:"¿Qué lugar ocupa la Constitución de 1978 por extensión en nuestra historia?",o:["La segunda, tras la de Cádiz de 1812","La primera","La tercera, tras 1812 y 1931","La segunda, tras la de 1869"],w:"Es la segunda más extensa en número de disposiciones, tras la de 1812.",r:"Más extensa: 1812; segunda: 1978.",s:"2.1.3"},
+{q:"¿Por qué se dice que la Constitución de 1978 es «derivada»?",o:["Porque se inspira en las constituciones históricas y en el constitucionalismo comparado","Porque procede de la Ley para la Reforma Política","Porque deriva del poder constituyente constituido","Porque puede reformarse por el artículo 167"],w:"Así lo define la unidad.",r:"Derivada = inspirada en historia y Derecho comparado.",s:"2.1.3"},
+{q:"¿Cuántas disposiciones transitorias tiene la Constitución?",o:["Nueve","Cuatro","Diez","Una"],w:"4 adicionales, 9 transitorias, 1 derogatoria y 1 final.",r:"4 · 9 · 1 · 1.",s:"2.1.4"},
+{q:"¿Cuántos artículos tiene la Constitución de 1978?",o:["169","168","176","159"],w:"Preámbulo, 169 artículos, título preliminar y 10 títulos.",r:"169 artículos.",s:"2.1.4"},
+{q:"¿Qué integra la parte dogmática de la Constitución según la unidad?",o:["El preámbulo, el título preliminar y el título primero","Los títulos segundo a noveno","El título primero y el título décimo","Solo el título primero"],w:"La parte orgánica son los títulos segundo a noveno.",r:"Dogmática: preámbulo + preliminar + primero.",s:"2.1.4"},
+{q:"¿Qué valor jurídico tiene el preámbulo?",o:["Ninguno: es meramente declarativo","El mismo que el articulado","Valor de ley orgánica","Valor interpretativo vinculante para los jueces"],w:"No forma parte del articulado y carece de valor jurídico.",r:"Preámbulo = declarativo.",s:"2.1.4"},
+{q:"¿Qué títulos forman la parte orgánica según la unidad?",o:["Del segundo al noveno","Del primero al décimo","Del segundo al décimo","Del tercero al octavo"],w:"Es la parte más extensa: títulos segundo a noveno.",r:"Orgánica: II a IX.",s:"2.1.4"},
+{q:"¿Qué artículos forman el título preliminar?",o:["Del 1 al 9","Del 1 al 10","Del 10 al 55","Del 1 al 14"],w:"Título preliminar: artículos 1 a 9.",r:"Preliminar 1-9; primero 10-55.",s:"2.1.5"},
+{q:"Según el artículo 1.2, la soberanía nacional reside en…",o:["El pueblo español, del que emanan los poderes del Estado","Las Cortes Generales","La Corona","La Nación española, patria común e indivisible"],w:"«La soberanía nacional reside en el pueblo español, del que emanan los poderes del Estado.»",r:"1.2: soberanía en el pueblo español.",s:"2.1.5"},
+{q:"¿Qué artículo establece que la forma política del Estado es la monarquía parlamentaria?",o:["El 1.3","El 3.1","El 1.1","El 56.1"],w:"Es el 1.3. La unidad pone por error 3.1 en la página 18; el 3.1 es el del castellano.",r:"Monarquía parlamentaria: 1.3.",s:"2.2.3"},
+{q:"Según el artículo 3.1, ¿qué deber tienen los españoles respecto al castellano?",o:["El deber de conocerla y el derecho a usarla","El deber de usarla y el derecho a conocerla","Solo el derecho a usarla","El deber de usarla en todo el territorio"],w:"«Todos los españoles tienen el deber de conocerla y el derecho a usarla.»",r:"Castellano: deber de conocer, derecho a usar.",s:"2.1.5"},
+{q:"Según el artículo 4.1, ¿cómo es la franja amarilla de la bandera?",o:["De doble anchura que cada una de las rojas","Del mismo ancho que las rojas","De triple anchura que las rojas","La mitad de ancha que las rojas"],w:"«…siendo la amarilla de doble anchura que cada una de las rojas.»",r:"Roja, amarilla (doble), roja.",s:"2.1.5"},
+{q:"¿Qué artículo de la Constitución se refiere a los sindicatos y asociaciones empresariales?",o:["El 7","El 6","El 8","El 28"],w:"El 6 es partidos; el 7, sindicatos y asociaciones empresariales; el 8, Fuerzas Armadas.",r:"6 partidos · 7 sindicatos · 8 Fuerzas Armadas.",s:"2.1.5"},
+{q:"Según el artículo 8.2, ¿qué norma regula las bases de la organización militar?",o:["Una ley orgánica","Una ley ordinaria","Un real decreto","Una ley de bases"],w:"«Una ley orgánica regulará las bases de la organización militar…»",r:"8.2: ley orgánica.",s:"2.1.5"},
+{q:"¿Qué misión atribuye el artículo 8.1 a las Fuerzas Armadas?",o:["Garantizar la soberanía e independencia de España, defender su integridad territorial y el ordenamiento constitucional","Mantener el orden público y la seguridad ciudadana","Proteger al rey y a la familia real","Ejecutar las resoluciones judiciales"],w:"Es el texto literal del 8.1.",r:"Soberanía, independencia, integridad territorial, ordenamiento constitucional.",s:"2.1.5"},
+{q:"¿Qué título es el más extenso de la Constitución?",o:["El título primero, con 46 artículos","El título tercero, con 31 artículos","El título octavo, con 22 artículos","El título preliminar"],w:"Artículos 10 a 55: 46 artículos.",r:"Título primero: 10-55, 46 artículos.",s:"2.1.6"},
+{q:"¿Qué artículos forman la sección primera del capítulo segundo del título primero?",o:["Del 15 al 29","Del 14 al 29","Del 14 al 38","Del 30 al 38"],w:"El artículo 14 está en el capítulo segundo pero fuera de las secciones; la sección segunda va del 30 al 38.",r:"Sección 1.ª: 15-29. Sección 2.ª: 30-38.",s:"2.1.6"},
+{q:"¿Qué artículos contienen los principios rectores de la política social y económica?",o:["Del 39 al 52","Del 30 al 38","Del 53 al 54","Del 10 al 14"],w:"Capítulo tercero del título primero.",r:"Principios rectores: 39-52.",s:"2.1.6"},
+{q:"¿Qué título regula las relaciones entre el Gobierno y las Cortes Generales?",o:["El quinto (artículos 108 a 116)","El cuarto (97 a 107)","El tercero (66 a 96)","El sexto (117 a 127)"],w:"Incluye cuestión de confianza, moción de censura, disolución y estados de alarma, excepción y sitio.",r:"Título V: 108-116.",s:"2.1.6"},
+{q:"¿En qué título se regulan los tratados internacionales?",o:["En el título tercero, capítulo tercero (artículos 93 a 96)","En el título cuarto","En el título noveno","En el título preliminar"],w:"Título tercero, de las Cortes Generales; capítulo tercero, de los tratados internacionales.",r:"Tratados: 93-96.",s:"2.1.6"},
+{q:"¿Qué título establece el principio de subordinación de la riqueza al interés general?",o:["El séptimo, Economía y Hacienda","El primero, de los derechos","El octavo, organización territorial","El cuarto, Gobierno y Administración"],w:"También regula el Tribunal de Cuentas y los Presupuestos.",r:"Título VII: 128-136.",s:"2.1.6"},
+{q:"¿Qué artículos forman el título del Tribunal Constitucional?",o:["Del 159 al 165","Del 117 al 127","Del 166 al 169","Del 137 al 158"],w:"Título noveno.",r:"TC: 159-165. Reforma: 166-169.",s:"2.1.6"},
+{q:"¿Cuáles son los valores superiores del ordenamiento jurídico según el artículo 1.1?",o:["La libertad, la justicia, la igualdad y el pluralismo político","La libertad, la igualdad, la fraternidad y la solidaridad","La dignidad, la libertad, la igualdad y la seguridad jurídica","La justicia, la paz, la igualdad y la democracia"],w:"Son cuatro y están en el 1.1.",r:"Libertad, justicia, igualdad, pluralismo político.",s:"2.2"},
+{q:"¿En qué artículo sitúa la unidad el fundamento de la libertad como valor?",o:["En el artículo 10: la dignidad de la persona","En el artículo 14","En el artículo 17","En el artículo 6"],w:"El fundamento de la libertad es la dignidad de la persona (artículo 10).",r:"Libertad ↔ artículo 10 (dignidad) y 9.2.",s:"2.2.1"},
+{q:"¿Cuál es la principal manifestación del pluralismo político según la unidad?",o:["El artículo 6, sobre los partidos políticos","El artículo 7, sobre los sindicatos","El artículo 23, derecho de participación","El artículo 14, igualdad"],w:"Los partidos políticos expresan el pluralismo político.",r:"Pluralismo ↔ artículo 6.",s:"2.2.1"},
+{q:"¿Qué constitución extranjera cita la unidad como equivalente a nuestros valores superiores?",o:["La francesa de 1958, artículo 2","La alemana de Weimar","La italiana de 1947","La estadounidense de 1787"],w:"«La divisa de la República es libertad, igualdad y fraternidad.»",r:"Francia 1958, artículo 2.",s:"2.2.1"},
+{q:"¿Qué constitución histórica española contiene una referencia similar a los valores superiores?",o:["La de 1931: «La República se organiza en régimen de libertad y justicia»","La de 1812","La de 1869","La de 1876"],w:"Según la unidad, solo la de 1931.",r:"1931, artículo 1.",s:"2.2.1"},
+{q:"¿Cómo se resuelven, según la unidad, los conflictos entre valores superiores?",o:["Guardando el equilibrio entre ellos, sin eliminar por completo ninguno","Aplicando siempre la libertad por encima de los demás","Según el orden en que los enumera el artículo 1.1","Dando prioridad a la igualdad"],w:"La prevalencia de uno no puede suponer eliminar por completo la aplicación de los otros.",r:"Equilibrio entre valores.",s:"2.2.1"},
+{q:"¿Cómo se ejerce la soberanía del pueblo en el Estado democrático, según la unidad?",o:["A través de un gobierno representativo, no de forma directa","De forma directa, mediante referéndum","A través del rey como jefe del Estado","Mediante las comunidades autónomas"],w:"La unidad lo subraya en negrita.",r:"Soberanía popular ejercida representativamente.",s:"2.2.2"},
+{q:"¿Cuál de estos NO es un elemento del Estado de derecho según la unidad?",o:["Sufragio universal","Imperio de la ley","División de poderes","Reconocimiento de derechos y libertades fundamentales"],w:"Los tres elementos del Estado de derecho son imperio de la ley, división de poderes y derechos fundamentales.",r:"Estado de derecho: ley + división + derechos.",s:"2.2.2"},
+{q:"¿Qué artículo cita la unidad como ejemplo del elemento social del Estado?",o:["El 9.2, intervención de los poderes públicos","El 1.2, soberanía popular","El 6, partidos políticos","El 117, poder judicial"],w:"También el capítulo segundo del título primero, el capítulo tercero y el título séptimo.",r:"Estado social: 9.2, capítulo III, título VII.",s:"2.2.2"},
+{q:"¿Qué tres principios recoge el artículo 2 sobre la organización territorial?",o:["Unidad, autonomía y solidaridad","Unidad, igualdad y subsidiariedad","Autonomía, federalismo y solidaridad","Unidad, descentralización y coordinación"],w:"Indisoluble unidad, derecho a la autonomía de nacionalidades y regiones, y solidaridad.",r:"Artículo 2: unidad + autonomía + solidaridad.",s:"2.2.3"},
+{q:"¿Qué función tiene el monarca en la monarquía parlamentaria según la unidad?",o:["Actúa como moderador del funcionamiento regular de las instituciones","Dirige la política interior y exterior","Comparte el poder legislativo con las Cortes","Nombra libremente al Gobierno"],w:"El monarca no toma decisiones gubernamentales.",r:"Rey: árbitro y moderador.",s:"2.2.3"},
+{q:"Según el artículo 1.1 del Código Civil, ¿cuáles son las fuentes del ordenamiento jurídico español?",o:["La ley, la costumbre y los principios generales del derecho","La ley, la jurisprudencia y la doctrina","La Constitución, la ley y el reglamento","La ley, la costumbre y la jurisprudencia"],w:"La jurisprudencia y la doctrina son fuentes aclaratorias.",r:"Ley + costumbre + principios generales.",s:"2.3"},
+{q:"¿Cuáles son, según la unidad, fuentes aclaratorias?",o:["La jurisprudencia y la doctrina","La costumbre y los principios generales","La ley y el reglamento","Los tratados y la Constitución"],w:"Orientan sobre el verdadero sentido de la norma.",r:"Aclaratorias: jurisprudencia + doctrina.",s:"2.3"},
+{q:"¿Qué son las fuentes secundarias según la unidad?",o:["Las que derivan su vigencia de los pronunciamientos de las fuentes primarias","Las dictadas por las comunidades autónomas","Las que interpretan la ley","Las normas europeas"],w:"Son la costumbre y los principios generales del derecho.",r:"Secundarias: costumbre y principios generales.",s:"2.3"},
+{q:"Según el artículo 1.4 del Código Civil, los principios generales del derecho se aplican…",o:["En defecto de ley o costumbre, sin perjuicio de su carácter informador del ordenamiento","Con preferencia a la costumbre","Solo cuando lo autorice un juez","En defecto de jurisprudencia"],w:"Literal del artículo 1.4.",r:"Ley → costumbre → principios generales.",s:"2.3"},
+{q:"Según la unidad, ¿son fuente del derecho el órgano que dicta la norma o su procedimiento?",o:["No","Sí, ambos","Solo el órgano","Solo el procedimiento"],w:"La unidad lo dice expresamente.",r:"Ni el órgano ni el procedimiento son fuente.",s:"2.3"},
+{q:"¿Por qué se llama a la Constitución *norma normarum*?",o:["Porque es la primera y más importante norma del ordenamiento, la fuente de las fuentes","Porque es la norma más antigua","Porque la aprueban las Cortes por mayoría reforzada","Porque la interpreta el Tribunal Constitucional"],w:"La Constitución es, en sí misma, fuente del derecho y fuente de las fuentes.",r:"Norma normarum = fuente de las fuentes.",s:"2.3.1"},
+{q:"¿Qué ley califica la unidad de «carácter excepcional»?",o:["La ley de armonización","La ley marco","La ley orgánica","La ley de transferencia"],w:"Así la presenta la lista del apartado 2.3.1.",r:"Armonización = excepcional.",s:"2.3.1"},
+{q:"¿Por qué considera la doctrina fuente del derecho a las sentencias del Tribunal Constitucional?",o:["Porque sus sentencias interpretativas deciden qué interpretaciones de las leyes son inconstitucionales: al interpretar, crea derecho","Porque lo dice el artículo 1.1 del Código Civil","Porque sus magistrados los nombra el rey","Porque sus sentencias pueden recurrirse"],w:"La unidad lo explica así.",r:"Tribunal Constitucional: crea derecho al interpretar.",s:"2.3.1"},
+{q:"¿Qué artículo establece que las sentencias de inconstitucionalidad tienen plenos efectos frente a todos?",o:["El 164.1","El 161.1","El 9.1","El 95.2"],w:"Las que declaren la inconstitucionalidad de una ley o norma con fuerza de ley tienen plenos efectos frente a todos.",r:"164.1: efectos erga omnes.",s:"2.3.2"},
+{q:"¿Qué principio rige la relación entre el derecho europeo y el derecho interno, según la unidad?",o:["El de competencia, con aplicación preferente del derecho europeo","El de jerarquía, con supremacía del derecho europeo","El de jerarquía, con supremacía de la Constitución","El de temporalidad"],w:"Preferencia no significa supremacía: rige la competencia cedida.",r:"Derecho europeo: aplicación preferente, no jerarquía.",s:"2.3.4"},
+{q:"¿Quién resuelve, según la unidad, la colisión entre derecho europeo y derecho interno?",o:["El Tribunal de Justicia europeo","El Tribunal Constitucional","El Tribunal Supremo","El Consejo de Estado"],w:"Ha sentado la doctrina de la preferencia del derecho europeo.",r:"Tribunal de Justicia de la Unión Europea.",s:"2.3.4"},
+{q:"¿Qué artículo de la Constitución permitió la adhesión a la Unión Europea?",o:["El 93, mediante ley orgánica","El 94, mediante autorización de las Cortes","El 95, mediante revisión constitucional","El 96, mediante publicación"],w:"Cesión del ejercicio de competencias a una organización internacional por ley orgánica.",r:"Adhesión UE: artículo 93.",s:"2.3.3"},
+{q:"¿Cuál de estos es derecho derivado de la Unión Europea según la unidad?",o:["Los reglamentos, directivas y decisiones","El Tratado de Lisboa","La Carta de los Derechos Fundamentales","La jurisprudencia del Tribunal de Justicia"],w:"El Tratado de Lisboa y la Carta son derecho primario; la jurisprudencia es derecho subsidiario.",r:"Primario: tratados y Carta. Derivado: reglamentos, directivas, decisiones…",s:"2.3.3"},
+{q:"¿Qué actos de la Unión Europea son no vinculantes según la unidad?",o:["Las recomendaciones y los dictámenes","Los reglamentos","Las directivas","Las decisiones"],w:"Son de aplicación opcional.",r:"No vinculantes: recomendaciones y dictámenes.",s:"2.3.3"},
+{q:"¿En qué año se firmó el Tratado de Maastricht, según la unidad?",o:["1992","1986","1997","2007"],w:"Acta Única 1986, Maastricht 1992, Ámsterdam 1997, Niza 2001, Lisboa 2007.",r:"86 · 92 · 97 · 01 · 07.",s:"2.3.3"},
+{q:"¿Cuál de estos NO es requisito para la aplicación directa de una norma europea según la unidad?",o:["Que haya sido traducida por el Estado","Que sea precisa","Que no esté sometida a reserva","Que no deje al Estado poder de apreciación"],w:"Los requisitos son: precisa, sin reserva, sin necesidad de acto europeo de ejecución, sin poder de apreciación del Estado.",r:"Cuatro requisitos de aplicación directa.",s:"2.3.4"},
+{q:"¿Qué tratados requieren autorización previa de las Cortes según el artículo 94.1?",o:["Los de carácter político o militar, entre otros","Todos los tratados sin excepción","Solo los que ceden competencias a la Unión Europea","Solo los que contradicen la Constitución"],w:"Políticos, militares, integridad territorial o derechos del título I, obligaciones financieras y los que modifiquen leyes.",r:"94.1: cinco supuestos.",s:"2.3.5"},
+{q:"Según el artículo 95.1, ¿qué exige un tratado con estipulaciones contrarias a la Constitución?",o:["La previa revisión constitucional","Una ley orgánica","La autorización de las Cortes","Un referéndum consultivo"],w:"«…exigirá la previa revisión constitucional.»",r:"95.1: revisión previa.",s:"2.3.5"},
+{q:"Según el artículo 95.2, ¿quién puede requerir al Tribunal Constitucional sobre la contradicción de un tratado?",o:["El Gobierno o cualquiera de las Cámaras","Cincuenta diputados o cincuenta senadores","El Defensor del Pueblo","Cualquier juez"],w:"Literal: «El Gobierno o cualquiera de las Cámaras puede requerir al Tribunal Constitucional…».",r:"95.2: Gobierno o Cámaras.",s:"2.3.5"},
+{q:"¿Cuándo es inconstitucional un tratado por razones formales?",o:["Cuando no se sigue el procedimiento o no intervienen los órganos competentes","Cuando vulnera los derechos del título primero","Cuando lo firma el rey","Cuando no se publica en el Diario Oficial de la Unión Europea"],w:"La material es la que vulnera disposiciones materiales de la Constitución.",r:"Material = contenido; formal = procedimiento u órgano.",s:"2.3.5"},
+{q:"Según el artículo 96.1, ¿cuándo forman parte del ordenamiento interno los tratados?",o:["Una vez publicados oficialmente en España","Desde su firma","Desde su ratificación por el rey","Cuando lo declare el Tribunal Constitucional"],w:"«…una vez publicados oficialmente en España, formarán parte del ordenamiento interno.»",r:"96.1: publicación oficial.",s:"2.3.5"},
+{q:"Según el artículo 166, ¿en qué términos se ejerce la iniciativa de reforma constitucional?",o:["En los previstos en los apartados 1 y 2 del artículo 87","En los previstos en todo el artículo 87, incluida la iniciativa popular","Solo por el Gobierno","Por las Cortes en sesión conjunta"],w:"El 166 remite solo a los apartados 1 y 2: queda fuera la iniciativa legislativa popular.",r:"Reforma: sin iniciativa popular.",s:"2.4.1"},
+{q:"¿Cuál de estos NO puede tomar la iniciativa de reforma constitucional?",o:["500 000 ciudadanos mediante iniciativa popular","El Gobierno","Las Asambleas legislativas de las comunidades autónomas","50 senadores que no pertenezcan al mismo grupo"],w:"La iniciativa legislativa popular queda excluida.",r:"Gobierno, 1/5 diputados o 2 grupos, 50 senadores, Asambleas autonómicas.",s:"2.4.1"},
+{q:"¿Qué mayoría exige el procedimiento ordinario de reforma del artículo 167?",o:["Tres quintos de cada Cámara","Dos tercios de cada Cámara","Mayoría absoluta de cada Cámara","Mayoría simple del Congreso"],w:"167.1: tres quintos de cada una de las Cámaras.",r:"167: 3/5. 168: 2/3.",s:"2.4.2"},
+{q:"En el artículo 167, si la comisión paritaria no logra la aprobación, ¿cómo puede aprobarse la reforma?",o:["Si el Senado votó a favor por mayoría absoluta, por dos tercios del Congreso","Por mayoría absoluta del Congreso","Mediante referéndum obligatorio","Por tres quintos del Senado"],w:"167.2: mayoría absoluta del Senado + dos tercios del Congreso.",r:"Plan B del 167: Senado absoluta + Congreso 2/3.",s:"2.4.2"},
+{q:"En el artículo 167, ¿quién puede pedir el referéndum y en qué plazo?",o:["Una décima parte de los miembros de cualquiera de las Cámaras, en quince días","Una quinta parte del Congreso, en un mes","El Gobierno, en quince días","Cincuenta senadores, en diez días"],w:"167.3: una décima parte de cualquiera de las Cámaras, dentro de los quince días siguientes a la aprobación.",r:"1/10 en 15 días.",s:"2.4.2"},
+{q:"¿Qué materias exigen el procedimiento agravado del artículo 168?",o:["Revisión total, o parcial del título preliminar, de la sección primera del capítulo segundo del título primero o del título segundo","Cualquier reforma del título primero","Las reformas del título octavo","Las reformas que afecten al título décimo"],w:"Literal del 168.1.",r:"168: total, preliminar, 15-29, Corona.",s:"2.4.2"},
+{q:"¿Qué es obligatorio en el procedimiento del artículo 168 pero no en el del 167?",o:["El referéndum de ratificación","La aprobación por las dos Cámaras","La iniciativa del Gobierno","La comisión paritaria"],w:"En el 167 el referéndum es facultativo; en el 168, obligatorio.",r:"168: referéndum obligatorio y disolución.",s:"2.4.2"},
+{q:"¿Qué ocurre tras aprobar el principio de reforma por dos tercios en el artículo 168?",o:["La disolución inmediata de las Cortes","El referéndum inmediato","La remisión al Tribunal Constitucional","La sanción del rey"],w:"Luego las nuevas Cámaras ratifican la decisión y aprueban el texto por dos tercios.",r:"Dos tercios → disolución → nuevas Cortes → dos tercios → referéndum.",s:"2.4.2"},
+{q:"¿Cuántas reformas ha tenido la Constitución y por qué procedimiento?",o:["Cuatro, todas por el artículo 167","Tres, todas por el artículo 167","Cuatro, una de ellas por el artículo 168","Dos, por el artículo 168"],w:"1992, 2011, 2024 y 2026.",r:"Cuatro reformas, todas ordinarias.",s:"2.4.2"},
+{q:"¿Qué se reformó en 1992?",o:["El artículo 13.2, para añadir «y pasivo» al sufragio de extranjeros en elecciones municipales","El artículo 135, estabilidad presupuestaria","El artículo 49, personas con discapacidad","El artículo 69.3, senador de Formentera"],w:"Para adaptar la Constitución al Tratado de Maastricht.",r:"1992: 13.2 · 2011: 135 · 2024: 49 · 2026: 69.3.",s:"2.4.2"},
+{q:"¿Qué artículo se reformó en 2011?",o:["El 135, sobre estabilidad presupuestaria","El 13.2","El 49","El 93"],w:"Sustitución íntegra del 135, en el título séptimo.",r:"2011: 135.",s:"2.4.2"},
+{q:"¿Qué modificó la reforma constitucional de mayo de 2026?",o:["El artículo 69.3, para dar un senador propio a Formentera","El artículo 49, sobre discapacidad","El artículo 135, sobre deuda pública","El artículo 57, sobre la sucesión a la Corona"],w:"Separó a Formentera de la circunscripción conjunta con Ibiza.",r:"2026: 69.3, Formentera.",s:"2.4.2"},
+{q:"Según el artículo 169, ¿cuándo no puede iniciarse la reforma constitucional?",o:["En tiempo de guerra o de vigencia de los estados de alarma, excepción o sitio","Durante un año electoral","Mientras esté en funciones el Gobierno","Durante la presidencia española de la Unión Europea"],w:"El 169 remite a los estados del artículo 116.",r:"169: guerra o artículo 116.",s:"2.4.3"},
+/* Repaso de la UD1 */
+{q:"Repaso UD1. ¿Cuántos principios garantiza el artículo 9.3 de la Constitución?",o:["Siete","Seis","Cinco","Ocho"],w:"El mapa de contenidos de la UD1 omitía la irretroactividad.",r:"Siete principios en el 9.3.",s:"UD1 · 1.2.2"},
+{q:"Repaso UD1. ¿Quién es el titular del poder constituyente?",o:["El pueblo","Las Cortes Generales","El Rey","El Tribunal Constitucional"],w:"Siguiendo el principio de soberanía popular.",r:"Constituyente: el pueblo.",s:"UD1 · 1.3.2"},
+{q:"Repaso UD1. ¿Qué constitución considera la UD1 la primera constitución española?",o:["La de Cádiz de 1812","El Estatuto de Bayona de 1808","El Estatuto Real de 1834","La de 1837"],w:"Bayona fue carta otorgada.",r:"Cádiz 1812.",s:"UD1 · 1.1.4"},
+{q:"Repaso UD1. ¿Qué constitución implanta por primera vez un Estado laico?",o:["La de 1931","La de 1837","La de 1869","La de 1978"],w:"La de 1837 habla de no confesionalidad.",r:"Laico = 1931.",s:"UD1 · 1.1.4"},
+{q:"Repaso UD1. ¿Quién es el intérprete supremo de la Constitución?",o:["El Tribunal Constitucional, artículo 1.1 de su Ley Orgánica","El Tribunal Supremo","El Consejo General del Poder Judicial","Las Cortes Generales"],w:"Para evitar la dispersión jurisprudencial.",r:"Tribunal Constitucional.",s:"UD1 · 1.3.3"},
+{q:"Repaso UD1. ¿Cuál es la única excepción al principio de responsabilidad de los poderes públicos?",o:["El Rey, cuya responsabilidad se traslada al refrendante","El presidente del Gobierno","Los diputados y senadores","Los jueces y magistrados"],w:"Artículo 56.3.",r:"Rey inviolable.",s:"UD1 · 1.2.2"},
+{q:"Repaso UD1. ¿Qué es el poder constituyente derivado?",o:["El que puede reformar una constitución ya en vigor","El que aprueba una constitución nueva","El que ejercen los jueces","El que ejercen las comunidades autónomas"],w:"Conecta con la reforma constitucional de esta unidad.",r:"Derivado = reformar.",s:"UD1 · 1.3.2"}
+];
+
+var ARTS={
+"1":"Artículo 1 de la Constitución: «1. España se constituye en un Estado social y democrático de Derecho, que propugna como valores superiores de su ordenamiento jurídico la libertad, la justicia, la igualdad y el pluralismo político. 2. La soberanía nacional reside en el pueblo español, del que emanan los poderes del Estado. 3. La forma política del Estado español es la Monarquía parlamentaria.»",
+"2":"Artículo 2 de la Constitución: «La Constitución se fundamenta en la indisoluble unidad de la Nación española, patria común e indivisible de todos los españoles, y reconoce y garantiza el derecho a la autonomía de las nacionalidades y regiones que la integran y la solidaridad entre todas ellas.»",
+"3":"Artículo 3 de la Constitución: «1. El castellano es la lengua española oficial del Estado. Todos los españoles tienen el deber de conocerla y el derecho a usarla. 2. Las demás lenguas españolas serán también oficiales en las respectivas Comunidades Autónomas de acuerdo con sus Estatutos. 3. La riqueza de las distintas modalidades lingüísticas de España es un patrimonio cultural que será objeto de especial respeto y protección.»",
+"4":"Artículo 4 de la Constitución: «1. La bandera de España está formada por tres franjas horizontales, roja, amarilla y roja, siendo la amarilla de doble anchura que cada una de las rojas. 2. Los Estatutos podrán reconocer banderas y enseñas propias de las Comunidades Autónomas. Estas se utilizarán junto a la bandera de España en sus edificios públicos y en sus actos oficiales.»",
+"6":"Artículo 6 de la Constitución: «Los partidos políticos expresan el pluralismo político, concurren a la formación y manifestación de la voluntad popular y son instrumento fundamental para la participación política. Su creación y el ejercicio de su actividad son libres dentro del respeto a la Constitución y a la ley. Su estructura interna y funcionamiento deberán ser democráticos.»",
+"7":"Artículo 7 de la Constitución: «Los sindicatos de trabajadores y las asociaciones empresariales contribuyen a la defensa y promoción de los intereses económicos y sociales que les son propios. Su creación y el ejercicio de su actividad son libres dentro del respeto a la Constitución y a la ley. Su estructura interna y funcionamiento deberán ser democráticos.»",
+"8":"Artículo 8 de la Constitución: «1. Las Fuerzas Armadas, constituidas por el Ejército de Tierra, la Armada y el Ejército del Aire, tienen como misión garantizar la soberanía e independencia de España, defender su integridad territorial y el ordenamiento constitucional. 2. Una ley orgánica regulará las bases de la organización militar conforme a los principios de la presente Constitución.»",
+"93":"Artículo 93 de la Constitución: «Mediante ley orgánica se podrá autorizar la celebración de tratados por los que se atribuya a una organización o institución internacional el ejercicio de competencias derivadas de la Constitución. Corresponde a las Cortes Generales o al Gobierno, según los casos, la garantía del cumplimiento de estos tratados y de las resoluciones emanadas de los organismos internacionales o supranacionales titulares de la cesión.»",
+"95":"Artículo 95 de la Constitución: «1. La celebración de un tratado internacional que contenga estipulaciones contrarias a la Constitución exigirá la previa revisión constitucional. 2. El Gobierno o cualquiera de las Cámaras puede requerir al Tribunal Constitucional para que declare si existe o no esa contradicción.»",
+"96.1":"Artículo 96.1 de la Constitución: «Los tratados internacionales válidamente celebrados, una vez publicados oficialmente en España, formarán parte del ordenamiento interno. Sus disposiciones sólo podrán ser derogadas, modificadas o suspendidas en la forma prevista en los propios tratados o de acuerdo con las normas generales del Derecho internacional.»",
+"164.1":"Artículo 164.1 de la Constitución (último inciso): «Las que declaren la inconstitucionalidad de una ley o de una norma con fuerza de ley y todas las que no se limiten a la estimación subjetiva de un derecho, tienen plenos efectos frente a todos.»",
+"166":"Artículo 166 de la Constitución: «La iniciativa de reforma constitucional se ejercerá en los términos previstos en los apartados 1 y 2 del artículo 87.»",
+"167":"Artículo 167 de la Constitución: «1. Los proyectos de reforma constitucional deberán ser aprobados por una mayoría de tres quintos de cada una de las Cámaras. Si no hubiera acuerdo entre ambas, se intentará obtenerlo mediante la creación de una Comisión de composición paritaria de Diputados y Senadores, que presentará un texto que será votado por el Congreso y el Senado. 2. De no lograrse la aprobación mediante el procedimiento del apartado anterior, y siempre que el texto hubiere obtenido el voto favorable de la mayoría absoluta del Senado, el Congreso, por mayoría de dos tercios, podrá aprobar la reforma. 3. Aprobada la reforma por las Cortes Generales, será sometida a referéndum para su ratificación cuando así lo soliciten, dentro de los quince días siguientes a su aprobación, una décima parte de los miembros de cualquiera de las Cámaras.»",
+"168":"Artículo 168 de la Constitución: «1. Cuando se propusiere la revisión total de la Constitución o una parcial que afecte al Título preliminar, al Capítulo segundo, Sección primera del Título I, o al Título II, se procederá a la aprobación del principio por mayoría de dos tercios de cada Cámara, y a la disolución inmediata de las Cortes. 2. Las Cámaras elegidas deberán ratificar la decisión y proceder al estudio del nuevo texto constitucional, que deberá ser aprobado por mayoría de dos tercios de ambas Cámaras. 3. Aprobada la reforma por las Cortes Generales, será sometida a referéndum para su ratificación.»",
+"169":"Artículo 169 de la Constitución: «No podrá iniciarse la reforma constitucional en tiempo de guerra o de vigencia de alguno de los estados previstos en el artículo 116.»",
+"CC 1.1":"Artículo 1.1 del Código Civil: «Las fuentes del ordenamiento jurídico español son la ley, la costumbre y los principios generales del derecho.»",
+"CC 1.3":"Artículo 1.3 del Código Civil: «La costumbre sólo regirá en defecto de ley aplicable, siempre que no sea contraria a la moral o al orden público y que resulte probada. Los usos jurídicos que no sean meramente interpretativos de una declaración de voluntad tendrán la consideración de costumbre.»",
+"CC 1.4":"Artículo 1.4 del Código Civil: «Los principios generales del derecho se aplicarán en defecto de ley o costumbre, sin perjuicio de su carácter informador del ordenamiento jurídico.»"
+};
+var LIT=[
+{k:"1",s:"España se constituye en un Estado social y democrático de Derecho, que propugna como valores ___ de su ordenamiento jurídico…",a:["superiores"]},
+{k:"1",s:"…la libertad, la justicia, la igualdad y el ___ político.",a:["pluralismo"]},
+{k:"1",s:"La soberanía nacional reside en el ___ español, del que emanan los poderes del Estado.",a:["pueblo"]},
+{k:"1",s:"La forma política del Estado español es la ___ parlamentaria.",a:["monarquia"]},
+{k:"2",s:"La Constitución se fundamenta en la indisoluble ___ de la Nación española…",a:["unidad"]},
+{k:"2",s:"…y reconoce y garantiza el derecho a la autonomía de las ___ y regiones que la integran y la solidaridad entre todas ellas.",a:["nacionalidades"]},
+{k:"3",s:"Todos los españoles tienen el ___ de conocerla y el derecho a usarla.",a:["deber"]},
+{k:"4",s:"…siendo la amarilla de ___ anchura que cada una de las rojas.",a:["doble"]},
+{k:"6",s:"Los partidos políticos expresan el ___ político, concurren a la formación y manifestación de la voluntad popular…",a:["pluralismo"]},
+{k:"6",s:"Su estructura interna y funcionamiento deberán ser ___.",a:["democraticos"]},
+{k:"8",s:"Una ley ___ regulará las bases de la organización militar conforme a los principios de la presente Constitución.",a:["organica"]},
+{k:"93",s:"Mediante ley ___ se podrá autorizar la celebración de tratados por los que se atribuya a una organización o institución internacional el ejercicio de competencias derivadas de la Constitución.",a:["organica"]},
+{k:"95",s:"La celebración de un tratado internacional que contenga estipulaciones contrarias a la Constitución exigirá la previa ___ constitucional.",a:["revision"]},
+{k:"95",s:"El Gobierno o cualquiera de las ___ puede requerir al Tribunal Constitucional para que declare si existe o no esa contradicción.",a:["camaras"]},
+{k:"96.1",s:"Los tratados internacionales válidamente celebrados, una vez ___ oficialmente en España, formarán parte del ordenamiento interno.",a:["publicados"]},
+{k:"164.1",s:"Las que declaren la inconstitucionalidad de una ley o de una norma con fuerza de ley… tienen plenos efectos frente a ___.",a:["todos"]},
+{k:"166",s:"La iniciativa de reforma constitucional se ejercerá en los términos previstos en los apartados 1 y 2 del artículo ___.",a:["87","ochenta y siete"]},
+{k:"167",s:"Los proyectos de reforma constitucional deberán ser aprobados por una mayoría de ___ de cada una de las Cámaras.",a:["tres quintos"]},
+{k:"167",s:"…mediante la creación de una Comisión de composición ___ de Diputados y Senadores…",a:["paritaria"]},
+{k:"167",s:"…siempre que el texto hubiere obtenido el voto favorable de la mayoría ___ del Senado, el Congreso, por mayoría de dos tercios, podrá aprobar la reforma.",a:["absoluta"]},
+{k:"167",s:"…cuando así lo soliciten, dentro de los ___ días siguientes a su aprobación, una décima parte de los miembros de cualquiera de las Cámaras.",a:["quince","15"]},
+{k:"168",s:"…se procederá a la aprobación del principio por mayoría de dos tercios de cada Cámara, y a la ___ inmediata de las Cortes.",a:["disolucion"]},
+{k:"168",s:"Las Cámaras elegidas deberán ___ la decisión y proceder al estudio del nuevo texto constitucional…",a:["ratificar"]},
+{k:"169",s:"No podrá iniciarse la reforma constitucional en tiempo de ___ o de vigencia de alguno de los estados previstos en el artículo 116.",a:["guerra"]},
+{k:"CC 1.1",s:"Las fuentes del ordenamiento jurídico español son la ley, la ___ y los principios generales del derecho.",a:["costumbre"]},
+{k:"CC 1.3",s:"La costumbre sólo regirá en defecto de ley aplicable, siempre que no sea contraria a la moral o al orden público y que resulte ___.",a:["probada"]},
+{k:"CC 1.4",s:"Los principios generales del derecho se aplicarán en defecto de ley o costumbre, sin perjuicio de su carácter ___ del ordenamiento jurídico.",a:["informador"]}
+];
+
+var CONC=[
+{t:"Ley para la Reforma Política",d:"Ley 1/1977, de 4 de enero, que permitió pasar de la dictadura a la democracia «de la ley a la ley a través de la ley»; hoy derogada."},
+{t:"Transición",d:"Paso pacífico de la dictadura al Estado social y democrático de derecho."},
+{t:"Constitución normativa",d:"La que es una auténtica norma jurídica, la «ley de leyes»; la de 1978 es la primera de nuestra historia."},
+{t:"Constitución derivada",d:"La que se inspira en las constituciones históricas y en el constitucionalismo comparado."},
+{t:"Constitución codificada",d:"La ordenada sistemáticamente en un solo cuerpo legal, con forma de ley codificada y cerrada."},
+{t:"Constitución rígida",d:"La que solo puede reformarse por procedimientos particulares preestablecidos (artículos 167 y 168)."},
+{t:"Parte dogmática",d:"Preámbulo, título preliminar y título primero: identidad del Estado, valores y derechos."},
+{t:"Parte orgánica",d:"Títulos segundo a noveno: poderes del Estado, orden económico, organización territorial y Tribunal Constitucional."},
+{t:"Preámbulo",d:"Exposición de motivos y objetivos de la Constitución; no forma parte del articulado y es meramente declarativo."},
+{t:"Valores superiores",d:"Libertad, justicia, igualdad y pluralismo político (artículo 1.1), ideales que presiden el ordenamiento."},
+{t:"Pluralismo político",d:"Valor que garantiza la existencia de varias opciones políticas; su principal manifestación son los partidos (artículo 6)."},
+{t:"Estado social",d:"El que obliga a los poderes públicos a garantizar el bienestar y las necesidades de los ciudadanos (artículo 9.2)."},
+{t:"Estado democrático",d:"Aquel en que la soberanía emana del pueblo y se ejerce a través de un gobierno representativo (artículo 1.2)."},
+{t:"Estado de derecho",d:"Aquel en que rigen el imperio de la ley, la división de poderes y el reconocimiento de los derechos fundamentales."},
+{t:"Monarquía parlamentaria",d:"Forma política (artículo 1.3) en que el monarca no gobierna, sino que modera el funcionamiento de las instituciones."},
+{t:"Estado autonómico",d:"Modelo territorial abierto del artículo 2, basado en la unidad, la autonomía de nacionalidades y regiones y la solidaridad."},
+{t:"Fuentes primarias",d:"Derecho directamente aplicable y escrito: Constitución, leyes, reglamentos y tratados publicados."},
+{t:"Fuentes secundarias",d:"Las que derivan su vigencia de las primarias: la costumbre y los principios generales del derecho."},
+{t:"Fuentes aclaratorias",d:"Las que orientan sobre el sentido de la norma: la jurisprudencia y la doctrina."},
+{t:"Costumbre",d:"Prácticas y usos de la sociedad; forma espontánea de crear derecho que rige en defecto de ley aplicable."},
+{t:"Principios generales del derecho",d:"Se aplican en defecto de ley o costumbre, sin perjuicio de su carácter informador del ordenamiento."},
+{t:"Norma normarum",d:"La Constitución como primera y más importante norma, fuente de las fuentes."},
+{t:"Derecho primario de la Unión Europea",d:"Tratados constitutivos, modificativos, de adhesión y retirada, y la Carta de los Derechos Fundamentales."},
+{t:"Derecho derivado de la Unión Europea",d:"Reglamentos, directivas, decisiones, recomendaciones, dictámenes y actos atípicos."},
+{t:"Aplicación preferente",d:"Primacía del derecho europeo basada en la competencia cedida, no en la jerarquía ni en la supremacía."},
+{t:"Inconstitucionalidad material de un tratado",d:"La que vulnera las disposiciones materiales de la Constitución."},
+{t:"Inconstitucionalidad formal de un tratado",d:"La que se produce cuando no se sigue el procedimiento o no intervienen los órganos competentes."},
+{t:"Reforma ordinaria",d:"Procedimiento del artículo 167: tres quintos, comisión paritaria y referéndum facultativo."},
+{t:"Reforma agravada",d:"Procedimiento del artículo 168: dos tercios, disolución, nuevas Cortes, dos tercios y referéndum obligatorio."},
+{t:"Límite temporal de la reforma",d:"No puede iniciarse en tiempo de guerra o de estados de alarma, excepción o sitio (artículo 169)."}
+];
+
+/* CLASIFICACIÓN: ¿qué procedimiento o qué fuente? */
+var CLS_OPTS=["Artículo 167","Artículo 168","Fuente primaria","Fuente secundaria","Fuente aclaratoria"];
+var CLS=[
+{p:"Reforma del artículo 135 sobre estabilidad presupuestaria.",a:"Artículo 167"},
+{p:"Reforma del artículo 69.3 para dar un senador a Formentera.",a:"Artículo 167"},
+{p:"Reforma del artículo 49 sobre personas con discapacidad.",a:"Artículo 167"},
+{p:"Reforma del artículo 13.2 por el Tratado de Maastricht.",a:"Artículo 167"},
+{p:"Cambiar la capital del Estado (artículo 5).",a:"Artículo 168"},
+{p:"Modificar el artículo 16 sobre libertad religiosa.",a:"Artículo 168"},
+{p:"Modificar el orden de sucesión a la Corona (título segundo).",a:"Artículo 168"},
+{p:"Revisión total de la Constitución.",a:"Artículo 168"},
+{p:"Reformar el artículo 27 sobre el derecho a la educación.",a:"Artículo 168"},
+{p:"Reformar el artículo 31 sobre el deber de contribuir.",a:"Artículo 167"},
+{p:"Reformar la composición del Tribunal Constitucional (título noveno).",a:"Artículo 167"},
+{p:"Reformar el artículo 1.3 sobre la forma política del Estado.",a:"Artículo 168"},
+{p:"Reformar el artículo 14 sobre igualdad (fuera de la sección primera).",a:"Artículo 167"},
+{p:"Reformar el artículo 155 (título octavo).",a:"Artículo 167"},
+{p:"La Constitución.",a:"Fuente primaria"},
+{p:"Una ley aprobada por las Cortes.",a:"Fuente primaria"},
+{p:"Un reglamento del Gobierno.",a:"Fuente primaria"},
+{p:"Un tratado internacional ratificado y publicado en España.",a:"Fuente primaria"},
+{p:"La costumbre.",a:"Fuente secundaria"},
+{p:"Los principios generales del derecho.",a:"Fuente secundaria"},
+{p:"La jurisprudencia.",a:"Fuente aclaratoria"},
+{p:"La doctrina de los juristas.",a:"Fuente aclaratoria"}
+];
+
+var VF=[
+{p:"La Constitución entró en vigor el 27 de diciembre de 1978.",v:false,w:"Falso. El 27 se sancionó y promulgó; entró en vigor el 29, con su publicación."},
+{p:"El 6 de diciembre es el Día de la Constitución porque ese día se celebró el referéndum.",v:true,w:"Verdadero."},
+{p:"La Constitución fue ratificada por el 88 % del censo electoral.",v:false,w:"Falso. Fue el 88 % de los votantes, que equivale al 59 % del censo."},
+{p:"La Ley para la Reforma Política tenía una disposición derogatoria.",v:false,w:"Falso. Carecía de ella, pero derogó todo lo que le era incompatible."},
+{p:"La Ley para la Reforma Política fue derogada por la propia Constitución.",v:true,w:"Verdadero. La disposición derogatoria la deroga expresamente junto a las leyes fundamentales."},
+{p:"El rey designó 41 senadores en 1977.",v:true,w:"Verdadero, al amparo del artículo 2.3 de la Ley para la Reforma Política."},
+{p:"La Constitución de 1978 es la más extensa de nuestra historia.",v:false,w:"Falso. Es la segunda, tras la de Cádiz de 1812."},
+{p:"El preámbulo tiene valor jurídico vinculante.",v:false,w:"Falso. Es meramente declarativo."},
+{p:"La parte orgánica comprende los títulos segundo a noveno.",v:true,w:"Verdadero. Es la parte más extensa."},
+{p:"El artículo 14 forma parte de la sección primera del capítulo segundo del título primero.",v:false,w:"Falso. La sección primera va del 15 al 29; el 14 queda fuera, y por eso su reforma no exige el 168."},
+{p:"La monarquía parlamentaria está en el artículo 3.1.",v:false,w:"Falso. Es el 1.3; el 3.1 es el castellano (errata de la página 18)."},
+{p:"La soberanía del pueblo se ejerce de forma directa.",v:false,w:"Falso. Se ejerce a través de un gobierno representativo."},
+{p:"La jurisprudencia es una fuente primaria del derecho.",v:false,w:"Falso. Es fuente aclaratoria, junto con la doctrina."},
+{p:"La costumbre rige solo en defecto de ley aplicable.",v:true,w:"Verdadero (artículo 1.3 del Código Civil), y además debe probarse y no ser contraria a la moral ni al orden público."},
+{p:"El órgano que dicta una norma es fuente del derecho.",v:false,w:"Falso. Ni el órgano ni el procedimiento lo son."},
+{p:"Entre derecho europeo e interno rige el principio de jerarquía.",v:false,w:"Falso. Rige el de competencia; el europeo tiene aplicación preferente, no supremacía."},
+{p:"Las recomendaciones y los dictámenes europeos son vinculantes.",v:false,w:"Falso. Son de aplicación opcional."},
+{p:"La adhesión a la Unión Europea se autorizó por la vía del artículo 93.",v:true,w:"Verdadero: ley orgánica que atribuye el ejercicio de competencias."},
+{p:"Cualquier diputado puede requerir al Tribunal Constitucional sobre un tratado (artículo 95.2).",v:false,w:"Falso. Pueden el Gobierno o cualquiera de las Cámaras."},
+{p:"La iniciativa legislativa popular puede promover una reforma constitucional.",v:false,w:"Falso. El 166 solo remite a los apartados 1 y 2 del 87."},
+{p:"El procedimiento ordinario exige tres quintos de cada Cámara.",v:true,w:"Verdadero (167.1)."},
+{p:"En el procedimiento ordinario el referéndum es obligatorio.",v:false,w:"Falso. Solo si lo pide una décima parte de los miembros de una Cámara en quince días."},
+{p:"En el procedimiento agravado las Cortes se disuelven tras aprobar el principio de reforma.",v:true,w:"Verdadero (168.1)."},
+{p:"Alguna de las cuatro reformas constitucionales siguió el artículo 168.",v:false,w:"Falso. Las cuatro siguieron el 167."},
+{p:"La reforma no puede iniciarse durante un estado de alarma.",v:true,w:"Verdadero (169, que remite al 116)."},
+{p:"La Ley Orgánica 12/2015 introdujo el recurso previo contra proyectos de Estatuto de Autonomía.",v:true,w:"Verdadero; modificó la Ley Orgánica del Tribunal Constitucional."}
+];
+
+var TASKS={
+ a:{t:"Supuesto 1. Un grupo de diputados propone reformar el artículo 27 (derecho a la educación) para incorporar la educación digital, y otro grupo quiere reformar el artículo 135 para flexibilizar el límite de déficit. Además, se plantea iniciarlo en plena vigencia de un estado de alarma. Explica qué procedimiento corresponde a cada reforma, quién puede tener la iniciativa y si puede iniciarse en ese momento. Mínimo 150 palabras.",
+  checks:[
+   {re:/167/,t:"Cita el artículo 167"},
+   {re:/168/,t:"Cita el artículo 168"},
+   {re:/169/,t:"Aplica el límite del artículo 169"},
+   {re:/(87|166)/,t:"Cita la iniciativa (artículos 166 y 87)"},
+   {re:/(dos tercios|tres quintos)/i,t:"Indica las mayorías"},
+   {re:/(en conclusi[oó]n|por tanto|en definitiva|concluyo)/i,t:"Conclusión explícita"}
+  ],
+  min:150,
+  m:"La reforma del artículo 27 afecta a la sección primera del capítulo segundo del título primero (artículos 15 a 29), por lo que exige el procedimiento agravado del artículo 168: aprobación del principio por dos tercios de cada Cámara, disolución inmediata de las Cortes, ratificación y aprobación del nuevo texto por dos tercios de las nuevas Cámaras y referéndum obligatorio.\n\nLa reforma del artículo 135, en el título séptimo, no toca ninguna materia reservada, así que sigue el procedimiento ordinario del artículo 167: tres quintos de cada Cámara; si no hay acuerdo, comisión paritaria; y, en último término, mayoría absoluta del Senado y dos tercios del Congreso. El referéndum solo se celebra si lo pide una décima parte de los miembros de cualquiera de las Cámaras en quince días. Así se hizo en 2011.\n\nEn cuanto a la iniciativa, el artículo 166 remite a los apartados 1 y 2 del artículo 87: Gobierno, Congreso (un quinto de los diputados o dos grupos), Senado (50 senadores de distinto grupo) y Asambleas autonómicas. Queda excluida la iniciativa popular.\n\nPor tanto, ninguna de las dos puede iniciarse ahora: el artículo 169 prohíbe iniciar la reforma durante la vigencia de los estados del artículo 116."},
+ b:{t:"Supuesto 2. El Gobierno quiere firmar un tratado internacional que atribuye a una organización internacional competencias sobre fronteras, pero una de sus cláusulas parece contraria a la Constitución. Explica qué debe hacer antes de obligarse, qué control cabe y cuándo pasaría el tratado a formar parte del ordenamiento interno. Mínimo 150 palabras.",
+  checks:[
+   {re:/93/,t:"Cita el artículo 93"},
+   {re:/95/,t:"Cita el artículo 95"},
+   {re:/96/,t:"Cita el artículo 96"},
+   {re:/(revisi[oó]n constitucional|reforma)/i,t:"Menciona la previa revisión constitucional"},
+   {re:/tribunal constitucional/i,t:"Menciona el control del Tribunal Constitucional"},
+   {re:/(en conclusi[oó]n|por tanto|en definitiva|concluyo)/i,t:"Conclusión explícita"}
+  ],
+  min:150,
+  m:"Como el tratado atribuye a una organización internacional el ejercicio de competencias derivadas de la Constitución, su celebración debe autorizarse mediante ley orgánica, según el artículo 93. Además, al afectar a la integridad territorial, encaja en los supuestos del artículo 94.1 que exigen autorización previa de las Cortes.\n\nEl problema es la cláusula contraria a la Constitución. El artículo 95.1 dispone que un tratado con estipulaciones contrarias a la Constitución exige la previa revisión constitucional. Para despejar la duda, el artículo 95.2 permite al Gobierno o a cualquiera de las Cámaras requerir al Tribunal Constitucional para que declare si existe o no esa contradicción. Es un control previo que la Ley Orgánica del Tribunal Constitucional desarrolla y que no pueden ejercer los tribunales ordinarios.\n\nSi el Tribunal aprecia la contradicción, habrá que reformar antes la Constitución o renegociar la cláusula; si no la aprecia, el procedimiento sigue.\n\nPor tanto, el tratado solo formará parte del ordenamiento interno cuando, válidamente celebrado, se publique oficialmente en España, como exige el artículo 96.1."}
+};
+
+(function(){
+"use strict";
+var STORE="ui1-const-ud2-v1";
+function load(){ try{ var r=localStorage.getItem(STORE); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
+function save(d){ try{ localStorage.setItem(STORE, JSON.stringify(d)); }catch(e){} }
+var db=load(); db.examHistory=db.examHistory||[]; db.drafts=db.drafts||{};
+function $(id){ return document.getElementById(id); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function norm(s){ return (s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/\s+/g," ").trim().replace(/[.,;:!?»«"]+$/,""); }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function fb(el,ok,html){ el.className="fb show "+(ok?"ok":"ko"); el.innerHTML=html; }
+function hideFb(el){ el.className="fb"; el.innerHTML=""; }
+function fmt(n){ return (Math.round(n*100)/100).toString().replace(".",","); }
+
+var tabs=document.querySelectorAll(".tab");
+tabs.forEach(function(t){ t.addEventListener("click",function(){
+  tabs.forEach(function(x){ x.setAttribute("aria-selected", x===t?"true":"false"); });
+  document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id==="p-"+t.dataset.p); });
+}); });
+
+/* ===== EXAM ===== */
+function letter(it){ return "ABCD".charAt(it.o.indexOf(it.ok)); }
+function explain(it){
+  var h="<b>✓ Respuesta correcta: "+letter(it)+")</b> "+esc(it.ok);
+  h+="<div style='margin-top:8px'><b>Por qué:</b> "+esc(it.w)+"</div>";
+  h+="<div style='margin-top:6px'><b>Recuerda:</b> "+esc(it.r)+"</div>";
+  h+="<div class='es'>Apartado de la unidad: "+esc(it.s)+"</div>";
+  return h;
+}
+var ex=null;
+function renderHistory(){ var h=db.examHistory; $("exam-history").textContent = h.length ? ("Últimas notas: "+h.slice(-5).map(function(x){ return fmt(x.nota); }).join(" / ")+" sobre 10.") : ""; }
+function startExam(pool){
+  var qs=(pool||shuffle(EXAM).slice(0,30)).map(function(it){ return {q:it.q,w:it.w,r:it.r,s:it.s,ok:it.o[0],o:shuffle(it.o),src:it}; });
+  ex={qs:qs,i:0,ok:0,ko:0,blank:0,wrong:[],done:false};
+  $("exam-start").hidden=true; $("exam-end").hidden=true; $("exam-run").hidden=false; showQ();
+}
+function showQ(){
+  if(ex.i>=ex.qs.length){ return endExam(); }
+  var it=ex.qs[ex.i]; ex.done=false;
+  $("exam-bar").style.width=(ex.i/ex.qs.length*100)+"%";
+  $("exam-count").textContent="Pregunta "+(ex.i+1)+" de "+ex.qs.length;
+  $("exam-score").textContent="Puntos: "+fmt(ex.ok-ex.ko*0.33);
+  $("exam-q").innerHTML="<span class='hint' style='display:block;margin:0 0 6px'>Elige UNA respuesta correcta.</span>"+esc(it.q);
+  var box=$("exam-opts"); box.innerHTML="";
+  it.o.forEach(function(op,k){ var b=document.createElement("button"); b.className="opt"; b.dataset.v=op; b.textContent="ABCD".charAt(k)+") "+op; b.addEventListener("click",function(){ answer(op,b); }); box.appendChild(b); });
+  hideFb($("exam-fb")); $("exam-next").disabled=true; $("exam-blank").disabled=false;
+}
+function reveal(){ var it=ex.qs[ex.i]; $("exam-opts").querySelectorAll(".opt").forEach(function(b){ b.disabled=true; if(b.dataset.v===it.ok) b.classList.add("ok"); }); }
+function answer(op,btn){
+  if(ex.done) return; ex.done=true; var it=ex.qs[ex.i]; reveal();
+  if(op===it.ok){ ex.ok++; fb($("exam-fb"),true,explain(it)); } else { ex.ko++; btn.classList.add("ko"); ex.wrong.push(it.src); fb($("exam-fb"),false,explain(it)); }
+  $("exam-next").disabled=false; $("exam-blank").disabled=true; $("exam-next").focus();
+}
+$("exam-blank").addEventListener("click",function(){ if(ex.done) return; ex.done=true; ex.blank++; var it=ex.qs[ex.i]; ex.wrong.push(it.src); reveal(); fb($("exam-fb"),false,"En blanco. "+explain(it)); $("exam-next").disabled=false; $("exam-blank").disabled=true; });
+$("exam-next").addEventListener("click",function(){ ex.i++; showQ(); });
+$("exam-go").addEventListener("click",function(){ startExam(); });
+function endExam(){
+  $("exam-run").hidden=true;
+  var n=ex.qs.length, raw=ex.ok-ex.ko*0.33, nota=Math.max(0,raw)/n*10;
+  if(n===30){ db.examHistory.push({d:Date.now(),nota:Math.round(nota*100)/100}); db.examHistory=db.examHistory.slice(-20); save(db); }
+  var h="<p class='prompt'>Nota: <span class='mark'>"+fmt(nota)+"</span> sobre 10</p>";
+  h+="<div class='stats'><div class='stat'><b>"+ex.ok+"</b><span>aciertos</span></div><div class='stat'><b>"+ex.ko+"</b><span>fallos (−"+fmt(ex.ko*0.33)+")</span></div><div class='stat'><b>"+ex.blank+"</b><span>en blanco</span></div></div>";
+  h+= n===30 ? "<p class='hint'>Mínimo en el examen: 4 sobre 10 en cada parte y 5 de media. Objetivo: 7 o más dos veces seguidas.</p>" : "<p class='hint'>Ronda de repaso: no cuenta en el historial.</p>";
+  if(ex.wrong.length){ h+="<ul class='review'>"+ex.wrong.map(function(w){ return "<li><b>"+esc(w.q)+"</b><br><span class='mark'>"+esc(w.o[0])+"</span>. "+esc(w.w)+"<div class='es'>Recuerda: "+esc(w.r)+"</div></li>"; }).join("")+"</ul>"; }
+  h+="<div class='row'>"+(ex.wrong.length?"<button class='btn' id='exam-retry'>Repetir solo los fallos</button>":"")+"<button class='btn ghost' id='exam-new'>Nuevo test de 30</button></div>";
+  var end=$("exam-end"); end.innerHTML=h; end.hidden=false;
+  var wr=ex.wrong.slice();
+  if($("exam-retry")) $("exam-retry").addEventListener("click",function(){ startExam(shuffle(wr)); });
+  $("exam-new").addEventListener("click",function(){ startExam(); });
+  renderHistory();
+}
+renderHistory();
+
+/* ===== adaptive queue ===== */
+function Queue(items){ this.q=shuffle(items); this.total=items.length; this.mastered=0; this.cur=null; }
+Queue.prototype.next=function(){ this.cur=this.q.shift()||null; return this.cur; };
+Queue.prototype.fail=function(){ var pos=Math.min(3,this.q.length); this.q.splice(pos,0,this.cur); };
+Queue.prototype.pass=function(){ this.mastered++; };
+function bar(id,Q){ $(id).style.width=(Q.mastered/Q.total*100)+"%"; }
+
+/* ===== ARTÍCULOS LITERALES ===== */
+var L=new Queue(LIT), lDone=false;
+function litShow(){
+  var c=L.next(); bar("lit-bar",L); hideFb($("lit-fb"));
+  if(!c){ $("lit-q").innerHTML="<span class='mark'>Completado.</span> Has acertado los "+L.total+" huecos."; $("lit-in").hidden=true; $("lit-check").hidden=true; $("lit-next").textContent="Empezar de nuevo"; $("lit-next").disabled=false; $("lit-count").textContent=""; $("lit-art").textContent=""; return; }
+  $("lit-in").hidden=false; $("lit-check").hidden=false; $("lit-next").textContent="Siguiente";
+  $("lit-count").textContent="Dominados "+L.mastered+" de "+L.total;
+  $("lit-art").textContent=(c.k.indexOf("CC ")===0?"Código Civil, artículo "+c.k.slice(3):"Constitución, artículo "+c.k);
+  $("lit-q").textContent=c.s; $("lit-in").value=""; $("lit-next").disabled=true; lDone=false; $("lit-in").focus({preventScroll:true});
+}
+function litCheck(){
+  if(lDone) return; var c=L.cur; if(!c) return; var v=norm($("lit-in").value); if(!v) return; lDone=true;
+  var ok=c.a.some(function(a){ return norm(a)===v; });
+  var full="<div class='es'>"+esc(ARTS[c.k])+"</div>";
+  if(ok){ L.pass(); fb($("lit-fb"),true,"Correcto."+full); } else { L.fail(); fb($("lit-fb"),false,"Respuesta: <span class='mark'>"+esc(c.a[0])+"</span>. Volverá a salir."+full); }
+  bar("lit-bar",L); $("lit-next").disabled=false; $("lit-next").focus();
+}
+$("lit-check").addEventListener("click",litCheck);
+$("lit-in").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(lDone) litShow(); else litCheck(); } });
+$("lit-next").addEventListener("click",function(){ if(!L.cur && L.q.length===0 && L.mastered===L.total){ L=new Queue(LIT); } litShow(); });
+litShow();
+
+/* ===== CONCEPTOS ===== */
+var CC=[]; CONC.forEach(function(x){ CC.push({f:x.d,b:x.t,k:"¿Qué concepto es?"}); CC.push({f:x.t,b:x.d,k:"Defínelo según la unidad"}); });
+var C=new Queue(CC);
+function conShow(){
+  var c=C.next(); bar("con-bar",C); hideFb($("con-fb")); $("con-row1").hidden=false; $("con-row2").hidden=true;
+  if(!c){ $("con-q").innerHTML="<span class='mark'>Completado.</span>"; $("con-show").textContent="Empezar de nuevo"; $("con-count").textContent=""; $("con-kind").textContent=""; return; }
+  $("con-show").textContent="Ver respuesta"; $("con-count").textContent="Dominadas "+C.mastered+" de "+C.total; $("con-kind").textContent=c.k; $("con-q").textContent=c.f;
+}
+$("con-show").addEventListener("click",function(){ if(!C.cur){ C=new Queue(CC); conShow(); return; } fb($("con-fb"),true,"<span class='mark'>"+esc(C.cur.b)+"</span>"); $("con-row1").hidden=true; $("con-row2").hidden=false; });
+$("con-good").addEventListener("click",function(){ C.pass(); conShow(); });
+$("con-bad").addEventListener("click",function(){ C.fail(); conShow(); });
+conShow();
+
+/* ===== CLASIFICACIÓN ===== */
+var K=new Queue(CLS), kDone=false;
+var kb=$("cls-btns"); CLS_OPTS.forEach(function(y){ var b=document.createElement("button"); b.className="btn ghost"; b.textContent=y; b.dataset.y=y; b.addEventListener("click",function(){ clsAns(y); }); kb.appendChild(b); });
+function clsShow(){
+  var c=K.next(); bar("cls-bar",K); hideFb($("cls-fb")); kDone=false; $("cls-next").disabled=true;
+  if(!c){ $("cls-q").innerHTML="<span class='mark'>Completado.</span>"; kb.hidden=true; $("cls-next").textContent="Empezar de nuevo"; $("cls-next").disabled=false; $("cls-count").textContent=""; return; }
+  kb.hidden=false; $("cls-next").textContent="Siguiente"; $("cls-count").textContent="Dominadas "+K.mastered+" de "+K.total; $("cls-q").textContent=c.p;
+}
+function clsAns(y){
+  if(kDone||!K.cur) return; kDone=true; var c=K.cur;
+  if(y===c.a){ K.pass(); fb($("cls-fb"),true,"Correcto: "+esc(c.a)+"."); } else { K.fail(); fb($("cls-fb"),false,"Es <span class='mark'>"+esc(c.a)+"</span>. Volverá a salir."); }
+  bar("cls-bar",K); $("cls-next").disabled=false; $("cls-next").focus();
+}
+$("cls-next").addEventListener("click",function(){ if(!K.cur && K.q.length===0 && K.mastered===K.total){ K=new Queue(CLS); } clsShow(); });
+clsShow();
+
+/* ===== VERDADERO O FALSO ===== */
+var V=new Queue(VF), vDone=false;
+function vfShow(){
+  var c=V.next(); bar("vf-bar",V); hideFb($("vf-fb")); vDone=false; $("vf-next").disabled=true;
+  if(!c){ $("vf-q").innerHTML="<span class='mark'>Completado.</span>"; $("vf-t").hidden=true; $("vf-f").hidden=true; $("vf-next").textContent="Empezar de nuevo"; $("vf-next").disabled=false; $("vf-count").textContent=""; return; }
+  $("vf-t").hidden=false; $("vf-f").hidden=false; $("vf-next").textContent="Siguiente"; $("vf-count").textContent="Dominadas "+V.mastered+" de "+V.total; $("vf-q").textContent=c.p;
+}
+function vfAns(val){
+  if(vDone||!V.cur) return; vDone=true; var c=V.cur;
+  if(val===c.v){ V.pass(); fb($("vf-fb"),true,esc(c.w)); } else { V.fail(); fb($("vf-fb"),false,esc(c.w)+" Volverá a salir."); }
+  bar("vf-bar",V); $("vf-next").disabled=false; $("vf-next").focus();
+}
+$("vf-t").addEventListener("click",function(){ vfAns(true); });
+$("vf-f").addEventListener("click",function(){ vfAns(false); });
+$("vf-next").addEventListener("click",function(){ if(!V.cur && V.q.length===0 && V.mastered===V.total){ V=new Queue(VF); } vfShow(); });
+vfShow();
+
+/* ===== APLICACIÓN ===== */
+var wMode="a";
+function countWords(t){ return (t.match(/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9]+/g)||[]).length; }
+function checksFor(task,body){ var n=countWords(body); var c=task.checks.map(function(x){ return {ok:x.re.test(body),t:x.t}; }); c.push({ok:n>=task.min,t:"Al menos "+task.min+" palabras (ahora "+n+")"}); return {c:c,words:n}; }
+function wRender(){
+  var body=$("w-body").value, r=checksFor(TASKS[wMode],body);
+  $("w-words").textContent=r.words+" palabras";
+  $("w-checks").innerHTML=r.c.map(function(x){ return "<li class='"+(body.trim()?(x.ok?"pass":"fail"):"")+"'>"+esc(x.t)+"</li>"; }).join("");
+  db.drafts[wMode]=body; save(db);
+}
+function wSet(m){ wMode=m; $("w-a").className= m==="a"?"btn":"btn ghost"; $("w-b").className= m==="b"?"btn":"btn ghost"; $("w-task").textContent=TASKS[m].t; $("w-model").textContent=TASKS[m].m; $("w-body").value=db.drafts[m]||""; wRender(); }
+$("w-a").addEventListener("click",function(){ wSet("a"); });
+$("w-b").addEventListener("click",function(){ wSet("b"); });
+$("w-body").addEventListener("input",wRender);
+wSet("a");
+})();
+</script>
