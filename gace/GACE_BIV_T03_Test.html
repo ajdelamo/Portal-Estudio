@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 3 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque IV · Tema 3 · El reglamento, los principios y los tratados</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u":1,"t":"Según el temario 2026, el reglamento es:","o":["Toda disposición de carácter general, escrita, dictada por la Administración en ejercicio de una potestad propia, con rango inferior a la ley","Toda decisión escrita de la Administración que afecte a una pluralidad de interesados, con rango inferior a la ley","Toda norma escrita aprobada por el Gobierno con rango de ley por delegación de las Cortes","Toda disposición general dictada por cualquier órgano público en ejecución de una ley previa"],"c":0,"e":"Concepto del temario 2026: disposición general, escrita, dictada por la Administración en ejercicio de la potestad reglamentaria, con rango inferior a la ley. La pluralidad de destinatarios no basta (puede ser un acto general)."},
+{"u":1,"t":"¿Cuál de estas NO es una de las tres notas del reglamento según el temario 2026?","o":["Es una norma que innova el ordenamiento y no se agota con su aplicación","Procede de la Administración y tiene legitimidad democrática indirecta","Está sometido a control judicial pleno y puede ser inaplicado por cualquier juez","Solo puede ser enjuiciado por el Tribunal Constitucional, como la ley"],"c":3,"e":"Las tres notas: norma que se integra en el ordenamiento; procede de la Administración (legitimidad indirecta, subordinado a la ley); control judicial pleno (106.1 CE, 6 LOPJ). El monopolio del TC es propio de las leyes."},
+{"u":1,"t":"Los ministros ejercen la potestad reglamentaria:","o":["En cualquier materia, siempre que lo autorice el Presidente del Gobierno","En las materias propias de su departamento (art. 4.1.b Ley 50/1997)","Solo en materia organizativa y siempre por delegación del Consejo de Ministros","Únicamente cuando una ley orgánica se la atribuya expresamente"],"c":1,"e":"Art. 4.1.b Ley 50/1997. Otros órganos (autoridades independientes, Banco de España) solo cuando una ley se la atribuya expresamente."},
+{"u":1,"t":"La potestad reglamentaria de las Entidades Locales se reconoce en:","o":["El art. 4.1.a de la Ley 7/1985, como manifestación de su autonomía","El art. 97 CE, que la atribuye al Gobierno y por extensión a los Ayuntamientos","El art. 128.1 de la Ley 40/2015, de Régimen Jurídico del Sector Público","Los Estatutos de Autonomía de cada Comunidad, que la delegan en los municipios"],"c":0,"e":"Art. 4.1.a LRBRL: potestades reglamentaria y de autoorganización. El art. 128.1 que también la menciona es de la Ley 39/2015, no de la 40/2015."},
+{"u":1,"t":"Una convocatoria de oposiciones dirigida a miles de aspirantes es:","o":["Un reglamento, porque se dirige a una pluralidad indeterminada de personas","Un acto administrativo general, porque se agota con su cumplimiento","Un reglamento organizativo, porque regula el acceso a la función pública","Una disposición de carácter general, porque se publica en el BOE"],"c":1,"e":"Criterio de consunción: se agota con el proceso selectivo. El número de destinatarios y la publicación no la convierten en reglamento."},
+{"u":1,"t":"El criterio decisivo para distinguir reglamento y acto, según el temario 2026, es:","o":["El número de destinatarios de la decisión","El órgano que la dicta y su posición jerárquica","Si la decisión innova el ordenamiento o se limita a aplicarlo","Si se publica en el diario oficial o se notifica a los interesados"],"c":2,"e":"Idea clave del temario 2026: criterio ordinamental. La publicación es una consecuencia de ser reglamento, no el criterio."},
+{"u":1,"t":"Respecto de la derogación y revocación, el temario 2026 señala que:","o":["El reglamento solo puede derogarse siguiendo los procedimientos de revisión de oficio y previo dictamen del Consejo de Estado, como los actos favorables","El reglamento se deroga libremente por otro reglamento; los actos favorables solo se anulan por los procedimientos de revisión","Tanto el reglamento como el acto favorable se revocan libremente","El acto de gravamen solo puede revocarse mediante declaración de lesividad"],"c":1,"e":"El reglamento se deroga libremente por otro; la revocación de actos de gravamen tiene límites (art. 109 Ley 39/2015) y los favorables solo se anulan por revisión (106, 107)."},
+{"u":2,"t":"Los reglamentos ejecutivos:","o":["No requieren dictamen del Consejo de Estado, salvo que lo solicite expresamente el Ministro proponente por la complejidad técnica de la norma","Exigen dictamen preceptivo del Consejo de Estado, también para sus modificaciones","Exigen dictamen del Consejo de Estado solo si afectan a derechos fundamentales","Requieren informe de la Abogacía del Estado en lugar del Consejo de Estado"],"c":1,"e":"Art. 22.3 LO 3/1980: dictamen de la Comisión Permanente en los reglamentos o disposiciones de carácter general que se dicten en ejecución de las leyes, así como sus modificaciones."},
+{"u":2,"t":"Los reglamentos independientes en el ámbito estatal:","o":["Pueden regular derechos de los ciudadanos si no hay ley sobre la materia","Se limitan fundamentalmente a la organización administrativa","Pueden suspender la aplicación de leyes en situaciones de emergencia","Son los que dictan las autoridades administrativas independientes"],"c":1,"e":"Regulan materias no reguladas por ley y no reservadas; en el Estado, fundamentalmente organizativos o domésticos. No confundir con los de necesidad ni con los de las autoridades independientes."},
+{"u":2,"t":"Según el temario 2026, los reglamentos de necesidad:","o":["Se fundan en el estado de necesidad y no necesitan habilitación legal","Se dictan para emergencias en virtud de una habilitación legal y su vigencia se limita a la emergencia","Son reglamentos ejecutivos de urgencia aprobados por el Congreso","Tienen rango de ley mientras dure la emergencia"],"c":1,"e":"Habilitación legal (p. ej. LO 4/1981). El material visual los llamaba contra legem fundados en el estado de necesidad: corregido."},
+{"u":2,"t":"Los reglamentos organizativos o ad intra regulan:","o":["Las relaciones entre los ciudadanos y la Administración en general, siempre que no afecten a derechos fundamentales ni a materias tributarias","La organización y el funcionamiento interno, y las relaciones de sujeción especial","Las relaciones entre el Estado y las Comunidades Autónomas","Los derechos y deberes de los ciudadanos que no tienen reserva de ley"],"c":1,"e":"Ad intra: organización interna y sujeción especial (funcionarios, internos, estudiantes). Los jurídicos o ad extra afectan a los ciudadanos y requieren habilitación legal."},
+{"u":2,"t":"La creación, modificación y supresión de departamentos ministeriales adopta la forma de:","o":["Real decreto acordado en Consejo de Ministros","Real decreto del Presidente del Gobierno","Orden del Ministro de la Presidencia","Ley orgánica"],"c":1,"e":"Art. 25 Ley 50/1997 y art. 2.2.j del mismo texto: real decreto del Presidente del Gobierno."},
+{"u":2,"t":"Las decisiones del Consejo de Ministros que no deban adoptar la forma de real decreto revisten la forma de:","o":["Orden ministerial","Acuerdo del Consejo de Ministros","Resolución de la Comisión General de Secretarios de Estado y Subsecretarios","Instrucción del Ministro de la Presidencia"],"c":1,"e":"Art. 25 Ley 50/1997. Los acuerdos no son reglamentos ni forman un tercer escalón de la jerarquía."},
+{"u":2,"t":"Una disposición que afecta a varios departamentos ministeriales revestirá la forma de:","o":["Real decreto acordado en Consejo de Ministros","Orden conjunta firmada por todos los ministros afectados y publicada simultáneamente por cada uno de los departamentos implicados","Orden del Ministro de la Presidencia, a propuesta de los ministros interesados","Acuerdo de la Comisión Delegada correspondiente"],"c":2,"e":"Art. 25.f Ley 50/1997."},
+{"u":2,"t":"Según el art. 24.2 Ley 50/1997, la jerarquía de los reglamentos estatales es:","o":["Real decreto del Presidente > real decreto del Consejo de Ministros > orden ministerial","Real decreto (del Presidente o del Consejo de Ministros) > orden ministerial","Real decreto > acuerdo del Consejo de Ministros > orden ministerial","Real decreto del Consejo de Ministros > orden ministerial > real decreto del Presidente"],"c":1,"e":"Dos escalones: 1.º reales decretos del Presidente o acordados en Consejo de Ministros (mismo nivel); 2.º órdenes ministeriales."},
+{"u":2,"t":"Los decretos de los Consejos de Gobierno y las órdenes de los consejeros son reglamentos:","o":["Estatales","Autonómicos","Locales","Independientes por definición"],"c":1,"e":"Clasificación por el órgano: estatales, autonómicos y locales (ordenanzas, reglamentos y bandos)."},
+{"u":3,"t":"¿Cuál de estos es un límite FORMAL de la potestad reglamentaria según el temario 2026?","o":["La reserva de ley","La irretroactividad de las disposiciones sancionadoras no favorables","La competencia del órgano","La interdicción de la arbitrariedad"],"c":2,"e":"Formales: competencia, procedimiento, jerarquía, publicación. Los otros tres son materiales."},
+{"u":3,"t":"El reglamento dictado por un órgano incompetente es:","o":["Anulable, si la incompetencia no es manifiesta","Nulo de pleno derecho","Válido hasta que se publique una norma posterior","Convalidable por el órgano competente"],"c":1,"e":"Para las disposiciones no hay anulabilidad: art. 47.2 Ley 39/2015. La convalidación del art. 52 es para actos anulables."},
+{"u":3,"t":"Según el art. 128.2 Ley 39/2015, los reglamentos, sin perjuicio de su función de colaboración con la ley, NO podrán:","o":["Desarrollar leyes orgánicas","Tipificar infracciones administrativas ni establecer sanciones, tributos o prestaciones patrimoniales públicas","Regular la organización interna de la Administración","Fijar plazos de procedimiento distintos de los de la Ley 39/2015"],"c":1,"e":"Literal del 128.2: no podrán tipificar delitos, faltas o infracciones administrativas, establecer penas o sanciones, así como tributos, exacciones parafiscales u otras cargas o prestaciones personales o patrimoniales de carácter público."},
+{"u":3,"t":"Según el art. 37.1 Ley 39/2015, las resoluciones particulares no pueden vulnerar una disposición general aunque procedan de un órgano:","o":["De igual o superior rango al de la disposición","De igual o superior jerarquía al que dictó la disposición general","De otra Administración Pública","Que tenga atribuida la competencia para modificar o derogar la disposición general vulnerada"],"c":1,"e":"Literal: «órgano de igual o superior jerarquía al que dictó la disposición general». El Temario Claude decía «rango»: error."},
+{"u":3,"t":"El fundamento de la inderogabilidad singular es principalmente:","o":["La seguridad jurídica","La igualdad","La jerarquía normativa","La eficacia administrativa"],"c":1,"e":"Impide la dispensa singular: lo que vale para todos no se exceptúa para uno. Si se quiere excepcionar, se modifica el reglamento con carácter general."},
+{"u":3,"t":"¿Cuál NO es un principio de buena regulación del art. 129 Ley 39/2015?","o":["Necesidad","Proporcionalidad","Transparencia","Participación"],"c":3,"e":"Seis principios: necesidad, eficacia, proporcionalidad, seguridad jurídica, transparencia y eficiencia. La participación se articula en el art. 133."},
+{"u":3,"t":"El Plan Anual Normativo recoge:","o":["Las normas aprobadas el año anterior, para su evaluación","Las iniciativas legislativas o reglamentarias que vayan a elevarse para su aprobación el año siguiente","Los reglamentos pendientes de dictamen del Consejo de Estado","Las directivas europeas pendientes de transposición"],"c":1,"e":"Art. 132 Ley 39/2015 y art. 25 Ley 50/1997."},
+{"u":3,"t":"La consulta pública previa del art. 133.1 Ley 39/2015 se realiza:","o":["Después de redactar el texto, sobre su articulado completo y la Memoria del Análisis de Impacto Normativo que lo acompaña, durante quince días","Antes de redactar el texto, sobre los problemas, la necesidad, los objetivos y las alternativas","Solo cuando la norma afecte a derechos fundamentales","Durante el trámite de audiencia, por un plazo de diez días"],"c":1,"e":"Consulta previa: antes de la elaboración, a través del portal web del departamento. La audiencia e información pública es posterior y versa sobre el texto."},
+{"u":3,"t":"El plazo mínimo del trámite de audiencia e información pública en la elaboración de reglamentos estatales es:","o":["10 días hábiles, reducible a 5","15 días hábiles, reducible a 7 por razones debidamente motivadas","20 días naturales, reducible a 10 días naturales cuando lo acuerde el Consejo de Ministros por razones de urgencia","1 mes, reducible a 15 días"],"c":1,"e":"Art. 26.6 Ley 50/1997."},
+{"u":3,"t":"En la tramitación urgente del art. 27 Ley 50/1997:","o":["Se suprimen todos los informes preceptivos y el dictamen del Consejo de Estado","Los plazos se reducen a la mitad, no es precisa la consulta pública previa y la audiencia es de 7 días","Los plazos se reducen a un tercio y la audiencia se sustituye por información pública","Solo se suprime el trámite de audiencia"],"c":1,"e":"Además, la falta de un dictamen o informe preceptivo en plazo no impide continuar. La urgencia la acuerda el Consejo de Ministros."},
+{"u":3,"t":"¿Qué informe es preceptivo SIEMPRE en la elaboración de un reglamento estatal?","o":["El del Consejo de Estado","El de la Secretaría General Técnica del departamento proponente","El de la Abogacía General del Estado","El de la Comisión Nacional de los Mercados y la Competencia, por su incidencia en la competencia efectiva en los mercados"],"c":1,"e":"Art. 26.5 Ley 50/1997. El dictamen del Consejo de Estado solo en los reglamentos ejecutivos."},
+{"u":3,"t":"Según el art. 23 Ley 50/1997, el reglamento estatal que impone nuevas obligaciones a quienes ejercen una actividad económica entra en vigor, con carácter general:","o":["A los veinte días de su completa publicación en el BOE, conforme a la regla general del artículo 2.1 del Código Civil","El 1 de enero o el 1 de julio siguientes a su aprobación","El 2 de enero o el 1 de julio siguientes a su aprobación","El día siguiente a su publicación"],"c":2,"e":"2 de enero o 1 de julio. No se aplica a los reales decretos-leyes ni cuando la transposición de directivas u otras razones justificadas, acreditadas en la MAIN, lo aconsejen."},
+{"u":3,"t":"La STC 55/2018 sobre el Título VI de la Ley 39/2015:","o":["Lo anuló íntegramente por invadir competencias autonómicas","Declaró que varias previsiones no se aplican a la potestad legislativa autonómica y que algunas solo rigen para el Estado","Confirmó que todo el Título VI es legislación básica aplicable a todas las Administraciones","Declaró inconstitucional el art. 129"],"c":1,"e":"Siguen plenamente aplicables a la AGE, que es lo que pregunta el GACE."},
+{"u":3,"t":"La evaluación normativa periódica se regula en:","o":["Art. 130 Ley 39/2015 y art. 28 Ley 50/1997","Art. 132 Ley 39/2015 y art. 25 Ley 50/1997, que regulan el Plan Anual Normativo","Art. 133 Ley 39/2015 y art. 26 Ley 50/1997","Art. 131 Ley 39/2015 y art. 23 Ley 50/1997"],"c":0,"e":"130 y 28: evaluación. 132 y 25: planificación. 133 y 26: participación y procedimiento. 131 y 23: publicación y entrada en vigor."},
+{"u":4,"t":"El plazo para interponer recurso contencioso-administrativo directo contra un reglamento es:","o":["Un mes desde su publicación","Dos meses desde el día siguiente a su publicación","Seis meses desde su entrada en vigor","No tiene plazo, porque la nulidad de pleno derecho es imprescriptible y puede alegarse en cualquier momento"],"c":1,"e":"Arts. 25 y 46.1 LJCA. La nulidad no elimina el plazo del recurso directo; sí permite el indirecto contra actos posteriores."},
+{"u":4,"t":"El recurso indirecto contra un reglamento consiste en:","o":["Recurrir el reglamento en reposición ante el mismo órgano que lo dictó, antes de acudir a la jurisdicción contencioso-administrativa","Impugnar los actos de aplicación alegando la ilegalidad del reglamento","Solicitar al Ministerio Fiscal que lo impugne","Plantear una cuestión de inconstitucionalidad"],"c":1,"e":"Art. 26 LJCA. Cabe aunque no se recurriera el reglamento directamente y el plazo se cuenta desde el acto."},
+{"u":4,"t":"La cuestión de ilegalidad la plantea el juez o tribunal:","o":["Al admitir a trámite un recurso indirecto","Tras dictar sentencia firme estimatoria por ilegalidad del reglamento, si no es competente para el recurso directo","Cuando duda de la legalidad del reglamento, antes de dictar sentencia","Siempre que el reglamento haya sido aprobado por el Consejo de Ministros"],"c":1,"e":"Art. 27.1 LJCA, en los cinco días siguientes a la firmeza (art. 123.1). Precisión al temario 2026, que omitía el requisito de la sentencia firme estimatoria."},
+{"u":4,"t":"Cuando el Tribunal Supremo conoce de un recurso contra un acto fundado en la ilegalidad de un reglamento:","o":["Debe plantear cuestión de ilegalidad al Consejo de Estado","Anula directamente el reglamento, sin necesidad de plantear cuestión","Debe remitir el asunto al Tribunal Constitucional","Solo puede inaplicarlo al caso concreto, porque la anulación con efectos generales corresponde a la Audiencia Nacional"],"c":1,"e":"Art. 27.3 LJCA."},
+{"u":4,"t":"Un juez de lo social considera que un real decreto aplicable al caso es contrario a una ley. Debe:","o":["Plantear cuestión de inconstitucionalidad ante el TC","Plantear cuestión de ilegalidad ante el Tribunal Supremo","Inaplicarlo por sí mismo (art. 6 LOPJ)","Suspender el proceso hasta que la Administración lo revise de oficio"],"c":2,"e":"Todos los jueces inaplican los reglamentos ilegales (art. 6 LOPJ). La cuestión de ilegalidad es un mecanismo del orden contencioso tras un recurso indirecto estimado."},
+{"u":4,"t":"La revisión de oficio de una disposición general nula (art. 106.2 Ley 39/2015) exige:","o":["Informe de la Abogacía del Estado y de la Intervención General, y caduca si no se resuelve en el plazo de un año","Dictamen favorable del Consejo de Estado u órgano consultivo autonómico","Solicitud de un interesado y dictamen no vinculante","Declaración previa de lesividad"],"c":1,"e":"En cualquier momento, de oficio, previo dictamen favorable. Si se inicia de oficio y no se resuelve en seis meses, caduca (106.5)."},
+{"u":4,"t":"Según la STS 1598/2022, de 30 de noviembre, un particular que pide a la Administración la revisión de oficio de un reglamento nulo:","o":["Tiene derecho a que se tramite su solicitud y, si se desestima o no se resuelve, puede recurrir esa decisión ante los tribunales","No tiene acción para obtener por esa vía la nulidad de una disposición general","Puede exigirla solo si acredita un interés legítimo directo","Puede exigirla si han pasado más de dos meses desde la publicación"],"c":1,"e":"La facultad del 106.2 corresponde en exclusiva a la Administración autora. El particular puede usar el recurso directo o el indirecto. Corrección al material visual."},
+{"u":4,"t":"La sentencia firme que anula un reglamento (arts. 72.2 y 73 LJCA):","o":["Anula automáticamente todos los actos firmes dictados en su aplicación","Tiene efectos generales desde la publicación del fallo, sin afectar por sí a los actos firmes anteriores, salvo sanciones no ejecutadas","Solo produce efectos entre las partes del proceso","Tiene efectos desde la entrada en vigor del reglamento anulado"],"c":1,"e":"Art. 73 LJCA: excepción cuando la anulación excluye o reduce sanciones no ejecutadas completamente."},
+{"u":4,"t":"Contra un reglamento estatal, el Tribunal Constitucional puede intervenir:","o":["Mediante recurso de inconstitucionalidad","Mediante cuestión de inconstitucionalidad","Mediante conflicto de competencias o recurso de amparo si vulnera derechos fundamentales","En ningún caso, porque los reglamentos solo los controla la jurisdicción contencioso-administrativa ordinaria a través de recursos directos e indirectos"],"c":2,"e":"Recurso y cuestión de inconstitucionalidad son para normas con rango de ley. El TC conoce de reglamentos por conflicto de competencias, amparo o la impugnación del art. 161.2 CE."},
+{"u":4,"t":"Un recurso contra una sanción fundado únicamente en la nulidad de la orden ministerial aplicada se interpone:","o":["Ante el órgano que dictó la sanción, en todo caso","Directamente ante el órgano que dictó la orden","Ante el Consejo de Estado","Ante el Defensor del Pueblo"],"c":1,"e":"Art. 112.3 Ley 39/2015, último inciso: «podrán interponerse directamente ante el órgano que dictó dicha disposición»."},
+{"u":5,"t":"Según el art. 1.4 CC, los principios generales del Derecho:","o":["Se aplican con preferencia a la costumbre","Se aplican en defecto de ley o costumbre, sin perjuicio de su carácter informador del ordenamiento","Solo se aplican si están recogidos en la Constitución","Son fuente directa de igual rango que la ley y prevalecen sobre la costumbre y sobre los reglamentos en todo caso"],"c":1,"e":"Triple función del temario 2026: supletoria, informadora y, por ello, interpretativa. Los positivizados adquieren rango constitucional o legal."},
+{"u":5,"t":"El principio de confianza legítima:","o":["Procede del Derecho francés, se formuló por el Consejo de Estado francés y se recoge expresamente en el art. 9.3 CE","Procede del Derecho alemán y del de la Unión, y está en el art. 3.1.e Ley 40/2015","Es una creación del Tribunal Constitucional sin reflejo legal","Equivale a la prohibición de la reformatio in peius"],"c":1,"e":"Protege la confianza cuando la Administración ha creado signos externos que la justifican."},
+{"u":5,"t":"La prohibición de ir contra los propios actos es una manifestación del principio de:","o":["Proporcionalidad","Buena fe","Jerarquía","Eficacia"],"c":1,"e":"Buena fe: art. 7 CC y art. 3.1.e Ley 40/2015."},
+{"u":5,"t":"Según el art. 4 Ley 40/2015, cuando las Administraciones exijan requisitos o limiten derechos deberán:","o":["Elegir siempre la medida más eficaz para el interés general, aunque resulte más gravosa para los ciudadanos afectados","Aplicar el principio de proporcionalidad y elegir la medida menos restrictiva","Obtener autorización judicial previa","Someter la medida a información pública"],"c":1,"e":"Proporcionalidad: adecuada, necesaria y proporcionada en sentido estricto."},
+{"u":5,"t":"¿Cuál de estos es uno de los principios del art. 3.1 Ley 40/2015 (examen GACE 2019)?","o":["Planificación y dirección por objetivos","Jerarquía normativa y publicidad de las normas","Autonomía local","Reserva de ley"],"c":0,"e":"Art. 3.1.g. La jerarquía normativa está en el 9.3 CE; la autonomía local, en el 140 CE."},
+{"u":5,"t":"¿Cuál NO figura entre los principios del art. 3.1 Ley 40/2015?","o":["Simplicidad, claridad y proximidad a los ciudadanos","Economía, suficiencia y adecuación estricta de los medios a los fines","Irretroactividad de las disposiciones sancionadoras","Cooperación, colaboración y coordinación entre Administraciones"],"c":2,"e":"La irretroactividad está en el art. 9.3 CE. El 3.1 tiene once principios, de servicio efectivo (a) a cooperación (k)."},
+{"u":5,"t":"La positivización de un principio general en la Constitución o en la ley tiene como efecto:","o":["Que pierde su carácter de principio","Que adquiere rango constitucional o legal y no solo supletorio","Que solo puede aplicarse en defecto de costumbre","Que deja de servir como criterio de interpretación y solo puede aplicarse como norma escrita"],"c":1,"e":"Temario 2026: el art. 9.3 y 103.1 CE y el art. 3 Ley 40/2015 les dan rango constitucional o legal."},
+{"u":5,"t":"En el Derecho administrativo, los principios generales son especialmente importantes porque:","o":["Sustituyen a la ley cuando la Administración lo decide","Permiten controlar la discrecionalidad administrativa, ya que la legislación no puede prever todo","Prevalecen siempre sobre los reglamentos","Son la única fuente de las potestades administrativas"],"c":1,"e":"Dos razones del temario 2026: imprevisión legislativa y control de la discrecionalidad."},
+{"u":6,"t":"Según el art. 2 Ley 25/2014, un tratado internacional es:","o":["Todo acuerdo entre Estados, aunque sea verbal","El acuerdo celebrado por escrito entre España y otro u otros sujetos de Derecho internacional, regido por el Derecho internacional, cualquiera que sea su denominación","El acuerdo firmado por el Ministerio de Asuntos Exteriores con un organismo internacional","Solo el acuerdo que se denomina expresamente «tratado»"],"c":1,"e":"Conforme al Convenio de Viena de 1969. La denominación es irrelevante."},
+{"u":6,"t":"Un memorando de entendimiento que no genera obligaciones internacionales es, según la Ley 25/2014:","o":["Un tratado internacional","Un acuerdo internacional administrativo","Un acuerdo internacional no normativo","Un convenio interadministrativo"],"c":2,"e":"Los acuerdos administrativos se celebran en ejecución o concreción de un tratado; los no normativos no son fuente de obligaciones ni se rigen por el Derecho internacional."},
+{"u":6,"t":"La manifestación del consentimiento del Estado para obligarse por medio de tratados corresponde a:","o":["Las Cortes Generales","El Gobierno","El Rey (art. 63.2 CE)","El Ministro de Asuntos Exteriores"],"c":2,"e":"El Gobierno dirige la política exterior (97) y autoriza la firma; las Cortes autorizan (93, 94.1) o son informadas (94.2)."},
+{"u":6,"t":"Las Comunidades Autónomas, según la Ley 25/2014 (examen GACE 2019):","o":["Pueden celebrar tratados internacionales en materias de su competencia","Pueden solicitar al Gobierno la apertura de negociaciones en materias de su competencia o interés específico","Necesitan autorización del Senado para participar en la delegación española","No pueden celebrar ningún tipo de acuerdo internacional"],"c":1,"e":"Arts. 49-52: solicitud de negociaciones, información, participación y ejecución. Pueden celebrar acuerdos administrativos y no normativos, previo informe del Ministerio de Asuntos Exteriores, pero no tratados."},
+{"u":6,"t":"Un tratado que implica obligaciones financieras para la Hacienda Pública requiere:","o":["Ley orgánica (art. 93 CE)","Autorización previa de las Cortes Generales (art. 94.1 CE)","Mera información al Congreso y al Senado (art. 94.2 CE)","Referéndum consultivo de todos los ciudadanos, convocado por el Rey a propuesta del Presidente"],"c":1,"e":"Art. 94.1.d CE."},
+{"u":6,"t":"Si el Congreso y el Senado no se ponen de acuerdo sobre la autorización de un tratado del art. 94.1 CE:","o":["Decide el Gobierno","Se intenta un acuerdo en Comisión Mixta y, si no, decide el Congreso por mayoría absoluta","Prevalece el criterio del Senado como Cámara de representación territorial","Se somete a referéndum"],"c":1,"e":"Art. 74.2 CE."},
+{"u":6,"t":"El requerimiento al TC del art. 95.2 CE para que declare si un tratado contradice la Constitución puede formularlo (examen GACE 2019):","o":["Solo el Gobierno","El Gobierno o cualquiera de las Cámaras","Cincuenta diputados o cincuenta senadores","El Defensor del Pueblo y el Ministerio Fiscal"],"c":1,"e":"Art. 95.2 CE y art. 78 LOTC. Se ha usado dos veces: DTC 1/1992 (Maastricht) y DTC 1/2004."},
+{"u":6,"t":"Sobre la necesidad de autorización de las Cortes antes de que el Estado preste su consentimiento dictamina:","o":["La Comisión Permanente del Consejo de Estado (art. 22.1 LO 3/1980)","La Comisión de Asuntos Exteriores del Congreso","El Tribunal Constitucional, mediante el procedimiento de control previo de los tratados internacionales del artículo 95","La Abogacía General del Estado"],"c":0,"e":"Art. 22.1 LO 3/1980."},
+{"u":6,"t":"Para denunciar un tratado autorizado por las Cortes conforme al art. 94.1 CE:","o":["Basta un acuerdo del Consejo de Ministros","Se sigue el mismo procedimiento previsto para su aprobación (art. 96.2 CE)","Se necesita una ley orgánica","Se necesita una reforma constitucional previa, porque el tratado forma parte del ordenamiento interno"],"c":1,"e":"Art. 96.2 CE."},
+{"u":6,"t":"Si una ley posterior contradice un tratado publicado, según la STC 140/2018:","o":["El juez debe plantear cuestión de inconstitucionalidad","Es un problema de selección del Derecho aplicable que resuelve el juez ordinario mediante el control de convencionalidad","Prevalece la ley por ser posterior","Debe pronunciarse el Consejo de Estado"],"c":1,"e":"Art. 31 Ley 25/2014: prevalencia del tratado salvo sobre normas de rango constitucional."},
+{"u":7,"t":"Ante una orden ministerial en el enunciado, ¿qué se escribe primero según el método de la Comisión?","o":["Directamente la conclusión sobre su validez","La calificación: disposición general o acto, forma y órgano, ejecutiva o independiente, efectos ad extra o ad intra","La transcripción del preámbulo de la orden","Las posibles responsabilidades del Ministro"],"c":1,"e":"«Con carácter previo, procede calificar…». De ello dependen el dictamen del Consejo de Estado, la invalidez y la vía de impugnación."},
+{"u":7,"t":"El enunciado no dice si se acordó la tramitación urgente de un reglamento. Según el método de la Comisión, se escribe:","o":["«El enunciado no precisa si se acordó la tramitación urgente, por lo que suponemos que no se acordó, dado que nada lo indica»","«Podríamos entender que la tramitación fue urgente»","«Sin ese dato no es posible pronunciarse sobre la validez»","«Salvo mejor criterio, se presume la urgencia»"],"c":0,"e":"Suposición declarada y justificada. La Comisión no penaliza la suposición; sí la duda en la conclusión y dejar la cuestión sin responder."},
+{"u":7,"t":"Una orden ministerial publicada el 14 de abril puede recurrirse en vía contencioso-administrativa directa hasta el:","o":["14 de mayo","14 de junio","15 de junio","13 de julio, porque el plazo es de tres meses"],"c":1,"e":"Dos meses contados desde el día siguiente a la publicación, de fecha a fecha (art. 46.1 LJCA): vence el 14 de junio."},
+{"u":7,"t":"¿Qué órgano judicial conoce del recurso directo contra una orden ministerial?","o":["Los Juzgados Centrales de lo Contencioso-administrativo, por tratarse de una disposición de un órgano central","La Sala de lo Contencioso-administrativo de la Audiencia Nacional","El Tribunal Superior de Justicia de Madrid","La Sala Tercera del Tribunal Supremo"],"c":1,"e":"Art. 11.1.a LJCA: disposiciones generales y actos de Ministros y Secretarios de Estado. Los reales decretos del Consejo de Ministros van al Tribunal Supremo (12.1.a)."},
+{"u":7,"t":"¿Cuál de estos cierres sigue el criterio de la Comisión?","o":["«Por tanto, se concluye que la orden es nula de pleno derecho conforme al artículo 47.2 de la LPAC, por haberse omitido el dictamen preceptivo del Consejo de Estado»","«A tenor de lo expuesto, podría entenderse que la orden quizá es nula»","«Salvo mejor criterio fundado en Derecho, la orden sería nula»","«La orden puede ser nula o anulable, según el criterio del tribunal»"],"c":0,"e":"Conclusión afirmativa con el artículo y el motivo. Además, para los reglamentos no hay anulabilidad."}
+];
+
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Concepto, titulares y acto",2:"Clases, forma y jerarquía",3:"Límites y procedimiento",4:"Control de los reglamentos",5:"Principios generales",6:"Tratados internacionales",7:"Supuesto práctico"};
+const TABS={1:"Concepto",2:"Clases",3:"Límites",4:"Control",5:"Principios",6:"Tratados",7:"Supuesto"};
+const SK="gace27_biv_t03_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
