@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BIV · Tema 3 — El reglamento, los principios generales y los tratados (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque IV · Derecho Administrativo · Tema 3</small>
+    <h1>El reglamento: concepto, clases y límites. Los principios generales del Derecho. Los tratados internacionales</h1>
+    <p>Versión fusionada: el Tema 3 del Bloque IV del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 23/10/2026 · Ley 50/1997 con la modificación del art. 26 de 2025 · STS 1598/2022 sobre revisión de oficio de reglamentos</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">El reglamento: concepto y titulares</a></li>
+    <li><a href="#s2">Reglamento y acto administrativo</a></li>
+    <li><a href="#s3">Clases de reglamentos</a></li>
+    <li><a href="#s4">Forma y jerarquía (Ley 50/1997)</a></li>
+    <li><a href="#s5">Límites de la potestad reglamentaria</a></li>
+    <li><a href="#s6">Procedimiento de elaboración</a></li>
+    <li><a href="#s7">Control de los reglamentos</a></li>
+    <li><a href="#s8">Principios generales del Derecho</a></li>
+    <li><a href="#s9">Tratados internacionales</a></li>
+    <li><a href="#s10">Lo que preguntan y trampas</a></li>
+    <li><a href="#s11">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s12">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. Busca el hilo: «qué es el reglamento → cómo se hace → qué no puede hacer → cómo se controla», y después principios y tratados.</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Repaso en audio. Al terminar, recita la lista del <a href="#s10">apartado 10</a> sin mirar.</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s11">apartado 11</a> tapando la columna derecha. Este tema da puntos siempre que el enunciado mete una orden ministerial o un real decreto.</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+<div class="box clave"><span class="box-h">Enlace con el Tema 1</span>
+El Tema 1 ya vio el reglamento «en visión de conjunto», los principios del art. 9.3 CE y los tratados en la pirámide. Aquí se desarrollan en profundidad. Si algo te suena repetido, es intencionado: en el examen te lo preguntan desde los dos temas.</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> El reglamento: concepto, notas y titulares</h2>
+<div class="box clave"><span class="box-h">Concepto (temario 2026)</span>
+El reglamento es <strong>toda disposición de carácter general, escrita, dictada por la Administración en ejercicio de una potestad propia</strong> (la potestad reglamentaria), <strong>con rango inferior a la ley</strong>. Es la fuente más característica del Derecho administrativo y la más numerosa del ordenamiento.</div>
+<p>El material visual añade dos rasgos: su contenido es predominantemente <strong>técnico</strong> y su vigencia, a menudo, <strong>coyuntural</strong>.</p>
+<div class="grid3">
+<div class="card"><h4>1 · Es una norma</h4>Innova el ordenamiento con carácter general y abstracto y se integra en él: <strong>no se agota con su aplicación</strong>, se consolida y puede aplicarse indefinidamente.</div>
+<div class="card"><h4>2 · Viene de la Administración</h4>No del legislativo: tiene una <strong>legitimidad democrática indirecta</strong> y está <strong>subordinado a la ley</strong>.</div>
+<div class="card"><h4>3 · Control judicial pleno</h4>Los tribunales contencioso-administrativos pueden <strong>anularlo</strong> (<span class="art">Art. 106.1 CE</span>) y todos los jueces pueden <strong>inaplicarlo</strong> si es ilegal (<span class="art">Art. 6 LOPJ</span>).</div>
+</div>
+<h3>Titulares de la potestad reglamentaria</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Nivel</th><th>Órgano y forma</th><th style="width:30%">Base</th></tr>
+<tr><td>Estado</td><td><strong>Gobierno</strong>: reales decretos del Presidente o acordados en Consejo de Ministros. Potestad <strong>originaria</strong>, que deriva directamente de la Constitución.<br><strong>Ministros</strong>: órdenes ministeriales en las <strong>materias propias de su departamento</strong>.</td><td><span class="art">Art. 97 CE</span> · <span class="art">Art. 4.1.b Ley 50/1997</span> · art. 128.1 Ley 39/2015</td></tr>
+<tr><td>CCAA</td><td>Consejo de Gobierno (decretos) y consejeros (órdenes). Potestad originaria en sus competencias, limitada por la CE, el Estatuto y la legislación básica estatal.</td><td>Estatutos de Autonomía · <span class="art">Art. 137 CE</span></td></tr>
+<tr><td>Entidades Locales</td><td>Ordenanzas y reglamentos (los aprueba el <strong>Pleno</strong>) y bandos del Alcalde, como manifestación de su <strong>autonomía</strong>.</td><td><span class="art">Art. 4.1.a Ley 7/1985</span> · arts. 137 y 140 CE · art. 21.1.e LRBRL (bandos)</td></tr>
+<tr><td>Otros órganos</td><td>Solo cuando una <strong>ley se la atribuya expresamente</strong>: autoridades administrativas independientes, Banco de España.</td><td>Ley de cada organismo</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión a las dos fuentes: los bandos del Alcalde</span>
+Ambos documentos colocan los bandos entre los reglamentos locales. La mayoría de los bandos solo recuerdan o comunican normas ya existentes; únicamente los dictados en catástrofe o infortunio público (art. 21.1.m LRBRL) pueden imponer medidas nuevas, y con carácter excepcional. No los equipares sin más a una ordenanza.</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> Reglamento y acto administrativo</h2>
+<div class="box clave"><span class="box-h">Idea clave del temario 2026</span>
+El criterio decisivo es si la decisión <strong>innova el ordenamiento</strong> (es <em>ordinamental</em>) o se limita a <strong>aplicarlo</strong>. La distinción es esencial por sus consecuencias jurídicas: invalidez, recursos, publicación y derogación cambian por completo.</div>
+<div class="grid2">
+<div class="card"><h4>Criterio de CONSUNCIÓN</h4>Si se agota con su cumplimiento → <strong>acto administrativo</strong>, aunque tenga muchos destinatarios. Ejemplo: una convocatoria.</div>
+<div class="card"><h4>Criterio de ORDINAMENTALIDAD</h4>Si se integra en el ordenamiento para aplicarse a una serie <strong>indeterminada de casos futuros</strong> → <strong>reglamento</strong>.</div>
+</div>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Aspecto</th><th>REGLAMENTO</th><th>ACTO ADMINISTRATIVO</th></tr>
+<tr><td>Naturaleza</td><td>Norma: integra el ordenamiento</td><td>Aplicación del ordenamiento a un caso</td></tr>
+<tr><td>Destinatarios</td><td>Generalidad indeterminada</td><td>Uno o varios sujetos determinados o determinables (incluso actos generales, como una convocatoria)</td></tr>
+<tr><td>Eficacia</td><td>Se consolida y se aplica indefinidamente</td><td>Se agota con su cumplimiento</td></tr>
+<tr><td>Derogación / revocación</td><td>Se <strong>deroga libremente</strong> por otro reglamento</td><td>La revocación de actos de gravamen tiene límites; los favorables solo se anulan por los procedimientos de revisión</td></tr>
+<tr><td>Inderogabilidad singular</td><td>Las resoluciones particulares no pueden vulnerarlo (<span class="art">Art. 37 Ley 39/2015</span>)</td><td>—</td></tr>
+<tr><td>Invalidez</td><td>Siempre <strong>nulidad de pleno derecho</strong> (<span class="art">Art. 47.2 Ley 39/2015</span>)</td><td>Nulidad (47.1) o anulabilidad (48), según el vicio</td></tr>
+<tr><td>Publicidad</td><td>Debe <strong>publicarse</strong> en el diario oficial para entrar en vigor</td><td>Se notifica a los interesados o se publica</td></tr>
+<tr><td>Recursos</td><td><strong>No cabe recurso administrativo</strong> (<span class="art">Art. 112.3 Ley 39/2015</span>): directamente al contencioso</td><td>Recursos administrativos y contencioso-administrativo</td></tr>
+</table></div>
+<div class="box trampa"><span class="box-h">Trampa clásica: «la convocatoria es un reglamento porque se dirige a muchos»</span>
+NO. El número de destinatarios no decide nada. La convocatoria se agota con el proceso selectivo: es un <strong>acto administrativo general</strong>. Lo que la hace acto es la consunción.</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> Clases de reglamentos</h2>
+<h3>Por su relación con la ley (la clasificación clave del examen)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Clase</th><th>Concepto</th><th style="width:30%">Dato de examen</th></tr>
+<tr><td><strong>EJECUTIVOS</strong><br>(<em>secundum legem</em>)</td><td>Desarrollan o complementan una ley previa.</td><td>Exigen <strong>dictamen preceptivo del Consejo de Estado</strong> (art. 22.3 LO 3/1980), también para sus modificaciones.</td></tr>
+<tr><td><strong>INDEPENDIENTES</strong><br>(<em>praeter legem</em>)</td><td>Regulan materias no reguladas por ley y no reservadas a ella. En el ámbito estatal se limitan fundamentalmente a la <strong>organización administrativa</strong> (reglamentos organizativos o domésticos); nunca entran en materias con reserva de ley ni afectan a derechos.</td><td>No requieren dictamen del Consejo de Estado.</td></tr>
+<tr><td><strong>DE NECESIDAD</strong></td><td>Dictados para <strong>situaciones de emergencia</strong> en virtud de una <strong>habilitación legal</strong> (estados de alarma, crisis sanitarias, catástrofes). Pueden desplazar temporalmente la aplicación de normas.</td><td>Su vigencia se limita a la emergencia: cesan cuando cesa.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al material visual: el reglamento de necesidad no es «contra legem» sin más</span>
+El visual los llamaba <em>contra legem</em> y decía que su fundamento era el estado de necesidad. El temario 2026 precisa que se dictan <strong>en virtud de una habilitación legal</strong>: en nuestro sistema no hay potestad de necesidad sin ley que la prevea (por ejemplo, la LO 4/1981 de los estados de alarma, excepción y sitio). Puede afectar temporalmente a la aplicación de leyes porque la propia ley lo permite, no por encima de ella.</div>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Criterio</th><th>Clases</th></tr>
+<tr><td>Por sus efectos</td><td><strong>Jurídicos o normativos</strong> (<em>ad extra</em>): afectan a los ciudadanos, crean, modifican o extinguen derechos y obligaciones; requieren habilitación legal.<br><strong>Administrativos u organizativos</strong> (<em>ad intra</em>): organización y funcionamiento interno, y relaciones de sujeción especial (funcionarios, internos, estudiantes).</td></tr>
+<tr><td>Por el órgano que los dicta</td><td><strong>Estatales</strong>: reales decretos del Presidente o del Consejo de Ministros y órdenes ministeriales. <strong>Autonómicos</strong>: decretos de los Consejos de Gobierno y órdenes de los consejeros. <strong>Locales</strong>: ordenanzas, reglamentos y bandos.</td></tr>
+<tr><td>Por su ámbito</td><td>Generales y especiales.</td></tr>
+</table></div>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> La forma y la jerarquía de los reglamentos estatales (arts. 24 y 25 Ley 50/1997)</h2>
+<h3>Las formas de las decisiones del Gobierno (art. 24.1 y 25)</h3>
+<div class="flowv">
+<div class="step"><b>Reales decretos legislativos y reales decretos-leyes</b>Para las normas con rango de ley.</div>
+<div class="step"><b>Reales decretos del Presidente del Gobierno</b>Normas reglamentarias de su competencia y resoluciones que deban adoptar esa forma: por ejemplo, la creación, modificación y supresión de departamentos ministeriales.</div>
+<div class="step"><b>Reales decretos acordados en Consejo de Ministros</b>Normas reglamentarias de la competencia del Consejo y resoluciones que deban adoptar esa forma.</div>
+<div class="step"><b>Acuerdos del Consejo de Ministros</b>Decisiones que no deban adoptar la forma de real decreto.</div>
+<div class="step"><b>Acuerdos de las Comisiones Delegadas del Gobierno</b></div>
+<div class="step"><b>Órdenes ministeriales</b>Disposiciones y resoluciones de los ministros. Si afectan a <strong>varios departamentos</strong>: <strong>orden del Ministro de la Presidencia</strong>, dictada a propuesta de los ministros interesados.</div>
+</div>
+<div class="pyr" role="img" aria-label="Jerarquía reglamentaria estatal">
+  <div class="p3"><b>1.º REAL DECRETO</b>del Presidente del Gobierno o acordado en Consejo de Ministros</div>
+  <div class="p4"><b>2.º ORDEN MINISTERIAL</b>(también la orden del Ministro de la Presidencia)</div>
+</div>
+<div class="box clave"><span class="box-h">Art. 24.2 Ley 50/1997</span>
+Los reglamentos se ordenan según esa jerarquía y <strong>ningún reglamento podrá vulnerar preceptos de otro de jerarquía superior</strong>. Entre el real decreto del Presidente y el acordado en Consejo de Ministros no hay jerarquía: están en el mismo escalón.</div>
+<div class="box trampa"><span class="box-h">Trampa: el acuerdo del Consejo de Ministros</span>
+No es un reglamento. Es la forma de las decisiones del Consejo que <strong>no</strong> deben adoptar la forma de real decreto. Si una opción del test coloca el «acuerdo» como tercer escalón reglamentario, es falsa.</div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> Los límites de la potestad reglamentaria</h2>
+<div class="grid2">
+<div class="card"><h4>Límites FORMALES</h4><ul>
+<li><strong>Competencia</strong> del órgano: el reglamento dictado por órgano incompetente es nulo.</li>
+<li><strong>Procedimiento</strong> de elaboración (art. 26 Ley 50/1997): la omisión de un trámite esencial acarrea nulidad.</li>
+<li><strong>Jerarquía</strong> normativa.</li>
+<li><strong>Publicación</strong>.</li></ul></div>
+<div class="card"><h4>Límites MATERIALES</h4><ul>
+<li>Respeto a la <strong>Constitución y a las leyes</strong>.</li>
+<li><strong>Reserva de ley</strong>: no regula materias reservadas ni, sin habilitación legal, tipifica infracciones y sanciones, establece tributos o prestaciones patrimoniales públicas.</li>
+<li><strong>Irretroactividad</strong> de las disposiciones sancionadoras no favorables o restrictivas de derechos individuales (<span class="art">Art. 9.3 CE</span>); sí cabe la retroactividad favorable.</li>
+<li><strong>Principios generales</strong>, en especial la interdicción de la arbitrariedad.</li>
+<li><strong>Inderogabilidad singular</strong>.</li>
+<li>Respeto a la <strong>distribución de competencias</strong> (materia propia del ente).</li></ul></div>
+</div>
+<div class="box fix"><span class="box-h">Las dos fuentes ordenan distinto los límites</span>
+El material visual ponía la irretroactividad entre los formales y la jerarquía entre los materiales. El temario 2026 hace lo contrario. Quédate con la del temario: <strong>formales</strong> = quién, cómo y dónde se publica (competencia, procedimiento, jerarquía, publicación); <strong>materiales</strong> = qué puede decir (CE y leyes, reserva, irretroactividad, principios, inderogabilidad, competencias).</div>
+<div class="box clave"><span class="box-h">Art. 128.2 Ley 39/2015: el resumen legal de los límites</span>
+Los reglamentos y disposiciones administrativas <strong>no podrán vulnerar la Constitución o las leyes</strong> ni regular materias que la Constitución o los Estatutos reconocen de la competencia de las Cortes o de las Asambleas autonómicas. Sin perjuicio de su función de desarrollo o colaboración con la ley, <strong>no podrán tipificar delitos, faltas o infracciones administrativas, establecer penas o sanciones, así como tributos, exacciones parafiscales u otras cargas o prestaciones personales o patrimoniales de carácter público</strong>.</div>
+<div class="box clave"><span class="box-h">Consecuencia de traspasar un límite</span>
+<strong>Nulidad de pleno derecho</strong> (<span class="art">Art. 47.2 Ley 39/2015</span>): imprescriptible, insanable por el tiempo o el consentimiento, y con efectos en cadena sobre lo que en el reglamento se base. Puede declararla la Administración de oficio (<span class="art">Art. 106.2</span>) o los tribunales.</div>
+<h3>La inderogabilidad singular (art. 37 Ley 39/2015), literal</h3>
+<div class="box clave"><span class="box-h">37.1 y 37.2</span>
+<span class="lit">«Las resoluciones administrativas de carácter particular no podrán vulnerar lo establecido en una disposición de carácter general, aunque aquéllas procedan de un órgano de igual o superior jerarquía al que dictó la disposición general.»</span><br>
+<span class="lit">«Son nulas las resoluciones administrativas que vulneren lo establecido en una disposición reglamentaria, así como aquellas que incurran en alguna de las causas recogidas en el artículo 47.»</span><br>
+Fundamento: la <strong>igualdad</strong>. No cabe la dispensa singular: si la Administración quiere exceptuar, tiene que modificar el reglamento con carácter general.</div>
+<div class="box fix"><span class="box-h">Corrección (ya estaba en el material visual): «rango» frente a «jerarquía»</span>
+El Temario Claude citaba el 37.1 como «aunque aquéllas tengan igual o superior rango a éstas». El literal habla de <strong>órgano de igual o superior jerarquía</strong>. En un test de literales, esa diferencia es una pregunta.</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> El procedimiento de elaboración de los reglamentos</h2>
+<div class="box clave"><span class="box-h">Principios de buena regulación (art. 129 Ley 39/2015)</span>
+<strong>Necesidad · Eficacia · Proporcionalidad · Seguridad jurídica · Transparencia · Eficiencia</strong>. Su adecuación debe justificarse en el preámbulo (o exposición de motivos) de la norma.</div>
+<h3>Las fases en la Administración del Estado</h3>
+<div class="flowv">
+<div class="step"><b>1 · Planificación normativa</b>Cada año se publica el <strong>Plan Anual Normativo</strong> con las iniciativas que se elevarán el año siguiente (<span class="art">Art. 132 Ley 39/2015</span>; <span class="art">Art. 25 Ley 50/1997</span>).</div>
+<div class="step"><b>2 · Consulta pública PREVIA</b>Antes de redactar, en el portal web del departamento: problemas que se quieren resolver, necesidad y oportunidad, objetivos y alternativas posibles (<span class="art">Art. 133.1 Ley 39/2015</span>; art. 26.2 Ley 50/1997).</div>
+<div class="step"><b>3 · Redacción + MAIN</b>El centro directivo competente elabora el texto con la <strong>Memoria del Análisis de Impacto Normativo</strong>: oportunidad, buena regulación, impacto económico y presupuestario, cargas, género, entre otros. Estudios y consultas.</div>
+<div class="step"><b>4 · Audiencia e información pública</b>Cuando afecte a derechos e intereses legítimos. Plazo mínimo de <strong>15 días hábiles</strong>, reducible a <strong>7</strong> por razones debidamente motivadas (<span class="art">Art. 26.6 Ley 50/1997</span>; el trámite lo exige también el art. 133.2 Ley 39/2015).</div>
+<div class="step"><b>5 · Informes preceptivos</b><strong>Secretaría General Técnica</strong> del departamento (siempre); <strong>aprobación previa</strong> del ministerio competente en organización y función pública cuando afecte a la estructura orgánica, al personal o a los procedimientos; <strong>Oficina de Coordinación y Calidad Normativa</strong>; y, en su caso, otros órganos.</div>
+<div class="step"><b>6 · Dictamen del CONSEJO DE ESTADO</b>Cuando sea preceptivo: <strong>reglamentos ejecutivos de leyes y sus modificaciones</strong> (<span class="art">Art. 22.3 LO 3/1980</span>).</div>
+<div class="step"><b>7 · Comisión General de Secretarios de Estado y Subsecretarios → Consejo de Ministros</b>Aprobación por el órgano competente. Las órdenes ministeriales siguen un procedimiento análogo.</div>
+<div class="step"><b>8 · Publicación y entrada en vigor</b>En el diario oficial correspondiente, para que entren en vigor y produzcan efectos (<span class="art">Art. 131 Ley 39/2015</span>).</div>
+<div class="step"><b>9 · Evaluación normativa</b>Revisión periódica de la normativa vigente para adaptarla a la buena regulación y comprobar si ha conseguido sus objetivos (<span class="art">Art. 130 Ley 39/2015</span>; <span class="art">Art. 28 Ley 50/1997</span>).</div>
+</div>
+<div class="box act"><span class="box-h">Tramitación urgente (art. 27 Ley 50/1997)</span>
+La acuerda el <strong>Consejo de Ministros</strong> (por ejemplo, para cumplir el plazo de transposición de una directiva u otras circunstancias extraordinarias). Efectos: <strong>plazos reducidos a la mitad</strong>; <strong>no es precisa la consulta pública previa</strong>; la audiencia e información pública pasa a <strong>7 días</strong>; la falta de un dictamen o informe preceptivo en plazo no impide continuar el procedimiento. El temario 2026 no recoge este artículo: procede del material visual.</div>
+<div class="box clave"><span class="box-h">Las fechas comunes de entrada en vigor (art. 23 Ley 50/1997)</span>
+Los reglamentos estatales que impongan <strong>nuevas obligaciones a quienes ejercen una actividad económica o profesional</strong> entran en vigor el <strong>2 de enero o el 1 de julio</strong> siguientes a su aprobación. No se aplica a los reales decretos-leyes ni cuando la transposición de directivas u otras razones justificadas lo aconsejen, lo que debe quedar acreditado en la MAIN.</div>
+<div class="box act"><span class="box-h">STC 55/2018 y vigencia</span>
+Declaró que varias previsiones del Título VI de la Ley 39/2015 no se aplican a la <strong>potestad legislativa de las CCAA</strong> y que algunas (partes de los arts. 129, 130, 132 y 133) solo rigen para la <strong>Administración del Estado</strong>, que es lo que pregunta el GACE. El art. 26 de la Ley 50/1997 se modificó por última vez por la LO 1/2025 (en vigor desde el 3 de abril de 2025); los arts. 22 a 25, 27 y 28 no han cambiado desde 2015. Comprobado a 23/10/2026.</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> El control de los reglamentos</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Vía</th><th>Mecanismo</th><th style="width:28%">Claves</th></tr>
+<tr><td><strong>Recurso directo</strong></td><td>Recurso contencioso-administrativo contra el propio reglamento.</td><td><strong>2 meses</strong> desde el día siguiente a la publicación (<span class="art">Arts. 25 y 46 LJCA</span>).</td></tr>
+<tr><td><strong>Recurso indirecto</strong></td><td>Se impugnan los <strong>actos de aplicación</strong>, alegando la ilegalidad del reglamento.</td><td><span class="art">Art. 26 LJCA</span>. El plazo se cuenta desde el acto, no desde la publicación del reglamento; cabe aunque no se recurriera directamente.</td></tr>
+<tr><td><strong>Cuestión de ilegalidad</strong></td><td>El juez que estima un recurso indirecto y no es competente para conocer del directo plantea la cuestión al tribunal que sí lo es, para que anule el reglamento con efectos generales.</td><td><span class="art">Arts. 27 y 123-126 LJCA</span>. Si el propio órgano es competente para el directo, declara la validez o nulidad (27.2). El <strong>TS</strong> anula directamente, sin cuestión (27.3).</td></tr>
+<tr><td><strong>Inaplicación judicial</strong></td><td>Cualquier juez o tribunal deja de aplicar el reglamento ilegal.</td><td><span class="art">Art. 6 LOPJ</span>. No hace falta acudir a nadie, a diferencia de las leyes.</td></tr>
+<tr><td><strong>Revisión de oficio</strong></td><td>La Administración declara la nulidad de sus disposiciones en los supuestos del 47.2.</td><td><span class="art">Art. 106.2 Ley 39/2015</span>: en cualquier momento, <strong>previo dictamen favorable</strong> del Consejo de Estado u órgano consultivo autonómico. Caduca a los <strong>6 meses</strong> sin resolver (106.5).</td></tr>
+<tr><td><strong>Tribunal Constitucional</strong></td><td>Conflicto de competencias entre el Estado y las CCAA; recurso de amparo si vulnera derechos fundamentales; impugnación por el Gobierno de disposiciones autonómicas (art. 161.2 CE; Título V LOTC).</td><td>Vía excepcional.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026: la cuestión de ilegalidad</span>
+El temario dice que el juez del recurso indirecto «debe plantear la cuestión» si no es competente para el directo. Falta un requisito: solo la plantea cuando ha dictado <strong>sentencia firme estimatoria</strong> por considerar ilegal el reglamento (art. 27.1 LJCA), y en los cinco días siguientes a la firmeza (art. 123.1). Si desestima, no hay cuestión.</div>
+<div class="box fix"><span class="box-h">Corrección al material visual: la revisión de oficio de un reglamento no se puede pedir como derecho</span>
+El visual decía que la nulidad del reglamento es «declarable de oficio o a instancia de parte». Para los reglamentos, no: el art. 106.2 solo habla de las Administraciones «de oficio», y el Tribunal Supremo niega a los particulares una acción para obtener por esa vía la nulidad de una disposición general (<strong>STS 1598/2022, de 30 de noviembre</strong>). El particular puede denunciar la ilegalidad, pero la Administración no está obligada a tramitar. Su vía es el recurso directo o el indirecto. La solicitud de parte sí cabe para los <strong>actos</strong> (106.1).</div>
+<div class="box clave"><span class="box-h">Efectos de la anulación (arts. 72.2 y 73 LJCA)</span>
+La sentencia firme que anula un reglamento tiene <strong>efectos generales</strong> desde que se publica su fallo en el diario oficial donde se publicó el reglamento. Pero <strong>no afecta por sí misma</strong> a las sentencias o actos firmes que lo aplicaron antes, <strong>salvo</strong> que la anulación excluya o reduzca sanciones aún no ejecutadas completamente.</div>
+<div class="box trampa"><span class="box-h">Trampas del control</span>
+«El juez ordinario debe plantear cuestión para inaplicar un reglamento» → NO: lo inaplica por sí mismo (art. 6 LOPJ). La cuestión de ilegalidad es otra cosa: llega después de estimar un recurso indirecto y sirve para anularlo con efectos generales.<br>
+«Contra el reglamento cabe recurso de alzada» → NO: ningún recurso administrativo (art. 112.3 Ley 39/2015). Sí cabe recurrir en vía administrativa el <strong>acto</strong> de aplicación; si se funda solo en la nulidad del reglamento, se interpone directamente ante el órgano que lo dictó (112.3, último inciso).</div>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> Los principios generales del Derecho</h2>
+<div class="box clave"><span class="box-h">Concepto y funciones (temario 2026)</span>
+Son los <strong>criterios básicos que inspiran el ordenamiento jurídico y expresan los valores de la comunidad</strong>. El art. 1.4 CC les atribuye una <strong>triple función</strong>: fuente <strong>supletoria</strong> en defecto de ley o costumbre, criterio <strong>informador</strong> de todo el ordenamiento y, por eso, criterio <strong>interpretativo</strong>.</div>
+<div class="box fix"><span class="box-h">Ojo: el temario no enumera igual la triple función en los Temas 1 y 3</span>
+En el Tema 1: fundamentadora, interpretativa y supletoria o integradora. Aquí: supletoria, informadora e interpretativa. Es la misma idea con nombres distintos (fundamentadora e informadora coinciden). Si el test pregunta «según el art. 1.4 CC», las palabras del Código son «en defecto de ley o costumbre» y «carácter informador».</div>
+<p>En el Derecho administrativo pesan especialmente por dos razones: la legislación no puede prever todas las situaciones, y los principios permiten <strong>controlar la discrecionalidad</strong> administrativa. Muchos están positivizados, lo que les da <strong>rango constitucional o legal</strong> y no solo supletorio: el art. 9.3 CE (legalidad, jerarquía, publicidad, irretroactividad, seguridad jurídica, responsabilidad, interdicción de la arbitrariedad), el art. 103.1 CE (eficacia, jerarquía, descentralización, desconcentración, coordinación) y el art. 3 de la Ley 40/2015.</p>
+<h3>Principales principios en el Derecho administrativo</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Principio</th><th>Contenido</th><th style="width:22%">Anclaje</th></tr>
+<tr><td><strong>Legalidad</strong></td><td>Sometimiento pleno a la ley y al Derecho. <strong>Vinculación positiva</strong>: la Administración solo puede hacer lo que el ordenamiento le permite, mediante la atribución de potestades.</td><td><span class="art">Art. 103.1 CE</span></td></tr>
+<tr><td><strong>Seguridad jurídica</strong></td><td>Certeza del Derecho aplicable y previsibilidad de las consecuencias de los actos; incluye la publicidad y la claridad normativa.</td><td><span class="art">Art. 9.3 CE</span></td></tr>
+<tr><td><strong>Confianza legítima</strong></td><td>Protege la confianza en la estabilidad de las decisiones administrativas cuando la Administración ha creado <strong>signos externos</strong> que la justifican. Procede del Derecho <strong>alemán</strong> y del de la Unión.</td><td><span class="art">Art. 3.1.e Ley 40/2015</span></td></tr>
+<tr><td><strong>Buena fe</strong></td><td>Lealtad en las relaciones jurídicas; prohíbe ir <strong>contra los propios actos</strong> y el abuso del derecho.</td><td>Art. 7 CC · <span class="art">Art. 3.1.e Ley 40/2015</span></td></tr>
+<tr><td><strong>Interdicción de la arbitrariedad</strong></td><td>Decisiones motivadas y basadas en razones objetivas, sobre todo en el ejercicio de potestades discrecionales.</td><td><span class="art">Art. 9.3 CE</span></td></tr>
+<tr><td><strong>Proporcionalidad</strong></td><td>Intervención <strong>adecuada, necesaria y proporcionada</strong> en sentido estricto; cuando se exijan requisitos o se limiten derechos, se elige la <strong>medida menos restrictiva</strong>.</td><td><span class="art">Art. 4 Ley 40/2015</span></td></tr>
+<tr><td><strong>Igualdad</strong></td><td>Prohíbe tratos desiguales injustificados, también en la aplicación de la ley.</td><td><span class="art">Art. 14 CE</span></td></tr>
+<tr><td><strong>Responsabilidad</strong></td><td>La Administración responde de los daños que cause su funcionamiento.</td><td><span class="art">Art. 106.2 CE</span></td></tr>
+<tr><td><strong>Audiencia y defensa</strong></td><td>Nadie puede ser privado de sus derechos sin ser oído.</td><td>Arts. 24 y 105.c CE</td></tr>
+<tr><td>Otros</td><td>Buena administración, transparencia, eficacia, eficiencia, servicio efectivo, lealtad institucional, cooperación y colaboración, <em>non bis in idem</em> en lo sancionador.</td><td>Art. 41 CDFUE · art. 31 Ley 40/2015</td></tr>
+</table></div>
+<h3>Art. 3.1 Ley 40/2015: los principios de actuación de las Administraciones</h3>
+<div class="grid2">
+<div class="card"><ol>
+<li>Servicio efectivo a los ciudadanos.</li>
+<li>Simplicidad, claridad y proximidad a los ciudadanos.</li>
+<li>Participación, objetividad y transparencia de la actuación administrativa.</li>
+<li>Racionalización y agilidad de los procedimientos administrativos y de las actividades materiales de gestión.</li>
+<li>Buena fe, confianza legítima y lealtad institucional.</li>
+<li>Responsabilidad por la gestión pública.</li></ol></div>
+<div class="card"><ol start="7">
+<li><strong>Planificación y dirección por objetivos</strong> y control de la gestión y evaluación de los resultados de las políticas públicas.</li>
+<li>Eficacia en el cumplimiento de los objetivos fijados.</li>
+<li>Economía, suficiencia y adecuación estricta de los medios a los fines institucionales.</li>
+<li>Eficiencia en la asignación y utilización de los recursos públicos.</li>
+<li>Cooperación, colaboración y coordinación entre las Administraciones Públicas.</li></ol></div>
+</div>
+<div class="box clave"><span class="box-h">Idea clave del temario 2026 (examen GACE 2019)</span>
+La <strong>planificación y dirección por objetivos</strong> es uno de los principios que las Administraciones deben respetar en su actuación y relaciones (art. 3.1.g Ley 40/2015). Truco para recitar los once: empiezan por el ciudadano (a-c), siguen por el procedimiento y la conducta (d-f), pasan a la gestión (g-j) y terminan en las demás Administraciones (k).</div>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> Los tratados internacionales</h2>
+<h3>9.1 Concepto y régimen jurídico</h3>
+<div class="box clave"><span class="box-h">Art. 2 Ley 25/2014, de Tratados y otros Acuerdos Internacionales</span>
+El tratado internacional es el <strong>acuerdo celebrado por escrito</strong> entre España y otro u otros sujetos de Derecho internacional, <strong>regido por el Derecho internacional</strong>, cualquiera que sea su denominación. Sigue el Convenio de Viena sobre el Derecho de los Tratados de 1969.</div>
+<div class="grid3">
+<div class="card"><h4>Tratado</h4>Obliga internacionalmente al Estado. Lo celebra el Estado.</div>
+<div class="card"><h4>Acuerdo internacional administrativo</h4>Lo celebran órganos de la Administración <strong>en ejecución o concreción de un tratado</strong>.</div>
+<div class="card"><h4>Acuerdo internacional no normativo</h4>No es fuente de obligaciones internacionales ni se rige por el Derecho internacional: los <strong>memorandos de entendimiento</strong>.</div>
+</div>
+<h3>9.2 La celebración</h3>
+<div class="grid2">
+<div class="card"><h4>Competencia</h4>Dirección de la política exterior: el <strong>Gobierno</strong> (<span class="art">Art. 97 CE</span>).<br>Manifestación del consentimiento del Estado: el <strong>Rey</strong> (<span class="art">Art. 63.2 CE</span>).</div>
+<div class="card"><h4>Participación de las CCAA (Ley 25/2014, arts. 49 a 52)</h4>Pueden <strong>solicitar al Gobierno la apertura de negociaciones</strong> en materias de su competencia o interés específico o que afecten especialmente a su territorio; ser informadas y participar en la delegación española; y deben ejecutar los tratados en su ámbito. Pueden celebrar acuerdos administrativos y no normativos en sus competencias, <strong>previo informe del Ministerio de Asuntos Exteriores</strong>.</div>
+</div>
+<div class="flow">
+<span><b>Negociación</b><br>Asuntos Exteriores y representantes acreditados</span><i>→</i>
+<span><b>Adopción y autenticación</b><br>del texto</span><i>→</i>
+<span><b>Firma</b><br>autorizada por el Consejo de Ministros (a veces <em>ad referendum</em>)</span><i>→</i>
+<span><b>Autorización de las Cortes</b><br>si procede</span><i>→</i>
+<span><b>Consentimiento</b><br>ratificación, adhesión, aceptación</span><i>→</i>
+<span style="border-color:var(--blue)"><b>Publicación</b><br>BOE</span>
+</div>
+<h3>9.3 La intervención de las Cortes Generales</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Precepto</th><th>Supuestos</th><th style="width:22%">Instrumento</th></tr>
+<tr><td><span class="art">Art. 93 CE</span></td><td>Tratados que atribuyen a una organización o institución internacional el <strong>ejercicio de competencias derivadas de la Constitución</strong>: adhesión a la UE y tratados de reforma.</td><td><strong>Ley orgánica</strong></td></tr>
+<tr><td><span class="art">Art. 94.1 CE</span></td><td>Tratados <strong>políticos</strong>; <strong>militares</strong>; que afecten a la <strong>integridad territorial</strong> o a los <strong>derechos y deberes fundamentales del Título I</strong>; que impliquen <strong>obligaciones financieras</strong> para la Hacienda Pública; que supongan <strong>modificación o derogación de una ley</strong> o exijan medidas legislativas.</td><td><strong>Autorización previa</strong> de cada Cámara. Desacuerdo: Comisión Mixta y decide el <strong>Congreso por mayoría absoluta</strong> (<span class="art">Art. 74.2 CE</span>).</td></tr>
+<tr><td><span class="art">Art. 94.2 CE</span></td><td>Los demás.</td><td><strong>Información inmediata</strong> al Congreso y al Senado.</td></tr>
+<tr><td><span class="art">Art. 95 CE</span></td><td>Tratado con <strong>estipulaciones contrarias a la Constitución</strong>: exige la <strong>previa revisión constitucional</strong>. El Gobierno o cualquiera de las Cámaras puede requerir al TC que declare si hay contradicción (<span class="art">Art. 78 LOTC</span>).</td><td>Usado dos veces: <strong>DTC 1/1992</strong> (Maastricht → reforma del art. 13.2) y <strong>DTC 1/2004</strong> (Tratado constitucional europeo).</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">El Consejo de Estado en los tratados</span>
+Dictamina sobre la <strong>necesidad de autorización de las Cortes</strong> antes de que el Estado preste su consentimiento (<span class="art">Art. 22.1 LO 3/1980</span>, Comisión Permanente).</div>
+<div class="box clave"><span class="box-h">Idea clave del temario 2026: tres preguntas del examen GACE 2019</span>
+1) Un tratado con estipulaciones contrarias a la Constitución exige la <strong>previa revisión constitucional</strong>. 2) El control previo puede instarlo el <strong>Gobierno o cualquiera de las Cámaras</strong>. 3) Las <strong>CCAA pueden solicitar al Gobierno la apertura de negociaciones</strong> en materias de su competencia.</div>
+<div class="box fix"><span class="box-h">Corrección que se mantiene: las Cortes no «ratifican»</span>
+Las Cortes <strong>autorizan</strong> (93 y 94.1) o son informadas (94.2). La ratificación es una forma de manifestar el consentimiento, y la presta el Rey (63.2). El art. 10.2 CE sí dice «ratificados por España»: ahí se refiere al Estado, no a las Cortes.</div>
+<h3>9.4 Eficacia y posición en el ordenamiento</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Rasgo</th><th>Contenido</th><th style="width:22%">Anclaje</th></tr>
+<tr><td><strong>Incorporación</strong></td><td>Una vez publicados oficialmente en España, forman parte del ordenamiento interno. Sin publicación íntegra en el BOE no son de aplicación directa. Se publican con la fecha de entrada en vigor para España.</td><td><span class="art">Art. 96.1 CE</span> · <span class="art">Art. 1.5 CC</span></td></tr>
+<tr><td><strong>Resistencia</strong></td><td>Solo se derogan, modifican o suspenden en la forma prevista en los propios tratados o según las normas generales del Derecho internacional. Para la <strong>denuncia</strong>, el mismo procedimiento que para su aprobación.</td><td><span class="art">Art. 96.1 y 96.2 CE</span></td></tr>
+<tr><td><strong>Prevalencia</strong></td><td>Prevalecen sobre cualquier norma interna en caso de conflicto, <strong>salvo las de rango constitucional</strong>. El conflicto tratado–ley <strong>no es de constitucionalidad</strong>, sino de selección del Derecho aplicable: lo resuelven los jueces ordinarios con el <strong>control de convencionalidad</strong>.</td><td><span class="art">Art. 31 Ley 25/2014</span> · <span class="art">STC 140/2018</span></td></tr>
+<tr><td><strong>Valor interpretativo</strong></td><td>Los derechos fundamentales se interpretan conforme a la Declaración Universal y los tratados ratificados por España: especial peso del CEDH y de la jurisprudencia del TEDH.</td><td><span class="art">Art. 10.2 CE</span></td></tr>
+<tr><td><strong>Interpretación</strong></td><td>Conforme a las normas del Derecho internacional (Convenio de Viena).</td><td>Convenio de Viena de 1969</td></tr>
+<tr><td><strong>Sin efecto directo</strong></td><td>Requieren medidas de desarrollo legislativas o reglamentarias para aplicarse.</td><td>—</td></tr>
+</table></div>
+<div class="box trampa"><span class="box-h">Trampa: tratado contrario a una ley</span>
+Si un juez ve que una ley choca con un tratado publicado, <strong>no</strong> plantea cuestión de inconstitucionalidad: aplica el tratado e inaplica la ley (control de convencionalidad, STC 140/2018). Si el tratado choca con la Constitución, la solución es la previa reforma constitucional (95), no su aplicación.</div>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Lo que preguntan y trampas</h2>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Datos ancla</span><ul>
+<li>Reglamento ejecutivo → <strong>dictamen del Consejo de Estado</strong> (22.3 LO 3/1980).</li>
+<li>Jerarquía: real decreto (Presidente o Consejo de Ministros) &gt; orden ministerial (24.2 Ley 50/1997).</li>
+<li>Orden que afecta a varios departamentos → <strong>Ministro de la Presidencia</strong>.</li>
+<li>Seis principios de buena regulación (129).</li>
+<li>Audiencia: <strong>15 días hábiles</strong>, mínimo 7; urgencia (27 Ley 50/1997): plazos a la mitad, sin consulta previa, audiencia de 7 días.</li>
+<li>Entrada en vigor de reglamentos con nuevas obligaciones económicas: <strong>2 de enero o 1 de julio</strong>.</li>
+<li>Recurso directo: <strong>2 meses</strong>; revisión de oficio: dictamen favorable y caducidad de <strong>6 meses</strong>.</li>
+<li>Planificación y dirección por objetivos (3.1.g Ley 40/2015, examen 2019).</li>
+<li>Art. 95 CE: DTC 1/1992 y 1/2004; lo instan el Gobierno o cualquiera de las Cámaras.</li>
+<li>Prevalencia del tratado: art. 31 Ley 25/2014; STC 140/2018.</li>
+</ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>«El reglamento ilegal es anulable» → NO: siempre nulo de pleno derecho (47.2).</li>
+<li>«El reglamento independiente puede regular derechos de los ciudadanos» → NO: solo el ámbito organizativo.</li>
+<li>«El dictamen del Consejo de Estado es preceptivo en todos los reglamentos» → NO: en los ejecutivos.</li>
+<li>«La Administración puede dispensar del reglamento si el órgano es superior» → NO: inderogabilidad (37).</li>
+<li>«Un particular puede exigir la revisión de oficio de un reglamento» → NO: STS 1598/2022.</li>
+<li>«La cuestión de ilegalidad se plantea al admitir el recurso indirecto» → NO: tras sentencia firme estimatoria.</li>
+<li>«El acuerdo del Consejo de Ministros es un reglamento» → NO.</li>
+<li>«La denuncia de un tratado la decide libremente el Gobierno» → NO: mismo procedimiento que su aprobación (96.2).</li>
+<li>«El conflicto entre tratado y ley lo resuelve el TC» → NO: el juez ordinario (STC 140/2018).</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia del supuesto con sus cuatro piezas: Constitución (9.3, 97, 106.1 y 149.1.18.ª), LPAC (Título VI y art. 47.2), Ley del Gobierno (arts. 24 a 26) y LJCA (arts. 25 a 27) para el control.</li>
+<li>Concepto de reglamento y sus tres notas; los criterios de consunción y ordinamentalidad.</li>
+<li>Las tres clases por su relación con la ley y cuál exige dictamen del Consejo de Estado.</li>
+<li>Las seis formas de las decisiones del Gobierno (25 Ley 50/1997) y la jerarquía del 24.2.</li>
+<li>Límites formales y materiales, el literal del 128.2 y el del 37.</li>
+<li>Las nueve fases del procedimiento con sus plazos, y los efectos de la tramitación urgente.</li>
+<li>Las seis vías de control y los efectos de la anulación (72.2 y 73 LJCA).</li>
+<li>Los once principios del art. 3.1 Ley 40/2015.</li>
+<li>Los cuatro escalones de intervención de las Cortes (93, 94.1, 94.2, 95) con sus mayorías.</li>
+</ol>
+
+<!-- 11 -->
+<h2 id="s11"><span class="n">11.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>Este tema sale cuando el enunciado trae una <strong>orden ministerial o un real decreto</strong> y pregunta si es válido, cómo se impugna o si un acto puede apartarse de él. Recuerda que el ejercicio es <strong>sin consulta de textos legales</strong>: el procedimiento del art. 26 y las vías del 25 a 27 LJCA tienen que salirte de memoria.</p>
+<h3>11.1 Introducción de la materia (para memorizar)</h3>
+<div class="model">
+<p>«En materia de potestad reglamentaria, el artículo 97 de la Constitución Española atribuye al Gobierno la potestad reglamentaria de acuerdo con la Constitución y las leyes; el artículo 9.3 garantiza los principios de legalidad, jerarquía normativa y publicidad de las normas; el artículo 106.1 atribuye a los Tribunales el control de la potestad reglamentaria, y el artículo 149.1.18.ª atribuye al Estado las bases del régimen jurídico de las Administraciones Públicas y el procedimiento administrativo común. Resulta de aplicación la Ley 39/2015, de 1 de octubre, del Procedimiento Administrativo Común de las Administraciones Públicas (en adelante, LPAC), cuyo Título VI (artículos 127 a 133) regula la iniciativa legislativa y la potestad reglamentaria, y cuyo artículo 47.2 sanciona con la nulidad de pleno derecho las disposiciones ilegales, y la Ley 50/1997, de 27 de noviembre, del Gobierno, cuyos artículos 24 a 26 regulan la forma, la jerarquía y el procedimiento de elaboración de los reglamentos. Su control jurisdiccional se rige por los artículos 25 a 27 de la Ley 29/1998, de 13 de julio, reguladora de la Jurisdicción Contencioso-administrativa (en adelante, LJCA).»</p>
+</div>
+<div class="box sup"><span class="box-h">Las cuatro piezas</span>Constitución (97, 9.3, 106.1 y 149.1.18.ª) → ley principal (LPAC, Título VI y art. 47.2) → norma complementaria (Ley del Gobierno, arts. 24 a 26) → control (LJCA, arts. 25 a 27). Es la del Tema 1 adaptada al reglamento: añade el 106.1 y la LJCA y quita el Código Civil. Si ya introdujiste la materia de fuentes, basta con remitirte a ella y añadir el control.</div>
+<h3>11.2 Calificación previa (antes de contestar)</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar la actuación controvertida: si es una disposición de carácter general, porque se integra en el ordenamiento y se aplica a casos futuros indeterminados, o un acto administrativo, porque se agota con su cumplimiento; qué órgano la dicta y con qué forma (real decreto u orden ministerial, artículos 24 y 25 de la Ley 50/1997); si es un reglamento ejecutivo de una ley o independiente, y si sus efectos son ad extra o meramente organizativos. De dicha calificación dependen los trámites exigibles, como el dictamen del Consejo de Estado, el régimen de invalidez y la vía de impugnación.»</p>
+</div>
+<h3>11.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Hecho del enunciado</th><th style="width:34%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>Una orden ministerial de desarrollo de una ley se aprueba sin dictamen del Consejo de Estado</td><td>Reglamento ejecutivo: art. 22.3 LO 3/1980; art. 26 Ley 50/1997</td><td>Omisión de trámite esencial: la orden es nula de pleno derecho (47.2 LPAC)</td></tr>
+<tr><td>La audiencia e información pública se abre por 5 días sin motivar la reducción</td><td>Art. 26.6 Ley 50/1997 (y 133.2 LPAC): mínimo 15 días hábiles, 7 con motivación</td><td>Vicio de procedimiento: la disposición es nula de pleno derecho</td></tr>
+<tr><td>Un reglamento impone nuevas obligaciones a empresas y entra en vigor al día siguiente</td><td>Art. 23 Ley 50/1997: 2 de enero o 1 de julio, salvo razones acreditadas en la MAIN</td><td>La cláusula de entrada en vigor vulnera la ley; si la MAIN no justifica la excepción, es nula</td></tr>
+<tr><td>Una orden ministerial contradice un real decreto</td><td>Art. 24.2 Ley 50/1997; art. 128.3 LPAC</td><td>La orden es nula de pleno derecho (47.2)</td></tr>
+<tr><td>Un reglamento independiente regula derechos y obligaciones de los ciudadanos</td><td>Reserva de ley y límites del reglamento independiente (solo organización)</td><td>Nulo de pleno derecho por regular materia reservada</td></tr>
+<tr><td>El Director General exime a una empresa de cumplir una orden ministerial</td><td>Inderogabilidad singular (37.1 y 37.2 LPAC)</td><td>La exención es nula de pleno derecho</td></tr>
+<tr><td>Un interesado interpone recurso de alzada contra un reglamento</td><td>Art. 112.3 LPAC</td><td>Se inadmite; puede ir al contencioso directo en 2 meses (46.1 LJCA)</td></tr>
+<tr><td>La empresa recurre la sanción alegando solo la nulidad de la orden</td><td>Art. 112.3 LPAC, último inciso</td><td>El recurso se interpone directamente ante el Ministro que dictó la orden</td></tr>
+<tr><td>Un particular pide al Ministerio que revise de oficio una orden nula</td><td>Art. 106.2 LPAC; STS 1598/2022</td><td>No tiene acción: la Administración no está obligada a tramitarla; debe impugnar en vía contencioso-administrativa</td></tr>
+<tr><td>Un Juzgado estima un recurso indirecto contra un acto basado en un real decreto ilegal</td><td>Arts. 27.1 y 123 LJCA; el directo contra el real decreto es del TS (12.1.a)</td><td>Tras la firmeza, plantea cuestión de ilegalidad ante el Tribunal Supremo en 5 días</td></tr>
+<tr><td>Se aplica un reglamento a una sanción no ejecutada y después se anula</td><td>Art. 73 LJCA</td><td>La anulación beneficia al sancionado: la sanción no ejecutada se excluye o reduce</td></tr>
+<tr><td>Una ley interna contradice un tratado publicado en el BOE</td><td>Art. 96.1 CE; art. 31 Ley 25/2014; STC 140/2018</td><td>El juez aplica el tratado e inaplica la ley (control de convencionalidad)</td></tr>
+</table></div>
+
+<h3>11.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+La Ley W habilita al Ministro de Industria para dictar sus normas de desarrollo. El Ministro aprueba una orden ministerial, publicada en el BOE el <strong>14 de abril</strong>, que obliga a las empresas del sector a instalar un sistema de control y que «entra en vigor el día siguiente al de su publicación». La orden se tramitó con un trámite de audiencia de <strong>5 días hábiles</strong> y sin dictamen del Consejo de Estado. A la empresa Gamma, S.A. se le impone por resolución del Director General, notificada el <strong>3 de junio</strong>, una sanción de 10.000 € por no instalar el sistema.
+<br><br><strong>Cuestiones:</strong> a) Validez de la orden. b) Vías de Gamma contra la orden y contra la sanción, con sus plazos. c) ¿Puede Gamma pedir al Ministerio que declare la nulidad de la orden por revisión de oficio?</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 11.1.] Con carácter previo, procede calificar la orden: es una disposición de carácter general, porque se integra en el ordenamiento y se aplica a una pluralidad indeterminada de empresas; tiene forma de orden ministerial, el escalón inferior de la jerarquía reglamentaria estatal (artículo 24.2 de la Ley 50/1997), y es un reglamento ejecutivo con efectos ad extra, porque desarrolla la Ley W e impone obligaciones a los particulares. La competencia del Ministro existe, porque la Ley W le habilita expresamente. La cuestión a) solicita determinar si la orden es válida. De conformidad con el artículo 22.3 de la Ley Orgánica 3/1980, del Consejo de Estado, es preceptivo el dictamen de su Comisión Permanente en los reglamentos que se dicten en ejecución de las leyes; en el presente supuesto se ha omitido. Además, el artículo 26.6 de la Ley 50/1997, en relación con el artículo 133.2 de la LPAC, fija para la audiencia e información pública un plazo mínimo de quince días hábiles, reducible a siete por razones motivadas; aquí se concedieron cinco, por debajo incluso del mínimo reducido. El enunciado no precisa si el Consejo de Ministros acordó la tramitación urgente del artículo 27 de la Ley 50/1997, por lo que suponemos que no se acordó, dado que nada en el enunciado lo indica; aun en ese caso, la audiencia sería de siete días y el dictamen del Consejo de Estado seguiría siendo preceptivo. A mayor abundamiento, la orden impone nuevas obligaciones a empresas y entra en vigor el 15 de abril, cuando el artículo 23 de la Ley 50/1997 exige el 2 de enero o el 1 de julio siguientes, salvo razones justificadas en la Memoria del Análisis de Impacto Normativo, que el enunciado no menciona. Por tanto, se concluye que la orden es nula de pleno derecho conforme al artículo 47.2 de la LPAC, por haberse omitido el dictamen preceptivo del Consejo de Estado y el plazo mínimo de audiencia.</p>
+<p><strong>Cuestión b).</strong> La cuestión b) solicita identificar las vías de Gamma y sus plazos. Contra la orden no cabe recurso en vía administrativa, porque es una disposición de carácter general (artículo 112.3 de la LPAC). Gamma puede interponer recurso contencioso-administrativo directo contra ella (artículo 25 de la LJCA) ante la Sala de lo Contencioso-administrativo de la Audiencia Nacional, competente para las disposiciones de los Ministros (artículo 11.1.a) de la LJCA), en el plazo de dos meses desde el día siguiente a su publicación (artículo 46.1): publicada el 14 de abril, el plazo vence el 14 de junio. Contra la sanción, que es un acto de aplicación dictado por un Director General que no pone fin a la vía administrativa, procede recurso de alzada en el plazo de un mes (artículo 122 de la LPAC): notificada el 3 de junio, vence el 3 de julio. Si el recurso se funda únicamente en la nulidad de la orden, se interpone directamente ante el Ministro que la dictó (artículo 112.3, último inciso). No obstante lo anterior, cabría esperar a impugnar solo la sanción ante los tribunales, mediante el recurso indirecto del artículo 26 de la LJCA, si bien la solución más adecuada es combinar ambas vías: el recurso directo expulsa la orden con efectos generales y la alzada impide que la sanción adquiera firmeza. Por tanto, se concluye que Gamma debe interponer recurso contencioso-administrativo directo ante la Audiencia Nacional antes del 14 de junio y recurso de alzada contra la sanción ante el Ministro antes del 3 de julio.</p>
+<p><strong>Cuestión c).</strong> La cuestión c) plantea si Gamma puede instar la revisión de oficio de la orden. El artículo 106.2 de la LPAC permite a las Administraciones declarar de oficio, en cualquier momento y previo dictamen favorable del Consejo de Estado, la nulidad de sus disposiciones en los supuestos del artículo 47.2. Pero la jurisprudencia del Tribunal Supremo (sentencia 1598/2022, de 30 de noviembre) niega a los particulares una acción para obtener por esta vía la nulidad de una disposición general: la facultad corresponde en exclusiva a la Administración autora. En el presente supuesto, Gamma puede poner la ilegalidad en conocimiento del Ministerio, pero este no está obligado a iniciar el procedimiento, y su inactividad no abre por sí sola un recurso. Por tanto, se concluye que Gamma no tiene derecho a obtener la revisión de oficio de la orden y que su vía de defensa son los recursos de la cuestión b).</p>
+</div>
+<h3>11.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Introducción y calificación previa</strong> (disposición general, orden ministerial, reglamento ejecutivo, competencia habilitada) → <em>análisis</em>: contextualiza y formula el problema antes de resolverlo.<br>
+<strong>Reformular cada cuestión con su letra</strong> → <em>sistemática</em>: secuencia lógica y completitud sobre el conjunto del supuesto.<br>
+<strong>Artículo concreto + datos operados</strong> (5 días frente a 15 y 7; vigencia el 15 de abril frente al 1 de julio; plazos hasta el 14 de junio y el 3 de julio) → <em>aplicación de conocimientos</em>, que se puntúa pregunta por pregunta.<br>
+<strong>Suposición declarada</strong> (no consta la tramitación urgente) y comprobación de que la conclusión no cambia aunque la hubiera → la Comisión admite las suposiciones si se justifican.<br>
+<strong>Alternativas evaluadas</strong> (recurso directo, alzada, recurso indirecto) y elección argumentada → <em>análisis</em>.<br>
+<strong>Conclusión afirmativa</strong> en cada cuestión, también cuando la respuesta es negativa (cuestión c) → así terminan todas las respuestas modelo de 40 a 50 puntos.<br>
+<strong>Siglas definidas con «(en adelante, …)»</strong> → <em>expresión escrita</em>.</div>
+
+<!-- 12 -->
+<h2 id="s12"><span class="n">12.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Concepto y notas del reglamento</td><td>Concepto, tres notas, titulares (4.1.b Ley 50/1997, 4.1.a LRBRL, autoridades independientes)</td><td>Concepto, contenido técnico, tabla de titulares</td><td>Fusionado (1)</td></tr>
+<tr><td>Reglamento y acto</td><td>Tabla de ocho aspectos + idea clave</td><td>Consunción y ordinamentalidad</td><td>Fusionado (2)</td></tr>
+<tr><td>Clases</td><td>Ejecutivos, independientes, de necesidad (con habilitación legal); efectos; órgano; ámbito</td><td>Las tres por la ley, con latinismos; efectos</td><td>Fusionado con corrección (3)</td></tr>
+<tr><td>Forma y jerarquía</td><td>Arts. 24 y 25 Ley 50/1997 completos</td><td>Solo el 24.2</td><td>Apdo. 4</td></tr>
+<tr><td>Límites</td><td>Formales, materiales, consecuencia, 128.2</td><td>Formales, materiales, literal del 37</td><td>Fusionado (5)</td></tr>
+<tr><td>Procedimiento</td><td>129, 132, 133, 26, 22.3 LOCE, 28, 130, 131, 23, STC 55/2018</td><td>Siete fases + tramitación urgente (27)</td><td>Nueve fases + urgencia (6)</td></tr>
+<tr><td>Control</td><td>Seis vías + art. 73 LJCA</td><td>Seis vías con detalles (106.2, 27.2 y 27.3)</td><td>Fusionado con dos correcciones (7)</td></tr>
+<tr><td>Principios generales</td><td>Concepto, funciones, tabla de diez, art. 3.1 Ley 40/2015, examen 2019</td><td>Solo remisión al Tema 1</td><td>Apdo. 8 completo</td></tr>
+<tr><td>Tratados</td><td>Ley 25/2014, celebración, CCAA, Cortes, 95, eficacia, STC 140/2018, examen 2019</td><td>Solo remisión al Tema 1</td><td>Apdo. 9 completo</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 11 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas</span>
+<strong>Temario 2026:</strong> la cuestión de ilegalidad exige sentencia firme estimatoria y se plantea en cinco días (7) · los bandos del Alcalde, por regla general, no son normas (1) · la «triple función» de los principios no se enumera igual que en el Tema 1 (8).<br>
+<strong>Material visual:</strong> la revisión de oficio de un reglamento no puede instarse como derecho (STS 1598/2022) (7) · el reglamento de necesidad requiere habilitación legal, no es «contra legem» sin más (3) · reordenados los límites formales y materiales (5).<br>
+<strong>Temario Claude</strong> (corrección que ya traía el visual): art. 37.1, «órgano de igual o superior jerarquía», no «rango» (5).</div>
+
+<footer>
+GACE 2027 · Bloque IV · Tema 3 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 23/10/2026.<br>
+Normas: CE · Código Civil · Ley 39/2015 · Ley 40/2015 · Ley 50/1997 · LO 3/1980 (Consejo de Estado) · LJCA · LOPJ · Ley 7/1985 · Ley 25/2014 · Convenio de Viena de 1969 · LOTC.
+</footer>
+</div>
+</body>
+</html>
