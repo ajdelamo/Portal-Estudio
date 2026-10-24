@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 4 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque IV · Tema 4 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "Definición de acto administrativo", "b": "Declaración de voluntad, juicio, conocimiento o deseo de la Administración en ejercicio de una potestad administrativa distinta de la reglamentaria (Zanobini, García de Enterría)."}, {"u": 1, "f": "Los cinco rasgos del acto", "b": "1) Declaración (no actuación material) · 2) procede de una Administración sometida al Derecho administrativo · 3) en ejercicio de una potestad · 4) distinta de la reglamentaria · 5) unilateral y ejecutiva, presunción de validez."}, {"u": 1, "f": "¿Es acto administrativo? (examen 2022)", "b": "SÍ: reconocimiento de un trienio.\nNO: disposición general, sentencia, reclamación de un ciudadano."}, {"u": 1, "f": "Art. 1.3 LJCA", "b": "También se impugnan en el contencioso los actos de los órganos constitucionales en materia de personal, administración y gestión patrimonial."}, {"u": 1, "f": "Actos de trámite cualificados (art. 112.1)", "b": "Recurribles si deciden directa o indirectamente el fondo, impiden continuar, o producen indefensión o perjuicio irreparable. Contra los demás: alegaciones."}, {"u": 1, "f": "Fin de la vía administrativa en la AGE (114.2)", "b": "Gobierno y sus miembros · Ministros · Secretarios de Estado · Directores generales o superiores solo en materia de personal."}, {"u": 1, "f": "Favorables frente a gravamen", "b": "Favorables: solo revisión de oficio (106) o lesividad (107).\nGravamen: revocables mientras no prescriba, sin dispensa no permitida ni contrariar igualdad, interés público u ordenamiento (109.1)."}, {"u": 1, "f": "Control de la discrecionalidad", "b": "Elementos reglados · hechos determinantes · principios generales · desviación de poder. Motivación obligatoria (35.1.i)."}, {"u": 2, "f": "Art. 8 Ley 40/2015", "b": "Competencia irrenunciable, ejercida por el órgano que la tenga como propia, salvo delegación o avocación. Sin órgano especificado: los inferiores competentes por materia y territorio."}, {"u": 2, "f": "Indelegables (art. 9.2 Ley 40/2015)", "b": "Relaciones con Jefatura del Estado, Presidencia del Gobierno, Cortes, Presidencias autonómicas y Asambleas · disposiciones generales · resolución de recursos en el órgano que dictó el acto · lo que diga una ley."}, {"u": 2, "f": "Delegación de competencias: régimen", "b": "Se publica (9.3) · la resolución indica la delegación y se considera del DELEGANTE (9.4) · no se delega lo delegado salvo ley (9.5) · revocable en cualquier momento (9.6). En la AGE, aprobación previa del órgano ministerial."}, {"u": 2, "f": "Avocación (art. 10)", "b": "El superior asume asuntos de sus dependientes por circunstancias técnicas, económicas, sociales, jurídicas o territoriales. Acuerdo motivado notificado antes o simultáneamente a la resolución. Sin recurso propio."}, {"u": 2, "f": "Encomienda de gestión (art. 11)", "b": "Actividades materiales o técnicas, por eficacia o falta de medios. No cede titularidad ni elementos sustantivos. Entre Administraciones: convenio."}, {"u": 2, "f": "Delegación de firma (art. 12)", "b": "En titulares de órganos dependientes, dentro de los límites del art. 9. No altera la competencia. No necesita publicación. Consta la delegación y la autoridad de procedencia. SÍ cabe en sanciones (la Ley 40/2015 suprimió la prohibición de la Ley 30/1992)."}, {"u": 2, "f": "Suplencia (art. 13)", "b": "Vacante, ausencia, enfermedad, abstención o recusación. Suple quien designe el órgano de nombramiento o, en su defecto, el inmediato superior. No altera la competencia."}, {"u": 2, "f": "Causas de abstención (art. 23.2 Ley 40/2015)", "b": "Interés personal o societario · matrimonio o parentesco (consanguinidad 4.º, afinidad 2.º) · amistad íntima o enemistad manifiesta · perito o testigo · relación de servicio o servicios profesionales en los dos últimos años."}, {"u": 2, "f": "Art. 23.4 y 24 Ley 40/2015 (examen 2019)", "b": "No abstenerse no implica necesariamente la invalidez del acto, pero sí responsabilidad. Recusación en cualquier momento de la tramitación."}, {"u": 2, "f": "Incompetencia: nulidad o anulabilidad", "b": "Manifiesta por materia o territorio → NULIDAD (47.1.b).\nJerárquica → ANULABILIDAD, convalidable por el superior (52.3)."}, {"u": 3, "f": "Elementos objetivos", "b": "Presupuesto de hecho · contenido (determinado y adecuado a los fines, 34.2; lícito, posible) · causa · fin. Elementos accidentales en los discrecionales: condición, término, modo."}, {"u": 3, "f": "Desviación de poder", "b": "Ejercicio de potestades para fines distintos de los fijados por el ordenamiento (70.2 LJCA), aunque sean públicos → anulabilidad (48.1)."}, {"u": 3, "f": "Art. 36 Ley 39/2015: la forma", "b": "36.1: por escrito a través de medios electrónicos.\n36.2: verbal → constancia escrita por el titular del órgano inferior o funcionario que la reciba; relación de resoluciones verbales.\n36.3: refundición de actos de la misma naturaleza."}, {"u": 3, "f": "Motivación: concepto y funciones", "b": "Razones de hecho y de Derecho, con sucinta referencia. Defensa del interesado · control judicial · interdicción de la arbitrariedad. Suficiente, puede ser sucinta."}, {"u": 3, "f": "Motivación in aliunde", "b": "Art. 88.6: los informes o dictámenes sirven de motivación cuando se incorporan AL TEXTO de la resolución."}, {"u": 3, "f": "Art. 35.1 (a-e)", "b": "a) limitan derechos · b) revisión de oficio, recursos, arbitraje e inadmisión · c) se separan del criterio precedente o de dictamen consultivo · d) suspensión y medidas provisionales · e) urgencia, ampliación de plazos, actuaciones complementarias."}, {"u": 3, "f": "Art. 35.1 (f-i)", "b": "f) rechazan pruebas · g) imposibilidad sobrevenida y desistimiento de la Administración · h) propuestas y resoluciones sancionadoras, y de responsabilidad patrimonial · i) potestades discrecionales y los que diga una norma."}, {"u": 3, "f": "Falta de motivación", "b": "Defecto de forma → anulabilidad cuando produce indefensión (48.2). No todos los actos deben motivarse (exámenes 2019 y 2022)."}, {"u": 4, "f": "Art. 39 (1 y 2)", "b": "39.1: se presumen válidos y producen efectos desde que se dictan, SALVO QUE EN ELLOS SE DISPONGA OTRA COSA (examen 2019).\n39.2: eficacia demorada por su contenido o por notificación, publicación o aprobación superior (examen 2022)."}, {"u": 4, "f": "Retroactividad (art. 39.3)", "b": "1) En sustitución de actos anulados (examen 2022).\n2) Favorables, si los supuestos de hecho existían y no se lesionan derechos de terceros."}, {"u": 4, "f": "Art. 39.4 y 39.5", "b": "39.4: los actos dictados en la propia competencia deben ser observados por los demás órganos.\n39.5: si un acto de otra Administración es ilegal, requerimiento previo y, si se rechaza, recurso contencioso."}, {"u": 4, "f": "Validez frente a eficacia", "b": "Validez: conformidad con el ordenamiento. Eficacia: producción de efectos. La notificación es requisito de eficacia."}, {"u": 4, "f": "Excepciones a la ejecutoriedad (art. 98.1)", "b": "a) suspensión · b) sanción contra la que quepa recurso en vía administrativa (incluida reposición) · c) disposición en contrario · d) aprobación o autorización superior."}, {"u": 4, "f": "Requisitos de la ejecución forzosa", "b": "Título previo (97, si no, vía de hecho) · apercibimiento (99) · proporcionalidad y medio menos restrictivo (100) · domicilio: consentimiento o autorización judicial (100.3)."}, {"u": 4, "f": "Los cuatro medios de ejecución forzosa", "b": "Apremio sobre el patrimonio (101, cantidades líquidas) · ejecución subsidiaria (102, no personalísimos, a costa del obligado) · multa coercitiva (103, con ley, compatible con sanción) · compulsión sobre las personas (104, no hacer o soportar)."}, {"u": 4, "f": "Art. 105 y suspensión (117)", "b": "105: no se admiten acciones posesorias (interdictos) contra actuaciones administrativas.\n117: el recurso no suspende; excepción por perjuicio de imposible o difícil reparación o causa de nulidad."}, {"u": 5, "f": "Notificación: plazo y contenido (art. 40.2)", "b": "Cursada en 10 días. Texto íntegro · si pone fin a la vía · recursos · órgano · plazo."}, {"u": 5, "f": "Notificación defectuosa (40.3) y plazo para resolver (40.4)", "b": "40.3: surte efecto cuando el interesado actúa conociendo el contenido o interpone recurso.\n40.4: basta el texto íntegro y el intento debidamente acreditado."}, {"u": 5, "f": "Medio electrónico (art. 41.1)", "b": "Preferente y obligatorio para los obligados (14.2: personas jurídicas, entidades sin personalidad, colegiados, empleados públicos). Excepciones: comparecencia espontánea y entrega directa por empleado público."}, {"u": 5, "f": "Rechazo y varios cauces", "b": "Rechazo: consta en el expediente y se da por efectuado el trámite (41.5, examen 2022).\nVarios cauces: vale la fecha del primero (41.7)."}, {"u": 5, "f": "Papel (art. 42.2)", "b": "Recoge cualquier mayor de 14 años que se identifique. Si nadie: un solo intento más, en 3 días, hora distinta (antes/después de las 15:00), con 3 horas de margen (examen 2022)."}, {"u": 5, "f": "Electrónica (art. 43)", "b": "Sede electrónica o dirección electrónica habilitada única. Practicada al acceder; rechazada a los 10 días naturales sin acceso."}, {"u": 5, "f": "Infructuosa (art. 44)", "b": "Anuncio en el BOE (Tablón Edictal Único). Facultativo: boletín autonómico o provincial, tablón del Ayuntamiento o consulado."}, {"u": 5, "f": "Publicación (arts. 45 y 46)", "b": "Obligatoria: pluralidad indeterminada de destinatarios o notificación insuficiente; procedimientos selectivos o de concurrencia competitiva. Surte los efectos de la notificación. Si lesiona derechos: somera indicación (46)."}, {"u": 6, "f": "Art. 47.1 (a-d)", "b": "a) lesionan derechos susceptibles de amparo · b) órgano manifiestamente incompetente por materia o territorio · c) contenido imposible · d) constitutivos de infracción penal o dictados como consecuencia de ella."}, {"u": 6, "f": "Art. 47.1 (e-g)", "b": "e) prescindiendo total y absolutamente del procedimiento o de las reglas esenciales de formación de la voluntad de los colegiados (examen 2019) · f) expresos o presuntos que dan facultades sin requisitos esenciales · g) los que diga una ley."}, {"u": 6, "f": "Nulidad frente a anulabilidad", "b": "Nulidad: no se convalida, imprescriptible, revisión de oficio en cualquier momento, efectos ex tunc.\nAnulabilidad: regla general (48.1), convalidable, firme si no se recurre, lesividad en 4 años."}, {"u": 6, "f": "Arts. 48.2 y 48.3", "b": "48.2: el defecto de forma solo anula si faltan requisitos indispensables para el fin o hay indefensión (examen 2024).\n48.3: fuera de plazo solo anula si lo impone la naturaleza del plazo."}, {"u": 6, "f": "Técnicas de conservación (arts. 49 a 52)", "b": "49: no se extiende a los actos sucesivos ni a las partes independientes (examen 2019) · 50: conversión · 51: conservación de trámites · 52: convalidación de anulables (efectos desde su fecha)."}, {"u": 6, "f": "Lesividad (art. 107)", "b": "Declaración en 4 años desde que se dictó el acto; después, recurso contencioso en 2 meses (46.5 LJCA). Caduca a los 6 meses sin declararla."}, {"u": 6, "f": "Competencia para revisar de oficio en la AGE (art. 111)", "b": "Consejo de Ministros: los suyos y los de los Ministros · Ministros: Secretarios de Estado y directivos no dependientes de una Secretaría de Estado · Secretarios de Estado: sus directivos."}, {"u": 7, "f": "Introducción de procedimiento administrativo: las cuatro piezas", "b": "1) Constitución: 149.1.18.ª y 105.\n2) LPAC (Ley 39/2015), artículos 1 y 2.\n3) Real Decreto 203/2021 (actuación electrónica).\n4) Objeto: validez y eficacia de los actos y procedimiento común. Competencia: añadir la Ley 40/2015."}, {"u": 7, "f": "Calificación previa del acto", "b": "Órgano y título (propio, delegación, avocación, suplencia, firma) · trámite o resolución · fin de vía (114) · favorable o gravamen, reglado o discrecional, sancionador → motivación (35), ejecutividad (98), recursos · notificación (40 a 44)."}, {"u": 7, "f": "Mini-supuesto: sanción a una S.L. notificada en papel", "b": "Delegación de firma válida (12 Ley 40/2015) · motivación por remisión sin incorporar el informe → anulable con indefensión (88.6, 48.2) · papel a persona jurídica e intentos en la misma franja → notificación inválida (14.2.a, 41.1, 42.2) · sanción no ejecutiva con recurso abierto (98.1.b, 90.3)."}];
+const UNAMES={"1": "Concepto y clases", "2": "Competencia", "3": "Elementos y motivación", "4": "Eficacia y ejecución", "5": "Notificación", "6": "Validez", "7": "Supuesto"};
+const SK="gace27_biv_t04_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
