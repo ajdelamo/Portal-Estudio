@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 4 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque IV · Tema 4 · El acto administrativo</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u":1,"t":"Según la doctrina que recoge el temario 2026, el acto administrativo es:","o":["La declaración de voluntad, juicio, conocimiento o deseo de la Administración en ejercicio de una potestad administrativa distinta de la reglamentaria","Toda decisión escrita de un órgano público que afecte a derechos de los particulares, incluidas las normas reglamentarias","La declaración de voluntad de la Administración que se dirige a una pluralidad indeterminada de destinatarios","Cualquier actuación material o jurídica de la Administración sometida al Derecho administrativo"],"c":0,"e":"Definición de Zanobini y García de Enterría. Excluye el reglamento (potestad distinta) y las actuaciones materiales."},
+{"u":1,"t":"¿Cuál de estas es un acto administrativo según el examen GACE 2022?","o":["Una disposición de carácter general","Una sentencia de un Juzgado de lo contencioso","El reconocimiento de un trienio a un funcionario","La reclamación previa presentada por un ciudadano"],"c":2,"e":"Idea clave 2022. La disposición general es una norma; la sentencia, un acto judicial; la reclamación, un acto del particular."},
+{"u":1,"t":"Los actos de los órganos constitucionales en materia de personal, administración y gestión patrimonial:","o":["No son impugnables por tratarse de órganos constitucionales","Se impugnan ante el Tribunal Constitucional mediante recurso de amparo o conflicto entre órganos constitucionales","Son impugnables ante la jurisdicción contencioso-administrativa (art. 1.3 LJCA)","Solo pueden recurrirse en vía administrativa ante el propio órgano"],"c":2,"e":"Art. 1.3.a LJCA."},
+{"u":1,"t":"Las actuaciones materiales de la Administración (vía de hecho, actividad técnica):","o":["Son actos administrativos tácitos, porque de ellas se deduce la voluntad de la Administración de forma concluyente","No son actos administrativos, pero deben ampararse en un acto previo","Son actos administrativos verbales","Son actos de trámite cualificados"],"c":1,"e":"El acto es una declaración; las actuaciones materiales necesitan título previo (art. 97 Ley 39/2015). Sin él, vía de hecho."},
+{"u":1,"t":"Un acto de trámite es recurrible de forma autónoma cuando:","o":["Lo solicite el interesado en cualquier fase del procedimiento, siempre que acredite un interés legítimo directo y actual en el asunto","Decide directa o indirectamente el fondo, impide continuar el procedimiento o produce indefensión o perjuicio irreparable","Ha sido dictado por un órgano colegiado","Se notifica a más de un interesado"],"c":1,"e":"Art. 112.1 Ley 39/2015: actos de trámite cualificados. Contra los demás, alegaciones."},
+{"u":1,"t":"En la Administración General del Estado, ponen fin a la vía administrativa los actos de los Directores generales:","o":["En todo caso","Solo en materia de personal","Nunca","Solo cuando resuelven recursos de alzada"],"c":1,"e":"Art. 114.2.c Ley 39/2015. También ponen fin los actos del Gobierno y sus miembros, de los Ministros y de los Secretarios de Estado."},
+{"u":1,"t":"La revocación de los actos de gravamen (art. 109.1 Ley 39/2015) es posible:","o":["En cualquier momento y sin límites, por ser desfavorables","Mientras no haya transcurrido el plazo de prescripción, si no es dispensa no permitida ni contraria a la igualdad, al interés público o al ordenamiento","Solo previa declaración de lesividad en el plazo de cuatro años","Solo por el superior jerárquico del órgano que lo dictó, previo dictamen favorable del Consejo de Estado u órgano consultivo autonómico equivalente"],"c":1,"e":"Los favorables no se revocan libremente: revisión de oficio (106) o lesividad (107)."},
+{"u":1,"t":"La discrecionalidad administrativa se controla mediante:","o":["Únicamente la desviación de poder","Los elementos reglados, los hechos determinantes, los principios generales y la desviación de poder","Solo los principios generales del Derecho","No se controla: es una facultad libre de la Administración, que solo responde políticamente ante el Parlamento por su ejercicio"],"c":1,"e":"Discrecionalidad no es arbitrariedad (9.3 CE). Además, los actos discrecionales deben motivarse (35.1.i)."},
+{"u":2,"t":"Según el art. 8 Ley 40/2015, la competencia:","o":["Es renunciable con autorización del superior jerárquico y publicación del acuerdo de renuncia en el diario oficial correspondiente al ámbito","Es irrenunciable y se ejerce por los órganos que la tengan atribuida como propia, salvo delegación o avocación","Puede transferirse libremente entre órganos de la misma Administración","Se presume del órgano superior si la norma no dice otra cosa"],"c":1,"e":"Si la norma no especifica órgano, la competencia corresponde a los órganos inferiores competentes por razón de la materia y del territorio (8.2)."},
+{"u":2,"t":"¿Cuál de estas competencias NO puede delegarse según el art. 9.2 Ley 40/2015?","o":["La resolución de procedimientos sancionadores","La concesión de subvenciones nominativas previstas en los Presupuestos Generales del Estado","La adopción de disposiciones de carácter general","La contratación de suministros"],"c":2,"e":"Indelegables: relaciones con Jefatura del Estado, Presidencia del Gobierno, Cortes, Presidencias autonómicas y Asambleas; disposiciones generales; resolución de recursos en el órgano que dictó el acto; lo que diga una ley."},
+{"u":2,"t":"Las resoluciones adoptadas por delegación de competencias:","o":["Se consideran dictadas por el órgano delegado","Se consideran dictadas por el órgano delegante y deben indicar expresamente esta circunstancia","Se consideran dictadas por el superior jerárquico común a ambos órganos, que responde de ellas ante los interesados","Solo son válidas si las ratifica el delegante"],"c":1,"e":"Art. 9.4 Ley 40/2015. La delegación debe publicarse (9.3) y es revocable en cualquier momento (9.6)."},
+{"u":2,"t":"La avocación debe notificarse a los interesados:","o":["En el plazo de diez días desde que se acuerde, mediante publicación en el diario oficial del departamento","Con anterioridad o simultáneamente a la resolución final","Solo si el interesado lo solicita","Después de la resolución, junto con los recursos"],"c":1,"e":"Art. 10.2 Ley 40/2015. El temario 2026 dice solo «antes»: precisión. No cabe recurso contra la avocación, sin perjuicio del que se interponga contra la resolución."},
+{"u":2,"t":"En la encomienda de gestión (art. 11 Ley 40/2015):","o":["Se transfiere la titularidad de la competencia al órgano encomendado","Se encomiendan actividades materiales o técnicas, sin ceder la titularidad ni los elementos sustantivos del ejercicio","Se encomienda la resolución de los procedimientos a otro órgano, que firma en nombre propio y responde de lo resuelto ante los interesados","Solo cabe entre órganos de la misma Administración"],"c":1,"e":"Entre Administraciones distintas se formaliza mediante convenio."},
+{"u":2,"t":"Según la Ley 40/2015, la delegación de firma en resoluciones sancionadoras:","o":["Está expresamente prohibida","Está permitida dentro de los límites del art. 9, porque la Ley 40/2015 suprimió la prohibición de la Ley 30/1992","Solo es posible si la sanción es leve","Solo cabe con autorización expresa del Consejo de Ministros y publicación en el BOE del acuerdo de delegación de firma"],"c":1,"e":"Corrección al temario 2026, que mantiene la prohibición del antiguo art. 16.4 Ley 30/1992."},
+{"u":2,"t":"La delegación de firma:","o":["Debe publicarse en el diario oficial para ser válida, igual que la delegación de competencias del art. 9.3","No altera la competencia del delegante y no necesita publicarse para su validez","Transfiere la competencia al delegado","Solo puede hacerse en órganos no dependientes"],"c":1,"e":"Art. 12.2 Ley 40/2015. En la resolución consta la delegación y la autoridad de procedencia (12.3)."},
+{"u":2,"t":"En caso de vacante de un titular, si no se designa suplente, la competencia la ejerce:","o":["El órgano inferior de mayor antigüedad en el puesto, sin necesidad de designación expresa por parte del superior","Quien designe el órgano administrativo inmediato superior","El Subsecretario del departamento en todo caso","Nadie hasta que se cubra la vacante"],"c":1,"e":"Art. 13.1 Ley 40/2015. La suplencia no altera la competencia."},
+{"u":2,"t":"Los conflictos de atribuciones (art. 14 Ley 40/2015) solo pueden suscitarse entre órganos:","o":["De distintas Administraciones Públicas, cuando ambas se consideren competentes para resolver el mismo procedimiento administrativo","De una misma Administración no relacionados jerárquicamente, en asuntos cuyo procedimiento no haya finalizado","Relacionados jerárquicamente","De la Administración y los Tribunales"],"c":1,"e":"Art. 14.3."},
+{"u":2,"t":"Es causa de abstención (art. 23.2 Ley 40/2015) el parentesco con un interesado:","o":["De consanguinidad hasta el segundo grado o afinidad hasta el cuarto","De consanguinidad dentro del cuarto grado o afinidad dentro del segundo","De consanguinidad o afinidad hasta el tercer grado, con los interesados, sus representantes o sus asesores","Solo el matrimonio y la filiación"],"c":1,"e":"Consanguinidad 4.º, afinidad 2.º; también con administradores o asesores."},
+{"u":2,"t":"La actuación de una autoridad en la que concurría causa de abstención (examen GACE 2019):","o":["Determina siempre la nulidad de pleno derecho del acto","Determina siempre la anulabilidad del acto","No implica necesariamente la invalidez, pero da lugar a la responsabilidad que proceda","No tiene ninguna consecuencia jurídica si el acto es favorable al interesado y nadie lo ha recurrido dentro de plazo"],"c":2,"e":"Art. 23.4 Ley 40/2015."},
+{"u":2,"t":"Un acto dictado por un órgano con incompetencia jerárquica (no manifiesta) es:","o":["Nulo de pleno derecho","Anulable y convalidable por el superior jerárquico competente","Inexistente","Válido, porque la incompetencia jerárquica no es vicio cuando el órgano pertenece al mismo departamento ministerial"],"c":1,"e":"Art. 52.3 Ley 39/2015. Solo la manifiesta por materia o territorio es nulidad (47.1.b)."},
+{"u":3,"t":"Según el art. 34.2 Ley 39/2015, el contenido de los actos:","o":["Será el que decida libremente el órgano competente dentro del margen que le reconozca la norma de atribución de la potestad","Se ajustará al ordenamiento y será determinado y adecuado a los fines de aquellos","Deberá ser siempre favorable al interesado","Podrá apartarse de la ley si lo exige el interés público"],"c":1,"e":"Lícito, posible y determinado. En los discrecionales, elementos accidentales: condición, término y modo."},
+{"u":3,"t":"La desviación de poder (art. 70.2 LJCA) es causa de:","o":["Nulidad de pleno derecho","Anulabilidad (art. 48.1 Ley 39/2015)","Inexistencia del acto","Irregularidad no invalidante, salvo que el fin perseguido sea privado o contrario a la Constitución"],"c":1,"e":"Ejercicio de potestades para fines distintos de los fijados por el ordenamiento, aunque sean públicos."},
+{"u":3,"t":"Prescindir de un trámite del procedimiento determina, como regla:","o":["Siempre la nulidad de pleno derecho","La anulabilidad o una irregularidad; solo prescindir total y absolutamente del procedimiento es nulidad","La inexistencia del acto","La nulidad de pleno derecho siempre que el trámite omitido fuera preceptivo según la norma del procedimiento"],"c":1,"e":"Art. 47.1.e: omisión total y absoluta. El resto, art. 48."},
+{"u":3,"t":"Según el art. 36.1 Ley 39/2015, los actos administrativos se producirán:","o":["Por escrito en papel, salvo que el interesado elija expresamente relacionarse con la Administración por medios electrónicos","Por escrito a través de medios electrónicos, salvo que su naturaleza exija otra forma más adecuada","De forma verbal o escrita, a elección del órgano","Por escrito y con firma manuscrita del titular"],"c":1,"e":"Art. 36.1."},
+{"u":3,"t":"Cuando un órgano ejerza su competencia de forma verbal, la constancia escrita, si es necesaria, la efectúa y firma (exámenes GACE 2019 y 2022):","o":["El propio titular del órgano que dictó el acto verbal","El titular del órgano inferior o funcionario que la reciba oralmente","El Secretario General Técnico del departamento, que la incorpora al registro de resoluciones verbales del Ministerio","Un notario, a solicitud del interesado"],"c":1,"e":"Art. 36.2, expresando la autoridad de la que procede."},
+{"u":3,"t":"La motivación por referencia a informes o dictámenes (in aliunde) se admite cuando:","o":["El informe conste en el expediente","El informe se incorpore al texto de la resolución (art. 88.6 Ley 39/2015)","El interesado haya tenido acceso al expediente completo durante el trámite de audiencia previo a la resolución","El informe sea del Consejo de Estado"],"c":1,"e":"Corrección al material visual, que la situaba en el 35.2 y se conformaba con el expediente."},
+{"u":3,"t":"¿Cuál de estos actos NO figura en la lista del art. 35.1 Ley 39/2015 de actos que deben motivarse?","o":["Los que rechacen pruebas propuestas por los interesados","Los que acuerden la ampliación de plazos","Los que se separen del criterio seguido en actuaciones precedentes","Los que acuerden la acumulación de procedimientos"],"c":3,"e":"La acumulación (art. 57) no es recurrible ni figura en el 35.1. Las otras tres son las letras f), e) y c)."},
+{"u":3,"t":"Deben motivarse los actos que se separen del criterio seguido en actuaciones precedentes (exámenes GACE 2019 y 2022). Esto significa que:","o":["Todos los actos administrativos deben motivarse","Solo deben motivarse los actos previstos en el art. 35, entre ellos estos","Solo deben motivarse los actos favorables, porque los de gravamen se fundan directamente en la norma que se aplica","La motivación es opcional si el interesado no la pide"],"c":1,"e":"No todos los actos deben motivarse."},
+{"u":3,"t":"Deben motivarse las propuestas de resolución en los procedimientos:","o":["De responsabilidad patrimonial","Sancionadores","De concesión de subvenciones","De contratación"],"c":1,"e":"Art. 35.1.h: propuestas de resolución en los sancionadores y los actos que resuelvan sancionadores o de responsabilidad patrimonial."},
+{"u":3,"t":"La falta de motivación de un acto que debía motivarse determina, como regla:","o":["La nulidad de pleno derecho","La anulabilidad, cuando produce indefensión (art. 48.2)","Una irregularidad no invalidante en todo caso, porque la motivación puede subsanarse en la resolución del recurso","La inexistencia del acto"],"c":1,"e":"Defecto de forma. Solo sería nulidad una indefensión absoluta equiparable a prescindir del procedimiento."},
+{"u":3,"t":"En los procedimientos selectivos y de concurrencia competitiva, la motivación:","o":["No es necesaria","Se ajusta a lo que dispongan las convocatorias, pero deben quedar acreditados los fundamentos de la resolución","Debe hacerla siempre la comisión de valoración por escrito, con informe jurídico previo y publicación individualizada de cada puntuación","Se sustituye por la publicación de la puntuación"],"c":1,"e":"Art. 35.2 Ley 39/2015."},
+{"u":4,"t":"Según el art. 39.1 Ley 39/2015, los actos producen efectos (examen GACE 2019):","o":["En todo caso desde la fecha en que se dicten","Desde la fecha en que se dicten, salvo que en ellos se disponga otra cosa","Desde su notificación al interesado, o desde su publicación si se dirige a una pluralidad indeterminada de personas","A los veinte días de su notificación"],"c":1,"e":"«Salvo que en ellos se disponga otra cosa», no «en todo caso»."},
+{"u":4,"t":"La eficacia del acto queda demorada cuando (examen GACE 2022):","o":["Lo solicite el interesado","Así lo exija su contenido o esté supeditada a su notificación, publicación o aprobación superior","El acto sea de gravamen","Se interponga un recurso administrativo contra el acto, que suspende automáticamente su eficacia hasta que se resuelva"],"c":1,"e":"Art. 39.2. El recurso no suspende por sí (117.1)."},
+{"u":4,"t":"Puede otorgarse eficacia retroactiva a un acto (examen GACE 2022):","o":["Cuando se dicte en sustitución de actos anulados","Siempre que lo acuerde el órgano competente","Cuando sea de gravamen y lo justifique el interés público","Nunca: los actos solo producen efectos hacia el futuro"],"c":0,"e":"Art. 39.3: en sustitución de actos anulados y, en los favorables, si los supuestos de hecho existían y no se lesionan derechos de terceros."},
+{"u":4,"t":"Si una Administración considera ilegal un acto de otra Administración en el que debe basar el suyo (art. 39.5):","o":["Puede inaplicarlo directamente","Puede requerirla previamente para que lo anule o revise y, si lo rechaza, interponer recurso contencioso-administrativo","Debe plantear un conflicto ante el Tribunal Constitucional","Debe solicitar dictamen del Consejo de Estado sobre la legalidad del acto y suspender el procedimiento hasta que se emita"],"c":1,"e":"Requerimiento del art. 44 LJCA."},
+{"u":4,"t":"La notificación de un acto es requisito de:","o":["Validez","Eficacia","Validez y eficacia","Existencia"],"c":1,"e":"Validez ≠ eficacia. Un acto no notificado puede ser válido pero no produce efectos frente al interesado."},
+{"u":4,"t":"Según el art. 98.1 Ley 39/2015, NO es inmediatamente ejecutiva:","o":["La orden de demolición de una obra ilegal, cuando el interesado haya anunciado la interposición de un recurso contencioso","La resolución sancionadora contra la que quepa algún recurso en vía administrativa, incluido el potestativo de reposición","La denegación de una licencia","La liquidación de una tasa"],"c":1,"e":"Art. 98.1.b. Las otras excepciones: suspensión, disposición en contrario y necesidad de aprobación superior."},
+{"u":4,"t":"Antes de proceder a la ejecución forzosa de un acto, la Administración debe:","o":["Obtener autorización judicial en todo caso","Realizar un apercibimiento previo (art. 99)","Esperar a que el acto sea firme en vía judicial","Imponer una multa coercitiva"],"c":1,"e":"Salvo suspensión de la ejecución o que la Constitución o la ley exijan intervención judicial."},
+{"u":4,"t":"La multa coercitiva (art. 103 Ley 39/2015):","o":["Es una sanción administrativa por incumplir el acto","Es un medio de ejecución forzosa, independiente de las sanciones y compatible con ellas","Un medio de ejecución forzosa que sustituye a la sanción cuando el obligado cumple voluntariamente lo ordenado antes del plazo","Solo procede en obligaciones de dar dinero"],"c":1,"e":"Requiere autorización legal y se reitera por lapsos suficientes. Idea clave 2022."},
+{"u":4,"t":"La ejecución subsidiaria procede en los actos que:","o":["Imponen una obligación personalísima de no hacer","Por no ser personalísimos pueden ser realizados por sujeto distinto del obligado, a costa de este","Imponen el pago de una cantidad líquida, que la Administración adelanta y después reclama al obligado por vía de apremio","Ordenan soportar una inspección"],"c":1,"e":"Art. 102. Cantidades líquidas: apremio (101). Personalísimas de no hacer o soportar: compulsión (104)."},
+{"u":4,"t":"Si para ejecutar un acto hay que entrar en el domicilio del afectado y este no consiente:","o":["La Administración entra con auxilio de las Fuerzas de Seguridad","Hace falta autorización judicial (art. 100.3)","Basta un acuerdo motivado del órgano competente","Se sustituye por una multa coercitiva"],"c":1,"e":"Art. 100.3 Ley 39/2015 y art. 18.2 CE."},
+{"u":4,"t":"Según el art. 105 Ley 39/2015, contra las actuaciones de los órganos administrativos realizadas en materia de su competencia y conforme al procedimiento:","o":["Caben acciones posesorias ante el juez civil, siempre que el particular acredite la posesión pacífica durante más de un año","No se admitirán a trámite acciones posesorias","Cabe recurso de amparo ordinario","Cabe solo reclamación previa"],"c":1,"e":"Prohibición de interdictos."},
+{"u":5,"t":"Toda notificación deberá ser cursada dentro del plazo de:","o":["Cinco días desde que se dictó el acto","Diez días desde que se dictó el acto","Quince días desde que se firmó el acto","Un mes desde que se dictó el acto"],"c":1,"e":"Art. 40.2 Ley 39/2015."},
+{"u":5,"t":"Una notificación que contiene el texto íntegro pero omite los recursos procedentes:","o":["Es nula y no produce efecto alguno","Surte efecto desde que el interesado realice actuaciones que supongan conocimiento del contenido o interponga el recurso procedente","Surte efecto a los diez días de su recepción","Un mes desde que se dictó el acto, ampliable a dos meses en los procedimientos con pluralidad de interesados"],"c":1,"e":"Art. 40.3: notificación defectuosa."},
+{"u":5,"t":"A efectos de entender cumplida la obligación de notificar dentro del plazo máximo para resolver, basta:","o":["La firma de la resolución dentro de plazo","La notificación con el texto íntegro de la resolución, así como el intento de notificación debidamente acreditado","La publicación en el tablón de anuncios del órgano","Produce efecto desde su recepción, pero el plazo para interponer recurso se duplica por la omisión de los recursos procedentes"],"c":1,"e":"Art. 40.4 Ley 39/2015."},
+{"u":5,"t":"Las notificaciones electrónicas son obligatorias, en todo caso, para:","o":["Todas las personas físicas mayores de edad","Los interesados obligados a relacionarse electrónicamente, como las personas jurídicas","Solo los empleados públicos","Quienes lo soliciten expresamente"],"c":1,"e":"Arts. 41.1 y 14.2 Ley 39/2015."},
+{"u":5,"t":"Si el interesado rechaza la notificación (examen GACE 2022):","o":["Se repite la notificación al día siguiente","Se hace constar en el expediente y se da por efectuado el trámite","Se publica un anuncio en el BOE","El procedimiento se suspende hasta que la acepte"],"c":1,"e":"Art. 41.5 Ley 39/2015."},
+{"u":5,"t":"Si el interesado es notificado por distintos cauces, se toma como fecha de notificación:","o":["La más favorable al interesado","La que se haya producido en primer lugar","La de la notificación electrónica","La última que se haya producido"],"c":1,"e":"Art. 41.7 Ley 39/2015."},
+{"u":5,"t":"En la notificación en papel, si el interesado no está, puede hacerse cargo de ella:","o":["Solo un familiar mayor de edad","Cualquier persona mayor de catorce años que se encuentre en el domicilio y haga constar su identidad","Cualquier vecino del inmueble","Nadie: debe dejarse aviso en el buzón"],"c":1,"e":"Art. 42.2 Ley 39/2015."},
+{"u":5,"t":"Si nadie se hace cargo de la notificación en papel, el intento se repetirá (examen GACE 2022):","o":["Dos veces más en los cinco días siguientes","Una sola vez, en hora distinta, dentro de los tres días siguientes","Una sola vez, a la misma hora, al día siguiente","No se repite: se publica directamente en el BOE"],"c":1,"e":"Art. 42.2. Si el primero fue antes de las 15:00, el segundo después, y viceversa, con al menos tres horas de margen."},
+{"u":5,"t":"La notificación electrónica se entiende rechazada cuando:","o":["Pasan diez días hábiles sin acceder al contenido","Pasan diez días naturales desde la puesta a disposición sin acceder al contenido","Pasan quince días naturales sin acceso","El interesado no responde al aviso por correo electrónico"],"c":1,"e":"Art. 43.2 Ley 39/2015."},
+{"u":5,"t":"Cuando se ignore el lugar de la notificación o, intentada, no se haya podido practicar, la notificación se hará por:","o":["Anuncio en el tablón del Ayuntamiento únicamente","Anuncio en el Boletín Oficial del Estado (Tablón Edictal Único)","Publicación en la sede electrónica del órgano","Llamada telefónica documentada"],"c":1,"e":"Art. 44. Facultativamente, además, en el boletín autonómico o provincial, el tablón del Ayuntamiento o el consulado."},
+{"u":5,"t":"Si el órgano aprecia que la publicación íntegra de un acto lesiona derechos o intereses legítimos:","o":["No lo publica y lo notifica individualmente","Publica una somera indicación del contenido y del lugar donde los interesados pueden conocerlo íntegramente (art. 46)","Lo publica con los datos personales anonimizados","Solicita autorización judicial para publicarlo"],"c":1,"e":"Art. 46 Ley 39/2015."},
+{"u":6,"t":"Es causa de nulidad de pleno derecho (art. 47.1 Ley 39/2015):","o":["El acto dictado por órgano jerárquicamente incompetente","El acto que lesione derechos y libertades susceptibles de amparo constitucional","El acto dictado fuera de plazo","El acto con defecto de forma que cause indefensión"],"c":1,"e":"Art. 47.1.a. Las demás son anulabilidad (48)."},
+{"u":6,"t":"Los actos dictados prescindiendo de las normas que contienen las reglas esenciales para la formación de la voluntad de los órganos colegiados son (examen GACE 2019):","o":["Anulables","Nulos de pleno derecho","Irregulares no invalidantes","Convalidables por el Presidente del órgano"],"c":1,"e":"Art. 47.1.e."},
+{"u":6,"t":"Los actos presuntos contrarios al ordenamiento por los que se adquieren facultades careciendo de los requisitos esenciales son:","o":["Válidos, porque el silencio es estimatorio","Nulos de pleno derecho (art. 47.1.f)","Anulables en el plazo de cuatro años","Inexistentes"],"c":1,"e":"El silencio positivo no puede dar lo que la ley exige con requisitos esenciales."},
+{"u":6,"t":"El defecto de forma determina la anulabilidad (examen GACE 2024):","o":["Siempre","Solo cuando el acto carezca de los requisitos formales indispensables para alcanzar su fin o dé lugar a indefensión","Solo si el interesado lo alega en el plazo de diez días","Nunca: es una irregularidad no invalidante"],"c":1,"e":"Art. 48.2."},
+{"u":6,"t":"La realización de actuaciones fuera del tiempo establecido implica la anulabilidad:","o":["Siempre","Solo cuando así lo imponga la naturaleza del término o plazo","Nunca","Solo en los procedimientos sancionadores"],"c":1,"e":"Art. 48.3."},
+{"u":6,"t":"La nulidad de un acto, respecto de los actos sucesivos del procedimiento independientes del primero (examen GACE 2019):","o":["Los arrastra siempre","No implica necesariamente su nulidad","Los convierte en anulables","Obliga a repetir todo el procedimiento"],"c":1,"e":"Art. 49.1 Ley 39/2015."},
+{"u":6,"t":"La convalidación (art. 52 Ley 39/2015):","o":["Es posible para actos nulos y anulables","Solo es posible para actos anulables y produce efectos desde su fecha, salvo lo dispuesto para la retroactividad","Produce siempre efectos retroactivos","Requiere dictamen del Consejo de Estado"],"c":1,"e":"Incompetencia no determinante de nulidad: la convalida el superior jerárquico competente; falta de autorización: con su otorgamiento."},
+{"u":6,"t":"El acto nulo que contiene los elementos constitutivos de otro distinto produce los efectos de este. Es la técnica de:","o":["Convalidación","Conservación","Conversión","Incomunicación de la invalidez"],"c":2,"e":"Art. 50 Ley 39/2015."},
+{"u":6,"t":"El plazo de cuatro años del art. 107 Ley 39/2015 se refiere a:","o":["La interposición del recurso contencioso de lesividad desde que se dictó el acto","La declaración de lesividad, contada desde que se dictó el acto","La revisión de oficio de los actos nulos","La caducidad del procedimiento de lesividad"],"c":1,"e":"Después, recurso contencioso en dos meses (46.5 LJCA). El procedimiento caduca a los seis meses (107.3). Precisión al temario 2026."},
+{"u":6,"t":"En la AGE, es competente para revisar de oficio los actos dictados por un Ministro:","o":["El propio Ministro","El Consejo de Ministros","El Subsecretario del departamento","El Consejo de Estado"],"c":1,"e":"Art. 111 Ley 39/2015: Consejo de Ministros (sus actos y los de los Ministros); Ministros (Secretarios de Estado y directivos no dependientes de una Secretaría de Estado); Secretarios de Estado (sus directivos)."},
+{"u":7,"t":"Ante una sanción en el enunciado, ¿qué se escribe primero según el método de la Comisión?","o":["Directamente la vía de recurso","La calificación: órgano y título de competencia, trámite o resolución, fin de vía, favorable o de gravamen, sancionador y notificación","La cuantía de la sanción y su proporcionalidad","El nombre de la ley sancionadora sectorial"],"c":1,"e":"«Con carácter previo, procede calificar el acto…»: de ello dependen la motivación (35), la ejecutividad (98) y los recursos."},
+{"u":7,"t":"El enunciado no dice si el interesado conocía el informe al que se remite la resolución. Según el método de la Comisión, se escribe:","o":["«El enunciado no precisa si el interesado conocía el informe, por lo que suponemos que no lo conocía, dado que…»","«Podríamos entender que lo conocía»","«Sin ese dato no puede valorarse la motivación»","«Salvo mejor criterio, la motivación es suficiente»"],"c":0,"e":"Suposición declarada y justificada antes de concluir."},
+{"u":7,"t":"Se notifica en papel una sanción a una sociedad limitada. En el supuesto se concluye que:","o":["La notificación es válida porque el papel es el medio ordinario","La notificación no es válida, porque está obligada a relacionarse electrónicamente (arts. 14.2.a y 41.1 LPAC)","La notificación es válida si la recibe el administrador","La notificación es anulable solo si la sociedad lo alega en diez días"],"c":1,"e":"Las personas jurídicas están obligadas a la relación electrónica."},
+{"u":7,"t":"Primer intento de notificación en papel a las 10:00. ¿Cuál de estos segundos intentos es correcto?","o":["Al día siguiente a las 12:00","Dos días después a las 16:30","Cuatro días después a las 17:00","El mismo día a las 14:30"],"c":1,"e":"Art. 42.2: dentro de los tres días siguientes, después de las 15:00 si el primero fue antes, con al menos tres horas de margen."},
+{"u":7,"t":"¿Cuál de estos cierres sigue el criterio de la Comisión?","o":["«Por tanto, se concluye que la sanción es anulable por falta de motivación con indefensión, conforme al artículo 48.2 de la LPAC»","«A tenor de lo expuesto, podría entenderse que la sanción quizá es anulable»","«Salvo mejor criterio fundado en Derecho, la sanción sería anulable»","«La sanción puede ser nula o anulable según el criterio del tribunal»"],"c":0,"e":"Conclusión afirmativa, con el artículo y el motivo."}
+];
+
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Concepto y clases",2:"Competencia y abstención",3:"Elementos y motivación",4:"Eficacia y ejecución",5:"Notificación y publicación",6:"Validez e invalidez",7:"Supuesto práctico"};
+const TABS={1:"Concepto",2:"Competencia",3:"Motivación",4:"Eficacia",5:"Notificación",6:"Validez",7:"Supuesto"};
+const SK="gace27_biv_t04_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
