@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 5 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque IV · Tema 5 · Los contratos del sector público (I)</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u":1,"t":"Según el art. 1 LCSP, la contratación pública debe garantizar, entre otros, los principios de:","o":["Libertad de acceso a las licitaciones, publicidad y transparencia, y no discriminación e igualdad de trato entre licitadores","Libre concurrencia, oralidad del procedimiento, igualdad de trato y preferencia de las empresas nacionales en los contratos menores","Publicidad, transparencia, jerarquía de los licitadores y adjudicación preferente a la oferta de menor precio en todo caso","Eficacia, desconcentración, coordinación y sometimiento pleno a la ley y al Derecho, como el art. 103 de la Constitución"],"c":0,"e":"Art. 1.1 LCSP. La eficiencia en el uso de fondos se vincula a la estabilidad presupuestaria y a la integridad."},
+{"u":1,"t":"La LCSP transpone las Directivas:","o":["2014/24/UE y 2014/25/UE, sobre contratación pública y sobre sectores especiales","2014/23/UE y 2014/24/UE, sobre concesiones y sobre contratación pública","2004/18/CE y 2004/17/CE, sobre contratación pública y sobre sectores especiales","2014/23/UE y 2014/25/UE, sobre concesiones y sobre sectores especiales"],"c":1,"e":"La Directiva 2014/25/UE (sectores especiales) la transpone el Real Decreto-ley 3/2020."},
+{"u":1,"t":"La LCSP entró en vigor, con carácter general, el:","o":["8 de noviembre de 2017","1 de enero de 2018","9 de marzo de 2018","2 de octubre de 2016"],"c":2,"e":"Ley 9/2017, de 8 de noviembre, publicada el 9/11/2017, con entrada en vigor a los cuatro meses: 9 de marzo de 2018."},
+{"u":1,"t":"¿Cuál de estas entidades NO es poder adjudicador según la idea clave del temario 2026 (examen GACE 2024)?","o":["Una mutua colaboradora con la Seguridad Social","Una fundación pública estatal","Una asociación inscrita en el Registro Nacional de Asociaciones","Un organismo autónomo dependiente de un Ministerio con competencias de gestión"],"c":2,"e":"Art. 3.3 LCSP. Las asociaciones privadas del Registro Nacional no son poder adjudicador."},
+{"u":1,"t":"A efectos de la LCSP, una entidad pública empresarial estatal:","o":["Es Administración Pública y celebra contratos administrativos típicos","Forma parte del sector público, pero no es Administración Pública a estos efectos","No forma parte del sector público porque actúa en régimen de mercado","Es Administración Pública solo cuando contrata obras de valor superior al umbral armonizado"],"c":1,"e":"Art. 3.1.d y 3.2 LCSP: las EPE no son AAPP, por lo que sus contratos no son administrativos."},
+{"u":1,"t":"Los partidos políticos, sindicatos y organizaciones empresariales que reúnan los requisitos de poder adjudicador por su financiación o control públicos (art. 3.4):","o":["Se someten íntegramente a la LCSP en todos sus contratos, como cualquier poder adjudicador","Deben respetar los principios de publicidad, concurrencia, transparencia, igualdad y no discriminación en sus contratos SARA","Quedan excluidos de la LCSP en todo caso por su carácter de asociaciones de relevancia constitucional","Solo deben publicar sus contratos menores en el perfil de contratante, con periodicidad trimestral"],"c":1,"e":"Art. 3.4 LCSP: solo principios y solo respecto de los contratos sujetos a regulación armonizada."},
+{"u":1,"t":"¿Cuál de estos negocios está excluido de la LCSP?","o":["El arrendamiento de un inmueble por un Ministerio","El suministro de mobiliario de oficina para un organismo autónomo","El servicio de limpieza de una sede ministerial durante tres años","La concesión de servicios de una cafetería en un edificio público"],"c":0,"e":"Art. 9.2 LCSP: compraventa, donación, permuta y arrendamiento de inmuebles se rigen por la legislación patrimonial."},
+{"u":1,"t":"Un contrato del sector público es oneroso cuando:","o":["El poder adjudicador paga siempre un precio en dinero al contratista","El contratista obtiene algún tipo de beneficio económico, directo o indirecto","Las prestaciones de ambas partes son exactamente equivalentes en valor","El contrato se formaliza en escritura pública y se inscribe en el registro correspondiente"],"c":1,"e":"Art. 2.1 LCSP."},
+{"u":1,"t":"La cafetería de un edificio ministerial, explotada por un particular, es un ejemplo de contrato:","o":["Privado, porque su objeto no es ninguno de los típicos","Administrativo especial, por su vinculación al giro o tráfico de la Administración","Excluido, por ser una autorización demanial","Administrativo típico de concesión de obras, por exigir obras de adecuación del local"],"c":1,"e":"Art. 25.1.b LCSP. Ejemplo clásico del temario."},
+{"u":1,"t":"En un contrato privado de una Administración Pública, la modificación del contrato:","o":["Se rige por el Derecho privado y se impugna ante la jurisdicción civil, como el resto de sus efectos","Se somete a la LCSP y su impugnación corresponde a la jurisdicción contencioso-administrativa","Solo es posible por mutuo acuerdo y se impugna ante la jurisdicción social","Se rige por el Código Civil, pero su impugnación corresponde al Tribunal Administrativo Central de Recursos Contractuales"],"c":1,"e":"Arts. 26.2 y 27.1.c LCSP: la modificación es una de las excepciones al régimen privado de los efectos."},
+{"u":1,"t":"Un contrato con prestaciones de obra y de servicios se rige por:","o":["Las normas del contrato de obras en todo caso, por su mayor complejidad","Las normas de la prestación de mayor valor estimado, sin excepción","Las normas de la prestación principal, con las reglas del art. 18","Las normas de cada prestación de forma separada, como si fueran dos contratos"],"c":2,"e":"Art. 18 LCSP: el contrato mixto se rige por la prestación principal (con reglas específicas para obras y concesiones)."},
+{"u":2,"t":"El presupuesto base de licitación (art. 100) es:","o":["El importe total sin IVA, incluidas prórrogas y modificaciones previstas","El límite máximo de gasto que puede comprometer el órgano de contratación, IVA incluido","El precio ofertado por el adjudicatario, IVA excluido, que sirve de base a la garantía definitiva","El valor que determina el procedimiento de adjudicación y la sujeción a regulación armonizada"],"c":1,"e":"Art. 100 LCSP. El valor estimado (art. 101) es el que va sin IVA, con prórrogas, y decide procedimiento y publicidad."},
+{"u":2,"t":"El valor estimado del contrato (art. 101):","o":["Incluye el IVA y excluye las prórrogas","Excluye el IVA e incluye las prórrogas y las modificaciones previstas","Incluye el IVA y las prórrogas, pero deja fuera las modificaciones que estén previstas en el pliego","Excluye el IVA y las prórrogas, que se calculan aparte"],"c":1,"e":"Art. 101 LCSP."},
+{"u":2,"t":"Umbral SARA de los contratos de suministros y servicios de la Administración General del Estado desde el 1/1/2026:","o":["216.000 € (umbral único para todos los poderes adjudicadores)","143.000 €","140.000 €","221.000 €"],"c":2,"e":"Reglamento Delegado (UE) 2025/2151 y Orden HAC/1517/2025. 216.000 € es el de los demás poderes adjudicadores."},
+{"u":2,"t":"Umbral SARA de las obras y de las concesiones desde el 1/1/2026:","o":["5.538.000 €","5.404.000 €","5.382.000 €","5.350.000 €"],"c":1,"e":"Umbrales 2026-2027. 5.538.000 € fue el de 2024-2025."},
+{"u":2,"t":"Umbral SARA de los servicios sociales y otros específicos del anexo IV:","o":["750.000 €","1.000.000 €","500.000 €","216.000 €"],"c":0,"e":"Art. 22.1.c LCSP."},
+{"u":2,"t":"Según la regla de lotes de los contratos SARA, pueden exceptuarse de la regulación armonizada los lotes de:","o":["Obras de menos de 1.000.000 € y de suministros y servicios de menos de 80.000 €, si no superan el 20 % del valor acumulado","Obras de menos de 500.000 € y de suministros y servicios de menos de 60.000 €, si no superan el 10 % del valor acumulado","Obras de menos de 2.000.000 € y de suministros y servicios de menos de 100.000 €, si no superan el 25 % del valor acumulado","Cualquier cuantía, siempre que el órgano de contratación justifique la división en el expediente"],"c":0,"e":"Arts. 20.2 y 21.2 LCSP."},
+{"u":2,"t":"El Consejo de Ministros debe autorizar la celebración de los contratos de la AGE de valor estimado:","o":["Superior a 6 millones de euros, previo dictamen del Consejo de Estado","Igual o superior a 12 millones de euros","Superior al umbral SARA de obras","Igual o superior a 3 millones de euros"],"c":1,"e":"Art. 324.1 LCSP."},
+{"u":2,"t":"La mesa de contratación es potestativa en:","o":["El procedimiento abierto","El procedimiento restringido","El procedimiento negociado sin publicidad","El diálogo competitivo para contratos particularmente complejos"],"c":2,"e":"Art. 326.1 LCSP. Tampoco es obligatoria en el simplificado sumario."},
+{"u":2,"t":"Entre los vocales de la mesa de contratación deben figurar obligatoriamente:","o":["Un asesor jurídico y un interventor","Un representante sindical y un técnico del órgano proponente","Un miembro de la Junta Consultiva y un interventor","Un abogado del Estado y un representante de las pymes"],"c":0,"e":"Art. 326.5 LCSP."},
+{"u":2,"t":"La clasificación del empresario es exigible:","o":["En los contratos de servicios de valor estimado igual o superior a 500.000 €","En los contratos de obras de valor estimado igual o superior a 500.000 €","En todos los contratos de obras, cualquiera que sea su valor","En los contratos de obras de valor estimado superior al umbral SARA"],"c":1,"e":"Art. 77.1.a LCSP. En servicios no es exigible."},
+{"u":2,"t":"La solvencia técnica en los contratos de obras se acredita, como regla, con las obras ejecutadas en:","o":["Los diez últimos años","Los tres últimos años","Los cinco últimos años","Los dos últimos ejercicios cerrados"],"c":2,"e":"Art. 88.1.a LCSP. El material visual antiguo decía diez años: corrección."},
+{"u":2,"t":"Como regla, el volumen anual de negocios exigible como solvencia económica no supera:","o":["Una vez el valor estimado del contrato","Una vez y media el valor estimado del contrato","Dos veces el presupuesto base de licitación del contrato, IVA incluido","El triple del precio anual del contrato"],"c":1,"e":"Art. 87.3.a LCSP: salvo casos justificados."},
+{"u":2,"t":"La duración máxima general de las prohibiciones de contratar, salvo las de origen penal, es de:","o":["Cinco años","Tres años","Dos años","Un año"],"c":1,"e":"Art. 72.6 LCSP."},
+{"u":2,"t":"El contrato se perfecciona con:","o":["La adjudicación","La formalización","El inicio de la ejecución","La constitución de la garantía definitiva"],"c":1,"e":"Art. 36.1 LCSP."},
+{"u":2,"t":"La garantía definitiva es, como regla general:","o":["El 5 % del presupuesto base de licitación, IVA incluido","El 5 % del precio final ofertado, IVA excluido","El 3 % del presupuesto base de licitación, IVA excluido","El 10 % del valor estimado del contrato"],"c":1,"e":"Art. 107.1 LCSP. El 3 % del PBL es el máximo de la provisional."},
+{"u":2,"t":"La garantía provisional:","o":["Es obligatoria en todos los procedimientos abiertos y asciende al 3 % del PBL","Es excepcional, se justifica en el expediente, no supera el 3 % del PBL y está prohibida en el simplificado","Equivale al 5 % del precio ofertado y se exige en todos los contratos con AAPP","Solo se exige en los contratos menores de obras, por el 3 % del presupuesto"],"c":1,"e":"Arts. 106 y 159.4.b LCSP."},
+{"u":3,"t":"Los servicios de prestación sucesiva tienen, como regla, una duración máxima, prórrogas incluidas, de:","o":["Cuatro años","Cinco años","Seis años","Diez años"],"c":1,"e":"Art. 29.4 LCSP. Los acuerdos marco, cuatro años."},
+{"u":3,"t":"La prórroga del contrato es obligatoria para el contratista si se le preavisa con al menos:","o":["Un mes de antelación","Dos meses de antelación","Tres meses de antelación","Quince días hábiles de antelación"],"c":1,"e":"Art. 29.2 LCSP."},
+{"u":3,"t":"Los pliegos de cláusulas administrativas generales los aprueba:","o":["El órgano de contratación, previo informe de su servicio jurídico","El Ministro de Hacienda, previo informe de la Junta Consultiva","El Consejo de Ministros, previo dictamen del Consejo de Estado","Las Cortes Generales, mediante ley específica"],"c":2,"e":"Art. 121.1 LCSP."},
+{"u":3,"t":"En la tramitación urgente (art. 119):","o":["No hay expediente y puede contratarse verbalmente","Los plazos se reducen a la mitad, con excepciones en los SARA, y la ejecución empieza en un mes como máximo","No cabe recurso especial y la fiscalización es posterior","Los plazos se reducen a un tercio, se suprime la mesa y no es necesario el certificado de crédito"],"c":1,"e":"Art. 119.2 LCSP. Lo demás es propio de la emergencia (art. 120)."},
+{"u":3,"t":"En la tramitación de emergencia:","o":["Cabe recurso especial con suspensión automática","Se reducen los plazos a la mitad, manteniendo el expediente","Puede contratarse verbalmente y no cabe recurso especial","Se requiere autorización previa del Consejo de Ministros"],"c":2,"e":"Arts. 37.1, 120 y 44.4 LCSP."},
+{"u":3,"t":"Límite del contrato menor de suministros y servicios:","o":["Valor estimado inferior a 40.000 €","Valor estimado inferior a 15.000 €","Valor estimado igual o inferior a 18.000 €","Valor estimado inferior a 60.000 €"],"c":1,"e":"Art. 118.1 LCSP. 40.000 € es el de obras."},
+{"u":3,"t":"Tras el Real Decreto-ley 3/2020, en el contrato menor:","o":["Debe justificarse que el contratista no ha suscrito en el año otros menores que superen el umbral","Se justifica que no se altera el objeto para eludir las reglas generales, sin límite anual por proveedor","Se exige siempre la petición de tres presupuestos y la publicación previa en el perfil","Se prohíbe adjudicar más de tres contratos menores al mismo contratista en el mismo ejercicio"],"c":1,"e":"Art. 118 vigente. El límite anual por proveedor se suprimió en 2020."},
+{"u":3,"t":"El contrato menor:","o":["Dura como máximo un año y no admite prórroga ni revisión de precios","Dura como máximo dos años, con una prórroga de uno","Dura como máximo un año, con una prórroga si se preavisa con dos meses","No tiene límite de duración si su valor no supera el umbral"],"c":0,"e":"Arts. 29.8 y 103.2 LCSP."},
+{"u":3,"t":"Los contratos menores se publican en el perfil de contratante:","o":["Antes de su adjudicación, como anuncio de licitación","Al menos trimestralmente, salvo los inferiores a 5.000 € pagados por anticipo de caja fija","Anualmente, junto con la memoria de la Junta Consultiva","Solo cuando su valor supere los 5.000 €, en el plazo de quince días desde su adjudicación"],"c":1,"e":"Art. 63.4 LCSP."},
+{"u":3,"t":"El pliego de prescripciones técnicas:","o":["Puede citar marcas concretas siempre que se justifique la calidad del producto","No puede citar marcas, salvo excepcionalmente y acompañadas de la mención «o equivalente»","Debe citar al menos tres marcas para garantizar la concurrencia","Lo aprueba el Consejo de Ministros previo dictamen del Consejo de Estado"],"c":1,"e":"Art. 126.6 LCSP."},
+{"u":4,"t":"Plazo mínimo de presentación de ofertas en el procedimiento abierto de un servicio SARA:","o":["30 días naturales desde el envío del anuncio al DOUE","35 días naturales desde el envío del anuncio al DOUE","26 días naturales desde la publicación del anuncio en el perfil de contratante","15 días naturales desde la publicación en el perfil"],"c":1,"e":"Art. 156.2 LCSP. 30 días es el de las concesiones."},
+{"u":4,"t":"Plazo mínimo de ofertas en el abierto NO SARA de suministros y servicios:","o":["15 días desde la publicación en el perfil","26 días desde la publicación en el perfil","35 días desde la publicación en el perfil","10 días hábiles desde la publicación en el perfil"],"c":0,"e":"Art. 156.6 LCSP. En obras y concesiones, 26 días."},
+{"u":4,"t":"El procedimiento abierto simplificado cabe en obras de valor estimado:","o":["Inferior a 80.000 €","Igual o inferior a 2.000.000 €","Inferior al umbral SARA de obras","Igual o inferior a 1.000.000 €"],"c":1,"e":"Art. 159.1.a LCSP."},
+{"u":4,"t":"En el abierto simplificado, los criterios evaluables mediante juicio de valor:","o":["Deben superar el 50 % de la puntuación","No pueden superar el 25 % (45 % en prestaciones intelectuales)","No pueden superar el 50 % (60 % en prestaciones intelectuales)","Están prohibidos en todo caso"],"c":1,"e":"Art. 159.1.b LCSP."},
+{"u":4,"t":"El abierto simplificado sumario cabe en suministros y servicios de valor estimado:","o":["Inferior a 60.000 €, salvo prestaciones intelectuales","Inferior a 80.000 €, incluidas las prestaciones intelectuales","Inferior a 100.000 €","Inferior a 35.000 €, salvo los de carácter intelectual"],"c":0,"e":"Art. 159.6 LCSP. En obras, inferior a 80.000 €."},
+{"u":4,"t":"En el abierto simplificado sumario:","o":["Se exige garantía definitiva del 5 % y mesa de contratación","Se exime de acreditar solvencia y no se exige garantía definitiva","Se valoran criterios de juicio de valor por un comité de expertos independiente","El plazo de ofertas es de 20 días naturales"],"c":1,"e":"Art. 159.6 LCSP. Plazo: 10 días hábiles (5 si son bienes disponibles en el mercado)."},
+{"u":4,"t":"En el procedimiento restringido, el número mínimo de candidatos invitados es:","o":["Tres","Cinco","Diez, o tres si así se motiva","Dos"],"c":1,"e":"Art. 162.1 LCSP. En la licitación con negociación y en el diálogo, tres."},
+{"u":4,"t":"Cuál de estos es un supuesto de negociado sin publicidad (art. 168):","o":["Que el contrato sea de servicios intelectuales de especial complejidad","Que la licitación previa haya quedado desierta por falta de ofertas adecuadas","Que el valor estimado no supere el umbral SARA","Que el órgano de contratación quiera negociar el precio con varios empresarios"],"c":1,"e":"Art. 168.a.1.º LCSP."},
+{"u":4,"t":"En el diálogo competitivo, la mesa debe contar con:","o":["Al menos un tercio de expertos en la materia","Un representante de cada candidato admitido","Mayoría de expertos ajenos a la Administración","Al menos dos interventores y un abogado del Estado"],"c":0,"e":"Art. 327 LCSP."},
+{"u":4,"t":"Duración máxima general de un acuerdo marco:","o":["Dos años","Cuatro años","Cinco años","Seis años"],"c":1,"e":"Art. 219.2 LCSP, salvo casos excepcionales justificados."},
+{"u":4,"t":"Ante una oferta incursa en presunción de anormalidad, el órgano de contratación:","o":["La excluye automáticamente, ya que los pliegos fijan el umbral","Requiere al licitador que la justifique, pide informe técnico y solo la excluye si no se justifica","La adjudica en todo caso, exigiendo al licitador una garantía complementaria del 10 % del precio","Da traslado al Tribunal Administrativo Central para que decida"],"c":1,"e":"Art. 149.4 LCSP."},
+{"u":4,"t":"Plazo del licitador mejor clasificado para presentar la documentación y la garantía definitiva (procedimiento abierto ordinario):","o":["5 días hábiles","10 días hábiles","15 días hábiles","7 días naturales"],"c":1,"e":"Art. 150.2 LCSP. En el simplificado, 7 días hábiles."},
+{"u":4,"t":"Recibida la documentación del mejor clasificado, el órgano adjudica en:","o":["Los 5 días hábiles siguientes","Los 10 días hábiles siguientes","Los 15 días naturales siguientes","Un mes"],"c":0,"e":"Art. 150.3 LCSP."},
+{"u":4,"t":"Si el contrato es susceptible de recurso especial, la formalización:","o":["Debe hacerse dentro de los 15 días hábiles siguientes a la notificación de la adjudicación","No puede hacerse antes de 15 días hábiles desde la remisión de la notificación de la adjudicación","Debe hacerse en los 5 días hábiles siguientes a la adjudicación","Se hace en el mismo acto de adjudicación"],"c":1,"e":"Art. 153.3 LCSP. La opción A es el régimen de los contratos que no admiten recurso especial."},
+{"u":5,"t":"Las prerrogativas de la Administración en los contratos administrativos incluyen:","o":["Interpretar, modificar, declarar la responsabilidad del contratista, suspender, resolver e inspeccionar","Interpretar, modificar, ceder el contrato a un tercero sin consentimiento y fijar libremente el precio","Modificar, resolver, imponer sanciones penales y ejecutar subsidiariamente cualquier obligación del contratista","Interpretar y resolver, pero no modificar, porque la modificación requiere acuerdo de ambas partes"],"c":0,"e":"Art. 190 LCSP."},
+{"u":5,"t":"Penalidad diaria por demora del contratista, salvo previsión distinta en los pliegos:","o":["0,20 € por cada 1.000 € del precio, IVA excluido","0,60 € por cada 1.000 € del precio, IVA excluido","1 € por cada 1.000 € del precio, IVA incluido","El 5 % del precio del contrato por cada semana de retraso imputable"],"c":1,"e":"Art. 193.3 LCSP. Cada múltiplo del 5 % del precio, el órgano puede resolver."},
+{"u":5,"t":"Si la Administración se demora en el pago más de cuatro meses, el contratista:","o":["Puede resolver el contrato y ser indemnizado","Puede suspender el cumplimiento, comunicándolo con un mes de antelación","Solo tiene derecho a intereses de demora, sin posibilidad de suspender la ejecución","Puede ceder el contrato sin autorización"],"c":1,"e":"Art. 198.5 LCSP. La resolución exige más de seis meses (198.6)."},
+{"u":5,"t":"Plazo de la Administración para aprobar la conformidad de la prestación y para pagarla:","o":["Treinta días para la conformidad y treinta días más para el pago","Sesenta días para la conformidad y treinta para el pago","Treinta días para todo","Un mes para la conformidad y dos meses más para el pago efectivo de la factura"],"c":0,"e":"Art. 198.4 LCSP."},
+{"u":5,"t":"Los daños causados a terceros por la ejecución del contrato:","o":["Los indemniza siempre la Administración, que puede repetir contra el contratista","Los indemniza el contratista, salvo que sean consecuencia inmediata y directa de una orden de la Administración","Los indemnizan ambos de forma solidaria","Los cubre la garantía definitiva hasta su importe y el resto el seguro obligatorio"],"c":1,"e":"Art. 196 LCSP."},
+{"u":5,"t":"Para ceder el contrato, el cedente debe haber ejecutado al menos:","o":["El 10 % del importe","El 20 % del importe","El 50 % del importe","La mitad del plazo"],"c":1,"e":"Art. 214.2.b LCSP; en concesiones, una quinta parte del plazo."},
+{"u":5,"t":"El contratista principal debe pagar a los subcontratistas en un plazo máximo de:","o":["30 días","60 días","90 días","120 días"],"c":1,"e":"Art. 216.4 LCSP."},
+{"u":5,"t":"La recepción o conformidad de la prestación debe producirse:","o":["Dentro del mes siguiente a la entrega o realización del objeto","Dentro de los seis meses siguientes a la entrega","En el plazo de garantía","Dentro de los quince días hábiles siguientes a la entrega o realización del objeto"],"c":0,"e":"Art. 210.2 LCSP."},
+{"u":5,"t":"Si el contrato se resuelve por imposibilidad de ejecutarlo o por lesión grave al interés público (211.1.g), el contratista tiene derecho, como regla, a:","o":["El 6 % del precio de la prestación dejada de realizar, en concepto de beneficio dejado de obtener","El 3 % del importe de la prestación dejada de realizar","La totalidad del beneficio industrial previsto","La devolución de la garantía sin indemnización"],"c":1,"e":"Art. 213.4 LCSP. El material visual lo extendía a cualquier causa imputable a la Administración: corrección."},
+{"u":5,"t":"Si el contrato se resuelve por incumplimiento culpable del contratista:","o":["Se le incauta la garantía e indemniza los daños en lo que excedan de su importe","Se le impone una multa del 3 % del precio","Se le devuelve la garantía y se le prohíbe contratar dos años","Solo se le incauta la garantía, sin más indemnización"],"c":0,"e":"Art. 213.3 LCSP."},
+{"u":6,"t":"La revisión de precios exige que se haya ejecutado al menos:","o":["El 20 % del importe y hayan transcurrido dos años desde la formalización","El 20 % del importe o hayan transcurrido dos años desde la adjudicación del contrato","El 50 % del importe y haya transcurrido un año","El 10 % del importe y hayan transcurrido dos años"],"c":0,"e":"Art. 103.5 LCSP: ambos requisitos."},
+{"u":6,"t":"Cuál de estos contratos NO admite revisión periódica y predeterminada de precios según el art. 103.2:","o":["Obras","Suministro de energía","Servicio de limpieza sin periodo de recuperación de la inversión","Suministro de fabricación de armas y equipamiento"],"c":2,"e":"También se revisan los contratos con un periodo de recuperación de la inversión de cinco años o más."},
+{"u":6,"t":"Una modificación no prevista en el pliego por circunstancias sobrevenidas e imprevisibles tiene un límite de:","o":["El 20 % del precio inicial","El 50 % del precio inicial, IVA excluido","El 10 % del precio inicial","El 15 % del precio inicial en obras y el 10 % en los demás contratos"],"c":1,"e":"Art. 205.2.b LCSP. El 20 % es el límite de la prevista (204)."},
+{"u":6,"t":"Las modificaciones no previstas son obligatorias para el contratista cuando:","o":["No superan el 20 % del precio inicial","No superan el 50 % del precio inicial","Las aprueba el Consejo de Ministros","Lo dice el pliego de prescripciones técnicas"],"c":0,"e":"Art. 206.1 LCSP. Por encima, puede negarse y el contrato se resuelve."},
+{"u":6,"t":"El dictamen del Consejo de Estado es preceptivo en las modificaciones:","o":["De cuantía igual o superior al 20 % del precio, en cualquier contrato","No previstas, de cuantía superior al 20 % del precio inicial, si este es igual o superior a 6 millones","Previstas en el pliego, de cuantía superior al 10 %","No previstas, de cualquier cuantía, cuando el contratista se oponga"],"c":1,"e":"Art. 191.3.b LCSP. El 20 % exacto no exige dictamen."},
+{"u":6,"t":"Es causa de nulidad de Derecho administrativo del contrato (art. 39):","o":["La falta de solvencia económica, financiera o técnica del adjudicatario","Cualquier modificación del contrato que no se ajuste a lo previsto en los arts. 204 y 205","El encargo a medio propio sin los requisitos del art. 32","Cualquier defecto de forma en la memoria justificativa"],"c":0,"e":"Art. 39.2.a LCSP (examen GACE 2019). B y C son anulabilidad (art. 40)."},
+{"u":6,"t":"La falta de publicación del anuncio de licitación en el perfil de contratante cuando sea preceptiva:","o":["Es causa de anulabilidad, subsanable en el plazo de quince días","Es causa de nulidad de pleno derecho","Es una irregularidad no invalidante si se publicó en el BOE","Solo afecta al contrato si es SARA"],"c":1,"e":"Art. 39.2.c LCSP (examen GACE 2022)."},
+{"u":6,"t":"Si la declaración de nulidad causa un grave trastorno al servicio público:","o":["Se mantiene el contrato en todo caso, con todas sus cláusulas, hasta su vencimiento natural","Puede acordarse la continuación de sus efectos hasta que se adopten medidas urgentes","Se suspende la nulidad hasta la sentencia firme","Se transforma automáticamente en un contrato menor"],"c":1,"e":"Art. 42.3 LCSP."},
+{"u":6,"t":"Es susceptible de recurso especial un contrato de servicios de valor estimado:","o":["Superior a 100.000 €","Superior a 140.000 €","Superior a 3.000.000 €","Igual o superior a 15.000 €"],"c":0,"e":"Art. 44.1.a LCSP. En obras y concesiones, superior a 3.000.000 €."},
+{"u":6,"t":"Plazo de interposición del recurso especial:","o":["Un mes desde la notificación","15 días hábiles desde la remisión de la notificación o publicación","10 días hábiles desde el conocimiento del acto o desde su publicación en el perfil","Dos meses desde la notificación"],"c":1,"e":"Art. 50.1 LCSP."},
+{"u":6,"t":"El recurso especial produce la suspensión automática del procedimiento cuando se interpone contra:","o":["Los pliegos","La adjudicación","La exclusión de un licitador","Cualquier acto recurrible"],"c":1,"e":"Art. 53 LCSP. En los demás casos, medidas cautelares."},
+{"u":6,"t":"El recurso especial:","o":["Es obligatorio antes de acudir a la vía contenciosa","Es potestativo y gratuito","Es potestativo, pero exige el pago de una tasa del 1 %","Es obligatorio y se resuelve en un mes"],"c":1,"e":"Art. 44.7 LCSP. Sustituye a los recursos administrativos ordinarios."},
+{"u":6,"t":"En la Administración General del Estado, el recurso especial lo resuelve:","o":["La Junta Consultiva de Contratación Pública del Estado","El Tribunal Administrativo Central de Recursos Contractuales","La Oficina Independiente de Regulación y Supervisión de la Contratación","El propio órgano de contratación en reposición"],"c":1,"e":"Art. 45 LCSP."},
+{"u":7,"t":"En el supuesto, antes de contestar a una cuestión de contratación, lo primero que procede escribir es:","o":["La conclusión, para que el corrector vea la respuesta de inmediato","La calificación previa: contrato oneroso, poder adjudicador, tipo, carácter administrativo, valor estimado y SARA","Un resumen de los hechos del enunciado, sin citar ninguna norma","Las posibles soluciones alternativas, sin decantarse por ninguna"],"c":1,"e":"Criterio de la Comisión: la calificación previa es lo que más puntúa en contratación."},
+{"u":7,"t":"El enunciado no precisa si hay festivos en el plazo del recurso especial. Según el método de la Comisión, lo correcto es:","o":["No calcular el plazo, porque falta un dato","Escribir «El enunciado no precisa si hay festivos, por lo que suponemos que no los hay» y calcular la fecha","Concluir que «podríamos entender que el plazo vence hacia finales de mayo»","Añadir «Salvo mejor criterio fundado en Derecho» al final de la respuesta"],"c":1,"e":"La suposición declarada se admite si se justifica. C y D son fórmulas que no deben usarse."},
+{"u":7,"t":"Un servicio de la AGE cuesta 75.000 € anuales sin IVA, dura 2 años y admite 1 de prórroga. La conclusión correcta es:","o":["Su valor estimado es de 150.000 € y cabe el abierto simplificado","Su valor estimado es de 225.000 €, está sujeto a regulación armonizada y no cabe el simplificado","Su valor estimado es de 272.250 € con IVA y se tramita por el sumario","Su valor estimado es de 75.000 € y es un contrato menor anual"],"c":1,"e":"Art. 101 (prórrogas incluidas, sin IVA) frente al umbral AGE de 140.000 €."},
+{"u":7,"t":"Una conclusión que la Comisión puntúa en una cuestión de contratación es:","o":["«Por tanto, se concluye que la exclusión es contraria al art. 149.4 LCSP y que procede el recurso especial»","«Podríamos entender que la exclusión quizá no fue del todo correcta»","«Salvo mejor criterio, parece que cabría algún recurso»","«La exclusión podría entenderse irregular, dependiendo de los pliegos»"],"c":0,"e":"La conclusión es afirmativa; la incertidumbre se resuelve antes con una suposición declarada."},
+{"u":7,"t":"Sigma oferta 130.000 € sin IVA. La garantía definitiva que debe constituir es:","o":["7.865 €","6.500 €","3.900 €","13.000 €"],"c":1,"e":"Art. 107.1: 5 % del precio ofertado sin IVA. 7.865 € sería el 5 % con IVA."},
+{"u":7,"t":"Se trocea una obra de 70.000 € en dos contratos menores de 35.000 €. En el supuesto se concluye que:","o":["Es válido, porque cada contrato es inferior a 40.000 €","Es un fraccionamiento prohibido por el art. 99.2 y procede un procedimiento por el valor total","Es válido si se piden tres presupuestos","Solo es irregular si el contratista es el mismo"],"c":1,"e":"Art. 99.2 LCSP."},
+{"u":7,"t":"La Administración paga con cinco meses de retraso. El contratista:","o":["Puede resolver el contrato inmediatamente","Puede suspender la ejecución con un mes de preaviso, pero aún no resolver","Solo puede reclamar en vía civil","Debe esperar a la recepción de la prestación para reclamar intereses de demora"],"c":1,"e":"Art. 198.5 y 198.6 LCSP."},
+{"u":7,"t":"El primer elemento de la introducción de la materia de contratación en el supuesto es:","o":["El art. 149.1.18.ª de la Constitución","El art. 103 de la Constitución","La Directiva 2014/24/UE","El art. 1 del Real Decreto 1098/2001, que fija el objeto"],"c":0,"e":"Plantillas v2, sección 7: Constitución → LCSP → RD 1098/2001 → objeto y umbrales (Orden HAC/1517/2025)."}
+];
+
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Marco, ámbito y clases",2:"Magnitudes y elementos",3:"Preparación y menor",4:"Adjudicación",5:"Ejecución y extinción",6:"Modificación, invalidez y recursos",7:"Supuesto práctico"};
+const TABS={1:"Ámbito",2:"Elementos",3:"Preparación",4:"Adjudicación",5:"Ejecución",6:"Invalidez",7:"Supuesto"};
+const SK="gace27_biv_t05_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
