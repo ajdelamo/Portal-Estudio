@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BIV · Tema 4 — El acto administrativo (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tablewrap table{break-inside:auto}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque IV · Derecho Administrativo · Tema 4</small>
+    <h1>El acto administrativo: concepto, clases y elementos. Eficacia y validez de los actos administrativos. Su motivación y notificación</h1>
+    <p>Versión fusionada: el Tema 4 del Bloque IV del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 24/10/2026 · Ley 39/2015 sin cambios desde 2024 · delegación de firma en sanciones permitida por la Ley 40/2015</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">Concepto y rasgos del acto</a></li>
+    <li><a href="#s2">Clases de actos</a></li>
+    <li><a href="#s3">Elemento subjetivo: la competencia</a></li>
+    <li><a href="#s4">Elementos objetivos y formales</a></li>
+    <li><a href="#s5">La motivación</a></li>
+    <li><a href="#s6">La eficacia</a></li>
+    <li><a href="#s7">La ejecución forzosa</a></li>
+    <li><a href="#s8">Notificación y publicación</a></li>
+    <li><a href="#s9">La validez: nulidad, anulabilidad y conservación</a></li>
+    <li><a href="#s10">Lo que preguntan y trampas</a></li>
+    <li><a href="#s11">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s12">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. El hilo es: «qué es el acto → quién lo dicta y cómo → cuándo produce efectos → cómo se impone → cuándo es inválido».</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Repaso en audio. Al terminar, recita la lista del <a href="#s10">apartado 10</a> sin mirar.</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s11">apartado 11</a> tapando la columna derecha. Este es el tema que más se usa en el ejercicio 2: casi todas las preguntas acaban en «¿es válido este acto?».</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+<div class="box clave"><span class="box-h">El tema con más preguntas de examen</span>
+El temario 2026 marca <strong>trece «ideas clave»</strong> que ya han caído en los exámenes GACE de 2019, 2022 y 2024. Aquí van todas, cada una en su apartado.</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> El acto administrativo: concepto y rasgos</h2>
+<div class="box clave"><span class="box-h">Definición doctrinal (la ley no define el acto)</span>
+Siguiendo a <strong>Zanobini</strong> y a <strong>García de Enterría</strong>: <span class="lit">la declaración de voluntad, de juicio, de conocimiento o de deseo realizada por la Administración en el ejercicio de una potestad administrativa distinta de la potestad reglamentaria</span>. El material visual la atribuye a Zanobini y Garrido Falla; el núcleo es el mismo.</div>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Rasgo</th><th>Qué significa</th></tr>
+<tr><td><strong>Es una declaración</strong></td><td>Exteriorización intelectual. Excluye las <strong>actuaciones materiales</strong> (la vía de hecho o la mera actividad técnica), que deben ampararse en un acto previo (art. 97 Ley 39/2015).</td></tr>
+<tr><td><strong>Procede de una Administración</strong></td><td>Actuando sometida al Derecho administrativo (art. 2.3 Ley 39/2015). Los actos de los <strong>órganos constitucionales</strong> en materia de personal, administración y gestión patrimonial también se impugnan ante el contencioso (<span class="art">Art. 1.3 LJCA</span>). Excepcionalmente, entidades privadas del sector público con potestades atribuidas por ley.</td></tr>
+<tr><td><strong>En ejercicio de una potestad administrativa</strong></td><td>Atribuida por el ordenamiento: principio de legalidad.</td></tr>
+<tr><td><strong>Distinta de la potestad reglamentaria</strong></td><td>El acto <strong>aplica</strong> el ordenamiento; el reglamento lo <strong>integra</strong> (Tema 3).</td></tr>
+<tr><td><strong>Unilateral y ejecutiva</strong></td><td>Produce efectos por sí misma, sin el consentimiento del destinatario, y goza de <strong>presunción de validez</strong>.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Idea clave (examen GACE 2022)</span>
+El reconocimiento de un <strong>trienio</strong> a un funcionario <strong>es</strong> un acto administrativo. Una disposición general, una sentencia o la reclamación de un ciudadano <strong>no</strong> lo son.</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> Clases de actos administrativos (con su consecuencia práctica)</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Criterio</th><th style="width:38%">Clases</th><th>Consecuencia de examen</th></tr>
+<tr><td>Efectos sobre los destinatarios</td><td><strong>Favorables</strong> o declarativos de derechos (licencias, autorizaciones, subvenciones) y <strong>desfavorables o de gravamen</strong> (sanciones, órdenes, expropiaciones).</td><td>Determina revocación, retroactividad y revisión. Favorables: solo por revisión de oficio (106) o lesividad (107). Gravamen: revocables (<span class="art">Art. 109.1</span>) mientras no prescriba, si no es dispensa no permitida ni contraria a la igualdad, al interés público o al ordenamiento.</td></tr>
+<tr><td>Posición en el procedimiento</td><td><strong>Resoluciones</strong> o actos definitivos (deciden el fondo) y <strong>actos de trámite</strong> (preparan la resolución).</td><td>El trámite solo es recurrible si es <strong>cualificado</strong> (<span class="art">Art. 112.1</span>): decide directa o indirectamente el fondo, impide continuar, o produce indefensión o perjuicio irreparable. Contra los demás: alegaciones (art. 76), que se tendrán en cuenta al resolver.</td></tr>
+<tr><td>Impugnabilidad</td><td>Que <strong>ponen fin a la vía administrativa</strong> (reposición potestativa o contencioso directo) y que <strong>no</strong> la agotan (alzada). <strong>Firmes</strong> (transcurridos los plazos) y <strong>consentidos</strong>.</td><td>Fin de vía (<span class="art">Art. 114</span>): alzada resuelta, órganos sin superior, responsabilidad patrimonial, pactos finalizadores… En la AGE (114.2): Gobierno y sus miembros, Ministros y Secretarios de Estado, y Directores generales o superiores <strong>en materia de personal</strong>. Contra el acto firme solo cabe el extraordinario de revisión (art. 125).</td></tr>
+<tr><td>Número de destinatarios</td><td><strong>Singulares</strong> y <strong>plúrimos o generales</strong>.</td><td>La convocatoria de pruebas selectivas es un acto general: no es norma porque se agota con su cumplimiento.</td></tr>
+<tr><td>Forma de manifestación</td><td><strong>Expresos</strong> y <strong>presuntos</strong> (silencio, arts. 24-25); <strong>escritos</strong> (regla, por medios electrónicos) y <strong>verbales</strong>; <strong>tácitos</strong> (comportamiento concluyente).</td><td>Regla: escritos a través de medios electrónicos (<span class="art">Art. 36.1</span>).</td></tr>
+<tr><td>Grado de vinculación normativa</td><td><strong>Reglados</strong> (contenido predeterminado) y <strong>discrecionales</strong> (la norma permite elegir entre varias soluciones igualmente justas).</td><td>Discrecionalidad no es arbitrariedad (9.3 CE): control por los <strong>elementos reglados</strong>, los <strong>hechos determinantes</strong>, los <strong>principios generales</strong> y la <strong>desviación de poder</strong>. Motivación obligatoria (35.1.i).</td></tr>
+<tr><td>Órgano</td><td><strong>Unipersonales</strong> y <strong>colegiados</strong>; <strong>simples</strong> y <strong>complejos</strong> (intervienen varios órganos).</td><td>En los colegiados, las reglas esenciales de formación de la voluntad son causa de nulidad (47.1.e).</td></tr>
+<tr><td>Contenido</td><td><strong>Constitutivos</strong> (crean, modifican o extinguen situaciones) y <strong>declarativos</strong> (constatan una situación).</td><td>—</td></tr>
+</table></div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> El elemento subjetivo: la competencia</h2>
+<div class="box clave"><span class="box-h">Art. 8 Ley 40/2015</span>
+El acto debe dictarlo el <strong>órgano competente</strong> (por materia, territorio y jerarquía). La competencia es <strong>irrenunciable</strong> y se ejerce por los órganos que la tengan atribuida como propia, salvo delegación o avocación. Si una norma atribuye la competencia a una Administración sin especificar el órgano, instruir y resolver corresponde a los <strong>órganos inferiores</strong> competentes por razón de la materia y del territorio.</div>
+<h3>Las técnicas que alteran el ejercicio de la competencia</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Técnica</th><th>Régimen</th><th style="width:22%">¿Cambia la titularidad?</th></tr>
+<tr><td><strong>Delegación de competencias</strong><br><span class="art">Art. 9</span></td><td>En otros órganos de la misma Administración, <strong>aun no jerárquicamente dependientes</strong>, o en organismos públicos vinculados o dependientes. En la AGE, la aprueba previamente el órgano ministerial del que dependa el delegante. <strong>Indelegables</strong>: relaciones con la Jefatura del Estado, la Presidencia del Gobierno, las Cortes, las Presidencias de los Consejos de Gobierno autonómicos y las Asambleas autonómicas; la adopción de <strong>disposiciones de carácter general</strong>; la <strong>resolución de recursos</strong> en el órgano que dictó el acto recurrido; y lo que disponga una norma con rango de ley. Se <strong>publica</strong> en el diario oficial. Las resoluciones indican que se dictan por delegación y se consideran <strong>dictadas por el delegante</strong>. No cabe delegar lo ya delegado, salvo autorización legal. Revocable en cualquier momento.</td><td>No: cambia el ejercicio. La resolución es del delegante.</td></tr>
+<tr><td><strong>Avocación</strong><br><span class="art">Art. 10</span></td><td>El órgano superior asume uno o varios asuntos que corresponden, ordinariamente o por delegación, a sus dependientes, cuando circunstancias técnicas, económicas, sociales, jurídicas o territoriales lo hagan conveniente. Si la delegación fue en un órgano no dependiente, solo avoca el delegante. <strong>Acuerdo motivado</strong> notificado a los interesados <strong>antes o simultáneamente</strong> a la resolución final. Sin recurso propio: se impugna en el que se interponga contra la resolución.</td><td>No.</td></tr>
+<tr><td><strong>Encomienda de gestión</strong><br><span class="art">Art. 11</span></td><td>Actividades de carácter <strong>material o técnico</strong>, a otros órganos o entidades de la misma o de distinta Administración, por eficacia o falta de medios. Entre Administraciones distintas, por <strong>convenio</strong>.</td><td>No cede la titularidad ni los elementos sustantivos de su ejercicio.</td></tr>
+<tr><td><strong>Delegación de firma</strong><br><span class="art">Art. 12</span></td><td>Los titulares de los órganos pueden delegar la firma de sus resoluciones y actos en los titulares de órganos o unidades que dependan de ellos, dentro de los límites del art. 9. Para su validez <strong>no hace falta publicarla</strong>. En la resolución consta que se firma por delegación y la <strong>autoridad de procedencia</strong>.</td><td>No altera la competencia del delegante.</td></tr>
+<tr><td><strong>Suplencia</strong><br><span class="art">Art. 13</span></td><td>En vacante, ausencia o enfermedad, o tras abstención o recusación: suple temporalmente quien designe el órgano competente para el nombramiento o, en su defecto, el inmediato superior. Basta con que conste la suplencia.</td><td>No: no altera la competencia.</td></tr>
+<tr><td><strong>Conflictos</strong><br><span class="art">Art. 14</span></td><td>El órgano que se estime incompetente remite las actuaciones al que considere competente si son de la misma Administración. Los conflictos de atribuciones solo entre órganos de una misma Administración <strong>no relacionados jerárquicamente</strong> y en asuntos cuyo procedimiento no haya finalizado.</td><td>—</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al temario 2026: la delegación de firma SÍ cabe en las sanciones</span>
+El temario dice que la delegación de firma «no cabe en las resoluciones de carácter sancionador». Esa prohibición era del art. 16.4 de la Ley 30/1992. El art. 12 de la Ley 40/2015 <strong>la suprimió</strong>: hoy solo limita la delegación de firma a los mismos límites del art. 9. Si el test dice «no cabe en sanciones», busca si pregunta por la ley derogada.</div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026: la avocación se notifica «con anterioridad o simultáneamente»</span>
+El temario dice «antes de la resolución final». El art. 10.2 añade «o simultáneamente». Es un literal de test.</div>
+<h3>Imparcialidad del titular: abstención y recusación (arts. 23 y 24 Ley 40/2015)</h3>
+<div class="grid2">
+<div class="card"><h4>Causas de abstención (23.2)</h4><ol>
+<li><strong>Interés personal</strong> en el asunto o en otro cuya resolución pueda influir; ser administrador de sociedad interesada o tener cuestión litigiosa pendiente con algún interesado.</li>
+<li><strong>Parentesco</strong>: matrimonio o situación de hecho asimilable, consanguinidad dentro del <strong>cuarto grado</strong> o afinidad dentro del <strong>segundo</strong>, con interesados, administradores o asesores.</li>
+<li><strong>Amistad íntima o enemistad manifiesta</strong>.</li>
+<li>Haber intervenido como <strong>perito o testigo</strong>.</li>
+<li><strong>Relación de servicio</strong> con persona interesada o haberle prestado servicios profesionales en los dos últimos años.</li></ol></div>
+<div class="card"><h4>Consecuencias</h4>La actuación de quien debía abstenerse <strong>no implica necesariamente la invalidez</strong> del acto, pero sí la <strong>responsabilidad</strong> que proceda (23.4). Los interesados pueden <strong>recusar en cualquier momento</strong> de la tramitación (24).<div class="q">Idea clave (examen GACE 2019): no invalida necesariamente, pero genera responsabilidad.</div></div>
+</div>
+<div class="box trampa"><span class="box-h">La distinción más preguntada: incompetencia</span>
+Incompetencia <strong>manifiesta por razón de la materia o del territorio</strong> → <strong>NULIDAD</strong> de pleno derecho (<span class="art">Art. 47.1.b Ley 39/2015</span>).<br>
+Incompetencia <strong>jerárquica</strong> (no manifiesta) → <strong>ANULABILIDAD</strong>, convalidable por el superior jerárquico competente (<span class="art">Art. 52.3</span>).</div>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> Elementos objetivos y formales</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Elemento</th><th>Contenido</th><th style="width:28%">Si falla</th></tr>
+<tr><td><strong>Presupuesto de hecho</strong></td><td>La situación fáctica que la norma prevé para dictar el acto (el material visual lo llama elemento causal: presupuestos de hecho y de derecho).</td><td>Su inexistencia o apreciación errónea vicia el acto.</td></tr>
+<tr><td><strong>Contenido u objeto</strong></td><td>Lo que el acto decide, declara o certifica. Se ajustará al ordenamiento y será <strong>determinado y adecuado a los fines</strong> (<span class="art">Art. 34.2</span>). Lícito, posible y determinado. En los discrecionales puede incluir <strong>elementos accidentales</strong>: condición, término y modo.</td><td>Imposible → nulidad (47.1.c). Constitutivo de infracción penal → nulidad (47.1.d).</td></tr>
+<tr><td><strong>Causa</strong></td><td>La adecuación del acto al interés público concreto que justifica la potestad.</td><td>Invalidez.</td></tr>
+<tr><td><strong>Fin</strong></td><td>El que la norma tuvo en cuenta al atribuir la potestad.</td><td><strong>Desviación de poder</strong>: ejercicio de potestades para fines distintos de los fijados por el ordenamiento (<span class="art">Art. 70.2 LJCA</span>), aunque sean públicos → <strong>anulabilidad</strong> (48.1).</td></tr>
+<tr><td><strong>Procedimiento</strong></td><td>Los actos se producen siguiendo el procedimiento establecido (<span class="art">Art. 34.1</span>).</td><td>Prescindir <strong>total y absolutamente</strong> de él → nulidad (47.1.e). Un trámite omitido suele ser anulabilidad o irregularidad.</td></tr>
+<tr><td><strong>Forma</strong></td><td>Ver abajo (art. 36).</td><td>Defecto de forma: anulabilidad solo si falta un requisito indispensable o hay indefensión (48.2).</td></tr>
+<tr><td><strong>Motivación</strong></td><td>Apartado 5.</td><td>—</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">La forma (art. 36 Ley 39/2015)</span>
+<strong>36.1</strong>: los actos se producen <strong>por escrito a través de medios electrónicos</strong>, salvo que su naturaleza exija otra forma más adecuada de expresión y constancia.<br>
+<strong>36.2</strong>: si el órgano ejerce su competencia <strong>de forma verbal</strong>, la constancia escrita, cuando sea necesaria, la efectúa y firma el <strong>titular del órgano inferior o funcionario que la reciba oralmente</strong>, expresando la autoridad de la que procede. Si son resoluciones, el titular de la competencia autoriza una <strong>relación</strong> de las dictadas verbalmente, con su contenido.<br>
+<strong>36.3</strong>: los actos de la misma naturaleza pueden <strong>refundirse en uno solo</strong>, que especifique las personas y circunstancias que individualicen los efectos para cada interesado.</div>
+<div class="box clave"><span class="box-h">Idea clave (exámenes GACE 2019 y 2022)</span>
+La Ley 39/2015 contempla la forma verbal en su <strong>artículo 36</strong> (2022), con constancia escrita por el <strong>titular del órgano inferior o funcionario que la reciba oralmente</strong> cuando sea necesaria (2019 y 2022).</div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> La motivación</h2>
+<div class="box clave"><span class="box-h">Concepto y función</span>
+Exposición de las <strong>razones de hecho y de Derecho</strong> que justifican la decisión, «con sucinta referencia de hechos y fundamentos de derecho». Tres funciones: que el interesado conozca los fundamentos para <strong>defenderse</strong>, facilitar el <strong>control judicial</strong> y garantizar la <strong>interdicción de la arbitrariedad</strong> (9.3 CE). Debe ser <strong>suficiente</strong>, aunque puede ser <strong>sucinta</strong>. En las potestades discrecionales es la principal barrera frente a la arbitrariedad.</div>
+<div class="box clave"><span class="box-h">Motivación «in aliunde» (art. 88.6 Ley 39/2015)</span>
+La aceptación de informes o dictámenes sirve de motivación cuando se <strong>incorporen al texto de la resolución</strong>.</div>
+<div class="box fix"><span class="box-h">Corrección al material visual</span>
+El visual situaba la motivación <em>in aliunde</em> en el art. 35.2 y la admitía con informes «incorporados al expediente». Es el <strong>art. 88.6</strong>, y exige incorporarlos <strong>al texto de la resolución</strong>; el 35.2 trata de los procedimientos selectivos. También he retirado dos sentencias que citaba (STC 14/2002 y STS de 27/04/1988), porque no he podido verificar que digan lo que se les atribuía.</div>
+<h3>Actos que deben motivarse (art. 35.1 Ley 39/2015, lista examinable)</h3>
+<ol class="recite">
+<li><strong>a)</strong> Los que <strong>limiten derechos subjetivos o intereses legítimos</strong>.</li>
+<li><strong>b)</strong> Los que resuelvan procedimientos de <strong>revisión de oficio</strong> de disposiciones o actos, <strong>recursos administrativos</strong> y procedimientos de <strong>arbitraje</strong>, y los que declaren su <strong>inadmisión</strong>.</li>
+<li><strong>c)</strong> Los que se <strong>separen del criterio seguido en actuaciones precedentes o del dictamen de órganos consultivos</strong>.</li>
+<li><strong>d)</strong> Los acuerdos de <strong>suspensión de actos</strong>, cualquiera que sea el motivo, y la adopción de <strong>medidas provisionales</strong> (art. 56).</li>
+<li><strong>e)</strong> Los acuerdos de aplicación de la <strong>tramitación de urgencia</strong>, de <strong>ampliación de plazos</strong> y de realización de <strong>actuaciones complementarias</strong>.</li>
+<li><strong>f)</strong> Los que <strong>rechacen pruebas</strong> propuestas por los interesados.</li>
+<li><strong>g)</strong> Los que acuerden la terminación por <strong>imposibilidad material sobrevenida</strong> y el <strong>desistimiento de la Administración</strong> en procedimientos iniciados de oficio.</li>
+<li><strong>h)</strong> Las <strong>propuestas de resolución en los sancionadores</strong> y los actos que resuelvan procedimientos <strong>sancionadores o de responsabilidad patrimonial</strong>.</li>
+<li><strong>i)</strong> Los dictados en el ejercicio de <strong>potestades discrecionales</strong> y los que deban serlo por disposición legal o reglamentaria expresa.</li>
+</ol>
+<p><strong>Art. 35.2</strong>: en los procedimientos <strong>selectivos y de concurrencia competitiva</strong>, la motivación se ajusta a lo que dispongan sus convocatorias, pero en todo caso deben quedar acreditados en el procedimiento los fundamentos de la resolución.</p>
+<div class="box trampa"><span class="box-h">Consecuencia de la falta de motivación</span>
+Es un <strong>defecto de forma</strong> que determina la <strong>anulabilidad</strong> cuando produce <strong>indefensión</strong> (48.2). No es nulidad de pleno derecho, salvo una indefensión absoluta equiparable a prescindir del procedimiento.</div>
+<div class="box clave"><span class="box-h">Idea clave (exámenes GACE 2019 y 2022)</span>
+Deben motivarse, entre otros, los actos que se separen del criterio seguido en actuaciones precedentes. <strong>No todos los actos deben motivarse</strong>: solo los del art. 35.</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> La eficacia de los actos administrativos</h2>
+<div class="box clave"><span class="box-h">Validez ≠ eficacia</span>
+<strong>Validez</strong>: conformidad con el ordenamiento. <strong>Eficacia</strong>: producción de efectos. Un acto puede ser válido e ineficaz (aún no notificado) o inválido y eficaz (anulable no recurrido). La notificación es requisito de <strong>eficacia</strong>, no de validez.</div>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Regla</th><th>Contenido</th><th style="width:14%">Artículo</th></tr>
+<tr><td><strong>Ejecutividad</strong></td><td>Los actos sujetos al Derecho administrativo son ejecutivos con arreglo a la ley.</td><td><span class="art">38</span></td></tr>
+<tr><td><strong>Presunción de validez y eficacia inmediata</strong></td><td>Se presumen válidos y producen efectos <strong>desde la fecha en que se dicten, salvo que en ellos se disponga otra cosa</strong> (autotutela declarativa).</td><td><span class="art">39.1</span></td></tr>
+<tr><td><strong>Eficacia demorada</strong></td><td>Cuando lo exija el <strong>contenido</strong> del acto (condición, plazo) o esté supeditada a su <strong>notificación, publicación o aprobación superior</strong>.</td><td><span class="art">39.2</span></td></tr>
+<tr><td><strong>Retroactividad excepcional</strong></td><td>Solo: (1) actos dictados en <strong>sustitución de actos anulados</strong>; (2) actos <strong>favorables</strong>, si los supuestos de hecho ya existían en la fecha a la que se retrotrae la eficacia y no se lesionan derechos o intereses legítimos de otras personas.</td><td><span class="art">39.3</span></td></tr>
+<tr><td><strong>Efectos sobre otros órganos</strong></td><td>Las normas y actos dictados en ejercicio de la propia competencia deben ser <strong>observados por el resto de órganos</strong>, aunque no dependan jerárquicamente o sean de otra Administración.</td><td><span class="art">39.4</span></td></tr>
+<tr><td><strong>Cuestionamiento entre Administraciones</strong></td><td>Si una Administración tiene que dictar un acto basado en otro de otra Administración que considera ilegal, puede <strong>requerirla previamente</strong> para que lo anule o revise (art. 44 LJCA) y, si rechaza el requerimiento, interponer recurso contencioso-administrativo.</td><td><span class="art">39.5</span></td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Idea clave (exámenes GACE 2019 y 2022)</span>
+Los actos producen efectos desde que se dictan <strong>«salvo que en ellos se disponga otra cosa»</strong>, no «en todo caso» (2019) · la eficacia se demora cuando lo exija su contenido o esté supeditada a su notificación, publicación o aprobación superior (2022) · cabe la retroactividad cuando el acto se dicta en <strong>sustitución de actos anulados</strong> (2022).</div>
+<div class="box clave"><span class="box-h">El recurso no suspende (art. 117 Ley 39/2015)</span>
+Regla: la interposición de un recurso <strong>no suspende</strong> la ejecución (117.1). Suspensión excepcional si la ejecución puede causar perjuicios de <strong>imposible o difícil reparación</strong> o si la impugnación se funda en una causa de <strong>nulidad del 47.1</strong> (117.2). En vía judicial, art. 130 LJCA. Este apartado procede del material visual.</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> La ejecución forzosa</h2>
+<div class="flowv">
+<div class="step"><b>1 · Título previo (art. 97)</b>Ninguna actuación material de ejecución que limite derechos sin una resolución previa que le sirva de fundamento. Sin ella hay <strong>vía de hecho</strong>.</div>
+<div class="step"><b>2 · Ejecutoriedad (art. 98)</b>Los actos son <strong>inmediatamente ejecutivos</strong>, salvo: a) que se suspenda su ejecución; b) que sea una <strong>resolución sancionadora contra la que quepa algún recurso en vía administrativa</strong>, incluida la reposición; c) que una disposición establezca lo contrario; d) que necesite aprobación o autorización superior.</div>
+<div class="step"><b>3 · Apercibimiento (art. 99)</b>La Administración puede proceder, <strong>previo apercibimiento</strong>, a la ejecución forzosa, salvo que se suspenda la ejecución o que la Constitución o la ley exijan la intervención de un órgano judicial.</div>
+<div class="step"><b>4 · Medio proporcionado (art. 100)</b>Respetando el principio de proporcionalidad y eligiendo el <strong>menos restrictivo de la libertad individual</strong>. Si hay que entrar en un <strong>domicilio</strong> o lugar que requiera autorización de su titular: su consentimiento o, en su defecto, <strong>autorización judicial</strong> (100.3).</div>
+</div>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Medio</th><th>Cuándo</th><th style="width:32%">Claves</th></tr>
+<tr><td><strong>Apremio sobre el patrimonio</strong> (101)</td><td>Cantidades líquidas.</td><td>Por el Reglamento General de Recaudación.</td></tr>
+<tr><td><strong>Ejecución subsidiaria</strong> (102)</td><td>Actos <strong>no personalísimos</strong> que puede realizar un sujeto distinto del obligado.</td><td>La Administración lo hace por sí o por tercero, <strong>a costa del obligado</strong>.</td></tr>
+<tr><td><strong>Multa coercitiva</strong> (103)</td><td>Cuando lo <strong>autoricen las leyes</strong>, reiterada por lapsos de tiempo suficientes para cumplir lo ordenado.</td><td><strong>Independiente de las sanciones y compatible con ellas</strong>. No es una sanción.</td></tr>
+<tr><td><strong>Compulsión sobre las personas</strong> (104)</td><td>Obligaciones <strong>personalísimas de no hacer o soportar</strong>.</td><td>Solo si la ley lo autoriza expresamente, con respeto a la dignidad y a los derechos constitucionales.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Prohibición de interdictos (art. 105) e idea clave</span>
+No se admiten a trámite <strong>acciones posesorias</strong> contra las actuaciones de los órganos administrativos realizadas en materia de su competencia y de acuerdo con el procedimiento legal.<br>
+Idea clave (examen GACE 2022): la <strong>multa coercitiva es un medio de ejecución forzosa</strong>.</div>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> La notificación y la publicación</h2>
+<h3>8.1 La notificación (art. 40 Ley 39/2015)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Regla</th><th>Contenido</th></tr>
+<tr><td>A quién (40.1)</td><td>A los interesados cuyos derechos e intereses sean afectados.</td></tr>
+<tr><td>Plazo (40.2)</td><td>Cursada dentro de los <strong>10 días</strong> desde que se dicta el acto.</td></tr>
+<tr><td>Contenido (40.2)</td><td><strong>Texto íntegro</strong>, si pone fin o no a la vía administrativa, los <strong>recursos</strong> que procedan, el <strong>órgano</strong> y el <strong>plazo</strong>, sin perjuicio de que el interesado ejercite cualquier otro.</td></tr>
+<tr><td>Defectuosa (40.3)</td><td>Con el texto íntegro pero sin los demás requisitos: surte efecto desde que el interesado realice actuaciones que supongan conocer el contenido y alcance de la resolución o interponga el recurso procedente.</td></tr>
+<tr><td>Plazo máximo para resolver (40.4)</td><td>Basta la notificación que contenga al menos el texto íntegro de la resolución y el <strong>intento de notificación debidamente acreditado</strong>.</td></tr>
+<tr><td>Datos personales (40.5)</td><td>Pueden adoptarse medidas para protegerlos.</td></tr>
+</table></div>
+<h3>8.2 La práctica de las notificaciones (arts. 41 a 44)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Regla</th><th>Contenido</th></tr>
+<tr><td>Preferencia electrónica (41.1)</td><td>Preferentemente electrónicas y, <strong>en todo caso</strong>, cuando el interesado esté <strong>obligado</strong> a recibirlas así (art. 14.2: personas jurídicas, entidades sin personalidad, profesionales colegiados, representantes de obligados, empleados públicos por razón de su condición). Otros medios: comparecencia espontánea en las oficinas o entrega directa de un empleado público para asegurar la eficacia.</td></tr>
+<tr><td>Requisitos de validez (41.1)</td><td>Constancia del envío o puesta a disposición, de la recepción o acceso, de fechas y horas, del contenido íntegro y de la identidad fidedigna de remitente y destinatario.</td></tr>
+<tr><td>Rechazo (41.5)</td><td>Se hace constar en el expediente, con las circunstancias del intento y el medio, <strong>dando por efectuado el trámite</strong> y siguiendo el procedimiento.</td></tr>
+<tr><td>Varios cauces (41.7)</td><td>Fecha de notificación: la que se haya producido <strong>en primer lugar</strong>.</td></tr>
+<tr><td>Papel (42.2)</td><td>Si el interesado no está, puede recogerla <strong>cualquier persona mayor de 14 años</strong> que esté en el domicilio y se identifique. Si nadie se hace cargo: se anota y se repite <strong>una sola vez</strong>, en <strong>hora distinta</strong>, <strong>dentro de los 3 días siguientes</strong>. Si el primer intento fue antes de las 15:00, el segundo después de las 15:00, y viceversa, con al menos <strong>3 horas</strong> de margen.</td></tr>
+<tr><td>Electrónica (43)</td><td>Por comparecencia en la <strong>sede electrónica</strong>, la <strong>dirección electrónica habilitada única</strong> o ambos. Se entiende practicada al <strong>acceder</strong> al contenido y <strong>rechazada</strong> a los <strong>10 días naturales</strong> desde la puesta a disposición sin acceso.</td></tr>
+<tr><td>Infructuosa (44)</td><td>Interesados desconocidos, lugar o medio ignorados, o intento sin éxito: <strong>anuncio en el BOE</strong> (Tablón Edictal Único). Además, con carácter facultativo, en el boletín autonómico o provincial, el tablón del Ayuntamiento del último domicilio o el consulado.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al material visual</span>
+El visual situaba el segundo intento en papel en el art. 41.5. Es el <strong>art. 42.2</strong>; el 41.5 regula el rechazo.</div>
+<div class="box clave"><span class="box-h">Idea clave (examen GACE 2022)</span>
+El <strong>rechazo</strong> se hace constar en el expediente, <strong>dando por efectuado el trámite</strong> · en papel infructuosa, el intento se repite <strong>una sola vez en hora distinta dentro de los tres días siguientes</strong>.</div>
+<h3>8.3 La publicación (arts. 45 y 46)</h3>
+<div class="grid2">
+<div class="card"><h4>Cuándo se publica (45)</h4>Cuando lo establezcan las normas del procedimiento o lo aconsejen razones de interés público. <strong>En todo caso</strong>: si el acto tiene por destinatario una <strong>pluralidad indeterminada</strong> de personas o la notificación a uno solo es insuficiente para todos; y si es un acto de un <strong>procedimiento selectivo o de concurrencia competitiva</strong> (la convocatoria indica el medio). La publicación <strong>surte los efectos de la notificación</strong>.</div>
+<div class="card"><h4>Indicación somera (46)</h4>Si el órgano aprecia que la publicación íntegra <strong>lesiona derechos o intereses legítimos</strong>, publica solo una <strong>somera indicación</strong> del contenido y del lugar donde los interesados pueden comparecer para conocerlo íntegramente.</div>
+</div>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> La validez: nulidad, anulabilidad y conservación</h2>
+<h3>9.1 Las siete causas de nulidad de pleno derecho (art. 47.1 Ley 39/2015)</h3>
+<ol class="recite">
+<li><strong>a)</strong> Los que <strong>lesionen los derechos y libertades susceptibles de amparo constitucional</strong> (arts. 14 a 29 y 30.2 CE).</li>
+<li><strong>b)</strong> Los dictados por órgano <strong>manifiestamente incompetente por razón de la materia o del territorio</strong>.</li>
+<li><strong>c)</strong> Los que tengan un <strong>contenido imposible</strong>.</li>
+<li><strong>d)</strong> Los que sean <strong>constitutivos de infracción penal</strong> o se dicten como consecuencia de esta.</li>
+<li><strong>e)</strong> Los dictados <strong>prescindiendo total y absolutamente del procedimiento</strong> o de las <strong>normas esenciales para la formación de la voluntad de los órganos colegiados</strong>.</li>
+<li><strong>f)</strong> Los actos expresos o <strong>presuntos</strong> contrarios al ordenamiento por los que se <strong>adquieren facultades o derechos careciendo de los requisitos esenciales</strong>.</li>
+<li><strong>g)</strong> Cualquier otro que se establezca <strong>expresamente en una disposición con rango de ley</strong>.</li>
+</ol>
+<p><strong>Art. 47.2</strong>: son también nulas las <strong>disposiciones</strong> que vulneren la Constitución, las leyes u otras disposiciones de rango superior, las que regulen materias reservadas a la ley y las que establezcan la retroactividad de disposiciones sancionadoras no favorables o restrictivas de derechos individuales (Tema 3).</p>
+<div class="grid2">
+<div class="card"><h4>NULIDAD (art. 47)</h4><ul>
+<li>Insubsanable: <strong>no se convalida</strong>.</li>
+<li><strong>Imprescriptible</strong>: revisión de oficio en cualquier momento (106), de oficio o a instancia del interesado.</li>
+<li>Efectos <strong><em>ex tunc</em></strong>, desde el origen.</li>
+<li>Apreciable de oficio.</li></ul></div>
+<div class="card"><h4>ANULABILIDAD (art. 48)</h4><ul>
+<li><strong>Regla general</strong> de la invalidez: cualquier infracción del ordenamiento, <strong>incluida la desviación de poder</strong> (48.1).</li>
+<li><strong>Convalidable</strong> (52); queda <strong>firme</strong> si no se recurre en plazo.</li>
+<li>Revisión de oficio de los favorables: <strong>declaración de lesividad</strong> en el plazo de <strong>4 años</strong> desde que se dictó el acto, y recurso contencioso (107).</li>
+<li>Efectos: los manuales de oposición los dan como <em>ex nunc</em>; la ley no lo dice expresamente.</li></ul></div>
+</div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026: el plazo de cuatro años de la lesividad</span>
+El temario habla de «declaración de lesividad y la impugnación ante la jurisdicción contencioso-administrativa en el plazo de cuatro años». Los cuatro años son para <strong>declarar la lesividad</strong>, contados desde que se dictó el acto (107.2). Después, la Administración interpone el recurso contencioso en el plazo de <strong>dos meses</strong> desde la declaración (46.5 LJCA). Y el procedimiento de lesividad caduca a los <strong>seis meses</strong> sin declararla (107.3).</div>
+<div class="box trampa"><span class="box-h">Defectos de forma y de plazo (arts. 48.2 y 48.3)</span>
+El defecto de forma solo anula si el acto <strong>carece de los requisitos formales indispensables para alcanzar su fin</strong> o causa <strong>indefensión</strong>; si no, es una <strong>irregularidad no invalidante</strong>. La actuación fuera de plazo solo anula <strong>cuando lo imponga la naturaleza del término o plazo</strong>.</div>
+<div class="box clave"><span class="box-h">Idea clave (exámenes GACE 2019, 2022 y 2024)</span>
+Prescindir de las reglas esenciales de formación de la voluntad de los <strong>órganos colegiados</strong> → <strong>nulidad</strong>, no anulabilidad (2019) · el <strong>defecto de forma</strong> solo anula si faltan requisitos indispensables o hay indefensión (<strong>2024</strong>) · las <strong>disposiciones</strong> que regulan materias reservadas a la ley son <strong>nulas</strong> (2022).</div>
+<h3>9.2 Las técnicas de conservación (arts. 49 a 52)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Técnica</th><th>Régimen</th></tr>
+<tr><td><strong>Límites a la extensión</strong> (49)</td><td>La invalidez de un acto no implica la de los <strong>sucesivos independientes</strong> del primero. La invalidez parcial no implica la de las partes independientes, salvo que la parte viciada sea tan importante que sin ella el acto no se habría dictado.</td></tr>
+<tr><td><strong>Conversión</strong> (50)</td><td>El acto nulo o anulable que contenga los elementos constitutivos de otro distinto produce los efectos de este.</td></tr>
+<tr><td><strong>Conservación</strong> (51)</td><td>El órgano que declare la nulidad o anule dispondrá <strong>siempre</strong> la conservación de los actos y trámites cuyo contenido se habría mantenido igual sin la infracción.</td></tr>
+<tr><td><strong>Convalidación</strong> (52)</td><td>Solo de actos <strong>anulables</strong>, subsanando los vicios. Efectos <strong>desde su fecha</strong>, salvo lo dispuesto para la retroactividad. Incompetencia no determinante de nulidad: la convalida el órgano competente si es <strong>superior jerárquico</strong> del que dictó el acto. Falta de autorización: con su otorgamiento por el órgano competente.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Idea clave (examen GACE 2019)</span>
+La nulidad o anulabilidad de un acto <strong>no implica necesariamente la de los actos sucesivos independientes</strong>.</div>
+<h3>9.3 La revisión de los actos (remisión al Tema 12)</h3>
+<p>La invalidez se hace valer por los <strong>recursos</strong> administrativos y contencioso-administrativos o por la <strong>revisión de oficio</strong>: nulidad (art. 106) y declaración de lesividad de actos anulables (art. 107). Se estudian en el Tema 12 de este bloque.</p>
+<div class="box clave"><span class="box-h">Competencia para la revisión de oficio en la AGE (art. 111 Ley 39/2015)</span>
+<strong>Consejo de Ministros</strong>: sus propios actos y disposiciones y los de los Ministros.<br>
+<strong>Ministros</strong>: los de los Secretarios de Estado y los de órganos directivos del departamento no dependientes de una Secretaría de Estado.<br>
+<strong>Secretarios de Estado</strong>: los de los órganos directivos que dependan de ellos.</div>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Lo que preguntan y trampas</h2>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Datos ancla</span><ul>
+<li>Eficacia: desde que se dictan, <strong>salvo que en ellos se disponga otra cosa</strong> (39.1).</li>
+<li>Notificación cursada en <strong>10 días</strong> (40.2).</li>
+<li>Papel: 2.º intento <strong>una vez</strong>, en <strong>3 días</strong>, hora distinta, margen de 3 horas (42.2); recoge cualquier mayor de <strong>14 años</strong>.</li>
+<li>Electrónica: rechazada a los <strong>10 días naturales</strong> sin acceso (43.2); infructuosa → <strong>BOE</strong> (44).</li>
+<li>Parentesco de abstención: consanguinidad <strong>4.º</strong>, afinidad <strong>2.º</strong>; servicios profesionales en los <strong>2 últimos años</strong>.</li>
+<li>Nulidad: <strong>7 causas</strong> (47.1); lesividad: <strong>4 años</strong> (107).</li>
+<li>Desviación de poder → anulabilidad (48.1); incompetencia jerárquica → anulable y convalidable (52.3).</li>
+<li>Cuatro medios de ejecución forzosa (100); multa coercitiva compatible con la sanción (103).</li>
+<li>Sanción recurrible en vía administrativa → no ejecutiva (98.1.b).</li>
+</ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>«Prescindir de un trámite = nulidad» → NO: solo la omisión <strong>total y absoluta</strong> (47.1.e).</li>
+<li>«La incompetencia siempre es nulidad» → NO: solo la manifiesta por materia o territorio.</li>
+<li>«El recurso suspende el acto» → NO (117.1).</li>
+<li>«Los actos favorables se revocan libremente» → NO: revisión (106) o lesividad (107).</li>
+<li>«La notificación es requisito de validez» → NO: de eficacia.</li>
+<li>«La multa coercitiva es una sanción» → NO: medio de ejecución forzosa.</li>
+<li>«Quien no se abstiene invalida siempre el acto» → NO (23.4).</li>
+<li>«No cabe delegar la firma en sanciones» → NO con la Ley 40/2015.</li>
+<li>«Todos los actos deben motivarse» → NO: solo los del 35.</li>
+<li>«La delegación de firma debe publicarse» → NO (12.2); la de competencias, sí (9.3).</li>
+<li>«La resolución delegada se imputa al delegado» → NO: al <strong>delegante</strong> (9.4).</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia del supuesto con sus cuatro piezas: Constitución (149.1.18.ª y 105), LPAC (artículos 1 y 2; 34 a 52), Real Decreto 203/2021 y objeto, más la Ley 40/2015 para la competencia.</li>
+<li>Definición del acto y sus cinco rasgos; la idea clave del trienio.</li>
+<li>Las seis técnicas de competencia (9 a 14) con lo que es indelegable.</li>
+<li>Las cinco causas de abstención y el efecto del 23.4.</li>
+<li>Los nueve supuestos del art. 35.1 de motivación.</li>
+<li>Las cinco reglas del art. 39 y los dos casos de retroactividad.</li>
+<li>Las cuatro excepciones a la ejecutoriedad (98) y los cuatro medios (100 a 104).</li>
+<li>El contenido de la notificación (40.2), la regla del papel (42.2) y la de la electrónica (43.2).</li>
+<li>Las siete causas del 47.1 por letras, el 48.2 y el 48.3, y las cuatro técnicas de conservación.</li>
+</ol>
+
+<!-- 11 -->
+<h2 id="s11"><span class="n">11.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>Este tema es la <strong>herramienta de cierre</strong> de casi cualquier pregunta: una vez que sabes qué norma aplica, tienes que decir si el acto es válido, desde cuándo produce efectos, si está bien notificado y si se puede ejecutar. Recuerda que no puedes consultar textos legales: las letras del 47.1 y los supuestos del 35.1 tienen que salirte de memoria.</p>
+<h3>11.1 Introducción de la materia (para memorizar)</h3>
+<div class="model">
+<p>«En materia de procedimiento administrativo resulta de aplicación la Ley 39/2015, de 1 de octubre, del Procedimiento Administrativo Común de las Administraciones Públicas (en adelante, LPAC), dictada al amparo del artículo 149.1.18.ª de la Constitución, que atribuye al Estado la competencia sobre el procedimiento administrativo común, y en desarrollo del artículo 105 de la Constitución, así como el Real Decreto 203/2021, de 30 de marzo, por el que se aprueba el Reglamento de actuación y funcionamiento del sector público por medios electrónicos. Conforme a su artículo 1, la LPAC regula los requisitos de validez y eficacia de los actos administrativos, el procedimiento administrativo común, incluidos el sancionador y el de responsabilidad patrimonial, y los principios de la iniciativa legislativa y de la potestad reglamentaria. Se aplica a todo el sector público, de conformidad con su artículo 2.»</p>
+</div>
+<div class="box sup"><span class="box-h">Las cuatro piezas</span>Constitución (149.1.18.ª y 105) → ley (LPAC, artículos 1 y 2) → reglamento (Real Decreto 203/2021, actuación electrónica y notificaciones) → objeto (validez y eficacia de los actos y procedimiento común). Si la pregunta toca la competencia, añade el complemento de la Ley 40/2015 (artículos 8 a 14 y 23 y 24). Es la introducción de la sección 4 de las plantillas v2, con el reglamento añadido.</div>
+<h3>11.2 Calificación previa (antes de contestar)</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar el acto: qué órgano lo dicta y si es competente o actúa por delegación, avocación, suplencia o delegación de firma; si es un acto de trámite o una resolución, y si pone fin a la vía administrativa (artículo 114 de la LPAC); si es favorable o de gravamen, reglado o discrecional, y si es sancionador, porque de ello dependen la obligación de motivar (artículo 35), su ejecutividad (artículo 98) y los recursos procedentes; y si ha sido notificado conforme a los artículos 40 a 44, porque de ello depende su eficacia y el cómputo de los plazos.»</p>
+</div>
+<h3>11.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Hecho del enunciado</th><th style="width:34%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>Un órgano de otro Ministerio, sin competencia en la materia, impone una sanción</td><td>Art. 47.1.b LPAC: incompetencia manifiesta por razón de la materia</td><td>Nula de pleno derecho; revisión de oficio (106) o recurso, sin plazo para la revisión</td></tr>
+<tr><td>El Subdirector resuelve un asunto que corresponde a su Director General</td><td>Incompetencia jerárquica no manifiesta: art. 48.1 y 52.3</td><td>Anulable; el Director General puede convalidarlo</td></tr>
+<tr><td>La sanción la firma un Subdirector «por delegación de firma» del Director General</td><td>Art. 12 Ley 40/2015 (sin la prohibición de la Ley 30/1992)</td><td>Válida si consta la delegación y la autoridad de procedencia; la resolución es del Director General</td></tr>
+<tr><td>El Director General resuelve un recurso de alzada contra su propio acto por delegación del Secretario General</td><td>Art. 9.2.c Ley 40/2015: indelegable la resolución de recursos en el órgano que dictó el acto</td><td>Delegación inválida; la resolución del recurso es anulable por incompetencia</td></tr>
+<tr><td>El instructor es primo hermano del interesado y no se abstiene</td><td>Art. 23.2.b (consanguinidad de cuarto grado) y 23.4 Ley 40/2015</td><td>El acto no es inválido por ello necesariamente; responsabilidad disciplinaria; el interesado pudo recusar (24)</td></tr>
+<tr><td>Se deniega una licencia sin motivar y el interesado no sabe por qué</td><td>Art. 35.1.a LPAC; 48.2 (indefensión)</td><td>Anulable por defecto de forma con indefensión</td></tr>
+<tr><td>La resolución se motiva por remisión a un informe que no se adjunta ni se transcribe</td><td>Art. 88.6 LPAC: el informe debe incorporarse al texto</td><td>Falta de motivación; anulable si causa indefensión</td></tr>
+<tr><td>Se pretende dar efectos retroactivos a una sanción</td><td>Art. 39.3 LPAC (solo favorables o en sustitución de anulados)</td><td>No procede la retroactividad</td></tr>
+<tr><td>La Administración ejecuta una sanción mientras está pendiente el plazo de alzada</td><td>Art. 98.1.b y 90.3 LPAC</td><td>La sanción no es ejecutiva; la ejecución es contraria a Derecho</td></tr>
+<tr><td>Se notifica en papel a una sociedad limitada</td><td>Arts. 14.2.a y 41.1 LPAC: obligada a relacionarse electrónicamente</td><td>Notificación practicada por un medio no válido; no produce efectos hasta que el interesado se da por enterado (40.3)</td></tr>
+<tr><td>Segundo intento en papel a la misma franja horaria o pasados 3 días</td><td>Art. 42.2 LPAC</td><td>Intento irregular: no habilita la notificación edictal del 44</td></tr>
+<tr><td>Un acto no indica los recursos ni el plazo</td><td>Art. 40.2 y 40.3 LPAC</td><td>Notificación defectuosa; surte efecto cuando el interesado interpone el recurso</td></tr>
+<tr><td>El interesado no se da por notificado electrónicamente en 10 días naturales</td><td>Art. 43.2 LPAC</td><td>Se entiende rechazada y el procedimiento sigue (41.5)</td></tr>
+<tr><td>El obligado no derriba una obra ilegal</td><td>Arts. 99 y 102 LPAC</td><td>Ejecución subsidiaria a su costa, previo apercibimiento; si es su domicilio, autorización judicial (100.3)</td></tr>
+</table></div>
+
+<h3>11.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+El Director General de Calidad Ambiental es el competente para sancionar. Una resolución sancionadora de <strong>30.000 €</strong> contra Delta, S.L. la firma el Subdirector General «por delegación de firma del Director General». La resolución dice que los hechos «constan en el informe de la Inspección», que no se adjunta ni se transcribe, y no indica los recursos procedentes. Se intenta notificar <strong>en papel</strong> en el domicilio social: primer intento el lunes 2 de marzo a las 10:00 y segundo el miércoles 4 de marzo a las 11:30, ambos sin éxito; después se publica un anuncio en el BOE el 20 de marzo. Delta interpone recurso el 10 de mayo. El 15 de abril, la Administración inició la vía de apremio.
+<br><br><strong>Cuestiones:</strong> a) Validez de la sanción. b) Validez de la notificación y si el recurso está en plazo. c) ¿Podía la Administración iniciar el apremio el 15 de abril?</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 11.1.] Con carácter previo, procede calificar el acto: es una resolución sancionadora, de gravamen, dictada por un Director General y firmada por un Subdirector por delegación de firma; no pone fin a la vía administrativa, porque el Director General tiene superior jerárquico y no se trata de materia de personal (artículo 114.2 de la LPAC). La cuestión a) solicita determinar si la sanción es válida. En cuanto a la competencia, el artículo 12 de la Ley 40/2015, de 1 de octubre, de Régimen Jurídico del Sector Público (en adelante, LRJSP) permite delegar la firma en los titulares de órganos dependientes, sin alterar la competencia del delegante, y ya no excluye las resoluciones sancionadoras, como hacía la ley anterior; en el presente supuesto consta la delegación y la autoridad de procedencia, por lo que la resolución es del Director General competente. En cuanto a la motivación, el artículo 35.1.h) de la LPAC exige motivar las resoluciones sancionadoras, y el artículo 88.6 solo admite la motivación por remisión a informes cuando se incorporen al texto de la resolución; aquí el informe ni se adjunta ni se transcribe. El enunciado no precisa si Delta conocía el informe por otra vía, como el trámite de audiencia, por lo que suponemos que no lo conocía, dado que la resolución es la primera comunicación que se describe. En consecuencia, Delta no puede saber qué hechos se le imputan, lo que le causa indefensión. Por tanto, se concluye que la competencia es correcta, pero que la sanción es anulable por falta de motivación con indefensión, conforme al artículo 48.2 de la LPAC.</p>
+<p><strong>Cuestión b).</strong> La cuestión b) plantea la validez de la notificación y el plazo del recurso. Delta es una sociedad limitada, persona jurídica obligada a relacionarse electrónicamente con la Administración (artículo 14.2.a) de la LPAC), y el artículo 41.1 exige que en ese caso la notificación sea electrónica. A mayor abundamiento, el artículo 42.2 exige que, si el primer intento en papel se hizo antes de las quince horas, el segundo se haga después de las quince horas: el primero fue a las 10:00 y el segundo a las 11:30, en la misma franja. Por ello, no concurría el presupuesto del artículo 44 para notificar por anuncio en el BOE. Además, la resolución no indica los recursos, por lo que la notificación es defectuosa (artículo 40.2) y, conforme al artículo 40.3, surte efecto desde que el interesado interpone el recurso procedente. Contra la resolución cabe recurso de alzada en el plazo de un mes (artículo 122.1), que no pudo empezar a correr con una notificación inválida. No obstante lo anterior, cabría sostener que el plazo se computa desde el anuncio del 20 de marzo, lo que llevaría a considerar extemporáneo el recurso del 10 de mayo; sin embargo, una notificación edictal sin intentos válidos no produce efectos. Por tanto, se concluye que la notificación es inválida y que el recurso de alzada de 10 de mayo está en plazo.</p>
+<p><strong>Cuestión c).</strong> La cuestión c) solicita determinar si podía iniciarse el apremio el 15 de abril. El artículo 98.1.b) de la LPAC excluye la ejecutividad inmediata de las resoluciones sancionadoras contra las que quepa algún recurso en vía administrativa, y el artículo 90.3 dispone que la resolución sancionadora es ejecutiva cuando no quepa contra ella ningún recurso ordinario en vía administrativa. En el presente supuesto, a 15 de abril la sanción no había sido válidamente notificada y seguía abierta la vía del recurso de alzada. Además, el apremio sobre el patrimonio exige apercibimiento previo (artículo 99) y una cantidad líquida exigible (artículo 101). Por tanto, se concluye que la Administración no podía iniciar la vía de apremio el 15 de abril, y que las actuaciones de apremio son contrarias a Derecho y deben anularse.</p>
+</div>
+<h3>11.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Introducción y calificación previa</strong> (sancionadora, de gravamen, no pone fin a la vía, delegación de firma) → <em>análisis</em>: contextualiza el problema antes de resolverlo.<br>
+<strong>Reformular cada cuestión con su letra</strong> → <em>sistemática</em>.<br>
+<strong>Artículo concreto + datos operados</strong> (10:00 y 11:30 frente a la regla de las quince horas; 20 de marzo frente a 10 de mayo) → <em>aplicación de conocimientos</em>.<br>
+<strong>Suposición declarada</strong> (no consta que Delta conociera el informe) → la Comisión la admite si se justifica.<br>
+<strong>Alternativa evaluada</strong> (cómputo desde el anuncio) y descartada con razón → <em>análisis</em>.<br>
+<strong>Corregir una idea extendida</strong> (la delegación de firma en sanciones) con la norma vigente → aplicación precisa, que es lo que separa un 35 de un 45.<br>
+<strong>Conclusión afirmativa</strong> en cada cuestión.</div>
+
+<!-- 12 -->
+<h2 id="s12"><span class="n">12.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Concepto y rasgos</td><td>Definición, cinco rasgos, art. 1.3 LJCA, idea clave 2022</td><td>Definición y tres notas</td><td>Fusionado (1)</td></tr>
+<tr><td>Clases</td><td>Ocho criterios</td><td>Siete criterios con consecuencias (112.1, 114, 109.1, 125)</td><td>Fusionado (2)</td></tr>
+<tr><td>Competencia</td><td>Arts. 8 a 14 en tabla, abstención, recusación, idea clave 2019</td><td>Art. 8, abstención, incompetencia nula frente a anulable</td><td>Fusionado con dos correcciones (3)</td></tr>
+<tr><td>Elementos objetivos y formales</td><td>Presupuesto, contenido, causa, fin, procedimiento, art. 36 completo, idea clave</td><td>Cinco elementos con consecuencias</td><td>Fusionado (4)</td></tr>
+<tr><td>Motivación</td><td>Concepto, 88.6, lista del 35.1, 35.2, idea clave</td><td>Lista del 35.1, trampa de la anulabilidad</td><td>Fusionado con corrección (5)</td></tr>
+<tr><td>Eficacia</td><td>Arts. 38 y 39.1 a 39.5, idea clave triple</td><td>Validez frente a eficacia, retroactividad, suspensión (117)</td><td>Fusionado (6)</td></tr>
+<tr><td>Ejecución</td><td>Arts. 98 a 105 con 100.3 e interdictos</td><td>Art. 97 (vía de hecho), cuatro medios</td><td>Fusionado (7)</td></tr>
+<tr><td>Notificación y publicación</td><td>Arts. 40 a 46 con detalle (41.7, 42.2, 46)</td><td>Tabla resumida</td><td>Fusionado con corrección (8)</td></tr>
+<tr><td>Validez y conservación</td><td>47, 48, 49 a 52, revisión y art. 111, ideas clave</td><td>47, 48, tabla nulidad/anulabilidad, conservación</td><td>Fusionado con precisión (9)</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 11 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas</span>
+<strong>Temario 2026:</strong> la delegación de firma sí cabe en las resoluciones sancionadoras con la Ley 40/2015 (3) · la avocación se notifica «con anterioridad o simultáneamente» (3) · los cuatro años son para declarar la lesividad; después, dos meses para recurrir (9).<br>
+<strong>Material visual:</strong> motivación <em>in aliunde</em> en el 88.6 y con el informe incorporado a la resolución (5) · segundo intento en papel en el 42.2, no en el 41.5 (8) · retiradas dos sentencias no verificadas (5) · el art. 8 Ley 40/2015 dice «irrenunciable», no «improrrogable» (3).</div>
+
+<footer>
+GACE 2027 · Bloque IV · Tema 4 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 24/10/2026.<br>
+Normas: CE · Ley 39/2015 · Ley 40/2015 · LJCA · Real Decreto 203/2021 · Reglamento General de Recaudación.
+</footer>
+</div>
+</body>
+</html>
