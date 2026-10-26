@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Practica la Unit 1 · Comunicación Profesional en Inglés</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F4; --surface:#FFFFFF; --ink:#1B2433; --muted:#566173; --line:#D5DCE4;
+  --accent:#2346A0; --accent-ink:#FFFFFF; --ok:#1E7F5C; --ok-bg:#E3F4EC; --ko:#B3261E; --ko-bg:#FBE9E7;
+  --mark:#FFE45C;
+  --serif:"Literata", Georgia, "Times New Roman", serif;
+  --sans:"Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+    --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+    --mark:rgba(255,228,92,.38);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+  --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+  --mark:rgba(255,228,92,.38);
+}
+:root{ box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+html{ scroll-padding-top:env(safe-area-inset-top,0px); }
+*,*::before,*::after{ box-sizing:inherit; }
+body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.5; }
+.wrap{ max-width:660px; margin:0 auto; padding:20px 16px 48px; }
+h1{ font-family:var(--serif); font-weight:600; font-size:1.9rem; line-height:1.15; margin:8px 0 6px; letter-spacing:-.01em; }
+.lead{ color:var(--muted); margin:0 0 18px; max-width:60ch; }
+.mark{ background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); padding:8px 0 10px; margin:0 -16px 8px; }
+.tabs{ display:flex; gap:6px; overflow-x:auto; padding:0 16px; scrollbar-width:none; }
+.tabs::-webkit-scrollbar{ display:none; }
+.tab{ flex:0 0 auto; border:1px solid var(--line); background:var(--surface); color:var(--ink); font:500 .92rem var(--sans); padding:8px 14px; border-radius:999px; cursor:pointer; }
+.tab[aria-selected="true"]{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.panel{ display:none; }
+.panel.on{ display:block; }
+.card{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; margin-bottom:14px; }
+.meta{ display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:.88rem; margin-bottom:10px; flex-wrap:wrap; }
+.prompt{ font-family:var(--serif); font-size:1.22rem; line-height:1.45; margin:0 0 14px; }
+.opts{ display:grid; gap:8px; }
+.opt{ text-align:left; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:10px; padding:11px 13px; font:1rem var(--serif); cursor:pointer; }
+.opt:hover:not(:disabled){ border-color:var(--accent); }
+.opt.ok{ background:var(--ok-bg); border-color:var(--ok); }
+.opt.ko{ background:var(--ko-bg); border-color:var(--ko); }
+.opt:disabled{ cursor:default; }
+.row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.btn{ border:0; background:var(--accent); color:var(--accent-ink); font:600 .95rem var(--sans); padding:10px 16px; border-radius:10px; cursor:pointer; }
+.btn.ghost{ background:transparent; color:var(--accent); border:1px solid var(--line); }
+.btn:disabled{ opacity:.45; cursor:default; }
+.fb{ margin-top:12px; padding:12px 14px; border-radius:10px; font-size:.95rem; display:none; }
+.fb.show{ display:block; }
+.fb.ok{ background:var(--ok-bg); color:var(--ink); border-left:4px solid var(--ok); }
+.fb.ko{ background:var(--ko-bg); color:var(--ink); border-left:4px solid var(--ko); }
+.es{ color:var(--muted); font-style:italic; margin-top:6px; }
+input[type=text], textarea{ width:100%; font:1.05rem var(--serif); color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+textarea{ min-height:240px; line-height:1.5; resize:vertical; }
+input:focus, textarea:focus, .btn:focus-visible, .opt:focus-visible, .tab:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+.hint{ color:var(--muted); font-size:.9rem; margin:0 0 10px; }
+.stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin:12px 0; }
+.stat{ border:1px solid var(--line); border-radius:10px; padding:10px; }
+.stat b{ display:block; font-family:var(--serif); font-size:1.5rem; }
+.stat span{ color:var(--muted); font-size:.85rem; }
+.review{ margin:12px 0 0; padding:0; list-style:none; }
+.review li{ border-top:1px solid var(--line); padding:10px 0; font-size:.95rem; }
+.checks{ list-style:none; padding:0; margin:12px 0 0; }
+.checks li{ padding:6px 0 6px 28px; position:relative; font-size:.95rem; }
+.checks li::before{ content:""; position:absolute; left:4px; top:11px; width:12px; height:12px; border-radius:50%; border:2px solid var(--line); }
+.checks li.pass::before{ background:var(--ok); border-color:var(--ok); }
+.checks li.fail::before{ border-color:var(--ko); }
+.seg{ display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.progress{ height:4px; background:var(--line); border-radius:2px; overflow:hidden; margin-bottom:12px; }
+.progress i{ display:block; height:100%; background:var(--accent); width:0; transition:width .25s; }
+details summary{ cursor:pointer; color:var(--accent); font-weight:500; }
+.model{ font-family:var(--serif); white-space:pre-wrap; background:var(--bg); border-radius:10px; padding:12px; margin-top:8px; }
+@media (prefers-reduced-motion: reduce){ .progress i{ transition:none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Practica la Unit 1</h1>
+  <p class="lead">Present tenses y emails. Los fallos vuelven a salir hasta que los aciertes. El test sigue el formato de las clases (Why? y Remember:) con las 4 opciones del examen y la puntuación del examen: 30 preguntas, cada fallo resta 0,33.</p>
+
+  <nav aria-label="Modos de práctica">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-p="exam" aria-selected="true">Test tipo examen</button>
+      <button class="tab" role="tab" data-p="gap" aria-selected="false">Rellena huecos</button>
+      <button class="tab" role="tab" data-p="spell" aria-selected="false">Ortografía -s / -ing</button>
+      <button class="tab" role="tab" data-p="fix" aria-selected="false">Corrige el error</button>
+      <button class="tab" role="tab" data-p="reg" aria-selected="false">¿Formal o informal?</button>
+      <button class="tab" role="tab" data-p="write" aria-selected="false">Redacta un email</button>
+    </div>
+  </nav>
+
+  <!-- EXAM -->
+  <section class="panel on" id="p-exam">
+    <div id="exam-start" class="card">
+      <p class="prompt">30 preguntas al azar de un banco de 50, con 4 opciones (A, B, C, D), como en el examen final.</p>
+      <p class="hint">Tipos de pregunta de la sesión del 06/10 (en clase usa 3 opciones; aquí van 4, como en el examen): <i>Choose the correct question for…</i>, <i>Choose the correct sentence</i>, <i>…for an action happening now</i> y <i>Choose the correct form</i>. Cada corrección trae <b>Why?</b> y <b>Remember:</b>.</p>
+      <p class="hint">Antes de responder, los 4 checks de la profesora: 1) mira el sujeto; 2) busca pistas de tiempo; 3) revisa el verbo tras el auxiliar; 4) lee la frase entera.</p>
+      <p class="hint">Acierto +1, fallo −0,33, en blanco 0. Con 4 opciones, contestar al azar tiene valor esperado cero. Si descartas una opción, responder vale +0,11; si descartas dos, +0,34. Regla: responde solo si puedes descartar al menos una.</p>
+      <div id="exam-history" class="hint"></div>
+      <div class="row"><button class="btn" id="exam-go">Empezar test</button></div>
+    </div>
+    <div id="exam-run" class="card" hidden>
+      <div class="progress"><i id="exam-bar"></i></div>
+      <div class="meta"><span id="exam-count"></span><span id="exam-score"></span></div>
+      <p class="prompt" id="exam-q"></p>
+      <div class="opts" id="exam-opts"></div>
+      <div class="fb" id="exam-fb"></div>
+      <div class="row">
+        <button class="btn ghost" id="exam-blank">Dejar en blanco</button>
+        <button class="btn" id="exam-next" disabled>Siguiente</button>
+      </div>
+    </div>
+    <div id="exam-end" class="card" hidden></div>
+  </section>
+
+  <!-- GAP -->
+  <section class="panel" id="p-gap">
+    <div class="card">
+      <div class="progress"><i id="gap-bar"></i></div>
+      <div class="meta"><span id="gap-count"></span><span>Pista entre paréntesis</span></div>
+      <p class="prompt" id="gap-q"></p>
+      <input type="text" id="gap-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Tu respuesta">
+      <div class="fb" id="gap-fb"></div>
+      <div class="row">
+        <button class="btn" id="gap-check">Comprobar</button>
+        <button class="btn ghost" id="gap-next" disabled>Siguiente</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPELL -->
+  <section class="panel" id="p-spell">
+    <div class="card">
+      <div class="progress"><i id="spell-bar"></i></div>
+      <div class="meta"><span id="spell-count"></span><span id="spell-mode"></span></div>
+      <p class="prompt" id="spell-q"></p>
+      <input type="text" id="spell-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Forma del verbo">
+      <div class="fb" id="spell-fb"></div>
+      <div class="row">
+        <button class="btn" id="spell-check">Comprobar</button>
+        <button class="btn ghost" id="spell-next" disabled>Siguiente</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIX -->
+  <section class="panel" id="p-fix">
+    <div class="card">
+      <div class="progress"><i id="fix-bar"></i></div>
+      <div class="meta"><span id="fix-count"></span><span>Encuentra el error y corrígelo mentalmente</span></div>
+      <p class="prompt" id="fix-q"></p>
+      <div class="fb" id="fix-fb"></div>
+      <div class="row" id="fix-row1"><button class="btn" id="fix-show">Ver corrección</button></div>
+      <div class="row" id="fix-row2" hidden>
+        <button class="btn" id="fix-good">Lo tenía bien</button>
+        <button class="btn ghost" id="fix-bad">Repasar otra vez</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section class="panel" id="p-reg">
+    <div class="card">
+      <div class="progress"><i id="reg-bar"></i></div>
+      <div class="meta"><span id="reg-count"></span><span>Según el material de la unidad</span></div>
+      <p class="prompt" id="reg-q"></p>
+      <div class="row">
+        <button class="btn" id="reg-f">Formal</button>
+        <button class="btn" id="reg-i">Informal</button>
+      </div>
+      <div class="fb" id="reg-fb"></div>
+      <div class="row"><button class="btn ghost" id="reg-next" disabled>Siguiente</button></div>
+    </div>
+  </section>
+
+  <!-- WRITE -->
+  <section class="panel" id="p-write">
+    <div class="card">
+      <div class="seg">
+        <button class="btn" id="w-formal">Email formal</button>
+        <button class="btn ghost" id="w-informal">Email informal</button>
+      </div>
+      <p class="prompt" id="w-task"></p>
+      <label class="hint" for="w-subject">Subject</label>
+      <input type="text" id="w-subject" autocomplete="off">
+      <p></p>
+      <label class="hint" for="w-body">Email</label>
+      <textarea id="w-body" spellcheck="true"></textarea>
+      <div class="meta"><span id="w-words">0 words</span><span>El borrador se guarda en este navegador</span></div>
+      <ul class="checks" id="w-checks"></ul>
+      <p class="hint">La comprobación es mecánica: detecta forma, no contenido. Revisa tú que el mensaje diga lo que tiene que decir.</p>
+      <details><summary>Ver un modelo de respuesta</summary><div class="model" id="w-model"></div></details>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+"use strict";
+var STORE="ui1-ing-ud1-v1";
+function load(){ try{ var r=localStorage.getItem(STORE); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
+function save(d){ try{ localStorage.setItem(STORE, JSON.stringify(d)); }catch(e){} }
+var db=load(); db.examHistory=db.examHistory||[]; db.drafts=db.drafts||{};
+
+function $(id){ return document.getElementById(id); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function norm(s){ return (s||"").toLowerCase().replace(/[’‘`]/g,"'").replace(/\s+/g," ").trim().replace(/[.!?]+$/,""); }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function fb(el,ok,html){ el.className="fb show "+(ok?"ok":"ko"); el.innerHTML=html; }
+function hideFb(el){ el.className="fb"; el.innerHTML=""; }
+function fmt(n){ return (Math.round(n*100)/100).toString().replace(".",","); }
+
+/* Tabs */
+var tabs=document.querySelectorAll(".tab");
+tabs.forEach(function(t){ t.addEventListener("click",function(){
+  tabs.forEach(function(x){ x.setAttribute("aria-selected", x===t?"true":"false"); });
+  document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id==="p-"+t.dataset.p); });
+}); });
+
+/* ===== EXAM ===== */
+var CHECKS=["Mira el sujeto: he/she/it → does/doesn't o has.", "Busca pistas de tiempo: now, every day, since, for, yet, just…", "Revisa la forma del verbo tras el auxiliar: does + work, have + finished.", "Lee la frase entera: debe tener sentido, no solo sonarte."];
+var EXAM=[
+{
+"t": "Q",
+"q": "Choose the correct question for “He lives in Sydney.”",
+"o": [
+"Does he live in Sydney?",
+"Does he lives in Sydney?",
+"Do he live in Sydney?",
+"Do he lives in Sydney?"
+],
+"w": "With he we use does. After does, the main verb stays in the base form: live.",
+"r": "Present simple question = Do/Does + subject + base verb.",
+"c": 3
+},
+{
+"t": "Q",
+"q": "Choose the correct question for “They are working on the project.”",
+"o": [
+"Are they working on the project?",
+"Do they working on the project?",
+"Are they work on the project?",
+"Is they working on the project?"
+],
+"w": "The present continuous makes questions by inverting are. It never uses do.",
+"r": "Present continuous question = Am/Is/Are + subject + verb-ing?",
+"c": 3
+},
+{
+"t": "Q",
+"q": "Choose the correct question for “She has finished the report.”",
+"o": [
+"Has she finished the report?",
+"Does she has finished the report?",
+"Has she finish the report?",
+"Has she finishing the report?"
+],
+"w": "We invert has. After has, the verb is the past participle: finished.",
+"r": "Present perfect question = Have/Has + subject + past participle?",
+"c": 3
+},
+{
+"t": "Q",
+"q": "Choose the correct question for “You are tired.”",
+"o": [
+"Are you tired?",
+"Do you be tired?",
+"Do you are tired?",
+"Are tired you?"
+],
+"w": "To be never takes do: we simply invert subject and verb.",
+"r": "To be: invert, no auxiliary.",
+"c": 3
+},
+{
+"t": "Q",
+"q": "Choose the correct question for “Someone lives in this flat.” (you want to know who)",
+"o": [
+"Who lives in this flat?",
+"Who does live in this flat?",
+"Who do lives in this flat?",
+"Who live in this flat?"
+],
+"w": "When who is the subject, we do not use do/does.",
+"r": "Who (subject) + verb with -s.",
+"c": 3
+},
+{
+"t": "Q",
+"q": "Choose the correct question for “It rains a lot in Asturias.”",
+"o": [
+"Does it rain a lot in Asturias?",
+"Does it rains a lot in Asturias?",
+"Is it rain a lot in Asturias?",
+"Do it rain a lot in Asturias?"
+],
+"w": "It = third person singular → does. After does, base form: rain.",
+"r": "Present simple question = Do/Does + subject + base verb.",
+"c": 1
+},
+{
+"t": "S",
+"q": "Choose the correct sentence.",
+"o": [
+"She doesn't drink coffee.",
+"She doesn't drinks coffee.",
+"She don't drink coffee.",
+"She not drinks coffee."
+],
+"w": "With she we use doesn't. After doesn't, the main verb is the base form: drink.",
+"r": "Negative = subject + don't/doesn't + base verb.",
+"c": 1
+},
+{
+"t": "S",
+"q": "Choose the correct sentence.",
+"o": [
+"I'm not tired.",
+"I don't am tired.",
+"I not am tired.",
+"I no am tired."
+],
+"w": "To be makes its negative with not, without do.",
+"r": "am/is/are + not.",
+"c": 3
+},
+{
+"t": "S",
+"q": "Choose the correct sentence.",
+"o": [
+"She has never been to London.",
+"She hasn't never been to London.",
+"She has ever been to London.",
+"She have never been to London."
+],
+"w": "English does not accept double negatives: never already makes the sentence negative.",
+"r": "have/has + never + past participle.",
+"c": 4
+},
+{
+"t": "S",
+"q": "Choose the correct sentence.",
+"o": [
+"He is often late.",
+"He often is late.",
+"He is late often always.",
+"Often he late is."
+],
+"w": "Frequency adverbs go after to be and before any other verb.",
+"r": "to be + adverb / adverb + main verb.",
+"c": 4
+},
+{
+"t": "S",
+"q": "Choose the correct sentence.",
+"o": [
+"They haven't finished the report yet.",
+"They haven't finished yet the report.",
+"They have finished the report yet.",
+"They don't have finished the report yet."
+],
+"w": "Yet is used in negatives and questions and goes at the end of the sentence.",
+"r": "yet → negatives and questions, at the end.",
+"c": 2
+},
+{
+"t": "S",
+"q": "Choose the correct sentence.",
+"o": [
+"I've just seen your email.",
+"I've seen just your email.",
+"I just have seen your email.",
+"I've justed seen your email."
+],
+"w": "Just goes between have and the past participle.",
+"r": "have + just + past participle.",
+"c": 2
+},
+{
+"t": "S",
+"q": "Choose the correct sentence.",
+"o": [
+"Have you ever spoken in public?",
+"Have ever you spoken in public?",
+"Do you ever have spoken in public?",
+"Have you spoke ever in public?"
+],
+"w": "In questions, ever goes after the subject.",
+"r": "Have + subject + ever + past participle?",
+"c": 3
+},
+{
+"t": "S",
+"q": "Choose the correct sentence.",
+"o": [
+"Don't close the door, please.",
+"Doesn't close the door, please.",
+"Not close the door, please.",
+"No close the door, please."
+],
+"w": "The negative imperative is Don't + base verb. The imperative never uses does.",
+"r": "Imperative: base verb / Don't + base verb.",
+"c": 3
+},
+{
+"t": "S",
+"q": "Choose the correct sentence.",
+"o": [
+"I know the answer.",
+"I am knowing the answer.",
+"I knowing the answer.",
+"I am know the answer."
+],
+"w": "Know is a state (non-action) verb, so it is not normally used in the continuous.",
+"r": "State verbs (know, like, need, believe…) → present simple.",
+"c": 4
+},
+{
+"t": "S",
+"q": "Choose the correct sentence.",
+"o": [
+"The meeting starts at 9 tomorrow.",
+"The meeting is start at 9 tomorrow.",
+"The meeting starting at 9 tomorrow.",
+"The meeting start at 9 tomorrow."
+],
+"w": "Timetables and scheduled events use the present simple.",
+"r": "Scheduled events → present simple.",
+"c": 2
+},
+{
+"t": "S",
+"q": "Choose the correct sentence.",
+"o": [
+"Mary has lived here since 2015.",
+"Mary lives here since 2015.",
+"Mary is living here since 2015.",
+"Mary has been live here since 2015."
+],
+"w": "Since + a starting point up to now needs the present perfect, not the present simple.",
+"r": "Since/for + up to now → present perfect.",
+"c": 2
+},
+{
+"t": "U",
+"q": "Choose the correct sentence for an action happening now.",
+"o": [
+"Be quiet, the baby is sleeping.",
+"Be quiet, the baby sleeps.",
+"Be quiet, the baby has slept.",
+"Be quiet, the baby sleep."
+],
+"w": "The action is in progress at the moment of speaking.",
+"r": "Present continuous = am/is/are + verb-ing.",
+"c": 2
+},
+{
+"t": "U",
+"q": "Choose the correct sentence for a habit.",
+"o": [
+"I usually take the train to work.",
+"I am usually taking the train to work.",
+"I have usually taken the train to work.",
+"I usually takes the train to work."
+],
+"w": "Routines and habits use the present simple, often with frequency adverbs.",
+"r": "Habits → present simple.",
+"c": 2
+},
+{
+"t": "U",
+"q": "Choose the correct sentence for a temporary situation.",
+"o": [
+"My car is broken, so I'm taking the bus this month.",
+"My car is broken, so I take the bus this month.",
+"My car is broken, so I have taken the bus this month.",
+"My car is broken, so I am take the bus this month."
+],
+"w": "“This month” marks a temporary situation, so the present continuous is appropriate.",
+"r": "Temporary situations → present continuous.",
+"c": 2
+},
+{
+"t": "U",
+"q": "Choose the correct sentence for a general truth.",
+"o": [
+"Water boils at 100 degrees Celsius.",
+"Water is boiling at 100 degrees Celsius.",
+"Water has boiled at 100 degrees Celsius.",
+"Water boil at 100 degrees Celsius."
+],
+"w": "Facts that are always true use the present simple.",
+"r": "General truths → present simple.",
+"c": 4
+},
+{
+"t": "U",
+"q": "Choose the correct sentence for a fixed arrangement in the future.",
+"o": [
+"We're meeting the client on Monday.",
+"We meet the client yesterday.",
+"We have met the client on Monday.",
+"We are meet the client on Monday."
+],
+"w": "Plans already arranged use the present continuous with future meaning.",
+"r": "Arranged plans → present continuous.",
+"c": 2
+},
+{
+"t": "U",
+"q": "Choose the correct sentence for a life experience.",
+"o": [
+"I have visited London three times.",
+"I visit London three times.",
+"I am visiting London three times.",
+"I have visit London three times."
+],
+"w": "Experiences up to now, without saying when, use the present perfect.",
+"r": "Life experiences → present perfect.",
+"c": 2
+},
+{
+"t": "U",
+"q": "Choose the correct sentence for a past action with a result now.",
+"o": [
+"I've lost my keys, so I can't get in.",
+"I lose my keys, so I can't get in.",
+"I'm losing my keys, so I can't get in.",
+"I've lose my keys, so I can't get in."
+],
+"w": "The action happened before, but its consequence is now: present perfect.",
+"r": "Past + connection with the present → present perfect.",
+"c": 4
+},
+{
+"t": "U",
+"q": "Choose the correct sentence for focus on the activity.",
+"o": [
+"I've been answering emails all morning.",
+"I answer emails all morning.",
+"I'm answer emails all morning.",
+"I've being answering emails all morning."
+],
+"w": "“All morning” up to now, with focus on the activity → present perfect continuous.",
+"r": "have/has + been + verb-ing.",
+"c": 2
+},
+{
+"t": "U",
+"q": "Choose the correct sentence for focus on the result.",
+"o": [
+"I've written three reports today.",
+"I've been writing three reports today.",
+"I'm writing three reports today.",
+"I've wrote three reports today."
+],
+"w": "A number of finished things is a result, so we use the present perfect simple.",
+"r": "Result → present perfect; activity → present perfect continuous.",
+"c": 4
+},
+{
+"t": "U",
+"q": "Choose the correct sentence for an instruction.",
+"o": [
+"Insert your card and enter your PIN.",
+"You inserting your card and enter your PIN.",
+"Do you insert your card and enter your PIN?",
+"Inserts your card and enters your PIN."
+],
+"w": "Instructions use the imperative: base verb, no subject. An imperative is not a question.",
+"r": "Imperative = base verb.",
+"c": 4
+},
+{
+"t": "U",
+"q": "Choose the correct sentence for a polite request in a formal email.",
+"o": [
+"Could you send me the report, please?",
+"Send me the report now.",
+"You send me the report.",
+"Could you sending me the report, please?"
+],
+"w": "A bare imperative sounds rude in a formal email. Soften the request.",
+"r": "Formal requests → Could you…? / I would be grateful if…",
+"c": 4
+},
+{
+"t": "F",
+"q": "Choose the correct form: “She ___ in a bank.”",
+"o": [
+"works",
+"work",
+"is work",
+"working"
+],
+"w": "He/she/it adds -s in the affirmative present simple.",
+"r": "he/she/it + verb-s.",
+"c": 1
+},
+{
+"t": "F",
+"q": "Choose the correct form: “Does he ___ English?”",
+"o": [
+"speak",
+"speaks",
+"speaking",
+"spoke"
+],
+"w": "After does, the main verb is the base form.",
+"r": "Does + subject + base verb.",
+"c": 3
+},
+{
+"t": "F",
+"q": "Choose the correct form: “We ___ that film three times.”",
+"o": [
+"have seen",
+"are seeing",
+"have been seen",
+"has seen"
+],
+"w": "Experience with a number of times → present perfect. “Have been seen” is passive.",
+"r": "Present perfect = have/has + past participle.",
+"c": 3
+},
+{
+"t": "F",
+"q": "Choose the correct form: “Mathew has worked here ___ 2015.”",
+"o": [
+"since",
+"for",
+"from",
+"during"
+],
+"w": "2015 is a starting point.",
+"r": "since = starting point; for = duration.",
+"c": 2
+},
+{
+"t": "F",
+"q": "Choose the correct form: “We have been waiting ___ an hour.”",
+"o": [
+"for",
+"since",
+"until",
+"from"
+],
+"w": "An hour is a duration.",
+"r": "since = starting point; for = duration.",
+"c": 2
+},
+{
+"t": "F",
+"q": "Choose the correct form: “___ you working from home today?”",
+"o": [
+"Are",
+"Do",
+"Does",
+"Is"
+],
+"w": "Working (-ing) shows the present continuous, which uses am/is/are, never do.",
+"r": "Present continuous question = Am/Is/Are + subject + verb-ing?",
+"c": 3
+},
+{
+"t": "F",
+"q": "Choose the correct form: “Paula ___ to Paris twice.”",
+"o": [
+"has been",
+"have been",
+"is been",
+"are been"
+],
+"w": "Paula = she → has.",
+"r": "he/she/it → has.",
+"c": 1
+},
+{
+"t": "F",
+"q": "Choose the correct form: “It ___ almost every day here in winter.”",
+"o": [
+"rains",
+"is rain",
+"rain",
+"raining"
+],
+"w": "It + present simple affirmative → -s. “Every day” is a habit.",
+"r": "he/she/it + verb-s.",
+"c": 1
+},
+{
+"t": "F",
+"q": "Choose the correct form: “I ___ for two hours and I'm exhausted.”",
+"o": [
+"have been studying",
+"am studying since",
+"study",
+"studying"
+],
+"w": "An action from the past up to now, with a duration and focus on the activity.",
+"r": "have/has + been + verb-ing.",
+"c": 2
+},
+{
+"t": "F",
+"q": "Choose the correct form: “Have you finished the report ___?”",
+"o": [
+"yet",
+"already",
+"still",
+"just"
+],
+"w": "Yet is the adverb for questions about whether something is finished.",
+"r": "yet → questions and negatives, at the end.",
+"c": 2
+},
+{
+"t": "F",
+"q": "Choose the correct form: “You promised it last week and you ___ haven't sent it.”",
+"o": [
+"still",
+"yet",
+"just",
+"ever"
+],
+"w": "Still: it hasn't finished when it should have. It goes before the auxiliary.",
+"r": "subject + still + haven't/hasn't.",
+"c": 2
+},
+{
+"t": "F",
+"q": "Choose the correct form: “She ___ Law.” (study)",
+"o": [
+"studies",
+"studys",
+"studyes",
+"studis"
+],
+"w": "Consonant + y → -ies.",
+"r": "Spelling: study → studies; play → plays.",
+"c": 1
+},
+{
+"t": "F",
+"q": "Choose the correct form: “He ___ the news every evening.” (watch)",
+"o": [
+"watches",
+"watchs",
+"watchies",
+"watchis"
+],
+"w": "Verbs ending in -ch add -es.",
+"r": "-s, -ch, -sh, -x, -z → -es.",
+"c": 1
+},
+{
+"t": "F",
+"q": "Choose the correct form: “She ___ tennis on Sundays.” (play)",
+"o": [
+"plays",
+"plaies",
+"playes",
+"playies"
+],
+"w": "Vowel + y → just -s.",
+"r": "Spelling: play → plays; study → studies.",
+"c": 1
+},
+{
+"t": "F",
+"q": "Choose the correct form: “They are ___ the bus.” (get)",
+"o": [
+"getting",
+"geting",
+"getteing",
+"gettin"
+],
+"w": "Consonant-vowel-consonant in a stressed syllable → double the consonant.",
+"r": "stop → stopping; get → getting.",
+"c": 3
+},
+{
+"t": "F",
+"q": "Choose the correct form: “She is ___ dinner.” (make)",
+"o": [
+"making",
+"makeing",
+"makking",
+"maked"
+],
+"w": "Verbs ending in -e drop the -e before -ing.",
+"r": "make → making; live → living.",
+"c": 3
+},
+{
+"t": "F",
+"q": "Choose the correct form: “Looking forward to ___ from you.”",
+"o": [
+"hearing",
+"hear",
+"heard",
+"to hear"
+],
+"w": "Here to is a preposition, so the verb takes -ing.",
+"r": "Looking forward to + -ing.",
+"c": 3
+},
+{
+"t": "F",
+"q": "Choose the correct form: “I ___ a lot yesterday.”",
+"o": [
+"studied",
+"have studied",
+"have been studying",
+"was studied"
+],
+"w": "Yesterday is finished time: past simple (Unit 2), not present perfect.",
+"r": "Finished time (yesterday, last week) → past simple.",
+"c": 2
+},
+{
+"t": "E",
+"q": "Choose the correct option: formal email to someone whose name you don't know.",
+"o": [
+"Dear Sir or Madam,",
+"Hi there!",
+"Dear John,",
+"Hey,"
+],
+"w": "Unknown recipient in a formal email → Dear Sir/Madam.",
+"r": "Formal greeting: Dear Mr/Ms + surname, or Dear Sir/Madam.",
+"c": 4
+},
+{
+"t": "E",
+"q": "Choose the correct option: closing a formal email when you know the name (according to the unit).",
+"o": [
+"Sincerely,",
+"Love,",
+"See you,",
+"Bye for now,"
+],
+"w": "The unit: name known → Sincerely; unknown → Faithfully. Best/Kind regards also work.",
+"r": "Formal closings: Sincerely / Faithfully / Kind regards.",
+"c": 4
+},
+{
+"t": "E",
+"q": "Choose the correct option: the contraction the unit considers always informal.",
+"o": [
+"I've",
+"don't",
+"can't",
+"It is"
+],
+"w": "Contractions with have (I've, I'd) are always informal; don't and can't now appear in formal texts.",
+"r": "Avoid I've / I'd in formal emails.",
+"c": 4
+},
+{
+"t": "E",
+"q": "Choose the correct option: meaning of “I'm leaving at 5”.",
+"o": [
+"Me voy a las 5.",
+"Me estoy marchando a las 5.",
+"Me fui a las 5.",
+"Me he ido a las 5."
+],
+"w": "The English -ing form can express future plans; the Spanish gerundio cannot.",
+"r": "Present continuous → arranged future.",
+"c": 4
+}
+];
+function letter(it){ return "ABCD".charAt(it.o.indexOf(it.ok)); }
+function explain(it,good){
+  var h="<b>✓ Correct answer: "+letter(it)+")</b> "+esc(it.ok);
+  h+="<div style='margin-top:8px'><b>Why?</b> "+esc(it.w)+"</div>";
+  h+="<div style='margin-top:6px'><b>Remember:</b> "+esc(it.r)+"</div>";
+  if(!good) h+="<div class='es'>Check "+it.c+": "+esc(CHECKS[it.c-1])+"</div>";
+  return h;
+}
+var ex=null;
+function renderHistory(){
+  var h=db.examHistory;
+  $("exam-history").textContent = h.length ? ("Últimas notas: "+h.slice(-5).map(function(x){ return fmt(x.nota); }).join(" / ")+" sobre 10.") : "";
+}
+function startExam(pool){
+  var qs=(pool||shuffle(EXAM).slice(0,30)).map(function(it){ return {t:it.t, q:it.q, w:it.w, r:it.r, c:it.c, ok:it.o[0], o:shuffle(it.o), src:it}; });
+  ex={qs:qs,i:0,ok:0,ko:0,blank:0,wrong:[],done:false};
+  $("exam-start").hidden=true; $("exam-end").hidden=true; $("exam-run").hidden=false;
+  showQ();
+}
+function showQ(){
+  if(ex.i>=ex.qs.length){ return endExam(); }
+  var it=ex.qs[ex.i]; ex.done=false;
+  $("exam-bar").style.width=(ex.i/ex.qs.length*100)+"%";
+  $("exam-count").textContent="Pregunta "+(ex.i+1)+" de "+ex.qs.length;
+  $("exam-score").textContent="Puntos: "+fmt(ex.ok-ex.ko*0.33);
+  $("exam-q").innerHTML="<span class='hint' style='display:block;margin:0 0 6px'>Choose ONE correct answer.</span>"+esc(it.q);
+  var box=$("exam-opts"); box.innerHTML="";
+  it.o.forEach(function(op,k){
+    var b=document.createElement("button"); b.className="opt"; b.dataset.v=op; b.textContent="ABCD".charAt(k)+") "+op;
+    b.addEventListener("click",function(){ answer(op,b); });
+    box.appendChild(b);
+  });
+  hideFb($("exam-fb")); $("exam-next").disabled=true; $("exam-blank").disabled=false;
+}
+function reveal(){
+  var it=ex.qs[ex.i];
+  $("exam-opts").querySelectorAll(".opt").forEach(function(b){ b.disabled=true; if(b.dataset.v===it.ok) b.classList.add("ok"); });
+}
+function answer(op,btn){
+  if(ex.done) return; ex.done=true;
+  var it=ex.qs[ex.i];
+  reveal();
+  if(op===it.ok){ ex.ok++; fb($("exam-fb"),true,explain(it,true)); }
+  else { ex.ko++; btn.classList.add("ko"); ex.wrong.push(it.src); fb($("exam-fb"),false,explain(it,false)); }
+  $("exam-next").disabled=false; $("exam-blank").disabled=true; $("exam-next").focus();
+}
+$("exam-blank").addEventListener("click",function(){
+  if(ex.done) return; ex.done=true; ex.blank++; var it=ex.qs[ex.i]; ex.wrong.push(it.src);
+  reveal(); fb($("exam-fb"),false,"En blanco. "+explain(it,false));
+  $("exam-next").disabled=false; $("exam-blank").disabled=true;
+});
+$("exam-next").addEventListener("click",function(){ ex.i++; showQ(); });
+$("exam-go").addEventListener("click",function(){ startExam(); });
+function endExam(){
+  $("exam-run").hidden=true;
+  var n=ex.qs.length, raw=ex.ok-ex.ko*0.33, nota=Math.max(0,raw)/n*10;
+  if(n===30){ db.examHistory.push({d:Date.now(),nota:Math.round(nota*100)/100}); db.examHistory=db.examHistory.slice(-20); save(db); }
+  var h="<p class='prompt'>Nota: <span class='mark'>"+fmt(nota)+"</span> sobre 10</p>";
+  h+="<div class='stats'><div class='stat'><b>"+ex.ok+"</b><span>aciertos</span></div><div class='stat'><b>"+ex.ko+"</b><span>fallos (−"+fmt(ex.ko*0.33)+")</span></div><div class='stat'><b>"+ex.blank+"</b><span>en blanco</span></div></div>";
+  h+= n===30 ? "<p class='hint'>Mínimo para compensar en el examen: 4 sobre 10 en cada parte y 5 de media.</p>" : "<p class='hint'>Ronda de repaso: no cuenta en el historial.</p>";
+  if(ex.wrong.length){
+    h+="<ul class='review'>"+ex.wrong.map(function(w){ return "<li><b>"+esc(w.q)+"</b><br><span class='mark'>"+esc(w.o[0])+"</span>. "+esc(w.w)+"<div class='es'>Remember: "+esc(w.r)+"</div></li>"; }).join("")+"</ul>";
+  }
+  h+="<div class='row'>"+(ex.wrong.length?"<button class='btn' id='exam-retry'>Repetir solo los fallos</button>":"")+"<button class='btn ghost' id='exam-new'>Nuevo test de 30</button></div>";
+  var end=$("exam-end"); end.innerHTML=h; end.hidden=false;
+  var wr=ex.wrong.slice();
+  if($("exam-retry")) $("exam-retry").addEventListener("click",function(){ startExam(shuffle(wr)); });
+  $("exam-new").addEventListener("click",function(){ startExam(); });
+  renderHistory();
+}
+renderHistory();
+
+/* ===== generic adaptive queue ===== */
+function Queue(items){ this.q=shuffle(items); this.total=items.length; this.mastered=0; this.cur=null; }
+Queue.prototype.next=function(){ this.cur=this.q.shift()||null; return this.cur; };
+Queue.prototype.fail=function(){ var pos=Math.min(3,this.q.length); this.q.splice(pos,0,this.cur); };
+Queue.prototype.pass=function(){ this.mastered++; };
+function bar(id,Q){ $(id).style.width=(Q.mastered/Q.total*100)+"%"; }
+
+/* ===== GAP FILL ===== */
+var GAPS=[
+{s:"She ___ (work) in London.",a:["works"],es:"Ella trabaja en Londres."},
+{s:"___ (do) you work from home?",a:["do"],es:"¿Trabajas desde casa?"},
+{s:"It ___ (not / rain) every day here.",a:["doesn't rain","does not rain"],es:"Aquí no llueve todos los días."},
+{s:"Paul ___ (not / speak) now.",a:["isn't speaking","is not speaking","'s not speaking"],es:"Paul no está hablando ahora."},
+{s:"I ___ (learn) English at the moment.",a:["am learning","'m learning"],es:"Estoy aprendiendo inglés en este momento."},
+{s:"She ___ never come to my house.",a:["has"],es:"Nunca ha venido a mi casa."},
+{s:"They haven't started the report ___. (todavía)",a:["yet"],es:"Todavía no han empezado el informe."},
+{s:"Mathew has worked there ___ 2010.",a:["since"],es:"Mathew trabaja ahí desde 2010."},
+{s:"We have been waiting ___ twenty minutes.",a:["for"],es:"Llevamos veinte minutos esperando."},
+{s:"I ___ (just / see) your friend Mary.",a:["have just seen","'ve just seen"],es:"Acabo de ver a tu amiga Mary."},
+{s:"Have you ever ___ (study) Italian?",a:["studied"],es:"¿Has estudiado alguna vez italiano?"},
+{s:"She ___ (complain) since she arrived. (foco en la acción)",a:["has been complaining","'s been complaining"],es:"No ha parado de quejarse desde que llegó."},
+{s:"Mary ___ (live) in that house for three years. (continuo)",a:["has been living","'s been living"],es:"Mary lleva tres años viviendo en esa casa."},
+{s:"___ (not / close) the door!",a:["don't close","do not close"],es:"¡No cierres la puerta!"},
+{s:"Who ___ (like) paella?",a:["likes"],es:"¿A quién le gusta la paella?"},
+{s:"The temperature ___ (rise) all over the planet.",a:["is rising","'s rising"],es:"La temperatura está subiendo en todo el planeta."},
+{s:"We ___ (fly) to Rome on Friday. (horario fijo)",a:["fly"],es:"Volamos a Roma el viernes."},
+{s:"I ___ (be) thirty years old.",a:["am","'m"],es:"Tengo treinta años."},
+{s:"He ___ (watch) TV every evening.",a:["watches"],es:"Ve la tele todas las tardes."},
+{s:"She ___ (study) Law.",a:["studies"],es:"Estudia Derecho."},
+{s:"He ___ (play) tennis on Sundays.",a:["plays"],es:"Juega al tenis los domingos."},
+{s:"I hope this email ___ you well.",a:["finds"],es:"Espero que se encuentre bien."},
+{s:"If you would be so ___ as to give me your address...",a:["kind"],es:"Si fuera tan amable de facilitarme su dirección..."},
+{s:"Looking forward to ___ (hear) from you.",a:["hearing"],es:"Quedo a la espera de sus noticias."},
+{s:"Send my ___ to your family. (recuerdos)",a:["regards","love"],es:"Dale recuerdos a tu familia."},
+{s:"Dear ___ Smith, (mujer, sin aludir al estado civil)",a:["ms","ms."],es:"Estimada Sra. Smith:"},
+{s:"I am writing ___ the advertisement on your website. (en relación con)",a:["regarding"],es:"Le escribo en relación con el anuncio de su web."},
+{s:"Nobody has ___ said that to me before.",a:["ever"],es:"Nadie me había dicho eso nunca."},
+{s:"You promised it yesterday and you ___ haven't finished it.",a:["still"],es:"Lo prometiste ayer y todavía no lo has terminado."},
+{s:"The reason I am writing is ___ I need your help.",a:["that"],es:"El motivo por el que escribo es que necesito tu ayuda."}
+];
+var G=new Queue(GAPS), gDone=false;
+function gapShow(){
+  var c=G.next(); bar("gap-bar",G);
+  if(!c){ $("gap-q").innerHTML="<span class='mark'>Completado.</span> Has acertado las "+G.total+" tarjetas."; $("gap-in").hidden=true; $("gap-check").hidden=true; $("gap-next").textContent="Empezar de nuevo"; $("gap-next").disabled=false; $("gap-count").textContent=""; hideFb($("gap-fb")); return; }
+  $("gap-in").hidden=false; $("gap-check").hidden=false; $("gap-next").textContent="Siguiente";
+  $("gap-count").textContent="Dominadas "+G.mastered+" de "+G.total;
+  $("gap-q").textContent=c.s; $("gap-in").value=""; hideFb($("gap-fb")); $("gap-next").disabled=true; gDone=false; $("gap-in").focus({preventScroll:true});
+}
+function gapCheck(){
+  if(gDone) return; var c=G.cur; if(!c) return; var v=norm($("gap-in").value); if(!v) return; gDone=true;
+  var ok=c.a.some(function(a){ return norm(a)===v; });
+  if(ok){ G.pass(); fb($("gap-fb"),true,"Correcto.<div class='es'>"+esc(c.es)+"</div>"); }
+  else { G.fail(); fb($("gap-fb"),false,"Respuesta: <span class='mark'>"+esc(c.a[0])+"</span>. Volverá a salir.<div class='es'>"+esc(c.es)+"</div>"); }
+  bar("gap-bar",G); $("gap-next").disabled=false; $("gap-next").focus();
+}
+$("gap-check").addEventListener("click",gapCheck);
+$("gap-in").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(gDone) gapShow(); else gapCheck(); } });
+$("gap-next").addEventListener("click",function(){ if(!G.cur && G.q.length===0 && G.mastered===G.total){ G=new Queue(GAPS); } gapShow(); });
+gapShow();
+
+/* ===== SPELLING ===== */
+var VERBS=[
+["work","works","working","añade -s","añade -ing"],["spend","spends","spending","añade -s","añade -ing"],
+["drive","drives","driving","añade -s","acaba en -e: la -e cae"],["fly","flies","flying","consonante + y → -ies","se mantiene la -y"],
+["cry","cries","crying","consonante + y → -ies","se mantiene la -y"],["study","studies","studying","consonante + y → -ies","se mantiene la -y"],
+["tidy","tidies","tidying","consonante + y → -ies","se mantiene la -y"],["play","plays","playing","vocal + y → solo -s","se mantiene la -y"],
+["pray","prays","praying","vocal + y → solo -s","se mantiene la -y"],["go","goes","going","acaba en -o → -es","añade -ing"],
+["do","does","doing","acaba en -o → -es","añade -ing"],["echo","echoes","echoing","acaba en -o → -es","añade -ing"],
+["pass","passes","passing","acaba en -s → -es","añade -ing"],["watch","watches","watching","acaba en -ch → -es","añade -ing"],
+["push","pushes","pushing","acaba en -sh → -es","añade -ing"],["fix","fixes","fixing","acaba en -x → -es","añade -ing"],
+["buzz","buzzes","buzzing","acaba en -z → -es","añade -ing"],["make","makes","making","añade -s","acaba en -e: la -e cae"],
+["decide","decides","deciding","añade -s","acaba en -e: la -e cae"],["live","lives","living","añade -s","acaba en -e: la -e cae"],
+["stop","stops","stopping","añade -s","consonante-vocal-consonante tónica: se dobla"],["get","gets","getting","añade -s","consonante-vocal-consonante tónica: se dobla"],
+["refer","refers","referring","añade -s","sílaba final tónica (re-FER): se dobla"],["begin","begins","beginning","añade -s","sílaba final tónica (be-GIN): se dobla"],
+["visit","visits","visiting","añade -s","sílaba final átona (VI-sit): no se dobla"],["speak","speaks","speaking","añade -s","añade -ing"],
+["read","reads","reading","añade -s","añade -ing"]
+];
+var SP=[]; VERBS.forEach(function(v){ SP.push({v:v[0],k:"s",a:v[1],r:v[3]}); SP.push({v:v[0],k:"ing",a:v[2],r:v[4]}); });
+var S=new Queue(SP), sDone=false;
+function spShow(){
+  var c=S.next(); bar("spell-bar",S);
+  if(!c){ $("spell-q").innerHTML="<span class='mark'>Completado.</span> 54 formas acertadas."; $("spell-in").hidden=true; $("spell-check").hidden=true; $("spell-next").textContent="Empezar de nuevo"; $("spell-next").disabled=false; $("spell-count").textContent=""; $("spell-mode").textContent=""; hideFb($("spell-fb")); return; }
+  $("spell-in").hidden=false; $("spell-check").hidden=false; $("spell-next").textContent="Siguiente";
+  $("spell-count").textContent="Dominadas "+S.mastered+" de "+S.total;
+  $("spell-mode").textContent= c.k==="s" ? "3ª persona singular" : "Forma -ing";
+  $("spell-q").innerHTML = c.k==="s" ? "She / he / it ... <b>"+esc(c.v)+"</b>" : "I am ... <b>"+esc(c.v)+"</b>";
+  $("spell-in").value=""; hideFb($("spell-fb")); $("spell-next").disabled=true; sDone=false; $("spell-in").focus({preventScroll:true});
+}
+function spCheck(){
+  if(sDone) return; var c=S.cur; if(!c) return; var v=norm($("spell-in").value); if(!v) return; sDone=true;
+  if(v===c.a){ S.pass(); fb($("spell-fb"),true,"Correcto: "+esc(c.a)+". Regla: "+esc(c.r)+"."); }
+  else { S.fail(); fb($("spell-fb"),false,"Es <span class='mark'>"+esc(c.a)+"</span>. Regla: "+esc(c.r)+"."); }
+  bar("spell-bar",S); $("spell-next").disabled=false; $("spell-next").focus();
+}
+$("spell-check").addEventListener("click",spCheck);
+$("spell-in").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(sDone) spShow(); else spCheck(); } });
+$("spell-next").addEventListener("click",function(){ if(!S.cur && S.q.length===0 && S.mastered===S.total){ S=new Queue(SP); } spShow(); });
+spShow();
+
+/* ===== FIX THE MISTAKE ===== */
+var FIX=[
+{b:"Mary doesn't drinks water.",g:"Mary doesn't drink water.",w:"Tras doesn't, verbo en forma base."},
+{b:"Where does he comes from?",g:"Where does he come from?",w:"Does ya marca la 3ª persona."},
+{b:"I don't am tired.",g:"I'm not tired. / I am not tired.",w:"To be no usa do."},
+{b:"Does she be happy?",g:"Is she happy?",w:"To be se invierte sin auxiliar."},
+{b:"She is dancesing a lot.",g:"She is dancing a lot.",w:"En continuo, la 3ª persona la marca is."},
+{b:"She hasn't never come to my house.",g:"She has never come to my house. / She hasn't ever come to my house.",w:"Sin doble negación."},
+{b:"I am knowing the answer.",g:"I know the answer.",w:"Know es verbo de estado."},
+{b:"She often is late.",g:"She is often late.",w:"Adverbio de frecuencia detrás de to be."},
+{b:"I go often to the swimming pool.",g:"I often go to the swimming pool.",w:"Adverbio de frecuencia delante del verbo principal."},
+{b:"They haven't started the report still.",g:"They haven't started the report yet. / They still haven't started the report.",w:"Yet al final en negativas; still delante del auxiliar."},
+{b:"I have been writing emails all the day.",g:"I have been writing emails all day.",w:"All day, sin artículo (errata del propio material)."},
+{b:"I have studied a lot yesterday.",g:"I studied a lot yesterday.",w:"Yesterday = tiempo terminado: past simple."},
+{b:"He works here for 2010.",g:"He has worked here since 2010.",w:"Desde un punto de inicio hasta ahora: presente perfecto + since."},
+{b:"Doesn't close the door!",g:"Don't close the door!",w:"El imperativo nunca usa does."},
+{b:"Have ever you travelled to England?",g:"Have you ever travelled to England?",w:"Ever detrás del sujeto en preguntas."},
+{b:"Would you mind to send me the file?",g:"Would you mind sending me the file?",w:"Would you mind + -ing."},
+{b:"Looking forward to hear from you.",g:"Looking forward to hearing from you.",w:"Aquí to es preposición: va seguido de -ing."},
+{b:"Hi Mr Smith! I want the report asap.",g:"Dear Mr Smith, I would be grateful if you could send me the report as soon as possible.",w:"Email formal: saludo Dear, sin exclamaciones ni abreviaturas, petición cortés."},
+{b:"Dear Sir or Madam, ... Lots of love, John",g:"Dear Sir or Madam, ... Yours faithfully, John Smith",w:"Cierre informal en un email formal."},
+{b:"I am in the middle of a field research.",g:"I am in the middle of some field research.",w:"Research es incontable (errata del propio material)."},
+{b:"The pronoun I always go in capital letters.",g:"The pronoun I always goes in capital letters.",w:"Sujeto en 3ª persona singular (errata del propio material)."},
+{b:"Who does live in London?",g:"Who lives in London?",w:"Who como sujeto no lleva auxiliar."}
+];
+var F=new Queue(FIX);
+function fixShow(){
+  var c=F.next(); bar("fix-bar",F); hideFb($("fix-fb"));
+  $("fix-row1").hidden=false; $("fix-row2").hidden=true;
+  if(!c){ $("fix-q").innerHTML="<span class='mark'>Completado.</span>"; $("fix-show").textContent="Empezar de nuevo"; $("fix-count").textContent=""; return; }
+  $("fix-show").textContent="Ver corrección";
+  $("fix-count").textContent="Dominadas "+F.mastered+" de "+F.total;
+  $("fix-q").textContent=c.b;
+}
+$("fix-show").addEventListener("click",function(){
+  if(!F.cur){ F=new Queue(FIX); fixShow(); return; }
+  var c=F.cur; fb($("fix-fb"),true,"<span class='mark'>"+esc(c.g)+"</span><div class='es'>"+esc(c.w)+"</div>");
+  $("fix-row1").hidden=true; $("fix-row2").hidden=false;
+});
+$("fix-good").addEventListener("click",function(){ F.pass(); fixShow(); });
+$("fix-bad").addEventListener("click",function(){ F.fail(); fixShow(); });
+fixShow();
+
+/* ===== REGISTER ===== */
+var REG=[
+{p:"How's everything going?",f:false},{p:"I hope this email finds you well.",f:true},{p:"Dear Sir/Madam,",f:true},
+{p:"Keep in touch!",f:false},{p:"Kind regards,",f:true},{p:"Bye for now,",f:false},
+{p:"I am writing regarding the advertisement on your website.",f:true},{p:"Thanks for your letter.",f:false},
+{p:"If you would be so kind as to give me your address...",f:true},{p:"What's new?",f:false},
+{p:"Please let me know a convenient time to visit it.",f:true},{p:"Send my love to Pete and the kids.",f:false},
+{p:"Lots of love,",f:false},{p:"Yours faithfully,",f:true},{p:"Sorry for not writing earlier.",f:false},
+{p:"I would like to discuss it further, as well as answer any questions you may have.",f:true},
+{p:"Hope you feel better soon.",f:false},{p:"Dear Ms Walker,",f:true},{p:"I've moved to a different house.",f:false},
+{p:"I do not have any disrupting hobbies.",f:true},{p:"Hi!",f:false},{p:"Best regards,",f:true},
+{p:"Anyway, I was wondering if...",f:false},{p:"I'd love to see you!",f:false},{p:"Dear Dr Holmes,",f:true},
+{p:"How are you getting on?",f:false}
+];
+var WHY={f:"Registro formal: sin contracciones, fórmulas de cortesía, tono distante.",i:"Registro informal: contracciones, exclamaciones, phrasal verbs o tono cercano."};
+var R=new Queue(REG), rDone=false;
+function regShow(){
+  var c=R.next(); bar("reg-bar",R); hideFb($("reg-fb")); rDone=false; $("reg-next").disabled=true;
+  if(!c){ $("reg-q").innerHTML="<span class='mark'>Completado.</span>"; $("reg-f").hidden=true; $("reg-i").hidden=true; $("reg-next").textContent="Empezar de nuevo"; $("reg-next").disabled=false; $("reg-count").textContent=""; return; }
+  $("reg-f").hidden=false; $("reg-i").hidden=false; $("reg-next").textContent="Siguiente";
+  $("reg-count").textContent="Dominadas "+R.mastered+" de "+R.total;
+  $("reg-q").textContent=c.p;
+}
+function regAns(isF){
+  if(rDone || !R.cur) return; rDone=true; var c=R.cur;
+  if(isF===c.f){ R.pass(); fb($("reg-fb"),true,"Correcto. "+(c.f?WHY.f:WHY.i)); }
+  else { R.fail(); fb($("reg-fb"),false,"Es <span class='mark'>"+(c.f?"formal":"informal")+"</span>. "+(c.f?WHY.f:WHY.i)); }
+  bar("reg-bar",R); $("reg-next").disabled=false; $("reg-next").focus();
+}
+$("reg-f").addEventListener("click",function(){ regAns(true); });
+$("reg-i").addEventListener("click",function(){ regAns(false); });
+$("reg-next").addEventListener("click",function(){ if(!R.cur && R.q.length===0 && R.mastered===R.total){ R=new Queue(REG); } regShow(); });
+regShow();
+
+/* ===== WRITE ===== */
+var TASKS={
+ formal:{t:"Escribe a tu profesora, Almudena Nido, para preguntarle el horario de las clases síncronas y si quedarán grabadas. Entre 80 y 150 palabras.",
+  m:"Subject: Schedule of the synchronous classes\n\nDear Ms Nido,\n\nI hope this email finds you well.\n\nI am a first-year student of Professional Communication in English. I am writing regarding the weekly online classes mentioned in your welcome message.\n\nI would be grateful if you could tell me the schedule of these sessions. I work full-time, so I would also like to know whether the recordings will be available in the virtual classroom.\n\nThank you in advance for your help.\n\nKind regards,\n\nAntonio de Lamo"},
+ informal:{t:"Escribe a un amigo para contarle que has empezado el Grado en Derecho y proponerle quedar un fin de semana. Entre 80 y 150 palabras.",
+  m:"Subject: Big news!\n\nHi Carlos,\n\nHow's everything going? It's been ages!\n\nI'm just writing to tell you that I've started a Law degree online. I'm studying English grammar at the moment and, believe it or not, I'm enjoying it. Work keeps me busy, but I study in the evenings and at weekends.\n\nAnyway, I was wondering if you fancy meeting up one weekend. There's a new place in the city centre I've been wanting to try.\n\nLet me know when you're free. Send my love to your family.\n\nTake care,\n\nAntonio"}
+};
+var wMode="formal";
+var CONTR=/\b(i'm|i've|i'd|i'll|you're|you've|we're|we've|they're|they've|it's|that's|there's|he's|she's|don't|doesn't|didn't|can't|won't|isn't|aren't|haven't|hasn't|wasn't|weren't|couldn't|wouldn't|shouldn't|let's)\b/i;
+function lines(t){ return t.split(/\n/).map(function(x){ return x.trim(); }).filter(Boolean); }
+function checksFor(sub,body){
+  var L=lines(body), first=L[0]||"", words=(body.match(/[A-Za-z']+/g)||[]).length;
+  var paras=body.split(/\n\s*\n/).map(function(x){ return x.trim(); }).filter(Boolean).length;
+  var sents=body.split(/[.!?]+/).map(function(x){ return x.trim(); }).filter(Boolean);
+  var avg=sents.length? words/sents.length : 0;
+  var closeF=/^(kind regards|best regards|yours sincerely|yours faithfully|sincerely|faithfully),?$/i;
+  var closeI=/^(take care|best wishes|all the best|love|lots of love|see you|bye for now|keep in touch|stay in touch|regards|write soon)[,!]?$/i;
+  var ci=-1; L.forEach(function(x,i){ if((wMode==="formal"?closeF:closeI).test(x)) ci=i; });
+  var c=[];
+  c.push({ok:sub.trim().length>=6, t:"Asunto claro (subject line)"});
+  if(wMode==="formal"){
+    c.push({ok:/^dear\s+(ms|mr|mrs|miss|dr|professor|sir)/i.test(first), t:"Saludo formal: Dear Ms/Mr/Dr + apellido, o Dear Sir/Madam"});
+    c.push({ok:!CONTR.test(body), t:"Sin contracciones (I am, it is, do not...)"});
+    c.push({ok:!/^(hi|hey|hello)\b/i.test(first) && body.indexOf("!")===-1, t:"Sin Hi/Hey ni exclamaciones"});
+    c.push({ok:ci>-1, t:"Cierre formal: Kind regards, Best regards, Yours sincerely/faithfully"});
+    c.push({ok:!/\b(u|asap|pls|thx)\b/i.test(body), t:"Sin abreviaturas (u, asap, pls, thx)"});
+    c.push({ok:avg>0 && avg<=20, t:"Frases cortas (media ≤ 20 palabras; ahora "+Math.round(avg)+")"});
+  } else {
+    c.push({ok:/^(hi|hello|dear)\s+\w+/i.test(first), t:"Saludo cercano: Hi / Hello / Dear + nombre"});
+    c.push({ok:CONTR.test(body), t:"Usa alguna contracción (I'm, I've, it's...)"});
+    c.push({ok:ci>-1, t:"Cierre informal: Take care, Best wishes, All the best, Love..."});
+    c.push({ok:!/\b(yours faithfully|yours sincerely|faithfully)\b/i.test(body), t:"Sin cierres formales (Yours faithfully/sincerely)"});
+    c.push({ok:/\?/.test(body), t:"Pregunta al destinatario por su vida (How are you?, What's new?...)"});
+  }
+  c.push({ok:ci>-1 && ci<L.length-1, t:"Firma detrás del cierre"});
+  c.push({ok:paras>=4, t:"Un párrafo por idea (al menos 4 bloques separados por línea en blanco)"});
+  c.push({ok:words>=80 && words<=150, t:"Entre 80 y 150 palabras"});
+  return {c:c,words:words};
+}
+function wRender(){
+  var sub=$("w-subject").value, body=$("w-body").value, r=checksFor(sub,body);
+  $("w-words").textContent=r.words+" words";
+  $("w-checks").innerHTML=r.c.map(function(x){ return "<li class='"+(body.trim()?(x.ok?"pass":"fail"):"")+"'>"+esc(x.t)+"</li>"; }).join("");
+  db.drafts[wMode]={s:sub,b:body}; save(db);
+}
+function wSet(m){
+  wMode=m; $("w-formal").className= m==="formal"?"btn":"btn ghost"; $("w-informal").className= m==="informal"?"btn":"btn ghost";
+  $("w-task").textContent=TASKS[m].t; $("w-model").textContent=TASKS[m].m;
+  var d=db.drafts[m]||{s:"",b:""}; $("w-subject").value=d.s; $("w-body").value=d.b; wRender();
+}
+$("w-formal").addEventListener("click",function(){ wSet("formal"); });
+$("w-informal").addEventListener("click",function(){ wSet("informal"); });
+$("w-subject").addEventListener("input",wRender);
+$("w-body").addEventListener("input",wRender);
+wSet("formal");
+})();
+</script>
+</body>
+</html>
