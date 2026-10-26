@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Practica la Unit 3 · Comunicación Profesional en Inglés</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F4; --surface:#FFFFFF; --ink:#1B2433; --muted:#566173; --line:#D5DCE4;
+  --accent:#2346A0; --accent-ink:#FFFFFF; --ok:#1E7F5C; --ok-bg:#E3F4EC; --ko:#B3261E; --ko-bg:#FBE9E7;
+  --mark:#FFE45C;
+  --serif:"Literata", Georgia, "Times New Roman", serif;
+  --sans:"Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+    --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+    --mark:rgba(255,228,92,.38);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+  --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+  --mark:rgba(255,228,92,.38);
+}
+:root{ box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+html{ scroll-padding-top:env(safe-area-inset-top,0px); }
+*,*::before,*::after{ box-sizing:inherit; }
+body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.5; }
+.wrap{ max-width:660px; margin:0 auto; padding:20px 16px 48px; }
+h1{ font-family:var(--serif); font-weight:600; font-size:1.9rem; line-height:1.15; margin:8px 0 6px; letter-spacing:-.01em; }
+.lead{ color:var(--muted); margin:0 0 18px; max-width:60ch; }
+.mark{ background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); padding:8px 0 10px; margin:0 -16px 8px; }
+.tabs{ display:flex; gap:6px; overflow-x:auto; padding:0 16px; scrollbar-width:none; }
+.tabs::-webkit-scrollbar{ display:none; }
+.tab{ flex:0 0 auto; border:1px solid var(--line); background:var(--surface); color:var(--ink); font:500 .92rem var(--sans); padding:8px 14px; border-radius:999px; cursor:pointer; }
+.tab[aria-selected="true"]{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.panel{ display:none; }
+.panel.on{ display:block; }
+.card{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; margin-bottom:14px; }
+.meta{ display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:.88rem; margin-bottom:10px; flex-wrap:wrap; }
+.prompt{ font-family:var(--serif); font-size:1.22rem; line-height:1.45; margin:0 0 14px; }
+.opts{ display:grid; gap:8px; }
+.opt{ text-align:left; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:10px; padding:11px 13px; font:1rem var(--serif); cursor:pointer; }
+.opt:hover:not(:disabled){ border-color:var(--accent); }
+.opt.ok{ background:var(--ok-bg); border-color:var(--ok); }
+.opt.ko{ background:var(--ko-bg); border-color:var(--ko); }
+.opt:disabled{ cursor:default; }
+.row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.btn{ border:0; background:var(--accent); color:var(--accent-ink); font:600 .95rem var(--sans); padding:10px 16px; border-radius:10px; cursor:pointer; }
+.btn.ghost{ background:transparent; color:var(--accent); border:1px solid var(--line); }
+.btn:disabled{ opacity:.45; cursor:default; }
+.fb{ margin-top:12px; padding:12px 14px; border-radius:10px; font-size:.95rem; display:none; }
+.fb.show{ display:block; }
+.fb.ok{ background:var(--ok-bg); color:var(--ink); border-left:4px solid var(--ok); }
+.fb.ko{ background:var(--ko-bg); color:var(--ink); border-left:4px solid var(--ko); }
+.es{ color:var(--muted); font-style:italic; margin-top:6px; }
+input[type=text], textarea{ width:100%; font:1.05rem var(--serif); color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+textarea{ min-height:240px; line-height:1.5; resize:vertical; }
+input:focus, textarea:focus, .btn:focus-visible, .opt:focus-visible, .tab:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+.hint{ color:var(--muted); font-size:.9rem; margin:0 0 10px; }
+.stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin:12px 0; }
+.stat{ border:1px solid var(--line); border-radius:10px; padding:10px; }
+.stat b{ display:block; font-family:var(--serif); font-size:1.5rem; }
+.stat span{ color:var(--muted); font-size:.85rem; }
+.review{ margin:12px 0 0; padding:0; list-style:none; }
+.review li{ border-top:1px solid var(--line); padding:10px 0; font-size:.95rem; }
+.checks{ list-style:none; padding:0; margin:12px 0 0; }
+.checks li{ padding:6px 0 6px 28px; position:relative; font-size:.95rem; }
+.checks li::before{ content:""; position:absolute; left:4px; top:11px; width:12px; height:12px; border-radius:50%; border:2px solid var(--line); }
+.checks li.pass::before{ background:var(--ok); border-color:var(--ok); }
+.checks li.fail::before{ border-color:var(--ko); }
+.seg{ display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.progress{ height:4px; background:var(--line); border-radius:2px; overflow:hidden; margin-bottom:12px; }
+.progress i{ display:block; height:100%; background:var(--accent); width:0; transition:width .25s; }
+details summary{ cursor:pointer; color:var(--accent); font-weight:500; }
+.model{ font-family:var(--serif); white-space:pre-wrap; background:var(--bg); border-radius:10px; padding:12px; margin-top:8px; }
+@media (prefers-reduced-motion: reduce){ .progress i{ transition:none; } }
+.vt{width:100%;border-collapse:collapse;font-size:.92rem}.vt th,.vt td{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}.vt th{color:var(--muted);font-weight:600}.vt h4{margin:14px 0 4px}.tw{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Practica la Unit 3</h1>
+  <p class="lead">Modal verbs y suggestions. Los fallos vuelven a salir hasta que los aciertes. El test sigue el formato de corrección de las clases (Why?, Why are the other options wrong? y Remember:) con las 4 opciones del examen: 30 preguntas, cada fallo resta 0,33. Nuevo: modo «Modales en pasado» (modal + have + participio) y clasificación por significado.</p>
+
+  <nav aria-label="Modos de práctica">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-p="exam" aria-selected="true">Test tipo examen</button>
+      <button class="tab" role="tab" data-p="gap" aria-selected="false">Rellena huecos</button>
+      <button class="tab" role="tab" data-p="spell" aria-selected="false">Modales en pasado</button>
+      <button class="tab" role="tab" data-p="irr" aria-selected="false">Irregulares</button>
+      <button class="tab" role="tab" data-p="fix" aria-selected="false">Corrige el error</button>
+      <button class="tab" role="tab" data-p="reg" aria-selected="false">¿Qué expresa?</button>
+      <button class="tab" role="tab" data-p="write" aria-selected="false">Redacta</button>
+    </div>
+  </nav>
+
+  <!-- EXAM -->
+  <section class="panel on" id="p-exam">
+    <div id="exam-start" class="card">
+      <p class="prompt">30 preguntas al azar de un banco de 67, con 4 opciones (A, B, C, D), como en el examen final.</p>
+      <p class="hint">Tipos de pregunta de las clases de la profesora: <i>Choose the correct question for…</i>, <i>Choose the correct sentence</i>, <i>…for &lt;un uso&gt;</i> y <i>Choose the correct form</i>. Incluye repaso de las Units 1 y 2 y verbos irregulares con modal + have + participio.</p>
+      <p class="hint">Formato de las clases: cada corrección trae <b>Why?</b>, <b>Why are the other options wrong?</b> y <b>Remember:</b>. Exam strategy de la sesión 3: 1) lee la frase entera; 2) identifica el significado; 3) revisa la estructura (modal + base; have to con do/does; had to); 4) elimina las opciones de significado o forma erróneos.</p>
+      <p class="hint">Acierto +1, fallo −0,33, en blanco 0. Con 4 opciones, contestar al azar vale cero; si descartas una opción, responder vale +0,11; si descartas dos, +0,34. Responde solo si puedes descartar al menos una.</p>
+      <div id="exam-history" class="hint"></div>
+      <div class="row"><button class="btn" id="exam-go">Empezar test</button></div>
+    </div>
+    <div id="exam-run" class="card" hidden>
+      <div class="progress"><i id="exam-bar"></i></div>
+      <div class="meta"><span id="exam-count"></span><span id="exam-score"></span></div>
+      <p class="prompt" id="exam-q"></p>
+      <div class="opts" id="exam-opts"></div>
+      <div class="fb" id="exam-fb"></div>
+      <div class="row">
+        <button class="btn ghost" id="exam-blank">Dejar en blanco</button>
+        <button class="btn" id="exam-next" disabled>Siguiente</button>
+      </div>
+    </div>
+    <div id="exam-end" class="card" hidden></div>
+  </section>
+
+  <!-- GAP -->
+  <section class="panel" id="p-gap">
+    <div class="card">
+      <div class="progress"><i id="gap-bar"></i></div>
+      <div class="meta"><span id="gap-count"></span><span>Pista entre paréntesis</span></div>
+      <p class="prompt" id="gap-q"></p>
+      <input type="text" id="gap-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Tu respuesta">
+      <div class="fb" id="gap-fb"></div>
+      <div class="row">
+        <button class="btn" id="gap-check">Comprobar</button>
+        <button class="btn ghost" id="gap-next" disabled>Siguiente</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPELL -->
+  <section class="panel" id="p-spell">
+    <div class="card">
+      <div class="progress"><i id="spell-bar"></i></div>
+      <div class="meta"><span id="spell-count"></span><span id="spell-mode"></span></div>
+      <p class="prompt" id="spell-q"></p>
+      <input type="text" id="spell-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Modal + have + participio">
+      <div class="fb" id="spell-fb"></div>
+      <div class="row">
+        <button class="btn" id="spell-check">Comprobar</button>
+        <button class="btn ghost" id="spell-next" disabled>Siguiente</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- IRREGULAR VERBS -->
+  <section class="panel" id="p-irr">
+    <div class="card">
+      <div class="seg" id="irr-groups"></div>
+      <div class="progress"><i id="irr-bar"></i></div>
+      <div class="meta"><span id="irr-count"></span><span id="irr-glabel"></span></div>
+      <p class="prompt" id="irr-q"></p>
+      <p class="hint" id="irr-es"></p>
+      <div id="irr-inputs">
+        <label class="hint" for="irr-past">Past simple</label>
+        <input type="text" id="irr-past" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <p></p>
+        <label class="hint" for="irr-pp">Past participle</label>
+        <input type="text" id="irr-pp" autocomplete="off" autocapitalize="off" spellcheck="false">
+      </div>
+      <div class="fb" id="irr-fb"></div>
+      <div class="row">
+        <button class="btn" id="irr-check">Comprobar</button>
+        <button class="btn ghost" id="irr-next" disabled>Siguiente</button>
+      </div>
+    </div>
+    <div class="card"><details><summary>Ver la lista completa por grupos</summary><div class="tw" id="irr-list"></div></details></div>
+  </section>
+
+  <!-- FIX -->
+  <section class="panel" id="p-fix">
+    <div class="card">
+      <div class="progress"><i id="fix-bar"></i></div>
+      <div class="meta"><span id="fix-count"></span><span>Encuentra el error y corrígelo mentalmente</span></div>
+      <p class="prompt" id="fix-q"></p>
+      <div class="fb" id="fix-fb"></div>
+      <div class="row" id="fix-row1"><button class="btn" id="fix-show">Ver corrección</button></div>
+      <div class="row" id="fix-row2" hidden>
+        <button class="btn" id="fix-good">Lo tenía bien</button>
+        <button class="btn ghost" id="fix-bad">Repasar otra vez</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section class="panel" id="p-reg">
+    <div class="card">
+      <div class="progress"><i id="reg-bar"></i></div>
+      <div class="meta"><span id="reg-count"></span><span>¿Qué expresa el modal?</span></div>
+      <p class="prompt" id="reg-q"></p>
+      <p class="hint" id="reg-ctx"></p>
+      <div class="opts" id="reg-opts"></div>
+      <div class="fb" id="reg-fb"></div>
+      <div class="row"><button class="btn ghost" id="reg-next" disabled>Siguiente</button></div>
+    </div>
+  </section>
+
+  <!-- WRITE -->
+  <section class="panel" id="p-write">
+    <div class="card">
+      <div class="seg">
+        <button class="btn" id="w-formal">Email de recomendaciones</button>
+        <button class="btn ghost" id="w-informal">Cover letter (PEC)</button>
+      </div>
+      <p class="prompt" id="w-task"></p>
+      <label class="hint" for="w-subject">Subject</label>
+      <input type="text" id="w-subject" autocomplete="off">
+      <p></p>
+      <label class="hint" for="w-body">Texto</label>
+      <textarea id="w-body" spellcheck="true"></textarea>
+      <div class="meta"><span id="w-words">0 words</span><span>El borrador se guarda en este navegador</span></div>
+      <ul class="checks" id="w-checks"></ul>
+      <p class="hint">La comprobación es mecánica: detecta forma, no contenido. Revisa tú que el mensaje diga lo que tiene que decir.</p>
+      <details><summary>Ver un modelo de respuesta</summary><div class="model" id="w-model"></div></details>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+"use strict";
+var D={"CHECKS": ["Read the whole sentence before choosing: lee la frase entera antes de elegir (el contexto decide: «No entry», «office rules», «yesterday»).", "Identify the meaning: capacidad, permiso, consejo, obligación, prohibición o posibilidad (y en pasado: lamento o deducción).", "Check the structure: modal + forma base (sin to); have to usa do/does; obligación pasada = had to; pasado = modal + have + participio.", "Eliminate options with the wrong meaning or form: descarta primero las de forma imposible (musted, had better to) y luego las de significado erróneo."], "EXAM": [{"t": "Q", "q": "Choose the correct question for “She can drive.”", "o": ["Can she drive?", "Does she can drive?", "Can she drives?", "Does she drive can?"], "w": "Modals are auxiliaries: we invert the modal and the subject, without do.", "r": "Modal + subject + base verb?", "c": 3, "x": ["Modals never use do/does in questions.", "After a modal, the base form: no -s.", "Wrong word order: the modal goes before the subject."]}, {"t": "Q", "q": "Choose the correct question for “He has to work on Saturday.”", "o": ["Does he have to work on Saturday?", "Has he to work on Saturday?", "Does he has to work on Saturday?", "Do he have to work on Saturday?"], "w": "Have to is not a pure modal: its questions need do/does, and after does we use the base form have.", "r": "Do/Does + subject + have to + base verb?", "c": 3, "x": ["“Has he to…?” is not used in modern English: have to needs do/does.", "After does, the base form “have”, not “has”.", "He → does, not do."]}, {"t": "Q", "q": "Choose the correct question for “They had to leave early.”", "o": ["Did they have to leave early?", "Had they to leave early?", "Did they had to leave early?", "Do they had to leave early?"], "w": "Past questions with have to use did + have to + base verb.", "r": "Did + subject + have to + base verb?", "c": 4, "x": ["Have to needs did in past questions; we don't invert “had”.", "After did, the base form “have”, not “had”.", "Do is present: with “had” it mixes two tenses."]}, {"t": "Q", "q": "Choose the correct question for “We should call the client.”", "o": ["Should we call the client?", "Do we should call the client?", "Should we to call the client?", "Should we calling the client?"], "w": "Should is a modal: invert it with the subject. After should, the base form.", "r": "Should + subject + base verb?", "c": 3, "x": ["Modals never take do.", "No to after should.", "After a modal, the base form, not -ing."]}, {"t": "Q", "q": "Choose the correct question for “I may leave early.” (asking for permission)", "o": ["May I leave early?", "Do I may leave early?", "May I to leave early?", "May I leaving early?"], "w": "May is a modal: invert it. It is a polite way of asking for permission.", "r": "May + I + base verb? = polite permission.", "c": 3, "x": ["Modals never take do.", "No to after may.", "After may, the base form, not -ing."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["She can speak three languages.", "She cans speak three languages.", "She can to speak three languages.", "She can speaks three languages."], "w": "Modals are invariable and are followed by the base form.", "r": "Modal + base form: no -s, no to.", "c": 3, "x": ["Modals never take -s in the third person.", "No to after can.", "After can, the base form: speak, not speaks."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["You mustn't smoke in this building.", "You don't must smoke in this building.", "You mustn't to smoke in this building.", "You must not smoking in this building."], "w": "Must makes its negative by adding not (mustn't), without do. It expresses prohibition.", "r": "Mustn't + base form = prohibition.", "c": 3, "x": ["Must never uses do: mustn't.", "No to after mustn't.", "After must not, the base form, not -ing."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["We don't have to wear a uniform.", "We haven't to wear a uniform.", "We don't have wear a uniform.", "We doesn't have to wear a uniform."], "w": "Have to forms its negative with don't/doesn't + have to.", "r": "Don't have to = it is not necessary.", "c": 3, "x": ["Have to makes the negative with don't, not haven't (errata on p. 5 of the unit).", "Have to keeps “to” before the verb.", "We → don't, not doesn't."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["You'd better take an umbrella.", "You'd better to take an umbrella.", "You'd better taking an umbrella.", "You'd better took an umbrella."], "w": "Had better ('d better) is followed by the base form, although “had” looks like a past form.", "r": "Had better + base form (negative: had better not + base).", "c": 3, "x": ["No to after had better.", "Had better is followed by the base form, not -ing.", "Had better refers to the present/future: base form, not past."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["You ought to see a doctor.", "You ought see a doctor.", "You ought to seeing a doctor.", "You oughts to see a doctor."], "w": "Ought is always followed by to + base form.", "r": "Ought to + base form = should.", "c": 3, "x": ["Ought always needs to.", "After ought to, the base form, not -ing.", "Ought never takes -s."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["He must have forgotten the meeting.", "He must have forgot the meeting.", "He must had forgotten the meeting.", "He must forgotten the meeting."], "w": "Deduction about the past: must + have + past participle (forget → forgotten).", "r": "Modal + have + past participle.", "c": 4, "x": ["After have, the past participle “forgotten”, not the past simple “forgot”.", "After a modal, “have” never changes to “had”.", "Missing “have”: modal + have + past participle."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["I should have listened to your advice.", "I should had listened to your advice.", "I should have listen to your advice.", "I should listened to your advice."], "w": "Regret about the past: should + have + past participle.", "r": "Should have + past participle = I didn't do it and it was a mistake.", "c": 4, "x": ["After a modal, “have”, never “had”.", "After have, the past participle: listened.", "Missing “have”: should have listened."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["She couldn't have seen us; she was in Paris.", "She mustn't have seen us; she was in Paris.", "She can't saw us; she was in Paris.", "She couldn't have saw us; she was in Paris."], "w": "Negative deduction about the past: can't/couldn't + have + past participle.", "r": "Can't/couldn't have + participle = impossible that…", "c": 4, "x": ["Mustn't expresses prohibition, not negative deduction (the unit is wrong on p. 14).", "After can't, the base form; for the past, can't have + participle.", "After have, the participle “seen”, not “saw”."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["Shall we start the meeting?", "Shall we to start the meeting?", "Do we shall start the meeting?", "Shall we starting the meeting?"], "w": "Shall + we/I in a question makes a suggestion or an offer.", "r": "Shall I/we + base form? = suggestion.", "c": 3, "x": ["No to after shall.", "Modals never take do.", "After shall, the base form, not -ing."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["Why don't we take a break?", "Why don't we to take a break?", "Why we don't take a break?", "Why don't we taking a break?"], "w": "Why don't we/you + base form? is a common suggestion.", "r": "Why don't + subject + base form?", "c": 3, "x": ["No to after don't.", "Questions need inversion: why don't we…", "After don't, the base form, not -ing."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["How about meeting on Monday?", "How about meet on Monday?", "How about to meet on Monday?", "How about we meeting on Monday?"], "w": "How about is followed by the -ing form.", "r": "How about / What about + -ing?", "c": 3, "x": ["After how about, the -ing form: meeting.", "No to-infinitive after how about.", "With a subject it would be “how about we meet”; “we meeting” is wrong."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["Let's go to the cinema.", "Let's going to the cinema.", "Let's to go to the cinema.", "Lets we go to the cinema."], "w": "Let's is followed by the base form without to.", "r": "Let's + base form = informal suggestion.", "c": 3, "x": ["After let's, the base form, not -ing.", "No to after let's.", "Let's already contains “us”: no “we”, and it needs the apostrophe."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["May I borrow your pen?", "May I borrowing your pen?", "Do I may borrow your pen?", "May I to borrow your pen?"], "w": "Polite permission: May I + base form?", "r": "May I…? is more polite than Can I…?", "c": 3, "x": ["After may, the base form, not -ing.", "Modals never take do.", "No to after may."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["Did you have to work late yesterday?", "Had you to work late yesterday?", "Did you had to work late yesterday?", "Must you work late yesterday?"], "w": "Past obligation = had to; in questions, did + have to.", "r": "Must has no past form: use had to / did… have to.", "c": 4, "x": ["Have to uses did in questions; we don't invert “had”.", "After did, the base form “have”.", "Must has no past form: it can't go with “yesterday”."]}, {"t": "F", "q": "Choose the correct sentence for lack of obligation.", "o": ["You don't have to come to the meeting.", "You mustn't come to the meeting.", "You have to come to the meeting.", "You must come to the meeting."], "w": "Don't have to means it is not necessary, but you can do it if you want.", "r": "Don't have to ≠ mustn't.", "c": 1, "x": ["Mustn't means it is forbidden, not unnecessary.", "Have to expresses obligation, not lack of it.", "Must expresses strong obligation."]}, {"t": "F", "q": "Choose the correct sentence for prohibition.", "o": ["You mustn't park here.", "You don't have to park here.", "You needn't park here.", "You should park here."], "w": "Mustn't expresses prohibition.", "r": "Mustn't = it is forbidden.", "c": 1, "x": ["Don't have to = it is not necessary.", "Needn't = it is not necessary.", "Should gives advice, not prohibition."]}, {"t": "F", "q": "Choose the correct sentence for past obligation.", "o": ["I had to finish the report last night.", "I must finish the report last night.", "I must have finished the report last night.", "I musted finish the report last night."], "w": "Must has no past form; for obligation in the past we use had to.", "r": "Past obligation = had to + base form.", "c": 4, "x": ["Must is present: it can't go with “last night”.", "Must have + participle is a deduction, not an obligation.", "“Musted” does not exist."]}, {"t": "F", "q": "Choose the correct sentence for a deduction (you are almost sure).", "o": ["She's been working for twelve hours. She must be tired.", "She's been working for twelve hours. She can be tired.", "She's been working for twelve hours. She must to be tired.", "She's been working for twelve hours. She mustn't be tired."], "w": "Must expresses a logical deduction when we are almost sure.", "r": "Must = almost certain; can't = impossible.", "c": 1, "x": ["Can expresses general possibility, not a deduction about now.", "No to after must.", "Mustn't is prohibition; the negative deduction is can't."]}, {"t": "F", "q": "Choose the correct sentence for a negative deduction.", "o": ["That can't be Tom; he's in London.", "That mustn't be Tom; he's in London.", "That doesn't have to be Tom; he's in London.", "That can't to be Tom; he's in London."], "w": "Can't + base form expresses that something is impossible.", "r": "Negative deduction = can't, never mustn't.", "c": 1, "x": ["Mustn't is prohibition, not deduction.", "Doesn't have to = not necessary; it doesn't express impossibility.", "No to after can't."]}, {"t": "F", "q": "Choose the correct sentence for a polite request in a formal email.", "o": ["Could you send me the contract by Friday?", "Can you to send me the contract by Friday?", "You send me the contract by Friday.", "Must you send me the contract by Friday?"], "w": "Could you…? is a polite way of asking for something.", "r": "Could you / Would you + base form? = polite request.", "c": 2, "x": ["No to after can.", "It is a statement, not a polite request.", "Must you…? asks about obligation (or complains); it is not a request."]}, {"t": "F", "q": "Choose the correct sentence for advice with a warning.", "o": ["You'd better leave now or you'll miss the train.", "You'd better to leave now or you'll miss the train.", "You had better leaving now or you'll miss the train.", "You'd rather leave now or you'll miss the train."], "w": "Had better gives advice and suggests negative consequences if you don't follow it.", "r": "Had better + base form… or + consequence.", "c": 2, "x": ["No to after had better.", "Had better is followed by the base form, not -ing.", "Would rather expresses preference, not advice with a warning."]}, {"t": "F", "q": "Choose the correct sentence for regret about the past.", "o": ["We should have booked the hotel earlier.", "We should booked the hotel earlier.", "We must have booked the hotel earlier.", "We should have book the hotel earlier."], "w": "Should have + past participle: we didn't do it and it was a mistake.", "r": "Should have + participle = regret or criticism.", "c": 4, "x": ["Missing “have”: should have booked.", "Must have + participle is a deduction, not a regret.", "After have, the participle: booked."]}, {"t": "F", "q": "Choose the correct sentence for general ability in the past.", "o": ["When I was a child, I could swim very well.", "When I was a child, I can swim very well.", "When I was a child, I could swam very well.", "When I was a child, I could to swim very well."], "w": "Could is the past of can for general ability.", "r": "Could + base form = past ability.", "c": 4, "x": ["Can is present; “when I was a child” is past.", "After could, the base form: swim.", "No to after could."]}, {"t": "F", "q": "Choose the correct sentence for an offer as a question.", "o": ["Shall I open the window?", "Shall I to open the window?", "Do I shall open the window?", "Shall I opening the window?"], "w": "Shall I + base form? offers to do something.", "r": "Shall I/we…? = offer or suggestion.", "c": 3, "x": ["No to after shall.", "Modals never take do.", "After shall, the base form."]}, {"t": "F", "q": "Choose the correct sentence for an uncertain possibility.", "o": ["It might rain this afternoon.", "It must rain this afternoon.", "It might to rain this afternoon.", "It mights rain this afternoon."], "w": "Might expresses that something is possible but not certain.", "r": "May / might / could = perhaps.", "c": 1, "x": ["Must expresses certainty or obligation, not an uncertain possibility.", "No to after might.", "Modals never take -s."]}, {"t": "F", "q": "Choose the correct sentence for accepting a suggestion in a professional setting.", "o": ["That is a good idea.", "No way!", "I would rather not.", "Maybe some other time."], "w": "In a professional setting, a full sentence without emphasizing our opinion: That is a good idea.", "r": "Formal acceptance = full sentence (subject + verb).", "c": 2, "x": ["It is an informal (and impolite) refusal.", "It is a polite refusal, not an acceptance.", "It is a polite refusal, not an acceptance."]}, {"t": "F", "q": "Choose the correct sentence for declining a suggestion politely.", "o": ["I am not sure that is a good idea.", "No way! Absolutely not.", "Yes, we can do that.", "I agree."], "w": "A complete sentence is the polite way to decline.", "r": "Decline politely: I am not sure… / I would rather not.", "c": 2, "x": ["It is a refusal, but informal and impolite.", "It accepts the suggestion.", "It accepts the suggestion."]}, {"t": "F", "q": "Choose the correct sentence for a formal written report.", "o": ["The company could consider reviewing its policy.", "Let's review the policy, guys!", "Fancy reviewing the policy?", "How about reviewing the policy?"], "w": "Suggestions with modals are more elegant and formal; the other expressions are for informal or oral contexts.", "r": "Formal writing: could / should / might want to.", "c": 2, "x": ["Let's is informal, and “guys” is colloquial.", "Fancy…? is very informal British English.", "How about…? is very informal: not for written reports."]}, {"t": "C", "q": "Choose the correct form: “Employees ___ wear an ID badge. It's company policy.”", "o": ["have to", "has to", "must to", "should to"], "w": "An external rule (company policy): have to. Employees is plural.", "r": "Have to = external obligation.", "c": 2, "x": ["Employees is plural: have to.", "No to after must.", "No to after should."]}, {"t": "C", "q": "Choose the correct form: “You ___ bring anything. We have plenty of food.”", "o": ["don't have to", "mustn't", "haven't to", "don't must"], "w": "It is not necessary to bring anything: don't have to.", "r": "Don't have to / needn't = not necessary.", "c": 1, "x": ["Mustn't means it is forbidden; here it is just not necessary.", "Have to makes the negative with don't.", "Must never uses do."]}, {"t": "C", "q": "Choose the correct form: “I'm not sure where Anna is. She ___ be in a meeting.”", "o": ["might", "must", "mustn't", "can't"], "w": "“I'm not sure” shows doubt: might.", "r": "May / might / could = perhaps.", "c": 2, "x": ["Must means you are almost sure, but “I'm not sure” shows doubt.", "Mustn't is prohibition, not deduction.", "Can't means it is impossible, but you are not sure."]}, {"t": "C", "q": "Choose the correct form: “It's nearly midnight. They ___ have arrived by now.”", "o": ["should", "must to", "ought", "shall"], "w": "Should have + participle expresses what we expect has happened.", "r": "Should have + participle = expectation about the past.", "c": 3, "x": ["No to after must.", "Ought always needs to: ought to have.", "Shall is not used for expectations about the past."]}, {"t": "C", "q": "Choose the correct form: “___ we go to the cinema tonight?”", "o": ["Shall", "Do", "Let's", "How about"], "w": "Shall we + base form? makes a suggestion.", "r": "Shall we…? = suggestion as a question.", "c": 3, "x": ["“Do we go…?” asks about a habit or a fact, not a suggestion.", "Let's is not used in questions: Let's go…", "How about is followed by -ing: How about going…?"]}, {"t": "C", "q": "Choose the correct form: “How about ___ a coffee?”", "o": ["having", "have", "to have", "had"], "w": "How about + -ing.", "r": "How about / What about + -ing?", "c": 3, "x": ["After how about, -ing, not the base form.", "No to-infinitive after how about.", "No past form after how about."]}, {"t": "C", "q": "Choose the correct form: “I ___ attend the conference last year because I was ill.”", "o": ["couldn't", "can't", "mustn't", "don't have to"], "w": "Lack of ability or possibility in the past: couldn't.", "r": "Could / couldn't = can in the past.", "c": 4, "x": ["Can't is present; “last year” is past.", "Mustn't is prohibition and present.", "Don't have to is present and means not necessary."]}, {"t": "C", "q": "Choose the correct form: “You ___ tell anyone. It's a secret.”", "o": ["mustn't", "don't have to", "needn't", "couldn't"], "w": "A secret means it is forbidden to tell: mustn't.", "r": "Mustn't = prohibition.", "c": 1, "x": ["Don't have to = not necessary; a secret needs prohibition.", "Needn't = not necessary.", "Couldn't is past ability or possibility."]}, {"t": "C", "q": "Choose the correct form: “She ___ have left already: her coat is still here.”", "o": ["can't", "mustn't", "must", "should"], "w": "The coat is evidence that she hasn't left: can't have + participle.", "r": "Can't have + participle = impossible in the past.", "c": 4, "x": ["Mustn't is prohibition; the negative deduction is can't have.", "Must have = she has left, but the coat shows the opposite.", "Should have expresses expectation or criticism, not deduction."]}, {"t": "C", "q": "Choose the correct form: “You look exhausted. You ___ take a few days off.”", "o": ["should", "must to", "ought", "had better to"], "w": "Advice: should + base form.", "r": "Should / ought to / had better = advice.", "c": 3, "x": ["No to after must.", "Ought always needs to.", "No to after had better."]}, {"t": "C", "q": "Choose the correct form: “___ I use your phone, please?” (formal)", "o": ["May", "Must", "Shall", "Have"], "w": "May I…? asks for permission politely.", "r": "May I…? is more polite than Can I…?", "c": 1, "x": ["Must I…? asks about obligation.", "Shall I…? offers or suggests; it doesn't ask for permission.", "“Have I…?” is not used to ask for permission."]}, {"t": "C", "q": "Choose the correct form: “He ___ swim when he was five.”", "o": ["could", "can", "might", "must"], "w": "Ability in the past: could.", "r": "Could = past ability.", "c": 4, "x": ["Can is present; “when he was five” is past.", "Might expresses possibility, not ability.", "Must expresses obligation or deduction."]}, {"t": "C", "q": "Choose the correct form: “There ___ be a meeting about this next week.”", "o": ["may", "mays", "may to", "is may"], "w": "There is a preparatory subject with modals: there may be.", "r": "There + modal + be.", "c": 3, "x": ["Modals never take -s.", "No to after may.", "A modal can't go after another verb like “is”."]}, {"t": "C", "q": "Choose the correct form: “You ___ come if you don't want to.”", "o": ["needn't", "mustn't", "needn't to", "don't need"], "w": "Modal needn't + base form = it is not necessary.", "r": "Needn't + base = don't need to + base.", "c": 3, "x": ["Mustn't = prohibition.", "Modal needn't has no to.", "Lexical need needs to: don't need to come."]}, {"t": "C", "q": "Choose the correct form: “If I had known, I ___ a better decision.”", "o": ["would have made", "would made", "will have made", "would have make"], "w": "Past unreal action: would + have + past participle.", "r": "Would have + participle = past unreal action.", "c": 4, "x": ["Missing “have”: would have made.", "Will is not used for past unreal situations.", "After have, the participle: made."]}, {"t": "C", "q": "Choose the correct form: “They ___ won the match; I haven't checked the result yet.”", "o": ["may have", "may has", "may had", "mays have"], "w": "Possibility about the past: may + have + past participle.", "r": "May / might have + participle = perhaps in the past.", "c": 4, "x": ["After a modal, “have”, never “has”.", "After a modal, “have”, never “had”.", "Modals never take -s."]}, {"t": "R", "q": "Choose the correct form: “She ___ in Madrid since 2019.”", "o": ["has lived", "lives", "is living", "lived"], "w": "Since 2019 connects the past with the present: present perfect. (Unit 1)", "r": "Since / for + present perfect.", "c": 2, "x": ["The present simple doesn't connect with since.", "The present continuous doesn't connect with since.", "The past simple is for finished time, not since + present."]}, {"t": "R", "q": "Choose the correct form: “Look at those clouds! It ___ rain.”", "o": ["is going to", "will", "rains", "is raining to"], "w": "Prediction with present evidence: be going to. (Unit 2)", "r": "Evidence now → going to.", "c": 2, "x": ["Will is for predictions without present evidence.", "The present simple is not used for this prediction.", "“Is raining to” does not exist."]}, {"t": "R", "q": "Choose the correct question for “He works in a bank.”", "o": ["Does he work in a bank?", "Does he works in a bank?", "Do he work in a bank?", "Works he in a bank?"], "w": "Present simple question: does + subject + base form. (Unit 1)", "r": "Do/Does + subject + base form?", "c": 3, "x": ["After does, the base form: work.", "He → does, not do.", "Lexical verbs don't invert: use does."]}, {"t": "R", "q": "Choose the correct form: “I ___ TV when the phone rang.”", "o": ["was watching", "watched", "am watching", "have watched"], "w": "A long action in progress interrupted by a short one: past continuous. (Unit 2)", "r": "Was/were + -ing… when + past simple.", "c": 2, "x": ["“Watched” is grammatical but doesn't highlight the action in progress when the phone rang.", "Present continuous clashes with “rang”.", "Present perfect clashes with a finished past moment."]}, {"t": "R", "q": "Choose the correct sentence for opening a formal email when you don't know the recipient's name.", "o": ["Dear Sir or Madam,", "Hi there,", "Dear Mr John,", "Hey!"], "w": "Formal opening with an unknown name: Dear Sir or Madam. (Unit 1)", "r": "Unknown name → Dear Sir or Madam / Yours faithfully.", "c": 2, "x": ["Hi there is informal.", "Mr goes with the surname, not the first name.", "Hey is very informal."]}, {"t": "I", "q": "Choose the correct form: “You should have ___ me earlier.”", "o": ["told", "tell", "telled", "tolded"], "w": "After should have, the past participle: tell → told.", "r": "Modal + have + past participle (irregular: tell, told, told).", "c": 4, "x": ["After have, the participle, not the base form.", "Tell is irregular: there is no “telled”.", "“Tolded” does not exist."]}, {"t": "I", "q": "Choose the correct form: “They must have ___ the wrong train.”", "o": ["taken", "took", "take", "taked"], "w": "After must have, the past participle: take → taken.", "r": "take, took, taken (ABC).", "c": 4, "x": ["“Took” is the past simple, not the participle.", "After have, the participle, not the base form.", "Take is irregular: there is no “taked”."]}, {"t": "I", "q": "Choose the correct form: “She could have ___ the contract, but she didn't.”", "o": ["written", "wrote", "write", "writed"], "w": "Unreal past possibility: could have + participle (write → written).", "r": "write, wrote, written (ABC).", "c": 4, "x": ["“Wrote” is the past simple, not the participle.", "After have, the participle, not the base form.", "Write is irregular: there is no “writed”."]}, {"t": "I", "q": "Choose the correct form: “We might have ___ the wrong way.”", "o": ["gone", "went", "go", "goed"], "w": "Possibility about the past: might have + participle (go → gone).", "r": "go, went, gone (ABC).", "c": 4, "x": ["“Went” is the past simple: “might have went” is a typical mistake.", "After have, the participle, not the base form.", "Go is irregular: there is no “goed”."]}, {"t": "I", "q": "Choose the correct form: “He can't have ___ the email; I didn't receive it.”", "o": ["sent", "sended", "send", "sending"], "w": "Negative deduction about the past: can't have + participle (send → sent).", "r": "send, sent, sent (ABB).", "c": 4, "x": ["Send is irregular: there is no “sended”.", "After have, the participle, not the base form.", "After have, the participle, not -ing."]}, {"t": "S", "q": "Choose the polite request for permission.", "o": ["Could I leave a little earlier today, please?", "Must I leave a little earlier today, please?", "Should I leave a little earlier today, please?", "Could I to leave a little earlier today, please?"], "w": "COULD I…? is a polite way to ask for permission.", "r": "Could I / May I + base form? = polite permission.", "c": 2, "x": ["MUST I…? asks whether something is necessary.", "SHOULD I…? asks for advice, not permission.", "No to after could."]}, {"t": "C", "q": "Choose the correct form: “The sign says ‘No mobile phones’. You ___ use your phone in this room.”", "o": ["mustn't", "don't have to", "should", "needn't"], "w": "MUSTN'T expresses prohibition: using the phone is not allowed.", "r": "Mustn't = it is forbidden.", "c": 1, "x": ["DON'T HAVE TO means there is no need, not that it is forbidden.", "SHOULD gives advice.", "NEEDN'T means it is not necessary."]}, {"t": "C", "q": "Choose the correct form: “The company rules say all visitors ___ sign in at reception.”", "o": ["have to", "might", "could", "has to"], "w": "HAVE TO is appropriate for an obligation imposed by rules or circumstances.", "r": "External obligation (rules) → have to.", "c": 1, "x": ["MIGHT expresses possibility.", "COULD expresses ability or possibility.", "Visitors is plural: have to, not has to."]}, {"t": "C", "q": "Choose the correct form: “Last week, we ___ work on Saturday to finish the project.”", "o": ["had to", "have to", "musted", "must"], "w": "HAD TO is the past form used to express obligation.", "r": "Past obligation = had to.", "c": 4, "x": ["HAVE TO is present, not past.", "MUSTED is not a correct form.", "Must has no past form: it can't go with “last week”."]}, {"t": "C", "q": "Choose the correct form: “The client is waiting. You ___ call him back now, or we'll lose the contract.”", "o": ["had better", "would better", "had better to", "have better"], "w": "HAD BETTER + base verb gives strong advice, often because there may be a negative consequence.", "r": "Had better + base form (… or + consequence).", "c": 3, "x": ["WOULD BETTER is not the standard expression.", "HAD BETTER is followed by the base verb without TO.", "The expression is HAD better, not have better."]}, {"t": "C", "q": "Choose the correct form: “My colleague ___ write reports in English and French.”", "o": ["can", "must", "should", "may"], "w": "CAN expresses ability: she has the skill.", "r": "Can = ability.", "c": 2, "x": ["MUST expresses obligation or strong necessity.", "SHOULD gives advice or expresses expectation.", "MAY expresses possibility or permission, not ability."]}, {"t": "F", "q": "Choose the correct sentence for a suggestion with -ing.", "o": ["Fancy going for a coffee?", "Fancy go for a coffee?", "Fancy to go for a coffee?", "Fancy we go for a coffee?"], "w": "FANCY…? is a very informal British suggestion followed by a noun or an -ing form.", "r": "Fancy + noun / -ing? (very informal).", "c": 3, "x": ["After fancy, -ing, not the base form.", "No to-infinitive after fancy.", "Fancy has no subject in this structure."]}, {"t": "F", "q": "Choose the correct sentence for a past possibility that didn't happen.", "o": ["She could have taken the bus, but she walked.", "She could take the bus, but she walked yesterday.", "She must have taken the bus, but she walked.", "She could have took the bus, but she walked."], "w": "COULD HAVE + past participle: it was possible, but it didn't happen.", "r": "Could have + participle = unrealised past possibility.", "c": 4, "x": ["Could + base refers to present/general possibility, not to a past option.", "MUST HAVE is a deduction that it happened, which contradicts “she walked”.", "After have, the participle taken, not took."]}], "GAPS": [{"s": "She ___ (can / speak) three languages.", "a": ["can speak"], "es": "Habla tres idiomas."}, {"s": "You ___ (must / not) smoke in the office.", "a": ["mustn't", "must not"], "es": "No se puede fumar en la oficina."}, {"s": "We ___ (not / have to) wear a suit on Fridays.", "a": ["don't have to", "do not have to"], "es": "Los viernes no tenemos que llevar traje."}, {"s": "She ___ (have to) work last Saturday.", "a": ["had to"], "es": "El sábado pasado tuvo que trabajar."}, {"s": "___ (you / have to) travel a lot in your job?", "a": ["do you have to"], "es": "¿Tienes que viajar mucho en tu trabajo?"}, {"s": "You ___ (should / see) a doctor.", "a": ["should see"], "es": "Deberías ir al médico."}, {"s": "You ___ (had better / not / be) late again.", "a": ["had better not be", "'d better not be"], "es": "Más vale que no vuelvas a llegar tarde."}, {"s": "I ___ (ought to / call) my parents more often.", "a": ["ought to call"], "es": "Debería llamar a mis padres más a menudo."}, {"s": "When I was young, I ___ (could / run) very fast.", "a": ["could run"], "es": "De joven corría muy rápido."}, {"s": "He ___ (must / be) tired. He's been working all day.", "a": ["must be"], "es": "Debe de estar cansado. Lleva todo el día trabajando."}, {"s": "That ___ (can't / be) true. I saw him an hour ago.", "a": ["can't be", "cannot be"], "es": "Eso no puede ser verdad. Le vi hace una hora."}, {"s": "They ___ (might / come) later, but I'm not sure.", "a": ["might come"], "es": "Puede que vengan más tarde, pero no estoy seguro."}, {"s": "___ (may / I) come in?", "a": ["may i"], "es": "¿Puedo pasar?"}, {"s": "You ___ (should / tell) me earlier. Now it's too late.", "a": ["should have told"], "es": "Deberías habérmelo dicho antes. Ahora es tarde."}, {"s": "She ___ (must / leave) already. Her coat isn't here.", "a": ["must have left"], "es": "Ya se debe de haber ido. Su abrigo no está."}, {"s": "He ___ (can't / see) us. He was in Rome.", "a": ["can't have seen", "cannot have seen", "couldn't have seen"], "es": "Es imposible que nos viera. Estaba en Roma."}, {"s": "We ___ (could / win) the match, but we played badly.", "a": ["could have won"], "es": "Podríamos haber ganado el partido, pero jugamos mal."}, {"s": "They ___ (may / miss) the train yesterday.", "a": ["may have missed"], "es": "Puede que ayer perdieran el tren."}, {"s": "If I had known, I ___ (would / take) a better decision.", "a": ["would have taken"], "es": "Si lo hubiera sabido, habría tomado una decisión mejor."}, {"s": "___ (shall / we) start the meeting?", "a": ["shall we"], "es": "¿Empezamos la reunión?"}, {"s": "How about ___ (go) to the cinema?", "a": ["going"], "es": "¿Qué tal si vamos al cine?"}, {"s": "Why don't we ___ (have) a break?", "a": ["have"], "es": "¿Por qué no hacemos un descanso?"}, {"s": "Let's ___ (meet) at nine.", "a": ["meet"], "es": "Quedemos a las nueve."}, {"s": "You ___ (need / not) come tomorrow. (modal)", "a": ["needn't", "need not"], "es": "No hace falta que vengas mañana."}, {"s": "She ___ (not / need) another bicycle. (lexical verb)", "a": ["doesn't need", "does not need"], "es": "No necesita otra bicicleta."}, {"s": "There ___ (may / be) rain later today.", "a": ["may be"], "es": "Puede que llueva más tarde."}, {"s": "The report ___ (ought to / finish) by Friday. (passive)", "a": ["ought to be finished"], "es": "El informe debería estar terminado para el viernes."}, {"s": "She ___ (may / not / work) tomorrow. (progressive)", "a": ["may not be working"], "es": "Puede que mañana no esté trabajando."}, {"s": "You ___ (might / want) to have that checked out.", "a": ["might want"], "es": "Quizá deberías hacértelo mirar."}, {"s": "___ (could / you) send me the file, please?", "a": ["could you"], "es": "¿Podrías enviarme el archivo, por favor?"}], "SP": [{"v": "Seguro que se ha ido. → He ___ (must / leave).", "k": "modal", "a": ["must have left"], "r": "deducción: must have + participio (leave, left, left)"}, {"v": "Es imposible que nos viera. → She ___ (can't / see) us.", "k": "modal", "a": ["can't have seen", "cannot have seen", "couldn't have seen", "could not have seen"], "r": "deducción negativa: can't have + participio (see, saw, seen)"}, {"v": "Puede que lo olvidara. → He ___ (might / forget) it.", "k": "modal", "a": ["might have forgotten"], "r": "posibilidad: might have + participio (forget, forgot, forgotten)"}, {"v": "Deberías habérmelo dicho. → You ___ (should / tell) me.", "k": "modal", "a": ["should have told"], "r": "lamento o crítica: should have + participio (tell, told, told)"}, {"v": "Podría haber cogido el autobús. → She ___ (could / take) the bus.", "k": "modal", "a": ["could have taken"], "r": "posibilidad no realizada: could have + participio (take, took, taken)"}, {"v": "Habría tomado una decisión mejor. → I ___ (would / make) a better decision.", "k": "modal", "a": ["would have made"], "r": "acción irreal: would have + participio (make, made, made)"}, {"v": "Puede que ganaran (no lo sabemos). → They ___ (may / win).", "k": "modal", "a": ["may have won"], "r": "posibilidad: may have + participio (win, won, won)"}, {"v": "¡Seguro que estaban locos! → They ___ (must / be) crazy!", "k": "modal", "a": ["must have been"], "r": "deducción: must have + participio (be, was/were, been)"}, {"v": "No deberías haber gastado tanto. → You ___ (should / not / spend) so much.", "k": "modal", "a": ["shouldn't have spent", "should not have spent"], "r": "crítica: shouldn't have + participio (spend, spent, spent)"}, {"v": "No hacía falta que trajeras un regalo (y lo trajiste). → You ___ (needn't / bring) a gift.", "k": "modal", "a": ["needn't have brought", "need not have brought"], "r": "lo hizo, pero no era necesario: needn't have + participio (bring, brought, brought)"}, {"v": "Debería habernos avisado. → He ___ (ought to / warn) us.", "k": "modal", "a": ["ought to have warned"], "r": "crítica: ought to have + participio"}, {"v": "Tuve que trabajar el sábado (obligación). → I ___ (work) on Saturday.", "k": "modal", "a": ["had to work"], "r": "obligación pasada: had to + base (nunca «musted» ni «must have»)"}, {"v": "No podía haberlo sabido. → You ___ (couldn't / know).", "k": "modal", "a": ["couldn't have known", "could not have known", "can't have known", "cannot have known"], "r": "deducción negativa: couldn't have + participio (know, knew, known)"}, {"v": "Puede que fuera a la fiesta. → Tina ___ (might / go) to the party.", "k": "modal", "a": ["might have gone"], "r": "posibilidad: might have + participio (go, went, gone)"}, {"v": "Seguro que perdió las llaves. → She ___ (must / lose) her keys.", "k": "modal", "a": ["must have lost"], "r": "deducción: must have + participio (lose, lost, lost)"}, {"v": "Deberían haber enviado la factura. → They ___ (should / send) the invoice.", "k": "modal", "a": ["should have sent"], "r": "crítica: should have + participio (send, sent, sent)"}, {"v": "Podría haber escrito el informe. → I ___ (could / write) the report.", "k": "modal", "a": ["could have written"], "r": "posibilidad no realizada: could have + participio (write, wrote, written)"}, {"v": "Es imposible que haya terminado ya. → He ___ (can't / finish) already.", "k": "modal", "a": ["can't have finished", "cannot have finished"], "r": "deducción negativa: can't have + participio"}, {"v": "Puede que no hayan recibido el email. → They ___ (may / not / receive) the email.", "k": "modal", "a": ["may not have received"], "r": "posibilidad negativa: may not have + participio"}, {"v": "Habría venido si se lo hubieras pedido. → She ___ (would / come) if you had asked her.", "k": "modal", "a": ["would have come"], "r": "acción irreal: would have + participio (come, came, come)"}], "IRR": [{"g": "AAA", "b": "bet", "p": "bet", "pp": "bet", "es": "apostar"}, {"g": "AAA", "b": "cost", "p": "cost", "pp": "cost", "es": "costar"}, {"g": "AAA", "b": "cut", "p": "cut", "pp": "cut", "es": "cortar"}, {"g": "AAA", "b": "hit", "p": "hit", "pp": "hit", "es": "golpear"}, {"g": "AAA", "b": "hurt", "p": "hurt", "pp": "hurt", "es": "herir, doler"}, {"g": "AAA", "b": "let", "p": "let", "pp": "let", "es": "dejar, permitir"}, {"g": "AAA", "b": "put", "p": "put", "pp": "put", "es": "poner"}, {"g": "AAA", "b": "quit", "p": "quit", "pp": "quit", "es": "dejar, abandonar"}, {"g": "AAA", "b": "read", "p": "read", "pp": "read", "es": "leer (se pronuncia /red/ en pasado)"}, {"g": "AAA", "b": "set", "p": "set", "pp": "set", "es": "fijar, establecer"}, {"g": "AAA", "b": "shut", "p": "shut", "pp": "shut", "es": "cerrar"}, {"g": "AAA", "b": "spread", "p": "spread", "pp": "spread", "es": "extender, difundir"}, {"g": "ABB", "b": "bring", "p": "brought", "pp": "brought", "es": "traer"}, {"g": "ABB", "b": "build", "p": "built", "pp": "built", "es": "construir"}, {"g": "ABB", "b": "burn", "p": "burnt/burned", "pp": "burnt/burned", "es": "quemar"}, {"g": "ABB", "b": "buy", "p": "bought", "pp": "bought", "es": "comprar"}, {"g": "ABB", "b": "catch", "p": "caught", "pp": "caught", "es": "coger, atrapar"}, {"g": "ABB", "b": "dream", "p": "dreamt/dreamed", "pp": "dreamt/dreamed", "es": "soñar"}, {"g": "ABB", "b": "feed", "p": "fed", "pp": "fed", "es": "alimentar"}, {"g": "ABB", "b": "feel", "p": "felt", "pp": "felt", "es": "sentir"}, {"g": "ABB", "b": "fight", "p": "fought", "pp": "fought", "es": "luchar"}, {"g": "ABB", "b": "find", "p": "found", "pp": "found", "es": "encontrar"}, {"g": "ABB", "b": "get", "p": "got", "pp": "got", "es": "conseguir, obtener (US: gotten)"}, {"g": "ABB", "b": "hang", "p": "hung", "pp": "hung", "es": "colgar"}, {"g": "ABB", "b": "have", "p": "had", "pp": "had", "es": "tener, haber"}, {"g": "ABB", "b": "hear", "p": "heard", "pp": "heard", "es": "oír"}, {"g": "ABB", "b": "hold", "p": "held", "pp": "held", "es": "sostener, celebrar (una reunión)"}, {"g": "ABB", "b": "keep", "p": "kept", "pp": "kept", "es": "mantener, guardar"}, {"g": "ABB", "b": "lay", "p": "laid", "pp": "laid", "es": "poner, colocar"}, {"g": "ABB", "b": "lead", "p": "led", "pp": "led", "es": "dirigir, liderar"}, {"g": "ABB", "b": "learn", "p": "learnt/learned", "pp": "learnt/learned", "es": "aprender"}, {"g": "ABB", "b": "leave", "p": "left", "pp": "left", "es": "dejar, irse"}, {"g": "ABB", "b": "lend", "p": "lent", "pp": "lent", "es": "prestar"}, {"g": "ABB", "b": "light", "p": "lit", "pp": "lit", "es": "encender"}, {"g": "ABB", "b": "lose", "p": "lost", "pp": "lost", "es": "perder"}, {"g": "ABB", "b": "make", "p": "made", "pp": "made", "es": "hacer, fabricar"}, {"g": "ABB", "b": "mean", "p": "meant", "pp": "meant", "es": "significar, querer decir"}, {"g": "ABB", "b": "meet", "p": "met", "pp": "met", "es": "conocer, reunirse"}, {"g": "ABB", "b": "pay", "p": "paid", "pp": "paid", "es": "pagar"}, {"g": "ABB", "b": "say", "p": "said", "pp": "said", "es": "decir"}, {"g": "ABB", "b": "sell", "p": "sold", "pp": "sold", "es": "vender"}, {"g": "ABB", "b": "send", "p": "sent", "pp": "sent", "es": "enviar"}, {"g": "ABB", "b": "shoot", "p": "shot", "pp": "shot", "es": "disparar"}, {"g": "ABB", "b": "sit", "p": "sat", "pp": "sat", "es": "sentarse"}, {"g": "ABB", "b": "sleep", "p": "slept", "pp": "slept", "es": "dormir"}, {"g": "ABB", "b": "smell", "p": "smelt/smelled", "pp": "smelt/smelled", "es": "oler"}, {"g": "ABB", "b": "spell", "p": "spelt/spelled", "pp": "spelt/spelled", "es": "deletrear"}, {"g": "ABB", "b": "spend", "p": "spent", "pp": "spent", "es": "gastar, pasar (tiempo)"}, {"g": "ABB", "b": "spill", "p": "spilt/spilled", "pp": "spilt/spilled", "es": "derramar"}, {"g": "ABB", "b": "stand", "p": "stood", "pp": "stood", "es": "estar de pie"}, {"g": "ABB", "b": "stick", "p": "stuck", "pp": "stuck", "es": "pegar, atascarse"}, {"g": "ABB", "b": "teach", "p": "taught", "pp": "taught", "es": "enseñar"}, {"g": "ABB", "b": "tell", "p": "told", "pp": "told", "es": "decir, contar"}, {"g": "ABB", "b": "think", "p": "thought", "pp": "thought", "es": "pensar"}, {"g": "ABB", "b": "understand", "p": "understood", "pp": "understood", "es": "entender"}, {"g": "ABB", "b": "win", "p": "won", "pp": "won", "es": "ganar"}, {"g": "ABC", "b": "be", "p": "was/were", "pp": "been", "es": "ser, estar"}, {"g": "ABC", "b": "begin", "p": "began", "pp": "begun", "es": "empezar"}, {"g": "ABC", "b": "bite", "p": "bit", "pp": "bitten", "es": "morder"}, {"g": "ABC", "b": "blow", "p": "blew", "pp": "blown", "es": "soplar"}, {"g": "ABC", "b": "break", "p": "broke", "pp": "broken", "es": "romper"}, {"g": "ABC", "b": "choose", "p": "chose", "pp": "chosen", "es": "elegir"}, {"g": "ABC", "b": "do", "p": "did", "pp": "done", "es": "hacer"}, {"g": "ABC", "b": "draw", "p": "drew", "pp": "drawn", "es": "dibujar"}, {"g": "ABC", "b": "drink", "p": "drank", "pp": "drunk", "es": "beber"}, {"g": "ABC", "b": "drive", "p": "drove", "pp": "driven", "es": "conducir"}, {"g": "ABC", "b": "eat", "p": "ate", "pp": "eaten", "es": "comer"}, {"g": "ABC", "b": "fall", "p": "fell", "pp": "fallen", "es": "caer"}, {"g": "ABC", "b": "fly", "p": "flew", "pp": "flown", "es": "volar"}, {"g": "ABC", "b": "forget", "p": "forgot", "pp": "forgotten", "es": "olvidar"}, {"g": "ABC", "b": "forgive", "p": "forgave", "pp": "forgiven", "es": "perdonar"}, {"g": "ABC", "b": "freeze", "p": "froze", "pp": "frozen", "es": "congelar"}, {"g": "ABC", "b": "give", "p": "gave", "pp": "given", "es": "dar"}, {"g": "ABC", "b": "go", "p": "went", "pp": "gone", "es": "ir"}, {"g": "ABC", "b": "grow", "p": "grew", "pp": "grown", "es": "crecer, cultivar"}, {"g": "ABC", "b": "hide", "p": "hid", "pp": "hidden", "es": "esconder"}, {"g": "ABC", "b": "know", "p": "knew", "pp": "known", "es": "saber, conocer"}, {"g": "ABC", "b": "lie", "p": "lay", "pp": "lain", "es": "tumbarse (≠ lie, lied, lied: mentir)"}, {"g": "ABC", "b": "ride", "p": "rode", "pp": "ridden", "es": "montar"}, {"g": "ABC", "b": "ring", "p": "rang", "pp": "rung", "es": "sonar, llamar por teléfono"}, {"g": "ABC", "b": "rise", "p": "rose", "pp": "risen", "es": "subir, levantarse"}, {"g": "ABC", "b": "see", "p": "saw", "pp": "seen", "es": "ver"}, {"g": "ABC", "b": "shake", "p": "shook", "pp": "shaken", "es": "agitar, temblar"}, {"g": "ABC", "b": "show", "p": "showed", "pp": "shown", "es": "mostrar"}, {"g": "ABC", "b": "sing", "p": "sang", "pp": "sung", "es": "cantar"}, {"g": "ABC", "b": "sink", "p": "sank", "pp": "sunk", "es": "hundir(se)"}, {"g": "ABC", "b": "speak", "p": "spoke", "pp": "spoken", "es": "hablar"}, {"g": "ABC", "b": "steal", "p": "stole", "pp": "stolen", "es": "robar"}, {"g": "ABC", "b": "swim", "p": "swam", "pp": "swum", "es": "nadar"}, {"g": "ABC", "b": "take", "p": "took", "pp": "taken", "es": "tomar, llevar"}, {"g": "ABC", "b": "tear", "p": "tore", "pp": "torn", "es": "rasgar"}, {"g": "ABC", "b": "throw", "p": "threw", "pp": "thrown", "es": "lanzar"}, {"g": "ABC", "b": "wake", "p": "woke", "pp": "woken", "es": "despertar(se)"}, {"g": "ABC", "b": "wear", "p": "wore", "pp": "worn", "es": "llevar puesto"}, {"g": "ABC", "b": "write", "p": "wrote", "pp": "written", "es": "escribir"}, {"g": "ABA", "b": "become", "p": "became", "pp": "become", "es": "llegar a ser, convertirse"}, {"g": "ABA", "b": "come", "p": "came", "pp": "come", "es": "venir"}, {"g": "ABA", "b": "run", "p": "ran", "pp": "run", "es": "correr"}], "GROUPS": [{"g": "AAA", "es": "Las tres formas iguales", "n": 12}, {"g": "ABB", "es": "Pasado y participio iguales", "n": 44}, {"g": "ABC", "es": "Las tres formas distintas", "n": 39}, {"g": "ABA", "es": "Base y participio iguales", "n": 3}], "FIX": [{"b": "She cans speak French.", "g": "She can speak French.", "w": "Los modales no llevan -s en tercera persona."}, {"b": "You must to finish today.", "g": "You must finish today.", "w": "Tras must, forma base sin to."}, {"b": "Do you can help me?", "g": "Can you help me?", "w": "Los modales no usan do: se invierten."}, {"b": "He doesn't should eat so much.", "g": "He shouldn't eat so much.", "w": "La negativa del modal es should not / shouldn't, sin does."}, {"b": "We haven't to wear a tie.", "g": "We don't have to wear a tie.", "w": "Have to niega con don't / doesn't (errata del material, p. 5)."}, {"b": "You'd better to hurry.", "g": "You'd better hurry.", "w": "Had better + forma base sin to."}, {"b": "I musted work late yesterday.", "g": "I had to work late yesterday.", "w": "Must no tiene pasado: had to."}, {"b": "She should have went home.", "g": "She should have gone home.", "w": "Tras have, participio (go, went, gone)."}, {"b": "They must have took the wrong bus.", "g": "They must have taken the wrong bus.", "w": "Tras have, participio (take, took, taken)."}, {"b": "He mustn't have seen us; he was abroad.", "g": "He can't have seen us; he was abroad.", "w": "La deducción negativa es can't have, no mustn't have."}, {"b": "The students mustn't have copied in the exam.", "g": "The students weren't allowed to copy in the exam.", "w": "Errata del material (p. 13): la prohibición pasada se dice con wasn't/weren't allowed to."}, {"b": "How about go to the cinema?", "g": "How about going to the cinema?", "w": "How about + -ing."}, {"b": "Let's to start the meeting.", "g": "Let's start the meeting.", "w": "Let's + forma base sin to."}, {"b": "Why we don't take a taxi?", "g": "Why don't we take a taxi?", "w": "Pregunta: why don't we + base."}, {"b": "You ought study more.", "g": "You ought to study more.", "w": "Ought siempre lleva to."}, {"b": "Did you had to wait long?", "g": "Did you have to wait long?", "w": "Tras did, forma base: have."}, {"b": "It mights rain later.", "g": "It might rain later.", "w": "Los modales no llevan -s."}, {"b": "Must you to leave so early?", "g": "Must you leave so early?", "w": "Tras must, forma base sin to."}, {"b": "I don't think it might be necessary.", "g": "I don't think it will be necessary.", "w": "Errata del material (p. 11): tras I don't think, will."}, {"b": "I ought to stop eating trash food.", "g": "I ought to stop eating junk food.", "w": "Errata del material (p. 7): en inglés es junk food."}, {"b": "She doesn't needs another bicycle.", "g": "She doesn't need another bicycle.", "w": "Tras doesn't, forma base."}, {"b": "You needn't to come.", "g": "You needn't come.", "w": "Needn't modal va sin to (o bien: You don't need to come)."}, {"b": "He can't to be at home.", "g": "He can't be at home.", "w": "Tras can't, forma base sin to."}], "CATS": ["ability", "permission", "advice", "obligation", "prohibition", "no obligation", "deduction", "possibility"], "WHYC": {"ability": "Capacidad: can / could / be able to (saber o poder hacer algo).", "permission": "Permiso: can / could / may / might (pedir, dar o negar permiso).", "advice": "Consejo o sugerencia: should / ought to / had better / you might want to.", "obligation": "Obligación: must (personal, fuerte) / have to (externa) / had to (pasado).", "prohibition": "Prohibición: mustn't / can't (no está permitido).", "no obligation": "Ausencia de obligación: don't have to / needn't (no hace falta, pero se puede).", "deduction": "Deducción con certeza: must (seguro que sí) / can't (seguro que no), también en pasado con have + participio.", "possibility": "Posibilidad incierta: may / might / could (quizá)."}, "REG": [{"s": "", "e": "He can speak five languages.", "c": "ability"}, {"s": "", "e": "When I was a child, I could swim very well.", "c": "ability"}, {"s": "", "e": "I can't dance.", "c": "ability"}, {"s": "", "e": "Can I go home now?", "c": "permission"}, {"s": "", "e": "May I borrow your car tomorrow?", "c": "permission"}, {"s": "", "e": "You can borrow my pen if you need it.", "c": "permission"}, {"s": "", "e": "You should wear your hat.", "c": "advice"}, {"s": "", "e": "You'd better tell her everything.", "c": "advice"}, {"s": "", "e": "You ought to do more exercise.", "c": "advice"}, {"s": "", "e": "You might want to have that checked out.", "c": "advice"}, {"s": "", "e": "You must stop at the red light.", "c": "obligation"}, {"s": "", "e": "I have to visit the clients at their company.", "c": "obligation"}, {"s": "", "e": "She had to work during the holidays.", "c": "obligation"}, {"s": "", "e": "You mustn't talk to strangers.", "c": "prohibition"}, {"s": "", "e": "You mustn't smoke in closed spaces.", "c": "prohibition"}, {"s": "Señal de tráfico", "e": "You can't park here.", "c": "prohibition"}, {"s": "", "e": "We don't have to travel to London today.", "c": "no obligation"}, {"s": "", "e": "You needn't come.", "c": "no obligation"}, {"s": "", "e": "You don't have to bring anything.", "c": "no obligation"}, {"s": "Te cuentan algo increíble", "e": "You must be kidding!", "c": "deduction"}, {"s": "Le viste hace una hora", "e": "That can't be true.", "c": "deduction"}, {"s": "", "e": "They must have been crazy!", "c": "deduction"}, {"s": "", "e": "She may be coming this afternoon.", "c": "possibility"}, {"s": "", "e": "He might be there already.", "c": "possibility"}, {"s": "No sabes quién contesta al teléfono", "e": "It could be Dan.", "c": "possibility"}, {"s": "", "e": "There may be rain later today.", "c": "possibility"}, {"s": "Pides permiso con mucha cortesía", "e": "Might I ask you a question?", "c": "permission"}, {"s": "", "e": "They must have been tired.", "c": "deduction"}, {"s": "", "e": "She could have taken the bus.", "c": "possibility"}], "TASKS": {"advice": {"label": "Email de recomendaciones", "t": "Email formal de recomendaciones: un compañero de otro departamento te pide consejo para adaptarse a un procedimiento nuevo (protección de datos, contratación, un registro…). Da consejos (should, ought to), indica qué es obligatorio (must, have to) y qué no hace falta (don't have to), sugiere opciones (could, might want to) y termina con una petición cortés (Could you…?). Usa however, therefore o in addition. Registro formal, sin contracciones, entre 120 y 180 palabras.", "m": "Subject: Recommendations for the new data protection procedure\n\nDear Ms Taylor,\n\nThank you for your email about the new data protection procedure. I am writing to give you some recommendations before the audit next month.\n\nFirst, all staff must complete the online training before 15 November, and each department has to appoint a contact person. However, you do not have to send the certificates to our office, as the system records them automatically.\n\nIn addition, you should review the consent forms that your team uses. If you have any doubts, you could ask the legal department for a quick check. You might also want to update the privacy notice on your website; therefore, the audit will be much easier for everyone.\n\nCould you confirm that your department will follow these steps? Please do not hesitate to contact me if you need further information.\n\nKind regards,\n\nAntonio De Lamo"}, "cover": {"label": "Cover letter (PEC)", "t": "Párrafos centrales y cierre de una carta de presentación (entrenamiento para la parte 3 de la PEC, con otro despacho para no copiar): explica lo que sabes hacer (can, be able to), lo que podrías aportar (could), una frase en futuro (will), una petición cortés (I would be grateful if you could…) y los tres conectores que exige la PEC: however, therefore e in addition. Registro formal, sin contracciones, entre 120 y 180 palabras.", "m": "Subject: Application for the Trainee Paralegal position\n\nDear Hiring Manager,\n\nI am writing to apply for the Trainee Paralegal position advertised on your website. I am currently studying Law, and I have worked in local government for several years.\n\nIn my current role, I can manage complex files and I am able to write clear reports for senior officials. In addition, I could support your team with legal research, as I have studied administrative and constitutional law. However, I know that I still have a lot to learn about private practice; therefore, I would welcome the opportunity to develop my skills at Hartley & Moss.\n\nI will be available for an interview at any time next month. I would be grateful if you could consider my application, and I would be happy to provide any further information you may need.\n\nYours faithfully,\n\nAntonio De Lamo"}}};
+var STORE="ui1-ing-ud3-v1";
+function load(){ try{ var r=localStorage.getItem(STORE); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
+function save(d){ try{ localStorage.setItem(STORE, JSON.stringify(d)); }catch(e){} }
+var db=load(); db.examHistory=db.examHistory||[]; db.drafts=db.drafts||{};
+
+function $(id){ return document.getElementById(id); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function norm(s){ return (s||"").toLowerCase().replace(/[’‘`]/g,"'").replace(/\s+/g," ").trim().replace(/[.!?]+$/,""); }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function fb(el,ok,html){ el.className="fb show "+(ok?"ok":"ko"); el.innerHTML=html; }
+function hideFb(el){ el.className="fb"; el.innerHTML=""; }
+function fmt(n){ return (Math.round(n*100)/100).toString().replace(".",","); }
+
+/* Tabs */
+var tabs=document.querySelectorAll(".tab");
+tabs.forEach(function(t){ t.addEventListener("click",function(){
+  tabs.forEach(function(x){ x.setAttribute("aria-selected", x===t?"true":"false"); });
+  document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id==="p-"+t.dataset.p); });
+}); });
+
+/* ===== EXAM ===== */
+var L="ABCD";
+function explain(it,good){
+  var h="<b>✓ Correct answer: "+L.charAt(it.o.indexOf(it.ok))+")</b> "+esc(it.ok);
+  h+="<div style='margin-top:8px'><b>Why?</b> "+esc(it.w)+"</div>";
+  h+="<div style='margin-top:6px'><b>Remember:</b> "+esc(it.r)+"</div>";
+  if(it.x){
+    var m={}; for(var k=1;k<it.src.o.length;k++) m[it.src.o[k]]=it.x[k-1];
+    h+="<div style='margin-top:6px'><b>Why are the other options wrong?</b> "+it.o.map(function(op,k){ return op===it.ok?"":L.charAt(k)+") "+esc(m[op]); }).filter(Boolean).join(" ")+"</div>";
+  }
+  if(!good) h+="<div class='es'>"+esc(D.CHECKS[it.c-1])+"</div>";
+  return h;
+}
+var ex=null;
+function renderHistory(){
+  var h=db.examHistory;
+  $("exam-history").textContent = h.length ? ("Últimas notas: "+h.slice(-5).map(function(x){ return fmt(x.nota); }).join(" / ")+" sobre 10.") : "";
+}
+function startExam(pool){
+  var qs=(pool||shuffle(D.EXAM).slice(0,30)).map(function(it){ return {q:it.q,w:it.w,r:it.r,c:it.c,x:it.x,ok:it.o[0],o:shuffle(it.o),src:it}; });
+  ex={qs:qs,i:0,ok:0,ko:0,blank:0,wrong:[],done:false};
+  $("exam-start").hidden=true; $("exam-end").hidden=true; $("exam-run").hidden=false;
+  showQ();
+}
+function showQ(){
+  if(ex.i>=ex.qs.length){ return endExam(); }
+  var it=ex.qs[ex.i]; ex.done=false;
+  $("exam-bar").style.width=(ex.i/ex.qs.length*100)+"%";
+  $("exam-count").textContent="Pregunta "+(ex.i+1)+" de "+ex.qs.length;
+  $("exam-score").textContent="Puntos: "+fmt(ex.ok-ex.ko*0.33);
+  $("exam-q").innerHTML="<span class='hint' style='display:block;margin:0 0 6px'>Choose ONE correct answer.</span>"+esc(it.q);
+  var box=$("exam-opts"); box.innerHTML="";
+  it.o.forEach(function(op,k){
+    var b=document.createElement("button"); b.className="opt"; b.dataset.v=op; b.textContent=L.charAt(k)+") "+op;
+    b.addEventListener("click",function(){ answer(op,b); });
+    box.appendChild(b);
+  });
+  hideFb($("exam-fb")); $("exam-next").disabled=true; $("exam-blank").disabled=false;
+}
+function reveal(){
+  var it=ex.qs[ex.i];
+  $("exam-opts").querySelectorAll(".opt").forEach(function(b){ b.disabled=true; if(b.dataset.v===it.ok) b.classList.add("ok"); });
+}
+function answer(op,btn){
+  if(ex.done) return; ex.done=true;
+  var it=ex.qs[ex.i]; reveal();
+  if(op===it.ok){ ex.ok++; fb($("exam-fb"),true,explain(it,true)); }
+  else { ex.ko++; btn.classList.add("ko"); ex.wrong.push(it.src); fb($("exam-fb"),false,explain(it,false)); }
+  $("exam-next").disabled=false; $("exam-blank").disabled=true; $("exam-next").focus();
+}
+$("exam-blank").addEventListener("click",function(){
+  if(ex.done) return; ex.done=true; ex.blank++; var it=ex.qs[ex.i]; ex.wrong.push(it.src);
+  reveal(); fb($("exam-fb"),false,"En blanco. "+explain(it,false));
+  $("exam-next").disabled=false; $("exam-blank").disabled=true;
+});
+$("exam-next").addEventListener("click",function(){ ex.i++; showQ(); });
+$("exam-go").addEventListener("click",function(){ startExam(); });
+function endExam(){
+  $("exam-run").hidden=true;
+  var n=ex.qs.length, raw=ex.ok-ex.ko*0.33, nota=Math.max(0,raw)/n*10;
+  if(n===30){ db.examHistory.push({d:Date.now(),nota:Math.round(nota*100)/100}); db.examHistory=db.examHistory.slice(-20); save(db); }
+  var h="<p class='prompt'>Nota: <span class='mark'>"+fmt(nota)+"</span> sobre 10</p>";
+  h+="<div class='stats'><div class='stat'><b>"+ex.ok+"</b><span>aciertos</span></div><div class='stat'><b>"+ex.ko+"</b><span>fallos (−"+fmt(ex.ko*0.33)+")</span></div><div class='stat'><b>"+ex.blank+"</b><span>en blanco</span></div></div>";
+  h+= n===30 ? "<p class='hint'>El examen vale el 50 % de la nota: necesitas al menos un 4 en él y un 5 de media con la PEC.</p>" : "<p class='hint'>Ronda de repaso: no cuenta en el historial.</p>";
+  if(ex.wrong.length){
+    h+="<ul class='review'>"+ex.wrong.map(function(w){ return "<li><b>"+esc(w.q)+"</b><br><span class='mark'>"+esc(w.o[0])+"</span>. "+esc(w.w)+"<div class='es'>Remember: "+esc(w.r)+"</div></li>"; }).join("")+"</ul>";
+  }
+  h+="<div class='row'>"+(ex.wrong.length?"<button class='btn' id='exam-retry'>Repetir solo los fallos</button>":"")+"<button class='btn ghost' id='exam-new'>Nuevo test de 30</button></div>";
+  var end=$("exam-end"); end.innerHTML=h; end.hidden=false;
+  var wr=ex.wrong.slice();
+  if($("exam-retry")) $("exam-retry").addEventListener("click",function(){ startExam(shuffle(wr)); });
+  $("exam-new").addEventListener("click",function(){ startExam(); });
+  renderHistory();
+}
+renderHistory();
+
+/* ===== generic adaptive queue ===== */
+function Queue(items){ this.q=shuffle(items); this.total=items.length; this.mastered=0; this.cur=null; }
+Queue.prototype.next=function(){ this.cur=this.q.shift()||null; return this.cur; };
+Queue.prototype.fail=function(){ var pos=Math.min(3,this.q.length); this.q.splice(pos,0,this.cur); };
+Queue.prototype.pass=function(){ this.mastered++; };
+function bar(id,Q){ $(id).style.width=(Q.mastered/Q.total*100)+"%"; }
+function done(Q){ return !Q.cur && Q.q.length===0 && Q.mastered===Q.total; }
+
+/* ===== GAP FILL ===== */
+var G=new Queue(D.GAPS), gDone=false;
+function gapShow(){
+  var c=G.next(); bar("gap-bar",G); hideFb($("gap-fb"));
+  if(!c){ $("gap-q").innerHTML="<span class='mark'>Completado.</span> Has acertado las "+G.total+" tarjetas."; $("gap-in").hidden=true; $("gap-check").hidden=true; $("gap-next").textContent="Empezar de nuevo"; $("gap-next").disabled=false; $("gap-count").textContent=""; return; }
+  $("gap-in").hidden=false; $("gap-check").hidden=false; $("gap-next").textContent="Siguiente";
+  $("gap-count").textContent="Dominadas "+G.mastered+" de "+G.total;
+  $("gap-q").textContent=c.s; $("gap-in").value=""; $("gap-next").disabled=true; gDone=false; $("gap-in").focus({preventScroll:true});
+}
+function gapCheck(){
+  if(gDone) return; var c=G.cur; if(!c) return; var v=norm($("gap-in").value); if(!v) return; gDone=true;
+  var ok=c.a.some(function(a){ return norm(a)===v; });
+  if(ok){ G.pass(); fb($("gap-fb"),true,"Correcto.<div class='es'>"+esc(c.es)+"</div>"); }
+  else { G.fail(); fb($("gap-fb"),false,"Respuesta: <span class='mark'>"+esc(c.a[0])+"</span>. Volverá a salir.<div class='es'>"+esc(c.es)+"</div>"); }
+  bar("gap-bar",G); $("gap-next").disabled=false; $("gap-next").focus();
+}
+$("gap-check").addEventListener("click",gapCheck);
+$("gap-in").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(gDone) gapShow(); else gapCheck(); } });
+$("gap-next").addEventListener("click",function(){ if(done(G)){ G=new Queue(D.GAPS); } gapShow(); });
+gapShow();
+
+/* ===== PAST FORMS ===== */
+var S=new Queue(D.SP), sDone=false;
+function spShow(){
+  var c=S.next(); bar("spell-bar",S); hideFb($("spell-fb"));
+  if(!c){ $("spell-q").innerHTML="<span class='mark'>Completado.</span> "+S.total+" formas acertadas."; $("spell-in").hidden=true; $("spell-check").hidden=true; $("spell-next").textContent="Empezar de nuevo"; $("spell-next").disabled=false; $("spell-count").textContent=""; $("spell-mode").textContent=""; return; }
+  $("spell-in").hidden=false; $("spell-check").hidden=false; $("spell-next").textContent="Siguiente";
+  $("spell-count").textContent="Dominadas "+S.mastered+" de "+S.total;
+  $("spell-mode").textContent="Modal + have + participio";
+  $("spell-q").textContent = c.v;
+  $("spell-in").value=""; $("spell-next").disabled=true; sDone=false; $("spell-in").focus({preventScroll:true});
+}
+function spCheck(){
+  if(sDone) return; var c=S.cur; if(!c) return; var v=norm($("spell-in").value); if(!v) return; sDone=true;
+  var ok=c.a.some(function(a){ return norm(a)===v; });
+  if(ok){ S.pass(); fb($("spell-fb"),true,"Correcto: "+esc(c.a[0])+". Regla: "+esc(c.r)+"."); }
+  else { S.fail(); fb($("spell-fb"),false,"Es <span class='mark'>"+esc(c.a[0])+"</span>. Regla: "+esc(c.r)+"."); }
+  bar("spell-bar",S); $("spell-next").disabled=false; $("spell-next").focus();
+}
+$("spell-check").addEventListener("click",spCheck);
+$("spell-in").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(sDone) spShow(); else spCheck(); } });
+$("spell-next").addEventListener("click",function(){ if(done(S)){ S=new Queue(D.SP); } spShow(); });
+spShow();
+
+/* ===== IRREGULAR VERBS ===== */
+var IG="all", I=null, iDone=false;
+function accs(s){ var a=s.split("/").map(norm); a.push(norm(s)); a.push(norm(s.replace("/"," / "))); return a; }
+function irrPool(){ return D.IRR.filter(function(v){ return IG==="all"||v.g===IG; }); }
+function irrGroups(){
+  var box=$("irr-groups"); box.innerHTML="";
+  [{g:"all",es:"Todos",n:D.IRR.length}].concat(D.GROUPS).forEach(function(G){
+    var b=document.createElement("button"); b.className= IG===G.g?"btn":"btn ghost";
+    b.textContent=(G.g==="all"?"Todos":G.g)+" ("+G.n+")"; b.title=G.es;
+    b.addEventListener("click",function(){ IG=G.g; I=new Queue(irrPool()); irrGroups(); irrShow(); });
+    box.appendChild(b);
+  });
+  var cur=D.GROUPS.filter(function(G){ return G.g===IG; })[0];
+  $("irr-glabel").textContent= cur? cur.es : "Los 98 verbos";
+}
+function irrShow(){
+  var c=I.next(); bar("irr-bar",I); hideFb($("irr-fb")); iDone=false;
+  if(!c){ $("irr-q").innerHTML="<span class='mark'>Completado.</span> Grupo dominado."; $("irr-es").textContent=""; $("irr-inputs").hidden=true; $("irr-check").hidden=true; $("irr-next").textContent="Empezar de nuevo"; $("irr-next").disabled=false; $("irr-count").textContent=""; return; }
+  $("irr-inputs").hidden=false; $("irr-check").hidden=false; $("irr-next").textContent="Siguiente"; $("irr-next").disabled=true;
+  $("irr-count").textContent="Dominados "+I.mastered+" de "+I.total;
+  $("irr-q").innerHTML="<b>"+esc(c.b)+"</b>"; $("irr-es").textContent=c.es+" · grupo "+c.g;
+  $("irr-past").value=""; $("irr-pp").value=""; $("irr-past").focus({preventScroll:true});
+}
+function irrCheck(){
+  if(iDone) return; var c=I.cur; if(!c) return;
+  var p=norm($("irr-past").value), pp=norm($("irr-pp").value); if(!p||!pp) return; iDone=true;
+  var okP=accs(c.p).indexOf(p)>-1, okPP=accs(c.pp).indexOf(pp)>-1;
+  var forms="<span class='mark'>"+esc(c.b)+" – "+esc(c.p)+" – "+esc(c.pp)+"</span>";
+  if(okP&&okPP){ I.pass(); fb($("irr-fb"),true,"Correcto: "+forms); }
+  else { I.fail(); fb($("irr-fb"),false,(okP?"":"Past simple mal. ")+(okPP?"":"Participio mal. ")+"Es "+forms+". Volverá a salir."); }
+  bar("irr-bar",I); $("irr-next").disabled=false; $("irr-next").focus();
+}
+$("irr-check").addEventListener("click",irrCheck);
+$("irr-past").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(iDone) irrShow(); else $("irr-pp").focus(); } });
+$("irr-pp").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(iDone) irrShow(); else irrCheck(); } });
+$("irr-next").addEventListener("click",function(){ if(done(I)){ I=new Queue(irrPool()); } irrShow(); });
+$("irr-list").innerHTML=D.GROUPS.map(function(G){
+  return "<h4>"+G.g+" · "+esc(G.es)+" ("+G.n+")</h4><table class='vt'><tr><th>Base</th><th>Past</th><th>Participle</th><th>Español</th></tr>"+
+    D.IRR.filter(function(v){ return v.g===G.g; }).map(function(v){ return "<tr><td>"+esc(v.b)+"</td><td>"+esc(v.p)+"</td><td>"+esc(v.pp)+"</td><td>"+esc(v.es)+"</td></tr>"; }).join("")+"</table>";
+}).join("");
+I=new Queue(irrPool()); irrGroups(); irrShow();
+
+/* ===== FIX THE MISTAKE ===== */
+var F=new Queue(D.FIX);
+function fixShow(){
+  var c=F.next(); bar("fix-bar",F); hideFb($("fix-fb"));
+  $("fix-row1").hidden=false; $("fix-row2").hidden=true;
+  if(!c){ $("fix-q").innerHTML="<span class='mark'>Completado.</span>"; $("fix-show").textContent="Empezar de nuevo"; $("fix-count").textContent=""; return; }
+  $("fix-show").textContent="Ver corrección";
+  $("fix-count").textContent="Dominadas "+F.mastered+" de "+F.total;
+  $("fix-q").textContent=c.b;
+}
+$("fix-show").addEventListener("click",function(){
+  if(!F.cur){ F=new Queue(D.FIX); fixShow(); return; }
+  var c=F.cur; fb($("fix-fb"),true,"<span class='mark'>"+esc(c.g)+"</span><div class='es'>"+esc(c.w)+"</div>");
+  $("fix-row1").hidden=true; $("fix-row2").hidden=false;
+});
+$("fix-good").addEventListener("click",function(){ F.pass(); fixShow(); });
+$("fix-bad").addEventListener("click",function(){ F.fail(); fixShow(); });
+fixShow();
+
+/* ===== WHICH FUTURE? ===== */
+var R=new Queue(D.REG), rDone=false;
+function regShow(){
+  var c=R.next(); bar("reg-bar",R); hideFb($("reg-fb")); rDone=false; $("reg-next").disabled=true;
+  var box=$("reg-opts"); box.innerHTML="";
+  if(!c){ $("reg-q").innerHTML="<span class='mark'>Completado.</span>"; $("reg-ctx").textContent=""; $("reg-next").textContent="Empezar de nuevo"; $("reg-next").disabled=false; $("reg-count").textContent=""; return; }
+  $("reg-next").textContent="Siguiente";
+  $("reg-count").textContent="Dominadas "+R.mastered+" de "+R.total;
+  $("reg-ctx").textContent=c.s; $("reg-q").textContent=c.e;
+  D.CATS.forEach(function(cat){
+    var b=document.createElement("button"); b.className="opt"; b.textContent=cat; b.dataset.v=cat;
+    b.addEventListener("click",function(){ regAns(cat,b); });
+    box.appendChild(b);
+  });
+}
+function regAns(cat,btn){
+  if(rDone || !R.cur) return; rDone=true; var c=R.cur;
+  $("reg-opts").querySelectorAll(".opt").forEach(function(b){ b.disabled=true; if(b.dataset.v===c.c) b.classList.add("ok"); });
+  if(cat===c.c){ R.pass(); fb($("reg-fb"),true,"Correcto. "+esc(D.WHYC[c.c])); }
+  else { R.fail(); btn.classList.add("ko"); fb($("reg-fb"),false,"Es <span class='mark'>"+esc(c.c)+"</span>. "+esc(D.WHYC[c.c])); }
+  bar("reg-bar",R); $("reg-next").disabled=false; $("reg-next").focus();
+}
+$("reg-next").addEventListener("click",function(){ if(done(R)){ R=new Queue(D.REG); } regShow(); });
+regShow();
+
+/* ===== WRITE ===== */
+var wMode="advice";
+var CONTR=/\b(i'm|i've|i'd|i'll|you're|we're|we've|they're|it's|that's|there's|he's|she's|don't|doesn't|didn't|can't|won't|isn't|aren't|haven't|hasn't|wasn't|weren't|hadn't|couldn't|wouldn't|shouldn't|mustn't|needn't|you'd|gonna|wanna)\b/i;
+var INFORMAL=/\b(let's|how about|fancy|guys|hey)\b/i;
+function has(re,t){ return re.test(t); }
+function checksFor(sub,body){
+  var words=(body.match(/[A-Za-z']+/g)||[]).length;
+  var paras=body.split(/\n\s*\n/).map(function(x){ return x.trim(); }).filter(Boolean).length;
+  var low=body.toLowerCase();
+  var conns=["however","therefore","in addition"].filter(function(m){ return low.indexOf(m)>-1; }).length;
+  var c=[{ok:sub.trim().length>=6, t:"Asunto claro"}];
+  c.push({ok:/^\s*dear\b/im.test(body) && /\b(yours sincerely|yours faithfully|kind regards|best regards)\b/i.test(body), t:"Saludo (Dear…) y despedida formal (Yours sincerely / faithfully, Kind regards)"});
+  if(wMode==="advice"){
+    c.push({ok:has(/\b(should|ought to|had better)\b/i,body), t:"Consejo con should, ought to o had better"});
+    c.push({ok:has(/\b(must|have to|has to)\b/i,body), t:"Obligación con must o have to"});
+    c.push({ok:has(/\b(do not|does not|don't|doesn't) have to\b|\b(needn't|need not)\b/i,body), t:"Ausencia de obligación (do not have to / need not)"});
+    c.push({ok:has(/\b(could|might)\b/i,body), t:"Sugerencia o posibilidad con could o might"});
+    c.push({ok:has(/\b(could you|would you|grateful if you could)\b/i,body), t:"Petición cortés (Could you…? / Would you…?)"});
+    c.push({ok:conns>=2, t:"Al menos 2 conectores: however, therefore, in addition ("+conns+"/3)"});
+  } else {
+    c.push({ok:has(/\b(can|am able to|be able to)\b/i,body), t:"Capacidad: can o be able to"});
+    c.push({ok:has(/\bcould\b(?! you)/i,body), t:"Lo que podrías aportar: could"});
+    c.push({ok:has(/\bwould\b/i,body), t:"Cortesía con would (I would welcome / I would be grateful…)"});
+    c.push({ok:has(/\b(could you|would you|grateful if you could)\b/i,body), t:"Petición cortés (I would be grateful if you could…)"});
+    c.push({ok:has(/\bwill\b/i,body), t:"Una frase en futuro con will (requisito de la PEC)"});
+    c.push({ok:conns===3, t:"Los 3 conectores de la PEC: however, therefore, in addition ("+conns+"/3)"});
+  }
+  c.push({ok:!CONTR.test(body) && !INFORMAL.test(body), t:"Registro formal: sin contracciones ni let's / how about / fancy"});
+  c.push({ok:paras>=4, t:"Al menos 4 bloques (saludo, párrafos, despedida)"});
+  c.push({ok:words>=120 && words<=180, t:"Entre 120 y 180 palabras"});
+  return {c:c,words:words};
+}
+function wRender(){
+  var sub=$("w-subject").value, body=$("w-body").value, r=checksFor(sub,body);
+  $("w-words").textContent=r.words+" words";
+  $("w-checks").innerHTML=r.c.map(function(x){ return "<li class='"+(body.trim()?(x.ok?"pass":"fail"):"")+"'>"+esc(x.t)+"</li>"; }).join("");
+  db.drafts[wMode]={s:sub,b:body}; save(db);
+}
+function wSet(m){
+  wMode=m; $("w-formal").className= m==="advice"?"btn":"btn ghost"; $("w-informal").className= m==="cover"?"btn":"btn ghost";
+  $("w-task").textContent=D.TASKS[m].t; $("w-model").textContent=D.TASKS[m].m;
+  var d=db.drafts[m]||{s:"",b:""}; $("w-subject").value=d.s; $("w-body").value=d.b; wRender();
+}
+$("w-formal").addEventListener("click",function(){ wSet("advice"); });
+$("w-informal").addEventListener("click",function(){ wSet("cover"); });
+$("w-subject").addEventListener("input",wRender);
+$("w-body").addEventListener("input",wRender);
+wSet("advice");
+
+})();
+</script>
+</body>
+</html>
