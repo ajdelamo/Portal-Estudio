@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Practica la Unit 2 · Comunicación Profesional en Inglés</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F4; --surface:#FFFFFF; --ink:#1B2433; --muted:#566173; --line:#D5DCE4;
+  --accent:#2346A0; --accent-ink:#FFFFFF; --ok:#1E7F5C; --ok-bg:#E3F4EC; --ko:#B3261E; --ko-bg:#FBE9E7;
+  --mark:#FFE45C;
+  --serif:"Literata", Georgia, "Times New Roman", serif;
+  --sans:"Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+    --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+    --mark:rgba(255,228,92,.38);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+  --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+  --mark:rgba(255,228,92,.38);
+}
+:root{ box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+html{ scroll-padding-top:env(safe-area-inset-top,0px); }
+*,*::before,*::after{ box-sizing:inherit; }
+body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.5; }
+.wrap{ max-width:660px; margin:0 auto; padding:20px 16px 48px; }
+h1{ font-family:var(--serif); font-weight:600; font-size:1.9rem; line-height:1.15; margin:8px 0 6px; letter-spacing:-.01em; }
+.lead{ color:var(--muted); margin:0 0 18px; max-width:60ch; }
+.mark{ background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); padding:8px 0 10px; margin:0 -16px 8px; }
+.tabs{ display:flex; gap:6px; overflow-x:auto; padding:0 16px; scrollbar-width:none; }
+.tabs::-webkit-scrollbar{ display:none; }
+.tab{ flex:0 0 auto; border:1px solid var(--line); background:var(--surface); color:var(--ink); font:500 .92rem var(--sans); padding:8px 14px; border-radius:999px; cursor:pointer; }
+.tab[aria-selected="true"]{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.panel{ display:none; }
+.panel.on{ display:block; }
+.card{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; margin-bottom:14px; }
+.meta{ display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:.88rem; margin-bottom:10px; flex-wrap:wrap; }
+.prompt{ font-family:var(--serif); font-size:1.22rem; line-height:1.45; margin:0 0 14px; }
+.opts{ display:grid; gap:8px; }
+.opt{ text-align:left; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:10px; padding:11px 13px; font:1rem var(--serif); cursor:pointer; }
+.opt:hover:not(:disabled){ border-color:var(--accent); }
+.opt.ok{ background:var(--ok-bg); border-color:var(--ok); }
+.opt.ko{ background:var(--ko-bg); border-color:var(--ko); }
+.opt:disabled{ cursor:default; }
+.row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.btn{ border:0; background:var(--accent); color:var(--accent-ink); font:600 .95rem var(--sans); padding:10px 16px; border-radius:10px; cursor:pointer; }
+.btn.ghost{ background:transparent; color:var(--accent); border:1px solid var(--line); }
+.btn:disabled{ opacity:.45; cursor:default; }
+.fb{ margin-top:12px; padding:12px 14px; border-radius:10px; font-size:.95rem; display:none; }
+.fb.show{ display:block; }
+.fb.ok{ background:var(--ok-bg); color:var(--ink); border-left:4px solid var(--ok); }
+.fb.ko{ background:var(--ko-bg); color:var(--ink); border-left:4px solid var(--ko); }
+.es{ color:var(--muted); font-style:italic; margin-top:6px; }
+input[type=text], textarea{ width:100%; font:1.05rem var(--serif); color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+textarea{ min-height:240px; line-height:1.5; resize:vertical; }
+input:focus, textarea:focus, .btn:focus-visible, .opt:focus-visible, .tab:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+.hint{ color:var(--muted); font-size:.9rem; margin:0 0 10px; }
+.stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin:12px 0; }
+.stat{ border:1px solid var(--line); border-radius:10px; padding:10px; }
+.stat b{ display:block; font-family:var(--serif); font-size:1.5rem; }
+.stat span{ color:var(--muted); font-size:.85rem; }
+.review{ margin:12px 0 0; padding:0; list-style:none; }
+.review li{ border-top:1px solid var(--line); padding:10px 0; font-size:.95rem; }
+.checks{ list-style:none; padding:0; margin:12px 0 0; }
+.checks li{ padding:6px 0 6px 28px; position:relative; font-size:.95rem; }
+.checks li::before{ content:""; position:absolute; left:4px; top:11px; width:12px; height:12px; border-radius:50%; border:2px solid var(--line); }
+.checks li.pass::before{ background:var(--ok); border-color:var(--ok); }
+.checks li.fail::before{ border-color:var(--ko); }
+.seg{ display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.progress{ height:4px; background:var(--line); border-radius:2px; overflow:hidden; margin-bottom:12px; }
+.progress i{ display:block; height:100%; background:var(--accent); width:0; transition:width .25s; }
+details summary{ cursor:pointer; color:var(--accent); font-weight:500; }
+.model{ font-family:var(--serif); white-space:pre-wrap; background:var(--bg); border-radius:10px; padding:12px; margin-top:8px; }
+@media (prefers-reduced-motion: reduce){ .progress i{ transition:none; } }
+.vt{width:100%;border-collapse:collapse;font-size:.92rem}.vt th,.vt td{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}.vt th{color:var(--muted);font-weight:600}.vt h4{margin:14px 0 4px}.tw{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Practica la Unit 2</h1>
+  <p class="lead">Past and future. Los fallos vuelven a salir hasta que los aciertes. El test sigue el formato de corrección de las clases (Why?, Why are the other options wrong? y Remember:) con las 4 opciones del examen. Nuevo: modo Irregulares con 98 verbos: 30 preguntas, cada fallo resta 0,33.</p>
+
+  <nav aria-label="Modos de práctica">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-p="exam" aria-selected="true">Test tipo examen</button>
+      <button class="tab" role="tab" data-p="gap" aria-selected="false">Rellena huecos</button>
+      <button class="tab" role="tab" data-p="spell" aria-selected="false">Pasado regular (-ed)</button>
+      <button class="tab" role="tab" data-p="irr" aria-selected="false">Irregulares</button>
+      <button class="tab" role="tab" data-p="fix" aria-selected="false">Corrige el error</button>
+      <button class="tab" role="tab" data-p="reg" aria-selected="false">¿Qué futuro?</button>
+      <button class="tab" role="tab" data-p="write" aria-selected="false">Redacta</button>
+    </div>
+  </nav>
+
+  <!-- EXAM -->
+  <section class="panel on" id="p-exam">
+    <div id="exam-start" class="card">
+      <p class="prompt">30 preguntas al azar de un banco de 70, con 4 opciones (A, B, C, D), como en el examen final.</p>
+      <p class="hint">Tipos de pregunta de las clases de la profesora: <i>Choose the correct question for…</i>, <i>Choose the correct sentence</i>, <i>…for &lt;un uso&gt;</i> y <i>Choose the correct form</i>. Incluye repaso de la Unit 1 y de verbos irregulares.</p>
+      <p class="hint">Formato de las clases: cada corrección trae <b>Why?</b>, <b>Why are the other options wrong?</b> y <b>Remember:</b>. Antes de responder, «spot the clue»: 1) expresión de tiempo; 2) qué significa la frase; 3) estructura (y forma irregular); 4) en futuro, qué tipo de futuro.</p>
+      <p class="hint">Acierto +1, fallo −0,33, en blanco 0. Con 4 opciones, contestar al azar vale cero; si descartas una opción, responder vale +0,11; si descartas dos, +0,34. Responde solo si puedes descartar al menos una.</p>
+      <div id="exam-history" class="hint"></div>
+      <div class="row"><button class="btn" id="exam-go">Empezar test</button></div>
+    </div>
+    <div id="exam-run" class="card" hidden>
+      <div class="progress"><i id="exam-bar"></i></div>
+      <div class="meta"><span id="exam-count"></span><span id="exam-score"></span></div>
+      <p class="prompt" id="exam-q"></p>
+      <div class="opts" id="exam-opts"></div>
+      <div class="fb" id="exam-fb"></div>
+      <div class="row">
+        <button class="btn ghost" id="exam-blank">Dejar en blanco</button>
+        <button class="btn" id="exam-next" disabled>Siguiente</button>
+      </div>
+    </div>
+    <div id="exam-end" class="card" hidden></div>
+  </section>
+
+  <!-- GAP -->
+  <section class="panel" id="p-gap">
+    <div class="card">
+      <div class="progress"><i id="gap-bar"></i></div>
+      <div class="meta"><span id="gap-count"></span><span>Pista entre paréntesis</span></div>
+      <p class="prompt" id="gap-q"></p>
+      <input type="text" id="gap-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Tu respuesta">
+      <div class="fb" id="gap-fb"></div>
+      <div class="row">
+        <button class="btn" id="gap-check">Comprobar</button>
+        <button class="btn ghost" id="gap-next" disabled>Siguiente</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPELL -->
+  <section class="panel" id="p-spell">
+    <div class="card">
+      <div class="progress"><i id="spell-bar"></i></div>
+      <div class="meta"><span id="spell-count"></span><span id="spell-mode"></span></div>
+      <p class="prompt" id="spell-q"></p>
+      <input type="text" id="spell-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Forma del verbo">
+      <div class="fb" id="spell-fb"></div>
+      <div class="row">
+        <button class="btn" id="spell-check">Comprobar</button>
+        <button class="btn ghost" id="spell-next" disabled>Siguiente</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- IRREGULAR VERBS -->
+  <section class="panel" id="p-irr">
+    <div class="card">
+      <div class="seg" id="irr-groups"></div>
+      <div class="progress"><i id="irr-bar"></i></div>
+      <div class="meta"><span id="irr-count"></span><span id="irr-glabel"></span></div>
+      <p class="prompt" id="irr-q"></p>
+      <p class="hint" id="irr-es"></p>
+      <div id="irr-inputs">
+        <label class="hint" for="irr-past">Past simple</label>
+        <input type="text" id="irr-past" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <p></p>
+        <label class="hint" for="irr-pp">Past participle</label>
+        <input type="text" id="irr-pp" autocomplete="off" autocapitalize="off" spellcheck="false">
+      </div>
+      <div class="fb" id="irr-fb"></div>
+      <div class="row">
+        <button class="btn" id="irr-check">Comprobar</button>
+        <button class="btn ghost" id="irr-next" disabled>Siguiente</button>
+      </div>
+    </div>
+    <div class="card"><details><summary>Ver la lista completa por grupos</summary><div class="tw" id="irr-list"></div></details></div>
+  </section>
+
+  <!-- FIX -->
+  <section class="panel" id="p-fix">
+    <div class="card">
+      <div class="progress"><i id="fix-bar"></i></div>
+      <div class="meta"><span id="fix-count"></span><span>Encuentra el error y corrígelo mentalmente</span></div>
+      <p class="prompt" id="fix-q"></p>
+      <div class="fb" id="fix-fb"></div>
+      <div class="row" id="fix-row1"><button class="btn" id="fix-show">Ver corrección</button></div>
+      <div class="row" id="fix-row2" hidden>
+        <button class="btn" id="fix-good">Lo tenía bien</button>
+        <button class="btn ghost" id="fix-bad">Repasar otra vez</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section class="panel" id="p-reg">
+    <div class="card">
+      <div class="progress"><i id="reg-bar"></i></div>
+      <div class="meta"><span id="reg-count"></span><span>Elige la forma de futuro</span></div>
+      <p class="prompt" id="reg-q"></p>
+      <p class="hint" id="reg-ctx"></p>
+      <div class="opts" id="reg-opts"></div>
+      <div class="fb" id="reg-fb"></div>
+      <div class="row"><button class="btn ghost" id="reg-next" disabled>Siguiente</button></div>
+    </div>
+  </section>
+
+  <!-- WRITE -->
+  <section class="panel" id="p-write">
+    <div class="card">
+      <div class="seg">
+        <button class="btn" id="w-formal">Informe de progreso</button>
+        <button class="btn ghost" id="w-informal">Narración</button>
+      </div>
+      <p class="prompt" id="w-task"></p>
+      <label class="hint" for="w-subject">Subject</label>
+      <input type="text" id="w-subject" autocomplete="off">
+      <p></p>
+      <label class="hint" for="w-body">Texto</label>
+      <textarea id="w-body" spellcheck="true"></textarea>
+      <div class="meta"><span id="w-words">0 words</span><span>El borrador se guarda en este navegador</span></div>
+      <ul class="checks" id="w-checks"></ul>
+      <p class="hint">La comprobación es mecánica: detecta forma, no contenido. Revisa tú que el mensaje diga lo que tiene que decir.</p>
+      <details><summary>Ver un modelo de respuesta</summary><div class="model" id="w-model"></div></details>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+"use strict";
+var D={"CHECKS": ["1. Find the time expression: yesterday, at 8 p.m., when, while, ago, by Friday, next week…", "2. Ask what the sentence means: finished action, action in progress, earlier past action, or future plan?", "3. Check the structure: did + base verb; was/were + -ing; had + participle; will + base verb (irregular forms!).", "4. For future forms: timetable, arrangement, plan/evidence, spontaneous decision, or completed by a deadline?"], "EXAM": [{"t": "Q", "q": "Choose the correct question for “She was at the office yesterday.”", "o": ["Was she at the office yesterday?", "Did she was at the office yesterday?", "Were she at the office yesterday?", "Did she be at the office yesterday?"], "w": "To be makes questions by inversion, without did. She → was.", "r": "Past of to be: Was/Were + subject…?", "c": 1, "x": ["To be does not use did: invert was.", "She takes was, not were.", "After did, “be” is never used: Was she…?"]}, {"t": "Q", "q": "Choose the correct question for “They travelled to London last summer.”", "o": ["Did they travel to London last summer?", "Did they travelled to London last summer?", "Do they travelled to London last summer?", "Travelled they to London last summer?"], "w": "Past simple questions use did. After did, the verb returns to the base form: travel.", "r": "Past simple question = Did + subject + base verb?", "c": 3, "x": ["After did, use “travel”, not “travelled”.", "“Do” is present; the past auxiliary is “did”.", "Main verbs cannot be inverted; you need did."]}, {"t": "Q", "q": "Choose the correct question for “He was reading a novel.”", "o": ["Was he reading a novel?", "Did he reading a novel?", "Was he read a novel?", "Did he was reading a novel?"], "w": "The past continuous inverts was/were; it never uses did.", "r": "Past continuous question = Was/Were + subject + verb-ing?", "c": 3, "x": ["The past continuous uses was/were, not did.", "After was, use -ing: “reading”.", "Two auxiliaries: did and was cannot go together."]}, {"t": "Q", "q": "Choose the correct question for “She had finished the report.”", "o": ["Had she finished the report?", "Did she had finished the report?", "Had she finish the report?", "Has she finished the report?"], "w": "Had is an auxiliary, so we just invert it. After had, the past participle.", "r": "Past perfect question = Had + subject + past participle?", "c": 3, "x": ["Had is already the auxiliary: no did.", "After had, use the past participle “finished”.", "“Has” is present perfect; the statement uses “had”."]}, {"t": "Q", "q": "Choose the correct question for “You will call me tomorrow.”", "o": ["Will you call me tomorrow?", "Will you calling me tomorrow?", "Do you will call me tomorrow?", "Will you to call me tomorrow?"], "w": "Will is an auxiliary: invert it. After will, the base form without to.", "r": "Will + subject + base verb?", "c": 3, "x": ["After will, use the base verb, not -ing.", "Will is an auxiliary: no do.", "After will, no “to”."]}, {"t": "Q", "q": "Choose the correct question for “They are going to buy a flat.”", "o": ["Are they going to buy a flat?", "Do they going to buy a flat?", "Are they going to bought a flat?", "Are they go to buy a flat?"], "w": "Going to works like the present continuous: invert are. After going to, the base form.", "r": "Am/Is/Are + subject + going to + base verb?", "c": 3, "x": ["Going to uses am/is/are, not do.", "After going to, use the base verb “buy”.", "The structure is “be going to”, not “be go to”."]}, {"t": "Q", "q": "Choose the correct question for “The meeting ended at six.” (you want to know the time)", "o": ["What time did the meeting end?", "What time did the meeting ended?", "What time the meeting ended?", "What time was the meeting end?"], "w": "Wh- question in the past simple: Wh- + did + subject + base verb.", "r": "Wh- + did + subject + base verb?", "c": 3, "x": ["After did, use “end”, not “ended”.", "A Wh- question in the past needs did.", "“Was” cannot be followed by a base verb."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["I didn't travel to London last summer.", "I didn't travelled to London last summer.", "I not travelled to London last summer.", "I wasn't travel to London last summer."], "w": "After didn't, the verb is in the base form: the past is already marked by did.", "r": "Negative = subject + didn't + base verb.", "c": 3, "x": ["After didn't, use “travel”, not “travelled”.", "The negative needs the auxiliary didn't.", "“Wasn't” cannot be followed by a base verb."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["We were tired after the trip.", "We was tired after the trip.", "We did be tired after the trip.", "We were tire after the trip."], "w": "We → were. To be never uses did.", "r": "I/he/she/it → was; you/we/they → were.", "c": 1, "x": ["We takes were, not was.", "To be never uses did.", "After were, use an adjective: “tired”, not “tire”."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["The motorcycle had belonged to George for years.", "The motorcycle had been belonging to George for years.", "The motorcycle had belong to George for years.", "The motorcycle has been belonging to George for years."], "w": "Belong is a state (non-action) verb: no continuous forms. Use the past perfect.", "r": "State verbs → past perfect, not past perfect continuous.", "c": 4, "x": ["Belong is a state verb: no continuous forms.", "After had, use the participle “belonged”.", "State verb in the continuous, and “has” breaks the past reference."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["She will have finished the novel by May.", "She will has finished the novel by May.", "She will have finish the novel by May.", "She will finished the novel by May."], "w": "Future perfect = will + have + past participle. No -s in the third person.", "r": "will have + past participle (by + time).", "c": 3, "x": ["After will, use have, never has.", "After have, use the participle “finished”.", "The future perfect needs “have”: will have finished."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["I'll call you when I finish work.", "I'll call you when I will finish work.", "I call you when I will finish work.", "I'll call you when I finished work."], "w": "After when, after, until (time clauses) we use the present, not will.", "r": "Time clause (when…) → present; main clause → will.", "c": 4, "x": ["No will after when in a time clause.", "The main clause needs will, and the when-clause the present.", "The time clause refers to the future: use the present, not the past."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["If it rains, we won't play tennis.", "If it will rain, we won't play tennis.", "If it rains, we don't will play tennis.", "If it will rains, we won't play tennis."], "w": "No will in the if-clause; will goes in the main clause.", "r": "If + present, will + base verb.", "c": 4, "x": ["No will in the if-clause.", "The negative of will is won't, not “don't will”.", "No will in the if-clause, and no -s after will."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["When will the report be ready?", "When the report will be ready?", "When will be the report ready?", "When does the report will be ready?"], "w": "Will is perfectly correct in Wh- questions (the unit's rule is too absolute): Wh- + will + subject + base verb.", "r": "Wh- + will + subject + base verb?", "c": 4, "x": ["A question needs inversion: will + subject.", "The subject goes between will and be.", "Will and does cannot go together."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["He was working when his phone rang.", "He was work when his phone rang.", "He were working when his phone rang.", "He was working when his phone ringed."], "w": "Long action (past continuous) interrupted by a short one (past simple). Ring → rang.", "r": "was/were + -ing … when + past simple.", "c": 3, "x": ["After was, use -ing: “working”.", "He takes was, not were.", "Ring is irregular: rang, not “ringed”."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["They had been waiting for two hours when the doctor arrived.", "They had been wait for two hours when the doctor arrived.", "They have been waiting for two hours when the doctor arrived.", "They had waiting for two hours when the doctor arrived."], "w": "Duration up to a past moment → had been + -ing.", "r": "Past perfect continuous = had been + verb-ing.", "c": 3, "x": ["After been, use -ing: “waiting”.", "“Have been” clashes with the past reference “arrived”.", "The structure needs been: had been waiting."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["She stopped the car and got out.", "She stoped the car and got out.", "She stopt the car and got out.", "She stopped the car and getted out."], "w": "Stop: one syllable C-V-C → double the consonant. Get is irregular: got.", "r": "stop → stopped; get → got.", "c": 3, "x": ["Stop doubles the p: stopped.", "“Stopt” is not an English form.", "Get is irregular: got, not “getted”."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["Did you see the match yesterday?", "Did you saw the match yesterday?", "Have you seen the match yesterday?", "Were you see the match yesterday?"], "w": "Yesterday is finished time → past simple, not present perfect. After did, base form.", "r": "Finished time → past simple.", "c": 2, "x": ["After did, use the base verb “see”.", "Yesterday is finished time: no present perfect.", "“Were” cannot be followed by a base verb."]}, {"t": "U", "q": "Choose the correct sentence for a decision made at the moment of speaking.", "o": ["“It's cold in here.” “I'll close the window.”", "“It's cold in here.” “I closed the window.”", "“It's cold in here.” “I'd closed the window.”", "“It's cold in here.” “I've been closing the window.”"], "w": "A decision taken while you speak uses will.", "r": "On-the-spot decisions → will.", "c": 4, "x": ["The past simple reports a finished action, not a decision now.", "The past perfect describes an earlier past action.", "This describes an activity up to now, not a decision."]}, {"t": "U", "q": "Choose the correct sentence for a prediction based on present evidence.", "o": ["Look at those clouds! It's going to rain.", "Look at those clouds! It will rains.", "Look at those clouds! It rains.", "Look at those clouds! It was raining."], "w": "You can see the evidence (clouds) → going to.", "r": "Present evidence → going to.", "c": 4, "x": ["No -s after will; and with evidence, use going to.", "The present simple does not express a prediction.", "This is a past action, not a prediction."]}, {"t": "U", "q": "Choose the correct sentence for a fixed arrangement with time and place.", "o": ["I'm meeting the client at 10 tomorrow in her office.", "I meet the client at 10 yesterday.", "I'm meet the client at 10 tomorrow.", "I'll meeting the client at 10 tomorrow."], "w": "Personal arrangements with details (time, place) → present continuous.", "r": "Arrangements → present continuous.", "c": 3, "x": ["“Yesterday” clashes with a future arrangement.", "After 'm, use -ing: “meeting”.", "After 'll, use the base verb (or be + -ing)."]}, {"t": "U", "q": "Choose the correct sentence for a timetable.", "o": ["The train leaves at 8.45 tomorrow.", "The train will leaving at 8.45 tomorrow.", "The train is leave at 8.45 tomorrow.", "The train left at 8.45 tomorrow."], "w": "Scheduled events (timetables, calendars) → present simple.", "r": "Timetables → present simple.", "c": 2, "x": ["After will, use the base verb (and timetables take the present simple).", "After is, use -ing or a noun, not a base verb.", "Past tense clashes with “tomorrow”."]}, {"t": "U", "q": "Choose the correct sentence for an action in progress at a specific time in the past.", "o": ["At seven o'clock I was having breakfast.", "At seven o'clock I have breakfast yesterday.", "At seven o'clock I was have breakfast.", "At seven o'clock I had been have breakfast."], "w": "An action in progress at a past moment → past continuous.", "r": "was/were + verb-ing.", "c": 3, "x": ["Present tense clashes with “yesterday”.", "After was, use -ing: “having”.", "After had been, use -ing; and the action was in progress, not before."]}, {"t": "U", "q": "Choose the correct sentence for a long action interrupted by a short one.", "o": ["I was having a shower when the phone rang.", "I had a shower when the phone was ring.", "I was have a shower when the phone rang.", "I am having a shower when the phone rang."], "w": "Long action → past continuous; the short interruption → past simple.", "r": "Past continuous + when + past simple.", "c": 2, "x": ["After was, use -ing: “ringing”; and the short action is past simple.", "After was, use -ing: “having”.", "Present tense clashes with the past “rang”."]}, {"t": "U", "q": "Choose the correct sentence for an action finished before another past action.", "o": ["When we arrived, the film had already started.", "When we arrived, the film has already started.", "When we arrived, the film had already start.", "When we had arrived, the film already starts."], "w": "The film started before we arrived → past perfect.", "r": "Earlier past action → had + past participle.", "c": 3, "x": ["“Has” clashes with the past “arrived”.", "After had, use the participle “started”.", "The tenses are reversed: present for the past action."]}, {"t": "U", "q": "Choose the correct sentence for a past cause, focusing on how long it lasted.", "o": ["Jason was tired because he had been working for hours.", "Jason was tired because he has been working for hours.", "Jason was tired because he had been work for hours.", "Jason was tired because he had working for hours."], "w": "Cause + duration before a past moment → past perfect continuous.", "r": "had been + verb-ing.", "c": 3, "x": ["“Has been” clashes with the past “was tired”.", "After been, use -ing: “working”.", "The structure needs been: had been working."]}, {"t": "U", "q": "Choose the correct sentence for an action in progress at a specific time in the future.", "o": ["This time next week I'll be lying on the beach.", "This time next week I'll lying on the beach.", "This time next week I'll be lie on the beach.", "This time next week I was lying on the beach."], "w": "In progress at a future moment → future continuous.", "r": "will be + verb-ing.", "c": 3, "x": ["After 'll, you need be: 'll be lying.", "After be, use -ing: “lying”.", "Past tense clashes with “next week”."]}, {"t": "U", "q": "Choose the correct sentence for an action completed before a future moment.", "o": ["By Friday, we will have sent all the invoices.", "By Friday, we will have send all the invoices.", "By Friday, we will sent all the invoices.", "By Friday, we have sent all the invoices tomorrow."], "w": "Completed before a future time (by + time) → future perfect.", "r": "will have + past participle.", "c": 3, "x": ["After have, use the participle “sent”.", "The future perfect needs have: will have sent.", "Present perfect clashes with “by Friday” and “tomorrow”."]}, {"t": "U", "q": "Choose the correct sentence for a repeated action in the past.", "o": ["When I was a child, I played football every day.", "When I was a child, I play football every day.", "When I was a child, I had been play football every day.", "When I were a child, I played football every day."], "w": "Repeated past habits → past simple (every day).", "r": "Past habits → past simple.", "c": 2, "x": ["Present tense clashes with a past habit.", "After been, use -ing; and a habit takes the past simple.", "I takes was, not were."]}, {"t": "U", "q": "Choose the correct sentence for an intention decided before speaking.", "o": ["We've decided: we're going to open a new office in Seville.", "We've decided: we'll opening a new office in Seville.", "We've decided: we going to open a new office in Seville.", "We've decided: we're going to opened a new office in Seville."], "w": "A firm plan decided earlier → going to.", "r": "Previous decision → going to.", "c": 4, "x": ["After 'll, use the base verb, not -ing.", "Going to needs be: we're going to.", "After going to, use the base verb “open”."]}, {"t": "U", "q": "Choose the correct sentence for a progress report (what has been done to date).", "o": ["To date, we have contacted forty suppliers.", "To date, we contact forty suppliers last year.", "To date, we had contact forty suppliers.", "To date, we have contact forty suppliers."], "w": "“To date” = up to now: results with a connection to the present → present perfect.", "r": "Results to date → have/has + past participle.", "c": 2, "x": ["“Last year” clashes with “to date”: use the present perfect.", "After had, use the participle; and “to date” needs have.", "After have, use the participle “contacted”."]}, {"t": "F", "q": "Choose the correct form: “I ___ in Madrid in 2005.”", "o": ["was", "were", "am", "did be"], "w": "I → was. In 2005 is finished time.", "r": "I/he/she/it → was.", "c": 1, "x": ["I takes was, not were.", "“In 2005” is finished time: past, not present.", "To be never uses did."]}, {"t": "F", "q": "Choose the correct form: “We ___ to the market three days ago.”", "o": ["went", "have gone", "go", "were go"], "w": "Ago marks finished past time → past simple. Go → went.", "r": "… ago → past simple.", "c": 2, "x": ["“Ago” marks finished time: no present perfect.", "Present tense clashes with “ago”.", "After were, use -ing: “were going”."]}, {"t": "F", "q": "Choose the correct form: “While I ___ dinner, the lights went out.”", "o": ["was cooking", "had cook", "was cook", "am cooking"], "w": "While introduces the long action in progress → past continuous.", "r": "while + was/were + -ing.", "c": 2, "x": ["After had, use the participle; and while needs an action in progress.", "After was, use -ing: “cooking”.", "Present tense clashes with the past “went out”."]}, {"t": "F", "q": "Choose the correct form: “By the time the bell rang, I ___ the exam.”", "o": ["had finished", "have finished", "had finish", "finish"], "w": "Finished before another past moment → past perfect.", "r": "by the time + past → had + participle.", "c": 2, "x": ["“Have” clashes with the past “rang”: use had.", "After had, use the participle “finished”.", "Present tense clashes with the past reference."]}, {"t": "F", "q": "Choose the correct form: “She ___ the hat for four hours before anyone noticed.”", "o": ["had been wearing", "has been wearing", "had been wear", "had wearing"], "w": "Duration up to a past moment → had been + -ing.", "r": "had been + verb-ing.", "c": 3, "x": ["“Has been” clashes with the past “noticed”.", "After been, use -ing: “wearing”.", "The structure needs been: had been wearing."]}, {"t": "F", "q": "Choose the correct form: “Don't worry, I ___ you with your luggage.”", "o": ["'ll help", "help", "'m helped", "'ll helping"], "w": "An offer made at the moment → will + base verb.", "r": "Offers → will.", "c": 4, "x": ["An offer made now needs will: I'll help.", "This is a passive form with a different meaning.", "After 'll, use the base verb, not -ing."]}, {"t": "F", "q": "Choose the correct form: “Look at that glass! It ___ fall.”", "o": ["is going to", "will to", "is go to", "going"], "w": "You can see it is about to happen → going to.", "r": "Evidence → be going to + base verb.", "c": 4, "x": ["The structure is be going to, without will.", "The structure is going to, not “go to”.", "Going to needs the verb be: is going to."]}, {"t": "F", "q": "Choose the correct form: “What ___ you doing tomorrow evening?”", "o": ["are", "do", "will", "did"], "w": "Present continuous for a future arrangement: are + subject + -ing.", "r": "Arrangements → present continuous.", "c": 3, "x": ["“Doing” (-ing) needs are, not do.", "After will, use the base verb: will you do.", "“Tomorrow” clashes with the past “did”."]}, {"t": "F", "q": "Choose the correct form: “The next semester ___ in April.”", "o": ["starts", "starting", "will starts", "is start"], "w": "Calendar event → present simple; semester = it → starts.", "r": "Scheduled events → present simple.", "c": 2, "x": ["A scheduled event takes the present simple, and -ing alone is not a verb.", "No -s after will.", "After is, use -ing or a noun, not a base verb."]}, {"t": "F", "q": "Choose the correct form: “Next summer I ___ here for ten years.”", "o": ["will have been working", "will have working", "will be worked", "am working"], "w": "Duration up to a future moment → future perfect continuous.", "r": "will have been + verb-ing.", "c": 2, "x": ["After have, you need been: will have been working.", "This is a passive form with a different meaning.", "“Next summer” needs a future form."]}, {"t": "F", "q": "Choose the correct form: “I hope nobody ___ us today.”", "o": ["calls", "will calls", "call", "calling"], "w": "After hope we often use the present with future meaning; nobody → calls.", "r": "hope + present (future meaning).", "c": 2, "x": ["No -s after will.", "Nobody is singular: calls, not call.", "-ing alone is not a finite verb."]}, {"t": "F", "q": "Choose the correct form: “She ___ Law in Salamanca.” (study)", "o": ["studied", "studyed", "studdied", "studed"], "w": "Consonant + y → -ied.", "r": "study → studied; play → played.", "c": 3, "x": ["Consonant + y changes to -ied: studied.", "Study does not double the d.", "The y becomes i before -ed: studied."]}, {"t": "F", "q": "Choose the correct form: “He ___ the first option.” (prefer)", "o": ["preferred", "prefered", "preferd", "preferreded"], "w": "Stress on the last syllable (pre-FER) → double the r.", "r": "Stressed final C-V-C → double.", "c": 3, "x": ["Stress on the last syllable (pre-FER): double the r.", "The past needs -ed: preferred.", "Only one -ed: preferred."]}, {"t": "F", "q": "Choose the correct form: “They ___ the new office.” (open)", "o": ["opened", "openned", "opend", "openeded"], "w": "Stress on the first syllable (O-pen) → no doubling.", "r": "Unstressed final syllable → no doubling.", "c": 3, "x": ["O-pen: unstressed final syllable, no doubling.", "The past needs -ed: opened.", "Only one -ed: opened."]}, {"t": "F", "q": "Choose the correct form: “We ___ to Rome by train.” (travel, British English)", "o": ["travelled", "traveld", "travelt", "travellt"], "w": "British English doubles final -l: travelled (US: traveled).", "r": "BrE: travel → travelled.", "c": 3, "x": ["British English doubles the l: travelled.", "“Travelt” is not an English form.", "“Travellt” is not an English form."]}, {"t": "F", "q": "Choose the correct form: “Does she ___ here?” (Unit 1 review)", "o": ["work", "works", "worked", "working"], "w": "After does, the base form.", "r": "Does + subject + base verb.", "c": 3, "x": ["After does, use the base verb: work.", "After does, no past form.", "After does, no -ing."]}, {"t": "F", "q": "Choose the correct form: “I ___ the report already.” (Unit 1 review)", "o": ["have finished", "finished already", "am finishing", "has finished"], "w": "Already with a result now → present perfect; I → have.", "r": "have + already + participle.", "c": 1, "x": ["Already with a result now needs the present perfect.", "The present continuous does not fit “already”.", "I takes have, not has."]}, {"t": "E", "q": "Choose the correct option: closing a formal email when you don't know the name (Unit 1 review).", "o": ["Yours faithfully,", "Lots of love,", "See you,", "Cheers,"], "w": "Unknown recipient in a formal email → Yours faithfully.", "r": "Formal closings: Yours faithfully / sincerely, Kind regards.", "c": 4, "x": ["Informal closing for friends and family.", "Informal closing.", "Very informal closing."]}, {"t": "F", "q": "Choose the correct form: “Mathew has worked here ___ 2015.” (Unit 1 review)", "o": ["since", "for", "from", "during"], "w": "2015 is a starting point.", "r": "since = starting point; for = duration.", "c": 2, "x": ["For goes with a period of time, not a starting point.", "From needs a pair: from… to/until.", "During goes with a noun (during the summer), not a year as a starting point."]}, {"t": "S", "q": "Choose the correct sentence: “They ___ to Paris last month.”", "o": ["flew", "fly", "were fly", "have flown"], "w": "“Last month” is finished time: past simple. Fly is irregular: flew.", "r": "Past simple = subject + past form of the verb.", "c": 1, "x": ["“Fly” is the base form, not the past.", "After were, use -ing: “were flying”.", "“Last month” is finished time: no present perfect."]}, {"t": "S", "q": "Choose the correct sentence: “At 10 a.m. yesterday, we ___ a meeting.”", "o": ["were having", "have had", "had have", "are having"], "w": "The action was in progress at a specific time in the past.", "r": "Past continuous = was/were + verb-ing.", "c": 1, "x": ["Present perfect clashes with “yesterday”.", "After had, use the participle “had”.", "Present continuous clashes with “yesterday”."]}, {"t": "S", "q": "Choose the correct sentence: “She ___ dinner when the guests arrived.” (prepare)", "o": ["was preparing", "had preparing", "is preparing", "were preparing"], "w": "The longer action was in progress when the shorter one (the guests arrived) happened.", "r": "Past continuous + when + past simple.", "c": 3, "x": ["After had, use a participle, not -ing.", "Present continuous clashes with the past “arrived”.", "She takes was, not were."]}, {"t": "S", "q": "Choose the correct sentence: “When I got to the station, the train ___.”", "o": ["had already left", "has already left", "already leave", "had already leaved"], "w": "The train left before I got there: the past perfect marks the earlier action.", "r": "Past perfect = had + past participle.", "c": 2, "x": ["“Has” clashes with the past “got”.", "Present form clashes with the past reference.", "Leave is irregular: left, not “leaved”."]}, {"t": "S", "q": "Choose the correct sentence: “Her eyes were red because she ___.”", "o": ["had been crying", "has been crying", "had crying", "was cry"], "w": "The activity continued before a past moment and explains the result.", "r": "Past perfect continuous = had been + verb-ing.", "c": 2, "x": ["“Has been” clashes with the past “were red”.", "The structure needs been: had been crying.", "After was, use -ing: “crying”."]}, {"t": "F", "q": "Choose the correct form: “Don't call before six: I'll have ___ the report by then.”", "o": ["finished", "finish", "finishing", "been finish"], "w": "Completed by a future time → future perfect: will have + past participle.", "r": "Future perfect = will have + past participle (by…).", "c": 3, "x": ["After have, use the participle, not the base form.", "After have, no -ing (that would need been).", "“Been finish” is not a valid structure."]}, {"t": "F", "q": "Choose the correct form: “She has ___ three emails this morning.” (write)", "o": ["written", "wrote", "writed", "writen"], "w": "After has, use the past participle: written.", "r": "have/has + past participle (write – wrote – written).", "c": 3, "x": ["“Wrote” is the past simple, not the participle.", "Write is irregular: no -ed.", "Spelling: written has double t."]}, {"t": "F", "q": "Choose the correct form: “We ___ the bus at 7 yesterday.” (catch)", "o": ["caught", "catched", "catch", "have caught"], "w": "Finished time → past simple. Catch is irregular: caught.", "r": "catch – caught – caught.", "c": 2, "x": ["Catch is irregular: no -ed.", "Base form, not past.", "“Yesterday” is finished time: no present perfect."]}, {"t": "F", "q": "Choose the correct form: “Have you ever ___ to Ireland?” (be)", "o": ["been", "was", "be", "being"], "w": "After have, use the past participle: been.", "r": "be – was/were – been.", "c": 3, "x": ["“Was” is the past simple, not the participle.", "After have, no base form.", "After have, no -ing."]}, {"t": "F", "q": "Choose the correct form: “By the time we arrived, they had ___ all the food.” (eat)", "o": ["eaten", "ate", "eat", "eated"], "w": "After had, use the past participle: eaten.", "r": "eat – ate – eaten.", "c": 3, "x": ["“Ate” is the past simple, not the participle.", "After had, no base form.", "Eat is irregular: no -ed."]}, {"t": "F", "q": "Choose the correct form: “I ___ my keys last night.” (lose)", "o": ["lost", "losed", "lose", "have lost"], "w": "Finished time → past simple. Lose is irregular: lost.", "r": "lose – lost – lost.", "c": 2, "x": ["Lose is irregular: no -ed.", "Base form, not past.", "“Last night” is finished time: no present perfect."]}, {"t": "F", "q": "Choose the correct form: “The phone ___ while I was having a shower.” (ring)", "o": ["rang", "rung", "ringed", "rings"], "w": "Short action in the past simple. Ring: rang (past), rung (participle).", "r": "ring – rang – rung (past with a, participle with u).", "c": 3, "x": ["“Rung” is the participle: it needs have/had.", "Ring is irregular: no -ed.", "Present tense clashes with the past continuous."]}, {"t": "F", "q": "Choose the correct form: “He has ___ a new car.” (buy)", "o": ["bought", "buyed", "brought", "buy"], "w": "After has, use the past participle: bought.", "r": "buy – bought – bought (≠ bring – brought – brought).", "c": 3, "x": ["Buy is irregular: no -ed.", "“Brought” comes from bring (traer).", "After has, no base form."]}, {"t": "F", "q": "Choose the correct form: “I ___ my mother a present for her birthday.” (give)", "o": ["gave", "gived", "given", "give"], "w": "A finished past action: past simple. Give: gave.", "r": "give – gave – given.", "c": 3, "x": ["Give is irregular: no -ed.", "“Given” is the participle: it needs have/had.", "Base form, not past."]}, {"t": "F", "q": "Choose the correct form: “Have you ___ the new manager yet?” (meet)", "o": ["met", "meeted", "meet", "metted"], "w": "After have, use the past participle: met.", "r": "meet – met – met.", "c": 3, "x": ["Meet is irregular: no -ed.", "After have, no base form.", "No double t and no -ed: met."]}, {"t": "F", "q": "Choose the correct form: “They ___ a new office in Madrid last year.” (build)", "o": ["built", "builded", "build", "have built"], "w": "“Last year” is finished time: past simple. Build: built.", "r": "build – built – built.", "c": 2, "x": ["Build is irregular: no -ed.", "Base form, not past.", "“Last year” is finished time: no present perfect."]}, {"t": "F", "q": "Choose the correct form: “She had ___ before I could say goodbye.” (leave)", "o": ["left", "leaved", "leave", "lived"], "w": "After had, use the past participle: left.", "r": "leave – left – left (≠ live – lived – lived).", "c": 3, "x": ["Leave is irregular: no -ed.", "After had, no base form.", "“Lived” comes from live (vivir)."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["I've drunk two coffees today.", "I've drank two coffees today.", "I've drink two coffees today.", "I've drinked two coffees today."], "w": "After have, use the past participle: drunk.", "r": "drink – drank – drunk (past with a, participle with u).", "c": 3, "x": ["“Drank” is the past simple, not the participle.", "After have, no base form.", "Drink is irregular: no -ed."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["She fell and hurt her knee.", "She felt and hurt her knee.", "She falled and hurt her knee.", "She fall and hurted her knee."], "w": "Fall → fell; hurt has the same form in all three (AAA).", "r": "fall – fell – fallen (≠ feel – felt – felt).", "c": 3, "x": ["“Felt” comes from feel (sentir).", "Fall is irregular: no -ed.", "Present form, and hurt is AAA: no -ed."]}, {"t": "Q", "q": "Choose the correct question for “He took the train.”", "o": ["Did he take the train?", "Did he took the train?", "Did he taken the train?", "Took he the train?"], "w": "Past simple questions: Did + subject + base verb.", "r": "Did + subject + base verb?", "c": 3, "x": ["After did, use “take”, not the past “took”.", "After did, never the participle.", "Main verbs cannot be inverted; you need did."]}], "GAPS": [{"s": "I ___ (be) at home yesterday.", "a": ["was"], "es": "Ayer estuve en casa."}, {"s": "They ___ (be) late again.", "a": ["were"], "es": "Llegaron tarde otra vez."}, {"s": "She ___ (not / travel) to London last year.", "a": ["didn't travel", "did not travel"], "es": "El año pasado no viajó a Londres."}, {"s": "___ (you / see) the match last night?", "a": ["did you see"], "es": "¿Viste el partido anoche?"}, {"s": "We ___ (meet) Mary ten years ago.", "a": ["met"], "es": "Conocimos a Mary hace diez años."}, {"s": "I ___ (arrive) home at 1 am last night.", "a": ["arrived"], "es": "Anoche llegué a casa a la una."}, {"s": "When I was a child, I ___ (play) with my toys every day.", "a": ["played"], "es": "De niño jugaba con mis juguetes todos los días."}, {"s": "It was seven o'clock. I ___ (have) breakfast.", "a": ["was having"], "es": "Eran las siete. Estaba desayunando."}, {"s": "My husband ___ (cook) dinner when I arrived.", "a": ["was cooking"], "es": "Mi marido estaba haciendo la cena cuando llegué."}, {"s": "Who ___ (we / wait) for? (pasado continuo)", "a": ["were we waiting"], "es": "¿A quién estábamos esperando?"}, {"s": "Her Spanish ___ (improve) quickly.", "a": ["was improving"], "es": "Su español estaba mejorando rápidamente."}, {"s": "I ___ (finish) the homework by the time the bell rang.", "a": ["had finished", "'d finished"], "es": "Había terminado los deberes cuando sonó el timbre."}, {"s": "Teresa wasn't at home. She ___ (go) shopping.", "a": ["had gone", "'d gone"], "es": "Teresa no estaba. Se había ido de compras."}, {"s": "___ (you / finish) your exam when the alarm rang?", "a": ["had you finished"], "es": "¿Habías terminado el examen cuando sonó la alarma?"}, {"s": "I ___ (wait) for two hours when they called my name.", "a": ["had been waiting", "'d been waiting"], "es": "Llevaba dos horas esperando cuando dijeron mi nombre."}, {"s": "Mary failed because she ___ (not / attend) class. (continuo)", "a": ["hadn't been attending", "had not been attending"], "es": "Mary suspendió porque no había estado yendo a clase."}, {"s": "I ___ (go) with you to that meeting. (will)", "a": ["will go", "'ll go"], "es": "Iré contigo a esa reunión."}, {"s": "I ___ (not / tell) you the secret. (will)", "a": ["won't tell", "will not tell"], "es": "No te contaré el secreto."}, {"s": "Look at those clouds! It ___ (rain).", "a": ["is going to rain", "'s going to rain"], "es": "¡Mira esas nubes! Va a llover."}, {"s": "What ___ (you / do) on Friday? (going to)", "a": ["are you going to do"], "es": "¿Qué vas a hacer el viernes?"}, {"s": "We ___ (go) to Spain in June. (plan fijo)", "a": ["are going", "'re going"], "es": "Nos vamos a España en junio."}, {"s": "My train ___ (leave) tomorrow at 8.45.", "a": ["leaves"], "es": "Mi tren sale mañana a las 8:45."}, {"s": "This time next week I ___ (swim) in the sea.", "a": ["will be swimming", "'ll be swimming"], "es": "La semana que viene a estas horas estaré nadando en el mar."}, {"s": "By then I ___ (return) all the money.", "a": ["will have returned", "'ll have returned"], "es": "Para entonces habré devuelto todo el dinero."}, {"s": "Next summer I ___ (teach) for 10 years.", "a": ["will have been teaching", "'ll have been teaching"], "es": "El verano que viene hará 10 años que doy clase."}, {"s": "I'll come home when I ___ (finish) work.", "a": ["finish"], "es": "Volveré a casa cuando termine de trabajar."}, {"s": "If it ___ (rain), we won't play tennis.", "a": ["rains"], "es": "Si llueve, no jugaremos al tenis."}, {"s": "We met Mary ten years ___.", "a": ["ago"], "es": "Conocimos a Mary hace diez años."}, {"s": "___ three o'clock I will have finished the exam. (para las tres)", "a": ["by"], "es": "Para las tres habré terminado el examen."}, {"s": "To date, I ___ (record) data from five regions.", "a": ["have recorded", "'ve recorded"], "es": "Hasta la fecha he registrado datos de cinco regiones."}], "SP": [{"v": "close", "k": "past", "a": ["closed"], "r": "acaba en -e: solo -d"}, {"v": "agree", "k": "past", "a": ["agreed"], "r": "acaba en -e: solo -d (aunque sea tónica)"}, {"v": "love", "k": "past", "a": ["loved"], "r": "acaba en -e: solo -d"}, {"v": "play", "k": "past", "a": ["played"], "r": "vocal + y: -ed"}, {"v": "enjoy", "k": "past", "a": ["enjoyed"], "r": "vocal + y: -ed"}, {"v": "marry", "k": "past", "a": ["married"], "r": "consonante + y: -ied"}, {"v": "study", "k": "past", "a": ["studied"], "r": "consonante + y: -ied"}, {"v": "worry", "k": "past", "a": ["worried"], "r": "consonante + y: -ied"}, {"v": "visit", "k": "past", "a": ["visited"], "r": "regla general: -ed (VI-sit, átona)"}, {"v": "stop", "k": "past", "a": ["stopped"], "r": "monosílabo C-V-C: se dobla"}, {"v": "ban", "k": "past", "a": ["banned"], "r": "monosílabo C-V-C: se dobla"}, {"v": "plan", "k": "past", "a": ["planned"], "r": "monosílabo C-V-C: se dobla"}, {"v": "swap", "k": "past", "a": ["swapped"], "r": "monosílabo C-V-C: se dobla"}, {"v": "prefer", "k": "past", "a": ["preferred"], "r": "última sílaba tónica (pre-FER): se dobla"}, {"v": "admit", "k": "past", "a": ["admitted"], "r": "última sílaba tónica (ad-MIT): se dobla"}, {"v": "open", "k": "past", "a": ["opened"], "r": "sílaba final átona (O-pen): no se dobla"}, {"v": "offer", "k": "past", "a": ["offered"], "r": "sílaba final átona (OF-fer): no se dobla"}, {"v": "travel", "k": "past", "a": ["travelled"], "r": "británico: la -l se dobla (US traveled)"}, {"v": "cancel", "k": "past", "a": ["cancelled"], "r": "británico: la -l se dobla (US canceled)"}, {"v": "level", "k": "past", "a": ["levelled"], "r": "británico: la -l se dobla (US leveled)"}], "IRR": [{"g": "AAA", "b": "bet", "p": "bet", "pp": "bet", "es": "apostar"}, {"g": "AAA", "b": "cost", "p": "cost", "pp": "cost", "es": "costar"}, {"g": "AAA", "b": "cut", "p": "cut", "pp": "cut", "es": "cortar"}, {"g": "AAA", "b": "hit", "p": "hit", "pp": "hit", "es": "golpear"}, {"g": "AAA", "b": "hurt", "p": "hurt", "pp": "hurt", "es": "herir, doler"}, {"g": "AAA", "b": "let", "p": "let", "pp": "let", "es": "dejar, permitir"}, {"g": "AAA", "b": "put", "p": "put", "pp": "put", "es": "poner"}, {"g": "AAA", "b": "quit", "p": "quit", "pp": "quit", "es": "dejar, abandonar"}, {"g": "AAA", "b": "read", "p": "read", "pp": "read", "es": "leer (se pronuncia /red/ en pasado)"}, {"g": "AAA", "b": "set", "p": "set", "pp": "set", "es": "fijar, establecer"}, {"g": "AAA", "b": "shut", "p": "shut", "pp": "shut", "es": "cerrar"}, {"g": "AAA", "b": "spread", "p": "spread", "pp": "spread", "es": "extender, difundir"}, {"g": "ABB", "b": "bring", "p": "brought", "pp": "brought", "es": "traer"}, {"g": "ABB", "b": "build", "p": "built", "pp": "built", "es": "construir"}, {"g": "ABB", "b": "burn", "p": "burnt/burned", "pp": "burnt/burned", "es": "quemar"}, {"g": "ABB", "b": "buy", "p": "bought", "pp": "bought", "es": "comprar"}, {"g": "ABB", "b": "catch", "p": "caught", "pp": "caught", "es": "coger, atrapar"}, {"g": "ABB", "b": "dream", "p": "dreamt/dreamed", "pp": "dreamt/dreamed", "es": "soñar"}, {"g": "ABB", "b": "feed", "p": "fed", "pp": "fed", "es": "alimentar"}, {"g": "ABB", "b": "feel", "p": "felt", "pp": "felt", "es": "sentir"}, {"g": "ABB", "b": "fight", "p": "fought", "pp": "fought", "es": "luchar"}, {"g": "ABB", "b": "find", "p": "found", "pp": "found", "es": "encontrar"}, {"g": "ABB", "b": "get", "p": "got", "pp": "got", "es": "conseguir, obtener (US: gotten)"}, {"g": "ABB", "b": "hang", "p": "hung", "pp": "hung", "es": "colgar"}, {"g": "ABB", "b": "have", "p": "had", "pp": "had", "es": "tener, haber"}, {"g": "ABB", "b": "hear", "p": "heard", "pp": "heard", "es": "oír"}, {"g": "ABB", "b": "hold", "p": "held", "pp": "held", "es": "sostener, celebrar (una reunión)"}, {"g": "ABB", "b": "keep", "p": "kept", "pp": "kept", "es": "mantener, guardar"}, {"g": "ABB", "b": "lay", "p": "laid", "pp": "laid", "es": "poner, colocar"}, {"g": "ABB", "b": "lead", "p": "led", "pp": "led", "es": "dirigir, liderar"}, {"g": "ABB", "b": "learn", "p": "learnt/learned", "pp": "learnt/learned", "es": "aprender"}, {"g": "ABB", "b": "leave", "p": "left", "pp": "left", "es": "dejar, irse"}, {"g": "ABB", "b": "lend", "p": "lent", "pp": "lent", "es": "prestar"}, {"g": "ABB", "b": "light", "p": "lit", "pp": "lit", "es": "encender"}, {"g": "ABB", "b": "lose", "p": "lost", "pp": "lost", "es": "perder"}, {"g": "ABB", "b": "make", "p": "made", "pp": "made", "es": "hacer, fabricar"}, {"g": "ABB", "b": "mean", "p": "meant", "pp": "meant", "es": "significar, querer decir"}, {"g": "ABB", "b": "meet", "p": "met", "pp": "met", "es": "conocer, reunirse"}, {"g": "ABB", "b": "pay", "p": "paid", "pp": "paid", "es": "pagar"}, {"g": "ABB", "b": "say", "p": "said", "pp": "said", "es": "decir"}, {"g": "ABB", "b": "sell", "p": "sold", "pp": "sold", "es": "vender"}, {"g": "ABB", "b": "send", "p": "sent", "pp": "sent", "es": "enviar"}, {"g": "ABB", "b": "shoot", "p": "shot", "pp": "shot", "es": "disparar"}, {"g": "ABB", "b": "sit", "p": "sat", "pp": "sat", "es": "sentarse"}, {"g": "ABB", "b": "sleep", "p": "slept", "pp": "slept", "es": "dormir"}, {"g": "ABB", "b": "smell", "p": "smelt/smelled", "pp": "smelt/smelled", "es": "oler"}, {"g": "ABB", "b": "spell", "p": "spelt/spelled", "pp": "spelt/spelled", "es": "deletrear"}, {"g": "ABB", "b": "spend", "p": "spent", "pp": "spent", "es": "gastar, pasar (tiempo)"}, {"g": "ABB", "b": "spill", "p": "spilt/spilled", "pp": "spilt/spilled", "es": "derramar"}, {"g": "ABB", "b": "stand", "p": "stood", "pp": "stood", "es": "estar de pie"}, {"g": "ABB", "b": "stick", "p": "stuck", "pp": "stuck", "es": "pegar, atascarse"}, {"g": "ABB", "b": "teach", "p": "taught", "pp": "taught", "es": "enseñar"}, {"g": "ABB", "b": "tell", "p": "told", "pp": "told", "es": "decir, contar"}, {"g": "ABB", "b": "think", "p": "thought", "pp": "thought", "es": "pensar"}, {"g": "ABB", "b": "understand", "p": "understood", "pp": "understood", "es": "entender"}, {"g": "ABB", "b": "win", "p": "won", "pp": "won", "es": "ganar"}, {"g": "ABC", "b": "be", "p": "was/were", "pp": "been", "es": "ser, estar"}, {"g": "ABC", "b": "begin", "p": "began", "pp": "begun", "es": "empezar"}, {"g": "ABC", "b": "bite", "p": "bit", "pp": "bitten", "es": "morder"}, {"g": "ABC", "b": "blow", "p": "blew", "pp": "blown", "es": "soplar"}, {"g": "ABC", "b": "break", "p": "broke", "pp": "broken", "es": "romper"}, {"g": "ABC", "b": "choose", "p": "chose", "pp": "chosen", "es": "elegir"}, {"g": "ABC", "b": "do", "p": "did", "pp": "done", "es": "hacer"}, {"g": "ABC", "b": "draw", "p": "drew", "pp": "drawn", "es": "dibujar"}, {"g": "ABC", "b": "drink", "p": "drank", "pp": "drunk", "es": "beber"}, {"g": "ABC", "b": "drive", "p": "drove", "pp": "driven", "es": "conducir"}, {"g": "ABC", "b": "eat", "p": "ate", "pp": "eaten", "es": "comer"}, {"g": "ABC", "b": "fall", "p": "fell", "pp": "fallen", "es": "caer"}, {"g": "ABC", "b": "fly", "p": "flew", "pp": "flown", "es": "volar"}, {"g": "ABC", "b": "forget", "p": "forgot", "pp": "forgotten", "es": "olvidar"}, {"g": "ABC", "b": "forgive", "p": "forgave", "pp": "forgiven", "es": "perdonar"}, {"g": "ABC", "b": "freeze", "p": "froze", "pp": "frozen", "es": "congelar"}, {"g": "ABC", "b": "give", "p": "gave", "pp": "given", "es": "dar"}, {"g": "ABC", "b": "go", "p": "went", "pp": "gone", "es": "ir"}, {"g": "ABC", "b": "grow", "p": "grew", "pp": "grown", "es": "crecer, cultivar"}, {"g": "ABC", "b": "hide", "p": "hid", "pp": "hidden", "es": "esconder"}, {"g": "ABC", "b": "know", "p": "knew", "pp": "known", "es": "saber, conocer"}, {"g": "ABC", "b": "lie", "p": "lay", "pp": "lain", "es": "tumbarse (≠ lie, lied, lied: mentir)"}, {"g": "ABC", "b": "ride", "p": "rode", "pp": "ridden", "es": "montar"}, {"g": "ABC", "b": "ring", "p": "rang", "pp": "rung", "es": "sonar, llamar por teléfono"}, {"g": "ABC", "b": "rise", "p": "rose", "pp": "risen", "es": "subir, levantarse"}, {"g": "ABC", "b": "see", "p": "saw", "pp": "seen", "es": "ver"}, {"g": "ABC", "b": "shake", "p": "shook", "pp": "shaken", "es": "agitar, temblar"}, {"g": "ABC", "b": "show", "p": "showed", "pp": "shown", "es": "mostrar"}, {"g": "ABC", "b": "sing", "p": "sang", "pp": "sung", "es": "cantar"}, {"g": "ABC", "b": "sink", "p": "sank", "pp": "sunk", "es": "hundir(se)"}, {"g": "ABC", "b": "speak", "p": "spoke", "pp": "spoken", "es": "hablar"}, {"g": "ABC", "b": "steal", "p": "stole", "pp": "stolen", "es": "robar"}, {"g": "ABC", "b": "swim", "p": "swam", "pp": "swum", "es": "nadar"}, {"g": "ABC", "b": "take", "p": "took", "pp": "taken", "es": "tomar, llevar"}, {"g": "ABC", "b": "tear", "p": "tore", "pp": "torn", "es": "rasgar"}, {"g": "ABC", "b": "throw", "p": "threw", "pp": "thrown", "es": "lanzar"}, {"g": "ABC", "b": "wake", "p": "woke", "pp": "woken", "es": "despertar(se)"}, {"g": "ABC", "b": "wear", "p": "wore", "pp": "worn", "es": "llevar puesto"}, {"g": "ABC", "b": "write", "p": "wrote", "pp": "written", "es": "escribir"}, {"g": "ABA", "b": "become", "p": "became", "pp": "become", "es": "llegar a ser, convertirse"}, {"g": "ABA", "b": "come", "p": "came", "pp": "come", "es": "venir"}, {"g": "ABA", "b": "run", "p": "ran", "pp": "run", "es": "correr"}], "GROUPS": [{"g": "AAA", "es": "Las tres formas iguales", "n": 12}, {"g": "ABB", "es": "Pasado y participio iguales", "n": 44}, {"g": "ABC", "es": "Las tres formas distintas", "n": 39}, {"g": "ABA", "es": "Base y participio iguales", "n": 3}], "FIX": [{"b": "Did you saw the match?", "g": "Did you see the match?", "w": "Tras did, verbo en forma base."}, {"b": "I didn't travelled to London.", "g": "I didn't travel to London.", "w": "Tras didn't, forma base."}, {"b": "We was tired.", "g": "We were tired.", "w": "We → were."}, {"b": "Did she was at home?", "g": "Was she at home?", "w": "To be no usa did: se invierte."}, {"b": "She is dancing when I arrived.", "g": "She was dancing when I arrived.", "w": "Acción larga en el pasado → was + -ing."}, {"b": "I was have breakfast at seven.", "g": "I was having breakfast at seven.", "w": "Pasado continuo: was + -ing."}, {"b": "The motorcycle had been belonging to George.", "g": "The motorcycle had belonged to George.", "w": "Belong es verbo de estado: sin forma continua."}, {"b": "I have seen him yesterday.", "g": "I saw him yesterday.", "w": "Yesterday = tiempo terminado → pasado simple."}, {"b": "Two days ago I have finished the report.", "g": "Two days ago I finished the report.", "w": "Ago → pasado simple."}, {"b": "She stoped the car.", "g": "She stopped the car.", "w": "Monosílabo C-V-C: se dobla la consonante."}, {"b": "They openned the office.", "g": "They opened the office.", "w": "O-pen: sílaba final átona, no se dobla."}, {"b": "I'll call you when I will arrive.", "g": "I'll call you when I arrive.", "w": "Tras when (oración temporal) → presente."}, {"b": "If it will rain, we'll stay at home.", "g": "If it rains, we'll stay at home.", "w": "En la oración con if, presente."}, {"b": "Look at the clouds! It will rains.", "g": "Look at the clouds! It's going to rain.", "w": "Evidencia presente → going to (y nunca will + -s)."}, {"b": "She will has finished by May.", "g": "She will have finished by May.", "w": "Tras will, have (sin -s)."}, {"b": "This time tomorrow I will lie on the beach.", "g": "This time tomorrow I will be lying on the beach.", "w": "Acción en curso en un momento futuro → will be + -ing."}, {"b": "By the time we arrived, the film has started.", "g": "By the time we arrived, the film had started.", "w": "Anterior a otro hecho pasado → past perfect."}, {"b": "Next summer I will have teaching for 10 years.", "g": "Next summer I will have been teaching for 10 years.", "w": "Duración hasta un momento futuro → will have been + -ing (errata del material)."}, {"b": "Jane wasn't play in the park.", "g": "Jane wasn't playing in the park.", "w": "Pasado continuo negativo: wasn't + -ing."}, {"b": "When the report will be ready?", "g": "When will the report be ready?", "w": "Pregunta con will: Wh- + will + sujeto + verbo."}, {"b": "I had been waiting two hours when they called me.", "g": "I had been waiting for two hours when they called me.", "w": "Duración con for (errata del material)."}, {"b": "I'm gonna send you the report next week. (formal)", "g": "I am going to send you the report next week.", "w": "Gonna es informal: no en un informe o email formal."}, {"b": "I am going to the hairdressers at 8.", "g": "I am going to the hairdresser's at 8.", "w": "Hairdresser's = la peluquería (errata del material)."}], "CATS": ["will", "be going to", "present continuous", "present simple"], "WHYC": {"will": "Will: decisiones en el momento, ofrecimientos, promesas, peticiones y predicciones sin evidencia.", "be going to": "Going to: planes decididos antes de hablar o predicciones con evidencia presente.", "present continuous": "Presente continuo: citas y planes fijados, con detalles de hora, fecha o lugar.", "present simple": "Presente simple: horarios y calendarios, y oraciones con when/after/until/if referidas al futuro."}, "REG": [{"s": "Un compañero no puede con las cajas y decides ayudarle en ese momento.", "e": "“Wait, I ___ help you with those boxes.”", "c": "will"}, {"s": "Prometes a tu jefe enviarle el informe.", "e": "“I ___ send you the report tonight, I promise.”", "c": "will"}, {"s": "Te ofreces a hacer la cena a unos amigos.", "e": "“Sit down, we ___ cook dinner for you.”", "c": "will"}, {"s": "Predicción sin evidencia sobre dentro de 30 años.", "e": "“In 2055 people ___ live on Mars.”", "c": "will"}, {"s": "Suena el teléfono y reaccionas en el momento.", "e": "“The phone's ringing!” “I ___ get it.”", "c": "will"}, {"s": "Pides un favor: que te traigan agua.", "e": "“___ you bring me some water, please?”", "c": "will"}, {"s": "Ves nubes negras.", "e": "“Look at those clouds! It ___ rain.”", "c": "be going to"}, {"s": "Ves un vaso al borde de la mesa.", "e": "“Careful! That glass ___ fall.”", "c": "be going to"}, {"s": "Decidisteis la semana pasada comprar piso.", "e": "“We've thought about it: we ___ buy a flat next year.”", "c": "be going to"}, {"s": "Intención firme ya tomada.", "e": "“I ___ keep studying until I really understand the unit.”", "c": "be going to"}, {"s": "Ves a alguien subiendo a una escalera inestable.", "e": "“Watch out! You ___ fall.”", "c": "be going to"}, {"s": "Cita con el dentista mañana a las 5, ya concertada.", "e": "“I ___ the dentist at 5 tomorrow.” (see)", "c": "present continuous"}, {"s": "Vuelos a España reservados para junio.", "e": "“We ___ to Spain in June. The flights are booked.” (fly)", "c": "present continuous"}, {"s": "Reunión acordada con la clienta el lunes a las 10 en su despacho.", "e": "“I ___ the client on Monday at 10 in her office.” (meet)", "c": "present continuous"}, {"s": "Mesa reservada para cenar con amigos el sábado.", "e": "“We ___ dinner with Ana on Saturday at 9.” (have)", "c": "present continuous"}, {"s": "Horario del tren.", "e": "“The train ___ at 8.45 tomorrow morning.” (leave)", "c": "present simple"}, {"s": "Calendario académico.", "e": "“The next semester ___ in April.” (start)", "c": "present simple"}, {"s": "Programa del concierto.", "e": "“What time ___ the concert end?” (do)", "c": "present simple"}, {"s": "Oración temporal referida al futuro.", "e": "“When you ___ back from England, we will have a party.” (come)", "c": "present simple"}, {"s": "Oración con if referida al futuro.", "e": "“If it ___ tomorrow, we won't play tennis.” (rain)", "c": "present simple"}], "TASKS": {"report": {"label": "Informe de progreso", "t": "Informe de progreso (lo leerás en voz alta en una reunión): cuenta cómo va un proyecto de tu trabajo con la estructura de la unidad — antecedentes, logros, dificultades, recursos y próximos pasos. Registro formal, entre 120 y 180 palabras.", "m": "Subject: Progress report on the new local shops website\n\nThree months ago, the City Council decided to create a website to promote local shops. I was asked to coordinate the project with the Department of Commerce.\n\nTo date, we have registered ninety shops and we have published their profiles online. In September, we were also running a training programme for shop owners.\n\nHowever, we have faced some challenges. Several owners had not received our first letter, so the registration process took longer than expected. We solved this by visiting the shops in person.\n\nThe budget has covered the design and the first year of hosting. Two members of staff are working on the project part-time.\n\nAs a next step, we are going to launch an advertising campaign in November. By the end of the year, we will have included all the shops in the city centre, and the website will start to show results."}, "story": {"label": "Narración", "t": "Narración en pasado: cuenta un imprevisto en el trabajo que interrumpió algo que estabas haciendo. Usa pasado simple, pasado continuo (when/while) y pasado perfecto. Entre 100 y 150 palabras.", "m": "Subject: A strange morning at the office\n\nLast Monday, I arrived at the office at eight o'clock. It was raining heavily and I was very tired, because I had been preparing a report until midnight.\n\nI was reading my emails when the fire alarm suddenly rang. Everybody stood up and we left the building quickly. While we were waiting outside, a colleague told me that someone had burnt some toast in the kitchen.\n\nAfter twenty minutes, the firefighters checked the building and we went back inside. By the time I sat down again, my coffee had gone cold and I had missed an important call. It was not a disaster, but I learnt to save my work more often."}}};
+var STORE="ui1-ing-ud2-v1";
+function load(){ try{ var r=localStorage.getItem(STORE); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
+function save(d){ try{ localStorage.setItem(STORE, JSON.stringify(d)); }catch(e){} }
+var db=load(); db.examHistory=db.examHistory||[]; db.drafts=db.drafts||{};
+
+function $(id){ return document.getElementById(id); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function norm(s){ return (s||"").toLowerCase().replace(/[’‘`]/g,"'").replace(/\s+/g," ").trim().replace(/[.!?]+$/,""); }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function fb(el,ok,html){ el.className="fb show "+(ok?"ok":"ko"); el.innerHTML=html; }
+function hideFb(el){ el.className="fb"; el.innerHTML=""; }
+function fmt(n){ return (Math.round(n*100)/100).toString().replace(".",","); }
+
+/* Tabs */
+var tabs=document.querySelectorAll(".tab");
+tabs.forEach(function(t){ t.addEventListener("click",function(){
+  tabs.forEach(function(x){ x.setAttribute("aria-selected", x===t?"true":"false"); });
+  document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id==="p-"+t.dataset.p); });
+}); });
+
+/* ===== EXAM ===== */
+var L="ABCD";
+function explain(it,good){
+  var h="<b>✓ Correct answer: "+L.charAt(it.o.indexOf(it.ok))+")</b> "+esc(it.ok);
+  h+="<div style='margin-top:8px'><b>Why?</b> "+esc(it.w)+"</div>";
+  h+="<div style='margin-top:6px'><b>Remember:</b> "+esc(it.r)+"</div>";
+  if(it.x){
+    var m={}; for(var k=1;k<it.src.o.length;k++) m[it.src.o[k]]=it.x[k-1];
+    h+="<div style='margin-top:6px'><b>Why are the other options wrong?</b> "+it.o.map(function(op,k){ return op===it.ok?"":L.charAt(k)+") "+esc(m[op]); }).filter(Boolean).join(" ")+"</div>";
+  }
+  if(!good) h+="<div class='es'>"+esc(D.CHECKS[it.c-1])+"</div>";
+  return h;
+}
+var ex=null;
+function renderHistory(){
+  var h=db.examHistory;
+  $("exam-history").textContent = h.length ? ("Últimas notas: "+h.slice(-5).map(function(x){ return fmt(x.nota); }).join(" / ")+" sobre 10.") : "";
+}
+function startExam(pool){
+  var qs=(pool||shuffle(D.EXAM).slice(0,30)).map(function(it){ return {q:it.q,w:it.w,r:it.r,c:it.c,x:it.x,ok:it.o[0],o:shuffle(it.o),src:it}; });
+  ex={qs:qs,i:0,ok:0,ko:0,blank:0,wrong:[],done:false};
+  $("exam-start").hidden=true; $("exam-end").hidden=true; $("exam-run").hidden=false;
+  showQ();
+}
+function showQ(){
+  if(ex.i>=ex.qs.length){ return endExam(); }
+  var it=ex.qs[ex.i]; ex.done=false;
+  $("exam-bar").style.width=(ex.i/ex.qs.length*100)+"%";
+  $("exam-count").textContent="Pregunta "+(ex.i+1)+" de "+ex.qs.length;
+  $("exam-score").textContent="Puntos: "+fmt(ex.ok-ex.ko*0.33);
+  $("exam-q").innerHTML="<span class='hint' style='display:block;margin:0 0 6px'>Choose ONE correct answer.</span>"+esc(it.q);
+  var box=$("exam-opts"); box.innerHTML="";
+  it.o.forEach(function(op,k){
+    var b=document.createElement("button"); b.className="opt"; b.dataset.v=op; b.textContent=L.charAt(k)+") "+op;
+    b.addEventListener("click",function(){ answer(op,b); });
+    box.appendChild(b);
+  });
+  hideFb($("exam-fb")); $("exam-next").disabled=true; $("exam-blank").disabled=false;
+}
+function reveal(){
+  var it=ex.qs[ex.i];
+  $("exam-opts").querySelectorAll(".opt").forEach(function(b){ b.disabled=true; if(b.dataset.v===it.ok) b.classList.add("ok"); });
+}
+function answer(op,btn){
+  if(ex.done) return; ex.done=true;
+  var it=ex.qs[ex.i]; reveal();
+  if(op===it.ok){ ex.ok++; fb($("exam-fb"),true,explain(it,true)); }
+  else { ex.ko++; btn.classList.add("ko"); ex.wrong.push(it.src); fb($("exam-fb"),false,explain(it,false)); }
+  $("exam-next").disabled=false; $("exam-blank").disabled=true; $("exam-next").focus();
+}
+$("exam-blank").addEventListener("click",function(){
+  if(ex.done) return; ex.done=true; ex.blank++; var it=ex.qs[ex.i]; ex.wrong.push(it.src);
+  reveal(); fb($("exam-fb"),false,"En blanco. "+explain(it,false));
+  $("exam-next").disabled=false; $("exam-blank").disabled=true;
+});
+$("exam-next").addEventListener("click",function(){ ex.i++; showQ(); });
+$("exam-go").addEventListener("click",function(){ startExam(); });
+function endExam(){
+  $("exam-run").hidden=true;
+  var n=ex.qs.length, raw=ex.ok-ex.ko*0.33, nota=Math.max(0,raw)/n*10;
+  if(n===30){ db.examHistory.push({d:Date.now(),nota:Math.round(nota*100)/100}); db.examHistory=db.examHistory.slice(-20); save(db); }
+  var h="<p class='prompt'>Nota: <span class='mark'>"+fmt(nota)+"</span> sobre 10</p>";
+  h+="<div class='stats'><div class='stat'><b>"+ex.ok+"</b><span>aciertos</span></div><div class='stat'><b>"+ex.ko+"</b><span>fallos (−"+fmt(ex.ko*0.33)+")</span></div><div class='stat'><b>"+ex.blank+"</b><span>en blanco</span></div></div>";
+  h+= n===30 ? "<p class='hint'>El examen vale el 50 % de la nota: necesitas al menos un 4 en él y un 5 de media con la PEC.</p>" : "<p class='hint'>Ronda de repaso: no cuenta en el historial.</p>";
+  if(ex.wrong.length){
+    h+="<ul class='review'>"+ex.wrong.map(function(w){ return "<li><b>"+esc(w.q)+"</b><br><span class='mark'>"+esc(w.o[0])+"</span>. "+esc(w.w)+"<div class='es'>Remember: "+esc(w.r)+"</div></li>"; }).join("")+"</ul>";
+  }
+  h+="<div class='row'>"+(ex.wrong.length?"<button class='btn' id='exam-retry'>Repetir solo los fallos</button>":"")+"<button class='btn ghost' id='exam-new'>Nuevo test de 30</button></div>";
+  var end=$("exam-end"); end.innerHTML=h; end.hidden=false;
+  var wr=ex.wrong.slice();
+  if($("exam-retry")) $("exam-retry").addEventListener("click",function(){ startExam(shuffle(wr)); });
+  $("exam-new").addEventListener("click",function(){ startExam(); });
+  renderHistory();
+}
+renderHistory();
+
+/* ===== generic adaptive queue ===== */
+function Queue(items){ this.q=shuffle(items); this.total=items.length; this.mastered=0; this.cur=null; }
+Queue.prototype.next=function(){ this.cur=this.q.shift()||null; return this.cur; };
+Queue.prototype.fail=function(){ var pos=Math.min(3,this.q.length); this.q.splice(pos,0,this.cur); };
+Queue.prototype.pass=function(){ this.mastered++; };
+function bar(id,Q){ $(id).style.width=(Q.mastered/Q.total*100)+"%"; }
+function done(Q){ return !Q.cur && Q.q.length===0 && Q.mastered===Q.total; }
+
+/* ===== GAP FILL ===== */
+var G=new Queue(D.GAPS), gDone=false;
+function gapShow(){
+  var c=G.next(); bar("gap-bar",G); hideFb($("gap-fb"));
+  if(!c){ $("gap-q").innerHTML="<span class='mark'>Completado.</span> Has acertado las "+G.total+" tarjetas."; $("gap-in").hidden=true; $("gap-check").hidden=true; $("gap-next").textContent="Empezar de nuevo"; $("gap-next").disabled=false; $("gap-count").textContent=""; return; }
+  $("gap-in").hidden=false; $("gap-check").hidden=false; $("gap-next").textContent="Siguiente";
+  $("gap-count").textContent="Dominadas "+G.mastered+" de "+G.total;
+  $("gap-q").textContent=c.s; $("gap-in").value=""; $("gap-next").disabled=true; gDone=false; $("gap-in").focus({preventScroll:true});
+}
+function gapCheck(){
+  if(gDone) return; var c=G.cur; if(!c) return; var v=norm($("gap-in").value); if(!v) return; gDone=true;
+  var ok=c.a.some(function(a){ return norm(a)===v; });
+  if(ok){ G.pass(); fb($("gap-fb"),true,"Correcto.<div class='es'>"+esc(c.es)+"</div>"); }
+  else { G.fail(); fb($("gap-fb"),false,"Respuesta: <span class='mark'>"+esc(c.a[0])+"</span>. Volverá a salir.<div class='es'>"+esc(c.es)+"</div>"); }
+  bar("gap-bar",G); $("gap-next").disabled=false; $("gap-next").focus();
+}
+$("gap-check").addEventListener("click",gapCheck);
+$("gap-in").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(gDone) gapShow(); else gapCheck(); } });
+$("gap-next").addEventListener("click",function(){ if(done(G)){ G=new Queue(D.GAPS); } gapShow(); });
+gapShow();
+
+/* ===== PAST FORMS ===== */
+var S=new Queue(D.SP), sDone=false;
+function spShow(){
+  var c=S.next(); bar("spell-bar",S); hideFb($("spell-fb"));
+  if(!c){ $("spell-q").innerHTML="<span class='mark'>Completado.</span> "+S.total+" formas acertadas."; $("spell-in").hidden=true; $("spell-check").hidden=true; $("spell-next").textContent="Empezar de nuevo"; $("spell-next").disabled=false; $("spell-count").textContent=""; $("spell-mode").textContent=""; return; }
+  $("spell-in").hidden=false; $("spell-check").hidden=false; $("spell-next").textContent="Siguiente";
+  $("spell-count").textContent="Dominadas "+S.mastered+" de "+S.total;
+  $("spell-mode").textContent="Verbos regulares";
+  $("spell-q").innerHTML = (c.k==="past" ? "Past simple of " : "Past participle of ")+"<b>"+esc(c.v)+"</b>";
+  $("spell-in").value=""; $("spell-next").disabled=true; sDone=false; $("spell-in").focus({preventScroll:true});
+}
+function spCheck(){
+  if(sDone) return; var c=S.cur; if(!c) return; var v=norm($("spell-in").value); if(!v) return; sDone=true;
+  var ok=c.a.some(function(a){ return norm(a)===v; });
+  if(ok){ S.pass(); fb($("spell-fb"),true,"Correcto: "+esc(c.a[0])+". Regla: "+esc(c.r)+"."); }
+  else { S.fail(); fb($("spell-fb"),false,"Es <span class='mark'>"+esc(c.a[0])+"</span>. Regla: "+esc(c.r)+"."); }
+  bar("spell-bar",S); $("spell-next").disabled=false; $("spell-next").focus();
+}
+$("spell-check").addEventListener("click",spCheck);
+$("spell-in").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(sDone) spShow(); else spCheck(); } });
+$("spell-next").addEventListener("click",function(){ if(done(S)){ S=new Queue(D.SP); } spShow(); });
+spShow();
+
+/* ===== IRREGULAR VERBS ===== */
+var IG="all", I=null, iDone=false;
+function accs(s){ var a=s.split("/").map(norm); a.push(norm(s)); a.push(norm(s.replace("/"," / "))); return a; }
+function irrPool(){ return D.IRR.filter(function(v){ return IG==="all"||v.g===IG; }); }
+function irrGroups(){
+  var box=$("irr-groups"); box.innerHTML="";
+  [{g:"all",es:"Todos",n:D.IRR.length}].concat(D.GROUPS).forEach(function(G){
+    var b=document.createElement("button"); b.className= IG===G.g?"btn":"btn ghost";
+    b.textContent=(G.g==="all"?"Todos":G.g)+" ("+G.n+")"; b.title=G.es;
+    b.addEventListener("click",function(){ IG=G.g; I=new Queue(irrPool()); irrGroups(); irrShow(); });
+    box.appendChild(b);
+  });
+  var cur=D.GROUPS.filter(function(G){ return G.g===IG; })[0];
+  $("irr-glabel").textContent= cur? cur.es : "Los 98 verbos";
+}
+function irrShow(){
+  var c=I.next(); bar("irr-bar",I); hideFb($("irr-fb")); iDone=false;
+  if(!c){ $("irr-q").innerHTML="<span class='mark'>Completado.</span> Grupo dominado."; $("irr-es").textContent=""; $("irr-inputs").hidden=true; $("irr-check").hidden=true; $("irr-next").textContent="Empezar de nuevo"; $("irr-next").disabled=false; $("irr-count").textContent=""; return; }
+  $("irr-inputs").hidden=false; $("irr-check").hidden=false; $("irr-next").textContent="Siguiente"; $("irr-next").disabled=true;
+  $("irr-count").textContent="Dominados "+I.mastered+" de "+I.total;
+  $("irr-q").innerHTML="<b>"+esc(c.b)+"</b>"; $("irr-es").textContent=c.es+" · grupo "+c.g;
+  $("irr-past").value=""; $("irr-pp").value=""; $("irr-past").focus({preventScroll:true});
+}
+function irrCheck(){
+  if(iDone) return; var c=I.cur; if(!c) return;
+  var p=norm($("irr-past").value), pp=norm($("irr-pp").value); if(!p||!pp) return; iDone=true;
+  var okP=accs(c.p).indexOf(p)>-1, okPP=accs(c.pp).indexOf(pp)>-1;
+  var forms="<span class='mark'>"+esc(c.b)+" – "+esc(c.p)+" – "+esc(c.pp)+"</span>";
+  if(okP&&okPP){ I.pass(); fb($("irr-fb"),true,"Correcto: "+forms); }
+  else { I.fail(); fb($("irr-fb"),false,(okP?"":"Past simple mal. ")+(okPP?"":"Participio mal. ")+"Es "+forms+". Volverá a salir."); }
+  bar("irr-bar",I); $("irr-next").disabled=false; $("irr-next").focus();
+}
+$("irr-check").addEventListener("click",irrCheck);
+$("irr-past").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(iDone) irrShow(); else $("irr-pp").focus(); } });
+$("irr-pp").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(iDone) irrShow(); else irrCheck(); } });
+$("irr-next").addEventListener("click",function(){ if(done(I)){ I=new Queue(irrPool()); } irrShow(); });
+$("irr-list").innerHTML=D.GROUPS.map(function(G){
+  return "<h4>"+G.g+" · "+esc(G.es)+" ("+G.n+")</h4><table class='vt'><tr><th>Base</th><th>Past</th><th>Participle</th><th>Español</th></tr>"+
+    D.IRR.filter(function(v){ return v.g===G.g; }).map(function(v){ return "<tr><td>"+esc(v.b)+"</td><td>"+esc(v.p)+"</td><td>"+esc(v.pp)+"</td><td>"+esc(v.es)+"</td></tr>"; }).join("")+"</table>";
+}).join("");
+I=new Queue(irrPool()); irrGroups(); irrShow();
+
+/* ===== FIX THE MISTAKE ===== */
+var F=new Queue(D.FIX);
+function fixShow(){
+  var c=F.next(); bar("fix-bar",F); hideFb($("fix-fb"));
+  $("fix-row1").hidden=false; $("fix-row2").hidden=true;
+  if(!c){ $("fix-q").innerHTML="<span class='mark'>Completado.</span>"; $("fix-show").textContent="Empezar de nuevo"; $("fix-count").textContent=""; return; }
+  $("fix-show").textContent="Ver corrección";
+  $("fix-count").textContent="Dominadas "+F.mastered+" de "+F.total;
+  $("fix-q").textContent=c.b;
+}
+$("fix-show").addEventListener("click",function(){
+  if(!F.cur){ F=new Queue(D.FIX); fixShow(); return; }
+  var c=F.cur; fb($("fix-fb"),true,"<span class='mark'>"+esc(c.g)+"</span><div class='es'>"+esc(c.w)+"</div>");
+  $("fix-row1").hidden=true; $("fix-row2").hidden=false;
+});
+$("fix-good").addEventListener("click",function(){ F.pass(); fixShow(); });
+$("fix-bad").addEventListener("click",function(){ F.fail(); fixShow(); });
+fixShow();
+
+/* ===== WHICH FUTURE? ===== */
+var R=new Queue(D.REG), rDone=false;
+function regShow(){
+  var c=R.next(); bar("reg-bar",R); hideFb($("reg-fb")); rDone=false; $("reg-next").disabled=true;
+  var box=$("reg-opts"); box.innerHTML="";
+  if(!c){ $("reg-q").innerHTML="<span class='mark'>Completado.</span>"; $("reg-ctx").textContent=""; $("reg-next").textContent="Empezar de nuevo"; $("reg-next").disabled=false; $("reg-count").textContent=""; return; }
+  $("reg-next").textContent="Siguiente";
+  $("reg-count").textContent="Dominadas "+R.mastered+" de "+R.total;
+  $("reg-ctx").textContent=c.s; $("reg-q").textContent=c.e;
+  D.CATS.forEach(function(cat){
+    var b=document.createElement("button"); b.className="opt"; b.textContent=cat; b.dataset.v=cat;
+    b.addEventListener("click",function(){ regAns(cat,b); });
+    box.appendChild(b);
+  });
+}
+function regAns(cat,btn){
+  if(rDone || !R.cur) return; rDone=true; var c=R.cur;
+  $("reg-opts").querySelectorAll(".opt").forEach(function(b){ b.disabled=true; if(b.dataset.v===c.c) b.classList.add("ok"); });
+  if(cat===c.c){ R.pass(); fb($("reg-fb"),true,"Correcto. "+esc(D.WHYC[c.c])); }
+  else { R.fail(); btn.classList.add("ko"); fb($("reg-fb"),false,"Es <span class='mark'>"+esc(c.c)+"</span>. "+esc(D.WHYC[c.c])); }
+  bar("reg-bar",R); $("reg-next").disabled=false; $("reg-next").focus();
+}
+$("reg-next").addEventListener("click",function(){ if(done(R)){ R=new Queue(D.REG); } regShow(); });
+regShow();
+
+/* ===== WRITE ===== */
+var wMode="report";
+var CONTR=/\b(i'm|i've|i'd|i'll|you're|we're|we've|they're|it's|that's|there's|he's|she's|don't|doesn't|didn't|can't|won't|isn't|aren't|haven't|hasn't|wasn't|weren't|hadn't|couldn't|wouldn't|gonna|wanna)\b/i;
+var IRR="was|were|went|had|did|got|came|ran|saw|wrote|took|began|rang|swam|met|left|bought|thought|taught|drove|gave|knew|lost|told|spoke|broke|drank|ate|sent|found|chose|brought|felt|stood|sat|made|said|learnt|burnt";
+function checksFor(sub,body){
+  var words=(body.match(/[A-Za-z']+/g)||[]).length;
+  var paras=body.split(/\n\s*\n/).map(function(x){ return x.trim(); }).filter(Boolean).length;
+  var past=new RegExp("\\b(\\w{3,}ed|"+IRR+")\\b","i").test(body);
+  var c=[{ok:sub.trim().length>=6, t:"Título o asunto claro"}];
+  if(wMode==="report"){
+    c.push({ok:/\b(have|has)\s+(already\s+|also\s+|not\s+)?\w+(ed|en|t|wn|ne)\b/i.test(body), t:"Presente perfecto para lo hecho hasta ahora (we have registered…)"});
+    c.push({ok:past, t:"Pasado simple para hechos terminados (decided, was…)"});
+    c.push({ok:/\b(was|were)\s+\w+ing\b|\bhad\s+(been\s+)?\w+/i.test(body), t:"Pasado continuo o pasado perfecto para el contexto"});
+    c.push({ok:/\bwill\b/i.test(body), t:"Futuro con will"});
+    c.push({ok:/\bgoing to\b/i.test(body), t:"Plan con going to"});
+    var marks=["to date","so far","ago","challenge","problem","difficult","budget","resource","staff","next step","way forward","follow-up","by the end"].filter(function(m){ return body.toLowerCase().indexOf(m)>-1; }).length;
+    c.push({ok:marks>=3, t:"Estructura: antecedentes, logros, dificultades, recursos y próximos pasos ("+marks+" marcadores)"});
+    c.push({ok:!CONTR.test(body), t:"Registro formal: sin contracciones ni gonna"});
+    c.push({ok:paras>=4, t:"Al menos 4 párrafos"});
+    c.push({ok:words>=120 && words<=180, t:"Entre 120 y 180 palabras"});
+  } else {
+    c.push({ok:past, t:"Pasado simple"});
+    c.push({ok:/\b(was|were)\s+\w+ing\b/i.test(body), t:"Pasado continuo (was/were + -ing)"});
+    c.push({ok:/\b(when|while)\b/i.test(body), t:"Acciones simultáneas con when o while"});
+    c.push({ok:/\bhad\s+(been\s+|already\s+|not\s+)?\w+/i.test(body), t:"Pasado perfecto (had + participio)"});
+    c.push({ok:/\b(ago|last|yesterday|then|after|before|by the time)\b/i.test(body), t:"Marcadores de tiempo (ago, last, after, by the time…)"});
+    c.push({ok:paras>=3, t:"Al menos 3 párrafos"});
+    c.push({ok:words>=100 && words<=150, t:"Entre 100 y 150 palabras"});
+  }
+  return {c:c,words:words};
+}
+function wRender(){
+  var sub=$("w-subject").value, body=$("w-body").value, r=checksFor(sub,body);
+  $("w-words").textContent=r.words+" words";
+  $("w-checks").innerHTML=r.c.map(function(x){ return "<li class='"+(body.trim()?(x.ok?"pass":"fail"):"")+"'>"+esc(x.t)+"</li>"; }).join("");
+  db.drafts[wMode]={s:sub,b:body}; save(db);
+}
+function wSet(m){
+  wMode=m; $("w-formal").className= m==="report"?"btn":"btn ghost"; $("w-informal").className= m==="story"?"btn":"btn ghost";
+  $("w-task").textContent=D.TASKS[m].t; $("w-model").textContent=D.TASKS[m].m;
+  var d=db.drafts[m]||{s:"",b:""}; $("w-subject").value=d.s; $("w-body").value=d.b; wRender();
+}
+$("w-formal").addEventListener("click",function(){ wSet("report"); });
+$("w-informal").addEventListener("click",function(){ wSet("story"); });
+$("w-subject").addEventListener("input",wRender);
+$("w-body").addEventListener("input",wRender);
+wSet("report");
+
+})();
+</script>
+</body>
+</html>
