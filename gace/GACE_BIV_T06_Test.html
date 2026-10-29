@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 6 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque IV · Tema 6 · Los contratos del sector público (II): tipos</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u":1,"t":"Según el temario 2026, la calificación de un contrato por su tipo determina, entre otros extremos:","o":["El umbral de regulación armonizada, la duración máxima, la exigencia de clasificación y la procedencia del recurso especial","Solo la jurisdicción competente para conocer de los litigios sobre sus efectos, cumplimiento y extinción","Únicamente el procedimiento de adjudicación aplicable, el órgano de contratación competente y la composición de la mesa","La composición de la mesa de contratación y el régimen de la garantía provisional exclusivamente"],"c":0,"e":"Del tipo dependen umbrales (19-23), menor (118), duración (29), clasificación (77), recurso especial (44), revisión de precios (103) y reglas especiales."},
+{"u":1,"t":"¿Qué contrato desapareció con la Ley 9/2017?","o":["El contrato de suministro de fabricación","El contrato de gestión de servicios públicos","El contrato de concesión de obras públicas, sustituido por la concesión de servicios","El contrato administrativo especial"],"c":1,"e":"Desaparecen la gestión de servicios públicos (con sus modalidades) y el contrato de colaboración público-privada."},
+{"u":1,"t":"El elemento que distingue la concesión de servicios del contrato de servicios es:","o":["Que la retribución proceda de los usuarios y no de la Administración","Que el servicio sea un servicio público en sentido estricto","La transferencia al concesionario del riesgo operacional","Que la duración del contrato supere los cinco años"],"c":2,"e":"Arts. 14.4 y 15. Sin riesgo operacional, es contrato de servicios (art. 312 si va a la ciudadanía)."},
+{"u":1,"t":"Existe riesgo operacional cuando:","o":["La Administración garantiza al concesionario la recuperación de la inversión con un rendimiento razonable sobre el capital invertido","No está garantizado que, en condiciones normales, el concesionario recupere las inversiones ni cubra los costes","El concesionario asume cualquier pérdida, aunque sea nominal o desdeñable, derivada de la explotación","La retribución se fija exclusivamente mediante tarifas abonadas directamente por los usuarios"],"c":1,"e":"Art. 14.4: la exposición al mercado debe ser real; la pérdida potencial no puede ser meramente nominal o desdeñable."},
+{"u":1,"t":"Un contrato de obras de 1.000.000 € de valor estimado:","o":["Admite recurso especial, porque supera los 100.000 €","No admite recurso especial, que en obras exige más de 3.000.000 €","Admite recurso especial solo si está sujeto a regulación armonizada","No admite recurso especial porque las obras nunca son recurribles por esta vía"],"c":1,"e":"Art. 44.1.a (examen GACE 2022). Los 100.000 € son de suministros y servicios."},
+{"u":1,"t":"En los contratos de servicios, la clasificación del empresario:","o":["Es exigible a partir de 500.000 € de valor estimado","No es exigible, aunque si la tiene puede acreditar la solvencia","Es exigible en todo caso cuando el contrato está sujeto a regulación armonizada","Está prohibida, porque solo existe clasificación de contratistas de obras"],"c":1,"e":"Art. 77.1.b: no exigible en servicios; la clasificación acredita solvencia."},
+{"u":1,"t":"La disposición adicional 57.ª [sic] de la LCSP, sobre concesiones para vivienda social o asequible, procede de:","o":["La Ley 1/2026, de 8 de abril, integral de impulso de la economía social","El Real Decreto-ley 7/2026, de 20 de marzo, disposición final décima","La Orden HAC/459/2026, de 22 de abril, de contratación centralizada","El Real Decreto-ley 9/2024, de 23 de diciembre, que sigue vigente"],"c":1,"e":"El RDL 9/2024 no se convalidó; el régimen se reintrodujo por el RDL 7/2026 (en vigor el 22/03/2026)."},
+{"u":2,"t":"El contrato de obras se refiere, como regla, a:","o":["Una obra completa, susceptible de ser entregada al uso general o al servicio correspondiente","Cualquier parte de una obra, siempre que su valor sea inferior al umbral del contrato menor de obras","Una fase de obra definida por el contratista en su oferta","Una obra completa solo si está sujeta a regulación armonizada"],"c":0,"e":"Art. 13.3. Las de conservación y mantenimiento pueden contratarse sin referirse a obra completa."},
+{"u":2,"t":"La obra que repara un inmueble conservando su estética y valor histórico y dotándolo de una nueva funcionalidad compatible es de:","o":["Restauración","Rehabilitación","Reparación simple","Gran reparación"],"c":1,"e":"Art. 232. La restauración mantiene la funcionalidad; la rehabilitación da una nueva."},
+{"u":2,"t":"La obra necesaria para enmendar un menoscabo producido por el natural uso del bien es de:","o":["Reparación simple","Conservación y mantenimiento","Gran reparación","Reforma o modernización del inmueble existente"],"c":1,"e":"Art. 232. La reparación simple corrige menoscabos por causas fortuitas o accidentales."},
+{"u":2,"t":"El informe de la oficina de supervisión de proyectos es preceptivo, como regla, cuando:","o":["El valor estimado del contrato supere el umbral de regulación armonizada de las obras","El presupuesto base de licitación sea igual o superior a 500.000 €, IVA excluido","El presupuesto base de licitación sea igual o superior a 500.000 €, IVA incluido","El contrato se adjudique por procedimiento abierto, cualquiera que sea su cuantía"],"c":1,"e":"Art. 235 (examen GACE 2019). Por debajo, preceptivo si afecta a estabilidad, seguridad o estanqueidad."},
+{"u":2,"t":"El replanteo del proyecto (art. 236) se realiza:","o":["Aprobado el proyecto y antes de aprobar el expediente de contratación","Tras la formalización, en el plazo máximo de un mes","Antes de redactar el proyecto, para fijar su objeto","Con la recepción de las obras, para comprobar la medición final y la realidad geométrica ejecutada"],"c":0,"e":"La comprobación del replanteo tras la formalización es otra figura (art. 237)."},
+{"u":2,"t":"Se dispensa el requisito previo de disponibilidad de los terrenos en las obras de:","o":["Edificación de uso administrativo y de equipamientos públicos","Infraestructuras hidráulicas, de transporte y de carreteras","Conservación y mantenimiento de cualquier tipo","Valor estimado inferior a 500.000 €"],"c":1,"e":"Art. 236.2 (examen GACE 2024); no puede iniciarse la ejecución sin formalizar la ocupación."},
+{"u":2,"t":"Según el art. 131 del Reglamento General, los gastos generales y el beneficio industrial del presupuesto son:","o":["Entre el 13 % y el 17 % y el 6 % del presupuesto de ejecución material","Entre el 6 % y el 13 % y el 17 % del presupuesto base de licitación, IVA excluido","El 17 % y el 6 % del presupuesto base de licitación con IVA","Entre el 10 % y el 15 % y el 6 % del presupuesto de ejecución material"],"c":0,"e":"PEM + 13-17 % de gastos generales + 6 % de beneficio industrial + IVA = PBL."},
+{"u":2,"t":"La contratación conjunta de la elaboración del proyecto y de la ejecución de las obras:","o":["Es la regla general en las obras de valor estimado igual o superior al umbral de 5.404.000 €","Es excepcional y requiere motivos técnicos o dificultades técnicas singulares justificadas","Está prohibida desde la entrada en vigor de la Ley 9/2017","Solo cabe en las obras de conservación y mantenimiento"],"c":1,"e":"Art. 234. Se licita sobre un anteproyecto; sin acuerdo sobre precios, el contratista solo cobra el proyecto."},
+{"u":2,"t":"Una obra cuya anualidad media es de 900.000 € corresponde a la categoría de clasificación:","o":["3, porque la categoría 3 llega hasta 1.000.000 €","4","5","2"],"c":1,"e":"Categoría 4: más de 840.000 y hasta 2.400.000 € (RD 773/2015)."},
+{"u":3,"t":"La ejecución del contrato de obras comienza con:","o":["La formalización del contrato","El acta de comprobación del replanteo","La aprobación de la primera certificación","El replanteo previo del proyecto"],"c":1,"e":"Art. 237: dentro del plazo del contrato, no superior a un mes desde la formalización salvo casos excepcionales."},
+{"u":3,"t":"¿Cuál de estos sucesos es fuerza mayor según el art. 239?","o":["Una lluvia intensa propia de la estación que inunda la zanja","Un temporal marítimo de efectos catastróficos","Una subida extraordinaria del precio del acero","Una huelga general de los trabajadores del sector"],"c":1,"e":"Lista tasada: incendios por electricidad atmosférica, fenómenos naturales catastróficos, destrozos en guerra, robos tumultuosos o alteraciones graves del orden público."},
+{"u":3,"t":"Las certificaciones de obra:","o":["Son pagos a cuenta mensuales y suponen la recepción parcial de las obras que comprenden","Se expiden mensualmente, en los diez días siguientes, como pagos a cuenta sin suponer recepción","Se expiden trimestralmente y suponen la aprobación de las obras","Se expiden al terminar la obra, en los tres meses siguientes a la recepción"],"c":1,"e":"Art. 240.1. La certificación final es la de los tres meses tras la recepción (243.1)."},
+{"u":3,"t":"Si la modificación de un contrato de obras suprime o reduce unidades de obra:","o":["El contratista tiene derecho al 6 % de las unidades suprimidas como beneficio industrial","El contratista no tiene derecho a reclamar indemnización alguna","El contratista puede negarse si la reducción supera el 10 %","Debe tramitarse siempre como resolución parcial del contrato"],"c":1,"e":"Art. 242.1."},
+{"u":3,"t":"La audiencia del contratista para fijar los precios de unidades de obra no previstas es de al menos:","o":["Diez días hábiles","Tres días hábiles","Cinco días naturales","Quince días hábiles"],"c":1,"e":"Art. 242.2. Si no los acepta: otro empresario, ejecución directa o resolución."},
+{"u":3,"t":"No tiene la consideración de modificación el exceso de mediciones que no suponga un incremento del gasto superior al:","o":["3 % del presupuesto primitivo del contrato","10 % del precio del contrato inicial","20 % del precio inicial","15 % del precio inicial"],"c":1,"e":"Art. 242.4.i; se recoge en la certificación final. El 3 % es el límite de los precios nuevos."},
+{"u":3,"t":"La continuación provisional de las obras mientras se tramita una modificación cabe si el importe máximo previsto no supera el:","o":["10 % del precio inicial, IVA excluido","20 % del precio inicial, IVA excluido","50 % del precio inicial, IVA incluido, si hay crédito","3 % del presupuesto primitivo"],"c":1,"e":"Art. 242.5 (el temario dice 10 %: error). La acuerda el Ministro en el ámbito estatal."},
+{"u":3,"t":"Las modificaciones no previstas en el pliego son obligatorias para el contratista cuando no exceden del:","o":["10 % del precio inicial, IVA incluido","20 % del precio inicial, IVA excluido","50 % del precio inicial, IVA excluido","15 % del precio inicial en obras y 10 % en el resto"],"c":1,"e":"Arts. 206 y 242.1 (examen GACE 2022)."},
+{"u":3,"t":"El derecho del contratista a reclamar los daños por la suspensión del contrato prescribe:","o":["En un año desde que recibe la orden de reanudar la ejecución","En cuatro años desde que se acordó la suspensión","En seis meses desde el levantamiento del acta de suspensión de las obras","En un mes desde la notificación de la reanudación"],"c":0,"e":"Art. 208 (examen GACE 2019)."},
+{"u":3,"t":"La certificación final de las obras se aprueba:","o":["En el mes siguiente a la recepción, en todo caso","En los tres meses siguientes a la recepción, ampliables a cinco en obras de más de 12 millones con liquidación compleja","Al terminar el plazo de garantía, junto con la liquidación del contrato y la devolución de la garantía definitiva","En los sesenta días siguientes al informe del director facultativo"],"c":1,"e":"Art. 243.1."},
+{"u":3,"t":"El plazo de garantía de las obras:","o":["No puede ser inferior a un año, salvo casos especiales","Es siempre de un año, sin excepciones","No puede ser inferior a dos años en obras de edificación","Lo fija el contratista en su oferta como criterio de adjudicación obligatorio"],"c":0,"e":"Art. 243.3. No se exige en sondeos infructuosos o dragados (243.4)."},
+{"u":3,"t":"Si el informe del director facultativo al final del plazo de garantía es favorable, las obligaciones pendientes se pagan en:","o":["Treinta días","Sesenta días","Tres meses desde el informe","Quince días"],"c":1,"e":"Art. 243.3."},
+{"u":3,"t":"La responsabilidad del contratista por vicios ocultos que arruinen la obra se extiende durante:","o":["Diez años desde la recepción","Quince años desde la recepción","Quince años desde el fin del plazo de garantía","Cinco años desde la certificación final"],"c":1,"e":"Art. 244.1; las acciones prescriben a los dos años desde que se manifiesta el daño (244.2)."},
+{"u":3,"t":"Si se demora injustificadamente la comprobación del replanteo y se resuelve el contrato, el contratista tiene derecho a:","o":["El 3 % del precio de adjudicación, IVA excluido","El 2 % del precio de adjudicación, IVA excluido","El 6 % de las obras dejadas de realizar","Los daños y perjuicios efectivamente acreditados"],"c":1,"e":"Art. 246.2 (examen GACE 2022)."},
+{"u":3,"t":"La suspensión por la Administración de la iniciación de las obras por más de cuatro meses da derecho a una indemnización del:","o":["2 % del precio de adjudicación","3 % del precio de adjudicación","6 % del precio de las obras dejadas de realizar","10 % del precio de adjudicación"],"c":1,"e":"Arts. 245.b y 246.3. Igual que el desistimiento antes de iniciar."},
+{"u":3,"t":"El desistimiento de la Administración una vez iniciadas las obras da derecho al contratista a:","o":["El 3 % del precio de adjudicación del contrato","El 6 % del precio de las obras dejadas de realizar, como beneficio industrial","El 2 % del precio de adjudicación más los daños y perjuicios efectivamente acreditados por el contratista","El íntegro beneficio industrial previsto en el proyecto"],"c":1,"e":"Art. 246.4."},
+{"u":3,"t":"¿Cuál NO es causa propia de resolución del contrato de obras (art. 245)?","o":["La demora injustificada en la comprobación del replanteo","Un error del proyecto que desvíe el presupuesto en más del 20 %","La suspensión de las obras por más de ocho meses","El desistimiento de la Administración"],"c":1,"e":"El 20 % de desviación es la regla del art. 315 sobre el redactor del proyecto (error del visual antiguo)."},
+{"u":4,"t":"En la concesión de obras, el estudio de viabilidad se somete a información pública por:","o":["Veinte días hábiles","Un mes, prorrogable por idéntico plazo","Dos meses improrrogables desde su aprobación","Quince días naturales"],"c":1,"e":"Art. 247.3."},
+{"u":4,"t":"Si un particular presenta un estudio de viabilidad que culmina en la concesión, su autor tiene derecho:","o":["A la adjudicación directa de la concesión sin licitación","A 5 puntos porcentuales adicionales en la licitación y, si no resulta adjudicatario, al resarcimiento de gastos más un 5 %","Al resarcimiento de los gastos más un 10 %, pero sin ninguna ventaja en la puntuación de la licitación posterior","A una participación del 5 % en los beneficios de la concesión"],"c":1,"e":"Art. 247.5."},
+{"u":4,"t":"El estudio de viabilidad que concluye la inviabilidad del proyecto es expresamente vinculante en:","o":["La concesión de obras (art. 247)","La concesión de servicios (art. 285.2)","El contrato de obras (art. 231)","Todos los contratos de valor superior a 12 millones"],"c":1,"e":"El visual antiguo lo atribuía a la concesión de obras: error."},
+{"u":4,"t":"Las tarifas que abonan los usuarios de una concesión:","o":["Son tasas de naturaleza tributaria fijadas por ordenanza","Son prestaciones patrimoniales de carácter público no tributario, fijadas como máximas","Son precios privados que fija libremente el concesionario","Son precios públicos aprobados por el Consejo de Ministros para cada concesión estatal"],"c":1,"e":"Arts. 267 y 289. El concesionario puede aplicar tarifas inferiores."},
+{"u":4,"t":"¿En qué caso procede restablecer el equilibrio económico de una concesión de obras?","o":["Cuando la demanda real es inferior a la prevista en el estudio de la Administración","Cuando una actuación obligatoria de la Administración concedente rompe de forma directa y sustancial la economía del contrato","Cuando una disposición general aprobada por otra Administración distinta de la concedente encarece la explotación","Cuando el concesionario asumió en su oferta un riesgo que luego se materializa"],"c":1,"e":"Art. 270.2.b (factum principis). La norma de otra Administración da derecho a desistir (270.4)."},
+{"u":4,"t":"Una disposición general de una Administración distinta de la concedente encarece la concesión en un 7 % de su cifra de negocios anual. El concesionario:","o":["Tiene derecho al restablecimiento del equilibrio económico","Puede desistir del contrato sin indemnización para ninguna de las partes","Puede resolver el contrato con indemnización de los beneficios futuros dejados de percibir","No tiene ningún derecho, porque es riesgo operacional"],"c":1,"e":"Art. 270.4: onerosidad extraordinaria desde el 5 % de la cifra de negocios."},
+{"u":4,"t":"En la concesión de obras, el plazo puede prorrogarse para reequilibrar hasta:","o":["Un 15 % de la duración inicial, si más del 50 % de la retribución procede de tarifas de los usuarios","Un 20 % de la duración inicial, en todo caso","Un 15 % de la duración inicial, solo en caso de modificación acordada por la Administración concedente","Un 10 % de la duración inicial, sin condiciones"],"c":0,"e":"Art. 270.3; en los casos de factum principis y fuerza mayor."},
+{"u":4,"t":"El secuestro o intervención de una concesión de obras no puede exceder, incluidas las prórrogas, de:","o":["Un año","Tres años","Cinco años","Lo que dure la perturbación del servicio"],"c":1,"e":"Art. 263.3. Pasado el plazo sin garantías del concesionario, se resuelve."},
+{"u":4,"t":"El rescate de una concesión:","o":["Exige que el concesionario haya incumplido gravemente sus obligaciones y que se le haya oído previamente en el expediente","Es la terminación unilateral por interés público para la gestión directa, y exige acreditar que esta es más eficaz y eficiente","Solo puede acordarse si el concesionario lo solicita por onerosidad","Es la recuperación de la obra al término del plazo de la concesión"],"c":1,"e":"Arts. 279.c y 294.c. La recuperación al final del plazo es la reversión."},
+{"u":4,"t":"Si la concesión de obras se resuelve por causa no imputable a la Administración y la primera licitación queda desierta, la segunda se convoca con un tipo del:","o":["70 % del de la primera","50 % del de la primera","100 % del valor de las inversiones pendientes de amortizar","30 % de la inversión ejecutada"],"c":1,"e":"Art. 281.1, en el plazo máximo de un mes."},
+{"u":4,"t":"Si la concesión de obras se resuelve antes de terminar la construcción por causa no imputable a la Administración, el tipo de la primera licitación es:","o":["El 50 % de la inversión ejecutada","El 70 % de la inversión ejecutada","El valor de los flujos futuros descontados al bono a diez años","La totalidad de la inversión ejecutada pendiente de amortizar"],"c":1,"e":"Art. 282.e. Con la obra terminada, flujos de caja descontados al bono a 10 años + 300 puntos básicos."},
+{"u":4,"t":"En la concesión de servicios, la Administración puede acordar el secuestro o intervención:","o":["En cualquier concesión, hasta que desaparezca la perturbación","Si recae sobre un servicio público con perturbación grave, en los términos del art. 263","Solo con el consentimiento del concesionario","Únicamente durante la ejecución de las obras de la concesión, con un máximo de un año"],"c":1,"e":"Art. 293 (máximo tres años). «Hasta que desaparezca» es del art. 312.d (error del temario)."},
+{"u":4,"t":"Las concesiones de servicios especiales del anexo IV se adjudican mediante:","o":["Procedimiento abierto simplificado","Procedimiento restringido","Procedimiento negociado sin publicidad","Diálogo competitivo"],"c":1,"e":"Art. 131.2."},
+{"u":4,"t":"Duración máxima de una concesión de vivienda social o asequible conforme a la DA 57.ª [sic]:","o":["Cuarenta años","Ochenta años","Setenta y cinco años","Noventa y nueve años"],"c":1,"e":"Frente a los 40 del art. 29.6.a."},
+{"u":4,"t":"Según el art. 270 vigente, en la fuerza mayor que rompa la economía de la concesión:","o":["La Administración asegura siempre los rendimientos mínimos acordados","Procede el restablecimiento del equilibrio con las medidas del art. 270.3","El concesionario debe soportarla íntegramente como parte del riesgo operacional asumido","Se resuelve automáticamente el contrato con indemnización"],"c":1,"e":"Lo de los «rendimientos mínimos» que cita el temario no está en el art. 270 vigente."},
+{"u":5,"t":"La adquisición de equipos y programas informáticos estándar es un contrato de:","o":["Servicios","Suministro","Administrativo especial","Concesión de servicios"],"c":1,"e":"Art. 16.3.b (examen GACE 2024)."},
+{"u":5,"t":"La adquisición de un programa de ordenador desarrollado a medida es un contrato de:","o":["Suministro","Servicios","Obras","Privado"],"c":1,"e":"Art. 16.3.b, inciso final (examen GACE 2022)."},
+{"u":5,"t":"Un contrato de compra de energía eléctrica:","o":["Está excluido de la LCSP como negocio patrimonial","Es un contrato de suministro","Es un contrato de servicios","Es un contrato privado excluido del 25"],"c":1,"e":"Art. 16.3.d (examen GACE 2022)."},
+{"u":5,"t":"A los contratos de fabricación se aplican:","o":["Las normas del contrato de obras que determine el pliego, salvo las de publicidad y adjudicación","Las normas del contrato de servicios, en todo caso","Las normas del contrato de obras en su integridad, incluidas las de publicidad y adjudicación","Exclusivamente las normas del Código Civil sobre el contrato de obra"],"c":0,"e":"Art. 299 (examen GACE 2022)."},
+{"u":5,"t":"El arrendamiento de bienes muebles por una Administración:","o":["Es un contrato privado sujeto al Código Civil","Es un suministro con duración máxima de cinco años, incluidas las prórrogas","Es un suministro sin límite de duración","Es un contrato de servicios por la prestación de mantenimiento que asume el arrendador"],"c":1,"e":"Arts. 16 y 29.5 (exámenes 2019 y 2022). El arrendador asume el mantenimiento (298)."},
+{"u":5,"t":"En el suministro, si la recepción formal es posterior a la entrega, la custodia de los bienes en ese intervalo corresponde a:","o":["El contratista, hasta la recepción formal","La Administración","El transportista, salvo pacto","Ambas partes de forma solidaria"],"c":1,"e":"Art. 300.3. Antes de la entrega, el riesgo es del contratista (300.2)."},
+{"u":5,"t":"En el suministro puede pagarse parte del precio con bienes de la misma clase, con el límite del:","o":["25 % del precio total del contrato","50 % del precio total","10 % del precio total","20 % del precio total"],"c":1,"e":"Art. 302.1."},
+{"u":5,"t":"El desistimiento una vez iniciado un suministro da derecho al contratista a:","o":["El 3 % del precio de adjudicación","El 6 % del precio de los suministros dejados de realizar","El 2 % del precio de adjudicación","La totalidad del beneficio industrial del contrato"],"c":1,"e":"Art. 307.3."},
+{"u":5,"t":"A la extinción de un contrato de servicios, el personal del contratista:","o":["Se integra como personal laboral indefinido no fijo","No puede consolidarse en ningún caso como personal de la entidad contratante","Se subroga automáticamente en la Administración","Puede consolidarse si ha prestado servicios durante más de tres años en dependencias de la Administración"],"c":1,"e":"Art. 308.2."},
+{"u":5,"t":"Salvo previsión contraria en los pliegos, los productos protegidos por propiedad intelectual desarrollados en un contrato de servicios:","o":["Pertenecen al contratista, que concede una licencia de uso","Llevan aparejada la cesión de los derechos a la Administración","Pasan al dominio público al terminar el contrato","Se comparten por mitades entre el contratista y la Administración contratante"],"c":1,"e":"Art. 308.1."},
+{"u":5,"t":"En los servicios del anexo IV y en los de carácter intelectual, los criterios de calidad deben representar al menos:","o":["El 25 % de la puntuación","El 51 % de la puntuación","El 45 % de la puntuación total","El 60 % de la puntuación"],"c":1,"e":"Art. 145.4."},
+{"u":5,"t":"La regla de que el precio no puede ser el único criterio en los servicios intelectuales y en los intensivos en mano de obra está en el:","o":["Art. 312, sobre servicios a la ciudadanía","Art. 145.3.g","Art. 309, sobre determinación del precio","Art. 159, sobre el procedimiento simplificado"],"c":1,"e":"El visual antiguo la atribuía al art. 312: error."},
+{"u":5,"t":"En un contrato de servicios con prestaciones directas a la ciudadanía, ante una perturbación grave no reparable, la Administración puede:","o":["Acordar el secuestro o intervención hasta que la perturbación desaparezca","Imponer una multa coercitiva diaria del 5 %","Resolver el contrato sin audiencia del contratista","Asumir la gestión directa del servicio durante un máximo de tres años"],"c":0,"e":"Art. 312.d."},
+{"u":5,"t":"La resolución de un contrato complementario como consecuencia de la del principal da derecho al contratista a:","o":["El 6 % de los servicios dejados de prestar","El 3 % del precio de adjudicación, IVA excluido","Ninguna indemnización","El precio íntegro del contrato"],"c":1,"e":"Art. 313.1.c y 313.3."},
+{"u":5,"t":"Si el presupuesto de la obra se desvía un 35 % del coste real por errores del proyectista, la minoración del precio del proyecto es del:","o":["30 %","40 %","50 %","20 %, porque es el umbral de desviación"],"c":1,"e":"Art. 315.1: 30 % (20-30), 40 % (30-40), 50 % (más de 40). Es obligatoria."},
+{"u":5,"t":"La responsabilidad del redactor del proyecto por daños derivados de sus defectos alcanza:","o":["El 100 % de los daños, sin límite, durante quince años","El 50 % de los daños, con límite de cinco veces el precio del proyecto, durante diez años desde su recepción","El 50 % de los daños, con límite del precio del proyecto, durante cinco años","El 25 % de los daños durante el plazo de garantía de la obra"],"c":1,"e":"Art. 315.2 (el temario lo sitúa en el 316: error)."},
+{"u":5,"t":"Si el contratista no subsana los defectos del proyecto en el plazo dado y la Administración opta por un nuevo plazo, este es de:","o":["Dos meses prorrogables, sin penalidad","Un mes improrrogable, con penalidad del 25 % del precio","Quince días hábiles, con una penalidad del 10 % del precio","Tres meses, con incautación de la garantía"],"c":1,"e":"Art. 314.4."},
+{"u":6,"t":"En un contrato mixto con prestaciones separables de servicios y de concesión, adjudicado como contrato único, se aplican las normas del contrato de servicios cuando:","o":["El valor de las prestaciones de concesión supera el umbral armonizado","El valor de las prestaciones de servicios supera el umbral armonizado del art. 22","La prestación de servicios tiene mayor duración","Lo decide libremente el órgano de contratación"],"c":1,"e":"Art. 18.1.b.2.º. El temario lo expone al revés."},
+{"u":6,"t":"Un contrato mixto que incluye una obra de 60.000 €:","o":["No requiere proyecto, porque la obra es accesoria","Requiere proyecto tramitado conforme a los arts. 231 y siguientes","Solo requiere proyecto si la obra es la prestación principal del contrato mixto","Requiere estudio de viabilidad en todo caso"],"c":1,"e":"Art. 18.3: obra de más de 50.000 €."},
+{"u":6,"t":"Duración máxima de una concesión de servicios sanitarios que no comprenda la ejecución de obras:","o":["Veinticinco años","Diez años","Cinco años","Cuarenta años"],"c":1,"e":"Art. 29.6.c."},
+{"u":6,"t":"Los contratos de servicios a las personas pueden durar más de cinco años cuando:","o":["Lo autorice el Consejo de Ministros, con un máximo de diez años en los servicios sociales o sanitarios","Sea necesario para la continuidad de tratamientos en que el cambio de prestador repercutiría negativamente","El contratista haya hecho inversiones superiores al 50 % del precio","Se trate de servicios del anexo IV de valor superior a 750.000 €"],"c":1,"e":"Art. 29.4, sin tope fijo. El temario habla de diez años: error."},
+{"u":6,"t":"El contrato de mantenimiento concertado con la compra del bien, que solo puede prestar en exclusiva el suministrador, puede durar:","o":["Cinco años como máximo","La vida útil del producto adquirido","Diez años como máximo","Lo que dure la garantía del fabricante"],"c":1,"e":"Art. 29.4."},
+{"u":6,"t":"La prórroga de continuidad de un contrato vencido mientras se adjudica el nuevo puede durar como máximo:","o":["Seis meses, si el anuncio del nuevo se publicó un mes antes","Nueve meses, si el anuncio del nuevo se publicó al menos tres meses antes","Doce meses, sin requisitos de publicación","Tres meses, prorrogables otros tres"],"c":1,"e":"Art. 29.4."},
+{"u":6,"t":"Para que una entidad sea medio propio personificado debe realizar más de qué porcentaje de su actividad en encargos de quien la controla:","o":["50 %","80 %","90 % de su actividad","70 %"],"c":1,"e":"Art. 32.2.b."},
+{"u":6,"t":"Deben publicarse en la Plataforma de Contratación los encargos a medios propios de importe superior a:","o":["15.000 €, IVA excluido","50.000 €, IVA excluido","100.000 €, IVA incluido","40.000 €, IVA excluido"],"c":1,"e":"Art. 63.6."},
+{"u":6,"t":"Un medio propio puede contratar con terceros prestaciones parciales del encargo hasta, como regla, el:","o":["20 % de la cuantía del encargo","50 % de la cuantía del encargo","80 % de la cuantía del encargo","10 % de la cuantía del encargo"],"c":1,"e":"Art. 32.7, con excepciones tasadas."},
+{"u":6,"t":"Los acuerdos marco, los sistemas dinámicos de adquisición y las centrales de contratación son:","o":["Tipos contractuales nuevos introducidos por la Ley 9/2017","Técnicas de racionalización que se aplican sobre contratos de obras, suministros y servicios","Contratos administrativos especiales","Modalidades de concesión de servicios"],"c":1,"e":"Art. 218."},
+{"u":6,"t":"El sistema dinámico de adquisición:","o":["Es un procedimiento en papel para bienes de diseño específico","Es totalmente electrónico, para bienes de uso corriente, y abierto a cualquier empresa durante toda su vigencia","Tiene una duración máxima de cuatro años y no admite nuevas empresas","Solo pueden utilizarlo las centrales de contratación autonómicas"],"c":1,"e":"Arts. 223 a 226."},
+{"u":6,"t":"Desde mayo de 2026, el catálogo estatal de suministros y servicios de contratación centralizada lo fija la:","o":["Orden EHA/1049/2008","Orden HAC/459/2026","Orden HAC/1517/2025","Disposición adicional 57.ª de la LCSP"],"c":1,"e":"Orden HAC/459/2026, de 22 de abril, en vigor el 13/05/2026; la HAC/1517/2025 es la de umbrales."},
+{"u":7,"t":"En un supuesto de obras, tras calificar el contrato como administrativo, lo que más puntúa añadir es:","o":["Una exposición general de la historia de la contratación pública desde la legislación de 1965","El artículo del régimen propio del tipo (arts. 231 a 246) y la cifra operada que corresponda","La opinión personal sobre la conveniencia de la obra","Una conclusión condicional, a la espera de más datos"],"c":1,"e":"Criterio de la Comisión: calificación + artículo propio + cifra operada + conclusión afirmativa."},
+{"u":7,"t":"El enunciado no aclara si la suspensión de las obras es imputable al contratista. La forma correcta de seguir es:","o":["Dejar la cuestión sin resolver por falta de datos","Escribir «El enunciado no precisa…, por lo que suponemos que no le es imputable» y justificarlo","Concluir que «podríamos entender que quizá procede la resolución»","Cerrar con «Salvo mejor criterio fundado en Derecho»"],"c":1,"e":"Suposición declarada y justificada antes de una conclusión afirmativa."},
+{"u":7,"t":"PBL de 1.452.000 € con IVA del 21 %, sin prórrogas ni modificaciones previstas. El valor estimado es:","o":["1.452.000 €","1.200.000 €","1.147.080 € (PBL menos el 21 %)","1.756.920 €"],"c":1,"e":"1.452.000 / 1,21 = 1.200.000 € (art. 101: sin IVA)."},
+{"u":7,"t":"Adjudicación por 1.000.000 € sin IVA; la Administración suspende el inicio más de cuatro meses y se resuelve. Indemnización:","o":["20.000 €","30.000 €","60.000 € (6 % del precio)","36.300 €"],"c":1,"e":"Art. 246.3: 3 % del precio de adjudicación, IVA excluido."},
+{"u":7,"t":"Una conclusión que la Comisión puntúa en una cuestión de resolución de obras es:","o":["«Por tanto, se concluye que procede la resolución por el art. 245.b) con una indemnización de 30.000 €»","«Podríamos entender que tal vez quepa resolver el contrato, a la vista de todas las circunstancias concurrentes del caso»","«Salvo mejor criterio, parece que hay una causa de resolución»","«La resolución podría entenderse procedente según las circunstancias»"],"c":0,"e":"Conclusión afirmativa con la norma y la cifra."},
+{"u":7,"t":"El primer elemento de la introducción de la materia de contratación en el supuesto es:","o":["El art. 149.1.18.ª de la Constitución","El art. 103 de la Constitución","La Directiva 2014/23/UE","El art. 131 del Real Decreto 1098/2001"],"c":0,"e":"Plantillas v2, sección 7: Constitución → LCSP → RD 1098/2001 → objeto y umbrales."}
+];
+
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Tipología y riesgo operacional",2:"Obras: preparación",3:"Obras: ejecución y resolución",4:"Concesiones",5:"Suministro y servicios",6:"Mixtos, duración y racionalización",7:"Supuesto práctico"};
+const TABS={1:"Tipología",2:"Preparación",3:"Ejecución",4:"Concesiones",5:"Sum. y serv.",6:"Duración",7:"Supuesto"};
+const SK="gace27_biv_t06_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
