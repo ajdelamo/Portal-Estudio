@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BIV · Tema 6 — Los contratos del sector público (II): tipos (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tablewrap table{break-inside:auto}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque IV · Derecho Administrativo · Tema 6 · ⭐ tema estrella del supuesto</small>
+    <h1>Los contratos regulados por la Ley de Contratos del Sector Público (II). Tipos. Características generales</h1>
+    <p>Versión fusionada: el Tema 6 del Bloque IV del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas contra el texto consolidado del BOE y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 29/10/2026 · LCSP consolidada a 09/04/2026 · DA 57.ª (RDL 7/2026) · Orden HAC/459/2026</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">La tipología contractual</a></li>
+    <li><a href="#s2">El contrato de obras</a></li>
+    <li><a href="#s3">La concesión de obras</a></li>
+    <li><a href="#s4">La concesión de servicios</a></li>
+    <li><a href="#s5">El contrato de suministro</a></li>
+    <li><a href="#s6">El contrato de servicios</a></li>
+    <li><a href="#s7">Mixtos, especiales, privados y subvencionados</a></li>
+    <li><a href="#s8">Duración y encargos a medios propios</a></li>
+    <li><a href="#s9">La racionalización técnica</a></li>
+    <li><a href="#s10">Lo que preguntan y trampas</a></li>
+    <li><a href="#s11">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s12">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. Para cada contrato, fíjate siempre en lo mismo: concepto, actos preparatorios propios, reglas de ejecución, recepción y causas propias de resolución con su indemnización.</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Repaso en audio. Al terminar, recita sin mirar el cuadro maestro del <a href="#s1">apartado 1</a> y la escalera de cifras del <a href="#s10">apartado 10</a>.</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s11">apartado 11</a> tapando la columna derecha. Este tema pone los números que el Tema 5 deja abiertos: el 2, el 3 y el 6 % de la resolución, el 10 % de mediciones, los 500.000 de supervisión y clasificación.</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa o norma en tramitación ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+<div class="box clave"><span class="box-h">Reparto con el Tema 5</span>
+El Tema 5 es la parte general (ámbito, preparación, adjudicación, efectos comunes, modificación, invalidez y recursos). Este tema es el libro segundo, título II, de la LCSP: las reglas <strong>propias</strong> de cada contrato (arts. 231 a 315), más su duración (art. 29), los encargos a medios propios (arts. 32 y 33) y la racionalización técnica (arts. 218 a 230).</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> La tipología contractual de la Ley 9/2017</h2>
+<h3>1.1 Por qué importa calificar bien</h3>
+<p>La <strong>Ley 9/2017, de 8 de noviembre</strong>, de Contratos del Sector Público (LCSP), que transpone las Directivas 2014/23/UE (concesiones) y 2014/24/UE (contratación pública), organiza todo su régimen sobre una <strong>tipología cerrada</strong>. Calificar el contrato no es un ejercicio académico: el tipo decide el régimen de todas sus fases.</p>
+<div class="grid2">
+<div class="card"><h4>El tipo determina…</h4><ul>
+<li>El umbral de <strong>regulación armonizada</strong> y la publicidad en el DOUE (arts. 19 a 23).</li>
+<li>Los umbrales del <strong>contrato menor</strong> (art. 118) y de los procedimientos simplificados (art. 159).</li>
+<li>La <strong>duración</strong> máxima y sus prórrogas (art. 29).</li>
+<li>Si se exige <strong>clasificación</strong> (art. 77).</li></ul></div>
+<div class="card"><h4>…y además</h4><ul>
+<li>Si cabe el <strong>recurso especial</strong> (art. 44).</li>
+<li>Si cabe <strong>revisión de precios</strong> (art. 103).</li>
+<li>Las reglas especiales de preparación (proyecto, estudio de viabilidad), ejecución (certificaciones, entregas, recepción), modificación y extinción del libro segundo, título II.</li></ul></div>
+</div>
+<h3>1.2 Los tipos (art. 12) y lo que no es contrato</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Tipo</th><th style="width:8%">Art.</th><th>Nota definitoria</th></tr>
+<tr><td><strong>Obras</strong></td><td>13</td><td>Ejecución de una obra o de alguno de los trabajos del anexo I, con o sin redacción del proyecto.</td></tr>
+<tr><td><strong>Concesión de obras</strong></td><td>14</td><td>Ejecución de obras retribuida con el derecho a explotarlas, con transferencia del <strong>riesgo operacional</strong>.</td></tr>
+<tr><td><strong>Concesión de servicios</strong></td><td>15</td><td>Gestión de un servicio retribuida con el derecho a explotarlo, con transferencia del riesgo operacional.</td></tr>
+<tr><td><strong>Suministro</strong></td><td>16</td><td>Adquisición, arrendamiento financiero o arrendamiento, con o sin opción de compra, de <strong>bienes muebles</strong>.</td></tr>
+<tr><td><strong>Servicios</strong></td><td>17</td><td>Prestaciones de hacer: una actividad o un resultado distinto de una obra o un suministro.</td></tr>
+<tr><td><strong>Mixtos</strong></td><td>18</td><td>Prestaciones de dos o más tipos.</td></tr>
+</table></div>
+<p>Por su régimen, la ley distingue contratos <strong>administrativos</strong> (típicos y especiales) y <strong>privados</strong> (arts. 24 a 27); regula los <strong>subvencionados</strong> sujetos a regulación armonizada (art. 23); y da régimen propio a figuras que <strong>no son contratos</strong>: los <strong>encargos a medios propios</strong> (arts. 32 y 33) y los <strong>convenios</strong> (art. 6).</p>
+<div class="box clave"><span class="box-h">Lo que cambió en 2017 respecto del texto refundido de 2011</span>
+<ul>
+<li><strong>Desaparece el contrato de gestión de servicios públicos</strong> y sus modalidades (concesión, gestión interesada, concierto y sociedad de economía mixta). Su lugar lo ocupa la <strong>concesión de servicios</strong>, definida por la transferencia del riesgo operacional. Sin esa transferencia, el contrato es de servicios aunque las prestaciones vayan directamente a la ciudadanía.</li>
+<li><strong>Desaparece el contrato de colaboración entre el sector público y el sector privado</strong>, por su escaso uso y porque sus fines se logran con la concesión.</li>
+<li>El <strong>riesgo operacional</strong> pasa a ser lo que distingue las concesiones de los contratos de obras y servicios.</li>
+<li>Las antiguas encomiendas de gestión pasan a llamarse <strong>encargos a medios propios</strong>, con régimen reforzado para evitar la huida de la licitación.</li>
+</ul></div>
+<div class="box act"><span class="box-h">Reformas recientes que tocan este tema (comprobado a 29/10/2026)</span>
+<ul>
+<li><strong>Umbrales 2026-2027</strong> (arts. 20 a 23), publicados el 26/12/2025: Reglamentos Delegados (UE) de 2025, entre ellos el 2025/2151; en España, Orden HAC/1517/2025.</li>
+<li><strong>Disposición adicional 57.ª [sic]</strong>, añadida por la disposición final 10.ª del <strong>Real Decreto-ley 7/2026, de 20 de marzo</strong> (en vigor desde el 22/03/2026): concesiones para vivienda social o asequible en suelo público, con plazo de hasta <strong>80 años</strong>. Apartado 3.8.</li>
+<li><strong>Disposición adicional 4.ª</strong>, contratos reservados: reformada por la <strong>Ley 1/2026, de 8 de abril</strong>, integral de impulso de la economía social.</li>
+<li><strong>Orden HAC/459/2026, de 22 de abril</strong>, de declaración de suministros y servicios de contratación centralizada (BOE de 12/05/2026, en vigor el 13/05/2026), que deroga la Orden EHA/1049/2008. Apartado 9.3.</li>
+</ul></div>
+<div class="box act"><span class="box-h">En tramitación · no vigente</span>
+La Comisión Europea prepara la <strong>revisión de las directivas de contratación</strong>, con previsión de cerrar la negociación a finales de 2027. Hay además dos anteproyectos que tocarían la LCSP: el de <strong>Ley Orgánica de Integridad Pública</strong> (aprobado por el Consejo de Ministros el 17/02/2026), que haría público el registro de prohibiciones de contratar y exigiría programas de cumplimiento en contratos de más de un año, y el de <strong>Ley de Medicamentos</strong>, con reglas propias de suministro de medicamentos. Nada de esto se aplica hoy.</div>
+<h3>1.3 Cuadro de umbrales y reglas comunes por tipo</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:16%">Contrato</th><th>Regulación armonizada (2026-2027)</th><th style="width:15%">Contrato menor</th><th style="width:17%">Recurso especial (44)</th><th style="width:19%">Clasificación (77)</th></tr>
+<tr><td><strong>Obras</strong></td><td>VEC ≥ <strong>5.404.000 €</strong></td><td>&lt; 40.000 €</td><td>VEC &gt; 3.000.000 €</td><td>Exigible desde <strong>500.000 €</strong> de VEC</td></tr>
+<tr><td><strong>Concesiones</strong> de obras y de servicios</td><td>≥ 5.404.000 €</td><td>No aplicable</td><td>VEC &gt; 3.000.000 €</td><td>No exigible con carácter general</td></tr>
+<tr><td><strong>Suministro</strong></td><td>140.000 € (AGE, OOAA, entidades gestoras y servicios comunes de la Seguridad Social); 216.000 € los demás</td><td>&lt; 15.000 €</td><td>VEC &gt; 100.000 €</td><td>No exigible</td></tr>
+<tr><td><strong>Servicios</strong></td><td>140.000 € o 216.000 € según el poder adjudicador; <strong>750.000 €</strong> servicios sociales y del anexo IV</td><td>&lt; 15.000 €</td><td>VEC &gt; 100.000 €</td><td>No exigible; si se tiene, acredita la solvencia</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (examen GACE 2022)</span>
+La clasificación es requisito indispensable en las obras de valor estimado <strong>igual o superior a 500.000 €</strong>. Y un contrato de obras de <strong>1.000.000 €</strong> no admite recurso especial: hace falta un valor estimado <strong>superior a 3.000.000 €</strong>.</div>
+<h3>1.4 Cuadro maestro de los cinco contratos típicos</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:16%">Elemento</th><th>Obras (231-246)</th><th>Concesión de obras (247-283)</th><th>Concesión de servicios (284-297)</th><th>Suministro (298-307)</th><th>Servicios (308-315)</th></tr>
+<tr><td>Preparatorios propios</td><td>Proyecto, supervisión (≥ 500.000 € de PBL sin IVA) y replanteo</td><td>Estudio de viabilidad (+ anteproyecto, según complejidad)</td><td>Régimen jurídico previo del servicio + estudio de viabilidad (vinculante si concluye la inviabilidad)</td><td>—</td><td>Justificar la insuficiencia de medios propios</td></tr>
+<tr><td>Riesgo</td><td>Riesgo y ventura, con fuerza mayor (239)</td><td>Riesgo operacional</td><td>Riesgo operacional</td><td>Riesgo y ventura</td><td>Riesgo y ventura</td></tr>
+<tr><td>Duración máxima (29)</td><td>La de ejecución del proyecto</td><td>40 años</td><td>40 con obras · 25 sin obras · 10 sanitarios sin obras</td><td>5 años con prórrogas</td><td>5 años con prórrogas</td></tr>
+<tr><td>Fin de la ejecución</td><td>Acta de recepción; certificación final en 3 meses</td><td>Reversión (283)</td><td>Reversión (291)</td><td>Recepción o conformidad en 1 mes (210)</td><td>Recepción o conformidad en 1 mes (210)</td></tr>
+<tr><td>Garantía específica</td><td>Plazo ≥ 1 año · vicios ocultos 15 años</td><td>Equilibrio económico (270)</td><td>Equilibrio económico (290)</td><td>Vicios o defectos durante el plazo de garantía (305)</td><td>Responsabilidad por calidad técnica (311)</td></tr>
+<tr><td>Resolución propia</td><td>Demora en comprobar el replanteo · suspensión del inicio &gt; 4 meses · suspensión &gt; 8 meses · desistimiento</td><td>Ejecución hipotecaria desierta · demora &gt; 6 meses · rescate · supresión · imposibilidad · secuestro prolongado</td><td>Las mismas que la concesión de obras (294)</td><td>Desistimiento o suspensión del inicio &gt; 4 meses · desistimiento o suspensión &gt; 8 meses</td><td>Igual que el suministro + resolución de los complementarios</td></tr>
+</table></div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> El contrato de obras (arts. 13 y 231 a 246)</h2>
+<h3>2.1 Concepto (art. 13)</h3>
+<p>Tienen por objeto: 1) la <strong>ejecución de una obra</strong>, aislada o con la redacción del proyecto, o alguno de los trabajos del <strong>anexo I</strong> (demolición, preparación de terrenos, construcción general de inmuebles y obras de ingeniería civil, instalación de edificios y obras, acabado de edificios y alquiler de equipo de construcción con operario); o 2) la realización, por cualquier medio, de una obra que cumpla los requisitos fijados por la entidad contratante que ejerza una <strong>influencia decisiva</strong> en el tipo o el proyecto de la obra.</p>
+<p><strong>Obra</strong> es el resultado de un conjunto de trabajos de construcción o de ingeniería civil, destinado a cumplir por sí mismo una función económica o técnica, que tenga por objeto un <strong>bien inmueble</strong>. También lo son los trabajos que modifiquen la forma o sustancia del terreno o de su vuelo, o mejoren el medio físico o natural.</p>
+<div class="box clave"><span class="box-h">La obra completa (art. 13.3) y el fraccionamiento (art. 99)</span>
+El contrato se refiere a una <strong>obra completa</strong>: susceptible de entregarse al uso general o al servicio, con todos los elementos para su utilización. Cabe contratar por separado partes de una obra completa definidas en proyectos independientes si son de utilización independiente o pueden definirse sustancialmente, previa autorización motivada del órgano de contratación. Las obras de <strong>conservación y mantenimiento</strong> pueden contratarse sin referirse a una obra completa. La regla enlaza con la <strong>prohibición de fraccionar</strong> para eludir publicidad o procedimiento (99.2), que no impide la <strong>división en lotes</strong>, regla general cuando el objeto lo permite (99.3).</div>
+<h3>2.2 Clasificación de las obras (art. 232)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Grupo</th><th>Contenido</th></tr>
+<tr><td><strong>a) Primer establecimiento, reforma, restauración, rehabilitación o gran reparación</strong></td><td><strong>Primer establecimiento</strong>: crea un bien inmueble. <strong>Reforma</strong>: ampliación, mejora, modernización, adaptación, adecuación o refuerzo de uno existente. <strong>Restauración</strong>: repara conservando la estética, el valor histórico y la funcionalidad. <strong>Rehabilitación</strong>: repara conservando la estética y el valor histórico, con una <strong>nueva funcionalidad</strong> compatible. <strong>Gran reparación</strong>: afecta fundamentalmente a la <strong>estructura resistente</strong>.</td></tr>
+<tr><td><strong>b) Reparación simple</strong></td><td>Enmendar un menoscabo por causas <strong>fortuitas o accidentales</strong>; si afecta fundamentalmente a la estructura resistente, es gran reparación.</td></tr>
+<tr><td><strong>c) Conservación y mantenimiento</strong></td><td>Menoscabo por el <strong>uso natural</strong> del bien, o prevenir los efectos del deterioro.</td></tr>
+<tr><td><strong>d) Demolición</strong></td><td>Derribo o destrucción de un inmueble.</td></tr>
+</table></div>
+<h3>2.3 Preparación: proyecto, supervisión y replanteo</h3>
+<div class="flowv">
+<div class="step"><b>1 · Proyecto (arts. 231 a 233)</b>La adjudicación exige la previa <strong>elaboración, supervisión, aprobación y replanteo</strong> del proyecto. Lo aprueba el órgano de contratación, salvo atribución a otro órgano. Contenido mínimo (233.1): memoria; planos de conjunto y de detalle; pliego de prescripciones técnicas particulares; presupuesto con precios unitarios y descompuestos y estado de mediciones; programa de trabajos indicativo; referencias del replanteo; <strong>estudio de seguridad y salud</strong> (o estudio básico). Además, salvo incompatibilidad, <strong>estudio geotécnico</strong> y, en primer establecimiento, reforma o gran reparación, estudio de impacto ambiental cuando proceda. Con PBL &lt; 500.000 € sin IVA pueden simplificarse, refundirse o suprimirse documentos.</div>
+<div class="step"><b>2 · Supervisión (art. 235)</b>Antes de aprobar el proyecto, informe de la oficina de supervisión <strong>preceptivo</strong> si el PBL es <strong>igual o superior a 500.000 €, IVA excluido</strong>. Por debajo es facultativo, salvo que la obra afecte a la <strong>estabilidad, seguridad o estanqueidad</strong>. La responsabilidad por cálculos erróneos es del autor del proyecto.</div>
+<div class="step"><b>3 · Replanteo del proyecto (art. 236)</b>Aprobado el proyecto y <strong>antes de aprobar el expediente</strong>: comprobar la realidad geométrica de la obra y la <strong>disponibilidad de los terrenos</strong>. Es requisito para adjudicar. En obras de <strong>infraestructuras hidráulicas, de transporte y de carreteras</strong> se dispensa la disponibilidad previa de terrenos, pero no puede iniciarse la ejecución sin formalizar la ocupación conforme a la Ley de Expropiación Forzosa. Si los terrenos los cede otra entidad pública, bastan los acuerdos de cesión y aceptación.</div>
+</div>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Presupuesto del proyecto (RGLCAP, art. 131)</th><th>Contenido</th></tr>
+<tr><td>Presupuesto de ejecución material (PEM)</td><td>Mediciones de cada unidad × precio unitario, sumadas.</td></tr>
+<tr><td>Gastos generales</td><td>Entre el <strong>13 % y el 17 %</strong> del PEM.</td></tr>
+<tr><td>Beneficio industrial</td><td>El <strong>6 %</strong> del PEM.</td></tr>
+<tr><td>Presupuesto base de licitación</td><td>Suma de lo anterior + <strong>IVA</strong>.</td></tr>
+</table></div>
+<div class="grid2">
+<div class="card"><h4>Proyecto y obra a la vez (art. 234)</h4><strong>Excepcional</strong>, justificado en el expediente: a) motivos técnicos que obliguen a vincular al empresario a los estudios (ligados al destino o a las técnicas de ejecución); b) obras de dimensión excepcional o dificultades técnicas singulares. Se licita sobre un <strong>anteproyecto</strong> o documento similar (excepcionalmente, bases técnicas). El contratista presenta el proyecto para supervisión, aprobación y replanteo; no se inicia la obra hasta subsanar defectos. Si no hay acuerdo sobre precios, queda exonerado y solo cobra la redacción del proyecto.</div>
+<div class="card"><h4>Ideas clave del temario 2026</h4>El informe de supervisión se pide <strong>antes de aprobar el proyecto</strong> cuando el PBL es igual o superior a 500.000 €, IVA excluido (examen 2019). La disponibilidad de terrenos se dispensa en infraestructuras <strong>hidráulicas, de transporte y de carreteras</strong> (examen 2024).</div>
+</div>
+<h3>2.4 El contratista: clasificación y solvencia</h3>
+<p>En obras de valor estimado <strong>≥ 500.000 €</strong> la clasificación es requisito indispensable (77.1.a). Se otorga por <strong>grupos y subgrupos</strong> según el tipo de obra (movimiento de tierras, puentes, edificaciones, ferroviarias, hidráulicas, viales, instalaciones eléctricas…) y por <strong>categorías</strong> según la anualidad media del contrato (RGLCAP y Real Decreto 773/2015). Por debajo de 500.000 €, la clasificación acredita la solvencia pero no es exigible (arts. 87 y 88). La falta de solvencia del adjudicatario es <strong>nulidad de pleno derecho</strong> (39.2.a).</p>
+<div class="tablewrap"><table>
+<tr><th style="width:14%">Categoría</th><th>Anualidad media</th><th style="width:14%">Categoría</th><th>Anualidad media</th></tr>
+<tr><td>1</td><td>≤ 150.000 €</td><td>4</td><td>&gt; 840.000 y ≤ 2.400.000 €</td></tr>
+<tr><td>2</td><td>&gt; 150.000 y ≤ 360.000 €</td><td>5</td><td>&gt; 2.400.000 y ≤ 5.000.000 €</td></tr>
+<tr><td>3</td><td>&gt; 360.000 y ≤ 840.000 €</td><td>6</td><td>&gt; 5.000.000 €</td></tr>
+</table></div>
+<h3>2.5 La ejecución</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Fase</th><th style="width:9%">Art.</th><th>Claves y plazos</th></tr>
+<tr><td><strong>Comprobación del replanteo</strong></td><td>237</td><td>La ejecución <strong>comienza</strong> con el acta de comprobación del replanteo, en el plazo del contrato, que no puede superar <strong>1 mes desde la formalización</strong> salvo casos excepcionales justificados. La firman ambas partes.</td></tr>
+<tr><td><strong>Riesgo y ventura; dirección</strong></td><td>197 y 238</td><td>Ejecución con sujeción al pliego, al proyecto y a las instrucciones del director facultativo; las <strong>instrucciones verbales</strong> deben ratificarse por escrito. Hasta que termina el plazo de garantía, el contratista responde de los defectos de construcción.</td></tr>
+<tr><td><strong>Certificaciones</strong></td><td>240</td><td><strong>Mensuales</strong>, en los <strong>10 días siguientes</strong> al mes. Son <strong>pagos a cuenta</strong> sujetos a la medición final y <strong>no suponen aprobación ni recepción</strong>. Caben abonos a cuenta por operaciones preparatorias (instalaciones, acopio de materiales, maquinaria pesada), <strong>garantizados</strong>.</td></tr>
+<tr><td><strong>Pago</strong></td><td>198</td><td>Aprobación de la certificación en 30 días y pago en los 30 siguientes. Demora: intereses y costes de cobro (Ley 3/2004); más de <strong>4 meses</strong>, suspensión; más de <strong>6</strong>, resolución.</td></tr>
+<tr><td><strong>Revisión de precios</strong></td><td>103 a 105</td><td>Las obras son revisables: <strong>20 % ejecutado y 2 años</strong> desde la formalización, fórmulas tipo (Real Decreto 1359/2011) y principios del Real Decreto 55/2017. Revisión excepcional de 2021-2022: Real Decreto-ley 3/2022.</td></tr>
+<tr><td><strong>Demora</strong></td><td>192 y 193</td><td>Penalidades diarias de <strong>0,60 € por cada 1.000 €</strong> del precio, IVA excluido, salvo pliego. Cada <strong>múltiplo del 5 %</strong>: resolver o seguir (examen 2019).</td></tr>
+<tr><td><strong>Suspensión</strong></td><td>208</td><td>Acta con causas y situación. Se pagan los daños efectivos tasados: mantenimiento de la garantía, indemnizaciones laborales y salarios del personal adscrito, maquinaria e instalaciones, seguros. La reclamación <strong>prescribe en 1 año</strong> desde la orden de reanudar (examen 2019).</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Fuerza mayor (art. 239) · lista tasada, muy preguntada</span>
+Sin actuación imprudente del contratista, tiene derecho a <strong>indemnización</strong> por: 1) <strong>incendios causados por la electricidad atmosférica</strong>; 2) <strong>fenómenos naturales de efectos catastróficos</strong> (maremotos, terremotos, erupciones volcánicas, movimientos del terreno, temporales marítimos, inundaciones u otros semejantes); 3) <strong>destrozos ocasionados violentamente en tiempo de guerra, robos tumultuosos o alteraciones graves del orden público</strong>.</div>
+<div class="box trampa"><span class="box-h">Trampa</span>Una lluvia intensa «normal» o la subida de precios de los materiales <strong>no</strong> son fuerza mayor. La subida de precios va por revisión de precios o, en su momento, por la revisión excepcional del Real Decreto-ley 3/2022.</div>
+<h3>2.6 La modificación del contrato de obras (arts. 203 a 207 y 242)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Regla</th><th>Contenido</th></tr>
+<tr><td>Prevista en el pliego (204)</td><td>Hasta el <strong>20 %</strong> del precio inicial, si el pliego lo advierte de forma clara, precisa e inequívoca.</td></tr>
+<tr><td>No prevista (205 y 206)</td><td>Solo en supuestos tasados y con las variaciones indispensables. <strong>Obligatoria</strong> para el contratista si no excede del <strong>20 %</strong> del precio inicial, IVA excluido (examen 2022). Por encima, solo con su conformidad por escrito; si no, resolución (211.1.g).</td></tr>
+<tr><td>Reducción de unidades (242.1)</td><td>Si la modificación suprime o reduce unidades de obra, el contratista <strong>no tiene derecho a indemnización</strong>.</td></tr>
+<tr><td>Precios contradictorios (242.2)</td><td>Unidades nuevas o distintas: los precios los fija la Administración, previa audiencia del contratista de al menos <strong>3 días hábiles</strong>. Si no los acepta: contratarlas con otro a esos precios, ejecutarlas directamente o resolver.</td></tr>
+<tr><td>Unidades ocultas (242.3)</td><td>Antes de medirlas, aviso a la Intervención con <strong>5 días</strong> de antelación para la comprobación material de la inversión.</td></tr>
+<tr><td>Procedimiento (242.4)</td><td>Autorización para iniciar el expediente · redacción y aprobación técnica de la modificación del proyecto · audiencia del contratista y del redactor (mínimo 3 días) · aprobación del expediente y de los gastos complementarios.</td></tr>
+<tr><td><strong>No son modificación</strong> (242.4)</td><td>i) El <strong>exceso de mediciones</strong> que no suponga más del <strong>10 %</strong> del precio inicial; se recoge en la certificación final. ii) Los <strong>precios nuevos contradictorios</strong> que no incrementen el precio global ni afecten a unidades que en conjunto excedan del <strong>3 %</strong> del presupuesto primitivo.</td></tr>
+<tr><td>Continuación provisional (242.5)</td><td>Si la tramitación exige suspender toda la obra con grave perjuicio para el interés público, el <strong>Ministro</strong> (en el Estado) puede acordar que continúe provisionalmente, siempre que el importe máximo previsto no supere el <strong>20 %</strong> del precio inicial, IVA excluido, y haya crédito.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al temario 2026: la continuación provisional</span>
+El temario dice que puede autorizarse «con un límite del 10 % del precio del contrato». El art. 242.5 dice <strong>20 %</strong> del precio inicial, IVA excluido, y atribuye la decisión al Ministro en el ámbito estatal. El 10 % del art. 242 es el del exceso de mediciones.</div>
+<h3>2.7 Recepción, garantía, liquidación y vicios ocultos (arts. 243 y 244)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Momento</th><th>Régimen</th></tr>
+<tr><td><strong>Recepción</strong></td><td>Concurren un facultativo de la Administración, el director facultativo y el contratista (con su facultativo si quiere). Obras en buen estado: acta y <strong>empieza el plazo de garantía</strong>. Si no: defectos y plazo para remediarlos; incumplido, nuevo plazo improrrogable o resolución.</td></tr>
+<tr><td><strong>Certificación final</strong></td><td>Aprobada en <strong>3 meses</strong> desde la recepción y abonada a cuenta de la liquidación. En obras de VEC &gt; <strong>12 millones</strong> con liquidación compleja, el pliego puede ampliar el plazo hasta <strong>5 meses</strong>.</td></tr>
+<tr><td><strong>Recepción parcial y ocupación</strong></td><td>Cabe recepción parcial de fases entregables al uso público. Si se ocupan o ponen en servicio sin recepción formal, por razones excepcionales motivadas, se producen desde entonces los efectos de la recepción.</td></tr>
+<tr><td><strong>Plazo de garantía</strong></td><td>Lo fija el pliego; <strong>no inferior a 1 año</strong> salvo casos especiales. No se exige en obras sin perduración práctica (sondeos y prospecciones infructuosos, dragados). En los <strong>15 días</strong> anteriores a su fin, informe del director facultativo. Favorable: el contratista queda exonerado (salvo vicios ocultos), se devuelve la garantía, se liquida y se pagan las obligaciones pendientes en <strong>60 días</strong>. Desfavorable por defectos de ejecución (no de uso): reparación, sin cobrar por la ampliación del plazo.</td></tr>
+<tr><td><strong>Vicios ocultos (244)</strong></td><td>Ruina o deterioro grave incompatible con la función, tras el plazo de garantía, por vicios ocultos debidos a incumplimiento del contratista: responde <strong>15 años desde la recepción</strong>. También de los daños estructurales (cimentación, soportes, vigas, forjados, muros de carga) que comprometan la resistencia y estabilidad. Las acciones prescriben a los <strong>2 años</strong> desde que se producen o manifiestan los daños. Pasados los 15 años sin daño, la responsabilidad se extingue. Es independiente de la de los agentes de la edificación (Ley 38/1999).</td></tr>
+</table></div>
+<h3>2.8 La resolución del contrato de obras (arts. 211, 245 y 246)</h3>
+<p>A las causas generales del art. 211 (muerte o extinción del contratista, concurso, mutuo acuerdo, demora del contratista, demora en el pago de más de 6 meses, incumplimiento esencial, imposibilidad o modificación por encima del 20 %, impago de salarios) se suman <strong>cuatro causas propias</strong> (245):</p>
+<div class="tablewrap"><table>
+<tr><th>Causa propia (245)</th><th style="width:44%">Indemnización al contratista (246), «por todos los conceptos»</th></tr>
+<tr><td>a) <strong>Demora injustificada en la comprobación del replanteo</strong></td><td><strong>2 %</strong> del precio de adjudicación, IVA excluido</td></tr>
+<tr><td>b) <strong>Suspensión de la iniciación</strong> por la Administración por plazo <strong>superior a 4 meses</strong>; o <strong>desistimiento antes de iniciar</strong></td><td><strong>3 %</strong> del precio de adjudicación, IVA excluido</td></tr>
+<tr><td>c) <strong>Suspensión de las obras iniciadas</strong> por plazo <strong>superior a 8 meses</strong>; o <strong>desistimiento una vez iniciadas</strong></td><td><strong>6 %</strong> del precio de adjudicación <strong>de las obras dejadas de realizar</strong>, como beneficio industrial, IVA excluido</td></tr>
+</table></div>
+<p>La resolución da lugar a la <strong>comprobación, medición y liquidación</strong> de lo ejecutado, con citación del contratista. Si por urgencia, seguridad o para evitar la ruina las obras deben continuarlas otro empresario o la Administración, el órgano puede acordarlo tras notificar la liquidación; el contratista puede impugnar la valoración ante el propio órgano, que resuelve en <strong>15 días</strong>.</p>
+<div class="box clave"><span class="box-h">Idea clave (examen GACE 2022)</span>
+Si se demora injustificadamente la comprobación del replanteo y se resuelve el contrato, el contratista solo tiene derecho al <strong>2 %</strong> del precio de adjudicación, IVA excluido.</div>
+<div class="box fix"><span class="box-h">Corrección al material visual: el «error del proyecto ≥ 20 %»</span>
+El visual incluía entre las causas de resolución de las obras «error del proyecto que afecte al presupuesto en ≥ 20 %». No está en el art. 245, que solo tiene las cuatro causas de arriba. El 20 % de desviación por errores del proyecto es la regla del art. <strong>315</strong>, que penaliza al <strong>redactor</strong> del proyecto (apartado 6.5), no una causa de resolución del contrato de obras.</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> La concesión de obras (arts. 14 y 247 a 283)</h2>
+<h3>3.1 Concepto y contenido (art. 14)</h3>
+<p>El concesionario realiza prestaciones del art. 13 (incluidas la restauración y reparación de construcciones existentes y la conservación y mantenimiento de lo construido), y su contraprestación es <strong>solo el derecho a explotar la obra</strong> o ese derecho <strong>más un precio</strong>. Puede incluir además: la adecuación, reforma y modernización de la obra; las actuaciones de reposición y gran reparación exigibles; y las obras accesorias o vinculadas necesarias para su finalidad y mejor explotación, con sus actuaciones ambientales.</p>
+<div class="box clave"><span class="box-h">El riesgo operacional (art. 14.4)</span>
+El derecho de explotación implica transferir al concesionario un <strong>riesgo operacional</strong>: de <strong>demanda</strong> (la demanda real de las obras o servicios), de <strong>suministro</strong> (que la prestación no se ajuste a la demanda) o ambos. Existe cuando <strong>no está garantizado</strong> que, en condiciones normales, recupere las inversiones ni cubra los costes de explotación. La exposición al mercado debe ser <strong>real</strong>: la pérdida potencial no puede ser «meramente nominal o desdeñable».<br><br>
+Consecuencias: si la Administración garantiza la recuperación de la inversión, <strong>no hay concesión</strong> aunque se llame así, sino un contrato de obras o de servicios con pago aplazado. Y el riesgo operacional permite un régimen más flexible de duración, procedimiento y financiación (Directiva 2014/23/UE).</div>
+<h3>3.2 Actuaciones preparatorias</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Actuación</th><th style="width:8%">Art.</th><th>Régimen</th></tr>
+<tr><td><strong>Estudio de viabilidad</strong></td><td>247</td><td>Previo y preceptivo. Contenido mínimo: finalidad y características; ventajas de la concesión frente a otros contratos y su impacto en la estabilidad presupuestaria; previsiones de demanda y rentabilidad; planeamiento; impacto ambiental; justificación de la solución; <strong>riesgos operativos y tecnológicos</strong>; coste y financiación; seguridad y salud; <strong>valor actual neto</strong> de inversiones, costes e ingresos (para evaluar el riesgo operacional); posible ayuda de Estado. <strong>Información pública de 1 mes</strong>, prorrogable otro; informe de las Administraciones afectadas en 1 mes si la obra no está en el planeamiento. En los supuestos de la DA 22.ª, informe preceptivo de la <strong>Oficina Nacional de Evaluación</strong>. Puede sustituirse motivadamente por un estudio de viabilidad <strong>económico-financiera</strong>; entonces la Administración elabora antes de licitar el anteproyecto o proyecto. Se aprueba y se publica en el perfil.</td></tr>
+<tr><td><strong>Iniciativa privada</strong></td><td>247.5</td><td>Los particulares pueden presentar estudios. La Administración decide en <strong>3 meses</strong> (ampliable hasta 6) si los tramita; el silencio equivale a no aceptación. Si el estudio acaba en concesión, su autor tiene <strong>5 puntos porcentuales adicionales</strong> en la licitación; si no resulta adjudicatario, se le <strong>resarcen los gastos + 5 %</strong>, que pueden imponerse al concesionario.</td></tr>
+<tr><td><strong>Anteproyecto y proyecto</strong></td><td>248 y 249</td><td>Según la complejidad, anteproyecto (puede incluir zonas de explotación comercial) con memoria, planos, presupuesto con expropiaciones y estudio de explotación y tarifas; <strong>información pública de 1 mes</strong>, prorrogable otro. Su aprobación lleva implícita la declaración de utilidad pública a efectos expropiatorios. Sin anteproyecto, los licitadores pueden proponer mejoras al estudio; con él, variantes si el pliego lo permite. Antes de ejecutar siempre hace falta un <strong>proyecto</strong>.</td></tr>
+<tr><td><strong>Pliego de cláusulas</strong></td><td>250</td><td>Objeto, capacidad y solvencia, contenido de las ofertas (plan de obras, plazo, financiación, tarifas, plan económico-financiero), retribución y actualización de costes, <strong>umbral mínimo de beneficio</strong> y distribución de riesgos (el operacional siempre del concesionario), garantías, penalidades, resolución, plazo y criterios.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al material visual: el estudio de viabilidad «vinculante»</span>
+El visual decía que en la concesión de obras el estudio de viabilidad que concluye la inviabilidad es vinculante. Esa regla está en el art. <strong>285.2</strong>, para la <strong>concesión de servicios</strong>. El art. 247 no la recoge. Añadidos del BOE que no traía ninguna fuente: los 5 puntos porcentuales para el autor del estudio y el plazo de 3 meses (máximo 6) para decidir sobre él.</div>
+<h3>3.3 Derechos, obligaciones y retribución del concesionario</h3>
+<div class="grid2">
+<div class="card"><h4>Derechos (art. 257)</h4><ul>
+<li>Explotar las obras y percibir la retribución.</li>
+<li>Mantenimiento del <strong>equilibrio económico</strong> (270).</li>
+<li>Usar los bienes de dominio público necesarios.</li>
+<li>Que la Administración tramite expropiaciones, servidumbres y desahucios (pagando él las indemnizaciones).</li>
+<li>Ceder e <strong>hipotecar</strong> la concesión y titulizar sus créditos.</li></ul></div>
+<div class="card"><h4>Obligaciones (arts. 258 y 259)</h4><ul>
+<li>Ejecutar las obras según el contrato.</li>
+<li>Explotarlas con <strong>continuidad</strong>, asumiendo el riesgo operacional.</li>
+<li>Admitir a todo usuario con igualdad, universalidad y no discriminación, mediante tarifa.</li>
+<li>Cuidar el buen orden y la calidad, sin perjuicio de la <strong>policía</strong> de la Administración.</li>
+<li>Indemnizar los daños a terceros que le sean imputables y proteger el dominio público vinculado.</li></ul></div>
+</div>
+<p><strong>Retribución (arts. 267 y 268)</strong>: <strong>tarifas</strong> de los usuarios o de la Administración, que son prestaciones patrimoniales de carácter público <strong>no tributario</strong>, fijadas como <strong>máximas</strong> y revisables según el pliego. La Administración puede pagar en función de la utilización (<strong>peaje en sombra</strong>). Caben ingresos de las <strong>zonas comerciales</strong> y aportaciones públicas durante o al final de las obras.</p>
+<h3>3.4 El equilibrio económico (art. 270)</h3>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">SÍ se restablece</span><ul>
+<li>a) Modificación acordada por la Administración (art. 262) · <em>ius variandi</em>.</li>
+<li>b) Actuaciones <strong>de la Administración concedente</strong> que, por ser obligatorias, rompan de forma directa y sustancial la economía del contrato · <em>factum principis</em>.</li>
+<li>Fuera de esos casos, <strong>solo</strong> por <strong>fuerza mayor</strong> (causas del art. 239) que rompa de forma directa y sustancial la economía.</li></ul>
+Medidas: tarifas, retribución pública, <strong>reducción</strong> del plazo o cualquier cláusula económica. En b) y fuerza mayor, si más del <strong>50 %</strong> de la retribución procede de tarifas de los usuarios, el plazo puede <strong>prorrogarse hasta un 15 %</strong> de su duración inicial.</div>
+<div class="box trampa" style="margin:0"><span class="box-h">NO se restablece</span><ul>
+<li>Por <strong>incumplimiento de las previsiones de demanda</strong>, del estudio de la Administración o del propio concesionario (regla expresa desde 2017).</li>
+<li>Por el deterioro de la economía general (inflación, tipos de interés).</li>
+<li>Por los riesgos que asumió en su oferta.</li>
+<li>Por acuerdos de explotación <strong>sin trascendencia económica</strong> (270.5).</li></ul></div>
+</div>
+<div class="box clave"><span class="box-h">Desistimiento por onerosidad extraordinaria (art. 270.4)</span>
+El concesionario puede <strong>desistir</strong>, <strong>sin indemnización para ninguna de las partes</strong>, si el contrato le resulta extraordinariamente oneroso por: a) una <strong>disposición general de otra Administración distinta de la concedente</strong> posterior a la formalización; o b) avances técnicos que esté obligado a incorporar y que aparezcan en el mercado después. Es extraordinariamente oneroso si el incremento neto anualizado de costes es de al menos el <strong>5 % de la cifra de negocios</strong> de la concesión.</div>
+<div class="box fix"><span class="box-h">Dos correcciones al temario 2026 sobre el art. 270</span>
+1) El temario dice que, fuera del <em>ius variandi</em> y del <em>factum principis</em>, el reequilibrio «solo procede cuando la ruptura derive de actuaciones de otra Administración distinta de la concedente». Es al revés: fuera de esos dos casos solo cabe por <strong>fuerza mayor</strong>; las disposiciones de <strong>otra Administración</strong> no dan reequilibrio, sino derecho a <strong>desistir sin indemnización</strong> (270.4).<br>
+2) El temario añade que, en la fuerza mayor, la Administración «asegura los rendimientos mínimos acordados». Esa frase <strong>no está en el art. 270</strong> vigente; procede de la legislación anterior. Hoy la fuerza mayor solo da derecho al restablecimiento con las medidas del 270.3.</div>
+<h3>3.5 Financiación privada (arts. 271 a 275)</h3>
+<p>La financia total o parcialmente el concesionario, que asume siempre el riesgo operacional. Además de recursos propios: <strong>obligaciones y otros títulos</strong>, con vencimiento no superior al plazo de la concesión (272); <strong>hipoteca de la concesión</strong>, previa autorización (273); <strong>titulización</strong> de créditos. La Administración puede hacer aportaciones públicas y otorgar garantías a la financiación (252 y 253), sin desnaturalizar el riesgo operacional.</p>
+<h3>3.6 Concesiones para vivienda social o asequible (DA 57.ª [sic], RDL 7/2026)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Aspecto</th><th>Régimen general</th><th>Régimen de la DA 57.ª</th></tr>
+<tr><td>Duración máxima</td><td>40 años (29.6.a)</td><td>Hasta <strong>80 años</strong>, según el periodo de recuperación de la inversión</td></tr>
+<tr><td>Anteproyecto y proyecto previos</td><td>Arts. 248 y 249</td><td><strong>No son necesarios</strong></td></tr>
+<tr><td>Estudio de viabilidad</td><td>Con información pública e informes (ONE cuando proceda)</td><td>Basta un estudio de viabilidad <strong>económico-financiera</strong>, sin información pública ni informes de la ONE ni del Comité Superior de Precios; los estudios de seguridad y salud y de riesgos operativos los hace el adjudicatario</td></tr>
+<tr><td>Tasa de descuento</td><td>La del Real Decreto 55/2017</td><td>Opcional: entre el rendimiento medio del bono a 10 años de los últimos 6 meses y ese rendimiento + <strong>400 puntos básicos</strong></td></tr>
+<tr><td>Pliego (art. 250)</td><td>Umbral mínimo de beneficio y distribución de riesgos</td><td>No se exige mencionarlos</td></tr>
+<tr><td>Entidades locales</td><td>Tramitación conjunta con el expediente de conveniencia y oportunidad (DA 3.ª.5)</td><td>No exigida</td></tr>
+<tr><td>Cesión</td><td>20 % ejecutado o 1/5 del plazo de explotación (214.2.b)</td><td>No rige ese límite, pero <strong>nunca antes de terminar las obras</strong> de edificación</td></tr>
+</table></div>
+<div class="box act"><span class="box-h">Antecedente</span>Este régimen ya se aprobó en diciembre de 2024 (Real Decreto-ley 9/2024), pero el Congreso <strong>no convalidó</strong> aquel decreto-ley. Se reintrodujo con la disposición final 10.ª del Real Decreto-ley 7/2026, en vigor desde el 22/03/2026. El BOE lo numera «quincuagésima séptima [sic]» porque ese número ya estaba ocupado.</div>
+<h3>3.7 Modificación, secuestro y extinción</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Figura</th><th style="width:8%">Art.</th><th>Régimen</th></tr>
+<tr><td><strong>Modificación</strong></td><td>262</td><td>Por interés público y en los supuestos generales: modificar el proyecto y realizar obras complementarias en la zona de afección, revisando el plan económico-financiero.</td></tr>
+<tr><td><strong>Secuestro o intervención</strong></td><td>263</td><td>Previa audiencia, si el concesionario no puede atender la explotación temporalmente y con grave daño social por causas ajenas, o incurre en incumplimiento grave que la pone en peligro. La Administración explota directamente, con el personal y material del concesionario, <strong>por cuenta y riesgo de este</strong>, y designa interventores. Duración máxima, incluidas prórrogas: <strong>3 años</strong>. Pasado ese plazo sin garantías del concesionario, se <strong>resuelve</strong>.</td></tr>
+<tr><td><strong>Extinción por cumplimiento</strong></td><td>278</td><td>Al transcurrir el plazo (con prórrogas o reducciones). Se extinguen los contratos vinculados y los de las zonas comerciales.</td></tr>
+<tr><td><strong>Causas de resolución</strong></td><td>279</td><td>Las del art. 211 <strong>salvo las letras d) y e)</strong> (demora del contratista y demora en el pago), más: a) ejecución hipotecaria desierta o imposible; b) <strong>demora de más de 6 meses</strong> de la Administración en entregar contraprestación, terrenos o medios auxiliares; c) <strong>rescate</strong>: terminación unilateral por interés público, pese a la buena gestión, para gestionar directamente; exige acreditar que la gestión directa es <strong>más eficaz y eficiente</strong>; d) supresión de la explotación; e) imposibilidad de explotar por acuerdos posteriores de la concedente; f) secuestro por encima del plazo máximo.</td></tr>
+<tr><td><strong>Efectos: causa imputable a la Administración</strong></td><td>280</td><td>Abona las <strong>inversiones</strong> (expropiaciones, obras, bienes necesarios) según su grado de amortización, con <strong>amortización lineal</strong>, fijadas en 3 meses. En b), c), d) y e), además, <strong>daños y perjuicios</strong>: beneficios futuros (media de los beneficios antes de impuestos de un periodo igual a los años que restan; si restan más de los transcurridos, se toman estos) y pérdida de valor de lo que no revierte.</td></tr>
+<tr><td><strong>Efectos: causa no imputable a la Administración</strong></td><td>280 a 282</td><td>Se <strong>incauta la garantía</strong> y el concesionario indemniza lo que exceda. La Administración debe <strong>licitar de nuevo</strong> la concesión por <strong>subasta al alza</strong>; el <strong>tipo</strong> se calcula por los flujos de caja futuros descontados al bono a 10 años + 300 puntos básicos, o el <strong>70 % de la inversión ejecutada</strong> si la obra no estaba terminada. Si queda desierta, segunda licitación en 1 mes con el tipo al <strong>50 %</strong>. Lo que resulte es el <strong>valor de la concesión</strong>, que se abona al concesionario originario en 3 meses. No es imputable a la Administración la resolución por las letras a), b) y f) del 211 ni a) y f) del 279.</td></tr>
+<tr><td><strong>Reversión</strong></td><td>283</td><td>Entrega de obras, bienes e instalaciones en buen estado, con acta de recepción formal conforme al art. 243. El pliego puede prever su demolición. Los bienes que revierten son <strong>inembargables</strong>.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al temario 2026: la «RPA»</span>
+El temario llama «responsabilidad patrimonial de la Administración (RPA)» al importe de las inversiones y toma su valor como tipo de la nueva licitación. Esa denominación es del texto refundido de 2011. La LCSP vigente habla de <strong>valor de la concesión</strong> (art. 281) y fija el tipo con las reglas del art. <strong>282</strong> (flujos de caja o 70 % de la inversión ejecutada). Este mecanismo se diseñó tras el rescate de las autopistas radiales de peaje.</div>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> La concesión de servicios (arts. 15 y 284 a 297)</h2>
+<h3>4.1 Concepto (art. 15)</h3>
+<p>Uno o varios poderes adjudicadores encomiendan a título oneroso la <strong>gestión de un servicio</strong> de su titularidad o competencia, y la contrapartida es el <strong>derecho a explotarlo</strong> o ese derecho más un precio. Implica transferir el <strong>riesgo operacional</strong>. Rasgos: servicio de titularidad o competencia del poder adjudicador (sea o no servicio público en sentido estricto); riesgo operacional en el concesionario; retribución por la explotación (tarifas o pagos vinculados al uso).</p>
+<div class="box clave"><span class="box-h">Concesión de servicios o contrato de servicios: la distinción de examen</span>
+La frontera es el <strong>riesgo operacional</strong>. Si lo asume el contratista, concesión. Si lo retiene la Administración, que paga un precio por la actividad, <strong>contrato de servicios</strong>, aunque las prestaciones se dirijan a la ciudadanía: son los contratos de servicios con prestaciones directas a la ciudadanía del <strong>art. 312</strong> (apartado 6.3).</div>
+<h3>4.2 Régimen previo y pliegos (arts. 284 y 285)</h3>
+<ul>
+<li>Se gestionan así los servicios <strong>susceptibles de explotación económica</strong> por particulares. <strong>Nunca</strong> los que impliquen <strong>ejercicio de autoridad</strong> inherente a los poderes públicos.</li>
+<li>Si es un <strong>servicio público</strong>, antes hay que establecer su <strong>régimen jurídico</strong>: declarar que la actividad queda asumida como propia, fijar el alcance de las prestaciones a los administrados y regular sus aspectos jurídicos, económicos y administrativos (284.2).</li>
+<li>Pliegos (285.1): objeto con <strong>división en lotes</strong> cuando sea posible; condiciones del servicio, <strong>tarifas</strong> y su revisión, <strong>canon</strong> a la Administración; distribución de riesgos (el operacional, siempre del concesionario); solvencia por fases; <strong>cesión</strong> del contrato y de participaciones (cambio de control si se cede el <strong>51 %</strong>).</li>
+<li>Estudio de viabilidad o de viabilidad económico-financiera previo, <strong>vinculante si concluye la inviabilidad</strong> (285.2). Con obras, anteproyecto cuando proceda.</li>
+<li>Las concesiones de <strong>servicios especiales del anexo IV</strong> se adjudican por el procedimiento <strong>restringido</strong> (131.2).</li>
+</ul>
+<h3>4.3 Ejecución, obligaciones y retribución (arts. 286 a 289)</h3>
+<p>El concesionario organiza y presta el servicio con sujeción al contrato y, en su caso, ejecuta las obras según el proyecto aprobado; la Administración conserva los <strong>poderes de policía</strong>. Obligaciones (288): prestar el servicio con la <strong>continuidad</strong> convenida y garantizar su uso a los particulares mediante las tarifas aprobadas (y, extinguido por cumplimiento, seguir prestándolo hasta que se formalice el nuevo contrato); cuidar el buen orden; <strong>indemnizar los daños a terceros</strong> salvo los imputables a la Administración; no discriminar por nacionalidad en los suministros derivados. Retribución (289): según la utilización, de los usuarios o de la Administración; las tarifas son prestaciones patrimoniales de carácter público no tributario.</p>
+<h3>4.4 Modificación y equilibrio económico (art. 290)</h3>
+<p>Régimen <strong>paralelo</strong> al de la concesión de obras: la Administración solo modifica características y tarifas por interés público y en los supuestos generales; si afecta al régimen financiero, compensa. Reequilibrio por <em>ius variandi</em>, por <em>factum principis</em> de la concedente y, fuera de ellos, solo por fuerza mayor; <strong>nunca</strong> por fallo de las previsiones de demanda. Medidas: tarifas, retribución, plazo; ampliación del plazo hasta un <strong>15 %</strong> en <em>factum principis</em> y fuerza mayor, respetando los máximos legales. Desistimiento por onerosidad extraordinaria en los mismos casos que el 270.4.</p>
+<h3>4.5 Reversión, incumplimientos y resolución (arts. 291 a 295)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Figura</th><th style="width:8%">Art.</th><th>Régimen</th></tr>
+<tr><td>Reversión</td><td>291</td><td>Al terminar el plazo, el servicio revierte; se entregan obras e instalaciones en estado adecuado.</td></tr>
+<tr><td>Falta de pago o de medios auxiliares</td><td>292</td><td>Si la Administración no paga la contraprestación o no entrega los medios a tiempo y no se resuelve el contrato, el concesionario cobra <strong>interés de demora</strong> (art. 198).</td></tr>
+<tr><td><strong>Secuestro o intervención</strong></td><td>293</td><td>Si el contrato recae sobre un <strong>servicio público</strong> y, por causas ajenas o por incumplimiento del concesionario, hay perturbación grave no reparable por otros medios, la Administración puede acordar el secuestro <strong>en los términos del art. 263</strong> (máximo <strong>3 años</strong>). El concesionario indemniza los daños. Se aplican las penalidades del art. 264.</td></tr>
+<tr><td>Causas de resolución</td><td>294</td><td>Las del 211 <strong>salvo d) y e)</strong>, más: ejecución hipotecaria desierta; demora de la Administración de más de <strong>6 meses</strong>; <strong>rescate</strong> (acreditando que la gestión directa es más eficaz y eficiente); supresión del servicio; imposibilidad por acuerdos posteriores; secuestro por encima del plazo del 263.3.</td></tr>
+<tr><td>Efectos</td><td>295</td><td>Causa imputable a la Administración: abona las inversiones según su amortización (lineal) y, en demora, rescate, supresión e imposibilidad, los daños y perjuicios con los <strong>beneficios futuros</strong>; en la demora, además, interés de demora de la Ley 3/2004. Causa no imputable: valor de la concesión conforme al art. 281.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al temario 2026: la intervención del servicio</span>
+El temario atribuye al art. 293 una intervención «hasta que aquella [la perturbación] desaparezca». El art. 293 vigente remite al secuestro del <strong>art. 263</strong>, con su límite de <strong>3 años</strong>, y solo cuando el contrato recae sobre un servicio público. La fórmula «hasta que desaparezca» es la del art. <strong>312.d</strong>, para los <strong>contratos de servicios</strong> con prestaciones directas a la ciudadanía. Por eso el visual acertaba con los 3 años.</div>
+<div class="box clave"><span class="box-h">La acción concertada (art. 11.6)</span>
+Queda fuera de la LCSP la prestación de servicios sociales por entidades privadas cuando no requiera contratos: simple financiación, o licencias o autorizaciones a todas las entidades que cumplan las condiciones, <strong>sin límites ni cuotas</strong>, con publicidad, transparencia y no discriminación. Ampara los modelos autonómicos de <strong>acción concertada</strong> en servicios sociales, sanitarios o educativos con entidades sin ánimo de lucro.</div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> El contrato de suministro (arts. 16 y 298 a 307)</h2>
+<h3>5.1 Concepto y supuestos (art. 16)</h3>
+<p>Adquisición, arrendamiento financiero o arrendamiento, con o sin opción de compra, de <strong>bienes muebles</strong>. <strong>No</strong> son suministro los contratos sobre <strong>propiedades incorporales o valores negociables</strong> (salvo los programas de ordenador del 16.3.b). Los inmuebles van por la legislación patrimonial (Ley 33/2003). Son suministro <strong>en todo caso</strong>:</p>
+<ol>
+<li>Las <strong>entregas sucesivas por precio unitario</strong> sin cuantía total exacta, subordinadas a las necesidades del adquirente.</li>
+<li>La adquisición y arrendamiento de <strong>equipos y sistemas de telecomunicaciones o informáticos</strong>, sus dispositivos y programas, y la cesión del derecho de uso, <strong>salvo los programas desarrollados a medida</strong>, que son <strong>servicios</strong>.</li>
+<li>La <strong>fabricación</strong> de cosas con características peculiares fijadas por la entidad, aunque esta aporte materiales.</li>
+<li>La adquisición de <strong>energía</strong> primaria o transformada.</li>
+</ol>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026</span>
+Equipos y programas informáticos: <strong>suministro</strong> (examen 2024). Programas <strong>a medida</strong>: <strong>servicios</strong> (examen 2022). Compra de energía: suministro, <strong>no está excluida</strong> de la LCSP (examen 2022). Fabricación: normas de obras que diga el pliego, salvo publicidad y adjudicación (examen 2022). Arrendamiento de muebles: suministro (examen 2022), máximo <strong>5 años</strong> con prórrogas (examen 2019).</div>
+<h3>5.2 Ejecución (arts. 298 a 305)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Regla</th><th style="width:9%">Art.</th><th>Contenido</th></tr>
+<tr><td>Entrega</td><td>300.1 y 304</td><td>En tiempo y lugar fijados. Gastos de entrega y transporte <strong>del contratista</strong>, salvo pacto. Si los bienes no pueden recibirse, se hace constar en el acta y se ordena subsanar o un nuevo suministro.</td></tr>
+<tr><td><strong>Riesgo</strong></td><td>300.2 a 300.4</td><td>Sin indemnización por pérdidas, averías o perjuicios <strong>antes de la entrega</strong>, salvo mora de la Administración en recibir. Si la recepción formal es <strong>posterior a la entrega</strong>, la Administración custodia los bienes en ese intervalo. Recibidos perecederos de conformidad, la Administración responde de su gestión, uso o caducidad.</td></tr>
+<tr><td>Inspección</td><td>303</td><td>La Administración puede inspeccionar el proceso de fabricación, hacer análisis y ensayos, fijar controles de calidad y dictar instrucciones.</td></tr>
+<tr><td>Pago</td><td>301 y 302</td><td>Se paga lo <strong>entregado y formalmente recibido</strong>. Con precios unitarios, puede incrementarse el número de unidades hasta el <strong>10 %</strong> del precio sin expediente de modificación, si lo prevé el pliego y hay financiación. Puede pagarse parte con <strong>bienes de la misma clase</strong>, nunca más del <strong>50 %</strong> del precio total.</td></tr>
+<tr><td>Garantía</td><td>305</td><td>Vicios o defectos durante el plazo de garantía: <strong>reposición o reparación</strong>. Si no bastan y los bienes no son aptos, pueden <strong>rechazarse</strong> antes de que expire, sin pagar o recuperando el precio. Terminado el plazo sin reparos, el contratista queda exento.</td></tr>
+<tr><td>Arrendamiento</td><td>298 y 29.5</td><td>El arrendador asume el <strong>mantenimiento</strong>; el canon de mantenimiento se fija aparte del precio. Máximo <strong>5 años</strong> con prórrogas.</td></tr>
+<tr><td>Fabricación</td><td>299</td><td>Normas de <strong>obras</strong> que determine el pliego, salvo publicidad y adjudicación, que son las del suministro.</td></tr>
+<tr><td>Energía</td><td>103.2</td><td>Admite revisión de precios; suele ir por acuerdos marco centralizados.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026: la custodia</span>
+El temario dice que la Administración es responsable de la custodia «una vez recibidos de conformidad». El art. 300.3 la hace responsable <strong>antes</strong>: desde la entrega hasta la recepción formal, cuando esta es posterior.</div>
+<h3>5.3 Resolución (arts. 306 y 307)</h3>
+<div class="tablewrap"><table>
+<tr><th>Causa propia (306)</th><th style="width:44%">Indemnización (307)</th></tr>
+<tr><td>a) <strong>Desistimiento antes de iniciar</strong> o <strong>suspensión de la iniciación</strong> imputable a la Administración por <strong>más de 4 meses</strong> desde la fecha de entrega (salvo plazo menor en el pliego)</td><td><strong>3 %</strong> del precio de adjudicación, IVA excluido</td></tr>
+<tr><td>b) <strong>Desistimiento una vez iniciado</strong> o <strong>suspensión de más de 8 meses</strong> (salvo plazo menor en el pliego)</td><td><strong>6 %</strong> del precio de adjudicación de los suministros dejados de realizar, como beneficio industrial, IVA excluido</td></tr>
+</table></div>
+<p>En todo caso, <strong>devolución recíproca</strong> de bienes y pagos; si no es posible o conveniente, la Administración paga lo entregado y recibido de conformidad (examen 2019: la suspensión de la iniciación de más de 4 meses da el 3 %).</p>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> El contrato de servicios (arts. 17 y 308 a 315)</h2>
+<h3>6.1 Concepto y límites (arts. 17 y 308)</h3>
+<p>Prestaciones de hacer: una actividad o un resultado distinto de una obra o un suministro, incluidas las de ejecución sucesiva por precio unitario. Es la categoría <strong>residual</strong>: limpieza, seguridad, mantenimiento, consultoría, asistencia técnica, formación, aplicaciones a medida, redacción de proyectos y dirección de obras, servicios sociales y sanitarios sin riesgo operacional. El <strong>anexo IV</strong> reúne los servicios sociales, sanitarios, educativos, culturales, jurídicos y otros con umbral armonizado de <strong>750.000 €</strong>.</p>
+<div class="grid2">
+<div class="card"><h4>Prohibiciones (17 y 308.2)</h4><ul>
+<li>Ejercicio de <strong>autoridad</strong> inherente a los poderes públicos.</li>
+<li>Instrumentar la <strong>contratación de personal</strong> mediante un contrato de servicios, incluidos los menores.</li>
+<li>A la extinción, <strong>nunca</strong> se consolida al personal del contratista como personal de la entidad. Los empleados públicos deben abstenerse de actos propios del empresario (instrucciones de buenas prácticas).</li></ul></div>
+<div class="card"><h4>Propiedad intelectual (308.1) y precio (309)</h4>Salvo que los pliegos digan otra cosa, los productos protegidos que se desarrollen llevan aparejada la <strong>cesión</strong> de los derechos a la Administración; aunque se excluya, puede autorizarse su uso al sector público. Precio: por componentes, unidades de ejecución o de tiempo, tanto alzado, honorarios por tarifas o combinación. Con unidades de ejecución, la variación de unidades hasta el <strong>10 %</strong> del precio no es modificación si lo prevé el pliego.</div>
+</div>
+<h3>6.2 Reglas de adjudicación propias</h3>
+<ul>
+<li><strong>Calidad (145.4)</strong>: en servicios del anexo IV y en prestaciones de carácter intelectual, los criterios de calidad pesan <strong>al menos el 51 %</strong>.</li>
+<li><strong>Precio no único (145.3.g)</strong>: no puede ser el único criterio en servicios intelectuales (ingeniería y arquitectura), servicios sociales que fomenten la integración, servicios sociales, sanitarios o educativos de la DA 48.ª, servicios intensivos en mano de obra y seguridad privada.</li>
+<li><strong>Experiencia del personal (145.2.2.º)</strong>: en servicios del anexo IV e intelectuales puede valorarse la organización, cualificación y experiencia del personal adscrito, si su calidad afecta significativamente a la ejecución (examen 2022).</li>
+<li><strong>Especificaciones imprecisas</strong>: licitación con negociación o diálogo competitivo (art. 167, examen 2022) o asociación para la innovación.</li>
+<li><strong>Duración</strong>: máximo 5 años con prórrogas, con las excepciones del art. 29 (apartado 8).</li>
+</ul>
+<div class="box fix"><span class="box-h">Corrección al material visual: «precio nunca criterio único» no es del art. 312</span>
+El visual atribuía al art. 312 que en los servicios a la ciudadanía «el precio no puede ser el único criterio». Esa regla está en el art. <strong>145.3.g)</strong>, para los supuestos de la lista de arriba. El art. 312 no habla de criterios de adjudicación.</div>
+<h3>6.3 Ejecución, servicios a la ciudadanía y resolución (arts. 311 a 313)</h3>
+<p><strong>Ejecución (311)</strong>: con sujeción al contrato, los pliegos y las instrucciones del responsable del contrato. El contratista responde de la <strong>calidad técnica</strong> de los trabajos y de las consecuencias de <strong>omisiones, errores, métodos inadecuados o conclusiones incorrectas</strong>. Si los trabajos no se ajustan por vicios imputables, la Administración puede rechazarlos sin pagar o recuperando el precio.</p>
+<div class="box clave"><span class="box-h">Servicios con prestaciones directas a la ciudadanía (art. 312)</span>
+a) Antes de contratar, <strong>régimen jurídico</strong> del servicio que lo declare asumido como propio. b) El adjudicatario presta con <strong>continuidad</strong>, garantiza el uso, cuida el buen orden, <strong>indemniza los daños a terceros</strong> (salvo los imputables a la Administración) y entrega obras e instalaciones en buen estado. c) Los bienes afectos son <strong>inembargables</strong>. d) Perturbación grave no reparable: si no se resuelve, <strong>secuestro o intervención hasta que desaparezca</strong>. e) La Administración conserva los <strong>poderes de policía</strong>. f) Prestación, con carácter general, en <strong>dependencias diferenciadas</strong> de las de la Administración, para evitar la confusión de plantillas.</div>
+<div class="tablewrap"><table>
+<tr><th>Causa propia (313)</th><th style="width:44%">Efectos</th></tr>
+<tr><td>a) <strong>Desistimiento antes de iniciar</strong> o suspensión de la iniciación imputable a la Administración por <strong>más de 4 meses</strong></td><td><strong>3 %</strong> del precio de adjudicación, IVA excluido</td></tr>
+<tr><td>b) <strong>Desistimiento una vez iniciado</strong> o suspensión de <strong>más de 8 meses</strong></td><td><strong>6 %</strong> de los servicios dejados de prestar, como beneficio industrial, IVA excluido</td></tr>
+<tr><td>c) Los <strong>contratos complementarios</strong> se resuelven al resolverse el principal</td><td><strong>3 %</strong> del precio de adjudicación, IVA excluido</td></tr>
+</table></div>
+<p>En todo caso, el contratista cobra los estudios, informes, proyectos o servicios realizados y recibidos.</p>
+<h3>6.4 Contratos de elaboración de proyectos de obras (arts. 314 y 315)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Regla</th><th>Régimen</th></tr>
+<tr><td><strong>Subsanación (314)</strong></td><td>Defectos, insuficiencias, errores, omisiones o infracciones imputables: plazo de subsanación de <strong>hasta 2 meses</strong>. Si no se corrigen, la Administración elige: <strong>resolver</strong> (incautación de la garantía + indemnización del <strong>25 %</strong> del precio) o <strong>nuevo plazo de 1 mes improrrogable</strong> con penalidad del <strong>25 %</strong>. Si vuelve a incumplir: resolución con indemnización <strong>igual al precio</strong> y pérdida de la garantía.</td></tr>
+<tr><td><strong>Desviaciones (315.1)</strong></td><td>Si el presupuesto de la obra se desvía <strong>más de un 20 %</strong>, por exceso o por defecto, del coste real por errores u omisiones del consultor, <strong>se minora</strong> el precio del proyecto: <strong>30 %</strong> si la desviación está entre el 20 y el 30 %; <strong>40 %</strong> entre el 30 y el 40 %; <strong>50 %</strong> si supera el 40 %. Se paga en 1 mes desde la notificación.</td></tr>
+<tr><td><strong>Responsabilidad (315.2)</strong></td><td>Daños a la Administración o a terceros durante la ejecución o explotación de las obras por defectos del proyecto: el redactor paga el <strong>50 %</strong> de los daños, con límite de <strong>5 veces el precio</strong> del proyecto, exigible en <strong>10 años</strong> desde su recepción; el resto frente a terceros lo paga la Administración.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al temario 2026: arts. 314 a 316</span>
+El temario sitúa el régimen en los «arts. 314 a 316», presenta la minoración por desviaciones como algo que la Administración «puede establecer en el pliego» y atribuye la responsabilidad del 50 % al «art. 316». En el BOE: el régimen está en los arts. <strong>314 y 315</strong>; la minoración es <strong>obligatoria</strong> y tiene un <strong>baremo legal</strong> (30, 40 y 50 %); la responsabilidad está en el <strong>315.2</strong>. El art. 316 abre el libro tercero (contratos de poderes adjudicadores que no son Administración Pública).</div>
+<h3>6.5 Concursos de proyectos (arts. 183 a 187)</h3>
+<p>Procedimientos para obtener planos o proyectos (arquitectura, urbanismo, ingeniería, procesamiento de datos) con selección por un <strong>jurado</strong> tras licitación. Pueden terminar en un contrato de servicios o en premios o pagos. Jurado de personas físicas <strong>independientes</strong> de los participantes; si se exige cualificación, la debe tener al menos <strong>un tercio</strong>; decide con independencia sobre proyectos <strong>anónimos</strong>.</p>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> Mixtos, administrativos especiales, privados y subvencionados</h2>
+<h3>7.1 Contratos mixtos (arts. 18 y 34.2)</h3>
+<p>Solo caben si las prestaciones están <strong>directamente vinculadas</strong> y son complementarias, como <strong>unidad funcional</strong> (34.2). La preparación y adjudicación siguen el art. 18; los efectos, cumplimiento y extinción, el art. 122.2.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:32%">Combinación</th><th>Regla de adjudicación</th></tr>
+<tr><td>Obras, suministros o servicios entre sí</td><td>La <strong>prestación principal</strong>. Si mezcla servicios del anexo IV con otros, o servicios con suministros: la de <strong>mayor valor estimado</strong>.</td></tr>
+<tr><td>Obras, suministros o servicios con <strong>concesiones</strong></td><td>No separables: prestación principal. Separables y contrato único: normas de <strong>obras, suministros o servicios</strong> si el valor de esas prestaciones <strong>supera los umbrales</strong> de los arts. 20 a 22; en otro caso, normas de las <strong>concesiones</strong>.</td></tr>
+<tr><td>Con prestaciones ajenas a la LCSP</td><td>No separables: la principal. Separables y contrato único: la LCSP.</td></tr>
+<tr><td>Con una obra de más de 50.000 €</td><td>Proyecto y tramitación de los arts. 231 y siguientes (18.3). Si incluye elementos de concesión: estudio de viabilidad y, en su caso, anteproyecto.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al temario 2026: el art. 18.1.b.2.º, al revés</span>
+El temario dice que, si las prestaciones son separables y se adjudica un único contrato, «se aplican las normas de las concesiones si el valor de sus prestaciones supera los umbrales». El BOE dice lo contrario: se aplican las normas de <strong>obras, suministros o servicios</strong> cuando el valor de <strong>estas</strong> prestaciones supera los umbrales de los arts. 20, 21 y 22; si no, las de las concesiones.</div>
+<h3>7.2 Administrativos y privados (arts. 24 a 27)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Categoría</th><th>Supuestos</th><th style="width:34%">Régimen</th></tr>
+<tr><td><strong>Administrativos típicos</strong></td><td>Los cinco típicos celebrados por una Administración Pública, salvo servicios financieros, creación e interpretación artística y literaria, espectáculos y suscripciones a revistas y bases de datos.</td><td>LCSP y desarrollo; supletoriamente Derecho administrativo y, en su defecto, privado. Contencioso-administrativo.</td></tr>
+<tr><td><strong>Administrativos especiales</strong></td><td>Objeto distinto, pero vinculados al giro o tráfico específico de la Administración o a una finalidad pública de su competencia, sin carácter privado atribuido (25.1.b).</td><td>Sus normas específicas y, en su defecto, la LCSP.</td></tr>
+<tr><td><strong>Privados</strong></td><td>Los de entidades que no son Administración Pública; y los de Administraciones excluidos del 25 (seguros, banca e inversión, creación artística, espectáculos, suscripciones), además de compraventa, donación, permuta y arrendamiento de inmuebles y propiedades incorporales (art. 9).</td><td>Preparación y adjudicación: LCSP (contencioso). Efectos y extinción: Derecho privado (civil), salvo modificación, cesión, subcontratación, racionalización, condiciones especiales y resolución por imposibilidad de modificar (26.2).</td></tr>
+</table></div>
+<h3>7.3 Subvencionados sujetos a regulación armonizada (art. 23)</h3>
+<p>Obras, y servicios vinculados, de entidades que <strong>no son poderes adjudicadores</strong>, subvencionados directamente en <strong>más del 50 %</strong> por poderes adjudicadores: obras de ingeniería civil o construcción de hospitales, centros deportivos, recreativos o de ocio, edificios escolares o universitarios y edificios administrativos de VEC <strong>≥ 5.404.000 €</strong>, o servicios vinculados <strong>≥ 216.000 €</strong>. Se les aplican las normas de preparación y adjudicación de los poderes adjudicadores.</p>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> Duración de los contratos y encargos a medios propios</h2>
+<h3>8.1 Duración (art. 29)</h3>
+<p>Se fija según la naturaleza de las prestaciones, su financiación y la necesidad de someterlas periódicamente a concurrencia. Las prórrogas exigen que no cambien las características; las acuerda el órgano y son <strong>obligatorias</strong> para el empresario con preaviso de <strong>2 meses</strong> (salvo plazo mayor en el pliego); <strong>nunca tácitas</strong>; no obligan al contratista si la Administración lleva más de 6 meses sin pagar.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:40%">Contrato</th><th>Duración máxima</th></tr>
+<tr><td>Suministros y servicios de prestación sucesiva (29.4)</td><td><strong>5 años</strong> con prórrogas. Excepcionalmente más, si lo exige la recuperación de inversiones específicas no reutilizables cuya amortización sea un coste relevante, justificado en el expediente.</td></tr>
+<tr><td>Mantenimiento contratado con la compra del bien, solo prestable en exclusiva por el suministrador (29.4)</td><td>La <strong>vida útil</strong> del producto.</td></tr>
+<tr><td>Servicios a las personas (29.4)</td><td><strong>Mayor</strong> de 5 años cuando sea necesario para la continuidad de tratamientos que el cambio de prestador perjudicaría. <strong>Sin tope legal fijo</strong>.</td></tr>
+<tr><td>Arrendamiento de bienes muebles (29.5)</td><td>5 años con prórrogas.</td></tr>
+<tr><td>Servicios complementarios de obras o suministros (29.7)</td><td>Hasta la duración del principal (más el tiempo de liquidación). Los complementarios de un <strong>menor de obras</strong> pueden ir como menores hasta <strong>30 meses</strong>.</td></tr>
+<tr><td>Concesión de obras y de servicios con ejecución de obras (29.6.a)</td><td><strong>40 años</strong>.</td></tr>
+<tr><td>Concesión de servicios no sanitarios (29.6.b)</td><td><strong>25 años</strong>.</td></tr>
+<tr><td>Concesión de servicios sanitarios sin obras (29.6.c)</td><td><strong>10 años</strong>.</td></tr>
+<tr><td>Concesiones de vivienda social o asequible (DA 57.ª)</td><td><strong>80 años</strong>.</td></tr>
+<tr><td>Acuerdos marco (219)</td><td>4 años, salvo casos excepcionales justificados.</td></tr>
+<tr><td>Contratos menores (29.8)</td><td>1 año, sin prórroga.</td></tr>
+<tr><td>Obras</td><td>La que fije el pliego según el proyecto.</td></tr>
+</table></div>
+<ul>
+<li><strong>Concesiones de más de 5 años</strong>: no pueden exceder del tiempo razonable para recuperar las inversiones con un rendimiento sobre el capital (29.6 y 29.9; Real Decreto 55/2017). Los plazos del pliego solo se amplían un <strong>15 %</strong> para reequilibrar (270 y 290). No computan los periodos de suspensión imputables a la Administración o por fuerza mayor.</li>
+<li><strong>Prórroga de continuidad (29.4)</strong>: si al vencer no se ha formalizado el nuevo contrato por incidencias imprevisibles en la adjudicación y hay interés público, el contrato se prorroga hasta que empiece el nuevo, <strong>máximo 9 meses</strong>, si el anuncio del nuevo se publicó <strong>al menos 3 meses antes</strong> (o, en contratos basados, si se invitó al menos 15 días antes).</li>
+</ul>
+<div class="box fix"><span class="box-h">Correcciones sobre las duraciones</span>
+<strong>Temario 2026</strong>: dice que los servicios a los ciudadanos de carácter social o sanitario duran «hasta diez años». El art. 29.4 permite una duración <strong>mayor</strong> por continuidad de tratamientos, sin fijar los 10 años; ese número es el de la <strong>concesión</strong> de servicios sanitarios sin obras (29.6.c).<br>
+<strong>Material visual</strong>: decía que la concesión de obras dura 40 años «con obras» y 25 «solo explotación». La concesión de obras siempre tiene 40; los 25 son de la <strong>concesión de servicios</strong> no sanitaria.</div>
+<h3>8.2 Encargos a medios propios personificados (arts. 31 a 33)</h3>
+<p>Cooperación <strong>vertical</strong> (medios propios, art. 32) u <strong>horizontal</strong> (convenios, art. 31). El encargo que cumple los requisitos <strong>no es un contrato</strong>. Requisitos del medio propio (32.2):</p>
+<ol>
+<li><strong>Control análogo</strong> al que se ejerce sobre los propios servicios: influencia decisiva sobre objetivos estratégicos y decisiones significativas. Se presume si puede conferirle encargos de ejecución obligatoria y las tarifas las fija la entidad de la que depende, según coste efectivo.</li>
+<li><strong>Más del 80 %</strong> de su actividad en cometidos confiados por quien lo controla (o por otras entidades controladas igual), reflejado en la memoria de las cuentas anuales.</li>
+<li>Si es de Derecho privado, <strong>capital 100 % público</strong>.</li>
+<li><strong>Reconocimiento expreso</strong> en sus estatutos o actos de creación, previa conformidad del poder adjudicador y verificación de medios.</li>
+</ol>
+<ul>
+<li><strong>Publicidad</strong>: encargos de más de <strong>50.000 €</strong>, IVA excluido, en la Plataforma de Contratación (63.6).</li>
+<li><strong>Subcontratación</strong>: máximo el <strong>50 %</strong> de la cuantía del encargo, con excepciones tasadas (concesiones, urgencia, seguridad pública) (32.7). Sus contratos con terceros se someten a la LCSP.</li>
+<li>No puede <strong>concurrir</strong> a licitaciones de su poder adjudicador, aunque si no hay licitadores puede recibir el encargo.</li>
+<li>Entidades que <strong>no son poderes adjudicadores</strong> (art. 33): requisitos análogos (control de todo el capital y más del 80 % de actividad).</li>
+<li>Ejemplos estatales: <strong>TRAGSA</strong> y TRAGSATEC (DA 24.ª), la Fábrica Nacional de Moneda y Timbre, INECO.</li>
+<li>Encargo sin los requisitos del art. 32: <strong>anulable</strong> (art. 40) y recurrible en recurso especial (Tema 5).</li>
+</ul>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> La racionalización técnica de la contratación (arts. 218 a 230)</h2>
+<p>No son tipos contractuales, sino <strong>técnicas</strong> que se aplican sobre obras, suministros y servicios.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Instrumento</th><th>Notas esenciales</th></tr>
+<tr><td><strong>Acuerdos marco</strong> (219 a 222)</td><td>Con uno o varios empresarios, para fijar las condiciones de los contratos de un periodo, sin uso abusivo ni restricción de la competencia. Máximo <strong>4 años</strong>. Contratos basados según sus términos o, si no están todos fijados, con nueva licitación entre las partes.</td></tr>
+<tr><td><strong>Sistemas dinámicos de adquisición</strong> (223 a 226)</td><td>Para obras, servicios y suministros de <strong>uso corriente</strong> disponibles en el mercado. <strong>Totalmente electrónico</strong> y abierto durante toda su vigencia a cualquier empresa que cumpla los criterios de selección.</td></tr>
+<tr><td><strong>Centrales de contratación</strong> (227 a 230)</td><td>Adquieren suministros y servicios para otros órganos, adjudican contratos o celebran acuerdos marco y sistemas dinámicos para ellos.</td></tr>
+</table></div>
+<h3>9.1 Contratación centralizada estatal (art. 229)</h3>
+<p>El <strong>Ministro de Hacienda</strong> declara de contratación centralizada las obras, suministros y servicios de uso general y características homogéneas. Órgano de contratación: la <strong>Junta de Contratación Centralizada</strong> (en Pleno y en Comisión Permanente). Gestión del sistema: la <strong>Dirección General de Racionalización y Centralización de la Contratación</strong> (DGRCC), de la Subsecretaría de Hacienda, que adjudica los contratos basados a propuesta del organismo destinatario. Comunidades Autónomas, entidades locales y otras pueden <strong>adherirse</strong>.</p>
+<div class="box act"><span class="box-h">Orden HAC/459/2026, de 22 de abril (en vigor el 13/05/2026)</span>
+Sustituye a la Orden EHA/1049/2008, desfasada. <strong>Suministros</strong> centralizados: mobiliario; equipos y programas informáticos y de comunicaciones; impresión, digitalización y consumibles; audiovisuales; seguridad; vehículos y combustible; <strong>energía eléctrica</strong>; material de oficina, entre otros. <strong>Servicios</strong>: transformación digital hasta 1,5 millones de euros; servicios informáticos y de telecomunicaciones, incluida la ciberseguridad; publicidad institucional; seguridad y limpieza en ciertos ámbitos territoriales (como Madrid); postales; agencias de viajes, entre otros. Modos: acuerdos marco, sistemas dinámicos o contratos centralizados. Los proyectos singulares de tecnologías de la información requieren informe favorable de la <strong>Agencia Estatal de Administración Digital</strong>.</div>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Lo que preguntan y trampas</h2>
+<div class="box clave"><span class="box-h">La escalera de cifras del Tema 6 (memoriza en bloque)</span>
+<strong>Obras:</strong> supervisión y clasificación desde 500.000 · replanteo comprobado en ≤ 1 mes · certificaciones mensuales en 10 días · certificación final 3 meses (5 si &gt; 12 M€) · garantía ≥ 1 año · pago de la liquidación 60 días · vicios ocultos 15 años (acción 2) · gastos generales 13-17 % y beneficio 6 % · audiencia de precios contradictorios 3 días hábiles · exceso de mediciones ≤ 10 % · precios nuevos ≤ 3 % · continuación provisional ≤ 20 %.<br>
+<strong>Resolución:</strong> 2 % (replanteo) · 3 % (no iniciar: desistimiento o suspensión &gt; 4 meses) · 6 % de lo dejado de hacer (desistimiento iniciado o suspensión &gt; 8 meses). Igual en suministro y servicios.<br>
+<strong>Concesiones:</strong> información pública 1 mes · 5 puntos y gastos + 5 % al autor privado del estudio · secuestro máximo 3 años · demora de la Administración 6 meses · prórroga de reequilibrio 15 % (si &gt; 50 % de tarifas en obras) · onerosidad 5 % de la cifra de negocios · nueva licitación con tipo al 50 % · 70 % de la inversión ejecutada · bono a 10 años + 300 puntos básicos.<br>
+<strong>Duraciones:</strong> 5 suministros y servicios · 40 concesión de obras · 25 concesión de servicios · 10 sanitarios sin obras · 80 vivienda · 4 acuerdo marco · 9 meses de prórroga de continuidad con anuncio 3 meses antes.<br>
+<strong>Otras:</strong> pago en especie ≤ 50 % · mediciones de suministro o servicios ≤ 10 % · calidad ≥ 51 % en anexo IV e intelectuales · encargos publicados &gt; 50.000 · subcontratación del medio propio ≤ 50 % · actividad del medio propio &gt; 80 % · proyectos: subsanación 2 meses, 25 %, baremo 30-40-50 %, 50 % de los daños hasta 5 veces el precio, 10 años · obra en mixto &gt; 50.000 exige proyecto.</div>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Lo que preguntan</span><ul>
+<li>Calificar un contrato: suministro, servicios o concesión (software, energía, arrendamiento, fabricación).</li>
+<li>Riesgo operacional y diferencia concesión/servicios.</li>
+<li>Supervisión, replanteo y clasificación (exámenes 2019, 2022 y 2024).</li>
+<li>Fuerza mayor del art. 239.</li>
+<li>Qué no es modificación en obras (10 % y 3 %).</li>
+<li>Causas propias de resolución y sus 2, 3 y 6 %.</li>
+<li>Equilibrio económico: cuándo sí y cuándo no.</li>
+<li>Duraciones del art. 29 y requisitos del medio propio.</li></ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>Las certificaciones de obra <strong>no</strong> son recepción.</li>
+<li>La concesión de servicios sanitarios sin obras dura 10 años, no 25.</li>
+<li>La caída de demanda <strong>no</strong> permite reequilibrar.</li>
+<li>Una disposición de <strong>otra</strong> Administración da derecho a desistir, no a reequilibrar.</li>
+<li>El suministro no incluye inmuebles; el software a medida es servicio.</li>
+<li>El personal del contratista nunca se consolida como público (308.2).</li>
+<li>Solo los fenómenos naturales <strong>catastróficos</strong> son fuerza mayor.</li>
+<li>El estudio de viabilidad es vinculante si concluye la inviabilidad solo en la concesión de <strong>servicios</strong> (285.2).</li>
+<li>Exceso de mediciones: 10 %; precios nuevos: 3 %; continuación provisional: 20 %.</li>
+<li>Obras de 1 M€: sin recurso especial (&gt; 3 M€).</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia del supuesto con sus cuatro piezas: Constitución (149.1.18.ª), LCSP con sus directivas, Real Decreto 1098/2001 y objeto del art. 1, más la Orden HAC/1517/2025 de umbrales.</li>
+<li>La calificación previa de un contrato: oneroso, poder adjudicador y AP, <strong>tipo con su artículo</strong>, administrativo, valor estimado y SARA, órgano de contratación y jurisdicción.</li>
+<li>El cuadro maestro de los cinco contratos típicos.</li>
+<li>La secuencia proyecto → supervisión → replanteo → comprobación del replanteo → certificaciones → recepción → garantía → liquidación, con sus plazos.</li>
+<li>Las tres causas de fuerza mayor del art. 239.</li>
+<li>Las causas propias de resolución de obras, suministro y servicios con su 2, 3 y 6 %.</li>
+<li>El riesgo operacional (14.4) y los supuestos de restablecimiento del equilibrio (270 y 290).</li>
+<li>Las duraciones del art. 29.</li>
+<li>Los cuatro requisitos del medio propio personificado.</li>
+</ol>
+
+<!-- 11 -->
+<h2 id="s11"><span class="n">11.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>En el supuesto, este tema aparece casi siempre dentro de una cuestión de contratación: primero se califica el contrato (Tema 5) y luego se aplica la regla propia del tipo (este tema). Lo que separa una nota media de una alta es <strong>citar el artículo propio del tipo</strong> y <strong>operar la cifra</strong>: el 3 % de un precio, el 10 % de mediciones, la anualidad media para la categoría.</p>
+<h3>11.1 Introducción de la materia (plantillas v2, sección 7)</h3>
+<div class="model">
+<p>«La contratación pública se encuadra en el artículo 149.1.18.ª de la Constitución, que atribuye al Estado la legislación básica sobre contratos y concesiones administrativas. Resulta de aplicación la Ley 9/2017, de 8 de noviembre, de Contratos del Sector Público (en adelante, LCSP), por la que se transponen las Directivas 2014/23/UE y 2014/24/UE, y, en lo que no se oponga a ella, el Reglamento General de la Ley de Contratos de las Administraciones Públicas, aprobado por el Real Decreto 1098/2001, de 12 de octubre. Conforme a su artículo 1, la LCSP garantiza los principios de libertad de acceso a las licitaciones, publicidad y transparencia, no discriminación e igualdad de trato, y una eficiente utilización de los fondos públicos. Los umbrales de regulación armonizada vigentes son los fijados por la Orden HAC/1517/2025, de 18 de diciembre, aplicables desde el 1 de enero de 2026.»</p>
+</div>
+<div class="box sup"><span class="box-h">Las cuatro piezas</span>Constitución (149.1.18.ª) → LCSP con sus dos directivas → Real Decreto 1098/2001, en lo que no se oponga → objeto (art. 1) y umbrales (Orden HAC/1517/2025). En un supuesto de obras, el Real Decreto 1098/2001 aporta además el art. 131 (gastos generales y beneficio industrial) y las categorías de clasificación.</div>
+<h3>11.2 Calificación previa propia del Tema 6</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar el contrato. Se trata de un contrato oneroso (artículo 2 de la LCSP), celebrado por [Ministerio], que es Administración Pública y poder adjudicador (artículo 3). Por su objeto, [la ejecución de una obra de rehabilitación sobre un inmueble] es un contrato de [obras] (artículo [13]), de carácter administrativo (artículo 25), y su régimen específico es el de los artículos [231 a 246]. [No existe transferencia del riesgo operacional, por lo que no es una concesión (artículo 14.4).] Su valor estimado asciende a [cifra], por lo que [no] está sujeto a regulación armonizada y [no] es susceptible de recurso especial (artículo 44).»</p>
+</div>
+<h3>11.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Hecho del enunciado</th><th style="width:32%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>Se licita la compra de ordenadores y un programa estándar con licencias</td><td>Art. 16.3.b</td><td>Es suministro (examen 2024)</td></tr>
+<tr><td>Se encarga una aplicación informática desarrollada a medida</td><td>Art. 16.3.b, inciso final</td><td>Es contrato de servicios (examen 2022)</td></tr>
+<tr><td>Un concesionario de un aparcamiento pide reequilibrio porque el uso ha caído un 30 %</td><td>Arts. 14.4 y 290.4: riesgo de demanda</td><td>No procede el restablecimiento</td></tr>
+<tr><td>Una Comunidad Autónoma aprueba una norma que encarece un 7 % de la cifra de negocios la concesión estatal</td><td>Art. 270.4.a o 290.6.a: otra Administración</td><td>El concesionario puede desistir sin indemnización; no hay reequilibrio</td></tr>
+<tr><td>Obra con PBL de 600.000 € sin IVA y no se ha pedido informe de supervisión</td><td>Art. 235: ≥ 500.000 €</td><td>Falta un informe preceptivo: el proyecto no puede aprobarse</td></tr>
+<tr><td>La Administración tarda en comprobar el replanteo sin justificación y se resuelve el contrato</td><td>Arts. 245.a y 246.2</td><td>Indemnización del 2 % del precio de adjudicación, IVA excluido (examen 2022)</td></tr>
+<tr><td>Se suspende el inicio de un suministro 5 meses por causa de la Administración</td><td>Arts. 306.a y 307.2</td><td>Causa de resolución; indemnización del 3 % del precio de adjudicación (examen 2019)</td></tr>
+<tr><td>Las mediciones reales de una obra superan las del proyecto en un 7 % del precio</td><td>Art. 242.4.i</td><td>No es modificación: se recoge en la certificación final</td></tr>
+<tr><td>Un temporal marítimo catastrófico destruye parte de la obra</td><td>Art. 239</td><td>Fuerza mayor: indemnización al contratista si no hubo imprudencia</td></tr>
+<tr><td>La ruina de un edificio por vicio oculto aparece 9 años después de la recepción</td><td>Art. 244</td><td>Responde el contratista (plazo de 15 años); acción en 2 años desde que se manifiesta</td></tr>
+<tr><td>Un Ministerio encarga a TRAGSA, que obtiene el 70 % de su actividad de encargos públicos</td><td>Art. 32.2.b: más del 80 %</td><td>No cumple el requisito: el encargo es anulable y debe licitarse</td></tr>
+<tr><td>Al acabar un contrato de limpieza, los trabajadores piden ser personal del Ministerio</td><td>Art. 308.2</td><td>No procede la consolidación</td></tr>
+</table></div>
+
+<h3>11.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+El Ministerio de Transportes y Movilidad Sostenible licita la <strong>rehabilitación de un edificio administrativo</strong> para adaptarlo a oficinas de atención al público, conservando su fachada histórica. Presupuesto base de licitación: <strong>1.452.000 €</strong>, IVA incluido (21 %). No hay prórrogas ni modificaciones previstas. El contrato se adjudica a Gamma, S.A., por <strong>1.000.000 €</strong> sin IVA y se formaliza el <strong>2 de marzo</strong>. El 1 de abril, sin haberse comprobado el replanteo, el Ministerio <strong>suspende la iniciación</strong> de las obras por un problema con la disponibilidad de un solar colindante. El 15 de agosto la suspensión continúa y Gamma pide la resolución. Durante la licitación nadie pidió informe a la oficina de supervisión.
+<br><br><strong>Cuestiones:</strong> a) Calificación del contrato y requisitos previos que se han omitido. b) ¿Procede la resolución y qué indemnización corresponde a Gamma?</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 11.1.] Con carácter previo, procede calificar el contrato. Se trata de un contrato oneroso (artículo 2 de la LCSP), celebrado por un Ministerio, que es Administración Pública y poder adjudicador (artículo 3). Tiene por objeto la ejecución de una obra sobre un bien inmueble, por lo que es un contrato de obras (artículo 13) de carácter administrativo (artículo 25). Al conservar la fachada y el valor histórico y dotar al edificio de un nuevo uso, es una obra de rehabilitación, del grupo de primer establecimiento, reforma, restauración, rehabilitación o gran reparación (artículo 232.1.a). La cuestión a) solicita, además, determinar los requisitos previos omitidos. El presupuesto base de licitación sin IVA es de 1.452.000 / 1,21 = 1.200.000 €, y, al no haber prórrogas ni modificaciones previstas, ese es también su valor estimado (artículo 101). Por tanto: no está sujeto a regulación armonizada (inferior a 5.404.000 €, artículo 20); no admite recurso especial (no supera 3.000.000 €, artículo 44.1.a); exige clasificación del contratista (igual o superior a 500.000 €, artículo 77.1.a); y exigía informe de la oficina de supervisión antes de aprobar el proyecto, porque el presupuesto base de licitación sin IVA es igual o superior a 500.000 € (artículo 235). El enunciado no precisa si el proyecto ya se aprobó, por lo que suponemos que sí, ya que el contrato se adjudicó. No obstante lo anterior, cabría considerar la omisión un simple defecto formal sin consecuencias, si bien la solución más adecuada es calificarla como infracción del procedimiento de preparación que hace anulable el acto de aprobación del proyecto (artículo 48 de la Ley 39/2015, al que remite el artículo 40 de la LCSP), convalidable recabando el informe omitido (artículo 52 de la Ley 39/2015). Por tanto, se concluye que es un contrato administrativo de obras de rehabilitación, no armonizado y sin recurso especial, y que la aprobación del proyecto sin el informe de supervisión del artículo 235 de la LCSP es anulable y debe convalidarse.</p>
+<p><strong>Cuestión b).</strong> La cuestión b) plantea si procede la resolución y su indemnización. El artículo 245.b) de la LCSP considera causa de resolución propia del contrato de obras la suspensión de la iniciación de las obras por plazo superior a cuatro meses. En el presente supuesto, la suspensión se acordó el 1 de abril y el 1 de agosto se cumplieron cuatro meses; a 15 de agosto el plazo se ha superado. El enunciado no precisa si el problema del solar es imputable a Gamma, por lo que suponemos que no lo es, ya que la disponibilidad de los terrenos debía comprobarse en el replanteo previo a la aprobación del expediente (artículo 236.1), que corresponde a la Administración. Conforme al artículo 246.3, Gamma tiene derecho, por todos los conceptos, al 3 % del precio de adjudicación, IVA excluido: 3 % de 1.000.000 € = 30.000 €. No obstante lo anterior, cabría plantear la causa del artículo 245.a), demora en la comprobación del replanteo, con una indemnización del 2 %, si bien la solución más adecuada es la del apartado b), porque el retraso obedece a una suspensión expresa acordada por el Ministerio y no a una simple demora en comprobar el replanteo. Por tanto, se concluye que procede la resolución del contrato por el artículo 245.b) de la LCSP, con una indemnización a Gamma de 30.000 €, previa comprobación, medición y liquidación de lo ejecutado (artículo 246.1).</p>
+</div>
+<h3>11.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Calificación completa con el artículo del tipo</strong> (13 y 232.1.a) → <em>análisis</em>: la Comisión valora ver la obra como rehabilitación y no como simple reforma.<br>
+<strong>Cifras operadas</strong> (1.452.000 / 1,21 = 1.200.000 frente a 500.000, 3.000.000 y 5.404.000; 1 de abril + 4 meses; 3 % de 1.000.000 = 30.000) → <em>aplicación de conocimientos</em>.<br>
+<strong>Detectar lo que el enunciado esconde</strong> (la supervisión omitida; que no cabe recurso especial) → <em>análisis</em>.<br>
+<strong>Dos suposiciones declaradas</strong> (proyecto aprobado; causa no imputable a Gamma, apoyada en el art. 236) → admitidas porque se justifican.<br>
+<strong>Alternativas evaluadas y descartadas con razón</strong> (defecto subsanable; el 2 % del replanteo) → <em>análisis y sistemática</em>.<br>
+<strong>Conclusión afirmativa</strong> en cada cuestión, con la cifra final.</div>
+
+<!-- 12 -->
+<h2 id="s12"><span class="n">12.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Tipología</td><td>Sentido de la calificación, art. 12, cambios de 2017, reformas 2025-2026, cuadro de umbrales por tipo</td><td>Cuadro maestro de los cinco contratos</td><td>Fusionado (1)</td></tr>
+<tr><td>Obras</td><td>Concepto, obra completa, art. 232, proyecto y su presupuesto, 234, supervisión, replanteo, categorías, ejecución, revisión, modificación, demora, suspensión, recepción, vicios, resolución con porcentajes, ideas clave 2019-2024</td><td>Secuencia con plazos, fuerza mayor, no modificaciones (10 % y 3 %), reducción de unidades</td><td>Fusionado + BOE (2) con dos correcciones</td></tr>
+<tr><td>Concesión de obras</td><td>Concepto, riesgo operacional, viabilidad, anteproyecto, pliego, derechos, tarifas, equilibrio, financiación, DA vivienda, secuestro, resolución y efectos</td><td>Viabilidad con resarcimiento, secuestro, reversión, cuadro sí/no del equilibrio</td><td>Fusionado + BOE (3) con tres correcciones</td></tr>
+<tr><td>Concesión de servicios</td><td>Concepto, 284 y 285, ejecución, equilibrio, reversión, 292 a 295, acción concertada</td><td>Régimen previo, anexo IV restringido, obligaciones, secuestro 3 años, distinción con servicios</td><td>Fusionado (4) con corrección</td></tr>
+<tr><td>Suministro</td><td>Concepto y supuestos, ejecución, arrendamiento, fabricación, energía, resolución, ideas clave</td><td>Objeto, entrega y riesgo, recepción, resolución</td><td>Fusionado (5) con precisión</td></tr>
+<tr><td>Servicios</td><td>Concepto, 308, 309, 145, 167, duración, 311 y 312, 313, proyectos, concursos</td><td>Propiedad intelectual, responsabilidad, servicios a la ciudadanía</td><td>Fusionado + BOE (6) con dos correcciones</td></tr>
+<tr><td>Mixtos y otros</td><td>Mixtos, administrativos y privados, subvencionados</td><td>No</td><td>Fusionado (7) con corrección</td></tr>
+<tr><td>Duración y medios propios</td><td>Tabla del art. 29, prórroga de 9 meses, art. 32</td><td>Duraciones en el cuadro</td><td>Fusionado + BOE (8) con correcciones</td></tr>
+<tr><td>Racionalización</td><td>Instrumentos, contratación centralizada, Orden HAC/459/2026</td><td>No</td><td>Fusionado (9)</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 11 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas (contrastadas con el texto consolidado del BOE el 29/10/2026)</span>
+<strong>Temario 2026:</strong> continuación provisional hasta el 20 %, no el 10 % (242.5) · fuera del <em>ius variandi</em> y del <em>factum principis</em>, el reequilibrio solo cabe por fuerza mayor; las normas de otra Administración dan derecho a desistir (270.2 y 270.4) · los «rendimientos mínimos» en fuerza mayor no están en el art. 270 vigente · la «RPA» es terminología de 2011; hoy, valor de la concesión y tipo del art. 282 · el art. 293 remite al secuestro del 263 (3 años); «hasta que desaparezca» es del 312.d · la custodia corresponde a la Administración desde la entrega (300.3) · proyectos: arts. 314 y 315, baremo obligatorio, responsabilidad en el 315.2 · art. 18.1.b.2.º, al revés · servicios a las personas sin tope de 10 años (29.4).<br>
+<strong>Material visual:</strong> el «error del proyecto ≥ 20 %» no es causa de resolución de obras (245) · el estudio de viabilidad vinculante es de la concesión de servicios (285.2) · «precio nunca criterio único» es del art. 145.3.g, no del 312 · la concesión de obras dura 40 años; los 25 son de la concesión de servicios.<br>
+<strong>Añadidos del BOE que no traía ninguna fuente:</strong> 5 puntos porcentuales al autor del estudio de viabilidad (247.5) · certificación final ampliable a 5 meses (243.1) · obras sin plazo de garantía (243.4) · acción de 2 años por vicios (244.2) · aviso a la Intervención de unidades ocultas (242.3) · efectos del art. 314 · resolución por complementarios con el 3 % (313) · excepciones de las letras d) y e) del 211 en concesiones (279 y 294).</div>
+
+<footer>
+GACE 2027 · Bloque IV · Tema 6 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 29/10/2026.<br>
+Normas: CE · Ley 9/2017 (consolidada a 09/04/2026) · Real Decreto 1098/2001 · Real Decreto 773/2015 · Real Decreto 1359/2011 · Real Decreto 55/2017 · Real Decreto-ley 3/2022 · Real Decreto-ley 7/2026 · Ley 1/2026 · Orden HAC/1517/2025 · Orden HAC/459/2026 · Ley 33/2003 · Ley 38/1999 · Ley 3/2004.
+</footer>
+</div>
+</body>
+</html>
