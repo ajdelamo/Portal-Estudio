@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BIV · Tema 7 — Formas de la actividad administrativa y subvenciones (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tablewrap table{break-inside:auto}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque IV · Derecho Administrativo · Tema 7</small>
+    <h1>Procedimientos y formas de la actividad administrativa. La actividad de intervención, arbitral, de servicio público y de fomento. Formas de gestión de los servicios públicos. Ayudas y subvenciones públicas: régimen jurídico</h1>
+    <p>Versión fusionada: el Tema 7 del Bloque IV del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas contra el texto consolidado del BOE y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 29/10/2026 · Ley 38/2003 consolidada a 03/10/2026 (Ley 4/2026, en vigor el 23/10/2026)</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">Las formas de la actividad administrativa</a></li>
+    <li><a href="#s2">La actividad de intervención y la potestad sancionadora</a></li>
+    <li><a href="#s3">La actividad arbitral</a></li>
+    <li><a href="#s4">El servicio público y sus formas de gestión</a></li>
+    <li><a href="#s5">La actividad de fomento</a></li>
+    <li><a href="#s6">Las subvenciones: concepto, sujetos y principios</a></li>
+    <li><a href="#s7">Procedimientos de concesión y ejecución</a></li>
+    <li><a href="#s8">Invalidez, reintegro, control y sanciones</a></li>
+    <li><a href="#s9">Lo que preguntan y trampas</a></li>
+    <li><a href="#s10">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s11">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. El tema tiene dos mitades: las cuatro formas de actividad (con el procedimiento sancionador dentro de la intervención) y el régimen de las subvenciones, que es lo que más pregunta el examen.</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Repaso en audio. Al terminar, recita sin mirar la escalera de plazos del <a href="#s9">apartado 9</a>: la de la Ley 40/2015 (3, 2, 6 meses; 3, 2, 1) frente a la de subvenciones (4 y 4).</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s10">apartado 10</a> tapando la columna derecha. En el supuesto, las subvenciones casi siempre acaban en reintegro: causa, importe, intereses, prescripción y caducidad.</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> Las formas de la actividad administrativa</h2>
+<p>La doctrina clásica española, con <strong>Jordana de Pozas</strong> (1949) como referencia, agrupa la actividad de la Administración en <strong>tres formas</strong>; la doctrina posterior añadió una cuarta. El criterio es el grado en que cada una afecta a la libertad y al patrimonio del ciudadano.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Forma</th><th>Finalidad</th><th style="width:38%">Técnicas típicas</th></tr>
+<tr><td>👮 <strong>Intervención</strong> (antes, policía)</td><td>Limitar o condicionar la actividad de los particulares para proteger el interés general.</td><td>Información y registro · declaración responsable y comunicación · autorización · órdenes, inspección y sanciones.</td></tr>
+<tr><td>🌱 <strong>Fomento</strong></td><td>Estimular, <strong>sin coacción</strong> y sin prestar el servicio, actividades privadas de interés público.</td><td>Subvenciones, créditos, avales, beneficios fiscales, distinciones honoríficas.</td></tr>
+<tr><td>🚰 <strong>Servicio público</strong></td><td>Prestar o garantizar prestaciones a los ciudadanos, de forma regular y continua.</td><td>Gestión directa o indirecta de servicios.</td></tr>
+<tr><td>⚖️ <strong>Arbitral</strong></td><td>Resolver controversias entre particulares como tercero imparcial.</td><td>Juntas arbitrales, resolución de conflictos entre operadores.</td></tr>
+</table></div>
+<p>No son compartimentos estancos: un sector como las telecomunicaciones o la energía combina autorizaciones, obligaciones de servicio público, ayudas y resolución de conflictos.</p>
+<div class="box clave"><span class="box-h">Los procedimientos de la actividad</span>
+Cada forma se canaliza por procedimientos. La <strong>Ley 39/2015</strong> (LPAC) regula un procedimiento común con <strong>especialidades</strong> para el sancionador y el de responsabilidad patrimonial, que dejaron de tener reglamentos propios. Subsisten <strong>procedimientos especiales por razón de la materia</strong> (tributarios, subvenciones, contratación, extranjería, Seguridad Social…), regulados por su normativa y, supletoriamente, por la LPAC (<span class="art">DA 1.ª LPAC</span>).</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> La actividad de intervención y la potestad sancionadora</h2>
+<h3>2.1 Concepto y principios (art. 4 Ley 40/2015)</h3>
+<p>La Administración limita la libertad y los derechos de los particulares para garantizar el orden público, la seguridad, la salud pública, el medio ambiente u otros bienes de interés general. Exige <strong>habilitación legal</strong>, porque afecta a derechos. Principios del <span class="art">art. 4 LRJSP</span>, con origen en la Directiva 2006/123/CE («Bolkestein»):</p>
+<ul>
+<li>Aplicar el principio de <strong>proporcionalidad</strong> y elegir la <strong>medida menos restrictiva</strong>.</li>
+<li><strong>Motivar su necesidad</strong> para proteger el interés público y justificar su adecuación, sin diferencias de trato discriminatorias.</li>
+<li><strong>Evaluar periódicamente</strong> sus efectos y resultados.</li>
+<li>Pueden comprobar, verificar, investigar e inspeccionar los hechos y circunstancias necesarios.</li>
+</ul>
+<h3>2.2 Las técnicas, de menor a mayor intensidad</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Técnica</th><th>Régimen</th></tr>
+<tr><td><strong>Comunicación y declaración responsable</strong> (<span class="art">art. 69 LPAC</span>)</td><td><strong>Declaración responsable</strong>: el interesado manifiesta bajo su responsabilidad que cumple los requisitos, que dispone de la documentación y que se compromete a mantenerlos. <strong>Comunicación</strong>: pone en conocimiento de la Administración sus datos y requisitos. Ambas permiten ejercer el derecho o iniciar la actividad <strong>desde el día de su presentación</strong> (69.3), con control posterior. La inexactitud, falsedad u omisión <strong>esencial</strong> impide continuar desde que se conozca y puede obligar a restituir la situación.</td></tr>
+<tr><td><strong>Autorización o licencia</strong></td><td>Acto que <strong>remueve un obstáculo</strong> al ejercicio de un <strong>derecho preexistente</strong>, previa comprobación de los requisitos. No confundir con la <strong>concesión</strong>, que <strong>crea</strong> el derecho <em>ex novo</em>. La Ley 17/2009 («Paraguas», transposición de la Directiva de servicios), la Ley 25/2009 («Ómnibus») y la Ley 20/2013, de garantía de la unidad de mercado, solo la admiten si la justifica una <strong>razón imperiosa de interés general</strong> y es proporcionada; en gran medida se sustituyó por declaraciones responsables.</td></tr>
+<tr><td><strong>Órdenes y prohibiciones</strong></td><td>Mandatos de hacer o no hacer.</td></tr>
+<tr><td><strong>Inspección</strong></td><td>Comprobación del cumplimiento de la normativa.</td></tr>
+<tr><td><strong>Potestad sancionadora</strong></td><td>Reacción frente a las infracciones: principios de los arts. 25 a 31 LRJSP y procedimiento de la LPAC.</td></tr>
+</table></div>
+<h3>2.3 Los principios de la potestad sancionadora (arts. 25 a 31 LRJSP)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Principio</th><th>Contenido esencial</th></tr>
+<tr><td><strong>Legalidad</strong> (25)</td><td>Solo si una norma con <strong>rango de ley</strong> la reconoce, por los órganos que la tengan atribuida y con el procedimiento previsto. <strong>No se aplica</strong> a la potestad disciplinaria sobre el personal ni a quienes estén vinculados por una relación contractual.</td></tr>
+<tr><td><strong>Irretroactividad</strong> (26)</td><td>Rigen las normas vigentes al producirse los hechos. Tienen efecto <strong>retroactivo si favorecen</strong> al infractor, en tipificación, sanción y plazos de prescripción, incluso en sanciones pendientes de cumplir.</td></tr>
+<tr><td><strong>Tipicidad</strong> (27)</td><td>Infracciones previstas por <strong>ley</strong> y clasificadas en leves, graves y muy graves; sanciones delimitadas por ley. Los reglamentos solo especifican o gradúan. <strong>Sin analogía</strong>.</td></tr>
+<tr><td><strong>Responsabilidad</strong> (28)</td><td>Personas físicas y jurídicas y, si una ley les da capacidad de obrar, grupos de afectados, uniones, entidades sin personalidad y patrimonios independientes, a título de <strong>dolo o culpa</strong>. Compatible con reponer la situación alterada e indemnizar.</td></tr>
+<tr><td><strong>Proporcionalidad</strong> (29)</td><td>Nunca privación de libertad. Cometer la infracción no puede ser más beneficioso que cumplir. Graduación: culpabilidad o intencionalidad, continuidad o persistencia, naturaleza de los perjuicios y <strong>reincidencia</strong> (más de una infracción de la misma naturaleza en un año, declarada por resolución firme en vía administrativa). <strong>Infracción continuada</strong>: pluralidad de acciones u omisiones que infringen el mismo precepto en ejecución de un plan preconcebido o aprovechando idéntica ocasión.</td></tr>
+<tr><td><strong>Prescripción</strong> (30)</td><td>La que fije su ley; en su defecto: <strong>infracciones</strong> muy graves 3 años, graves 2, leves <strong>6 meses</strong>; <strong>sanciones</strong> muy graves 3 años, graves 2, leves <strong>1 año</strong>.</td></tr>
+<tr><td><strong>Non bis in idem</strong> (31)</td><td>No se sancionan hechos ya sancionados penal o administrativamente si hay identidad de <strong>sujeto, hecho y fundamento</strong>.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">El cómputo de la prescripción (art. 30)</span>
+<strong>Infracciones</strong>: desde que se cometieron (en las continuadas o permanentes, desde que terminó la conducta); se <strong>interrumpe</strong> por la iniciación, con conocimiento del interesado, de un procedimiento sancionador. <strong>Sanciones</strong>: desde el día siguiente a aquel en que sea ejecutable la resolución o haya transcurrido el plazo para recurrirla.</div>
+<div class="box trampa"><span class="box-h">Trampa</span>En subvenciones el plazo es <strong>especial</strong>: infracciones y sanciones prescriben a los <strong>4 años</strong> (art. 65 LGS). La escala de 3, 2 y 6 meses solo rige si la ley sectorial no dice otra cosa.</div>
+<h3>2.4 Especialidades del procedimiento sancionador en la LPAC</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Trámite</th><th>Régimen</th></tr>
+<tr><td>Separación de fases (63.1)</td><td>Siempre <strong>de oficio</strong>; fase instructora y sancionadora en <strong>órganos distintos</strong>. No hay sanción sin procedimiento.</td></tr>
+<tr><td>Denuncia (62)</td><td>No da por sí sola la condición de interesado. El denunciante que participó en la infracción, si hay otros infractores: <strong>exención</strong> si es el primero en aportar pruebas que permitan iniciar o comprobar, cuando no había elementos suficientes, y repara el perjuicio; si no, <strong>reducción</strong> cuando sus pruebas aporten un valor añadido significativo. En ambos casos debe <strong>cesar</strong> en la infracción y <strong>no haber destruido pruebas</strong> (62.4).</td></tr>
+<tr><td>Acuerdo de iniciación (64)</td><td>Presunto responsable; hechos, posible calificación y sanciones; instructor (y secretario) con su régimen de recusación; órgano competente y norma, con la posibilidad de reconocer la responsabilidad (art. 85); medidas provisionales; derecho a alegar y a la audiencia y sus plazos. Se comunica al instructor y se notifica a los interesados. Si no se alega y el acuerdo contiene un pronunciamiento preciso sobre la responsabilidad, puede valer como <strong>propuesta de resolución</strong>. Excepcionalmente, calificación posterior mediante <strong>pliego de cargos</strong>.</td></tr>
+<tr><td>Terminación anticipada (85)</td><td><strong>Reconocimiento</strong> de la responsabilidad o <strong>pago voluntario</strong> antes de la resolución (este, si la sanción es solo pecuniaria o la no pecuniaria se ha justificado improcedente). Si la sanción es solo pecuniaria, reducciones de <strong>al menos el 20 %</strong>, <strong>acumulables</strong>, condicionadas al desistimiento o renuncia de recursos administrativos. Queda a salvo la reposición e indemnización.</td></tr>
+<tr><td>Propuesta (89)</td><td>Hechos probados, calificación, infracción, responsable y sanción, o inexistencia de infracción; se notifica.</td></tr>
+<tr><td>Resolución (90)</td><td>Valora las pruebas; <strong>no puede aceptar hechos distintos</strong> de los determinados en el procedimiento. Es <strong>ejecutiva</strong> cuando no quepa recurso ordinario en vía administrativa; puede suspenderse cautelarmente si se anuncia recurso contencioso.</td></tr>
+<tr><td>Tramitación simplificada (96.5)</td><td>Si hay elementos para calificar la infracción como <strong>leve</strong>, sin que quepa la oposición expresa del interesado.</td></tr>
+<tr><td>Falta de resolución (25.1.b)</td><td>En procedimientos sancionadores o de intervención con efectos desfavorables, el vencimiento del plazo produce la <strong>caducidad</strong>. No supone por sí la prescripción, pero los procedimientos caducados <strong>no interrumpen</strong> la prescripción.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026: el plazo de alegaciones</span>
+El temario dice que el acuerdo de iniciación se notifica «concediéndoles un plazo de diez días para aportar alegaciones». El art. 64 <strong>no fija</strong> ese plazo: exige que el acuerdo indique el derecho a alegar y «los plazos para su ejercicio». Los diez días proceden de la práctica y de la normativa sectorial; si el examen pregunta qué dice el art. 64, la respuesta es la indicación de los plazos, no un número.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (examen GACE 2019)</span>
+El procedimiento sancionador se inicia siempre de oficio y <strong>caduca</strong> si no se resuelve en plazo. El denunciante que participó solo se beneficia de la exención o reducción si <strong>cesa</strong> y no destruye pruebas. La tramitación simplificada procede cuando la infracción puede calificarse como <strong>leve</strong>.</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> La actividad arbitral</h2>
+<p>La Administración, desde una posición de <strong>neutralidad</strong>, decide controversias entre particulares sobre derechos o intereses privados, o propone soluciones que pueden aceptar. Se diferencia del arbitraje privado (Ley 60/2003, de Arbitraje) porque decide un órgano administrativo, y de la jurisdicción porque sus decisiones son actos administrativos o laudos sin fuerza de cosa juzgada judicial, salvo previsión legal; los actos son <strong>recurribles</strong>.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Manifestación</th><th>Régimen</th></tr>
+<tr><td><strong>Sistema Arbitral de Consumo</strong> (Real Decreto 231/2008)</td><td>Juntas Arbitrales de Consumo (estatales, autonómicas o locales). Arbitraje entre consumidores y empresas: <strong>voluntario, gratuito y vinculante</strong> para ambas partes; el laudo tiene los efectos de la Ley de Arbitraje.</td></tr>
+<tr><td><strong>Juntas Arbitrales del Transporte</strong> (Ley 16/1987)</td><td>Controversias mercantiles de los contratos de transporte terrestre.</td></tr>
+<tr><td><strong>Organismos reguladores</strong></td><td>Conflictos entre operadores; por ejemplo, la CNMC en el acceso a redes de telecomunicaciones, energía o sector postal.</td></tr>
+<tr><td><strong>Arbitraje sustitutivo de recursos</strong> (112.2 LPAC)</td><td>Las leyes pueden sustituir la alzada, en ámbitos determinados y si lo justifica la materia, por impugnación, reclamación, conciliación, mediación y arbitraje ante órganos colegiados no sometidos a instrucciones jerárquicas.</td></tr>
+<tr><td><strong>Terminación convencional</strong> (86 LPAC)</td><td>Acuerdos, pactos, convenios o contratos con personas de Derecho público o privado que pueden poner fin al procedimiento.</td></tr>
+</table></div>
+<p>El visual citaba también los <strong>Jurados de Expropiación</strong> como ejemplo de órgano que decide con independencia (el justiprecio), aunque en sentido estricto no resuelven una controversia entre particulares.</p>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> El servicio público y sus formas de gestión</h2>
+<h3>4.1 Concepto</h3>
+<p>En sentido estricto, actividad prestacional que la ley atribuye a la <strong>titularidad</strong> de una Administración (<em>publicatio</em>) para satisfacer necesidades de interés general, prestada directamente o a través de particulares. En sentido amplio, toda actividad prestacional.</p>
+<div class="grid2">
+<div class="card"><h4>Constitución</h4><span class="art">Art. 128.2 CE</span>: reconoce la iniciativa pública en la actividad económica y permite <strong>reservar al sector público, mediante ley</strong>, recursos o servicios esenciales, especialmente en caso de monopolio. <span class="art">Art. 149.1.18.ª</span>: legislación básica de contratos y concesiones.</div>
+<div class="card"><h4>Derecho de la Unión</h4>Sustituye en buena medida la noción por la de <strong>servicios de interés económico general</strong> (arts. 14 y 106.2 TFUE y Protocolo n.º 26): actividades liberalizadas con <strong>obligaciones de servicio público</strong> o servicio universal (telecomunicaciones, postal, energía).</div>
+</div>
+<div class="box clave"><span class="box-h">Principios del servicio público</span>
+<strong>Continuidad</strong> (regular e ininterrumpido; justifica los servicios mínimos en huelga) · <strong>igualdad</strong> en el acceso · <strong>mutabilidad o adaptación</strong> al interés general · <strong>calidad y accesibilidad</strong> (cartas de servicios) · el visual añade la <strong>asequibilidad</strong>.</div>
+<h3>4.2 Formas de gestión</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Modalidad</th><th>Formas</th></tr>
+<tr><td><strong>Directa</strong></td><td>Por la propia Administración (sin órgano diferenciado o con órgano especial); organismo autónomo; entidad pública empresarial; sociedad mercantil de capital íntegramente público; encargos a medios propios personificados.</td></tr>
+<tr><td><strong>Indirecta</strong></td><td><strong>Concesión de servicios</strong>, con riesgo operacional del concesionario (art. 15 y arts. 284 a 297 LCSP). Sin riesgo operacional, el contrato es de <strong>servicios</strong> (art. 312 si va a la ciudadanía).</td></tr>
+<tr><td><strong>Mixta</strong></td><td><strong>Sociedad de economía mixta</strong> con capital mayoritariamente público y privado: puede adjudicársele directamente una concesión si el socio privado se eligió conforme a la LCSP y no se alteran el objeto ni las condiciones (<span class="art">DA 22.ª LCSP</span>).</td></tr>
+<tr><td><strong>Compartida</strong></td><td><strong>Consorcios</strong> (arts. 118 a 127 LRJSP, con adscripción obligatoria a una Administración) y <strong>mancomunidades</strong> de municipios (art. 44 LRBRL).</td></tr>
+<tr><td><strong>No contractual</strong></td><td><strong>Acción concertada</strong> en servicios sociales y sanitarios con entidades privadas, preferentemente sin ánimo de lucro (art. 11.6 LCSP y normativa autonómica).</td></tr>
+</table></div>
+<p>Tras la Ley 9/2017 desaparecieron las modalidades del contrato de gestión de servicios públicos (concesión, gestión interesada, concierto y sociedad de economía mixta).</p>
+<h3>4.3 Los servicios públicos locales (art. 85 LRBRL)</h3>
+<p>Se gestionan de la forma <strong>más sostenible y eficiente</strong> entre: <strong>directa</strong> (propia entidad local, organismo autónomo local, entidad pública empresarial local o sociedad mercantil local de capital público) o <strong>indirecta</strong>.</p>
+<ul>
+<li>La EPEL y la sociedad mercantil solo caben si una <strong>memoria justificativa</strong> acredita que son más sostenibles y eficientes que la gestión por la entidad o por organismo autónomo (rentabilidad económica y recuperación de la inversión). La memoria, con los informes de coste y el apoyo técnico recibido, se eleva al <strong>Pleno</strong> y se publica, con <strong>informe del interventor</strong> sobre la sostenibilidad financiera (Ley 27/2013).</li>
+<li>La <strong>municipalización o provincialización de actividades en régimen de monopolio</strong> y la aprobación de la forma concreta de gestión exigen acuerdo del Pleno por <strong>mayoría absoluta</strong> (<span class="art">art. 47.2.k LRBRL</span>).</li>
+<li>La forma de gestión debe respetar las <strong>funciones reservadas a funcionarios</strong> (art. 9 del Estatuto Básico del Empleado Público).</li>
+</ul>
+<div class="box fix"><span class="box-h">Correcciones sobre el art. 85 LRBRL</span>
+<strong>Temario 2026</strong>: dice que «en ningún caso pueden prestarse por gestión indirecta, ni mediante sociedad mercantil privada, los servicios públicos que impliquen ejercicio de autoridad». Era el art. 85.3, <strong>suprimido</strong> por la Ley 27/2013. Hoy la regla se deduce de la remisión del art. 85.2 al art. 9 del Estatuto Básico (funciones reservadas a funcionarios) y de la LCSP (arts. 17 y 284.1: nunca se contrata ni se concede el ejercicio de autoridad).<br>
+<strong>Material visual</strong>: atribuía al Pleno con mayoría absoluta la «creación» del servicio local en general. El art. 47.2.k exige esa mayoría para la <strong>municipalización en régimen de monopolio</strong> y la aprobación de la forma concreta de gestión de ese servicio.</div>
+<div class="box trampa"><span class="box-h">Trampa: el art. 85.2.B LRBRL no se ha actualizado</span>
+Sigue remitiendo a «las distintas formas previstas para el contrato de gestión de servicios públicos» del texto refundido de 2011. Esa remisión se entiende hecha hoy a la <strong>concesión de servicios</strong> de la LCSP: el contrato de gestión de servicios públicos ya no existe.</div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> La actividad de fomento</h2>
+<p>La Administración promueve o estimula que los particulares desarrollen actividades de interés general, <strong>sin coacción</strong> y <strong>sin asumir la prestación</strong>.</p>
+<div class="grid3">
+<div class="card"><h4>Medios honoríficos</h4>Condecoraciones, títulos, premios y distinciones.</div>
+<div class="card"><h4>Medios económicos</h4><strong>Reales</strong>: cesión gratuita de bienes. <strong>Financieros</strong>: subvenciones (la técnica estrella), préstamos privilegiados, avales, anticipos reintegrables y beneficios fiscales.</div>
+<div class="card"><h4>Medios jurídicos</h4>Un estatus o privilegio especial: declaración de utilidad pública de asociaciones, beneficio de la expropiación forzosa.</div>
+</div>
+<div class="box clave"><span class="box-h">Ayudas de Estado (arts. 107 a 109 TFUE)</span>
+El fomento respeta la igualdad, publicidad y objetividad y, en la Unión, el régimen de ayudas de Estado: son <strong>incompatibles</strong> con el mercado interior las ayudas otorgadas por los Estados o con fondos estatales que falseen o amenacen falsear la competencia, favoreciendo a determinadas empresas o producciones, en la medida en que afecten a los intercambios entre Estados miembros, salvo las compatibles por excepción o autorizadas por la Comisión. Los reglamentos <strong><em>de minimis</em></strong> y el <strong>Reglamento general de exención por categorías</strong> permiten conceder ciertas ayudas sin notificación previa.</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> Las subvenciones: concepto, sujetos y principios</h2>
+<h3>6.1 Normativa</h3>
+<p><strong>Ley 38/2003, de 17 de noviembre, General de Subvenciones</strong> (LGS) y su <strong>Reglamento</strong>, aprobado por el <strong>Real Decreto 887/2006, de 21 de julio</strong>. Gran parte es <strong>básica</strong> (disposición final primera), dictada al amparo de los arts. <strong>149.1.13.ª, 14.ª y 18.ª CE</strong>, y vincula a todas las Administraciones.</p>
+<h3>6.2 Concepto (art. 2.1): tres requisitos cumulativos</h3>
+<div class="box clave"><span class="box-h">Subvención</span>
+Toda <strong>disposición dineraria</strong> de los sujetos del art. 3 a favor de personas públicas o privadas que cumpla: <strong>a)</strong> entrega <strong>sin contraprestación directa</strong> de los beneficiarios; <strong>b)</strong> sujeta al cumplimiento de un objetivo, la ejecución de un proyecto, la realización de una actividad, la adopción de un comportamiento singular (ya realizados o por desarrollar) o la concurrencia de una situación, con las obligaciones materiales y formales establecidas; <strong>c)</strong> que tenga por objeto el <strong>fomento</strong> de una actividad de utilidad pública o interés social o la promoción de una finalidad pública.</div>
+<div class="tablewrap"><table>
+<tr><th style="width:28%">Figura</th><th>Contenido</th></tr>
+<tr><td><strong>Fuera del ámbito</strong> (2.2 y 2.3)</td><td>Las <strong>aportaciones dinerarias entre Administraciones</strong> para financiar globalmente su actividad, y entre agentes de una misma Administración cuyos presupuestos se integren en los generales, si no resultan de convocatoria pública. Las <strong>cuotas</strong> de las entidades locales a sus asociaciones (FEMP y similares, DA 5.ª LRBRL).</td></tr>
+<tr><td><strong>No son subvención</strong> (2.4)</td><td>a) Prestaciones contributivas y no contributivas de la Seguridad Social · b) y c) pensiones asistenciales y prestaciones a españoles no residentes, y a afectados por VIH y personas con discapacidad, asimilables a no contributivas · d) síndrome tóxico y hepatitis C de hemofílicos (Ley 14/2002) · e) clases pasivas, pensiones de guerra y prestaciones por terrorismo · f) <strong>Fondo de Garantía Salarial</strong> · g) <strong>beneficios fiscales</strong> y en cotizaciones · h) <strong>crédito oficial</strong>, salvo que la Administración subvencione los intereses · i) ayudas a víctimas de violencia de género y de violencias sexuales · <strong>j) ayudas de emergencia o urgencia social</strong> de los servicios sociales para necesidades básicas.</td></tr>
+<tr><td><strong>Excluidas de la ley</strong> (4)</td><td>a) <strong>Premios sin previa solicitud</strong> · b) subvenciones del <strong>régimen electoral</strong> (LO 5/1985) · c) <strong>financiación de partidos</strong> (la ley cita la LO 3/1987, hoy LO 8/2007) · d) subvenciones a <strong>grupos parlamentarios</strong> de las Cortes y de las asambleas autonómicas y a grupos políticos locales. Los premios <strong>con</strong> solicitud sí entran.</td></tr>
+</table></div>
+<div class="box act"><span class="box-h">Novedad: art. 2.4.j) LGS</span>
+La <strong>Ley 4/2026, de 1 de octubre</strong> (disposición final 7.ª), añade la letra j): las <strong>ayudas económicas de emergencia o urgencia social</strong> gestionadas por los servicios sociales para cubrir necesidades básicas <strong>no son subvenciones</strong>. En vigor desde el <strong>23/10/2026</strong>. Pregunta probable en 2027.</div>
+<div class="box fix"><span class="box-h">Corrección al material visual: la lista de lo que «no son subvenciones»</span>
+El visual mezclaba en el art. 2.4 figuras de tres preceptos distintos y añadía una que la ley no recoge. Las aportaciones entre Administraciones están en el <strong>2.2</strong>; los premios sin solicitud, las subvenciones electorales y las de grupos parlamentarios son <strong>exclusiones del art. 4</strong>; las cuotas de las entidades locales a sus asociaciones, en el <strong>2.3</strong>. Las «becas al personal propio» y las «cuotas a organismos internacionales» no figuran en esos preceptos.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026</span>
+Las prestaciones de la Seguridad Social y las del Fondo de Garantía Salarial no son subvenciones (2019). Los premios <strong>con previa solicitud</strong> y las <strong>nominativas</strong> sí entran en la LGS (2019 y 2022). Las subvenciones a grupos parlamentarios están excluidas (2024).</div>
+<h3>6.3 Principios y requisitos (arts. 8, 9, 17, 18 y 20)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Elemento</th><th>Régimen</th></tr>
+<tr><td><strong>Plan estratégico</strong> (8.1)</td><td><strong>Previo y preceptivo</strong>: objetivos y efectos, plazo, costes previsibles y fuentes de financiación, supeditado a la estabilidad presupuestaria.</td></tr>
+<tr><td><strong>Principios</strong> (8.3)</td><td>Publicidad, transparencia, concurrencia, objetividad, igualdad y no discriminación; <strong>eficacia</strong> en los objetivos; <strong>eficiencia</strong> en la asignación y utilización de los recursos.</td></tr>
+<tr><td><strong>Requisitos del otorgamiento</strong> (9.4)</td><td>Competencia del órgano · <strong>crédito</strong> adecuado y suficiente · tramitación del procedimiento · <strong>fiscalización previa</strong> · <strong>aprobación del gasto</strong>.</td></tr>
+<tr><td><strong>Bases reguladoras</strong> (9.2 y 17)</td><td>Previas al otorgamiento. En la AGE, las establecen los ministros, previo informe de los servicios jurídicos y de la intervención delegada, por <strong>orden ministerial</strong> publicada en el BOE. Contenido mínimo: objeto, requisitos de los beneficiarios, criterios objetivos y su ponderación, cuantía, órganos, plazo y forma de justificación, graduación de incumplimientos.</td></tr>
+<tr><td><strong>Publicidad</strong> (18 y 20)</td><td>La <strong>Base de Datos Nacional de Subvenciones</strong> (BDNS), gestionada por la <strong>IGAE</strong>, es el sistema nacional de publicidad, obligatorio para todas las Administraciones desde el 1/1/2016 (Ley 15/2014). Las convocatorias se publican en la BDNS, que remite un <strong>extracto</strong> al diario oficial; sin ese extracto, la convocatoria no es eficaz.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026</span>
+La <strong>audiencia pública</strong> y la <strong>comunicación posterior al Tribunal de Cuentas</strong> no son requisitos del art. 9 (2022). La <strong>previa realización de la actividad</strong> no es requisito de la concurrencia competitiva (2019). Las bases estatales se aprueban por <strong>orden ministerial</strong> (2024).</div>
+<h3>6.4 Órganos, beneficiarios y entidades colaboradoras</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Sujeto</th><th>Régimen</th></tr>
+<tr><td><strong>Órganos concedentes</strong> (10)</td><td>En la AGE, los <strong>Ministros y los Secretarios de Estado</strong>, y los presidentes o directores de los organismos y entidades vinculados, previa consignación presupuestaria. Más de <strong>12 millones</strong>: autorización previa del <strong>Consejo de Ministros</strong> (o de la Comisión Delegada para Asuntos Económicos si lo prevé la norma). En concurrencia competitiva, la autorización se obtiene <strong>antes de aprobar la convocatoria</strong>. No implica la aprobación del gasto. Cabe desconcentrar por real decreto. En las entidades locales, los órganos de la legislación local (Alcalde o Pleno).</td></tr>
+<tr><td><strong>Beneficiario</strong> (11)</td><td>Quien realiza la actividad o está en la situación que legitima la concesión. También los miembros asociados de una persona jurídica y, si lo prevén las bases, agrupaciones sin personalidad, con representante.</td></tr>
+<tr><td><strong>Entidad colaboradora</strong> (12 y 16)</td><td>Actúa en nombre y por cuenta del concedente: entrega y distribuye los fondos o colabora en la gestión, <strong>sin que los fondos se integren en su patrimonio</strong>. Convenio previo de vigencia <strong>no superior a 4 años</strong>, prorrogable por mutuo acuerdo antes de que termine, con prórrogas que no pueden superar el periodo inicial y una duración total <strong>máxima de 6 años</strong>.</td></tr>
+<tr><td><strong>Prohibiciones</strong> (13)</td><td>Condenados a la pena de pérdida de la posibilidad de obtener subvenciones · concurso o insolvencia · haber dado lugar a la resolución firme de un contrato por causa imputable · no estar al corriente con Hacienda o la Seguridad Social · <strong>paraíso fiscal</strong> · deudas por reintegro · sanción de pérdida de la posibilidad de obtener subvenciones · asociaciones incursas en causas de la Ley Orgánica de Asociaciones. Paralelas a las del art. 71 LCSP.</td></tr>
+<tr><td><strong>Obligaciones</strong> (14)</td><td>Cumplir el objetivo · <strong>justificar</strong> · someterse a comprobación y control · comunicar otras ayudas (en cuanto se conozcan y antes de justificar) · acreditar estar al corriente <strong>antes de la propuesta de resolución</strong> · contabilidad · <strong>conservar los justificantes mientras puedan ser objeto de comprobación y control</strong> · difusión de la financiación pública · reintegrar.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones sobre los sujetos</span>
+<strong>Temario 2026</strong>: dice que el convenio con la entidad colaboradora dura hasta 4 años «prorrogable hasta otros cuatro». El art. 16.2 limita las prórrogas a la duración inicial y el total a <strong>6 años</strong>. También dice que el beneficiario acredita estar al corriente «antes de la resolución»: el art. 14.1.e dice antes de la <strong>propuesta</strong> de resolución.<br>
+<strong>Material visual</strong>: fijaba en «4 años» la conservación de documentos. El art. 14.1.g no fija plazo: se conservan <strong>mientras puedan ser objeto de comprobación y control</strong>. En la práctica coincide con los 4 años de prescripción del reintegro, pero no es un plazo legal propio.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019 y 2022)</span>
+Ministros y Secretarios de Estado son los órganos concedentes en la AGE. Por encima de 12 millones, autorización del Consejo de Ministros (o de la Comisión Delegada si la norma lo prevé).</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> Procedimientos de concesión y ejecución</h2>
+<h3>7.1 Concurrencia competitiva (arts. 22.1 y 23 a 27): la regla general</h3>
+<p>Se comparan las solicitudes para establecer una <strong>prelación</strong> según los criterios de las bases y la convocatoria, y se adjudica, con el límite del crédito, a las de mayor valoración. Excepcionalmente, si lo prevén las bases, se <strong>prorratea</strong> el importe global entre los beneficiarios.</p>
+<div class="flowv">
+<div class="step"><b>1 · Iniciación (art. 23)</b><strong>Siempre de oficio</strong>, por convocatoria con contenido mínimo: bases y diario donde se publicaron, créditos y cuantía total máxima, objeto, requisitos, órganos, plazo de solicitudes, plazo de resolución y notificación, documentos, recursos y criterios de valoración. Antes, <strong>aprobación del gasto</strong> (art. 34.1). Publicación en la BDNS y extracto en el diario oficial.</div>
+<div class="step"><b>2 · Instrucción (art. 24)</b>El instructor comprueba de oficio los datos. Un <strong>órgano colegiado</strong> (comisión de valoración) emite informe. Propuesta de <strong>resolución provisional</strong>, notificada con <strong>10 días</strong> para alegaciones (prescindible si no se tienen en cuenta otros hechos que los aducidos por los interesados). Después, propuesta <strong>definitiva</strong>. Las propuestas <strong>no crean derecho</strong> hasta que se notifique la concesión.</div>
+<div class="step"><b>3 · Resolución (art. 25)</b>Motivada; incluye a los beneficiarios y la desestimación expresa del resto. Plazo máximo de <strong>6 meses</strong>, salvo que una ley o la normativa de la Unión fijen uno mayor, contado desde la <strong>publicación de la convocatoria</strong> (salvo que esta posponga sus efectos). Vencido sin notificación: <strong>silencio desestimatorio</strong> (25.5).</div>
+</div>
+<div class="box trampa"><span class="box-h">Trampa</span>El silencio en la concurrencia competitiva es <strong>negativo</strong> (art. 25.5 LGS), una excepción a la regla del silencio positivo del art. 24.1 LPAC en procedimientos a solicitud del interesado.</div>
+<h3>7.2 Concesión directa (arts. 22.2 y 28): tres supuestos tasados</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:28%">Supuesto</th><th>Régimen</th></tr>
+<tr><td>a) <strong>Nominativas</strong> en los Presupuestos (Estado, CCAA, EELL)</td><td>Nominativa es aquella cuya <strong>dotación y beneficiario</strong> aparecen determinados en los estados de gasto. El <strong>convenio</strong> es el instrumento habitual; la resolución o convenio, que actúa como bases reguladoras, fija el objeto, congruente con la clasificación del crédito.</td></tr>
+<tr><td>b) <strong>Impuestas por una norma con rango de ley</strong> (otorgamiento o cuantía)</td><td>Siguen el procedimiento de su normativa.</td></tr>
+<tr><td>c) <strong>Excepcionales</strong>: razones de interés público, social, económico o humanitario, u otras justificadas, que dificulten la convocatoria pública</td><td>En la AGE, el Gobierno aprueba por <strong>real decreto</strong>, a propuesta del ministro y previo informe de Hacienda, sus normas especiales (objeto y carácter singular, régimen jurídico, beneficiarios, procedimiento y justificación).</td></tr>
+</table></div>
+<h3>7.3 Subcontratación (art. 29)</h3>
+<ul>
+<li>Solo si la <strong>normativa reguladora lo prevé</strong>. Límite: el porcentaje de las bases; si no lo fijan, hasta el <strong>50 %</strong> del importe de la actividad subvencionada. Nunca actividades que encarezcan sin valor añadido.</li>
+<li>Si la actividad concertada supera el <strong>20 % del importe de la subvención</strong> y este es <strong>superior a 60.000 €</strong>: contrato <strong>por escrito</strong> y <strong>autorización previa</strong> del concedente. Prohibido fraccionar para eludirlo.</li>
+<li>Los subcontratistas solo se obligan ante el beneficiario, que responde de toda la ejecución.</li>
+</ul>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026</span>
+Concurrencia competitiva: siempre de oficio (2019). Plazo de 6 meses salvo ley o normativa de la Unión (2022). Las nominativas se canalizan por convenio o resolución (2019 y 2022). La subcontratación necesita autorización cuando supera el <strong>20 %</strong> y <strong>60.000 €</strong> (2022).</div>
+<h3>7.4 Justificación y gastos subvencionables (arts. 30 y 31)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Regla</th><th>Contenido</th></tr>
+<tr><td><strong>Modalidades</strong> (30.1)</td><td><strong>Cuenta justificativa</strong> (con justificantes, con informe de auditor o simplificada) · <strong>módulos</strong> · <strong>estados contables</strong>.</td></tr>
+<tr><td><strong>Plazo</strong> (30.2)</td><td>El de las bases; a falta de previsión, como máximo <strong>3 meses</strong> desde que termina el plazo de realización de la actividad.</td></tr>
+<tr><td><strong>Gasto subvencionable</strong> (31.1 y 31.2)</td><td>Responde de forma indubitada a la naturaleza de la actividad, es estrictamente necesario y se realiza en el plazo de las bases; nunca por encima del <strong>valor de mercado</strong>; pagado antes de que termine el periodo de justificación.</td></tr>
+<tr><td><strong>Tres ofertas</strong> (31.3)</td><td>Si el gasto supera el umbral del <strong>contrato menor</strong>: al menos tres ofertas antes de comprometerlo, salvo que no haya suficientes proveedores o el gasto sea anterior a la subvención; si no se elige la más económica, memoria justificativa.</td></tr>
+<tr><td><strong>Nunca subvencionables</strong> (31.7 y 31.8)</td><td>Intereses deudores · intereses, recargos y sanciones administrativas y penales · gastos judiciales · impuestos indirectos recuperables · impuestos personales sobre la renta. Excepcionalmente, gastos de <strong>garantía bancaria</strong> si lo prevén las bases.</td></tr>
+</table></div>
+<h3>7.5 Gasto y pago (art. 34)</h3>
+<ul>
+<li><strong>Aprobación del gasto</strong> antes de la convocatoria o de la concesión directa. La <strong>resolución de concesión conlleva el compromiso</strong> del gasto.</li>
+<li>Pago <strong>previa justificación</strong>; la falta de justificación o una causa de reintegro hacen perder el derecho al cobro. Caben <strong>pagos a cuenta</strong> y <strong>pagos anticipados</strong>, con las garantías que se fijen.</li>
+<li>No se paga si el beneficiario no está al corriente con Hacienda y la Seguridad Social o es deudor por reintegro.</li>
+<li>En las <strong>nominativas</strong>, dictado el acuerdo, el gestor formula un documento <strong>AD o ADOK</strong> (regla 83 de la Instrucción de operatoria contable de 1996), y están <strong>exentas de fiscalización previa</strong> (art. 151 LGP).</li>
+</ul>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026</span>
+Antes de la convocatoria se aprueba el gasto (2019); la concesión conlleva el compromiso (2022); en las nominativas, documento AD o ADOK y sin fiscalización previa (2019).</div>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> Invalidez, reintegro, control y sanciones</h2>
+<h3>8.1 Invalidez de la concesión (art. 36)</h3>
+<p><strong>Nulidad</strong>: las causas del art. 47 LPAC y la <strong>carencia o insuficiencia de crédito</strong>. <strong>Anulabilidad</strong>: las demás infracciones, en especial de la LGS. El concedente acude a la <strong>revisión de oficio</strong> o a la <strong>declaración de lesividad</strong> e impugnación.</p>
+<h3>8.2 El reintegro (arts. 37 a 43)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Elemento</th><th>Régimen</th></tr>
+<tr><td><strong>Causas</strong> (37)</td><td>Obtener la subvención <strong>falseando</strong> condiciones u ocultando las que lo impedirían · <strong>incumplimiento</strong> total o parcial del objetivo, la actividad o el proyecto · incumplimiento de la <strong>justificación</strong> o justificación insuficiente · incumplimiento de la <strong>difusión</strong> · <strong>resistencia u obstrucción</strong> a la comprobación y el control · incumplimiento de las condiciones impuestas · decisión de reintegro derivada de los arts. 107 a 109 TFUE.</td></tr>
+<tr><td><strong>Intereses</strong> (37 y 38)</td><td>Además del reintegro, <strong>interés de demora desde el momento del pago</strong>. El interés es el <strong>legal del dinero + 25 %</strong>, salvo que la Ley de Presupuestos fije otro.</td></tr>
+<tr><td><strong>Naturaleza</strong> (38)</td><td><strong>Ingresos de Derecho público</strong>, con la cobranza de la Ley General Presupuestaria; procedimiento siempre administrativo.</td></tr>
+<tr><td><strong>Prescripción</strong> (39)</td><td><strong>4 años</strong> el derecho a reconocer o liquidar el reintegro, desde: el vencimiento del plazo de justificación; la concesión, si se concede por concurrir una situación (30.7); o el vencimiento del periodo durante el que debían mantenerse las condiciones. Se interrumpe por actuaciones de la Administración con conocimiento formal del beneficiario, por recursos o actuaciones penales, o por actuaciones del beneficiario conducentes a la liquidación.</td></tr>
+<tr><td><strong>Procedimiento</strong> (42)</td><td>De oficio: iniciativa propia, orden superior, petición razonada, denuncia o informe de control financiero de la IGAE. <strong>Audiencia en todo caso</strong>. Plazo para resolver y notificar: <strong>12 meses</strong> desde el acuerdo de iniciación; vencido, <strong>caducidad</strong>, y las actuaciones hasta entonces <strong>no interrumpen</strong> la prescripción. La resolución <strong>pone fin a la vía administrativa</strong>.</td></tr>
+</table></div>
+<div class="box trampa"><span class="box-h">No confundir los plazos del reintegro</span>
+<strong>4 años</strong> = prescripción del derecho a reconocer o liquidar el reintegro (desde el fin del plazo de justificación). <strong>12 meses</strong> = caducidad del procedimiento ya iniciado. Y el interés de demora corre desde el <strong>pago</strong> de la subvención, no desde el acuerdo de reintegro.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026</span>
+El derecho a reconocer o liquidar el reintegro prescribe a los 4 años (2019 y 2022). En el procedimiento de reintegro se garantiza siempre la audiencia (2022).</div>
+<h3>8.3 Control financiero, infracciones y sanciones</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Materia</th><th>Régimen</th></tr>
+<tr><td><strong>Control financiero</strong> (44 a 51)</td><td>Lo ejerce la <strong>IGAE</strong> sobre beneficiarios y entidades colaboradoras: correcta obtención, cumplimiento de obligaciones, realidad y regularidad de las operaciones y justificación. Deber de colaboración. El control externo corresponde al <strong>Tribunal de Cuentas</strong>.</td></tr>
+<tr><td><strong>Infracciones</strong> (52 a 58)</td><td>Acciones y omisiones tipificadas en la LGS, sancionables incluso a título de <strong>simple negligencia</strong>. Leves, graves y muy graves; entre las muy graves, obtener la subvención falseando u ocultando condiciones.</td></tr>
+<tr><td><strong>Sanciones</strong> (59 a 63)</td><td>Multa fija o proporcional. Muy graves: multa proporcional del <strong>doble al triple</strong> de lo indebidamente obtenido, aplicado o no justificado. Si el perjuicio de una muy grave supera <strong>30.000 €</strong> y concurren las circunstancias del art. 60.1.b o c, además: pérdida <strong>hasta 5 años</strong> de la posibilidad de obtener subvenciones y avales, prohibición de contratar y de ser entidad colaboradora. Publicidad posible en la BDNS.</td></tr>
+<tr><td><strong>Prescripción</strong> (65)</td><td>Infracciones: <strong>4 años</strong> desde su comisión. Sanciones: <strong>4 años</strong> desde el día siguiente a la firmeza de la resolución. Se aplica de oficio.</td></tr>
+<tr><td><strong>Competencia y procedimiento</strong> (66 y 67)</td><td>En la AGE, los <strong>ministros</strong>. Expediente con audiencia previa, conforme a la LPAC; los acuerdos ponen fin a la vía administrativa.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026: las sanciones no pecuniarias</span>
+El temario presenta la pérdida de hasta cinco años de la posibilidad de obtener subvenciones como sanción general de las muy graves. El art. 63.2 la reserva a las muy graves con un perjuicio de <strong>más de 30.000 €</strong> y con alguna de las circunstancias del art. 60.1.b o c; es <strong>adicional</strong> a la multa.</div>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> Lo que preguntan y trampas</h2>
+<div class="box clave"><span class="box-h">La escalera de plazos y cifras</span>
+<strong>Sancionador general (art. 30 LRJSP)</strong>: infracciones 3 años / 2 años / 6 meses · sanciones 3 / 2 / 1 año · reincidencia en 1 año · reducciones del 85 LPAC de al menos el 20 %, acumulables.<br>
+<strong>Declaración responsable</strong>: efectos desde la presentación (69.3).<br>
+<strong>Subvenciones</strong>: plan estratégico previo · autorización del Consejo de Ministros desde 12 millones · convenio con entidad colaboradora 4 años (máx. 6) · alegaciones a la propuesta provisional 10 días · resolución en 6 meses desde la convocatoria · silencio negativo · subcontratación 50 % sin bases · escrito y autorización si &gt; 20 % y &gt; 60.000 € · tres ofertas por encima del contrato menor · justificación en 3 meses sin bases · interés legal + 25 % desde el pago · prescripción del reintegro 4 años · caducidad del procedimiento 12 meses · infracciones y sanciones 4 años · multa muy grave del doble al triple · pérdida hasta 5 años si el perjuicio &gt; 30.000 € · BDNS desde 2016.</div>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Lo que preguntan</span><ul>
+<li>Qué es y qué no es subvención (2.4 y 4).</li>
+<li>Órganos concedentes y los 12 millones.</li>
+<li>Requisitos del art. 9 y bases por orden ministerial.</li>
+<li>Concurrencia competitiva: inicio de oficio, 6 meses, silencio negativo.</li>
+<li>Concesión directa: tres supuestos y el real decreto.</li>
+<li>Subcontratación: 20 % y 60.000 €.</li>
+<li>Reintegro: causas, intereses, 4 años y 12 meses.</li>
+<li>Principios sancionadores y especialidades del procedimiento.</li>
+<li>Formas de gestión del servicio público local.</li></ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>El silencio en concurrencia competitiva es <strong>desestimatorio</strong>.</li>
+<li>Un premio sin solicitud no está en la LGS; con solicitud, sí.</li>
+<li>Los fondos <strong>no</strong> se integran en el patrimonio de la entidad colaboradora.</li>
+<li>La concesión directa no procede por conveniencia: tres supuestos tasados.</li>
+<li>La autorización no crea el derecho; lo crea la concesión.</li>
+<li>El contrato de gestión de servicios públicos ya no existe.</li>
+<li>Infracciones de subvenciones: 4 años, no 3.</li>
+<li>Las ayudas de urgencia social no son subvención desde el 23/10/2026.</li>
+<li>Convenio con entidad colaboradora: máximo 6 años, no 8.</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia de subvenciones con sus cuatro piezas: Ley 38/2003 (en adelante, LGS), títulos competenciales 149.1.13.ª, 14.ª y 18.ª, Real Decreto 887/2006 y concepto del art. 2.</li>
+<li>La calificación previa: ¿cumple los tres requisitos del art. 2 o es otra figura (contrato, prestación, premio sin solicitud)? ¿Concurrencia o concesión directa?</li>
+<li>Las cuatro formas de actividad y sus técnicas.</li>
+<li>Los siete principios sancionadores (25 a 31 LRJSP) y la escala de prescripción.</li>
+<li>Las especialidades del procedimiento sancionador en la LPAC.</li>
+<li>Las formas de gestión directa e indirecta y los requisitos del art. 85 LRBRL.</li>
+<li>Las fases de la concurrencia competitiva con sus plazos.</li>
+<li>Los tres supuestos de concesión directa.</li>
+<li>Las causas de reintegro, los intereses y los plazos de 4 años y 12 meses.</li>
+</ol>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>En el supuesto, este tema entra casi siempre por las <strong>subvenciones</strong> (y, en el Bloque VI, por su gestión presupuestaria) o por un <strong>procedimiento sancionador</strong>. Lo que puntúa es calificar la ayuda, identificar el procedimiento y, si hay incumplimiento, cerrar el reintegro con causa, importe, intereses y plazos.</p>
+<h3>10.1 Introducción de la materia (plantillas v2, sección 9)</h3>
+<div class="model">
+<p>«La actividad subvencional se regula en la Ley 38/2003, de 17 de noviembre, General de Subvenciones (en adelante, LGS), dictada al amparo de los artículos 149.1.13.ª, 149.1.14.ª y 149.1.18.ª de la Constitución, y en su Reglamento, aprobado por el Real Decreto 887/2006, de 21 de julio. Conforme a su artículo 2, es subvención toda disposición dineraria realizada por las Administraciones Públicas a favor de personas públicas o privadas, sin contraprestación directa de los beneficiarios, sujeta al cumplimiento de un objetivo, y que tiene por objeto el fomento de una actividad de utilidad pública o interés social.»</p>
+</div>
+<div class="box sup"><span class="box-h">Las cuatro piezas y el complemento sancionador</span>Ley (LGS) → títulos competenciales (149.1.13.ª, 14.ª y 18.ª) → Real Decreto 887/2006 → concepto del art. 2. Si la cuestión es sancionadora fuera de las subvenciones, usa la introducción de la sección 4 (LPAC) con el complemento de la Ley 40/2015 (arts. 25 a 31).</div>
+<h3>10.2 Calificación previa propia del Tema 7</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar la ayuda. Se trata de una disposición dineraria del [Ministerio] a favor de [beneficiario], sin contraprestación directa, sujeta a la realización de [actividad] y con finalidad de fomento de [interés social], por lo que reúne los tres requisitos del artículo 2.1 de la LGS y es una subvención [no incluida en las exclusiones de los artículos 2.4 y 4]. Se concede en régimen de [concurrencia competitiva, procedimiento ordinario del artículo 22.1 / concesión directa del artículo 22.2.[letra]], por el [Ministro / Secretario de Estado], órgano competente conforme al artículo 10.»</p>
+</div>
+<h3>10.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Hecho del enunciado</th><th style="width:30%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>El Ministerio paga a una empresa por organizar un congreso que él mismo utiliza</td><td>Art. 2.1.a LGS: hay contraprestación directa</td><td>No es subvención: es un contrato (LCSP)</td></tr>
+<tr><td>Un ayuntamiento entrega una ayuda de urgencia para pagar el alquiler a una familia</td><td>Art. 2.4.j LGS (Ley 4/2026)</td><td>No es subvención desde el 23/10/2026</td></tr>
+<tr><td>Se concede un premio literario sin que el autor lo haya solicitado</td><td>Art. 4.a LGS</td><td>Excluido de la LGS</td></tr>
+<tr><td>Una convocatoria de 15 millones se aprueba sin autorización del Consejo de Ministros</td><td>Art. 10.2 LGS: autorización previa a la convocatoria</td><td>Falta un requisito previo: la convocatoria no puede aprobarse</td></tr>
+<tr><td>Pasan 7 meses desde la convocatoria sin notificar la resolución</td><td>Art. 25.4 y 25.5 LGS</td><td>Silencio desestimatorio; recurso contra la desestimación presunta</td></tr>
+<tr><td>Se concede de forma directa por razones de urgencia sin real decreto</td><td>Arts. 22.2.c y 28.2 LGS</td><td>Concesión contraria a la ley; en la AGE es necesario un real decreto</td></tr>
+<tr><td>El beneficiario subcontrata el 30 % de una subvención de 100.000 € sin autorización</td><td>Art. 29.3: más del 20 % y más de 60.000 €</td><td>Exigía contrato escrito y autorización previa; el gasto no es justificable y procede el reintegro de esa parte</td></tr>
+<tr><td>El beneficiario no presenta la justificación</td><td>Art. 37.1.c LGS</td><td>Reintegro total más intereses de demora desde el pago</td></tr>
+<tr><td>El acuerdo de reintegro se inicia y pasan 13 meses sin resolver</td><td>Art. 42.4 LGS</td><td>Caducidad; puede iniciarse otro si no ha prescrito, pero las actuaciones caducadas no interrumpen la prescripción</td></tr>
+<tr><td>Se inicia el reintegro 5 años después del fin del plazo de justificación</td><td>Art. 39 LGS</td><td>El derecho ha prescrito (4 años)</td></tr>
+<tr><td>Una infracción leve de la Ley 40/2015 se cometió hace 8 meses</td><td>Art. 30 LRJSP: 6 meses, salvo ley especial</td><td>Ha prescrito</td></tr>
+<tr><td>El infractor reconoce su responsabilidad y paga voluntariamente una multa de 1.000 €</td><td>Art. 85 LPAC: dos reducciones de al menos el 20 % acumulables</td><td>Paga como máximo 600 € (1.000 − 200 − 200), siempre que desista o renuncie a recurrir en vía administrativa</td></tr>
+</table></div>
+
+<h3>10.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+El Ministerio de Cultura convoca subvenciones en concurrencia competitiva para festivales de música. A la Asociación Delta se le conceden <strong>80.000 €</strong>, que se le pagan por anticipado el <strong>2 de marzo de 2026</strong>, para un festival de coste total de 80.000 €. Las bases fijan como fin del plazo de justificación el <strong>30 de junio de 2026</strong>. Delta encarga a una productora el montaje del escenario por <strong>30.000 €</strong>, sin pedir autorización ni firmar contrato escrito, y a 30 de junio no presenta la cuenta justificativa. El 15 de octubre de 2026 el Ministerio acuerda iniciar el reintegro.
+<br><br><strong>Cuestiones:</strong> a) Calificación de la ayuda y de la subcontratación. b) Procedencia del reintegro, importe, intereses y plazos.</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 10.1.] Con carácter previo, procede calificar la ayuda. Se trata de una disposición dineraria del Ministerio de Cultura a favor de Delta, sin contraprestación directa, sujeta a la realización de un festival y con finalidad de fomento de la cultura, por lo que reúne los tres requisitos del artículo 2.1 de la LGS y es una subvención concedida en concurrencia competitiva, procedimiento ordinario del artículo 22.1. La cuestión a) solicita, además, calificar el encargo a la productora. Conforme al artículo 29.1, hay subcontratación porque Delta concierta con un tercero la ejecución de parte de la actividad subvencionada. El enunciado no precisa si las bases permiten subcontratar ni con qué límite, por lo que suponemos que lo permiten sin fijar porcentaje; en ese caso rige el 50 % del artículo 29.2, y 30.000 € representan el 37,5 % de 80.000 €, dentro del límite. Sin embargo, el artículo 29.3 exige contrato escrito y autorización previa cuando la actividad subcontratada supera el 20 % del importe de la subvención (16.000 €) y este es superior a 60.000 €: ambas condiciones se cumplen. No obstante lo anterior, cabría sostener que la autorización es un requisito meramente formal, si bien la solución más adecuada es considerarla un requisito de validez del gasto, porque la ley la exige «previamente». Por tanto, se concluye que se trata de una subvención en concurrencia competitiva y de una subcontratación que incumple el artículo 29.3 de la LGS, por lo que esos 30.000 € no son gasto justificable.</p>
+<p><strong>Cuestión b).</strong> La cuestión b) plantea la procedencia del reintegro y sus elementos. El artículo 37.1.c) de la LGS establece como causa de reintegro el incumplimiento de la obligación de justificación. En el presente supuesto, Delta no presentó la cuenta justificativa al vencer el plazo, el 30 de junio de 2026, por lo que procede el reintegro <strong>total</strong> de los 80.000 €, con independencia del defecto de la subcontratación, que solo afectaría a 30.000 €. Conforme a los artículos 37.1 y 38.2, se exige además el interés de demora desde el pago, el 2 de marzo de 2026, calculado con el interés legal del dinero incrementado en un 25 %. El enunciado no precisa el interés legal fijado para 2026, por lo que se deja indicado el método de cálculo sin cifrarlo. El derecho a reconocer el reintegro prescribe a los cuatro años desde el vencimiento del plazo de justificación (artículo 39.2.a), es decir, el 30 de junio de 2030, por lo que no ha prescrito. El procedimiento, iniciado el 15 de octubre de 2026, debe resolverse y notificarse en doce meses, hasta el 15 de octubre de 2027, con audiencia del interesado; si no, caduca (artículo 42). Por tanto, se concluye que procede el reintegro de 80.000 € más los intereses de demora del artículo 38.2 desde el 2 de marzo de 2026, en un procedimiento que debe resolverse antes del 15 de octubre de 2027, y cuya resolución pondrá fin a la vía administrativa.</p>
+</div>
+<h3>10.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Calificación de la ayuda con los tres requisitos del art. 2</strong> y del procedimiento → <em>análisis</em>.<br>
+<strong>Cifras operadas</strong> (30.000 / 80.000 = 37,5 % frente al 50 %; 20 % de 80.000 = 16.000; 80.000 &gt; 60.000; 30/06/2026 + 4 años; 15/10/2026 + 12 meses) → <em>aplicación de conocimientos</em>.<br>
+<strong>Jerarquizar las causas</strong>: la falta de justificación arrastra el reintegro total; el defecto de subcontratación queda absorbido → <em>sistemática</em>.<br>
+<strong>Dos suposiciones declaradas</strong> (bases sin porcentaje; interés legal no dado) → admitidas porque se justifican.<br>
+<strong>Alternativa evaluada</strong> (autorización formal o sustantiva) → <em>análisis</em>.<br>
+<strong>Distinguir prescripción (4 años) y caducidad (12 meses)</strong>, la confusión que más penaliza la Comisión.<br>
+<strong>Conclusión afirmativa</strong> con importe y fechas.</div>
+
+<!-- 11 -->
+<h2 id="s11"><span class="n">11.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Formas de actividad</td><td>Cuadro de las cuatro formas, procedimientos especiales</td><td>Jordana de Pozas 1949, criterio, art. 4 y Bolkestein, ejemplos arbitrales</td><td>Fusionado (1)</td></tr>
+<tr><td>Intervención</td><td>Art. 4 LRJSP, técnicas, art. 69, principios 25-31 en tabla, cómputo de la prescripción, especialidades LPAC, ideas clave</td><td>Técnicas por intensidad, autorización frente a concesión, Leyes Paraguas y Ómnibus, cuadro de prescripción</td><td>Fusionado + BOE (2) con precisión</td></tr>
+<tr><td>Arbitral</td><td>Concepto y cinco manifestaciones</td><td>Ejemplos (consumo, transporte, jurados)</td><td>Fusionado (3)</td></tr>
+<tr><td>Servicio público</td><td>Concepto, CE, SIEG, principios, formas, art. 85 LRBRL, acción concertada</td><td>Publicatio, 47.2.k, Ley 27/2013, consorcios y mancomunidades</td><td>Fusionado + BOE (4) con dos correcciones</td></tr>
+<tr><td>Fomento</td><td>Técnicas y ayudas de Estado</td><td>Medios y la subvención como estrella</td><td>Fusionado (5)</td></tr>
+<tr><td>Subvenciones: concepto y sujetos</td><td>Art. 2 y 4, Ley 4/2026, principios, art. 9, bases, BDNS, órganos, colaboradoras, prohibiciones, obligaciones</td><td>Requisitos cumulativos, carácter básico, plan, BDNS 2016, obligaciones</td><td>Fusionado + BOE (6) con correcciones</td></tr>
+<tr><td>Procedimientos y ejecución</td><td>Fases de la concurrencia, directa, subcontratación, justificación, gastos, pago y contabilidad</td><td>Esquema de fases, plazos, modalidades de justificación</td><td>Fusionado (7)</td></tr>
+<tr><td>Invalidez y reintegro</td><td>Art. 36, causas, interés, prescripción, procedimiento, control, infracciones y sanciones</td><td>Cuadro de plazos y la trampa 4 años / 12 meses</td><td>Fusionado + BOE (8) con precisión</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 10 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas (contrastadas con el BOE el 29/10/2026)</span>
+<strong>Temario 2026:</strong> el art. 64 LPAC no fija diez días para alegar · el art. 85.3 LRBRL sobre ejercicio de autoridad fue suprimido en 2013; la regla procede hoy del art. 9 del Estatuto Básico y de la LCSP · convenio con entidad colaboradora: total máximo de 6 años, no 8 (16.2) · el beneficiario acredita estar al corriente antes de la <strong>propuesta</strong> de resolución (14.1.e) · la pérdida de hasta 5 años es adicional y solo con perjuicio de más de 30.000 € (63.2).<br>
+<strong>Material visual:</strong> lista del art. 2.4 mezclada con los arts. 2.2, 2.3 y 4, con dos figuras inexistentes · conservación de documentos sin plazo legal propio (14.1.g) · el 47.2.k LRBRL se refiere a la municipalización en monopolio, no a cualquier creación de servicio · plazo de justificación de 3 meses: art. 30.2 LGS, no art. 71 del reglamento.<br>
+<strong>Añadidos del BOE:</strong> art. 2.4.j (Ley 4/2026) · autorización del Consejo de Ministros antes de la convocatoria (10.2) · definición de nominativa (22.2.a) · excepciones a las tres ofertas (31.3) · interrupción de la prescripción del reintegro (39.3) · informe del interventor en el art. 85.2 LRBRL · el art. 85.2.B LRBRL sigue citando el contrato de gestión de servicios públicos.</div>
+
+<footer>
+GACE 2027 · Bloque IV · Tema 7 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 29/10/2026.<br>
+Normas: CE (arts. 25, 103.1, 128.2, 149.1) · Ley 39/2015 · Ley 40/2015 · Ley 7/1985 · Ley 27/2013 · Ley 9/2017 · Ley 17/2009 · Ley 25/2009 · Ley 20/2013 · Ley 38/2003 (consolidada a 03/10/2026) · Real Decreto 887/2006 · Ley 4/2026 · Real Decreto 231/2008 · Ley 16/1987 · TFUE (arts. 14, 106 a 109).
+</footer>
+</div>
+</body>
+</html>
