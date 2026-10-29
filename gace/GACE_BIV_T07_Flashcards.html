@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 7 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque IV · Tema 7 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "Las cuatro formas de actividad", "b": "Intervención (antes policía) · fomento · servicio público (Jordana de Pozas, 1949) · y arbitral, añadida después. Criterio: grado de afectación a la libertad y al patrimonio."}, {"u": 1, "f": "Procedimientos especiales por razón de la materia", "b": "Tributarios, subvenciones, contratación, extranjería, Seguridad Social… Se rigen por su normativa y supletoriamente por la LPAC (DA 1.ª). El sancionador y el de responsabilidad patrimonial son especialidades dentro de la LPAC."}, {"u": 2, "f": "Principios del art. 4 LRJSP", "b": "Proporcionalidad y medida menos restrictiva · motivar la necesidad para el interés público · sin trato discriminatorio · evaluación periódica · facultades de comprobación e inspección. Origen: Directiva 2006/123 (Bolkestein)."}, {"u": 2, "f": "Declaración responsable y comunicación (art. 69 LPAC)", "b": "Efectos desde el día de la presentación, con control posterior. Inexactitud, falsedad u omisión esencial → no se puede continuar desde que se conozca y puede obligar a restituir."}, {"u": 2, "f": "Autorización frente a concesión", "b": "Autorización: remueve un obstáculo a un derecho preexistente. Concesión: crea el derecho ex novo. Leyes 17/2009 (Paraguas), 25/2009 (Ómnibus) y 20/2013: autorización solo por razón imperiosa de interés general y proporcionada."}, {"u": 3, "f": "Los siete principios sancionadores (arts. 25-31 LRJSP)", "b": "Legalidad · irretroactividad (salvo lo favorable) · tipicidad · responsabilidad (dolo o culpa) · proporcionalidad · prescripción · non bis in idem (sujeto, hecho y fundamento)."}, {"u": 3, "f": "Prescripción supletoria (art. 30 LRJSP)", "b": "Infracciones: muy graves 3 años, graves 2, leves 6 meses. Sanciones: muy graves 3 años, graves 2, leves 1 año. Infracción: desde la comisión; se interrumpe al iniciar el procedimiento con conocimiento del interesado. Sanción: desde que es ejecutable o vence el plazo para recurrir."}, {"u": 3, "f": "Reincidencia e infracción continuada", "b": "Reincidencia: más de una infracción de la misma naturaleza en 1 año, declarada por resolución firme en vía administrativa. Continuada: varias acciones u omisiones que infringen el mismo precepto con plan preconcebido o idéntica ocasión."}, {"u": 3, "f": "Terminación anticipada (art. 85 LPAC)", "b": "Reconocimiento de responsabilidad y/o pago voluntario. Sanción solo pecuniaria: reducciones de al menos el 20 % cada una, acumulables, condicionadas al desistimiento o renuncia de recursos. Ej.: 1.000 € → 600 € máximo."}, {"u": 3, "f": "Denunciante que participó (art. 62.4 LPAC)", "b": "Exención: primero en aportar pruebas para iniciar o comprobar, sin elementos previos suficientes, y repara el perjuicio. Reducción: pruebas con valor añadido significativo. Siempre: cesar y no destruir pruebas."}, {"u": 3, "f": "Contenido del acuerdo de iniciación (art. 64)", "b": "Presunto responsable · hechos, calificación y sanción posible · instructor y secretario (recusación) · órgano competente y norma · reconocimiento voluntario · medidas provisionales · derecho a alegar y plazos. No fija «10 días»."}, {"u": 3, "f": "Caducidad y tramitación simplificada", "b": "Sin resolución en plazo → caducidad (25.1.b); lo caducado no interrumpe la prescripción. Simplificada: si la infracción es leve (96.5), sin oposición posible del interesado. Fases instructora y sancionadora en órganos distintos (63.1)."}, {"u": 4, "f": "Manifestaciones de la actividad arbitral", "b": "Arbitraje de consumo (RD 231/2008: voluntario, gratuito, vinculante) · Juntas Arbitrales del Transporte (Ley 16/1987) · CNMC entre operadores · art. 112.2 LPAC (sustitutivo de la alzada) · terminación convencional (art. 86)."}, {"u": 4, "f": "Servicio público: concepto y principios", "b": "Titularidad pública por ley (publicatio). Art. 128.2 CE: reserva por ley de servicios esenciales. UE: SIEG (arts. 14 y 106.2 TFUE, Protocolo 26). Principios: continuidad, igualdad, mutabilidad, calidad y accesibilidad."}, {"u": 4, "f": "Formas de gestión", "b": "Directa: la propia Administración, OA, EPE, sociedad de capital íntegramente público, medios propios. Indirecta: concesión de servicios (riesgo operacional). Mixta: sociedad de economía mixta (DA 22.ª LCSP). Compartida: consorcios y mancomunidades. Acción concertada (11.6 LCSP)."}, {"u": 4, "f": "Art. 85.2 LRBRL: EPEL o sociedad mercantil", "b": "Solo con memoria justificativa de que es más sostenible y eficiente (rentabilidad, recuperación de la inversión), elevada al Pleno y publicada, con informe del interventor. El antiguo 85.3 (ejercicio de autoridad) fue suprimido por la Ley 27/2013."}, {"u": 4, "f": "Mayoría absoluta del Pleno (art. 47.2.k LRBRL)", "b": "Municipalización o provincialización de actividades en régimen de monopolio y aprobación de la forma concreta de gestión del servicio."}, {"u": 5, "f": "Medios de fomento", "b": "Honoríficos (condecoraciones, premios) · económicos reales (cesión de bienes) y financieros (subvenciones, préstamos, avales, anticipos, beneficios fiscales) · jurídicos (utilidad pública, beneficiario de expropiación)."}, {"u": 5, "f": "Ayudas de Estado (art. 107 TFUE)", "b": "Incompatibles si se otorgan con fondos estatales, falsean o amenazan falsear la competencia favoreciendo a determinadas empresas y afectan al comercio entre Estados miembros. Salvo excepciones o autorización; minimis y Reglamento general de exención por categorías."}, {"u": 6, "f": "Introducción de subvenciones: las cuatro piezas", "b": "Ley 38/2003, General de Subvenciones (en adelante, LGS) · arts. 149.1.13.ª, 14.ª y 18.ª CE · Reglamento por RD 887/2006 · concepto del art. 2."}, {"u": 6, "f": "Tres requisitos del art. 2.1 LGS", "b": "a) Sin contraprestación directa · b) sujeta a un objetivo, proyecto, actividad, comportamiento o situación · c) fomento de actividad de utilidad pública o interés social o promoción de una finalidad pública."}, {"u": 6, "f": "Art. 2.4: no son subvención", "b": "Seguridad Social · pensiones asistenciales y asimiladas · síndrome tóxico y hepatitis C · clases pasivas, guerra, terrorismo · FOGASA · beneficios fiscales y en cotizaciones · crédito oficial (salvo intereses subvencionados) · violencia de género y sexual · j) emergencia o urgencia social (Ley 4/2026, desde 23/10/2026)."}, {"u": 6, "f": "Fuera del ámbito y excluidas", "b": "Art. 2.2: aportaciones entre Administraciones para financiar su actividad global. Art. 2.3: cuotas locales a sus asociaciones (FEMP). Art. 4: premios sin solicitud, régimen electoral, partidos, grupos parlamentarios y políticos."}, {"u": 6, "f": "Art. 9.4: requisitos del otorgamiento", "b": "Competencia del órgano · crédito adecuado y suficiente · tramitación del procedimiento · fiscalización previa · aprobación del gasto. NO: audiencia pública ni comunicación al Tribunal de Cuentas."}, {"u": 6, "f": "Plan estratégico y principios (art. 8)", "b": "Plan previo y preceptivo: objetivos, plazo, costes, financiación, sujeto a estabilidad presupuestaria. Principios: publicidad, transparencia, concurrencia, objetividad, igualdad, no discriminación, eficacia y eficiencia."}, {"u": 6, "f": "Bases y BDNS", "b": "AGE: orden ministerial, previo informe de servicios jurídicos e intervención delegada, en el BOE (art. 17). BDNS gestionada por la IGAE, obligatoria desde 1/1/2016; remite el extracto al diario oficial, sin el cual la convocatoria no es eficaz."}, {"u": 7, "f": "Órganos concedentes (art. 10)", "b": "AGE: Ministros y Secretarios de Estado (y presidentes o directores de organismos). > 12 M€: autorización del Consejo de Ministros (o CDGAE), antes de la convocatoria en concurrencia. Locales: Alcalde o Pleno según la legislación local."}, {"u": 7, "f": "Entidad colaboradora (arts. 12 y 16)", "b": "Actúa en nombre y por cuenta del concedente; los fondos no se integran en su patrimonio. Convenio ≤ 4 años; prórrogas no superiores al periodo inicial; total máximo 6 años (no 8)."}, {"u": 7, "f": "Obligaciones del beneficiario (art. 14)", "b": "Cumplir · justificar · someterse a control · comunicar otras ayudas · estar al corriente antes de la propuesta de resolución · contabilidad · conservar justificantes mientras puedan ser objeto de control · difusión · reintegrar."}, {"u": 7, "f": "Prohibiciones (art. 13)", "b": "Condena a pérdida de subvenciones · concurso o insolvencia · resolución firme de contrato por causa imputable · no estar al corriente · paraíso fiscal · deudas por reintegro · sanción de pérdida · causas de la LO de Asociaciones."}, {"u": 8, "f": "Concurrencia competitiva: fases y plazos", "b": "De oficio por convocatoria (23) · instrucción con comisión de valoración, propuesta provisional con 10 días de alegaciones y propuesta definitiva (24) · resolución motivada en 6 meses desde la convocatoria; silencio desestimatorio (25)."}, {"u": 8, "f": "Concesión directa: tres supuestos (art. 22.2)", "b": "a) Nominativas (dotación y beneficiario en los estados de gasto; convenio o resolución) · b) impuestas por norma con rango de ley · c) excepcionales por interés público, social, económico o humanitario: en la AGE, real decreto a propuesta del ministro, previo informe de Hacienda."}, {"u": 8, "f": "Subcontratación (art. 29)", "b": "Solo si la normativa lo prevé · sin límite en bases: hasta el 50 % · > 20 % del importe y subvención > 60.000 €: contrato escrito y autorización previa · prohibido fraccionar · sin valor añadido, prohibida."}, {"u": 9, "f": "Justificación y gastos (arts. 30 y 31)", "b": "Cuenta justificativa, módulos o estados contables · plazo de las bases o, en su defecto, 3 meses (art. 30.2 LGS) · tres ofertas por encima del contrato menor · nunca: intereses deudores, recargos, sanciones, gastos judiciales, impuestos recuperables o sobre la renta."}, {"u": 9, "f": "Gasto y pago (art. 34)", "b": "Aprobación del gasto antes de la convocatoria · la concesión conlleva el compromiso · pago previa justificación (caben pagos a cuenta y anticipados) · nominativas: documento AD o ADOK, sin fiscalización previa (art. 151 LGP)."}, {"u": 10, "f": "Invalidez (art. 36)", "b": "Nulidad: causas del art. 47 LPAC y carencia o insuficiencia de crédito. Anulabilidad: demás infracciones. Revisión de oficio o declaración de lesividad."}, {"u": 10, "f": "Causas de reintegro (art. 37)", "b": "Obtención falseando u ocultando · incumplimiento del objetivo · falta o insuficiencia de justificación · falta de difusión · resistencia u obstrucción al control · incumplimiento de condiciones · decisión europea de ayudas de Estado."}, {"u": 10, "f": "Intereses del reintegro", "b": "Interés de demora desde el pago de la subvención = interés legal del dinero + 25 %, salvo otra cosa en la Ley de Presupuestos (art. 38.2). Ingresos de Derecho público."}, {"u": 10, "f": "Prescripción y caducidad del reintegro", "b": "Prescripción: 4 años desde el vencimiento del plazo de justificación (art. 39). Caducidad: 12 meses desde el acuerdo de iniciación (art. 42); lo caducado no interrumpe la prescripción. Audiencia siempre; pone fin a la vía administrativa."}, {"u": 10, "f": "Infracciones y sanciones de subvenciones", "b": "Simple negligencia basta · muy graves: multa del doble al triple · perjuicio > 30.000 € y circunstancias del art. 60.1.b o c: además, pérdida hasta 5 años de subvenciones, prohibición de contratar y de ser entidad colaboradora · prescripción 4 años (art. 65) · sancionan los ministros."}, {"u": 10, "f": "Control financiero", "b": "IGAE sobre beneficiarios y entidades colaboradoras: obtención, obligaciones, realidad y regularidad, justificación. Control externo: Tribunal de Cuentas."}, {"u": 11, "f": "Calificación previa del Tema 7", "b": "«Con carácter previo, procede calificar la ayuda»: ¿tres requisitos del art. 2.1 o es otra figura (contrato, prestación, premio sin solicitud, urgencia social)? ¿Concurrencia (22.1) o directa (22.2 y letra)? ¿Órgano competente (art. 10)?"}, {"u": 11, "f": "Cierre de un reintegro en el supuesto", "b": "Causa del art. 37.1 con su letra · importe · intereses desde el pago (art. 38.2) · prescripción de 4 años con fecha · caducidad de 12 meses con fecha · audiencia · fin de la vía administrativa. «Por tanto, se concluye que…»."}, {"u": 11, "f": "Mini-supuesto Delta (cifras)", "b": "80.000 € pagados el 2/3/2026 · subcontrata 30.000 € = 37,5 % (< 50 %) pero > 20 % (16.000 €) y subvención > 60.000 € → exigía escrito y autorización · no justifica a 30/6/2026 → reintegro total 80.000 € + intereses · prescripción 30/6/2030 · caducidad 15/10/2027."}, {"u": 11, "f": "Dato que falta en el enunciado", "b": "«El enunciado no precisa…, por lo que suponemos que…» (con su justificación) y después «Por tanto, se concluye que…». Nunca un condicional dubitativo en la conclusión ni coletillas de cierre."}, {"u": 11, "f": "Escalera de plazos: general frente a subvenciones", "b": "LRJSP: infracciones 3 / 2 años / 6 meses; sanciones 3 / 2 / 1 año. LGS: infracciones y sanciones 4 años; reintegro 4 años; caducidad del reintegro 12 meses; resolución en concurrencia 6 meses; justificación 3 meses sin bases."}];
+const UNAMES={"1": "Formas de actividad", "2": "Intervención", "3": "Sancionador", "4": "Arbitral y servicio público", "5": "Fomento", "6": "Subvenciones: concepto", "7": "Sujetos y requisitos", "8": "Procedimientos", "9": "Ejecución y pago", "10": "Reintegro y sanciones", "11": "Supuesto"};
+const SK="gace27_biv_t07_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
