@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 7 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque IV · Tema 7 · Formas de la actividad administrativa y subvenciones</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u":1,"t":"En la clasificación clásica de Jordana de Pozas, ¿qué forma de actividad estimula sin coacción y sin asumir la prestación?","o":["El fomento","La policía o intervención","El servicio público","La actividad arbitral"],"c":0,"e":"El fomento promueve actividades privadas de interés general sin coacción y sin que la Administración preste el servicio."},
+{"u":1,"t":"Según el art. 4 LRJSP, cuando una Administración exija requisitos para el desarrollo de una actividad deberá:","o":["Elegir la medida menos restrictiva, motivar su necesidad y evaluar periódicamente sus efectos","Elegir siempre la autorización previa como técnica preferente, por ser la que mejor garantiza el interés general protegido","Someter la medida a información pública por plazo mínimo de veinte días antes de aplicarla","Obtener el informe favorable de la Comisión Nacional de los Mercados y la Competencia"],"c":0,"e":"Art. 4.1 y 4.2 LRJSP: proporcionalidad, medida menos restrictiva, motivación y evaluación periódica."},
+{"u":1,"t":"La declaración responsable del art. 69 LPAC permite iniciar la actividad:","o":["Desde que la Administración compruebe la documentación aportada","Desde el día de su presentación, sin perjuicio del control posterior","Transcurrido un mes desde su presentación sin oposición expresa","Desde la notificación del acuse de recibo por el registro electrónico"],"c":1,"e":"Art. 69.3 LPAC: efectos desde el día de su presentación, con facultades de comprobación posteriores."},
+{"u":1,"t":"¿Qué diferencia la autorización de la concesión?","o":["La autorización es siempre un acto reglado y la concesión siempre discrecional, sin que quepa excepción alguna en ninguno de los dos casos","La autorización remueve un obstáculo al ejercicio de un derecho preexistente; la concesión crea el derecho ex novo","La concesión solo puede otorgarla una entidad local y la autorización cualquier Administración","Ninguna: la Ley 17/2009 las unificó en una única técnica de control previo"],"c":1,"e":"La autorización presupone un derecho preexistente; la concesión lo transfiere o crea."},
+{"u":1,"t":"La inexactitud, falsedad u omisión de carácter esencial en una declaración responsable:","o":["Solo da lugar a una multa, sin afectar a la continuidad de la actividad iniciada","Determina la imposibilidad de continuar con la actividad desde que se tenga constancia de ella","Obliga a convertir la declaración en una solicitud de autorización ordinaria, que se tramita con los plazos generales del procedimiento","Solo produce efectos si se declara en un procedimiento de revisión de oficio"],"c":1,"e":"Art. 69.4 LPAC: impide continuar desde que se conozca y puede obligar a restituir la situación."},
+{"u":1,"t":"Según la DA 1.ª LPAC, los procedimientos especiales por razón de la materia (tributarios, subvenciones, extranjería…):","o":["Quedaron derogados por la LPAC y se rigen íntegramente por ella","Se rigen por su normativa específica y supletoriamente por la LPAC","Solo pueden regularse por reglamento ministerial dictado en desarrollo de la LPAC","Se rigen por la LRJSP, no por la LPAC"],"c":1,"e":"DA 1.ª LPAC: especialidades por razón de la materia con aplicación supletoria de la ley."},
+{"u":1,"t":"La Ley 20/2013 de garantía de la unidad de mercado y la Ley 17/2009 admiten la autorización previa solo si:","o":["La actividad se desarrolla en más de una Comunidad Autónoma","Está justificada por una razón imperiosa de interés general y es proporcionada","Lo solicita expresamente el propio operador económico interesado","La actividad tiene un volumen de negocio superior a seis millones de euros"],"c":1,"e":"Necesidad (razón imperiosa de interés general) y proporcionalidad."},
+{"u":1,"t":"La Ley 25/2009 se conoce como:","o":["Ley Paraguas","Ley Ómnibus","Ley Bolkestein","Ley de unidad de mercado"],"c":1,"e":"La Ley 17/2009 es la «Paraguas»; la 25/2009 adaptó numerosas leyes («Ómnibus»)."},
+{"u":2,"t":"Conforme al art. 25 LRJSP, los principios de la potestad sancionadora NO se aplican:","o":["A las sanciones impuestas por las entidades locales en materia de tráfico","Al ejercicio de la potestad disciplinaria respecto del personal ni a quienes estén vinculados por relación contractual","A las sanciones tributarias impuestas por la Agencia Estatal de Administración Tributaria y a las de la Seguridad Social, que tienen ley propia","A las infracciones leves tramitadas por el procedimiento simplificado"],"c":1,"e":"Art. 25.3 LRJSP."},
+{"u":2,"t":"A falta de plazo en su ley, una infracción leve prescribe a los:","o":["Tres meses","Seis meses","Un año","Dos años"],"c":1,"e":"Art. 30.1 LRJSP: muy graves 3 años, graves 2, leves 6 meses."},
+{"u":2,"t":"A falta de plazo en su ley, una sanción impuesta por falta leve prescribe:","o":["A los seis meses","Al año","A los dos años","A los tres años"],"c":1,"e":"Art. 30.1 LRJSP: sanciones muy graves 3 años, graves 2, leves 1 año."},
+{"u":2,"t":"El plazo de prescripción de las sanciones comienza a contarse:","o":["Desde la fecha de la comisión de la infracción sancionada","Desde el día siguiente a aquel en que sea ejecutable la resolución o haya transcurrido el plazo para recurrirla","Desde la notificación de la propuesta de resolución al interesado","Desde la firmeza de la sentencia contencioso-administrativa que confirme la sanción, en todo caso, haya o no recurso administrativo previo"],"c":1,"e":"Art. 30.3 LRJSP."},
+{"u":2,"t":"Según el art. 29 LRJSP, hay reincidencia cuando se comete:","o":["Una segunda infracción de cualquier naturaleza en el plazo de dos años, aunque la primera no haya sido declarada por resolución firme","Más de una infracción de la misma naturaleza en el término de un año, declarado por resolución firme en vía administrativa","Más de tres infracciones leves en el mismo año natural, aunque no sean firmes","Una infracción idéntica a otra ya sancionada penalmente en los últimos cinco años"],"c":1,"e":"Art. 29.3.d LRJSP."},
+{"u":2,"t":"Las disposiciones sancionadoras posteriores favorables al infractor:","o":["Nunca tienen efecto retroactivo, por seguridad jurídica","Producen efecto retroactivo en tipificación, sanción y plazos de prescripción, incluso en sanciones pendientes de cumplimiento","Solo son retroactivas si la sanción no ha sido aún notificada","Solo son retroactivas en cuanto al plazo de prescripción de la infracción, nunca en cuanto a la tipificación ni a la cuantía de la sanción impuesta"],"c":1,"e":"Art. 26.2 LRJSP."},
+{"u":2,"t":"El non bis in idem (art. 31 LRJSP) exige identidad de:","o":["Sujeto, hecho y fundamento","Sujeto, órgano y procedimiento","Hecho, norma y sanción","Sujeto, hecho y Administración"],"c":0,"e":"Art. 31.1 LRJSP."},
+{"u":2,"t":"Según el art. 85 LPAC, si la sanción es solo pecuniaria, el reconocimiento de responsabilidad y el pago voluntario dan lugar a reducciones:","o":["De exactamente el 20 % cada una, no acumulables entre sí","De al menos el 20 % cada una, acumulables y condicionadas al desistimiento o renuncia de recursos administrativos","Del 50 %, como en las sanciones de tráfico, en todo caso","Fijadas libremente por el instructor en la propuesta de resolución, dentro de los márgenes de graduación del art. 29 LRJSP y sin necesidad de renunciar a recursos"],"c":1,"e":"Art. 85.3 LPAC."},
+{"u":2,"t":"¿Qué plazo de alegaciones fija el art. 64 LPAC en el acuerdo de iniciación del procedimiento sancionador?","o":["Diez días, en todo caso","Quince días","No fija un número: el acuerdo debe indicar el derecho a alegar y los plazos para su ejercicio","Cinco días hábiles para las infracciones leves y diez para las demás"],"c":2,"e":"Art. 64.2.f LPAC. El «10 días» del temario es una imprecisión."},
+{"u":2,"t":"El denunciante que ha participado en la infracción queda exento de la sanción si:","o":["Denuncia antes de que la Administración inicie actuaciones previas, con independencia del valor de las pruebas que aporte y aunque continúe en la infracción","Es el primero en aportar pruebas que permitan iniciar o comprobar la infracción, repara el perjuicio, cesa y no destruye pruebas","Abona el importe íntegro de la multa en el plazo voluntario de pago","Lo acuerda el órgano sancionador por razones de oportunidad, sin requisitos legales"],"c":1,"e":"Art. 62.4 LPAC."},
+{"u":2,"t":"En los procedimientos sancionadores, el vencimiento del plazo máximo sin resolución expresa produce:","o":["El silencio positivo a favor del interesado","La caducidad","La prescripción de la infracción","La conversión en procedimiento simplificado"],"c":1,"e":"Art. 25.1.b LPAC. Los procedimientos caducados no interrumpen la prescripción."},
+{"u":2,"t":"La tramitación simplificada del procedimiento sancionador procede cuando:","o":["El interesado no se opone expresamente a ella en el plazo de cinco días desde la notificación del acuerdo de iniciación, cualquiera que sea la gravedad","Existen elementos de juicio suficientes para calificar la infracción como leve","La sanción propuesta no supera los tres mil euros","El presunto infractor reconoce su responsabilidad en las alegaciones"],"c":1,"e":"Art. 96.5 LPAC; no cabe oposición expresa del interesado."},
+{"u":2,"t":"La resolución sancionadora es ejecutiva:","o":["Desde que se notifica al interesado, en todo caso, aunque contra ella quepa todavía recurso de alzada ante el superior jerárquico","Cuando no quepa contra ella ningún recurso ordinario en vía administrativa","Cuando sea firme en vía judicial","Desde que transcurra un mes desde su notificación"],"c":1,"e":"Art. 90.3 LPAC; puede suspenderse cautelarmente si se anuncia recurso contencioso."},
+{"u":2,"t":"En el procedimiento sancionador, la fase instructora y la sancionadora:","o":["Corresponden necesariamente a órganos distintos","Pueden corresponder al mismo órgano si este es unipersonal","Corresponden al mismo órgano salvo en infracciones muy graves","Solo se separan en el procedimiento simplificado"],"c":0,"e":"Art. 63.1 LPAC."},
+{"u":3,"t":"El arbitraje del Sistema Arbitral de Consumo (RD 231/2008) es:","o":["Obligatorio para las empresas y voluntario para los consumidores","Voluntario, gratuito y vinculante para ambas partes","Voluntario, con tasa a cargo de la parte que pierde, y no vinculante","Obligatorio y recurrible en alzada ante el Ministerio de Consumo"],"c":1,"e":"Voluntario, gratuito y con laudo vinculante."},
+{"u":3,"t":"El art. 112.2 LPAC permite que las leyes sustituyan el recurso de alzada por:","o":["Procedimientos de impugnación, reclamación, conciliación, mediación y arbitraje ante órganos colegiados no sometidos a instrucciones jerárquicas","Un recurso potestativo de reposición ante el mismo órgano que dictó el acto, seguido de una reclamación económico-administrativa ante el órgano colegiado competente y una ulterior conciliación","Un recurso extraordinario de revisión ante el Consejo de Ministros","Un arbitraje privado regido íntegramente por la Ley 60/2003"],"c":0,"e":"Art. 112.2 LPAC."},
+{"u":3,"t":"¿Qué precepto constitucional permite reservar al sector público, mediante ley, recursos o servicios esenciales?","o":["Art. 38 CE","Art. 103.1 CE","Art. 128.2 CE","Art. 149.1.18.ª CE"],"c":2,"e":"Art. 128.2 CE."},
+{"u":3,"t":"En el Derecho de la Unión, los servicios de interés económico general se regulan en:","o":["Los arts. 101 y 102 TFUE exclusivamente","Los arts. 14 y 106.2 TFUE y el Protocolo n.º 26","El art. 4 del Tratado de la Unión Europea","La Directiva 2014/23/UE de concesiones, de forma exclusiva"],"c":1,"e":"Arts. 14 y 106.2 TFUE y Protocolo 26."},
+{"u":3,"t":"¿Cuál de estas formas de gestión de un servicio público es indirecta?","o":["La entidad pública empresarial","La sociedad mercantil de capital íntegramente público","La concesión de servicios","El organismo autónomo"],"c":2,"e":"La concesión de servicios (arts. 15 y 284 ss. LCSP), con riesgo operacional del concesionario."},
+{"u":3,"t":"Una sociedad de economía mixta puede recibir directamente una concesión cuando:","o":["El capital público sea al menos del 75 %","El socio privado se haya elegido conforme a la LCSP y no se alteren el objeto ni las condiciones","Lo autorice expresamente el Consejo de Ministros por razones de interés público, previo informe de la Junta Consultiva de Contratación Pública del Estado","La concesión no supere el umbral de regulación armonizada"],"c":1,"e":"DA 22.ª LCSP."},
+{"u":3,"t":"Según el art. 85.2 LRBRL, la gestión de un servicio local por EPEL o sociedad mercantil exige:","o":["Una memoria justificativa de que es más sostenible y eficiente que la gestión por la propia entidad u organismo autónomo, elevada al Pleno, con informe del interventor","Únicamente un acuerdo del Alcalde, previo informe del secretario","La autorización previa de la Comunidad Autónoma respectiva","Que el servicio no implique ejercicio de autoridad y que así lo acuerde el Pleno por mayoría simple, sin que la ley exija memoria justificativa ni informe del interventor sobre la sostenibilidad financiera"],"c":0,"e":"Art. 85.2 LRBRL tras la Ley 27/2013."},
+{"u":3,"t":"La municipalización de actividades en régimen de monopolio exige acuerdo del Pleno por:","o":["Mayoría simple","Mayoría absoluta","Mayoría de dos tercios","Unanimidad"],"c":1,"e":"Art. 47.2.k LRBRL."},
+{"u":3,"t":"Sobre los servicios locales que impliquen ejercicio de autoridad, es correcto afirmar que:","o":["El art. 85.3 LRBRL sigue prohibiendo expresamente su gestión indirecta y su prestación mediante sociedad mercantil de capital privado","La regla del antiguo art. 85.3 fue suprimida en 2013; hoy deriva del art. 9 TREBEP y de la LCSP","Pueden gestionarse por sociedad mercantil privada si lo autoriza el Pleno","Solo pueden prestarse mediante consorcio"],"c":1,"e":"El art. 85.3 fue suprimido por la Ley 27/2013; el temario lo cita como vigente."},
+{"u":3,"t":"Tras la Ley 9/2017, el contrato de gestión de servicios públicos:","o":["Subsiste con sus cuatro modalidades clásicas (concesión, gestión interesada, concierto y sociedad de economía mixta) para los servicios locales","Ha desaparecido; la gestión indirecta se hace por concesión de servicios o contrato de servicios","Solo subsiste para las entidades locales","Se ha transformado en el concierto sanitario"],"c":1,"e":"La LCSP suprimió el contrato y sus modalidades."},
+{"u":3,"t":"La acción concertada en servicios sociales (art. 11.6 LCSP):","o":["Es una modalidad de concesión de servicios sujeta a riesgo operacional, que se adjudica por procedimiento abierto a entidades con o sin ánimo de lucro","Es una fórmula no contractual con entidades privadas, preferentemente sin ánimo de lucro","Solo puede utilizarla la Administración General del Estado","Se rige por la Ley General de Subvenciones"],"c":1,"e":"Art. 11.6 LCSP y normativa autonómica."},
+{"u":3,"t":"La declaración de utilidad pública de una asociación es un medio de fomento:","o":["Honorífico","Económico real","Jurídico","Financiero"],"c":2,"e":"Otorga un estatus o privilegio jurídico."},
+{"u":3,"t":"Según el art. 107 TFUE, las ayudas de Estado son incompatibles con el mercado interior cuando:","o":["Superan los 200.000 euros por beneficiario en tres ejercicios fiscales, aunque no afecten a los intercambios entre Estados miembros ni falseen la competencia","Falsean o amenazan falsear la competencia, favoreciendo a determinadas empresas, en la medida en que afecten a los intercambios entre Estados miembros","Las concede una entidad local sin informe de la Comisión","Se financian con fondos europeos"],"c":1,"e":"Art. 107.1 TFUE; excepciones y reglamentos de minimis y de exención por categorías."},
+{"u":4,"t":"¿Cuál NO es requisito del concepto de subvención del art. 2.1 LGS?","o":["Entrega sin contraprestación directa de los beneficiarios","Sujeción al cumplimiento de un objetivo, proyecto, actividad o situación","Que el beneficiario sea una persona jurídica privada sin ánimo de lucro","Que tenga por objeto el fomento de una actividad de utilidad pública o interés social"],"c":2,"e":"Puede ser beneficiaria cualquier persona pública o privada."},
+{"u":4,"t":"Según la Ley 4/2026, desde el 23/10/2026 no tienen carácter de subvención:","o":["Las subvenciones nominativas de los Presupuestos","Las ayudas económicas de emergencia o urgencia social gestionadas por los servicios sociales para necesidades básicas","Los premios concedidos con previa solicitud","Las ayudas a la contratación de personas con discapacidad y las ayudas al alquiler de vivienda concedidas por las Comunidades Autónomas en concurrencia competitiva"],"c":1,"e":"Nueva letra j) del art. 2.4 LGS (DF 7.ª Ley 4/2026)."},
+{"u":4,"t":"Un premio literario concedido sin previa solicitud del beneficiario:","o":["Es una subvención en concurrencia competitiva","Está excluido del ámbito de la LGS (art. 4)","Es una subvención de concesión directa","Es un contrato de servicios"],"c":1,"e":"Art. 4.a LGS. Con solicitud, sí se rige por la LGS."},
+{"u":4,"t":"Las aportaciones dinerarias entre Administraciones para financiar globalmente su actividad:","o":["Son subvenciones nominativas","Están fuera del ámbito de la LGS (art. 2.2)","Son subvenciones de concesión directa del art. 22.2.c","Están excluidas por el art. 4 junto a los premios"],"c":1,"e":"Art. 2.2 LGS."},
+{"u":4,"t":"¿Cuál de las siguientes figuras NO es subvención según el art. 2.4 LGS?","o":["Las prestaciones del Fondo de Garantía Salarial","Una ayuda para la modernización de comercios en concurrencia competitiva","Un premio de investigación concedido previa solicitud","Una subvención nominativa a una fundación"],"c":0,"e":"Art. 2.4.f LGS."},
+{"u":4,"t":"El crédito oficial:","o":["Es siempre subvención","No es subvención, salvo en los casos en que la Administración subvencione total o parcialmente los intereses","Está excluido de la LGS por el art. 4","Es subvención si se concede a entidades locales"],"c":1,"e":"Art. 2.4.h LGS."},
+{"u":4,"t":"El plan estratégico de subvenciones (art. 8 LGS) es:","o":["Facultativo y posterior a la convocatoria","Previo y preceptivo, y supeditado a la estabilidad presupuestaria","Solo exigible por encima de 12 millones de euros","Aprobado siempre por el Consejo de Ministros, a propuesta de Hacienda, y facultativo para las entidades locales"],"c":1,"e":"Art. 8.1 LGS."},
+{"u":4,"t":"¿Cuál NO es uno de los requisitos para el otorgamiento del art. 9.4 LGS?","o":["Competencia del órgano administrativo concedente","Existencia de crédito adecuado y suficiente","Trámite de audiencia pública previa","Fiscalización previa de los actos administrativos de contenido económico"],"c":2,"e":"La audiencia pública no es requisito (examen 2022)."},
+{"u":4,"t":"En la AGE, las bases reguladoras de las subvenciones se aprueban por:","o":["Real decreto del Consejo de Ministros","Orden ministerial, previo informe de los servicios jurídicos y de la intervención delegada","Resolución del Secretario de Estado de Presupuestos y Gastos, previo informe de la Abogacía del Estado y de la Intervención General","Ley de Presupuestos Generales del Estado"],"c":1,"e":"Art. 17.1 LGS (examen 2024)."},
+{"u":4,"t":"La Base de Datos Nacional de Subvenciones:","o":["La gestiona el Tribunal de Cuentas","La gestiona la IGAE y es el sistema nacional de publicidad de subvenciones","Solo es obligatoria para la AGE","La gestiona la Dirección General de Presupuestos y sustituye al diario oficial, que ya no publica extracto alguno de las convocatorias"],"c":1,"e":"Arts. 18 y 20 LGS; la BDNS remite el extracto al diario oficial."},
+{"u":4,"t":"La LGS se dicta, en gran parte, al amparo de:","o":["Art. 149.1.1.ª CE únicamente","Arts. 149.1.13.ª, 14.ª y 18.ª CE","Art. 149.1.6.ª y 8.ª CE","Art. 148.1.13.ª CE"],"c":1,"e":"DF 1.ª LGS."},
+{"u":5,"t":"En la AGE, la concesión de una subvención de importe superior a 12 millones de euros requiere:","o":["Informe del Consejo de Estado","Autorización previa del Consejo de Ministros (o de la Comisión Delegada para Asuntos Económicos si lo prevé la norma)","Autorización de las Cortes Generales","Informe del Tribunal de Cuentas"],"c":1,"e":"Art. 10.2 LGS; en concurrencia, antes de la convocatoria."},
+{"u":5,"t":"Los fondos que entrega una entidad colaboradora:","o":["Se integran en su patrimonio hasta su distribución","No se integran en su patrimonio","Se integran solo si es una entidad pública","Pasan a formar parte de su presupuesto de ingresos"],"c":1,"e":"Art. 12.1 LGS."},
+{"u":5,"t":"El convenio con una entidad colaboradora tiene una duración:","o":["No superior a cuatro años, prorrogable por mutuo acuerdo hasta otros cuatro, con una duración total máxima de ocho años incluidas las prórrogas","No superior a cuatro años, con prórrogas que no superen el periodo inicial y un total máximo de seis años","No superior a dos años, sin prórroga","Indefinida mientras subsista el crédito"],"c":1,"e":"Art. 16.2 LGS. El temario dice «hasta otros cuatro»: error."},
+{"u":5,"t":"El beneficiario debe acreditar estar al corriente de sus obligaciones tributarias y con la Seguridad Social:","o":["Después del pago de la subvención","Con anterioridad a dictarse la propuesta de resolución de concesión","Solo en el momento de la justificación","Dentro del mes siguiente a la notificación de la resolución de concesión y, en todo caso, antes del primer pago a cuenta"],"c":1,"e":"Art. 14.1.e LGS."},
+{"u":5,"t":"La concurrencia competitiva se inicia:","o":["A solicitud del interesado","Siempre de oficio, mediante convocatoria","De oficio o a solicitud, según las bases","Por denuncia de un tercero"],"c":1,"e":"Art. 23.1 LGS (examen 2019)."},
+{"u":5,"t":"El plazo máximo para resolver y notificar en concurrencia competitiva, salvo ley o normativa de la Unión, es de:","o":["Tres meses desde la presentación de la solicitud","Seis meses desde la publicación de la convocatoria, salvo que esta posponga sus efectos","Seis meses desde la presentación de la solicitud por cada interesado, con independencia de la fecha de publicación de la convocatoria","Doce meses desde la aprobación de las bases"],"c":1,"e":"Art. 25.4 LGS."},
+{"u":5,"t":"El vencimiento del plazo sin notificar la resolución en concurrencia competitiva legitima a los interesados para entender:","o":["Estimada su solicitud por silencio","Desestimada su solicitud por silencio","Caducado el procedimiento","Prorrogado el plazo seis meses más"],"c":1,"e":"Art. 25.5 LGS."},
+{"u":5,"t":"La propuesta de resolución provisional en concurrencia competitiva se notifica concediendo:","o":["Cinco días para alegaciones","Diez días para alegaciones","Quince días para alegaciones","Un mes para alegaciones"],"c":1,"e":"Art. 24.4 LGS; prescindible si no se tienen en cuenta otros hechos."},
+{"u":5,"t":"¿Cuál NO es un supuesto de concesión directa del art. 22.2 LGS?","o":["Las previstas nominativamente en los Presupuestos","Aquellas cuyo otorgamiento o cuantía venga impuesto por una norma de rango legal","Las de cuantía inferior al umbral del contrato menor","Las excepcionales por razones de interés público, social, económico o humanitario"],"c":2,"e":"Solo hay tres supuestos tasados."},
+{"u":5,"t":"En la AGE, las subvenciones directas del art. 22.2.c se regulan por:","o":["Orden ministerial","Real decreto, a propuesta del ministro competente y previo informe del Ministerio de Hacienda","Acuerdo de la Comisión Delegada del Gobierno para Asuntos Económicos, previa orden de bases del ministro competente y publicación en la BDNS","Resolución del Secretario de Estado"],"c":1,"e":"Art. 28.2 LGS."},
+{"u":5,"t":"Una subvención nominativa es aquella cuyo:","o":["Beneficiario se elige por sorteo","Objeto, dotación presupuestaria y beneficiario aparecen determinados en los estados de gasto del Presupuesto","Importe no supera 60.000 euros","Beneficiario es otra Administración Pública y cuyo importe se fija cada año por acuerdo de la Conferencia Sectorial correspondiente"],"c":1,"e":"Art. 22.2.a LGS."},
+{"u":5,"t":"El instrumento habitual para canalizar las subvenciones nominativas es:","o":["La convocatoria pública","El convenio","El contrato administrativo","La orden de bases"],"c":1,"e":"Art. 28.1 LGS."},
+{"u":6,"t":"Si la normativa reguladora no fija el porcentaje, el beneficiario puede subcontratar hasta:","o":["El 20 % de la actividad subvencionada","El 50 % del importe de la actividad subvencionada","El 60 % de la actividad subvencionada","El 100 %, con autorización"],"c":1,"e":"Art. 29.2 LGS."},
+{"u":6,"t":"Requieren contrato escrito y autorización previa las subcontrataciones que:","o":["Superen el 20 % del importe de la subvención y dicho importe sea superior a 60.000 euros","Superen el 50 % de la actividad subvencionada, cualquiera que sea el importe de la subvención concedida y aunque las bases no digan nada","Superen 15.000 euros, umbral del contrato menor de servicios","Se celebren con personas vinculadas, en todo caso"],"c":0,"e":"Art. 29.3 LGS (examen 2022)."},
+{"u":6,"t":"A falta de previsión en las bases, la justificación se presenta en un plazo máximo de:","o":["Un mes desde la finalización del plazo de realización de la actividad","Tres meses desde la finalización del plazo de realización de la actividad","Seis meses desde el pago","Un año desde la concesión"],"c":1,"e":"Art. 30.2 LGS (no el reglamento, como decía el visual)."},
+{"u":6,"t":"Cuando el gasto subvencionable supere el importe del contrato menor, el beneficiario debe:","o":["Tramitar un procedimiento abierto conforme a la LCSP, como poder adjudicador, con publicación del anuncio en la Plataforma de Contratación del Sector Público","Solicitar como mínimo tres ofertas de distintos proveedores, salvo que no existan suficientes o el gasto sea anterior a la subvención","Obtener la autorización del órgano concedente","Elegir siempre la oferta más económica, sin excepción"],"c":1,"e":"Art. 31.3 LGS."},
+{"u":6,"t":"¿Cuál de los siguientes gastos nunca es subvencionable?","o":["Los gastos de garantía bancaria, si lo prevén las bases","Los intereses, recargos y sanciones administrativas y penales","Los gastos de asesoría jurídica directamente relacionados con la actividad","Los costes indirectos imputados según principios contables"],"c":1,"e":"Art. 31.7 LGS."},
+{"u":6,"t":"La resolución de concesión de la subvención conlleva:","o":["La aprobación del gasto","El compromiso del gasto","El reconocimiento de la obligación","La ordenación del pago"],"c":1,"e":"Art. 34.1 LGS; la aprobación del gasto es previa a la convocatoria."},
+{"u":6,"t":"En las subvenciones nominativas de la AGE, tras el acuerdo de concesión:","o":["Se formula documento AD o ADOK, y están exentas de fiscalización previa","Se someten siempre a fiscalización previa plena por la intervención delegada, como el resto de subvenciones, antes de formular el documento contable","Se formula documento A y se convoca concurrencia","Se requiere autorización del Consejo de Ministros"],"c":0,"e":"Regla 83 IOC y art. 151 LGP (examen 2019)."},
+{"u":6,"t":"Es causa de nulidad específica de la resolución de concesión (art. 36 LGS):","o":["La falta de publicación en la BDNS","La carencia o insuficiencia de crédito","La falta de informe de la comisión de valoración","El retraso en la notificación"],"c":1,"e":"Art. 36.1.b LGS."},
+{"u":6,"t":"El interés de demora en el reintegro de subvenciones es:","o":["El interés legal del dinero","El interés legal del dinero incrementado en un 25 %, salvo que la Ley de Presupuestos establezca otro","El interés legal más dos puntos","El tipo de interés del Banco Central Europeo"],"c":1,"e":"Art. 38.2 LGS."},
+{"u":6,"t":"El interés de demora del reintegro se devenga desde:","o":["La fecha del acuerdo de inicio del reintegro","El momento del pago de la subvención","La fecha de fin del plazo de justificación","La notificación de la resolución de reintegro"],"c":1,"e":"Art. 37.1 LGS."},
+{"u":6,"t":"El derecho de la Administración a reconocer o liquidar el reintegro prescribe a los:","o":["Dos años","Tres años","Cuatro años","Cinco años"],"c":2,"e":"Art. 39.1 LGS."},
+{"u":6,"t":"El plazo máximo para resolver y notificar el procedimiento de reintegro es de:","o":["Seis meses desde la notificación del acuerdo de iniciación, transcurridos los cuales se entiende producido el silencio positivo a favor del beneficiario","Doce meses desde el acuerdo de iniciación; si vence, caducidad","Cuatro años","Tres meses desde la audiencia"],"c":1,"e":"Art. 42.4 LGS."},
+{"u":6,"t":"Las infracciones en materia de subvenciones prescriben a los:","o":["Tres años las muy graves, dos las graves y seis meses las leves","Cuatro años desde su comisión","Cinco años","Un año"],"c":1,"e":"Art. 65 LGS, plazo especial."},
+{"u":6,"t":"Las infracciones muy graves en materia de subvenciones se sancionan con multa:","o":["Fija de 30 a 6.000 euros","Proporcional del tanto al doble","Proporcional del doble al triple de la cantidad indebidamente obtenida, aplicada o no justificada","Proporcional del triple al quíntuple"],"c":2,"e":"Art. 63.1 LGS."},
+{"u":6,"t":"La pérdida durante hasta cinco años de la posibilidad de obtener subvenciones:","o":["Es la sanción principal y obligatoria de toda infracción muy grave, con independencia del importe del perjuicio causado y sin necesidad de multa","Se añade a la multa en las muy graves cuando el perjuicio supera 30.000 euros y concurren las circunstancias del art. 60.1.b o c","Se impone en las infracciones graves reincidentes","Solo la puede imponer el Consejo de Ministros"],"c":1,"e":"Art. 63.2 LGS."},
+{"u":6,"t":"El control financiero de subvenciones concedidas por la AGE corresponde a:","o":["El Tribunal de Cuentas","La Intervención General de la Administración del Estado","La Agencia Estatal de Administración Tributaria, en colaboración con la Tesorería General de la Seguridad Social","El órgano concedente exclusivamente"],"c":1,"e":"Art. 44 LGS; el Tribunal de Cuentas ejerce el control externo."},
+{"u":7,"t":"En el supuesto, el Ministerio paga 50.000 € a una empresa por organizar unas jornadas que él mismo usa para formar a su personal. ¿Qué se escribe en la calificación previa?","o":["Que es una subvención directa del art. 22.2.c","Que no es subvención por existir contraprestación directa, sino un contrato sujeto a la LCSP","Que es una subvención nominativa","Que es una ayuda de minimis"],"c":1,"e":"Art. 2.1.a LGS."},
+{"u":7,"t":"El enunciado no indica si las bases permiten subcontratar. Según el método de la Comisión, se debe escribir:","o":["«Salvo mejor criterio, podríamos entender que se permite»","«El enunciado no precisa si las bases lo permiten, por lo que suponemos que…», y después concluir de forma afirmativa","Nada, porque no se puede resolver sin el dato","«Podría entenderse que la subcontratación es lícita»"],"c":1,"e":"Suposición declarada antes de la conclusión; sin condicionales dubitativos."},
+{"u":7,"t":"Delta recibe 80.000 € pagados el 2/03/2026 y no justifica en plazo. ¿Qué conclusión es la correcta?","o":["Procede el reintegro solo de la parte subcontratada sin autorización, porque el resto del festival se celebró efectivamente aunque no se justificara","Procede el reintegro total de 80.000 € más el interés de demora desde el 2/03/2026","Procede imponer una multa del doble al triple, sin reintegro","Procede declarar la nulidad de la concesión por falta de crédito"],"c":1,"e":"Art. 37.1.c y 38 LGS."},
+{"u":7,"t":"Fin del plazo de justificación: 30/06/2026. ¿Hasta cuándo puede la Administración reconocer el reintegro?","o":["Hasta el 30/06/2027","Hasta el 30/06/2029","Hasta el 30/06/2030","Hasta el 30/06/2031"],"c":2,"e":"Art. 39 LGS: cuatro años desde el vencimiento del plazo de justificación."},
+{"u":7,"t":"El reintegro se inicia el 15/10/2026 y no se notifica resolución hasta el 20/10/2027. ¿Qué ocurre?","o":["Silencio positivo a favor del beneficiario","El procedimiento ha caducado; puede iniciarse otro si no ha prescrito, y lo actuado no interrumpió la prescripción","Ha prescrito el derecho de la Administración","Es válido, porque el plazo de la Administración para resolver el reintegro es el de prescripción de cuatro años y no se ha agotado"],"c":1,"e":"Art. 42.4 LGS."},
+{"u":7,"t":"Una subvención de 100.000 €: el beneficiario subcontrata 30.000 € sin autorización. ¿Qué se aplica?","o":["Nada: no supera el 50 %","El art. 29.3 LGS: supera el 20 % (20.000 €) y el importe es superior a 60.000 €, por lo que exigía contrato escrito y autorización previa","Solo exige comunicación posterior","El art. 31.3: tres ofertas"],"c":1,"e":"Art. 29.3 LGS."},
+{"u":7,"t":"¿Cuál es la conclusión que se ajusta al criterio de la Comisión?","o":["«Salvo mejor criterio fundado en Derecho, procedería el reintegro»","«Podríamos entender que procede el reintegro»","«Por tanto, se concluye que procede el reintegro de 80.000 € más los intereses de demora del art. 38.2»","«Parece que el reintegro sería posible»"],"c":2,"e":"Conclusión afirmativa con importe."},
+{"u":7,"t":"Antes de responder a una cuestión sobre una ayuda en el supuesto, lo primero que debe dejarse escrito es:","o":["El importe de la multa","La calificación de la ayuda: si cumple los tres requisitos del art. 2.1 LGS y el procedimiento de concesión","La prescripción de la infracción","El órgano judicial competente"],"c":1,"e":"«Con carácter previo, procede calificar…»."},
+{"u":7,"t":"Una convocatoria estatal de 15 millones de euros se aprueba sin autorización del Consejo de Ministros. ¿Qué consecuencia afirmativa se escribe?","o":["Es válida, porque la autorización puede obtenerse antes de la resolución","Falta un requisito previo del art. 10.2 LGS, que en concurrencia debe obtenerse antes de aprobar la convocatoria","Es nula por falta de crédito","Solo requería informe de la IGAE"],"c":1,"e":"Art. 10.2 LGS."},
+{"u":7,"t":"Una multa de 1.000 €; el infractor reconoce su responsabilidad y paga voluntariamente renunciando a recurrir. ¿Cuánto paga como máximo?","o":["1.000 €","800 €","600 €","500 €"],"c":2,"e":"Art. 85.3 LPAC: dos reducciones acumulables de al menos el 20 %."},
+{"u":7,"t":"Un ayuntamiento entrega en noviembre de 2026 una ayuda de urgencia social para pagar el alquiler. En el supuesto, se califica como:","o":["Subvención directa nominativa","No subvención (art. 2.4.j LGS, introducido por la Ley 4/2026)","Subvención en concurrencia competitiva","Contrato de servicios"],"c":1,"e":"En vigor desde el 23/10/2026."}
+];
+
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Formas de actividad e intervención",2:"Potestad sancionadora",3:"Arbitral, servicio público y fomento",4:"Subvenciones: concepto y principios",5:"Sujetos y procedimientos de concesión",6:"Ejecución, reintegro y sanciones",7:"Supuesto práctico"};
+const TABS={1:"Intervención",2:"Sancionador",3:"Serv. público",4:"Concepto",5:"Concesión",6:"Reintegro",7:"Supuesto"};
+const SK="gace27_biv_t07_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
