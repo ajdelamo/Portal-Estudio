@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Practica la Unit 4 · Comunicación Profesional en Inglés</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F4; --surface:#FFFFFF; --ink:#1B2433; --muted:#566173; --line:#D5DCE4;
+  --accent:#2346A0; --accent-ink:#FFFFFF; --ok:#1E7F5C; --ok-bg:#E3F4EC; --ko:#B3261E; --ko-bg:#FBE9E7;
+  --mark:#FFE45C;
+  --serif:"Literata", Georgia, "Times New Roman", serif;
+  --sans:"Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+    --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+    --mark:rgba(255,228,92,.38);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+  --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+  --mark:rgba(255,228,92,.38);
+}
+:root{ box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+html{ scroll-padding-top:env(safe-area-inset-top,0px); }
+*,*::before,*::after{ box-sizing:inherit; }
+body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.5; }
+.wrap{ max-width:660px; margin:0 auto; padding:20px 16px 48px; }
+h1{ font-family:var(--serif); font-weight:600; font-size:1.9rem; line-height:1.15; margin:8px 0 6px; letter-spacing:-.01em; }
+.lead{ color:var(--muted); margin:0 0 18px; max-width:60ch; }
+.mark{ background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); padding:8px 0 10px; margin:0 -16px 8px; }
+.tabs{ display:flex; gap:6px; overflow-x:auto; padding:0 16px; scrollbar-width:none; }
+.tabs::-webkit-scrollbar{ display:none; }
+.tab{ flex:0 0 auto; border:1px solid var(--line); background:var(--surface); color:var(--ink); font:500 .92rem var(--sans); padding:8px 14px; border-radius:999px; cursor:pointer; }
+.tab[aria-selected="true"]{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.panel{ display:none; }
+.panel.on{ display:block; }
+.card{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; margin-bottom:14px; }
+.meta{ display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:.88rem; margin-bottom:10px; flex-wrap:wrap; }
+.prompt{ font-family:var(--serif); font-size:1.22rem; line-height:1.45; margin:0 0 14px; }
+.opts{ display:grid; gap:8px; }
+.opt{ text-align:left; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:10px; padding:11px 13px; font:1rem var(--serif); cursor:pointer; }
+.opt:hover:not(:disabled){ border-color:var(--accent); }
+.opt.ok{ background:var(--ok-bg); border-color:var(--ok); }
+.opt.ko{ background:var(--ko-bg); border-color:var(--ko); }
+.opt:disabled{ cursor:default; }
+.row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.btn{ border:0; background:var(--accent); color:var(--accent-ink); font:600 .95rem var(--sans); padding:10px 16px; border-radius:10px; cursor:pointer; }
+.btn.ghost{ background:transparent; color:var(--accent); border:1px solid var(--line); }
+.btn:disabled{ opacity:.45; cursor:default; }
+.fb{ margin-top:12px; padding:12px 14px; border-radius:10px; font-size:.95rem; display:none; }
+.fb.show{ display:block; }
+.fb.ok{ background:var(--ok-bg); color:var(--ink); border-left:4px solid var(--ok); }
+.fb.ko{ background:var(--ko-bg); color:var(--ink); border-left:4px solid var(--ko); }
+.es{ color:var(--muted); font-style:italic; margin-top:6px; }
+input[type=text], textarea{ width:100%; font:1.05rem var(--serif); color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+textarea{ min-height:240px; line-height:1.5; resize:vertical; }
+input:focus, textarea:focus, .btn:focus-visible, .opt:focus-visible, .tab:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+.hint{ color:var(--muted); font-size:.9rem; margin:0 0 10px; }
+.stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin:12px 0; }
+.stat{ border:1px solid var(--line); border-radius:10px; padding:10px; }
+.stat b{ display:block; font-family:var(--serif); font-size:1.5rem; }
+.stat span{ color:var(--muted); font-size:.85rem; }
+.review{ margin:12px 0 0; padding:0; list-style:none; }
+.review li{ border-top:1px solid var(--line); padding:10px 0; font-size:.95rem; }
+.checks{ list-style:none; padding:0; margin:12px 0 0; }
+.checks li{ padding:6px 0 6px 28px; position:relative; font-size:.95rem; }
+.checks li::before{ content:""; position:absolute; left:4px; top:11px; width:12px; height:12px; border-radius:50%; border:2px solid var(--line); }
+.checks li.pass::before{ background:var(--ok); border-color:var(--ok); }
+.checks li.fail::before{ border-color:var(--ko); }
+.seg{ display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.progress{ height:4px; background:var(--line); border-radius:2px; overflow:hidden; margin-bottom:12px; }
+.progress i{ display:block; height:100%; background:var(--accent); width:0; transition:width .25s; }
+details summary{ cursor:pointer; color:var(--accent); font-weight:500; }
+.model{ font-family:var(--serif); white-space:pre-wrap; background:var(--bg); border-radius:10px; padding:12px; margin-top:8px; }
+@media (prefers-reduced-motion: reduce){ .progress i{ transition:none; } }
+.vt{width:100%;border-collapse:collapse;font-size:.92rem}.vt th,.vt td{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}.vt th{color:var(--muted);font-weight:600}.vt h4{margin:14px 0 4px}.tw{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Practica la Unit 4</h1>
+  <p class="lead">Conditional sentences, question tags y la entrevista de trabajo. Los fallos vuelven a salir hasta que los aciertes. El test sigue el formato de corrección de las clases (Why?, Why are the other options wrong? y Remember:) con las 4 opciones del examen: 30 preguntas, cada fallo resta 0,33. Incluye versiones propias de la sesión del 03/11 (repaso de tiempos) y el modo Irregulares con filtro «Solo participio».</p>
+
+  <nav aria-label="Modos de práctica">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-p="exam" aria-selected="true">Test tipo examen</button>
+      <button class="tab" role="tab" data-p="gap" aria-selected="false">Rellena huecos</button>
+      <button class="tab" role="tab" data-p="spell" aria-selected="false">Forma el condicional</button>
+      <button class="tab" role="tab" data-p="irr" aria-selected="false">Irregulares</button>
+      <button class="tab" role="tab" data-p="fix" aria-selected="false">Corrige el error</button>
+      <button class="tab" role="tab" data-p="reg" aria-selected="false">¿Qué condicional?</button>
+      <button class="tab" role="tab" data-p="write" aria-selected="false">Redacta</button>
+    </div>
+  </nav>
+
+  <!-- EXAM -->
+  <section class="panel on" id="p-exam">
+    <div id="exam-start" class="card">
+      <p class="prompt">30 preguntas al azar de un banco de 65, con 4 opciones (A, B, C, D), como en el examen final.</p>
+      <p class="hint">Tipos de pregunta de las clases de la profesora: <i>Choose the correct question for…</i>, <i>Choose the correct sentence</i>, <i>…for &lt;un uso&gt;</i> y <i>Choose the correct form</i>. Incluye question tags, preguntas de entrevista, repaso de tiempos (sesión del 03/11) y participios irregulares en el tercer condicional.</p>
+      <p class="hint">Formato de las clases: cada corrección trae <b>Why?</b>, <b>Why are the other options wrong?</b> y <b>Remember:</b>. Exam strategy: 1) lee la frase entera y separa la parte del if de la principal; 2) identifica el tipo de condicional y busca la pista (tomorrow, now, last year, the forecast…); 3) revisa la estructura (nunca will ni would en el if; participio tras had y have); 4) elimina las opciones de forma o significado erróneos.</p>
+      <p class="hint">Acierto +1, fallo −0,33, en blanco 0. Con 4 opciones, contestar al azar vale cero; si descartas una opción, responder vale +0,11; si descartas dos, +0,34. Responde solo si puedes descartar al menos una.</p>
+      <div id="exam-history" class="hint"></div>
+      <div class="row"><button class="btn" id="exam-go">Empezar test</button></div>
+    </div>
+    <div id="exam-run" class="card" hidden>
+      <div class="progress"><i id="exam-bar"></i></div>
+      <div class="meta"><span id="exam-count"></span><span id="exam-score"></span></div>
+      <p class="prompt" id="exam-q"></p>
+      <div class="opts" id="exam-opts"></div>
+      <div class="fb" id="exam-fb"></div>
+      <div class="row">
+        <button class="btn ghost" id="exam-blank">Dejar en blanco</button>
+        <button class="btn" id="exam-next" disabled>Siguiente</button>
+      </div>
+    </div>
+    <div id="exam-end" class="card" hidden></div>
+  </section>
+
+  <!-- GAP -->
+  <section class="panel" id="p-gap">
+    <div class="card">
+      <div class="progress"><i id="gap-bar"></i></div>
+      <div class="meta"><span id="gap-count"></span><span>Pista entre paréntesis</span></div>
+      <p class="prompt" id="gap-q"></p>
+      <input type="text" id="gap-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Tu respuesta">
+      <div class="fb" id="gap-fb"></div>
+      <div class="row">
+        <button class="btn" id="gap-check">Comprobar</button>
+        <button class="btn ghost" id="gap-next" disabled>Siguiente</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPELL -->
+  <section class="panel" id="p-spell">
+    <div class="card">
+      <div class="progress"><i id="spell-bar"></i></div>
+      <div class="meta"><span id="spell-count"></span><span id="spell-mode"></span></div>
+      <p class="prompt" id="spell-q"></p>
+      <input type="text" id="spell-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Forma verbal">
+      <div class="fb" id="spell-fb"></div>
+      <div class="row">
+        <button class="btn" id="spell-check">Comprobar</button>
+        <button class="btn ghost" id="spell-next" disabled>Siguiente</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- IRREGULAR VERBS -->
+  <section class="panel" id="p-irr">
+    <div class="card">
+      <div class="seg" id="irr-groups"></div>
+      <div class="progress"><i id="irr-bar"></i></div>
+      <div class="meta"><span id="irr-count"></span><span id="irr-glabel"></span></div>
+      <p class="prompt" id="irr-q"></p>
+      <p class="hint" id="irr-es"></p>
+      <div id="irr-inputs">
+        <label class="hint" for="irr-past" id="irr-past-l">Past simple</label>
+        <input type="text" id="irr-past" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <p></p>
+        <label class="hint" for="irr-pp">Past participle</label>
+        <input type="text" id="irr-pp" autocomplete="off" autocapitalize="off" spellcheck="false">
+      </div>
+      <div class="fb" id="irr-fb"></div>
+      <div class="row">
+        <button class="btn" id="irr-check">Comprobar</button>
+        <button class="btn ghost" id="irr-next" disabled>Siguiente</button>
+      </div>
+    </div>
+    <div class="card"><details><summary>Ver la lista completa por grupos</summary><div class="tw" id="irr-list"></div></details></div>
+  </section>
+
+  <!-- FIX -->
+  <section class="panel" id="p-fix">
+    <div class="card">
+      <div class="progress"><i id="fix-bar"></i></div>
+      <div class="meta"><span id="fix-count"></span><span>Encuentra el error y corrígelo mentalmente</span></div>
+      <p class="prompt" id="fix-q"></p>
+      <div class="fb" id="fix-fb"></div>
+      <div class="row" id="fix-row1"><button class="btn" id="fix-show">Ver corrección</button></div>
+      <div class="row" id="fix-row2" hidden>
+        <button class="btn" id="fix-good">Lo tenía bien</button>
+        <button class="btn ghost" id="fix-bad">Repasar otra vez</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section class="panel" id="p-reg">
+    <div class="card">
+      <div class="progress"><i id="reg-bar"></i></div>
+      <div class="meta"><span id="reg-count"></span><span>¿Qué tipo de condicional es?</span></div>
+      <p class="prompt" id="reg-q"></p>
+      <p class="hint" id="reg-ctx"></p>
+      <div class="opts" id="reg-opts"></div>
+      <div class="fb" id="reg-fb"></div>
+      <div class="row"><button class="btn ghost" id="reg-next" disabled>Siguiente</button></div>
+    </div>
+  </section>
+
+  <!-- WRITE -->
+  <section class="panel" id="p-write">
+    <div class="card">
+      <div class="seg">
+        <button class="btn" id="w-formal">Preguntas hipotéticas</button>
+        <button class="btn ghost" id="w-informal">Plan a cinco años</button>
+      </div>
+      <p class="prompt" id="w-task"></p>
+      <label class="hint" for="w-subject">Subject</label>
+      <input type="text" id="w-subject" autocomplete="off">
+      <p></p>
+      <label class="hint" for="w-body">Texto</label>
+      <textarea id="w-body" spellcheck="true"></textarea>
+      <div class="meta"><span id="w-words">0 words</span><span>El borrador se guarda en este navegador</span></div>
+      <ul class="checks" id="w-checks"></ul>
+      <p class="hint">La comprobación es mecánica: detecta forma, no contenido. Revisa tú que el mensaje diga lo que tiene que decir.</p>
+      <details><summary>Ver un modelo de respuesta</summary><div class="model" id="w-model"></div></details>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+"use strict";
+var D={"CHECKS": ["Read the whole sentence before choosing: localiza la parte del if (condición) y la principal (consecuencia); en las question tags, mira la frase entera antes de la coma.", "Identify the meaning and look for the clue: verdad general (cero), probable (primero), improbable o imaginario ahora (segundo), pasado que no ocurrió (tercero), pasado + now (mixto), deseo (I wish). Pistas: last year, now, tomorrow, the forecast says…", "Check the structure: if + presente / will + base · if + pasado / would + base · if + had + participio / would have + participio. Nunca will ni would en la parte del if. Tags: mismo auxiliar, polaridad contraria, pronombre.", "Eliminate options with the wrong meaning or form: primero las imposibles (if I would have, had knew, isn't John) y luego las de significado erróneo (primero por segundo)."], "EXAM": [{"t": "C", "q": "Choose the correct form: “If you heat ice, it ___.”", "o": ["melts", "melt", "is melt", "melted"], "w": "A general truth: zero conditional, present simple in both clauses (it → melts).", "r": "Zero: if + present, present.", "c": 2, "x": ["It needs the -s of the third person: melts.", "“Is + base form” does not exist.", "The past simple doesn't express a general truth."]}, {"t": "F", "q": "Choose the correct sentence for a general truth.", "o": ["If you mix blue and yellow, you get green.", "If you mix blue and yellow, you got green.", "If you will mix blue and yellow, you get green.", "If you mixes blue and yellow, you get green."], "w": "General truths use the zero conditional: present simple in both clauses.", "r": "Zero: if + present, present.", "c": 2, "x": ["The past simple doesn't express a general truth.", "No will in the if-clause.", "You → mix, without -s."]}, {"t": "F", "q": "Choose the correct sentence for a basic instruction.", "o": ["If you have any questions, ask me.", "If you will have any questions, ask me.", "If you have any questions, asking me.", "If you have any questions, to ask me."], "w": "Instructions: if + present simple, and the main clause in the imperative.", "r": "If + present, imperative.", "c": 3, "x": ["No will in the if-clause.", "The imperative is the base form, not -ing.", "The imperative has no to."]}, {"t": "C", "q": "Choose the correct form: “If it ___ tomorrow, we will stay at home.”", "o": ["rains", "will rain", "rained", "would rain"], "w": "First conditional: if + present simple, will + base form. Will never goes in the if-clause.", "r": "If + present, will + base.", "c": 3, "x": ["No will in the if-clause.", "“Rained” is second conditional and doesn't match “will stay”.", "No would in the if-clause."]}, {"t": "C", "q": "Choose the correct form: “If you study hard, you ___ the exam.”", "o": ["will pass", "would pass", "passed", "will passing"], "w": "A likely result: first conditional, will + base form.", "r": "If + present, will + base.", "c": 3, "x": ["Would goes with if + past, not with “study”.", "The main clause needs will + base, not the past.", "After will, the base form: pass."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["If he is late, we will have to go without him.", "If he will be late, we will have to go without him.", "If he is late, we would have to go without him.", "If he is late, we will must go without him."], "w": "First conditional: if + present (is), will + base (will have to).", "r": "Will have to = future obligation.", "c": 3, "x": ["No will in the if-clause.", "Would doesn't match “if he is”.", "Two modals can't go together: will have to."]}, {"t": "F", "q": "Choose the correct sentence for a promise.", "o": ["If you finish your homework, I will play with you.", "If you finished your homework, I will play with you.", "If you will finish your homework, I will play with you.", "If you finish your homework, I will to play with you."], "w": "Promises use the first conditional: if + present, will + base.", "r": "First conditional = plans, warnings and promises.", "c": 3, "x": ["If + past goes with would, not with will.", "No will in the if-clause.", "No to after will."]}, {"t": "C", "q": "Choose the correct form: “I ___ grateful if you would send me the documents.”", "o": ["would be", "will be", "am being", "would have been"], "w": "Polite request: would is possible in the if-clause when it expresses willingness (I would be grateful if you would…).", "r": "I would be grateful if you would / could…", "c": 3, "x": ["“Would send” in the if-clause goes with would, not will, in the main clause.", "Be grateful is a state: not continuous.", "“Would have been” is a past unreal result."]}, {"t": "C", "q": "Choose the correct form: “If I ___ the lottery, I would travel around the world.”", "o": ["won", "win", "will win", "would win"], "w": "Second conditional: if + past simple, would + base form.", "r": "If + past, would + base.", "c": 3, "x": ["If + present goes with will, not would.", "No will in the if-clause.", "No would in the if-clause."]}, {"t": "C", "q": "Choose the correct form: “If I ___ you, I would apologise.”", "o": ["were", "am", "will be", "would be"], "w": "If I were you = advice; were is the standard form for all persons in the second conditional.", "r": "If I were you, I would…", "c": 3, "x": ["“Am” is a real present and doesn't match would.", "No will in the if-clause.", "No would in the if-clause."]}, {"t": "C", "q": "Choose the correct form: “If you didn't smoke so much, you ___ much better.”", "o": ["would feel", "will feel", "felt", "would felt"], "w": "If + past (didn't smoke) → would + base form.", "r": "If + past, would + base.", "c": 3, "x": ["Will goes with if + present.", "The main clause needs would + base.", "After would, the base form: feel."]}, {"t": "F", "q": "Choose the correct sentence for something unlikely (the forecast says clear skies).", "o": ["If it snowed tomorrow, I would go skiing.", "If it snows tomorrow, I will go skiing.", "If it snowed tomorrow, I will go skiing.", "If it would snow tomorrow, I would go skiing."], "w": "Unlikely future: second conditional (if + past, would + base).", "r": "Likely → first; unlikely → second.", "c": 2, "x": ["First conditional presents snow as likely, but the forecast says clear skies.", "If + past goes with would, not will.", "No would in the if-clause."]}, {"t": "F", "q": "Choose the correct sentence for something likely (the forecast says snow).", "o": ["If it snows tomorrow, I'll go skiing.", "If it snowed tomorrow, I'd go skiing.", "If it will snow tomorrow, I'll go skiing.", "If it snows tomorrow, I'd go skiing."], "w": "Likely future: first conditional (if + present, will + base).", "r": "Likely → first; unlikely → second.", "c": 2, "x": ["Second conditional presents snow as unlikely, but the forecast says snow.", "No will in the if-clause.", "If + present goes with will ('ll), not would ('d)."]}, {"t": "C", "q": "Choose the correct form: “If I ___ swim, I'd go to the beach with you.”", "o": ["could", "can", "would", "will"], "w": "Could in the if-clause expresses ability in the second conditional.", "r": "If I could + base, I would…", "c": 3, "x": ["Can is present and doesn't match 'd (would).", "No would in the if-clause.", "No will in the if-clause."]}, {"t": "C", "q": "Choose the correct form: “If he ___ propose to you now, what would you say?”", "o": ["were to", "is to", "will", "would"], "w": "Were to makes the condition even less likely.", "r": "If + were to + base, would…", "c": 3, "x": ["“Is to” is present and doesn't match would.", "No will in the if-clause.", "No would in the if-clause."]}, {"t": "C", "q": "Choose the correct form: “If I had known, I ___ differently.”", "o": ["would have acted", "would acted", "will have acted", "would have act"], "w": "Third conditional: if + had + participle, would have + participle.", "r": "If + had + pp, would have + pp.", "c": 3, "x": ["Missing have: would have acted.", "Will doesn't express an unreal past.", "After have, the participle: acted."]}, {"t": "C", "q": "Choose the correct form: “If she ___ earlier, she wouldn't have missed the meeting.”", "o": ["had arrived", "arrived", "would have arrived", "has arrived"], "w": "Unreal past: if + past perfect (had arrived).", "r": "If + had + pp, would have + pp.", "c": 3, "x": ["“Arrived” is second conditional and doesn't match “wouldn't have missed”.", "No would in the if-clause.", "The present perfect doesn't express an unreal past."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["If I had studied harder, I would have gone to university.", "If I would have studied harder, I would have gone to university.", "If I had studied harder, I would have went to university.", "If I had study harder, I would have gone to university."], "w": "Third conditional: if + had + participle, would have + participle (go → gone).", "r": "Participles: studied, gone.", "c": 3, "x": ["No would in the if-clause.", "After have, the participle: gone, not went.", "After had, the participle: studied."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["Had I known the truth, I wouldn't have told her.", "Had I knew the truth, I wouldn't have told her.", "If had I known the truth, I wouldn't have told her.", "Hadn't I known the truth, I would have told her."], "w": "Formal inversion: had + subject + participle, without if.", "r": "Had I known… = If I had known…", "c": 3, "x": ["After had, the participle: known.", "The inversion drops if.", "Contracted negatives are not possible in the inversion."]}, {"t": "F", "q": "Choose the correct sentence for a formal inversion with a negative.", "o": ["Had people not been informed, the situation would have been worse.", "Hadn't people been informed, the situation would have been worse.", "If people not been informed, the situation would have been worse.", "Had people not been informed, the situation would have be worse."], "w": "Negative inversion: had + subject + not + participle (no contraction).", "r": "Had people not been… (never Hadn't people…).", "c": 3, "x": ["Contracted negatives are not possible in the inversion.", "With if, the past perfect needs had: if people hadn't been informed.", "After have, the participle: been."]}, {"t": "C", "q": "Choose the correct form: “If you had said something, I ___ have helped you.”", "o": ["could", "can", "will", "would to"], "w": "Third conditional with could have + participle: it was possible, but it didn't happen.", "r": "Would / could / might + have + pp.", "c": 3, "x": ["Can is present: could have.", "Will doesn't express an unreal past.", "No to after would."]}, {"t": "F", "q": "Choose the correct sentence for regret about the past.", "o": ["If I had known he was ill, I would have visited him.", "If I had knew he was ill, I would have visited him.", "If I had known he was ill, I would visit him yesterday.", "If I would have known he was ill, I would have visited him."], "w": "Regret about the past: third conditional.", "r": "If + had + pp, would have + pp.", "c": 4, "x": ["After had, the participle: known.", "“Yesterday” needs would have visited.", "No would in the if-clause."]}, {"t": "C", "q": "Choose the correct form: “If he had gone to university, he ___ a better job now.”", "o": ["would have", "would have had", "will have", "had"], "w": "Past action → present result (now): mixed conditional, would + base.", "r": "If + had + pp, would + base (now).", "c": 2, "x": ["“Would have had” is past and clashes with now.", "Will doesn't express an unreal situation.", "The main clause needs would."]}, {"t": "C", "q": "Choose the correct form: “If I were you, I ___ about the consequences before you signed the contract last week.”", "o": ["would have thought", "would think", "will think", "had thought"], "w": "Present situation (I am not you) → past consequence (last week): mixed, would have + participle.", "r": "If + past, would have + pp (past result).", "c": 2, "x": ["“Would think” refers to now, but the signing happened last week.", "Will doesn't express an unreal situation.", "The main clause needs would have."]}, {"t": "F", "q": "Choose the correct sentence for the present result of a past action.", "o": ["If I had taken the job last year, I would be rich now.", "If I had taken the job last year, I would have been rich now.", "If I took the job last year, I would be rich now.", "If I would have taken the job last year, I would be rich now."], "w": "Past (last year) → present (now): if + had + participle, would + base.", "r": "Mixed: past condition, present result.", "c": 2, "x": ["“Would have been” is past and clashes with now.", "“Last year” needs the past perfect: had taken.", "No would in the if-clause."]}, {"t": "C", "q": "Choose the correct form: “I need to call him now. I wish I ___ his phone number.”", "o": ["knew", "know", "will know", "known"], "w": "A wish about the present: I wish + past simple.", "r": "I wish + past = present regret.", "c": 3, "x": ["After I wish, the past, not the present.", "No will after I wish.", "“Known” is the participle: it needs had."]}, {"t": "C", "q": "Choose the correct form: “I feel sick. I wish I ___ so much cake.”", "o": ["hadn't eaten", "didn't eat", "wouldn't have eaten", "haven't eaten"], "w": "Regret about the past: I wish + past perfect.", "r": "I wish + had + pp = past regret.", "c": 2, "x": ["“Didn't eat” is a wish about the present; the cake is already eaten.", "Never would have after I wish.", "The present perfect doesn't go after I wish."]}, {"t": "C", "q": "Choose the correct form: “The weather was cold on holiday. I wish it ___ warmer.”", "o": ["had been", "would have been", "was", "has been"], "w": "Regret about the past (the holiday is over): I wish + past perfect.", "r": "Not I wish… would have.", "c": 2, "x": ["The material says it explicitly: not would have after I wish.", "“Was” is a wish about now, but the holiday is over.", "The present perfect doesn't go after I wish."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["If only I had more time to study.", "If only I have more time to study.", "If only I would have more time to study.", "If only I will have more time to study."], "w": "If only + past simple = a wish about the present.", "r": "If only / I wish + past.", "c": 3, "x": ["After if only, the past, not the present.", "No would after if only here.", "No will after if only."]}, {"t": "F", "q": "Choose the correct sentence for permission (first conditional).", "o": ["If you finish the test, you can leave the room.", "If you finish the test, you should leave the room.", "If you finish the test, you must leave the room.", "If you will finish the test, you can leave the room."], "w": "Can in the main clause of a first conditional gives permission.", "r": "First conditional + can = permission.", "c": 2, "x": ["Should gives advice, not permission.", "Must expresses obligation.", "No will in the if-clause."]}, {"t": "F", "q": "Choose the correct sentence for advice (first conditional).", "o": ["If you don't feel well, you should consult a doctor.", "If you don't feel well, you may consult a doctor.", "If you won't feel well, you should consult a doctor.", "If you don't feel well, you should to consult a doctor."], "w": "Should in the main clause gives advice.", "r": "First conditional + should = advice.", "c": 2, "x": ["May gives permission or possibility, not advice (the unit is wrong on p. 11).", "No will in the if-clause.", "No to after should."]}, {"t": "C", "q": "Choose the correct form: “If I arrive early, I ___ take a stroll around the park.” (future possibility)", "o": ["might", "must", "should to", "would have"], "w": "Might expresses a future possibility.", "r": "First conditional + might = possibility.", "c": 2, "x": ["Must expresses obligation, not possibility.", "No to after should.", "“Would have” is for an unreal past."]}, {"t": "C", "q": "Choose the correct form: “If I had seen him at the meeting, I ___ asked him, but I'm not sure.”", "o": ["might have", "would", "might", "must have"], "w": "Third conditional with might have: a possible but uncertain past result.", "r": "Would have / could have / might have + pp.", "c": 3, "x": ["“Would asked” needs have: would have asked.", "“Might asked” needs have.", "Must have is a deduction, not a conditional result."]}, {"t": "C", "q": "Choose the correct form: “If I'd gone to the party last night, I ___ tired now.”", "o": ["would be", "would have been", "will be", "am"], "w": "Past action → present result (now): would + base.", "r": "Would + base (now) vs would have + pp (past).", "c": 2, "x": ["“Would have been” is past and clashes with now.", "Will doesn't express an unreal situation.", "“Am” is a real present."]}, {"t": "C", "q": "Choose the correct form: “John is a teacher, ___?”", "o": ["isn't he", "isn't John", "is he", "doesn't he"], "w": "Positive sentence → negative tag, with the same auxiliary and a pronoun.", "r": "Tag = auxiliary + pronoun, opposite polarity.", "c": 3, "x": ["Tags use a pronoun, never the name.", "Positive sentence → negative tag.", "The sentence has is: the tag repeats is."]}, {"t": "C", "q": "Choose the correct form: “You haven't met him, ___?”", "o": ["have you", "haven't you", "did you", "do you"], "w": "Negative sentence → positive tag with the same auxiliary (have).", "r": "Negative → positive tag.", "c": 3, "x": ["Negative sentence → positive tag.", "The auxiliary is have, not did.", "The auxiliary is have, not do."]}, {"t": "C", "q": "Choose the correct form: “He eats meat, ___?”", "o": ["doesn't he", "isn't he", "don't he", "didn't he"], "w": "No auxiliary: the tag uses do/does/did. He + present → doesn't he.", "r": "No auxiliary → do / does / did.", "c": 3, "x": ["The sentence has no be: use does.", "He → doesn't, not don't.", "The sentence is present: doesn't, not didn't."]}, {"t": "C", "q": "Choose the correct form: “You said that, ___?”", "o": ["didn't you", "don't you", "haven't you", "did you"], "w": "Past simple without auxiliary → didn't + pronoun.", "r": "Said → didn't you?", "c": 3, "x": ["The sentence is past: did, not do.", "The sentence has no have.", "Positive sentence → negative tag."]}, {"t": "C", "q": "Choose the correct form: “I'm the fastest, ___?”", "o": ["aren't I", "amn't I", "am not I", "isn't I"], "w": "The tag for I am is aren't I?", "r": "I am → aren't I?", "c": 3, "x": ["“Amn't” is not standard English.", "The order is auxiliary + pronoun: aren't I.", "I goes with am / aren't, never is."]}, {"t": "C", "q": "Choose the correct form: “Let's go to the cinema, ___?”", "o": ["shall we", "will we", "don't we", "let we"], "w": "After let's, the tag is shall we?", "r": "Let's… → shall we?", "c": 3, "x": ["After let's, shall we, not will we.", "Let's is not a present simple: no do.", "“Let we” does not exist as a tag."]}, {"t": "C", "q": "Choose the correct form: “Give me a hand with this, ___?”", "o": ["will you", "do you", "don't you", "are you"], "w": "After an imperative, the tag is will you?", "r": "Imperative → will you?", "c": 3, "x": ["An imperative doesn't take do.", "An imperative doesn't take do.", "An imperative doesn't take be."]}, {"t": "C", "q": "Choose the correct form: “They couldn't hear me, ___?”", "o": ["could they", "couldn't they", "can they", "did they"], "w": "Negative with a modal → positive tag with the same modal.", "r": "Couldn't → could they?", "c": 3, "x": ["Negative sentence → positive tag.", "Keep the tense of the modal: could.", "The sentence has a modal: no did."]}, {"t": "C", "q": "Choose the correct form: “Mary had met him before, ___?”", "o": ["hadn't she", "didn't she", "hasn't she", "wasn't she"], "w": "Past perfect: the auxiliary is had → hadn't she?", "r": "Had → hadn't she?", "c": 3, "x": ["The auxiliary is had, not did.", "Keep the tense: had, not has.", "The auxiliary is had, not was."]}, {"t": "S", "q": "Choose the correctly written sentence.", "o": ["You eat meat, don't you?", "You eat meat. Don't you?", "You eat meat don't you.", "You eat meat, don't you."], "w": "A question tag goes after a comma and ends with a question mark.", "r": "Statement + comma + tag + ?", "c": 4, "x": ["The unit writes tags like this on p. 14, but tags always go after a comma (p. 13).", "Missing the comma and the question mark.", "A tag is a question: it needs a question mark."]}, {"t": "C", "q": "Choose the correct form: “You won't tell anyone, ___?”", "o": ["will you", "won't you", "do you", "would you"], "w": "Won't (will not) → positive tag will you?", "r": "Won't → will you?", "c": 3, "x": ["Negative sentence → positive tag.", "The auxiliary is will, not do.", "Keep the auxiliary: will, not would."]}, {"t": "C", "q": "Choose the correct form: “They've gone to London for a few days, ___?”", "o": ["haven't they", "haven't gone they", "didn't they", "aren't they"], "w": "The tag takes only the auxiliary (have), not the main verb.", "r": "They've = they have → haven't they?", "c": 3, "x": ["The tag doesn't repeat the main verb.", "The auxiliary is have, not did.", "The auxiliary is have, not are."]}, {"t": "F", "q": "Choose the correct sentence for answering “What would you do if you didn't get along with a coworker?”.", "o": ["I would not let personal problems affect my performance.", "I would not let personal problems to affect my performance.", "I would not to let personal problems affect my performance.", "I had not let personal problems affect my performance."], "w": "Hypothetical interview question → answer with would + base (second conditional).", "r": "What would you do…? → I would…", "c": 3, "x": ["After let + object, the base form: affect.", "No to after would.", "“Had not let” is past perfect, not a hypothetical answer."]}, {"t": "F", "q": "Choose the correct sentence for reflecting on past experience in an interview.", "o": ["If I had known then what I know now, I would have acted the same way.", "If I knew then what I know now, I would have acted the same way.", "If I had known then what I know now, I would acted the same way.", "If I would have known then what I know now, I would have acted the same way."], "w": "Reflecting on the past: third conditional.", "r": "If + had + pp, would have + pp.", "c": 4, "x": ["“Then” refers to the past: had known.", "Missing have: would have acted.", "No would in the if-clause."]}, {"t": "S", "q": "Choose the correct sentence.", "o": ["In five years, I hope to be head of the department.", "In five years, I hope being head of the department.", "In five years, I hope to being head of the department.", "In five years, I am hoping be head of the department."], "w": "Five-year plan: I hope to + base form.", "r": "Hope to + base form.", "c": 3, "x": ["Hope is followed by to + base, not -ing.", "After to, the base form: be.", "Hope needs to: I hope to be."]}, {"t": "C", "q": "Choose the correct form: “By then, I ___ my master's degree.” (five-year plan)", "o": ["will have finished", "will finished", "will have finish", "have finished"], "w": "Completed before a future moment (by then): future perfect.", "r": "Will have + past participle.", "c": 3, "x": ["After will, the base form; for completion, will have finished.", "After have, the participle: finished.", "The present perfect doesn't refer to the future."]}, {"t": "C", "q": "Choose the correct form: “Take an umbrella ___ it rains.”", "o": ["in case", "if not", "unless", "when not"], "w": "In case = as a precaution, por si acaso.", "r": "In case ≠ if.", "c": 2, "x": ["“If not” reverses the meaning.", "Unless = if not: it reverses the meaning.", "“When not” reverses the meaning."]}, {"t": "C", "q": "Choose the correct form: “___ you hurry, you'll miss the bus.”", "o": ["Unless", "If", "In case", "When"], "w": "Unless = if… not: if you don't hurry, you'll miss the bus.", "r": "Unless = if not.", "c": 2, "x": ["“If you hurry, you'll miss the bus” says the opposite.", "In case expresses precaution, not a condition.", "“When you hurry, you'll miss the bus” is illogical."]}, {"t": "R", "q": "Choose the correct form: “He ___ to the office by train every day.”", "o": ["goes", "is going", "go", "going"], "w": "A routine (every day): present simple, with -s for he. (Session 03/11)", "r": "Routines → present simple.", "c": 2, "x": ["The present continuous doesn't fit a routine with every day.", "He → goes, with -es.", "Missing the auxiliary and the form is not finite."]}, {"t": "R", "q": "Choose the correct form: “Please be quiet. I ___ on the phone.”", "o": ["am talking", "talk", "talks", "have talk"], "w": "An action happening now: present continuous. (Session 03/11)", "r": "Now → am / is / are + -ing.", "c": 2, "x": ["The present simple is for habits.", "Talks is third person.", "“Have talk” does not exist."]}, {"t": "R", "q": "Which sentence uses a state verb correctly?", "o": ["I need a new laptop.", "I am needing a new laptop.", "She is knowing the answer.", "He is preferring coffee."], "w": "State verbs (need, know, prefer, believe) are not usually continuous. (Session 03/11)", "r": "State verbs → simple form.", "c": 3, "x": ["Need is a state verb: not continuous.", "Know is a state verb: not continuous.", "Prefer is a state verb: not continuous."]}, {"t": "R", "q": "Choose the correct form: “She has worked here ___ three years.”", "o": ["for", "since", "from", "during"], "w": "For + a duration (three years); since + a starting point. (Session 03/11)", "r": "For + duration, since + starting point.", "c": 2, "x": ["Since needs a starting point (since 2023).", "From needs an end point (from… to…).", "During goes with a period (during the summer)."]}, {"t": "R", "q": "Choose the correct form: “At 9 p.m. yesterday, I ___ my report.”", "o": ["was writing", "have written", "am writing", "writed"], "w": "An action in progress at a specific past time: past continuous. (Session 03/11)", "r": "At 9 p.m. yesterday → was / were + -ing.", "c": 2, "x": ["The present perfect doesn't go with yesterday.", "The present continuous is present.", "Write is irregular: wrote, written."]}, {"t": "R", "q": "Choose the correct sentence.", "o": ["When we arrived, the meeting had already started.", "When we arrived, the meeting has already started.", "When we had arrived, the meeting has started.", "When we were arriving, the meeting already starts."], "w": "An action before another past action: past perfect. (Session 03/11)", "r": "Had + past participle.", "c": 4, "x": ["The present perfect clashes with arrived.", "Mixes past perfect and present perfect.", "Mixes past continuous and present."]}, {"t": "R", "q": "Choose the correct sentence for a fixed future arrangement.", "o": ["I am meeting the client on Friday at 10.", "I will meeting the client on Friday at 10.", "I am meet the client on Friday at 10.", "I meeting the client on Friday at 10."], "w": "A fixed arrangement: present continuous. (Session 03/11)", "r": "Arrangements → am / is / are + -ing.", "c": 2, "x": ["After will, the base form.", "Am + base form does not exist.", "Missing am."]}, {"t": "R", "q": "Choose the correct form: “He was exhausted because he ___ all night.”", "o": ["had been driving", "has been driving", "had been drive", "was drive"], "w": "The cause of a past situation, with duration: past perfect continuous. (Session 03/11)", "r": "Had been + -ing.", "c": 4, "x": ["Has been is present and clashes with was.", "After been, the -ing form.", "“Was drive” does not exist."]}, {"t": "I", "q": "Choose the correct form: “If she had ___ the truth, she would have told us.”", "o": ["known", "knew", "know", "knowed"], "w": "Third conditional: had + past participle (know, knew, known).", "r": "know, knew, known (ABC).", "c": 3, "x": ["“Knew” is the past simple, not the participle.", "After had, the participle, not the base form.", "Know is irregular: there is no “knowed”."]}, {"t": "I", "q": "Choose the correct form: “If we had ___ earlier, we would have caught the train.”", "o": ["left", "leaved", "leave", "lefted"], "w": "Had + past participle (leave, left, left).", "r": "leave, left, left (ABB).", "c": 3, "x": ["Leave is irregular: there is no “leaved”.", "After had, the participle.", "“Lefted” does not exist."]}, {"t": "I", "q": "Choose the correct form: “I would have ___ you if I had had your number.”", "o": ["rung", "rang", "ring", "ringed"], "w": "Would have + past participle (ring, rang, rung).", "r": "ring, rang, rung (ABC).", "c": 3, "x": ["“Rang” is the past simple, not the participle.", "After have, the participle.", "Ring is irregular: there is no “ringed”."]}, {"t": "I", "q": "Choose the correct form: “If he had ___ the report on time, we would have sent it.”", "o": ["written", "wrote", "write", "writed"], "w": "Had + past participle (write, wrote, written).", "r": "write, wrote, written (ABC).", "c": 3, "x": ["“Wrote” is the past simple, not the participle.", "After had, the participle.", "Write is irregular: there is no “writed”."]}, {"t": "I", "q": "Choose the correct form: “If I had ___ him at the meeting, I would have asked him.”", "o": ["seen", "saw", "see", "seed"], "w": "Had + past participle (see, saw, seen).", "r": "see, saw, seen (ABC).", "c": 3, "x": ["“Saw” is the past simple, not the participle.", "After had, the participle.", "See is irregular: there is no “seed”."]}], "GAPS": [{"s": "If you heat water, it ___ (boil).", "a": ["boils"], "es": "Si calientas agua, hierve."}, {"s": "When the sun ___ (go) down, it gets dark.", "a": ["goes"], "es": "Cuando se pone el sol, oscurece."}, {"s": "If it ___ (rain) tomorrow, we will stay at home.", "a": ["rains"], "es": "Si mañana llueve, nos quedaremos en casa."}, {"s": "If you study, you ___ (have) good grades.", "a": ["will have", "'ll have"], "es": "Si estudias, sacarás buenas notas."}, {"s": "I ___ (miss) the bus if I don't go out right now!", "a": ["will miss", "'ll miss"], "es": "¡Perderé el autobús si no salgo ahora mismo!"}, {"s": "If I ___ (win) the lottery, I would travel around the world.", "a": ["won"], "es": "Si me tocara la lotería, viajaría por todo el mundo."}, {"s": "If I ___ (be) you, I would apologise.", "a": ["were"], "es": "Yo que tú, pediría perdón."}, {"s": "If you didn't smoke so much, you ___ (feel) much better.", "a": ["would feel", "'d feel"], "es": "Si no fumaras tanto, te encontrarías mucho mejor."}, {"s": "If it snowed tomorrow, I ___ (go) skiing.", "a": ["would go", "'d go"], "es": "Si mañana nevara, iría a esquiar."}, {"s": "If I ___ (know), I would have acted differently.", "a": ["had known", "'d known"], "es": "Si lo hubiera sabido, habría actuado de otra manera."}, {"s": "He ___ (help) you if he had known your problem.", "a": ["would have helped", "'d have helped"], "es": "Te habría ayudado si hubiera conocido tu problema."}, {"s": "If I had studied harder, I ___ (go) to university.", "a": ["would have gone", "'d have gone"], "es": "Si hubiera estudiado más, habría ido a la universidad."}, {"s": "___ (I / know) the truth, I wouldn't have told her anything. (inversion)", "a": ["had i known"], "es": "De haber sabido la verdad, no le habría contado nada."}, {"s": "Had people ___ (not / be) informed, the situation would have been much worse.", "a": ["not been"], "es": "De no haberse informado a la gente, la situación habría sido mucho peor."}, {"s": "If he had gone to university, he ___ (have) a better job now.", "a": ["would have", "'d have"], "es": "Si hubiera ido a la universidad, ahora tendría un trabajo mejor."}, {"s": "If I were you, I ___ (think) about the consequences before you signed.", "a": ["would have thought", "'d have thought"], "es": "Yo que tú, habría pensado en las consecuencias antes de firmar."}, {"s": "I wish I ___ (know) his phone number.", "a": ["knew"], "es": "Ojalá supiera su número de teléfono."}, {"s": "I wish I ___ (not / eat) so much cake.", "a": ["hadn't eaten", "had not eaten"], "es": "Ojalá no hubiera comido tanta tarta."}, {"s": "If only you ___ (be) here.", "a": ["were"], "es": "Ojalá estuvieras aquí."}, {"s": "If you finish your homework, you ___ (can / watch) TV.", "a": ["can watch"], "es": "Si terminas los deberes, puedes ver la tele."}, {"s": "If you don't feel well, you ___ (should / consult) a doctor.", "a": ["should consult"], "es": "Si no te encuentras bien, deberías ir al médico."}, {"s": "If you had said something, I ___ (could / help) you.", "a": ["could have helped"], "es": "Si hubieras dicho algo, podría haberte ayudado."}, {"s": "I'd go to the beach with you if I ___ (can) swim.", "a": ["could"], "es": "Iría a la playa contigo si supiera nadar."}, {"s": "John is a teacher, ___?", "a": ["isn't he"], "es": "John es profesor, ¿no?"}, {"s": "You haven't met him, ___?", "a": ["have you"], "es": "No lo conoces, ¿verdad?"}, {"s": "He eats meat, ___?", "a": ["doesn't he"], "es": "Come carne, ¿no?"}, {"s": "I'm the fastest, ___?", "a": ["aren't i"], "es": "Soy el más rápido, ¿verdad?"}, {"s": "Let's go to the cinema, ___?", "a": ["shall we"], "es": "Vamos al cine, ¿te parece?"}, {"s": "Give me a hand with the washing-up, ___?", "a": ["will you"], "es": "Échame una mano con los platos, ¿quieres?"}, {"s": "In five years, I hope ___ (be) head of the department.", "a": ["to be"], "es": "Dentro de cinco años espero ser jefe del departamento."}], "SP": [{"v": "Zero · If you ___ (mix) blue and yellow, you get green.", "k": "cond", "a": ["mix"], "r": "cero: if + presente, presente"}, {"v": "Zero · If you heat ice, it ___ (melt).", "k": "cond", "a": ["melts"], "r": "cero: presente (it → -s)"}, {"v": "First · If he ___ (be) late, we will go without him.", "k": "cond", "a": ["is"], "r": "primero: if + presente (nunca will)"}, {"v": "First · If my mother finds out, we ___ (be) in trouble.", "k": "cond", "a": ["will be", "'ll be"], "r": "primero: will + base"}, {"v": "First · If Saturday is sunny, we ___ (eat) outside.", "k": "cond", "a": ["will eat", "'ll eat"], "r": "primero: will + base"}, {"v": "Second · If I ___ (have) more time, I would study more.", "k": "cond", "a": ["had"], "r": "segundo: if + pasado"}, {"v": "Second · If I had more time, I ___ (study) more.", "k": "cond", "a": ["would study", "'d study"], "r": "segundo: would + base"}, {"v": "Second · If you ___ (not / live) so far, I would visit you every week.", "k": "cond", "a": ["didn't live", "did not live"], "r": "segundo: if + pasado (negativa con didn't)"}, {"v": "Second · If you asked George, he ___ (might / be) able to help you.", "k": "cond", "a": ["might be"], "r": "segundo con modal: might + base"}, {"v": "Second · If he ___ (be to) propose now, what would you say?", "k": "cond", "a": ["were to"], "r": "segundo: were to = todavía menos probable"}, {"v": "Third · If I ___ (see) him at the meeting, I would have asked him.", "k": "cond", "a": ["had seen", "'d seen"], "r": "tercero: if + had + participio (see, saw, seen)"}, {"v": "Third · If I had seen him, I ___ (ask) him.", "k": "cond", "a": ["would have asked", "'d have asked"], "r": "tercero: would have + participio"}, {"v": "Third · If we had been there, we ___ (might / be) able to help.", "k": "cond", "a": ["might have been"], "r": "tercero con modal: might have + participio"}, {"v": "Third · If you ___ (warn) me, I wouldn't have told your father.", "k": "cond", "a": ["had warned", "'d warned"], "r": "tercero: if + had + participio"}, {"v": "Third · If I had been born rich, I ___ (grow) spoiled.", "k": "cond", "a": ["would have grown", "'d have grown"], "r": "tercero: would have + participio (grow, grew, grown)"}, {"v": "Inversion · ___ (she / arrive) sooner, she wouldn't have missed the meeting.", "k": "cond", "a": ["had she arrived"], "r": "inversión: had + sujeto + participio, sin if"}, {"v": "Mixed · If I had taken that job, I ___ (live) in London now.", "k": "cond", "a": ["would live", "'d live"], "r": "mixto: pasado → ahora: would + base"}, {"v": "Mixed · If I ___ (be) you, I would have called her yesterday.", "k": "cond", "a": ["were"], "r": "mixto: siempre (if I were) → pasado (would have)"}, {"v": "Wish · I wish I ___ (have) a car.", "k": "cond", "a": ["had"], "r": "I wish + pasado = deseo sobre el presente"}, {"v": "Wish · I wish I ___ (study) more last year.", "k": "cond", "a": ["had studied", "'d studied"], "r": "I wish + had + participio = lamento sobre el pasado"}, {"v": "Wish · I wish it ___ (be) warmer on holiday last week.", "k": "cond", "a": ["had been"], "r": "nunca I wish… would have"}, {"v": "Tag · You won't tell anyone, ___?", "k": "cond", "a": ["will you"], "r": "won't → will you?"}, {"v": "Tag · They couldn't hear me, ___?", "k": "cond", "a": ["could they"], "r": "couldn't → could they?"}, {"v": "Tag · You said that, ___?", "k": "cond", "a": ["didn't you"], "r": "sin auxiliar: did → didn't you?"}], "IRR": [{"g": "AAA", "b": "bet", "p": "bet", "pp": "bet", "es": "apostar"}, {"g": "AAA", "b": "cost", "p": "cost", "pp": "cost", "es": "costar"}, {"g": "AAA", "b": "cut", "p": "cut", "pp": "cut", "es": "cortar"}, {"g": "AAA", "b": "hit", "p": "hit", "pp": "hit", "es": "golpear"}, {"g": "AAA", "b": "hurt", "p": "hurt", "pp": "hurt", "es": "herir, doler"}, {"g": "AAA", "b": "let", "p": "let", "pp": "let", "es": "dejar, permitir"}, {"g": "AAA", "b": "put", "p": "put", "pp": "put", "es": "poner"}, {"g": "AAA", "b": "quit", "p": "quit", "pp": "quit", "es": "dejar, abandonar"}, {"g": "AAA", "b": "read", "p": "read", "pp": "read", "es": "leer (se pronuncia /red/ en pasado)"}, {"g": "AAA", "b": "set", "p": "set", "pp": "set", "es": "fijar, establecer"}, {"g": "AAA", "b": "shut", "p": "shut", "pp": "shut", "es": "cerrar"}, {"g": "AAA", "b": "spread", "p": "spread", "pp": "spread", "es": "extender, difundir"}, {"g": "ABB", "b": "bring", "p": "brought", "pp": "brought", "es": "traer"}, {"g": "ABB", "b": "build", "p": "built", "pp": "built", "es": "construir"}, {"g": "ABB", "b": "burn", "p": "burnt/burned", "pp": "burnt/burned", "es": "quemar"}, {"g": "ABB", "b": "buy", "p": "bought", "pp": "bought", "es": "comprar"}, {"g": "ABB", "b": "catch", "p": "caught", "pp": "caught", "es": "coger, atrapar"}, {"g": "ABB", "b": "dream", "p": "dreamt/dreamed", "pp": "dreamt/dreamed", "es": "soñar"}, {"g": "ABB", "b": "feed", "p": "fed", "pp": "fed", "es": "alimentar"}, {"g": "ABB", "b": "feel", "p": "felt", "pp": "felt", "es": "sentir"}, {"g": "ABB", "b": "fight", "p": "fought", "pp": "fought", "es": "luchar"}, {"g": "ABB", "b": "find", "p": "found", "pp": "found", "es": "encontrar"}, {"g": "ABB", "b": "get", "p": "got", "pp": "got", "es": "conseguir, obtener (US: gotten)"}, {"g": "ABB", "b": "hang", "p": "hung", "pp": "hung", "es": "colgar"}, {"g": "ABB", "b": "have", "p": "had", "pp": "had", "es": "tener, haber"}, {"g": "ABB", "b": "hear", "p": "heard", "pp": "heard", "es": "oír"}, {"g": "ABB", "b": "hold", "p": "held", "pp": "held", "es": "sostener, celebrar (una reunión)"}, {"g": "ABB", "b": "keep", "p": "kept", "pp": "kept", "es": "mantener, guardar"}, {"g": "ABB", "b": "lay", "p": "laid", "pp": "laid", "es": "poner, colocar"}, {"g": "ABB", "b": "lead", "p": "led", "pp": "led", "es": "dirigir, liderar"}, {"g": "ABB", "b": "learn", "p": "learnt/learned", "pp": "learnt/learned", "es": "aprender"}, {"g": "ABB", "b": "leave", "p": "left", "pp": "left", "es": "dejar, irse"}, {"g": "ABB", "b": "lend", "p": "lent", "pp": "lent", "es": "prestar"}, {"g": "ABB", "b": "light", "p": "lit", "pp": "lit", "es": "encender"}, {"g": "ABB", "b": "lose", "p": "lost", "pp": "lost", "es": "perder"}, {"g": "ABB", "b": "make", "p": "made", "pp": "made", "es": "hacer, fabricar"}, {"g": "ABB", "b": "mean", "p": "meant", "pp": "meant", "es": "significar, querer decir"}, {"g": "ABB", "b": "meet", "p": "met", "pp": "met", "es": "conocer, reunirse"}, {"g": "ABB", "b": "pay", "p": "paid", "pp": "paid", "es": "pagar"}, {"g": "ABB", "b": "say", "p": "said", "pp": "said", "es": "decir"}, {"g": "ABB", "b": "sell", "p": "sold", "pp": "sold", "es": "vender"}, {"g": "ABB", "b": "send", "p": "sent", "pp": "sent", "es": "enviar"}, {"g": "ABB", "b": "shoot", "p": "shot", "pp": "shot", "es": "disparar"}, {"g": "ABB", "b": "sit", "p": "sat", "pp": "sat", "es": "sentarse"}, {"g": "ABB", "b": "sleep", "p": "slept", "pp": "slept", "es": "dormir"}, {"g": "ABB", "b": "smell", "p": "smelt/smelled", "pp": "smelt/smelled", "es": "oler"}, {"g": "ABB", "b": "spell", "p": "spelt/spelled", "pp": "spelt/spelled", "es": "deletrear"}, {"g": "ABB", "b": "spend", "p": "spent", "pp": "spent", "es": "gastar, pasar (tiempo)"}, {"g": "ABB", "b": "spill", "p": "spilt/spilled", "pp": "spilt/spilled", "es": "derramar"}, {"g": "ABB", "b": "stand", "p": "stood", "pp": "stood", "es": "estar de pie"}, {"g": "ABB", "b": "stick", "p": "stuck", "pp": "stuck", "es": "pegar, atascarse"}, {"g": "ABB", "b": "teach", "p": "taught", "pp": "taught", "es": "enseñar"}, {"g": "ABB", "b": "tell", "p": "told", "pp": "told", "es": "decir, contar"}, {"g": "ABB", "b": "think", "p": "thought", "pp": "thought", "es": "pensar"}, {"g": "ABB", "b": "understand", "p": "understood", "pp": "understood", "es": "entender"}, {"g": "ABB", "b": "win", "p": "won", "pp": "won", "es": "ganar"}, {"g": "ABC", "b": "be", "p": "was/were", "pp": "been", "es": "ser, estar"}, {"g": "ABC", "b": "begin", "p": "began", "pp": "begun", "es": "empezar"}, {"g": "ABC", "b": "bite", "p": "bit", "pp": "bitten", "es": "morder"}, {"g": "ABC", "b": "blow", "p": "blew", "pp": "blown", "es": "soplar"}, {"g": "ABC", "b": "break", "p": "broke", "pp": "broken", "es": "romper"}, {"g": "ABC", "b": "choose", "p": "chose", "pp": "chosen", "es": "elegir"}, {"g": "ABC", "b": "do", "p": "did", "pp": "done", "es": "hacer"}, {"g": "ABC", "b": "draw", "p": "drew", "pp": "drawn", "es": "dibujar"}, {"g": "ABC", "b": "drink", "p": "drank", "pp": "drunk", "es": "beber"}, {"g": "ABC", "b": "drive", "p": "drove", "pp": "driven", "es": "conducir"}, {"g": "ABC", "b": "eat", "p": "ate", "pp": "eaten", "es": "comer"}, {"g": "ABC", "b": "fall", "p": "fell", "pp": "fallen", "es": "caer"}, {"g": "ABC", "b": "fly", "p": "flew", "pp": "flown", "es": "volar"}, {"g": "ABC", "b": "forget", "p": "forgot", "pp": "forgotten", "es": "olvidar"}, {"g": "ABC", "b": "forgive", "p": "forgave", "pp": "forgiven", "es": "perdonar"}, {"g": "ABC", "b": "freeze", "p": "froze", "pp": "frozen", "es": "congelar"}, {"g": "ABC", "b": "give", "p": "gave", "pp": "given", "es": "dar"}, {"g": "ABC", "b": "go", "p": "went", "pp": "gone", "es": "ir"}, {"g": "ABC", "b": "grow", "p": "grew", "pp": "grown", "es": "crecer, cultivar"}, {"g": "ABC", "b": "hide", "p": "hid", "pp": "hidden", "es": "esconder"}, {"g": "ABC", "b": "know", "p": "knew", "pp": "known", "es": "saber, conocer"}, {"g": "ABC", "b": "lie", "p": "lay", "pp": "lain", "es": "tumbarse (≠ lie, lied, lied: mentir)"}, {"g": "ABC", "b": "ride", "p": "rode", "pp": "ridden", "es": "montar"}, {"g": "ABC", "b": "ring", "p": "rang", "pp": "rung", "es": "sonar, llamar por teléfono"}, {"g": "ABC", "b": "rise", "p": "rose", "pp": "risen", "es": "subir, levantarse"}, {"g": "ABC", "b": "see", "p": "saw", "pp": "seen", "es": "ver"}, {"g": "ABC", "b": "shake", "p": "shook", "pp": "shaken", "es": "agitar, temblar"}, {"g": "ABC", "b": "show", "p": "showed", "pp": "shown", "es": "mostrar"}, {"g": "ABC", "b": "sing", "p": "sang", "pp": "sung", "es": "cantar"}, {"g": "ABC", "b": "sink", "p": "sank", "pp": "sunk", "es": "hundir(se)"}, {"g": "ABC", "b": "speak", "p": "spoke", "pp": "spoken", "es": "hablar"}, {"g": "ABC", "b": "steal", "p": "stole", "pp": "stolen", "es": "robar"}, {"g": "ABC", "b": "swim", "p": "swam", "pp": "swum", "es": "nadar"}, {"g": "ABC", "b": "take", "p": "took", "pp": "taken", "es": "tomar, llevar"}, {"g": "ABC", "b": "tear", "p": "tore", "pp": "torn", "es": "rasgar"}, {"g": "ABC", "b": "throw", "p": "threw", "pp": "thrown", "es": "lanzar"}, {"g": "ABC", "b": "wake", "p": "woke", "pp": "woken", "es": "despertar(se)"}, {"g": "ABC", "b": "wear", "p": "wore", "pp": "worn", "es": "llevar puesto"}, {"g": "ABC", "b": "write", "p": "wrote", "pp": "written", "es": "escribir"}, {"g": "ABA", "b": "become", "p": "became", "pp": "become", "es": "llegar a ser, convertirse"}, {"g": "ABA", "b": "come", "p": "came", "pp": "come", "es": "venir"}, {"g": "ABA", "b": "run", "p": "ran", "pp": "run", "es": "correr"}, {"g": "ABB", "b": "sweep", "p": "swept", "pp": "swept", "es": "barrer"}, {"g": "ABB", "b": "creep", "p": "crept", "pp": "crept", "es": "arrastrarse, avanzar sigilosamente"}, {"g": "ABB", "b": "deal", "p": "dealt", "pp": "dealt", "es": "tratar, ocuparse de"}, {"g": "ABB", "b": "bleed", "p": "bled", "pp": "bled", "es": "sangrar"}, {"g": "ABC", "b": "beat", "p": "beat", "pp": "beaten", "es": "vencer, golpear (beat, beat, beaten)"}], "GROUPS": [{"g": "AAA", "es": "Las tres formas iguales", "n": 12}, {"g": "ABB", "es": "Pasado y participio iguales", "n": 48}, {"g": "ABC", "es": "Las tres formas distintas", "n": 40}, {"g": "ABA", "es": "Base y participio iguales", "n": 3}], "FIX": [{"b": "If it will rain tomorrow, I won't go out.", "g": "If it rains tomorrow, I won't go out.", "w": "No va will en la parte del if."}, {"b": "If I would have known, I would have helped you.", "g": "If I had known, I would have helped you.", "w": "No va would en la parte del if: had + participio."}, {"b": "If I had knew the truth, I wouldn't have told her.", "g": "If I had known the truth, I wouldn't have told her.", "w": "Tras had, participio (know, knew, known)."}, {"b": "I would have went to university if I had studied.", "g": "I would have gone to university if I had studied.", "w": "Tras have, participio (go, went, gone)."}, {"b": "If I won the lottery, I will travel around the world.", "g": "If I won the lottery, I would travel around the world.", "w": "If + pasado va con would."}, {"b": "If you study, you would pass.", "g": "If you study, you will pass.", "w": "If + presente va con will."}, {"b": "Hadn't people been informed, the situation would have been worse.", "g": "Had people not been informed, the situation would have been worse.", "w": "En la inversión no se contrae la negativa."}, {"b": "If I had gone to the party, I would have been tired now.", "g": "If I had gone to the party, I would be tired now.", "w": "Con now, mixto: would + base."}, {"b": "I wish it would have been warmer.", "g": "I wish it had been warmer.", "w": "Nunca would have tras I wish."}, {"b": "I wish I know his number.", "g": "I wish I knew his number.", "w": "Deseo sobre el presente: I wish + pasado."}, {"b": "If you have a few hours, you may visit the museum. (advice)", "g": "If you have a few hours, you should visit the museum.", "w": "Errata del material (p. 11): may no da consejo; should sí."}, {"b": "John is a teacher, isn't John?", "g": "John is a teacher, isn't he?", "w": "La coletilla usa pronombre, nunca el nombre."}, {"b": "He eats meat, isn't he?", "g": "He eats meat, doesn't he?", "w": "Sin auxiliar: does → doesn't he?"}, {"b": "You said that. Didn't you?", "g": "You said that, didn't you?", "w": "Errata del material (p. 14): la coletilla va tras una coma."}, {"b": "I'm the fastest, amn't I?", "g": "I'm the fastest, aren't I?", "w": "La coletilla de I am es aren't I?"}, {"b": "Let's go to the cinema, will we?", "g": "Let's go to the cinema, shall we?", "w": "Tras let's: shall we?"}, {"b": "They've gone to London, haven't gone they?", "g": "They've gone to London, haven't they?", "w": "La coletilla solo repite el auxiliar."}, {"b": "You haven't met him, haven't you?", "g": "You haven't met him, have you?", "w": "Frase negativa, coletilla afirmativa."}, {"b": "Your reaction is always rue.", "g": "Your reaction is always true.", "w": "Errata del material (p. 14)."}, {"b": "Take an umbrella if not it rains.", "g": "Take an umbrella in case it rains.", "w": "Precaución = in case."}, {"b": "If I was you, I would apologise.", "g": "If I were you, I would apologise.", "w": "Forma estándar: If I were you (en examen y PEC)."}, {"b": "In five years, I hope being head of the department.", "g": "In five years, I hope to be head of the department.", "w": "Hope to + forma base."}], "CATS": ["zero", "first", "second", "third", "mixed", "wish"], "WHYC": {"zero": "Cero: if + presente, presente. Verdades generales e instrucciones.", "first": "Primero: if + presente, will (o can, may, might, must, should) + base. Algo probable.", "second": "Segundo: if + pasado (were), would / could / might + base. Algo improbable o irreal ahora.", "third": "Tercero: if + had + participio, would / could / might have + participio. Un pasado que no ocurrió.", "mixed": "Mixto: pasado → ahora (had + pp, would + base) o siempre → pasado (were, would have + pp).", "wish": "I wish / If only + pasado (deseo sobre el presente) o + pasado perfecto (lamento sobre el pasado)."}, "REG": [{"s": "", "e": "If you heat water, it boils.", "c": "zero"}, {"s": "", "e": "When the sun goes down, it gets dark.", "c": "zero"}, {"s": "", "e": "If you have any questions, please ask me.", "c": "zero"}, {"s": "", "e": "If you mix blue and yellow, you get green.", "c": "zero"}, {"s": "", "e": "If he is late, we will have to go without him.", "c": "first"}, {"s": "", "e": "If Saturday is sunny, we will eat outside.", "c": "first"}, {"s": "", "e": "If you finish your homework, you can watch TV.", "c": "first"}, {"s": "La previsión anuncia nieve", "e": "If it snows tomorrow, I'll go skiing.", "c": "first"}, {"s": "", "e": "If you ask Mary, she might be able to help you.", "c": "first"}, {"s": "", "e": "If I won the lottery, I would travel around the world.", "c": "second"}, {"s": "", "e": "If I were you, I would apologise.", "c": "second"}, {"s": "La previsión anuncia cielos despejados", "e": "If it snowed tomorrow, I'd go skiing.", "c": "second"}, {"s": "", "e": "I'd go to the beach with you if I could swim.", "c": "second"}, {"s": "", "e": "If he were to propose to you now, what would you say?", "c": "second"}, {"s": "", "e": "If I had known, I would have acted differently.", "c": "third"}, {"s": "", "e": "Had she arrived sooner, she wouldn't have missed the meeting.", "c": "third"}, {"s": "", "e": "If you had said something, I could have helped you.", "c": "third"}, {"s": "", "e": "If I had seen him at the meeting, I might have asked him.", "c": "third"}, {"s": "", "e": "If he had gone to university, he would have a better job now.", "c": "mixed"}, {"s": "", "e": "If I were you, I would have thought about the consequences before.", "c": "mixed"}, {"s": "", "e": "If I'd gone to the party last night, I would be tired now.", "c": "mixed"}, {"s": "", "e": "I wish Mary were here.", "c": "wish"}, {"s": "", "e": "If only I knew what to do.", "c": "wish"}, {"s": "", "e": "I wish I hadn't eaten so much cake.", "c": "wish"}, {"s": "", "e": "I wish I'd known that Andy was ill.", "c": "wish"}, {"s": "", "e": "If only I had more time to study.", "c": "wish"}], "TASKS": {"hypo": {"label": "Preguntas hipotéticas", "t": "Responde por escrito, como lo dirías en una entrevista, a dos preguntas hipotéticas del apartado 4.4: «What would you do if you had a difficult client?» y «What would you do if you suddenly had to step in for a manager and give a presentation?». Usa el segundo condicional (would + base, if + pasado) y una frase de tercer condicional sobre tu experiencia (If I had…, I would have…). Nunca would en la parte del if. Entre 100 y 160 palabras. Es entrenamiento para la parte 2 de la PEC: el vídeo se graba sin leer.", "m": "Subject: Interview practice, hypothetical questions\n\nIf I had a difficult client, I would listen carefully to understand what the real problem was. I would stay calm and I would explain the legal options in simple words. If the client asked for something impossible, I would say so politely and I would offer a realistic alternative. I think clients appreciate honesty more than empty promises.\n\nIf I suddenly had to step in for a manager, I would ask for the key points of the presentation and I would prepare a short outline. I would not try to sound like the manager; I would focus on the facts and on the questions of the audience.\n\nIn fact, something similar happened to me once. If I had prepared a backup plan earlier, I would have felt more confident, so now I always keep one."}, "plan": {"label": "Plan a cinco años", "t": "Responde a «Where do you see yourself in five years?» como en el apartado 4.4.1, con otro perfil distinto del de tu vídeo (por ejemplo, un abogado júnior en una consultora). Usa I see myself / I hope to, una frase con will have + participio (By then, I will have…) y un condicional para la parte del plan que no es segura (If…, I might / will…). Entre 80 y 140 palabras.", "m": "Subject: Interview practice, the five-year plan\n\nIn five years, I see myself as a senior associate in your consultancy, ideally leading a small team in the compliance area. I hope to work with international clients, because that is where I can use my languages.\n\nBy then, I will have completed my training in data protection and I will have gained experience with clients from several countries. If the firm opens an office in Lisbon, as I have read in your annual report, I might apply to help set it up.\n\nI am looking for a long-term career, not a short-term job, and I think this firm is the right place to grow."}}};
+var STORE="ui1-ing-ud4-v1";
+function load(){ try{ var r=localStorage.getItem(STORE); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
+function save(d){ try{ localStorage.setItem(STORE, JSON.stringify(d)); }catch(e){} }
+var db=load(); db.examHistory=db.examHistory||[]; db.drafts=db.drafts||{};
+
+function $(id){ return document.getElementById(id); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function norm(s){ return (s||"").toLowerCase().replace(/[’‘`]/g,"'").replace(/\s+/g," ").trim().replace(/[.!?]+$/,""); }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function fb(el,ok,html){ el.className="fb show "+(ok?"ok":"ko"); el.innerHTML=html; }
+function hideFb(el){ el.className="fb"; el.innerHTML=""; }
+function fmt(n){ return (Math.round(n*100)/100).toString().replace(".",","); }
+
+/* Tabs */
+var tabs=document.querySelectorAll(".tab");
+tabs.forEach(function(t){ t.addEventListener("click",function(){
+  tabs.forEach(function(x){ x.setAttribute("aria-selected", x===t?"true":"false"); });
+  document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id==="p-"+t.dataset.p); });
+}); });
+
+/* ===== EXAM ===== */
+var L="ABCD";
+function explain(it,good){
+  var h="<b>✓ Correct answer: "+L.charAt(it.o.indexOf(it.ok))+")</b> "+esc(it.ok);
+  h+="<div style='margin-top:8px'><b>Why?</b> "+esc(it.w)+"</div>";
+  h+="<div style='margin-top:6px'><b>Remember:</b> "+esc(it.r)+"</div>";
+  if(it.x){
+    var m={}; for(var k=1;k<it.src.o.length;k++) m[it.src.o[k]]=it.x[k-1];
+    h+="<div style='margin-top:6px'><b>Why are the other options wrong?</b> "+it.o.map(function(op,k){ return op===it.ok?"":L.charAt(k)+") "+esc(m[op]); }).filter(Boolean).join(" ")+"</div>";
+  }
+  if(!good) h+="<div class='es'>"+esc(D.CHECKS[it.c-1])+"</div>";
+  return h;
+}
+var ex=null;
+function renderHistory(){
+  var h=db.examHistory;
+  $("exam-history").textContent = h.length ? ("Últimas notas: "+h.slice(-5).map(function(x){ return fmt(x.nota); }).join(" / ")+" sobre 10.") : "";
+}
+function startExam(pool){
+  var qs=(pool||shuffle(D.EXAM).slice(0,30)).map(function(it){ return {q:it.q,w:it.w,r:it.r,c:it.c,x:it.x,ok:it.o[0],o:shuffle(it.o),src:it}; });
+  ex={qs:qs,i:0,ok:0,ko:0,blank:0,wrong:[],done:false};
+  $("exam-start").hidden=true; $("exam-end").hidden=true; $("exam-run").hidden=false;
+  showQ();
+}
+function showQ(){
+  if(ex.i>=ex.qs.length){ return endExam(); }
+  var it=ex.qs[ex.i]; ex.done=false;
+  $("exam-bar").style.width=(ex.i/ex.qs.length*100)+"%";
+  $("exam-count").textContent="Pregunta "+(ex.i+1)+" de "+ex.qs.length;
+  $("exam-score").textContent="Puntos: "+fmt(ex.ok-ex.ko*0.33);
+  $("exam-q").innerHTML="<span class='hint' style='display:block;margin:0 0 6px'>Choose ONE correct answer.</span>"+esc(it.q);
+  var box=$("exam-opts"); box.innerHTML="";
+  it.o.forEach(function(op,k){
+    var b=document.createElement("button"); b.className="opt"; b.dataset.v=op; b.textContent=L.charAt(k)+") "+op;
+    b.addEventListener("click",function(){ answer(op,b); });
+    box.appendChild(b);
+  });
+  hideFb($("exam-fb")); $("exam-next").disabled=true; $("exam-blank").disabled=false;
+}
+function reveal(){
+  var it=ex.qs[ex.i];
+  $("exam-opts").querySelectorAll(".opt").forEach(function(b){ b.disabled=true; if(b.dataset.v===it.ok) b.classList.add("ok"); });
+}
+function answer(op,btn){
+  if(ex.done) return; ex.done=true;
+  var it=ex.qs[ex.i]; reveal();
+  if(op===it.ok){ ex.ok++; fb($("exam-fb"),true,explain(it,true)); }
+  else { ex.ko++; btn.classList.add("ko"); ex.wrong.push(it.src); fb($("exam-fb"),false,explain(it,false)); }
+  $("exam-next").disabled=false; $("exam-blank").disabled=true; $("exam-next").focus();
+}
+$("exam-blank").addEventListener("click",function(){
+  if(ex.done) return; ex.done=true; ex.blank++; var it=ex.qs[ex.i]; ex.wrong.push(it.src);
+  reveal(); fb($("exam-fb"),false,"En blanco. "+explain(it,false));
+  $("exam-next").disabled=false; $("exam-blank").disabled=true;
+});
+$("exam-next").addEventListener("click",function(){ ex.i++; showQ(); });
+$("exam-go").addEventListener("click",function(){ startExam(); });
+function endExam(){
+  $("exam-run").hidden=true;
+  var n=ex.qs.length, raw=ex.ok-ex.ko*0.33, nota=Math.max(0,raw)/n*10;
+  if(n===30){ db.examHistory.push({d:Date.now(),nota:Math.round(nota*100)/100}); db.examHistory=db.examHistory.slice(-20); save(db); }
+  var h="<p class='prompt'>Nota: <span class='mark'>"+fmt(nota)+"</span> sobre 10</p>";
+  h+="<div class='stats'><div class='stat'><b>"+ex.ok+"</b><span>aciertos</span></div><div class='stat'><b>"+ex.ko+"</b><span>fallos (−"+fmt(ex.ko*0.33)+")</span></div><div class='stat'><b>"+ex.blank+"</b><span>en blanco</span></div></div>";
+  h+= n===30 ? "<p class='hint'>El examen vale el 50 % de la nota: necesitas al menos un 4 en él y un 5 de media con la PEC.</p>" : "<p class='hint'>Ronda de repaso: no cuenta en el historial.</p>";
+  if(ex.wrong.length){
+    h+="<ul class='review'>"+ex.wrong.map(function(w){ return "<li><b>"+esc(w.q)+"</b><br><span class='mark'>"+esc(w.o[0])+"</span>. "+esc(w.w)+"<div class='es'>Remember: "+esc(w.r)+"</div></li>"; }).join("")+"</ul>";
+  }
+  h+="<div class='row'>"+(ex.wrong.length?"<button class='btn' id='exam-retry'>Repetir solo los fallos</button>":"")+"<button class='btn ghost' id='exam-new'>Nuevo test de 30</button></div>";
+  var end=$("exam-end"); end.innerHTML=h; end.hidden=false;
+  var wr=ex.wrong.slice();
+  if($("exam-retry")) $("exam-retry").addEventListener("click",function(){ startExam(shuffle(wr)); });
+  $("exam-new").addEventListener("click",function(){ startExam(); });
+  renderHistory();
+}
+renderHistory();
+
+/* ===== generic adaptive queue ===== */
+function Queue(items){ this.q=shuffle(items); this.total=items.length; this.mastered=0; this.cur=null; }
+Queue.prototype.next=function(){ this.cur=this.q.shift()||null; return this.cur; };
+Queue.prototype.fail=function(){ var pos=Math.min(3,this.q.length); this.q.splice(pos,0,this.cur); };
+Queue.prototype.pass=function(){ this.mastered++; };
+function bar(id,Q){ $(id).style.width=(Q.mastered/Q.total*100)+"%"; }
+function done(Q){ return !Q.cur && Q.q.length===0 && Q.mastered===Q.total; }
+
+/* ===== GAP FILL ===== */
+var G=new Queue(D.GAPS), gDone=false;
+function gapShow(){
+  var c=G.next(); bar("gap-bar",G); hideFb($("gap-fb"));
+  if(!c){ $("gap-q").innerHTML="<span class='mark'>Completado.</span> Has acertado las "+G.total+" tarjetas."; $("gap-in").hidden=true; $("gap-check").hidden=true; $("gap-next").textContent="Empezar de nuevo"; $("gap-next").disabled=false; $("gap-count").textContent=""; return; }
+  $("gap-in").hidden=false; $("gap-check").hidden=false; $("gap-next").textContent="Siguiente";
+  $("gap-count").textContent="Dominadas "+G.mastered+" de "+G.total;
+  $("gap-q").textContent=c.s; $("gap-in").value=""; $("gap-next").disabled=true; gDone=false; $("gap-in").focus({preventScroll:true});
+}
+function gapCheck(){
+  if(gDone) return; var c=G.cur; if(!c) return; var v=norm($("gap-in").value); if(!v) return; gDone=true;
+  var ok=c.a.some(function(a){ return norm(a)===v; });
+  if(ok){ G.pass(); fb($("gap-fb"),true,"Correcto.<div class='es'>"+esc(c.es)+"</div>"); }
+  else { G.fail(); fb($("gap-fb"),false,"Respuesta: <span class='mark'>"+esc(c.a[0])+"</span>. Volverá a salir.<div class='es'>"+esc(c.es)+"</div>"); }
+  bar("gap-bar",G); $("gap-next").disabled=false; $("gap-next").focus();
+}
+$("gap-check").addEventListener("click",gapCheck);
+$("gap-in").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(gDone) gapShow(); else gapCheck(); } });
+$("gap-next").addEventListener("click",function(){ if(done(G)){ G=new Queue(D.GAPS); } gapShow(); });
+gapShow();
+
+/* ===== PAST FORMS ===== */
+var S=new Queue(D.SP), sDone=false;
+function spShow(){
+  var c=S.next(); bar("spell-bar",S); hideFb($("spell-fb"));
+  if(!c){ $("spell-q").innerHTML="<span class='mark'>Completado.</span> "+S.total+" formas acertadas."; $("spell-in").hidden=true; $("spell-check").hidden=true; $("spell-next").textContent="Empezar de nuevo"; $("spell-next").disabled=false; $("spell-count").textContent=""; $("spell-mode").textContent=""; return; }
+  $("spell-in").hidden=false; $("spell-check").hidden=false; $("spell-next").textContent="Siguiente";
+  $("spell-count").textContent="Dominadas "+S.mastered+" de "+S.total;
+  $("spell-mode").textContent="Forma el condicional";
+  $("spell-q").textContent = c.v;
+  $("spell-in").value=""; $("spell-next").disabled=true; sDone=false; $("spell-in").focus({preventScroll:true});
+}
+function spCheck(){
+  if(sDone) return; var c=S.cur; if(!c) return; var v=norm($("spell-in").value); if(!v) return; sDone=true;
+  var ok=c.a.some(function(a){ return norm(a)===v; });
+  if(ok){ S.pass(); fb($("spell-fb"),true,"Correcto: "+esc(c.a[0])+". Regla: "+esc(c.r)+"."); }
+  else { S.fail(); fb($("spell-fb"),false,"Es <span class='mark'>"+esc(c.a[0])+"</span>. Regla: "+esc(c.r)+"."); }
+  bar("spell-bar",S); $("spell-next").disabled=false; $("spell-next").focus();
+}
+$("spell-check").addEventListener("click",spCheck);
+$("spell-in").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(sDone) spShow(); else spCheck(); } });
+$("spell-next").addEventListener("click",function(){ if(done(S)){ S=new Queue(D.SP); } spShow(); });
+spShow();
+
+/* ===== IRREGULAR VERBS ===== */
+var IG="all", I=null, iDone=false, PPO=false;
+function accs(s){ var a=s.split("/").map(norm); a.push(norm(s)); a.push(norm(s.replace("/"," / "))); return a; }
+function irrPool(){ return D.IRR.filter(function(v){ return IG==="all"||v.g===IG; }); }
+function irrGroups(){
+  var box=$("irr-groups"); box.innerHTML="";
+  [{g:"all",es:"Todos",n:D.IRR.length}].concat(D.GROUPS).forEach(function(G){
+    var b=document.createElement("button"); b.className= IG===G.g?"btn":"btn ghost";
+    b.textContent=(G.g==="all"?"Todos":G.g)+" ("+G.n+")"; b.title=G.es;
+    b.addEventListener("click",function(){ IG=G.g; I=new Queue(irrPool()); irrGroups(); irrShow(); });
+    box.appendChild(b);
+  });
+  var t=document.createElement("button"); t.className= PPO?"btn":"btn ghost"; t.textContent= PPO?"Solo participio ✓":"Solo participio";
+  t.title="Para el tercer condicional y el mixto: escribe solo el participio";
+  t.addEventListener("click",function(){ PPO=!PPO; irrGroups(); irrShow(); }); box.appendChild(t);
+  var cur=D.GROUPS.filter(function(G){ return G.g===IG; })[0];
+  $("irr-glabel").textContent= (cur? cur.es : "Los "+D.IRR.length+" verbos")+(PPO?" · solo participio":"");
+}
+function irrShow(){
+  var c=I.next(); bar("irr-bar",I); hideFb($("irr-fb")); iDone=false;
+  if(!c){ $("irr-q").innerHTML="<span class='mark'>Completado.</span> Grupo dominado."; $("irr-es").textContent=""; $("irr-inputs").hidden=true; $("irr-check").hidden=true; $("irr-next").textContent="Empezar de nuevo"; $("irr-next").disabled=false; $("irr-count").textContent=""; return; }
+  $("irr-inputs").hidden=false; $("irr-check").hidden=false; $("irr-next").textContent="Siguiente"; $("irr-next").disabled=true;
+  $("irr-count").textContent="Dominados "+I.mastered+" de "+I.total;
+  $("irr-q").innerHTML="<b>"+esc(c.b)+"</b>"; $("irr-es").textContent=c.es+" · grupo "+c.g;
+  $("irr-past").value=""; $("irr-pp").value=""; $("irr-past").hidden=PPO; $("irr-past-l").hidden=PPO; (PPO?$("irr-pp"):$("irr-past")).focus({preventScroll:true});
+}
+function irrCheck(){
+  if(iDone) return; var c=I.cur; if(!c) return;
+  var p=norm($("irr-past").value), pp=norm($("irr-pp").value); if((!p&&!PPO)||!pp) return; iDone=true;
+  var okP=PPO||accs(c.p).indexOf(p)>-1, okPP=accs(c.pp).indexOf(pp)>-1;
+  var forms="<span class='mark'>"+esc(c.b)+" – "+esc(c.p)+" – "+esc(c.pp)+"</span>";
+  if(okP&&okPP){ I.pass(); fb($("irr-fb"),true,"Correcto: "+forms); }
+  else { I.fail(); fb($("irr-fb"),false,(okP?"":"Past simple mal. ")+(okPP?"":"Participio mal. ")+"Es "+forms+". Volverá a salir."); }
+  bar("irr-bar",I); $("irr-next").disabled=false; $("irr-next").focus();
+}
+$("irr-check").addEventListener("click",irrCheck);
+$("irr-past").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(iDone) irrShow(); else $("irr-pp").focus(); } });
+$("irr-pp").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(iDone) irrShow(); else irrCheck(); } });
+$("irr-next").addEventListener("click",function(){ if(done(I)){ I=new Queue(irrPool()); } irrShow(); });
+$("irr-list").innerHTML=D.GROUPS.map(function(G){
+  return "<h4>"+G.g+" · "+esc(G.es)+" ("+G.n+")</h4><table class='vt'><tr><th>Base</th><th>Past</th><th>Participle</th><th>Español</th></tr>"+
+    D.IRR.filter(function(v){ return v.g===G.g; }).map(function(v){ return "<tr><td>"+esc(v.b)+"</td><td>"+esc(v.p)+"</td><td>"+esc(v.pp)+"</td><td>"+esc(v.es)+"</td></tr>"; }).join("")+"</table>";
+}).join("");
+I=new Queue(irrPool()); irrGroups(); irrShow();
+
+/* ===== FIX THE MISTAKE ===== */
+var F=new Queue(D.FIX);
+function fixShow(){
+  var c=F.next(); bar("fix-bar",F); hideFb($("fix-fb"));
+  $("fix-row1").hidden=false; $("fix-row2").hidden=true;
+  if(!c){ $("fix-q").innerHTML="<span class='mark'>Completado.</span>"; $("fix-show").textContent="Empezar de nuevo"; $("fix-count").textContent=""; return; }
+  $("fix-show").textContent="Ver corrección";
+  $("fix-count").textContent="Dominadas "+F.mastered+" de "+F.total;
+  $("fix-q").textContent=c.b;
+}
+$("fix-show").addEventListener("click",function(){
+  if(!F.cur){ F=new Queue(D.FIX); fixShow(); return; }
+  var c=F.cur; fb($("fix-fb"),true,"<span class='mark'>"+esc(c.g)+"</span><div class='es'>"+esc(c.w)+"</div>");
+  $("fix-row1").hidden=true; $("fix-row2").hidden=false;
+});
+$("fix-good").addEventListener("click",function(){ F.pass(); fixShow(); });
+$("fix-bad").addEventListener("click",function(){ F.fail(); fixShow(); });
+fixShow();
+
+/* ===== WHICH FUTURE? ===== */
+var R=new Queue(D.REG), rDone=false;
+function regShow(){
+  var c=R.next(); bar("reg-bar",R); hideFb($("reg-fb")); rDone=false; $("reg-next").disabled=true;
+  var box=$("reg-opts"); box.innerHTML="";
+  if(!c){ $("reg-q").innerHTML="<span class='mark'>Completado.</span>"; $("reg-ctx").textContent=""; $("reg-next").textContent="Empezar de nuevo"; $("reg-next").disabled=false; $("reg-count").textContent=""; return; }
+  $("reg-next").textContent="Siguiente";
+  $("reg-count").textContent="Dominadas "+R.mastered+" de "+R.total;
+  $("reg-ctx").textContent=c.s; $("reg-q").textContent=c.e;
+  D.CATS.forEach(function(cat){
+    var b=document.createElement("button"); b.className="opt"; b.textContent=cat; b.dataset.v=cat;
+    b.addEventListener("click",function(){ regAns(cat,b); });
+    box.appendChild(b);
+  });
+}
+function regAns(cat,btn){
+  if(rDone || !R.cur) return; rDone=true; var c=R.cur;
+  $("reg-opts").querySelectorAll(".opt").forEach(function(b){ b.disabled=true; if(b.dataset.v===c.c) b.classList.add("ok"); });
+  if(cat===c.c){ R.pass(); fb($("reg-fb"),true,"Correcto. "+esc(D.WHYC[c.c])); }
+  else { R.fail(); btn.classList.add("ko"); fb($("reg-fb"),false,"Es <span class='mark'>"+esc(c.c)+"</span>. "+esc(D.WHYC[c.c])); }
+  bar("reg-bar",R); $("reg-next").disabled=false; $("reg-next").focus();
+}
+$("reg-next").addEventListener("click",function(){ if(done(R)){ R=new Queue(D.REG); } regShow(); });
+regShow();
+
+/* ===== WRITE ===== */
+var wMode="hypo";
+var IFWOULD=/\bif\s+(i|you|he|she|it|we|they|the \w+)\s+(would|will|'d|'ll)\b/i;
+function cnt(re,t){ return (t.match(re)||[]).length; }
+function checksFor(sub,body){
+  var words=(body.match(/[A-Za-z']+/g)||[]).length;
+  var low=body.toLowerCase();
+  var c=[];
+  if(wMode==="hypo"){
+    c.push({ok:cnt(/\bwould\s+(?!have\b)[a-z]+/gi,body)>=3, t:"Al menos 3 verbos con would + base (segundo condicional)"});
+    c.push({ok:/\bif\s+\w+\s+(had|asked|suddenly had|were|got|told|did|could|knew|found|thought)\b/i.test(body), t:"Una parte del if en pasado (If I had…, If the client asked…)"});
+    c.push({ok:/\bif\s+\w+\s+had\s+\w+(ed|en|wn|ne|t)\b/i.test(body) && /\bwould have\s+\w+/i.test(body), t:"Una frase de tercer condicional (If I had + participio, … would have + participio)"});
+    c.push({ok:!IFWOULD.test(body), t:"Nunca would ni will en la parte del if"});
+    c.push({ok:!/\bif (i|he|she|it) was\b/i.test(body), t:"If I were, no If I was"});
+    c.push({ok:words>=100 && words<=160, t:"Entre 100 y 160 palabras"});
+  } else {
+    c.push({ok:/\bin five years\b/i.test(body), t:"Empieza o incluye In five years"});
+    c.push({ok:/\b(i see myself|i hope to)\b/i.test(body), t:"I see myself / I hope to"});
+    c.push({ok:/\bwill have\s+\w+(ed|en|wn|ne|t)\b/i.test(body), t:"Futuro perfecto: will have + participio"});
+    c.push({ok:/\bif\b/i.test(low) && /\b(might|will|may|could)\b/i.test(body), t:"Un condicional para lo incierto (If…, I might / will…)"});
+    c.push({ok:!IFWOULD.test(body), t:"Nunca would ni will en la parte del if"});
+    c.push({ok:words>=80 && words<=140, t:"Entre 80 y 140 palabras"});
+  }
+  return {c:c,words:words};
+}
+function wRender(){
+  var sub=$("w-subject").value, body=$("w-body").value, r=checksFor(sub,body);
+  $("w-words").textContent=r.words+" words";
+  $("w-checks").innerHTML=r.c.map(function(x){ return "<li class='"+(body.trim()?(x.ok?"pass":"fail"):"")+"'>"+esc(x.t)+"</li>"; }).join("");
+  db.drafts[wMode]={s:sub,b:body}; save(db);
+}
+function wSet(m){
+  wMode=m; $("w-formal").className= m==="hypo"?"btn":"btn ghost"; $("w-informal").className= m==="plan"?"btn":"btn ghost";
+  $("w-task").textContent=D.TASKS[m].t; $("w-model").textContent=D.TASKS[m].m;
+  var d=db.drafts[m]||{s:"",b:""}; $("w-subject").value=d.s; $("w-body").value=d.b; wRender();
+}
+$("w-formal").addEventListener("click",function(){ wSet("hypo"); });
+$("w-informal").addEventListener("click",function(){ wSet("plan"); });
+$("w-subject").addEventListener("input",wRender);
+$("w-body").addEventListener("input",wRender);
+wSet("hypo");
+
+})();
+</script>
+</body>
+</html>
