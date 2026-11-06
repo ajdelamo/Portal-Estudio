@@ -1,0 +1,596 @@
+<title>Practica la UD 4 · Derecho Constitucional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F4; --surface:#FFFFFF; --ink:#1B2433; --muted:#566173; --line:#D5DCE4;
+  --accent:#2346A0; --accent-ink:#FFFFFF; --ok:#1E7F5C; --ok-bg:#E3F4EC; --ko:#B3261E; --ko-bg:#FBE9E7;
+  --mark:#FFE45C;
+  --serif:"Literata", Georgia, "Times New Roman", serif;
+  --sans:"Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+    --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+    --mark:rgba(255,228,92,.38); color-scheme:dark;
+  }
+}
+
+:root[data-theme="dark"]{ color-scheme:dark;
+  --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+  --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+  --mark:rgba(255,228,92,.38);
+}
+:root{ box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+html{ scroll-padding-top:env(safe-area-inset-top,0px); }
+*,*::before,*::after{ box-sizing:inherit; }
+body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.5; }
+.wrap{ max-width:660px; margin:0 auto; padding:20px 16px 48px; }
+h1{ font-family:var(--serif); font-weight:600; font-size:1.9rem; line-height:1.15; margin:8px 0 6px; letter-spacing:-.01em; }
+.lead{ color:var(--muted); margin:0 0 18px; max-width:60ch; }
+.mark{ background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); padding:8px 0 10px; margin:0 -16px 8px; }
+.tabs{ display:flex; gap:6px; overflow-x:auto; padding:0 16px; scrollbar-width:none; }
+.tabs::-webkit-scrollbar{ display:none; }
+.tab{ flex:0 0 auto; border:1px solid var(--line); background:var(--surface); color:var(--ink); font:500 .92rem var(--sans); padding:8px 14px; border-radius:999px; cursor:pointer; }
+.tab[aria-selected="true"]{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.panel{ display:none; }
+.panel.on{ display:block; }
+.card{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; margin-bottom:14px; }
+.meta{ display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:.88rem; margin-bottom:10px; flex-wrap:wrap; }
+.prompt{ font-family:var(--serif); font-size:1.22rem; line-height:1.45; margin:0 0 14px; }
+.opts{ display:grid; gap:8px; }
+.opt{ text-align:left; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:10px; padding:11px 13px; font:1rem var(--serif); cursor:pointer; }
+.opt:hover:not(:disabled){ border-color:var(--accent); }
+.opt.ok{ background:var(--ok-bg); border-color:var(--ok); }
+.opt.ko{ background:var(--ko-bg); border-color:var(--ko); }
+.opt:disabled{ cursor:default; }
+.row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.btn{ border:0; background:var(--accent); color:var(--accent-ink); font:600 .95rem var(--sans); padding:10px 16px; border-radius:10px; cursor:pointer; }
+.btn.ghost{ background:transparent; color:var(--accent); border:1px solid var(--line); }
+.btn:disabled{ opacity:.45; cursor:default; }
+.fb{ margin-top:12px; padding:12px 14px; border-radius:10px; font-size:.95rem; display:none; }
+.fb.show{ display:block; }
+.fb.ok{ background:var(--ok-bg); color:var(--ink); border-left:4px solid var(--ok); }
+.fb.ko{ background:var(--ko-bg); color:var(--ink); border-left:4px solid var(--ko); }
+.es{ color:var(--muted); font-style:italic; margin-top:6px; }
+input[type=text], textarea{ width:100%; font:1.05rem var(--serif); color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+textarea{ min-height:240px; line-height:1.5; resize:vertical; }
+input:focus, textarea:focus, .btn:focus-visible, .opt:focus-visible, .tab:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+.hint{ color:var(--muted); font-size:.9rem; margin:0 0 10px; }
+.stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin:12px 0; }
+.stat{ border:1px solid var(--line); border-radius:10px; padding:10px; }
+.stat b{ display:block; font-family:var(--serif); font-size:1.5rem; }
+.stat span{ color:var(--muted); font-size:.85rem; }
+.review{ margin:12px 0 0; padding:0; list-style:none; }
+.review li{ border-top:1px solid var(--line); padding:10px 0; font-size:.95rem; }
+.checks{ list-style:none; padding:0; margin:12px 0 0; }
+.checks li{ padding:6px 0 6px 28px; position:relative; font-size:.95rem; }
+.checks li::before{ content:""; position:absolute; left:4px; top:11px; width:12px; height:12px; border-radius:50%; border:2px solid var(--line); }
+.checks li.pass::before{ background:var(--ok); border-color:var(--ok); }
+.checks li.fail::before{ border-color:var(--ko); }
+.seg{ display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.progress{ height:4px; background:var(--line); border-radius:2px; overflow:hidden; margin-bottom:12px; }
+.progress i{ display:block; height:100%; background:var(--accent); width:0; transition:width .25s; }
+details summary{ cursor:pointer; color:var(--accent); font-weight:500; }
+.model{ font-family:var(--serif); white-space:pre-wrap; background:var(--bg); border-radius:10px; padding:12px; margin-top:8px; }
+@media (prefers-reduced-motion: reduce){ .progress i{ transition:none; } }
+</style>
+
+<div class="wrap">
+  <h1>Practica la UD 4 de Constitucional</h1>
+  <p class="lead">Título primero, artículos 14 a 17: igualdad, vida e integridad, libertad ideológica y religiosa, libertad y seguridad. Los fallos vuelven a salir hasta que los aciertes. El test usa el formato del examen final: 30 preguntas, 4 opciones, cada fallo resta 0,33.</p>
+  <nav aria-label="Modos de práctica">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-p="exam" aria-selected="true">Test tipo examen</button>
+      <button class="tab" role="tab" data-p="lit" aria-selected="false">Artículos literales</button>
+      <button class="tab" role="tab" data-p="con" aria-selected="false">Conceptos</button>
+      <button class="tab" role="tab" data-p="cls" aria-selected="false">¿Qué artículo?</button>
+      <button class="tab" role="tab" data-p="vf" aria-selected="false">Verdadero o falso</button>
+      <button class="tab" role="tab" data-p="write" aria-selected="false">Aplicación (PEC)</button>
+    </div>
+  </nav>
+
+  <section class="panel on" id="p-exam">
+    <div id="exam-start" class="card">
+      <p class="prompt">30 preguntas al azar de un banco de 92 (incluye 8 de repaso de las UD 1 a 3), con 4 opciones (A, B, C, D), como en el examen final.</p>
+      <p class="hint">Las respuestas siguen el texto de la unidad, que es contra lo que se corrige el examen, aunque el documento de estudio señale alguna imprecisión. Cada corrección trae <b>Por qué</b>, <b>Recuerda</b> y el apartado de la unidad.</p>
+      <p class="hint">Acierto +1, fallo −0,33, en blanco 0. Con 4 opciones, contestar al azar tiene valor esperado cero. Si descartas una opción, responder vale +0,11; si descartas dos, +0,34. Regla: responde solo si puedes descartar al menos una.</p>
+      <div id="exam-history" class="hint"></div>
+      <div class="row"><button class="btn" id="exam-go">Empezar test</button></div>
+    </div>
+    <div id="exam-run" class="card" hidden>
+      <div class="progress"><i id="exam-bar"></i></div>
+      <div class="meta"><span id="exam-count"></span><span id="exam-score"></span></div>
+      <p class="prompt" id="exam-q"></p>
+      <div class="opts" id="exam-opts"></div>
+      <div class="fb" id="exam-fb"></div>
+      <div class="row"><button class="btn ghost" id="exam-blank">Dejar en blanco</button><button class="btn" id="exam-next" disabled>Siguiente</button></div>
+    </div>
+    <div id="exam-end" class="card" hidden></div>
+  </section>
+
+  <section class="panel" id="p-lit">
+    <div class="card">
+      <div class="progress"><i id="lit-bar"></i></div>
+      <div class="meta"><span id="lit-count"></span><span id="lit-art"></span></div>
+      <p class="prompt" id="lit-q"></p>
+      <input type="text" id="lit-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Palabra que falta">
+      <div class="fb" id="lit-fb"></div>
+      <div class="row"><button class="btn" id="lit-check">Comprobar</button><button class="btn ghost" id="lit-next" disabled>Siguiente</button></div>
+      <p class="hint" style="margin-top:12px">No importan las tildes ni las mayúsculas. Al corregir verás el artículo completo.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="p-con">
+    <div class="card">
+      <div class="progress"><i id="con-bar"></i></div>
+      <div class="meta"><span id="con-count"></span><span id="con-kind"></span></div>
+      <p class="prompt" id="con-q"></p>
+      <div class="fb" id="con-fb"></div>
+      <div class="row" id="con-row1"><button class="btn" id="con-show">Ver respuesta</button></div>
+      <div class="row" id="con-row2" hidden><button class="btn" id="con-good">Lo sabía</button><button class="btn ghost" id="con-bad">Repasar otra vez</button></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-cls">
+    <div class="card">
+      <div class="progress"><i id="cls-bar"></i></div>
+      <div class="meta"><span id="cls-count"></span><span>¿En qué artículo de la Constitución está?</span></div>
+      <p class="prompt" id="cls-q"></p>
+      <div class="row" id="cls-btns"></div>
+      <div class="fb" id="cls-fb"></div>
+      <div class="row"><button class="btn ghost" id="cls-next" disabled>Siguiente</button></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-vf">
+    <div class="card">
+      <div class="progress"><i id="vf-bar"></i></div>
+      <div class="meta"><span id="vf-count"></span><span>Afirmaciones con trampa</span></div>
+      <p class="prompt" id="vf-q"></p>
+      <div class="row"><button class="btn" id="vf-t">Verdadero</button><button class="btn" id="vf-f">Falso</button></div>
+      <div class="fb" id="vf-fb"></div>
+      <div class="row"><button class="btn ghost" id="vf-next" disabled>Siguiente</button></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-write">
+    <div class="card">
+      <div class="seg"><button class="btn" id="w-a">Supuesto 1: igualdad</button><button class="btn ghost" id="w-b">Supuesto 2: detención</button></div>
+      <p class="prompt" id="w-task"></p>
+      <label class="hint" for="w-body">Tu respuesta</label>
+      <textarea id="w-body" spellcheck="true"></textarea>
+      <div class="meta"><span id="w-words">0 palabras</span><span>El borrador se guarda en este navegador</span></div>
+      <ul class="checks" id="w-checks"></ul>
+      <p class="hint">La comprobación es mecánica: detecta que cites y nombres lo necesario, no que el razonamiento sea correcto. Compáralo con el modelo.</p>
+      <details><summary>Ver una respuesta modelo</summary><div class="model" id="w-model"></div></details>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ===== BANCOS UD4 ===== */
+var EXAM=[
+/* 4.1 Igualdad */
+{q:"Según la unidad, ¿con qué identificaban la igualdad los textos legales surgidos tras la Revolución francesa?",o:["Con la igualdad de todos ante la ley frente a los privilegios del Antiguo Régimen","Con la igualdad material en el reparto de bienes","Con el mandato de remover los obstáculos a la igualdad real","Con la prohibición de las acciones positivas"],w:"Era un concepto de igualdad formal: igualar la ley frente a todos sus destinatarios.",r:"Revolución francesa → igualdad formal (ante la ley).",s:"4.1"},
+{q:"¿Qué crítica recibió el concepto de igualdad formal según la unidad?",o:["No tenía en cuenta las diferentes situaciones fácticas","Permitía privilegios a la nobleza","Impedía al legislador dictar normas de carácter general para todos los ciudadanos","Solo vinculaba a los jueces"],w:"La unidad añade que estaba orientada a la alta burguesía en el reparto de bienes.",r:"Formal: ignora las situaciones de hecho.",s:"4.1"},
+{q:"La igualdad «en la ley» o material supone que las leyes…",o:["tendrán en cuenta las situaciones distintas de sus destinatarios","se aplicarán por igual a todos sin excepción alguna","no podrán contener ninguna diferencia de trato","serán aprobadas por mayoría absoluta del Congreso en una votación final sobre el conjunto"],w:"Trato igual a los iguales y desigual a los desiguales.",r:"Material = igualdad en la ley.",s:"4.1"},
+{q:"¿Qué artículo de la Constitución recoge la cláusula general de igualdad?",o:["El artículo 14","El artículo 9.2","El artículo 1.1","El artículo 139"],w:"El 9.2 recoge la igualdad real y efectiva; el 1.1, la igualdad como valor superior.",r:"Cláusula general de igualdad: artículo 14.",s:"4.1.1"},
+{q:"¿Cuál de estas causas NO figura expresamente en el artículo 14?",o:["Edad","Nacimiento","Opinión","Religión"],w:"Las causas expresas son nacimiento, raza, sexo, religión y opinión; la edad entra en «cualquier otra condición o circunstancia personal o social».",r:"Cinco causas expresas + cláusula abierta.",s:"4.1.1"},
+{q:"¿Dónde está situado el artículo 14 dentro del título primero?",o:["Al frente del capítulo segundo, fuera de la sección primera","En la sección primera del capítulo segundo","En el capítulo tercero, entre los principios rectores","En el capítulo primero, con la nacionalidad"],w:"Por eso la unidad dice que «no sería considerado un derecho fundamental como tal», aunque el 53.2 le da protección reforzada.",r:"14: capítulo segundo, fuera de las secciones.",s:"4.1.1"},
+{q:"¿Qué precepto permite que el artículo 14 se proteja mediante recurso de amparo?",o:["El artículo 53.2","El artículo 53.1","El artículo 81.1","El artículo 9.1"],w:"El 53.2 incluye expresamente el artículo 14 en el procedimiento preferente y sumario y en el amparo.",r:"Amparo del 14: artículo 53.2.",s:"4.1.1"},
+{q:"Según la sentencia del Tribunal Constitucional 76/1983 citada en la unidad, el principio de igualdad…",o:["puede ser objeto de amparo, pero no de desarrollo por ley orgánica","debe desarrollarse por ley orgánica, pero no admite amparo","no puede invocarse ante los tribunales ordinarios","solo vincula al legislador y no a los jueces ni a la Administración en la aplicación de la ley"],w:"El 14 tiene amparo (53.2) pero no reserva de ley orgánica (81.1 se limita a la sección primera).",r:"14: amparo sí, ley orgánica no.",s:"4.1.1"},
+{q:"Según la unidad, ¿de qué precepto se desprende un derecho subjetivo de igualdad que puede ejercerse ante los tribunales?",o:["Solo del artículo 14","Del artículo 9.2","De los artículos 1.1 y 9.3","De cualquier artículo que mencione la igualdad"],w:"Lo dice el recuadro «Sabías que» del epígrafe 4.1.2.",r:"Derecho subjetivo de igualdad: solo el 14.",s:"4.1.2"},
+{q:"¿Qué artículo aspira a que la igualdad sea «real y efectiva»?",o:["El artículo 9.2","El artículo 14","El artículo 1.1","El artículo 9.3"],w:"El 9.2 encarga a los poderes públicos promover las condiciones para una igualdad real y efectiva.",r:"Real y efectiva → 9.2.",s:"4.1.2"},
+{q:"La igualdad como valor superior del ordenamiento jurídico aparece en el artículo…",o:["1.1","9.2","9.3","14"],w:"Valores superiores: libertad, justicia, igualdad y pluralismo político (artículo 1.1).",r:"Valor superior → 1.1.",s:"4.1.2"},
+{q:"Según la unidad, ¿qué precepto hace que el principio de igualdad incluya también a los particulares?",o:["El artículo 9.1","El artículo 9.2","El artículo 53.2","El artículo 10.2"],w:"Todos estamos sujetos a la Constitución y al resto del ordenamiento jurídico (9.1).",r:"Particulares → 9.1.",s:"4.1.2"},
+{q:"¿Cómo califica la unidad la lista de causas de discriminación del artículo 14?",o:["Numerus apertus","Numerus clausus","Lista tasada de cinco causas","Lista cerrada salvo ley orgánica"],w:"La cláusula «cualquier otra condición o circunstancia personal o social» abre la lista.",r:"Causas de discriminación: lista abierta.",s:"4.1.3"},
+{q:"Según la unidad, una diferencia normativa es compatible con el principio de igualdad si…",o:["se trata de situaciones de hecho diferentes y se basa en causas objetivas y razonables","la aprueba el Parlamento por mayoría absoluta","favorece a un colectivo cualquiera","no supera un plazo de cinco años y se revisa periódicamente por el Gobierno de la Nación"],w:"Además debe respetar el principio de proporcionalidad.",r:"Situaciones distintas + justificación objetiva y razonable + proporcionalidad.",s:"4.1.3"},
+{q:"La exigencia de que toda diferencia de trato tenga una justificación objetiva y razonable refleja, según la unidad, la prohibición de…",o:["arbitrariedad de los poderes públicos del artículo 9.3","retroactividad de las normas sancionadoras","censura previa del artículo 20.2 y del secuestro de publicaciones sin resolución judicial","discriminación por nacimiento del artículo 39"],w:"La unidad lo relaciona expresamente con la interdicción de la arbitrariedad.",r:"Diferencia sin justificación = arbitrariedad (9.3).",s:"4.1.3"},
+{q:"¿Qué es una discriminación indirecta según la unidad?",o:["Un trato que parece igualitario pero produce un impacto adverso en un colectivo tradicionalmente discriminado","Un trato desfavorable expreso por razón de un rasgo personal","Una diferencia de trato para compensar una desventaja","La discriminación que proviene de un particular y no del Estado"],w:"La directa dispensa un trato diferente y perjudicial por un rasgo de la persona.",r:"Indirecta: neutra en apariencia, adversa en el efecto.",s:"4.1.3"},
+{q:"¿Qué sentencias cita la unidad sobre la discriminación indirecta?",o:["145/1991 y 147/1995","103/1983 y 128/1987","53/1985 y 120/1990","24/1982 y 160/1986"],w:"Son las del tratamiento de la discriminación indirecta (salarial).",r:"Indirecta: 145/1991 y 147/1995.",s:"4.1.3"},
+{q:"¿Qué sentencia señala la unidad como punto de inflexión en la evolución del concepto de discriminación?",o:["La 103/1983","La 128/1987","La 28/1992","La 76/1983"],w:"Afectó a la pensión de viudedad del artículo 160 de la Ley General de la Seguridad Social.",r:"Punto de inflexión: 103/1983.",s:"4.1.3"},
+{q:"La sentencia 103/1983 se refería a…",o:["la pensión de viudedad","la ayuda de guardería","el plus de transporte nocturno","el permiso de lactancia"],w:"La 128/1987 trató la ayuda de guardería.",r:"103/1983 → viudedad.",s:"4.1.3"},
+{q:"Según la unidad, ¿qué supuesto resolvió la sentencia 128/1987?",o:["El de la ayuda de guardería concedida a las mujeres y no a los hombres","El de la pensión de viudedad de los varones","El de la prohibición del trabajo nocturno de las mujeres","El de la sucesión a la Corona"],w:"Ojo: la unidad dice que estas sentencias acabaron con normas que protegían solo a las mujeres (el documento señala la errata).",r:"128/1987 → guardería.",s:"4.1.3"},
+{q:"¿Qué sentencia, según la unidad, consolidó la necesidad de tener en cuenta las circunstancias de hecho para decidir si era necesario desigualar para igualar?",o:["La 28/1992","La 103/1983","La 145/1991","La 160/1986"],w:"Es la que la unidad cita al final del epígrafe 4.1.3.",r:"Desigualar para igualar: 28/1992.",s:"4.1.3"},
+{q:"¿Qué término se utiliza hoy, según la unidad, en lugar de «discriminación positiva» o «inversa»?",o:["Acción positiva","Discriminación compensatoria","Igualdad formal","Trato preferente"],w:"El término «discriminación» tiene un significado negativo.",r:"Hoy: acción positiva.",s:"4.1.4"},
+{q:"¿Qué ley define las medidas de acción positiva en su artículo 6.7?",o:["La Ley 15/2022, de 12 de julio, integral para la igualdad de trato y la no discriminación","La Ley Orgánica 3/2007, de 22 de marzo","La Ley Orgánica 1/2004, de violencia de género","La Ley 4/2023, para la igualdad real y efectiva de las personas trans"],w:"La unidad reproduce esa definición entre comillas.",r:"Acción positiva: artículo 6.7 de la Ley 15/2022.",s:"4.1.4"},
+{q:"Según el artículo 6.7 de la Ley 15/2022, las medidas de acción positiva serán aplicables…",o:["en tanto subsistan las situaciones de discriminación o desventaja que las justifican","durante un máximo de cinco años","solo en el sector público","mientras lo acuerde el Consejo de Ministros mediante real decreto aprobado a propuesta del Ministerio de Igualdad"],w:"Además deben ser razonables y proporcionadas.",r:"Acción positiva: temporal (mientras subsista la desventaja).",s:"4.1.4"},
+{q:"Según la nota de la unidad, ¿hacia qué ámbito enfoca sobre todo la Ley 15/2022 las medidas de acción positiva?",o:["El empleo y las condiciones de trabajo","La educación universitaria","La representación política en las listas electorales y en los órganos de gobierno","La vivienda pública"],w:"Lo dice el recuadro «Nota» del epígrafe 4.1.4.",r:"Ley 15/2022 → empleo.",s:"4.1.4"},
+{q:"¿Cuál es la fecha de la Ley Orgánica para la igualdad efectiva de mujeres y hombres?",o:["3/2007, de 22 de marzo","3/2007, de 3 de julio","15/2022, de 12 de julio","1/2004, de 28 de diciembre"],w:"La 15/2022 es la ley integral de igualdad de trato.",r:"Ley Orgánica 3/2007, de 22 de marzo.",s:"4.1.5"},
+{q:"¿Qué conferencia internacional cita la unidad como fuente de las premisas de la Ley Orgánica 3/2007?",o:["La Cuarta Conferencia Mundial sobre la Mujer, Pekín, 1995","La Tercera Conferencia Mundial sobre la Mujer, Nairobi, 1985","La Conferencia de Viena de 1993","La Conferencia de El Cairo de 1994"],w:"La unidad dice «fundamentalmente, a partir de la IV Conferencia Mundial sobre la Mujer».",r:"Pekín 1995.",s:"4.1.5"},
+{q:"Según la unidad, ¿cuál fue la mayor novedad de la Ley Orgánica 3/2007?",o:["La prevención de las conductas discriminatorias y la previsión de políticas activas","La creación del Ministerio de Igualdad","La tipificación penal de la discriminación salarial","La reforma de la sucesión a la Corona para suprimir la preferencia del varón sobre la mujer"],w:"Las políticas activas alcanzan a los ámbitos estatal, autonómico y local.",r:"3/2007: prevención + políticas activas.",s:"4.1.5"},
+{q:"¿Qué norma discriminatoria por razón de sexo menciona la unidad que sigue presente en la Constitución?",o:["La preferencia del varón sobre la mujer en la sucesión a la Corona","La edad de jubilación distinta","La exclusión de las mujeres de las Fuerzas Armadas","La pensión de viudedad solo para mujeres"],w:"Está en el artículo 57.1.",r:"Sucesión a la Corona: preferencia del varón.",s:"4.1.5"},
+/* 4.2 Artículo 15 */
+{q:"¿Qué derechos recoge el artículo 15 de la Constitución?",o:["Vida e integridad física y moral, prohibición de tortura y tratos inhumanos o degradantes y abolición de la pena de muerte","Vida, libertad y seguridad personal","Libertad ideológica, religiosa y de culto","Honor, intimidad y propia imagen"],w:"La libertad y seguridad son del artículo 17; las libertades ideológicas, del 16.",r:"15: vida, integridad, tortura, pena de muerte.",s:"4.2"},
+{q:"Según el artículo 15, la pena de muerte queda abolida salvo…",o:["lo que puedan disponer las leyes penales militares para tiempos de guerra","en los delitos de terrorismo","en los casos que determine una ley orgánica aprobada por mayoría absoluta del Congreso de los Diputados","cuando se declare el estado de sitio"],w:"La Constitución mantiene esa excepción; la ley la eliminó en 1995.",r:"Excepción del 15: leyes penales militares, tiempos de guerra.",s:"4.2"},
+{q:"¿Cuándo aparece un derecho a la vida específico, según la unidad?",o:["Tras la Segunda Guerra Mundial","Tras la Revolución francesa","Con la Constitución de Cádiz","Tras la Primera Guerra Mundial"],w:"Como reacción frente a las atrocidades presenciadas.",r:"Derecho a la vida: después de 1945.",s:"4.2.1"},
+{q:"Según la unidad, ¿qué constitución histórica española es el único antecedente del derecho a la vida y a la integridad física?",o:["La de Cádiz de 1812","La de 1869","La de 1931","La de 1876"],w:"La de 1978 es la única que lo reconoce expresamente.",r:"Antecedente: Cádiz 1812.",s:"4.2.1"},
+{q:"Según la unidad, el Tribunal Constitucional ha calificado el derecho a la vida como…",o:["un prius, un presupuesto para el ejercicio de los demás derechos","un principio rector de la política social","un derecho disponible por su titular","un derecho de configuración legal cuyo contenido depende por completo de lo que disponga el legislador"],w:"Es un valor previo y un principio.",r:"Vida = prius.",s:"4.2.1"},
+{q:"Según la unidad, ¿quién es el titular básico del derecho a la vida?",o:["La persona ya nacida","El nasciturus","Cualquier ser vivo","Solo los nacionales españoles"],w:"El nasciturus no carece de protección, pero no es titular.",r:"Titular: persona nacida.",s:"4.2.1"},
+{q:"¿Qué ley regula la eutanasia?",o:["La Ley Orgánica 3/2021, de 24 de marzo","La Ley Orgánica 2/2010, de 3 de marzo","La Ley 41/2002, de 14 de noviembre","La Ley Orgánica 1/2023, de 28 de febrero"],w:"La 2/2010 regula la interrupción voluntaria del embarazo; la 41/2002, la autonomía del paciente.",r:"Eutanasia: Ley Orgánica 3/2021.",s:"4.2.1"},
+{q:"Según la exposición de motivos de la Ley Orgánica 3/2021, ¿qué significa eutanasia?",o:["Buena muerte","Muerte digna","Muerte asistida","Final sin dolor"],w:"La unidad la define como el acto deliberado de dar fin a la vida por voluntad expresa de la persona para evitar un sufrimiento.",r:"Eutanasia = ‘buena muerte’.",s:"4.2.1"},
+{q:"Según la unidad, ¿con qué bienes trata de compatibilizar la Ley Orgánica 3/2021 el derecho a la vida?",o:["Dignidad, libertad y autonomía de la voluntad","Seguridad, orden público y salud pública","Igualdad, pluralismo político y justicia, como valores superiores del ordenamiento jurídico","Intimidad, honor y propia imagen"],w:"Lo dice la unidad al justificar la aprobación de la ley.",r:"Eutanasia: dignidad, libertad, autonomía.",s:"4.2.1"},
+{q:"Según la unidad, para el Tribunal Constitucional el derecho a la vida…",o:["tiene contenido positivo y no implica el derecho a la propia muerte","incluye el derecho a la propia muerte como derecho fundamental","es un derecho absoluto que impide cualquier ley de eutanasia","solo protege frente a los particulares"],w:"Aun así, la persona puede disponer sobre su propia muerte dentro de su libertad de acción.",r:"Vida: no incluye derecho a morir (según la unidad).",s:"4.2.1"},
+{q:"¿Qué sistema introdujo la Ley Orgánica 2/2010 para la interrupción del embarazo?",o:["Un sistema de plazos: decisión libre en las primeras catorce semanas","Un sistema de supuestos: violación, riesgo para la madre y malformación","Un sistema de plazos de veintidós semanas","Un sistema de autorización judicial previa"],w:"El de supuestos era el de la Ley Orgánica 9/1985.",r:"2010: plazos (14 semanas).",s:"4.2.1"},
+{q:"¿En qué tres casos permitía el aborto la Ley Orgánica 9/1985?",o:["Violación, riesgo para la salud física o psíquica de la madre y malformación fetal","Violación, incesto y riesgo económico","Riesgo para la vida de la madre, malformación y minoría de edad","A petición de la mujer en las primeras doce semanas"],w:"Reformaba el artículo 417 bis del Código Penal.",r:"1985: tres supuestos.",s:"4.2.1"},
+{q:"¿Qué sentencia del Tribunal Constitucional, según la unidad, exigió que la ley del aborto recogiera determinadas garantías?",o:["La 53/1985","La 120/1990","La 128/1987","La 24/1982"],w:"La 120/1990 es la de la huelga de hambre y la definición de tortura.",r:"Aborto: 53/1985.",s:"4.2.1"},
+{q:"¿Qué estableció la Ley Orgánica 11/2015 en materia de aborto?",o:["Que las menores de 16 y 17 años necesitaban el consentimiento paterno","Que el plazo libre se ampliaba a dieciséis semanas","Que se suprimía el periodo de reflexión","Que se creaba un registro de objetores"],w:"Esa exigencia la eliminó la Ley Orgánica 1/2023.",r:"2015: consentimiento paterno para 16 y 17 años.",s:"4.2.1"},
+{q:"¿Qué cambió la Ley Orgánica 1/2023?",o:["Permitió interrumpir el embarazo desde los 16 años sin consentimiento de los representantes y eliminó los tres días de reflexión","Restableció el sistema de supuestos de 1985","Exigió consentimiento paterno a todas las menores","Amplió el plazo libre a veintidós semanas"],w:"Deshizo la reforma de 2015.",r:"2023: 16 años sin consentimiento; sin días de reflexión.",s:"4.2.1"},
+{q:"Según la unidad, ¿qué ocurrió con el intento de reforma de la ley del aborto de 2013?",o:["Mariano Rajoy anunció la retirada del anteproyecto","Se aprobó y fue anulado por el Tribunal Constitucional","Se aprobó como Ley Orgánica 11/2015","Fue rechazado por el Senado"],w:"Por la falta de consenso en el partido y las protestas sociales.",r:"Anteproyecto de 2013: retirado.",s:"4.2.1"},
+{q:"Según la unidad, el derecho a la integridad física supone…",o:["no sufrir lesión, menoscabo o intervención en el cuerpo, aunque no haya riesgo para la salud","no sufrir intervenciones en la esfera psíquica sin consentimiento","recibir asistencia médica gratuita","no ser detenido sin orden judicial"],w:"La segunda opción define la integridad moral.",r:"Integridad física: también sin riesgo para la salud.",s:"4.2.2"},
+{q:"Según la unidad, la prohibición de tortura y de tratos inhumanos o degradantes…",o:["es absoluta y no puede ponderarse con otros derechos o bienes","admite excepciones en caso de terrorismo","puede suspenderse en el estado de sitio con autorización del Congreso por mayoría absoluta","se pondera con el derecho a la seguridad"],w:"«En ningún caso», dice el artículo 15.",r:"Prohibición de tortura: absoluta.",s:"4.2.2"},
+{q:"¿Qué sentencia define tortura y tratos inhumanos o degradantes como «nociones graduadas en una misma escala»?",o:["La 120/1990","La 53/1985","La 160/1986","La 199/1987"],w:"Es la sentencia de la huelga de hambre de presos.",r:"Nociones graduadas: 120/1990.",s:"4.2.2"},
+{q:"¿Dónde se celebró la Convención contra la Tortura que menciona la unidad?",o:["En Nueva York, el 10 de diciembre de 1984","En Ginebra, el 10 de diciembre de 1948","En Roma, el 4 de noviembre de 1950","En Estrasburgo, el 26 de noviembre de 1987"],w:"Roma 1950 es el Convenio Europeo de Derechos Humanos.",r:"Convención contra la Tortura: Nueva York, 1984.",s:"4.2.2"},
+{q:"¿Qué ley abolió la pena de muerte también en tiempo de guerra?",o:["La Ley Orgánica 11/1995, de 27 de noviembre","La Ley Orgánica 10/1995, del Código Penal","Una reforma del artículo 15 de la Constitución en 1995","La Ley Orgánica 13/1985, del Código Penal Militar"],w:"La Constitución no se reformó: mantiene la excepción del artículo 15.",r:"Abolición total: Ley Orgánica 11/1995.",s:"4.2.3"},
+{q:"¿Cuándo ratificó España el Protocolo 13 al Convenio Europeo, sobre la abolición de la pena de muerte en cualquier circunstancia?",o:["El 16 de diciembre de 2009","El 27 de noviembre de 1995","El 10 de diciembre de 1984","El 1 de enero de 1986"],w:"La Ley Orgánica 11/1995 es la ley interna de abolición.",r:"Protocolo 13: 16/12/2009.",s:"4.2.3"},
+/* 4.3 Artículo 16 */
+{q:"¿Cuántas libertades garantiza el artículo 16.1 según la unidad?",o:["Tres: ideológica, religiosa y de culto","Dos: ideológica y religiosa","Cuatro: ideológica, religiosa, de culto y de conciencia","Una: la libertad de pensamiento"],w:"«Son tres, por tanto, las libertades que garantiza este artículo».",r:"16.1: tres libertades.",s:"4.3"},
+{q:"¿Cuál es el único límite de las manifestaciones de la libertad ideológica, religiosa y de culto en el artículo 16.1?",o:["El necesario para el mantenimiento del orden público protegido por la ley","El respeto a la moral pública y las buenas costumbres","La seguridad nacional y la defensa","Los derechos de los menores"],w:"Y solo en las manifestaciones: la vertiente interna no admite límites.",r:"Límite: orden público protegido por la ley.",s:"4.3"},
+{q:"Según la unidad, el orden público «protegido por la ley» del artículo 16.1 es…",o:["el que deriva del ordenamiento jurídico y protege en particular los derechos fundamentales","el orden público de carácter policial","el que determine el Gobierno por decreto","la tranquilidad en la vía pública que garantizan las Fuerzas y Cuerpos de Seguridad del Estado"],w:"La unidad lo dice en el recuadro de límites.",r:"Orden público no policial.",s:"4.3.2"},
+{q:"Según la unidad, ¿a qué vertiente de estas libertades no pueden imponerse límites?",o:["A la vertiente interna","A la vertiente externa","A la libertad de culto","A la dimensión colectiva"],w:"El artículo 16.1 limita solo «sus manifestaciones».",r:"Interna: sin límites.",s:"4.3.2"},
+{q:"¿Qué ley orgánica desarrolla la libertad religiosa?",o:["La Ley Orgánica 7/1980, de 5 de julio","La Ley Orgánica 7/1985, de 1 de julio","La Ley Orgánica 1/1982, de 5 de mayo","La Ley Orgánica 9/1983, de 15 de julio"],w:"La 1/1982 es la del honor y la 9/1983 la del derecho de reunión.",r:"Libertad religiosa: Ley Orgánica 7/1980.",s:"4.3.1"},
+{q:"Según la unidad, la libertad de culto es…",o:["la manifestación externa de la religiosidad","el derecho a no declarar las propias creencias","la libertad de tener ideas sobre la sociedad","la cooperación del Estado con las confesiones"],w:"Ritos, ceremonias, procesiones, cantos, ofrendas.",r:"Culto = manifestación externa de la religiosidad.",s:"4.3.1"},
+{q:"Según la unidad, la libertad ideológica es el derecho a mantener ideas y convicciones acerca de…",o:["el individuo, la sociedad y la comunidad política","el origen del universo y la existencia de un ser superior","los ritos y ceremonias religiosas","la propia identidad sexual"],w:"La segunda opción define la libertad religiosa.",r:"Ideológica: individuo, sociedad, comunidad política.",s:"4.3.1"},
+{q:"Según el Tribunal Constitucional citado en la unidad, ¿quiénes son sujetos activos de las libertades del artículo 16?",o:["Los individuos y las comunidades, incluidas las personas jurídicas","Solo las personas físicas de nacionalidad española","Solo las confesiones inscritas","Solo los ciudadanos mayores de edad"],w:"La unidad lo dice al inicio del epígrafe 4.3.1.",r:"Artículo 16: también personas jurídicas.",s:"4.3.1"},
+{q:"¿Con qué derecho asocia la unidad la vertiente externa de la libertad ideológica?",o:["Con el pluralismo político y la libertad de expresión","Con el derecho a la intimidad","Con el derecho de asociación","Con la objeción de conciencia al servicio militar y a otras obligaciones legales"],w:"La unidad cita el artículo 20.",r:"Externa → pluralismo y artículo 20.",s:"4.3.1"},
+{q:"¿Qué sentencia reconoce «el derecho de los ciudadanos a actuar en este campo con plena inmunidad de coacción del Estado y de cualesquiera grupos sociales»?",o:["La 24/1982","La 20/1990","La 160/1986","La 126/1987"],w:"La 24/1982 se cita dos veces en el epígrafe 4.3.",r:"Inmunidad de coacción: 24/1982.",s:"4.3.2"},
+{q:"¿Qué dimensión de las libertades del artículo 16 es el derecho a no declarar sobre la ideología, religión o creencias?",o:["La dimensión negativa","La dimensión colectiva","La dimensión objetiva","La dimensión institucional"],w:"Está en el artículo 16.2.",r:"16.2 = dimensión negativa.",s:"4.3.3"},
+{q:"Según la unidad, ¿con qué derechos se relaciona directamente el derecho a no declarar sobre las propias creencias?",o:["Libertad de expresión, intimidad y no discriminación","Reunión, asociación y huelga","Tutela judicial, defensa y presunción de inocencia","Educación, sindicación y petición"],w:"Artículos 20, 18 y 14.",r:"16.2 ↔ 20, 18 y 14.",s:"4.3.3"},
+{q:"¿Qué dice el artículo 16.3 de la Constitución?",o:["Ninguna confesión tendrá carácter estatal","El Estado es laico","La religión católica es la oficial del Estado","Se garantiza la libertad de culto sin limitación alguna"],w:"Además, los poderes públicos cooperan con la Iglesia Católica y las demás confesiones.",r:"16.3: aconfesionalidad.",s:"4.3.4"},
+{q:"Según la unidad, el Estado español es…",o:["aconfesional, pero no laico","laico y aconfesional","confesional católico","laico, pero cooperativo"],w:"Como la mayor parte de los Estados democráticos de tradición católica.",r:"Aconfesional ≠ laico.",s:"4.3.4"},
+{q:"¿Cuántos acuerdos firmó el Estado con la Iglesia católica en 1979?",o:["Cuatro","Uno","Tres","Cinco"],w:"Asuntos jurídicos, económicos, enseñanza y cultura, y asistencia religiosa a las Fuerzas Armadas.",r:"Iglesia católica: cuatro acuerdos, 1979.",s:"4.3.4"},
+{q:"¿En qué año se firmaron los acuerdos con las confesiones protestante, musulmana y judía?",o:["1992","1979","1980","2009"],w:"1979 es el año de los acuerdos con la Iglesia católica.",r:"Otras confesiones: 1992.",s:"4.3.4"},
+/* 4.4 Artículo 17 */
+{q:"¿Qué derechos reconoce el artículo 17.1 de la Constitución?",o:["La libertad y la seguridad","La vida y la integridad","La libertad ideológica y religiosa","La tutela judicial efectiva"],w:"«Toda persona tiene derecho a la libertad y a la seguridad».",r:"17.1: libertad y seguridad.",s:"4.4.1"},
+{q:"Según la sentencia 160/1986 citada en la unidad, el derecho a la libertad del artículo 17 es…",o:["el derecho de todos a no ser privados de ella salvo en los casos previstos por la ley","un derecho general a actuar con total libertad","el derecho a circular libremente por el territorio nacional y a entrar y salir de España","el derecho a la seguridad jurídica"],w:"La unidad advierte que no es un derecho general a actuar con total libertad.",r:"17: no ser privado de libertad salvo casos legales.",s:"4.4.1"},
+{q:"Según la sentencia 126/1987, el derecho a la seguridad personal es el derecho a…",o:["la ausencia de perturbaciones procedentes de medidas de detención u otras similares","la seguridad jurídica del artículo 9.3","la protección policial frente a delitos que puedan poner en peligro la integridad física de las personas","la seguridad social"],w:"No tiene nada que ver con la seguridad jurídica.",r:"Seguridad personal ≠ seguridad jurídica.",s:"4.4.1"},
+{q:"¿Quién es titular del derecho a la seguridad personal según la unidad?",o:["Las personas físicas, no las jurídicas","Las personas físicas y jurídicas","Solo los españoles","Solo las personas detenidas o en prisión provisional por orden de la autoridad judicial competente"],w:"«Se trata de un derecho personal que corresponde a las personas físicas y no a las jurídicas».",r:"Seguridad personal: solo personas físicas.",s:"4.4.1"},
+{q:"¿Cuál es el plazo máximo de la detención preventiva según el artículo 17.2?",o:["Setenta y dos horas","Cuarenta y ocho horas","Veinticuatro horas","Ciento veinte horas"],w:"Y nunca más del tiempo estrictamente necesario.",r:"Detención: máximo 72 horas.",s:"4.4.2"},
+{q:"Según la unidad, ¿qué tipo de límite es «el tiempo estrictamente necesario» del artículo 17.2?",o:["Un límite relativo","Un límite absoluto","Un límite judicial","Un límite excepcional"],w:"El límite absoluto son las 72 horas.",r:"Relativo: tiempo necesario; absoluto: 72 horas.",s:"4.4.2"},
+{q:"Según la unidad, el artículo 17.2 se aplica únicamente a…",o:["las detenciones gubernativas, por agentes de policía","las detenciones acordadas por un juez de instrucción en el curso de un procedimiento penal","la prisión provisional","las detenciones de menores"],w:"El plazo de las detenciones judiciales lo fija la ley orgánica.",r:"17.2 → detenciones gubernativas.",s:"4.4.2"},
+{q:"¿Qué precepto constitucional cita la unidad como excepción al plazo máximo de la detención preventiva?",o:["El artículo 55.2","El artículo 55.1","El artículo 116","El artículo 53.2"],w:"Investigaciones sobre bandas armadas o elementos terroristas, con autorización judicial.",r:"Excepción: 55.2.",s:"4.4.2"},
+{q:"Según el artículo 520 bis de la Ley de Enjuiciamiento Criminal, la detención por delitos del artículo 384 bis puede prolongarse…",o:["hasta un máximo de otras 48 horas","hasta un máximo de otras 72 horas","hasta un máximo de otras 24 horas","sin límite mientras dure la investigación"],w:"Con previa y expresa autorización judicial.",r:"Prórroga: 48 horas más.",s:"4.4.2"},
+{q:"Según la unidad, ¿cuál es el plazo máximo de detención policial de un menor de entre 14 y 18 años no relacionado con bandas armadas o terrorismo?",o:["24 horas","48 horas","72 horas","12 horas"],w:"En terrorismo se equipara a los adultos: 72 horas más 48.",r:"Menores: 24 horas.",s:"4.4.2"},
+{q:"¿Qué artículo de la Constitución remite a la ley la duración máxima de la prisión provisional?",o:["El artículo 17.4","El artículo 17.2","El artículo 24.2","El artículo 25.2"],w:"El mismo apartado regula el habeas corpus.",r:"Prisión provisional: 17.4.",s:"4.4.2"},
+{q:"¿Quién puede decretar la prisión provisional según la unidad?",o:["Solo el juez","El juez o el Ministerio Fiscal","La policía, con autorización del juez","El Ministerio del Interior"],w:"Artículo 502.1 de la Ley de Enjuiciamiento Criminal.",r:"Prisión provisional: solo el juez.",s:"4.4.2"},
+{q:"¿Cuál de estas NO es una característica de la prisión provisional según la unidad?",o:["Es una pena anticipada","Es excepcional","Es subsidiaria","Es proporcionada"],w:"Es una medida cautelar: la persona goza de presunción de inocencia. Las cuatro características son excepcional, subsidiaria, provisional y proporcionada.",r:"Prisión provisional: cautelar, no pena.",s:"4.4.2"},
+{q:"¿Qué artículo de la Ley de Enjuiciamiento Criminal dice que la prisión provisional «durará el tiempo imprescindible»?",o:["El 504","El 502","El 503","El 520"],w:"El 503 recoge los fines y el 502 quién la decreta.",r:"Tiempo imprescindible: 504.",s:"4.4.2"},
+{q:"¿Cuál de estos derechos del detenido recoge el artículo 17.3?",o:["No ser obligado a declarar","Ser asistido gratuitamente por un intérprete","Comunicar la detención a un familiar","Ser examinado por un médico forense"],w:"Los otros figuran en la Ley de Enjuiciamiento Criminal, no en el 17.3.",r:"17.3: información, no declarar, abogado.",s:"4.4.3"},
+{q:"Según la unidad, el artículo 520 de la Ley de Enjuiciamiento Criminal exige que la información al detenido se dé…",o:["por escrito, en lenguaje sencillo y accesible y en una lengua que comprenda","verbalmente y en presencia del juez","por escrito y en castellano","en el plazo de setenta y dos horas desde el momento en que se practica la detención"],w:"Desarrolla el derecho a ser informado del 17.3.",r:"Información al detenido: por escrito y comprensible.",s:"4.4.3"},
+{q:"¿Qué artículos de la Ley de Enjuiciamiento Criminal recogen los derechos de defensa y el tratamiento de detenidos y presos?",o:["Los artículos 520 a 527","Los artículos 502 a 519","Los artículos 384 a 400","Los artículos 486 a 501"],w:"Es el capítulo cuarto que menciona la unidad.",r:"Derechos del detenido: 520 a 527.",s:"4.4.3"},
+/* Repaso UD1 a UD3 */
+{q:"Repaso UD3. ¿Qué artículos recogen los derechos fundamentales en sentido estricto?",o:["Los artículos 15 a 29","Los artículos 14 a 38","Los artículos 10 a 55","Los artículos 30 a 38"],w:"Sección primera del capítulo segundo.",r:"Fundamentales stricto sensu: 15 a 29.",s:"UD3"},
+{q:"Repaso UD3. ¿Cuál es el plazo para interponer recurso de amparo contra una resolución judicial?",o:["Treinta días","Veinte días","Tres meses","Diez días"],w:"Veinte contra actos del ejecutivo y tres meses contra actos parlamentarios.",r:"Amparo judicial: 30 días.",s:"UD3"},
+{q:"Repaso UD3. ¿En qué plazo debe resolverse el habeas corpus?",o:["En veinticuatro horas","En setenta y dos horas","En cuarenta y ocho horas","En diez días"],w:"Ley Orgánica 6/1984.",r:"Habeas corpus: 24 horas.",s:"UD3"},
+{q:"Repaso UD3. ¿Qué artículo de la Constitución regula el Defensor del Pueblo?",o:["El 54","El 53","El 55","El 124"],w:"El 124 regula el Ministerio Fiscal.",r:"Defensor del Pueblo: 54.",s:"UD3"},
+{q:"Repaso UD2. ¿Qué mayoría exige la aprobación de una ley orgánica?",o:["Mayoría absoluta del Congreso en una votación final sobre el conjunto del proyecto","Mayoría simple de ambas Cámaras","Tres quintos del Congreso y del Senado, como en la reforma ordinaria de la Constitución","Dos tercios de cada Cámara"],w:"Artículo 81.2.",r:"Ley orgánica: absoluta del Congreso.",s:"UD2"},
+{q:"Repaso UD2. ¿Qué artículo de la Constitución establece que los derechos fundamentales se interpretan conforme a la Declaración Universal y los tratados ratificados?",o:["El 10.2","El 96.1","El 93","El 9.1"],w:"El 96.1 integra los tratados en el ordenamiento interno.",r:"Interpretación conforme: 10.2.",s:"UD2"},
+{q:"Repaso UD1. ¿Qué valores superiores enumera el artículo 1.1?",o:["Libertad, justicia, igualdad y pluralismo político","Libertad, igualdad, fraternidad y solidaridad","Dignidad, libertad, igualdad y seguridad","Justicia, seguridad jurídica, legalidad y jerarquía"],w:"La seguridad jurídica es un principio del 9.3.",r:"Valores superiores: cuatro.",s:"UD1"},
+{q:"Repaso UD3. ¿Quién puede interponer recurso de amparo?",o:["Toda persona natural o jurídica con interés legítimo, el Defensor del Pueblo y el Ministerio Fiscal","El Presidente del Gobierno y cincuenta diputados","Solo la persona directamente afectada","Los jueces y tribunales cuando consideren que una norma con rango de ley puede ser inconstitucional"],w:"Artículo 162.1.b).",r:"Amparo: interés legítimo, Defensor, Fiscal.",s:"UD3"}
+];
+var ARTS={
+"9.2":"Artículo 9.2 de la Constitución: «Corresponde a los poderes públicos promover las condiciones para que la libertad y la igualdad del individuo y de los grupos en que se integra sean reales y efectivas; remover los obstáculos que impidan o dificulten su plenitud y facilitar la participación de todos los ciudadanos en la vida política, económica, cultural y social.»",
+"14":"Artículo 14 de la Constitución: «Los españoles son iguales ante la ley, sin que pueda prevalecer discriminación alguna por razón de nacimiento, raza, sexo, religión, opinión o cualquier otra condición o circunstancia personal o social.»",
+"15":"Artículo 15 de la Constitución: «Todos tienen derecho a la vida y a la integridad física y moral, sin que, en ningún caso, puedan ser sometidos a tortura ni a penas o tratos inhumanos o degradantes. Queda abolida la pena de muerte, salvo lo que puedan disponer las leyes penales militares para tiempos de guerra.»",
+"16":"Artículo 16 de la Constitución: «1. Se garantiza la libertad ideológica, religiosa y de culto de los individuos y las comunidades sin más limitación, en sus manifestaciones, que la necesaria para el mantenimiento del orden público protegido por la ley. 2. Nadie podrá ser obligado a declarar sobre su ideología, religión o creencias. 3. Ninguna confesión tendrá carácter estatal. Los poderes públicos tendrán en cuenta las creencias religiosas de la sociedad española y mantendrán las consiguientes relaciones de cooperación con la Iglesia Católica y las demás confesiones.»",
+"17":"Artículo 17 de la Constitución: «1. Toda persona tiene derecho a la libertad y a la seguridad. Nadie puede ser privado de su libertad, sino con la observancia de lo establecido en este artículo y en los casos y en la forma previstos en la ley. 2. La detención preventiva no podrá durar más del tiempo estrictamente necesario para la realización de las averiguaciones tendentes al esclarecimiento de los hechos, y, en todo caso, en el plazo máximo de setenta y dos horas, el detenido deberá ser puesto en libertad o a disposición de la autoridad judicial. 3. Toda persona detenida debe ser informada de forma inmediata, y de modo que le sea comprensible, de sus derechos y de las razones de su detención, no pudiendo ser obligada a declarar. Se garantiza la asistencia de abogado al detenido en las diligencias policiales y judiciales, en los términos que la ley establezca. 4. La ley regulará un procedimiento de «habeas corpus» para producir la inmediata puesta a disposición judicial de toda persona detenida ilegalmente. Asimismo, por ley se determinará el plazo máximo de duración de la prisión provisional.»",
+"55.2":"Artículo 55.2 de la Constitución: «Una ley orgánica podrá determinar la forma y los casos en los que, de forma individual y con la necesaria intervención judicial y el adecuado control parlamentario, los derechos reconocidos en los artículos 17, apartado 2, y 18, apartados 2 y 3, pueden ser suspendidos para personas determinadas, en relación con las investigaciones correspondientes a la actuación de bandas armadas o elementos terroristas. La utilización injustificada o abusiva de las facultades reconocidas en dicha ley orgánica producirá responsabilidad penal, como violación de los derechos y libertades reconocidos por las leyes.»",
+"L15 6.7":"Artículo 6.7 de la Ley 15/2022: «Se consideran acciones positivas las diferencias de trato orientadas a prevenir, eliminar y, en su caso, compensar cualquier forma de discriminación o desventaja en su dimensión colectiva o social. Tales medidas serán aplicables en tanto subsistan las situaciones de discriminación o las desventajas que las justifican y habrán de ser razonables y proporcionadas en relación con los medios para su desarrollo y los objetivos que persigan.»",
+"L2/2010 14":"Artículo 14 de la Ley Orgánica 2/2010: «Podrá interrumpirse el embarazo dentro de las primeras catorce semanas de gestación a petición de la mujer embarazada.»",
+"L41 8.2":"Artículo 8.2 de la Ley 41/2002: «El consentimiento será verbal por regla general. Sin embargo, se prestará por escrito en los casos siguientes: intervención quirúrgica, procedimientos diagnósticos y terapéuticos invasores y, en general, aplicación de procedimientos que suponen riesgos o inconvenientes de notoria y previsible repercusión negativa sobre la salud del paciente.»",
+"LECrim 504.1":"Artículo 504.1 de la Ley de Enjuiciamiento Criminal: «La prisión provisional durará el tiempo imprescindible para alcanzar cualquiera de los fines previstos en el artículo anterior y en tanto subsistan los motivos que justificaron su adopción.»"
+};
+var ARTLABEL={"L15 6.7":"Ley 15/2022, artículo 6.7","L2/2010 14":"Ley Orgánica 2/2010, artículo 14","L41 8.2":"Ley 41/2002, artículo 8.2","LECrim 504.1":"Ley de Enjuiciamiento Criminal, artículo 504.1"};
+var LIT=[
+{k:"9.2",s:"Corresponde a los poderes públicos promover las condiciones para que la libertad y la igualdad del individuo y de los grupos en que se integra sean ___ y efectivas…",a:["reales"]},
+{k:"9.2",s:"…___ los obstáculos que impidan o dificulten su plenitud…",a:["remover"]},
+{k:"14",s:"Los españoles son iguales ante la ___…",a:["ley"]},
+{k:"14",s:"…sin que pueda prevalecer discriminación alguna por razón de ___, raza, sexo, religión, opinión…",a:["nacimiento"]},
+{k:"14",s:"…o cualquier otra condición o circunstancia personal o ___.",a:["social"]},
+{k:"15",s:"Todos tienen derecho a la vida y a la integridad ___ y moral…",a:["fisica"]},
+{k:"15",s:"…sin que, en ningún caso, puedan ser sometidos a ___ ni a penas o tratos inhumanos o degradantes.",a:["tortura"]},
+{k:"15",s:"Queda abolida la pena de muerte, salvo lo que puedan disponer las leyes penales ___ para tiempos de guerra.",a:["militares"]},
+{k:"16",s:"Se garantiza la libertad ideológica, religiosa y de ___ de los individuos y las comunidades…",a:["culto"]},
+{k:"16",s:"…sin más limitación, en sus manifestaciones, que la necesaria para el mantenimiento del orden ___ protegido por la ley.",a:["publico"]},
+{k:"16",s:"Nadie podrá ser obligado a ___ sobre su ideología, religión o creencias.",a:["declarar"]},
+{k:"16",s:"Ninguna confesión tendrá carácter ___.",a:["estatal"]},
+{k:"16",s:"…mantendrán las consiguientes relaciones de ___ con la Iglesia Católica y las demás confesiones.",a:["cooperacion"]},
+{k:"17",s:"Toda persona tiene derecho a la libertad y a la ___.",a:["seguridad"]},
+{k:"17",s:"La detención preventiva no podrá durar más del tiempo ___ necesario para la realización de las averiguaciones…",a:["estrictamente"]},
+{k:"17",s:"…en todo caso, en el plazo máximo de ___ y dos horas…",a:["setenta"]},
+{k:"17",s:"…el detenido deberá ser puesto en libertad o a disposición de la autoridad ___.",a:["judicial"]},
+{k:"17",s:"Toda persona detenida debe ser informada de forma ___, y de modo que le sea comprensible…",a:["inmediata"]},
+{k:"17",s:"Se garantiza la asistencia de ___ al detenido en las diligencias policiales y judiciales…",a:["abogado"]},
+{k:"17",s:"La ley regulará un procedimiento de «habeas ___» para producir la inmediata puesta a disposición judicial…",a:["corpus"]},
+{k:"17",s:"Asimismo, por ley se determinará el plazo máximo de duración de la prisión ___.",a:["provisional"]},
+{k:"55.2",s:"…los derechos reconocidos en los artículos 17, apartado ___, y 18, apartados 2 y 3, pueden ser suspendidos…",a:["2","dos"]},
+{k:"55.2",s:"…en relación con las investigaciones correspondientes a la actuación de bandas armadas o elementos ___.",a:["terroristas"]},
+{k:"L15 6.7",s:"Se consideran acciones ___ las diferencias de trato orientadas a prevenir, eliminar y, en su caso, compensar…",a:["positivas"]},
+{k:"L15 6.7",s:"…habrán de ser razonables y ___ en relación con los medios para su desarrollo y los objetivos que persigan.",a:["proporcionadas"]},
+{k:"L2/2010 14",s:"Podrá interrumpirse el embarazo dentro de las primeras ___ semanas de gestación a petición de la mujer embarazada.",a:["catorce","14"]},
+{k:"L41 8.2",s:"El consentimiento será ___ por regla general.",a:["verbal"]},
+{k:"LECrim 504.1",s:"La prisión provisional durará el tiempo ___ para alcanzar cualquiera de los fines previstos…",a:["imprescindible"]}
+];
+var CONC=[
+{t:"Igualdad formal",d:"Igualdad ante la ley: la ley igual para todos sus destinatarios, frente a los privilegios del Antiguo Régimen. Nace con la Revolución francesa."},
+{t:"Igualdad material",d:"Igualdad en la ley: las leyes tienen en cuenta las distintas situaciones de sus destinatarios; trato igual a los iguales y desigual a los desiguales."},
+{t:"Cláusula general de igualdad",d:"La del artículo 14: los españoles son iguales ante la ley sin discriminación por nacimiento, raza, sexo, religión, opinión u otra circunstancia."},
+{t:"Igualdad real y efectiva",d:"Mandato del artículo 9.2 a los poderes públicos para que remuevan los obstáculos a la libertad y la igualdad."},
+{t:"Numerus apertus",d:"Lista abierta de causas de discriminación del artículo 14, gracias a la cláusula «cualquier otra condición o circunstancia personal o social»."},
+{t:"Justificación objetiva y razonable",d:"Lo que hace legítima una diferencia de trato entre situaciones de hecho distintas, siempre que sea además proporcionada."},
+{t:"Discriminación directa",d:"Trato diferente y perjudicial en función de un rasgo de la persona."},
+{t:"Discriminación indirecta",d:"Trato que a priori parece igualitario, pero produce un impacto adverso en un colectivo tradicionalmente discriminado (sentencias 145/1991 y 147/1995)."},
+{t:"Acción positiva",d:"Diferencias de trato orientadas a prevenir, eliminar o compensar una discriminación o desventaja colectiva, temporales, razonables y proporcionadas (artículo 6.7 de la Ley 15/2022)."},
+{t:"Discriminación inversa",d:"Término doctrinal inicial para una diferencia de trato no prohibida pero especialmente lesiva, distinta de la acción positiva."},
+{t:"Ley Orgánica 3/2007",d:"Ley de 22 de marzo para la igualdad efectiva de mujeres y hombres; su novedad es la prevención y las políticas activas."},
+{t:"Prius",d:"Calificación del derecho a la vida como presupuesto del ejercicio de los demás derechos."},
+{t:"Nasciturus",d:"Concebido no nacido. No es titular del derecho a la vida, pero no carece de protección."},
+{t:"Eutanasia",d:"‘Buena muerte’: acto deliberado de dar fin a la vida de una persona por su voluntad expresa para evitar un sufrimiento (Ley Orgánica 3/2021)."},
+{t:"Sistema de plazos",d:"Modelo de la Ley Orgánica 2/2010: la mujer decide libremente en las primeras catorce semanas."},
+{t:"Sistema de supuestos",d:"Modelo de la Ley Orgánica 9/1985: aborto permitido solo por violación, riesgo para la madre o malformación fetal."},
+{t:"Integridad física",d:"Derecho a no sufrir lesión, menoscabo o intervención alguna en el cuerpo, aunque no suponga riesgo para la salud."},
+{t:"Integridad moral",d:"Derecho a no ser objeto de intervenciones en la esfera psíquica sin consentimiento."},
+{t:"Prohibición absoluta de tortura",d:"No admite matiz ni ponderación con otros derechos o bienes."},
+{t:"Nociones graduadas",d:"Tortura y tratos inhumanos o degradantes como grados de una misma escala de padecimientos ilícitos causados de modo vejatorio (sentencia 120/1990)."},
+{t:"Ley Orgánica 11/1995",d:"Ley de 27 de noviembre que abolió la pena de muerte también en tiempo de guerra."},
+{t:"Libertad ideológica",d:"Derecho a mantener ideas y convicciones de cualquier tipo sobre el individuo, la sociedad y la comunidad política."},
+{t:"Libertad religiosa",d:"Derecho a mantener ideas y convicciones sobre el origen de las personas, un ser superior o el origen del universo (Ley Orgánica 7/1980)."},
+{t:"Libertad de culto",d:"Manifestación externa de la religiosidad: ritos, ceremonias, procesiones, cantos, ofrendas."},
+{t:"Vertiente interna",d:"Libertad de tener ideas y convicciones propias; no admite límites."},
+{t:"Vertiente externa",d:"Libertad de exteriorizar, transmitir y compartir las ideas; limitada por el orden público protegido por la ley."},
+{t:"Orden público protegido por la ley",d:"Único límite de las manifestaciones del artículo 16: el que deriva del ordenamiento y protege los derechos fundamentales, no el policial."},
+{t:"Aconfesionalidad",d:"Ninguna confesión tiene carácter estatal, pero el Estado coopera con las confesiones (artículo 16.3). No equivale a laicidad."},
+{t:"Seguridad personal",d:"Ausencia de perturbaciones por detenciones u otras medidas que restrinjan la libertad (sentencia 126/1987). Solo personas físicas."},
+{t:"Límite relativo de la detención",d:"El tiempo estrictamente necesario para las averiguaciones."},
+{t:"Límite absoluto de la detención",d:"Setenta y dos horas, que a ser posible no deben agotarse."},
+{t:"Prisión provisional",d:"Medida cautelar judicial que priva de libertad al investigado o encausado para evitar riesgos para el proceso; excepcional, subsidiaria, provisional y proporcionada."}
+];
+var CLS_OPTS=["Artículo 14","Artículo 15","Artículo 16","Artículo 17"];
+var CLS=[
+{p:"Prohibición de discriminación por razón de opinión.",a:"Artículo 14"},
+{p:"Igualdad ante la ley de los españoles.",a:"Artículo 14"},
+{p:"Recurso de amparo por una diferencia de trato sin justificación objetiva y razonable.",a:"Artículo 14"},
+{p:"Derecho a no sufrir intervenciones en la esfera psíquica sin consentimiento.",a:"Artículo 15"},
+{p:"Prohibición de penas inhumanas o degradantes.",a:"Artículo 15"},
+{p:"Abolición de la pena de muerte, salvo leyes penales militares en tiempo de guerra.",a:"Artículo 15"},
+{p:"Ley de regulación de la eutanasia.",a:"Artículo 15"},
+{p:"Sistema de plazos de la interrupción voluntaria del embarazo.",a:"Artículo 15"},
+{p:"Derecho a celebrar una procesión religiosa.",a:"Artículo 16"},
+{p:"Nadie puede ser obligado a declarar sobre sus creencias.",a:"Artículo 16"},
+{p:"Ninguna confesión tendrá carácter estatal.",a:"Artículo 16"},
+{p:"Acuerdos de cooperación con la Iglesia católica de 1979.",a:"Artículo 16"},
+{p:"Ley Orgánica 7/1980.",a:"Artículo 16"},
+{p:"Plazo máximo de setenta y dos horas de detención preventiva.",a:"Artículo 17"},
+{p:"Derecho a la asistencia de abogado en las diligencias policiales.",a:"Artículo 17"},
+{p:"Procedimiento de habeas corpus.",a:"Artículo 17"},
+{p:"Plazo máximo de la prisión provisional fijado por ley.",a:"Artículo 17"},
+{p:"Derecho a la seguridad personal.",a:"Artículo 17"},
+{p:"Derecho del detenido a ser informado de las razones de su detención.",a:"Artículo 17"},
+{p:"Prohibición de la tortura en interrogatorios policiales.",a:"Artículo 15"}
+];
+var VF=[
+{p:"El artículo 14 forma parte de la sección primera del capítulo segundo.",v:false,w:"Falso. Encabeza el capítulo segundo fuera de sus secciones, aunque tiene amparo por el artículo 53.2."},
+{p:"El artículo 14 puede protegerse mediante recurso de amparo.",v:true,w:"Verdadero. Lo dice el artículo 53.2."},
+{p:"El desarrollo del principio de igualdad del artículo 14 exige ley orgánica.",v:false,w:"Falso. Según la sentencia 76/1983 que cita la unidad, admite amparo pero no exige desarrollo por ley orgánica."},
+{p:"Del artículo 9.2 nace un derecho subjetivo de igualdad exigible ante los tribunales.",v:false,w:"Falso. Según la unidad, solo del artículo 14."},
+{p:"Las causas de discriminación del artículo 14 forman un numerus clausus.",v:false,w:"Falso. Es un numerus apertus: «cualquier otra condición o circunstancia»."},
+{p:"Toda diferencia de trato es discriminatoria.",v:false,w:"Falso. No lo es la que se basa en causas objetivas y razonables y es proporcionada."},
+{p:"La discriminación indirecta parte de un trato aparentemente igualitario.",v:true,w:"Verdadero. Su efecto adverso recae sobre un colectivo tradicionalmente discriminado."},
+{p:"Hoy se prefiere hablar de «acción positiva» porque «discriminación» tiene un significado negativo.",v:true,w:"Verdadero. Lo explica el epígrafe 4.1.4."},
+{p:"La Ley Orgánica 3/2007 es de 22 de marzo.",v:true,w:"Verdadero. Para la igualdad efectiva de mujeres y hombres."},
+{p:"Según la unidad, el nasciturus es titular del derecho a la vida.",v:false,w:"Falso. El titular es la persona ya nacida; el nasciturus tiene protección, pero no es titular."},
+{p:"La Constitución de 1978 es la única de nuestra historia que reconoce expresamente el derecho a la vida.",v:true,w:"Verdadero. Con el antecedente de Cádiz de 1812 que menciona la unidad."},
+{p:"La Ley Orgánica 2/2010 permite la interrupción del embarazo a petición de la mujer en las primeras catorce semanas.",v:true,w:"Verdadero. Es el sistema de plazos."},
+{p:"Tras la Ley Orgánica 1/2023 las mujeres de 16 y 17 años necesitan el consentimiento de sus representantes para abortar.",v:false,w:"Falso. Esa exigencia era de la Ley Orgánica 11/2015 y la de 2023 la eliminó."},
+{p:"La prohibición de tortura puede ponderarse con la seguridad pública.",v:false,w:"Falso. Es absoluta: no admite ponderación."},
+{p:"El artículo 15 de la Constitución se reformó en 1995 para abolir la pena de muerte en tiempo de guerra.",v:false,w:"Falso. La abolición la hizo la Ley Orgánica 11/1995; el artículo 15 mantiene su redacción."},
+{p:"El artículo 16.1 garantiza tres libertades.",v:true,w:"Verdadero. Ideológica, religiosa y de culto."},
+{p:"La vertiente interna de la libertad ideológica puede limitarse por razones de orden público.",v:false,w:"Falso. El límite se refiere solo a las manifestaciones."},
+{p:"Según la unidad, el Estado español es laico.",v:false,w:"Falso. Es aconfesional, pero no laico."},
+{p:"Las personas jurídicas pueden ser titulares de las libertades del artículo 16.",v:true,w:"Verdadero. El artículo habla de «individuos y comunidades»."},
+{p:"El derecho a la seguridad del artículo 17 es el mismo que la seguridad jurídica del artículo 9.3.",v:false,w:"Falso. La sentencia 126/1987 lo define como ausencia de perturbaciones por detenciones."},
+{p:"La detención preventiva debe durar siempre setenta y dos horas.",v:false,w:"Falso. Setenta y dos horas es el máximo; no debe durar más del tiempo estrictamente necesario."},
+{p:"La prórroga de la detención del artículo 520 bis puede llegar a cuarenta y ocho horas más.",v:true,w:"Verdadero. Para los delitos del artículo 384 bis, con autorización judicial."},
+{p:"La prisión provisional puede acordarla la policía en casos urgentes.",v:false,w:"Falso. Solo el juez (artículo 502.1 de la Ley de Enjuiciamiento Criminal)."},
+{p:"La prisión provisional es una medida subsidiaria.",v:true,w:"Verdadero. Solo cuando no haya otras medidas menos gravosas."},
+{p:"El artículo 17.3 reconoce al detenido el derecho a no declarar.",v:true,w:"Verdadero. Junto al derecho a ser informado y a la asistencia de abogado."}
+];
+var TASKS={
+ a:{t:"Supuesto 1. Una empresa pública concede una ayuda para guardería solo a las trabajadoras con hijos menores de tres años. Un trabajador con un hijo de la misma edad la solicita, se la deniegan y considera que se vulnera su derecho a la igualdad. Explica qué artículos están en juego, cómo distingue el Tribunal Constitucional una diferencia de trato legítima de una discriminatoria, si la medida puede ser una acción positiva y qué vía tendría para reclamar. Mínimo 150 palabras.",
+  checks:[
+   {re:/\b14\b/,t:"Cita el artículo 14"},
+   {re:/9\.2/,t:"Relaciona la medida con el artículo 9.2"},
+   {re:/objetiva y razonable/i,t:"Aplica la justificación objetiva y razonable"},
+   {re:/proporcion/i,t:"Valora la proporcionalidad"},
+   {re:/acci[oó]n positiva/i,t:"Analiza si es una acción positiva"},
+   {re:/128\/1987/,t:"Cita la sentencia 128/1987"},
+   {re:/amparo/i,t:"Indica la vía de amparo (artículo 53.2)"},
+   {re:/(en conclusi[oó]n|por tanto|en definitiva|concluyo)/i,t:"Conclusión explícita"}
+  ],
+  min:150,
+  m:"El trabajador invoca el derecho a la igualdad y a no ser discriminado por razón de sexo del artículo 14 de la Constitución. Frente a él está el mandato del artículo 9.2, que obliga a los poderes públicos a remover los obstáculos para que la igualdad sea real y efectiva.\n\nNo toda diferencia de trato es discriminatoria. Es legítima si responde a situaciones de hecho distintas, tiene una justificación objetiva y razonable y es proporcionada a la finalidad que persigue. Aquí la empresa podría alegar que las mujeres con hijos pequeños sufren una desventaja real en el empleo y que la ayuda pretende compensarla.\n\nEso la convertiría en una acción positiva en el sentido del artículo 6.7 de la Ley 15/2022: una diferencia de trato temporal, razonable y proporcionada para compensar una desventaja colectiva. Es justo lo que resolvió el Tribunal Constitucional en la sentencia 128/1987, que denegó el amparo a un trabajador en un caso casi idéntico. El riesgo es que la medida perpetúe el estereotipo de que el cuidado corresponde a las madres, que es lo que censuró la sentencia 103/1983 en la pensión de viudedad.\n\nComo el artículo 14 está protegido por el artículo 53.2, el trabajador podría acudir a los tribunales por el procedimiento preferente y sumario y, agotada la vía judicial, en amparo ante el Tribunal Constitucional.\n\nEn conclusión, la ayuda puede ser válida como acción positiva si se acredita la desventaja y se mantiene solo mientras subsista; si no, sería una discriminación por razón de sexo."},
+ b:{t:"Supuesto 2. La policía detiene a una persona sospechosa de pertenecer a una banda terrorista. Pasadas setenta horas, pide al juez prolongar la detención. El detenido no ha sido informado por escrito de sus derechos y le presionan para que declare. Explica qué límites temporales rigen, si cabe la prórroga y en qué condiciones, qué derechos se están vulnerando y qué podría hacer su familia. Mínimo 150 palabras.",
+  checks:[
+   {re:/17\.2/,t:"Cita el artículo 17.2"},
+   {re:/(72|setenta y dos)/i,t:"Aplica el límite de setenta y dos horas"},
+   {re:/55\.2/,t:"Cita el artículo 55.2"},
+   {re:/520 bis/i,t:"Cita el artículo 520 bis de la Ley de Enjuiciamiento Criminal"},
+   {re:/(48|cuarenta y ocho)/i,t:"Aplica la prórroga de cuarenta y ocho horas"},
+   {re:/17\.3/,t:"Cita los derechos del artículo 17.3"},
+   {re:/habeas corpus/i,t:"Propone el habeas corpus"},
+   {re:/(en conclusi[oó]n|por tanto|en definitiva|concluyo)/i,t:"Conclusión explícita"}
+  ],
+  min:150,
+  m:"El artículo 17.2 de la Constitución impone dos límites a la detención preventiva: uno relativo, el tiempo estrictamente necesario para las averiguaciones, y otro absoluto, setenta y dos horas, al cabo de las cuales el detenido debe quedar en libertad o a disposición judicial.\n\nEl artículo 55.2 permite suspender de forma individual el artículo 17.2 en investigaciones sobre bandas armadas o elementos terroristas, con intervención judicial. Lo desarrolla el artículo 520 bis de la Ley de Enjuiciamiento Criminal: la detención puede prolongarse hasta cuarenta y ocho horas más, pero la prórroga debe pedirse de forma motivada dentro de las primeras cuarenta y ocho horas y el juez debe autorizarla en las veinticuatro siguientes. Aquí la policía la pide a las setenta horas, fuera de plazo, así que la prórroga no cabe y la detención se convertiría en ilegal al superar las setenta y dos horas.\n\nAdemás se vulneran los derechos del artículo 17.3: el detenido debe ser informado de forma inmediata y comprensible de sus derechos (por escrito, según el artículo 520) y no puede ser obligado a declarar. La presión para que declare podría afectar también a la integridad moral del artículo 15.\n\nLa familia puede instar un habeas corpus (artículo 17.4 y Ley Orgánica 6/1984) para que el juez de guardia examine la legalidad de la detención en veinticuatro horas.\n\nEn conclusión, la detención es ilegal desde que se superan las setenta y dos horas sin prórroga válida, y se vulneran los derechos del detenido."}
+};
+
+(function(){
+"use strict";
+var STORE="ui1-const-ud4-v1";
+function load(){ try{ var r=localStorage.getItem(STORE); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
+function save(d){ try{ localStorage.setItem(STORE, JSON.stringify(d)); }catch(e){} }
+var db=load(); db.examHistory=db.examHistory||[]; db.drafts=db.drafts||{};
+function $(id){ return document.getElementById(id); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function norm(s){ return (s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/\s+/g," ").trim().replace(/[.,;:!?»«"]+$/,""); }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function fb(el,ok,html){ el.className="fb show "+(ok?"ok":"ko"); el.innerHTML=html; }
+function hideFb(el){ el.className="fb"; el.innerHTML=""; }
+function fmt(n){ return (Math.round(n*100)/100).toString().replace(".",","); }
+
+var tabs=document.querySelectorAll(".tab");
+tabs.forEach(function(t){ t.addEventListener("click",function(){
+  tabs.forEach(function(x){ x.setAttribute("aria-selected", x===t?"true":"false"); });
+  document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id==="p-"+t.dataset.p); });
+}); });
+
+/* ===== EXAM ===== */
+function letter(it){ return "ABCD".charAt(it.o.indexOf(it.ok)); }
+function explain(it){
+  var h="<b>✓ Respuesta correcta: "+letter(it)+")</b> "+esc(it.ok);
+  h+="<div style='margin-top:8px'><b>Por qué:</b> "+esc(it.w)+"</div>";
+  h+="<div style='margin-top:6px'><b>Recuerda:</b> "+esc(it.r)+"</div>";
+  h+="<div class='es'>Apartado de la unidad: "+esc(it.s)+"</div>";
+  return h;
+}
+var ex=null;
+function renderHistory(){ var h=db.examHistory; $("exam-history").textContent = h.length ? ("Últimas notas: "+h.slice(-5).map(function(x){ return fmt(x.nota); }).join(" / ")+" sobre 10.") : ""; }
+function startExam(pool){
+  var qs=(pool||shuffle(EXAM).slice(0,30)).map(function(it){ return {q:it.q,w:it.w,r:it.r,s:it.s,ok:it.o[0],o:shuffle(it.o),src:it}; });
+  ex={qs:qs,i:0,ok:0,ko:0,blank:0,wrong:[],done:false};
+  $("exam-start").hidden=true; $("exam-end").hidden=true; $("exam-run").hidden=false; showQ();
+}
+function showQ(){
+  if(ex.i>=ex.qs.length){ return endExam(); }
+  var it=ex.qs[ex.i]; ex.done=false;
+  $("exam-bar").style.width=(ex.i/ex.qs.length*100)+"%";
+  $("exam-count").textContent="Pregunta "+(ex.i+1)+" de "+ex.qs.length;
+  $("exam-score").textContent="Puntos: "+fmt(ex.ok-ex.ko*0.33);
+  $("exam-q").innerHTML="<span class='hint' style='display:block;margin:0 0 6px'>Elige UNA respuesta correcta.</span>"+esc(it.q);
+  var box=$("exam-opts"); box.innerHTML="";
+  it.o.forEach(function(op,k){ var b=document.createElement("button"); b.className="opt"; b.dataset.v=op; b.textContent="ABCD".charAt(k)+") "+op; b.addEventListener("click",function(){ answer(op,b); }); box.appendChild(b); });
+  hideFb($("exam-fb")); $("exam-next").disabled=true; $("exam-blank").disabled=false;
+}
+function reveal(){ var it=ex.qs[ex.i]; $("exam-opts").querySelectorAll(".opt").forEach(function(b){ b.disabled=true; if(b.dataset.v===it.ok) b.classList.add("ok"); }); }
+function answer(op,btn){
+  if(ex.done) return; ex.done=true; var it=ex.qs[ex.i]; reveal();
+  if(op===it.ok){ ex.ok++; fb($("exam-fb"),true,explain(it)); } else { ex.ko++; btn.classList.add("ko"); ex.wrong.push(it.src); fb($("exam-fb"),false,explain(it)); }
+  $("exam-next").disabled=false; $("exam-blank").disabled=true; $("exam-next").focus();
+}
+$("exam-blank").addEventListener("click",function(){ if(ex.done) return; ex.done=true; ex.blank++; var it=ex.qs[ex.i]; ex.wrong.push(it.src); reveal(); fb($("exam-fb"),false,"En blanco. "+explain(it)); $("exam-next").disabled=false; $("exam-blank").disabled=true; });
+$("exam-next").addEventListener("click",function(){ ex.i++; showQ(); });
+$("exam-go").addEventListener("click",function(){ startExam(); });
+function endExam(){
+  $("exam-run").hidden=true;
+  var n=ex.qs.length, raw=ex.ok-ex.ko*0.33, nota=Math.max(0,raw)/n*10;
+  if(n===30){ db.examHistory.push({d:Date.now(),nota:Math.round(nota*100)/100}); db.examHistory=db.examHistory.slice(-20); save(db); }
+  var h="<p class='prompt'>Nota: <span class='mark'>"+fmt(nota)+"</span> sobre 10</p>";
+  h+="<div class='stats'><div class='stat'><b>"+ex.ok+"</b><span>aciertos</span></div><div class='stat'><b>"+ex.ko+"</b><span>fallos (−"+fmt(ex.ko*0.33)+")</span></div><div class='stat'><b>"+ex.blank+"</b><span>en blanco</span></div></div>";
+  h+= n===30 ? "<p class='hint'>Mínimo en el examen: 4 sobre 10 en cada parte y 5 de media. Objetivo: 7 o más dos veces seguidas.</p>" : "<p class='hint'>Ronda de repaso: no cuenta en el historial.</p>";
+  if(ex.wrong.length){ h+="<ul class='review'>"+ex.wrong.map(function(w){ return "<li><b>"+esc(w.q)+"</b><br><span class='mark'>"+esc(w.o[0])+"</span>. "+esc(w.w)+"<div class='es'>Recuerda: "+esc(w.r)+"</div></li>"; }).join("")+"</ul>"; }
+  h+="<div class='row'>"+(ex.wrong.length?"<button class='btn' id='exam-retry'>Repetir solo los fallos</button>":"")+"<button class='btn ghost' id='exam-new'>Nuevo test de 30</button></div>";
+  var end=$("exam-end"); end.innerHTML=h; end.hidden=false;
+  var wr=ex.wrong.slice();
+  if($("exam-retry")) $("exam-retry").addEventListener("click",function(){ startExam(shuffle(wr)); });
+  $("exam-new").addEventListener("click",function(){ startExam(); });
+  renderHistory();
+}
+renderHistory();
+
+/* ===== adaptive queue ===== */
+function Queue(items){ this.q=shuffle(items); this.total=items.length; this.mastered=0; this.cur=null; }
+Queue.prototype.next=function(){ this.cur=this.q.shift()||null; return this.cur; };
+Queue.prototype.fail=function(){ var pos=Math.min(3,this.q.length); this.q.splice(pos,0,this.cur); };
+Queue.prototype.pass=function(){ this.mastered++; };
+function bar(id,Q){ $(id).style.width=(Q.mastered/Q.total*100)+"%"; }
+
+/* ===== ARTÍCULOS LITERALES ===== */
+var L=new Queue(LIT), lDone=false;
+function litShow(){
+  var c=L.next(); bar("lit-bar",L); hideFb($("lit-fb"));
+  if(!c){ $("lit-q").innerHTML="<span class='mark'>Completado.</span> Has acertado los "+L.total+" huecos."; $("lit-in").hidden=true; $("lit-check").hidden=true; $("lit-next").textContent="Empezar de nuevo"; $("lit-next").disabled=false; $("lit-count").textContent=""; $("lit-art").textContent=""; return; }
+  $("lit-in").hidden=false; $("lit-check").hidden=false; $("lit-next").textContent="Siguiente";
+  $("lit-count").textContent="Dominados "+L.mastered+" de "+L.total;
+  $("lit-art").textContent=(ARTLABEL[c.k]||"Constitución, artículo "+c.k);
+  $("lit-q").textContent=c.s; $("lit-in").value=""; $("lit-next").disabled=true; lDone=false; $("lit-in").focus({preventScroll:true});
+}
+function litCheck(){
+  if(lDone) return; var c=L.cur; if(!c) return; var v=norm($("lit-in").value); if(!v) return; lDone=true;
+  var ok=c.a.some(function(a){ return norm(a)===v; });
+  var full="<div class='es'>"+esc(ARTS[c.k])+"</div>";
+  if(ok){ L.pass(); fb($("lit-fb"),true,"Correcto."+full); } else { L.fail(); fb($("lit-fb"),false,"Respuesta: <span class='mark'>"+esc(c.a[0])+"</span>. Volverá a salir."+full); }
+  bar("lit-bar",L); $("lit-next").disabled=false; $("lit-next").focus();
+}
+$("lit-check").addEventListener("click",litCheck);
+$("lit-in").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(lDone) litShow(); else litCheck(); } });
+$("lit-next").addEventListener("click",function(){ if(!L.cur && L.q.length===0 && L.mastered===L.total){ L=new Queue(LIT); } litShow(); });
+litShow();
+
+/* ===== CONCEPTOS ===== */
+var CC=[]; CONC.forEach(function(x){ CC.push({f:x.d,b:x.t,k:"¿Qué concepto es?"}); CC.push({f:x.t,b:x.d,k:"Defínelo según la unidad"}); });
+var C=new Queue(CC);
+function conShow(){
+  var c=C.next(); bar("con-bar",C); hideFb($("con-fb")); $("con-row1").hidden=false; $("con-row2").hidden=true;
+  if(!c){ $("con-q").innerHTML="<span class='mark'>Completado.</span>"; $("con-show").textContent="Empezar de nuevo"; $("con-count").textContent=""; $("con-kind").textContent=""; return; }
+  $("con-show").textContent="Ver respuesta"; $("con-count").textContent="Dominadas "+C.mastered+" de "+C.total; $("con-kind").textContent=c.k; $("con-q").textContent=c.f;
+}
+$("con-show").addEventListener("click",function(){ if(!C.cur){ C=new Queue(CC); conShow(); return; } fb($("con-fb"),true,"<span class='mark'>"+esc(C.cur.b)+"</span>"); $("con-row1").hidden=true; $("con-row2").hidden=false; });
+$("con-good").addEventListener("click",function(){ C.pass(); conShow(); });
+$("con-bad").addEventListener("click",function(){ C.fail(); conShow(); });
+conShow();
+
+/* ===== CLASIFICACIÓN ===== */
+var K=new Queue(CLS), kDone=false;
+var kb=$("cls-btns"); CLS_OPTS.forEach(function(y){ var b=document.createElement("button"); b.className="btn ghost"; b.textContent=y; b.dataset.y=y; b.addEventListener("click",function(){ clsAns(y); }); kb.appendChild(b); });
+function clsShow(){
+  var c=K.next(); bar("cls-bar",K); hideFb($("cls-fb")); kDone=false; $("cls-next").disabled=true;
+  if(!c){ $("cls-q").innerHTML="<span class='mark'>Completado.</span>"; kb.hidden=true; $("cls-next").textContent="Empezar de nuevo"; $("cls-next").disabled=false; $("cls-count").textContent=""; return; }
+  kb.hidden=false; $("cls-next").textContent="Siguiente"; $("cls-count").textContent="Dominadas "+K.mastered+" de "+K.total; $("cls-q").textContent=c.p;
+}
+function clsAns(y){
+  if(kDone||!K.cur) return; kDone=true; var c=K.cur;
+  if(y===c.a){ K.pass(); fb($("cls-fb"),true,"Correcto: "+esc(c.a)+"."); } else { K.fail(); fb($("cls-fb"),false,"Es <span class='mark'>"+esc(c.a)+"</span>. Volverá a salir."); }
+  bar("cls-bar",K); $("cls-next").disabled=false; $("cls-next").focus();
+}
+$("cls-next").addEventListener("click",function(){ if(!K.cur && K.q.length===0 && K.mastered===K.total){ K=new Queue(CLS); } clsShow(); });
+clsShow();
+
+/* ===== VERDADERO O FALSO ===== */
+var V=new Queue(VF), vDone=false;
+function vfShow(){
+  var c=V.next(); bar("vf-bar",V); hideFb($("vf-fb")); vDone=false; $("vf-next").disabled=true;
+  if(!c){ $("vf-q").innerHTML="<span class='mark'>Completado.</span>"; $("vf-t").hidden=true; $("vf-f").hidden=true; $("vf-next").textContent="Empezar de nuevo"; $("vf-next").disabled=false; $("vf-count").textContent=""; return; }
+  $("vf-t").hidden=false; $("vf-f").hidden=false; $("vf-next").textContent="Siguiente"; $("vf-count").textContent="Dominadas "+V.mastered+" de "+V.total; $("vf-q").textContent=c.p;
+}
+function vfAns(val){
+  if(vDone||!V.cur) return; vDone=true; var c=V.cur;
+  if(val===c.v){ V.pass(); fb($("vf-fb"),true,esc(c.w)); } else { V.fail(); fb($("vf-fb"),false,esc(c.w)+" Volverá a salir."); }
+  bar("vf-bar",V); $("vf-next").disabled=false; $("vf-next").focus();
+}
+$("vf-t").addEventListener("click",function(){ vfAns(true); });
+$("vf-f").addEventListener("click",function(){ vfAns(false); });
+$("vf-next").addEventListener("click",function(){ if(!V.cur && V.q.length===0 && V.mastered===V.total){ V=new Queue(VF); } vfShow(); });
+vfShow();
+
+/* ===== APLICACIÓN ===== */
+var wMode="a";
+function countWords(t){ return (t.match(/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9]+/g)||[]).length; }
+function checksFor(task,body){ var n=countWords(body); var c=task.checks.map(function(x){ return {ok:x.re.test(body),t:x.t}; }); c.push({ok:n>=task.min,t:"Al menos "+task.min+" palabras (ahora "+n+")"}); return {c:c,words:n}; }
+function wRender(){
+  var body=$("w-body").value, r=checksFor(TASKS[wMode],body);
+  $("w-words").textContent=r.words+" palabras";
+  $("w-checks").innerHTML=r.c.map(function(x){ return "<li class='"+(body.trim()?(x.ok?"pass":"fail"):"")+"'>"+esc(x.t)+"</li>"; }).join("");
+  db.drafts[wMode]=body; save(db);
+}
+function wSet(m){ wMode=m; $("w-a").className= m==="a"?"btn":"btn ghost"; $("w-b").className= m==="b"?"btn":"btn ghost"; $("w-task").textContent=TASKS[m].t; $("w-model").textContent=TASKS[m].m; $("w-body").value=db.drafts[m]||""; wRender(); }
+$("w-a").addEventListener("click",function(){ wSet("a"); });
+$("w-b").addEventListener("click",function(){ wSet("b"); });
+$("w-body").addEventListener("input",wRender);
+wSet("a");
+})();
+
+</script>
