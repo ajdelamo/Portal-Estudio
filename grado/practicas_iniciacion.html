@@ -13,16 +13,17 @@ header p{margin-top:5px;color:#888780;font-size:12px}
 .wrap{max-width:720px;margin:0 auto;padding:24px 16px 60px}
 .back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:14px}
 .section-label{font-size:12px;font-weight:600;color:#5f5e5a;margin:4px 0 10px;padding-bottom:6px;border-bottom:1px solid #d3d1c7}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-bottom:12px}
 .card{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:16px 16px 13px;text-decoration:none;color:#1a1a18;display:flex;flex-direction:column;gap:6px;transition:border-color .15s,box-shadow .15s}
 a.card:hover,a.card:focus-visible{border-color:#185fa5;box-shadow:0 2px 8px rgba(24,95,165,.10);outline:none}
 .badge{font-size:10.5px;font-weight:600;color:#185fa5;background:#e6f1fb;padding:2px 8px;border-radius:5px;align-self:flex-start}
-.badge.gace{color:#0f6e56;background:#eaf3de}
-.badge.ingles{color:#854f0b;background:#faeeda}
+.badge.notion{color:#5f5e5a;background:#eceae4}
+.badge.ok{color:#0f6e56;background:#eaf3de}
 .card h2{font-size:14px;font-weight:600;line-height:1.4}
 .card p{font-size:12px;color:#888780;line-height:1.55}
 .go{margin-top:auto;padding-top:4px;font-size:12px;color:#185fa5;font-weight:600}
-.block-title{font-size:13px;font-weight:600;color:#1a1a18;margin:0 0 8px}
+.block-title{font-size:13px;font-weight:600;color:#1a1a18;margin:14px 0 8px}
+.note{font-size:11.5px;color:#888780;margin:0 0 28px}
 .info{background:#fff;border:1px solid #d3d1c7;border-radius:12px;padding:16px 18px;margin-bottom:18px;font-size:13px;line-height:1.6}
 .info h3{font-size:13px;font-weight:600;margin-bottom:6px}
 .info ul,.info ol{margin-left:18px}
@@ -31,14 +32,15 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}
 td,th{padding:6px 8px;border-bottom:1px solid #eceae4;text-align:left;vertical-align:top}
 th{font-weight:600;color:#5f5e5a}
 .pend{color:#b4b2a9;font-size:12px}
-.empty{background:#fff;border:1.5px dashed #d3d1c7;border-radius:12px;padding:22px;text-align:center;color:#888780;font-size:13px;margin-bottom:28px}
+.estado{font-size:11.5px;font-weight:600;color:#854f0b}
+.estado.ok{color:#0f6e56}
 footer{text-align:center;color:#b4b2a9;font-size:11px;padding:20px;border-top:1px solid #d3d1c7}
 </style>
 </head>
 <body>
 <header>
   <h1>🧭 Prácticas de Iniciación Profesional</h1>
-  <p>Grado en Derecho · UI1 · 1.er curso, anual · 6 ECTS</p>
+  <p>Grado en Derecho · UI1 · 1.er curso, anual · 6 ECTS · Docente: Nuria Puentes Ruiz</p>
 </header>
 <div class="wrap">
 <a class="back" href="../index.html">← Portal de Estudio</a>
@@ -46,33 +48,80 @@ footer{text-align:center;color:#b4b2a9;font-size:11px;padding:20px;border-top:1p
   <div class="section-label">Entregas</div>
   <div class="info">
     <table>
-      <tr><th>Entrega</th><th>Peso</th><th>Cierre</th></tr>
-      <tr><td>MP1-MP2: Libertad de reunión, estado de alarma e igualdad<br><span class="pend">Nota de jurisprudencia · PDF de 4 páginas como máximo, Arial 11, APA 7</span></td><td>25 %</td><td>09/12/2026, 23:59</td></tr>
-      <tr><td class="pend">Siguientes módulos</td><td class="pend">—</td><td class="pend">Pendiente de publicar</td></tr>
+      <tr><th>Actividad</th><th>Peso</th><th>Cierre</th><th>Estado</th></tr>
+      <tr><td>MP1-MP2 · Libertad de reunión, estado de alarma e igualdad<br><span class="pend">Nota de jurisprudencia · PDF de 4 páginas como máximo sin portada (las referencias cuentan), Arial 11, APA 7</span></td><td>25 %</td><td>09/12/2026, 23:59</td><td><span class="estado">PDF listo (06/11) · pendiente de subir al buzón</span></td></tr>
+      <tr><td>MP3 · Estudio de caso</td><td>25 %</td><td class="pend">Se publica el 11/01/2027</td><td class="pend">—</td></tr>
+      <tr><td>MP4 · Foro de debate colaborativo</td><td>25 %</td><td class="pend">Se publica el 23/02/2027</td><td class="pend">—</td></tr>
+      <tr><td>MP5-MP6 · Estudio de caso</td><td>25 %</td><td class="pend">MP5 el 13/04 y MP6 el 14/05/2027</td><td class="pend">—</td></tr>
     </table>
   </div>
 
   <div class="section-label">Materiales</div>
-  <div class="empty">Todavía no hay materiales. Irán apareciendo aquí a medida que los preparemos.</div>
+
+  <div class="block-title">MP1 · Cuestiones de derecho constitucional en España (I)</div>
+  <div class="grid">
+    <a class="card" href="https://claude.ai/code/artifact/536716cb-e5ac-4550-8e09-c8e44decdfb6" target="_blank" rel="noopener">
+      <span class="badge">Documento de estudio</span>
+      <h2>MP1 · Documento de estudio</h2>
+      <p>Para escuchar en Speechify: erratas, normas y sentencias, conexión con la nota y sesión del 06/10.</p>
+      <span class="go">Abrir en Claude →</span>
+    </a>
+    <a class="card" href="https://app.notion.com/p/3f4ccdec6fe981f0b3a2c1045e09dc63" target="_blank" rel="noopener">
+      <span class="badge notion">Notion</span>
+      <h2>MP1 · Página del módulo</h2>
+      <p>Materiales, normas clave y seguimiento.</p>
+      <span class="go">Abrir en Notion →</span>
+    </a>
+  </div>
+
+  <div class="block-title">MP2 · Cuestiones de derecho constitucional en España (II)</div>
+  <div class="grid">
+    <a class="card" href="https://claude.ai/artifact/3y6GaD8VcUPDFBrfbrpE8v" target="_blank" rel="noopener">
+      <span class="badge">Documento de estudio</span>
+      <h2>MP2 · Documento de estudio</h2>
+      <p>Igualdad, libertad de expresión y derecho de reunión: erratas, mapa redibujado y bibliografía.</p>
+      <span class="go">Abrir en Claude →</span>
+    </a>
+    <a class="card" href="https://app.notion.com/p/40fccdec6fe981a0a9bcf2ef89c201cb" target="_blank" rel="noopener">
+      <span class="badge notion">Notion</span>
+      <h2>MP2 · Página del módulo</h2>
+      <p>Materiales, normas clave y seguimiento.</p>
+      <span class="go">Abrir en Notion →</span>
+    </a>
+  </div>
+
+  <div class="block-title">Actividad MP1-MP2</div>
+  <div class="grid">
+    <a class="card" href="https://app.notion.com/p/3f4ccdec6fe981929df6eb3221c02622" target="_blank" rel="noopener">
+      <span class="badge ok">Terminado</span>
+      <h2>Nota de jurisprudencia · plan de redacción</h2>
+      <p>Enunciado, rúbrica, banco de fuentes verificadas y redacción punto por punto.</p>
+      <span class="go">Abrir en Notion →</span>
+    </a>
+  </div>
+  <p class="note">Los enlaces son privados: solo se abren con tu sesión de Claude o de Notion. Los documentos reproducen material de la universidad y por eso no se publican en este portal.</p>
 
   <div class="section-label">Módulos</div>
   <div class="info">
-    <ol>
-      <li>Derecho Constitucional en España (I): Estado social y democrático de Derecho, participación política, reforma constitucional.</li>
-      <li>Derecho Constitucional en España (II): igualdad, libertad de expresión y derecho de reunión.</li>
-      <li>Derecho Internacional Público (I): Estados y organizaciones internacionales como sujetos.</li>
-      <li>Derecho Internacional Público (II): derechos humanos, medio ambiente, asilo y refugio.</li>
-      <li>Derecho de la Unión Europea: integración, Brexit, retos del proyecto europeo, Estado de bienestar.</li>
-      <li>Trabajo académico en Ciencias Sociales y Jurídicas: método, fuentes, citación y defensa.</li>
-    </ol>
+    <table>
+      <tr><th>Módulo</th><th>Publicación</th></tr>
+      <tr><td>1. Derecho Constitucional en España (I): Estado social y democrático de derecho, participación política, reforma constitucional</td><td>22/09/2026</td></tr>
+      <tr><td>2. Derecho Constitucional en España (II): igualdad, libertad de expresión y derecho de reunión</td><td>04/11/2026</td></tr>
+      <tr><td>3. Derecho Internacional Público (I): Estados y organizaciones internacionales como sujetos</td><td class="pend">11/01/2027</td></tr>
+      <tr><td>4. Derecho Internacional Público (II): derechos humanos, medio ambiente, asilo y refugio</td><td class="pend">23/02/2027</td></tr>
+      <tr><td>5. Derecho de la Unión Europea: integración, Brexit, retos del proyecto europeo, Estado de bienestar</td><td class="pend">13/04/2027</td></tr>
+      <tr><td>6. Trabajo académico en Ciencias Sociales y Jurídicas: método, fuentes, citación y defensa</td><td class="pend">14/05/2027</td></tr>
+    </table>
   </div>
+
   <div class="info">
     <h3>Cómo se aprueba</h3>
     <ul>
-      <li>Asignatura anual: corre en paralelo a los tres trimestres.</li>
-      <li>Evaluación continua mediante simuladores de casos y un porfolio de trabajos. No hay examen tipo test.</li>
-      <li>Clases en directo los martes alternos a las 16:00, desde el 06/10/2026.</li>
-      <li>Calificaciones ordinarias: 02/07/2027 · extraordinaria: entrega hasta el 12/07/2027.</li>
+      <li>No hay examen. La evaluación continua es el 100 % de la nota: cuatro actividades del 25 % cada una (tres estudios de caso y un foro de debate).</li>
+      <li>Cada estudio de caso necesita más de un 5 para aprobar. Rúbrica común: presentación 10 %, contenido 50 %, coherencia 20 %, reflexión final 10 %, APA 7 10 %.</li>
+      <li>Cualquier contenido sin referencia en APA 7, o con una fuente cuya existencia no se pueda comprobar, supone el suspenso de la actividad.</li>
+      <li>Clases en directo los martes a las 16:00, cada quince días: 27/10, 03/11, 17/11 y 01/12/2026 en el primer trimestre. Quedan grabadas.</li>
+      <li>Calificaciones ordinarias: 02/07/2027. Extraordinaria: enunciado el 24/06, entrega hasta el 12/07 y calificaciones el 23/07/2027.</li>
     </ul>
   </div>
 
