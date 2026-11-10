@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 8 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque IV · Tema 8 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "Art. 33.3 CE (literal)", "b": "«Nadie podrá ser privado de sus bienes y derechos sino por causa justificada de utilidad pública o interés social, mediante la correspondiente indemnización y de conformidad con lo dispuesto por las leyes»."}, {"u": 1, "f": "Las tres garantías del art. 33.3", "b": "Causa expropiandi (utilidad pública o interés social) · indemnización con razonable equilibrio entre daño y reparación (TC) · procedimiento legal. Europa: art. 1 Protocolo 1 CEDH y art. 17 Carta UE."}, {"u": 1, "f": "Competencia (art. 149.1.18.ª CE)", "b": "Exclusiva del Estado sobre la «legislación sobre expropiación forzosa», sin «básica». Las CCAA: definen causas en sus materias, ejercen la potestad y crean jurados propios."}, {"u": 1, "f": "Concepto (art. 1 LEF)", "b": "Cualquier forma de privación singular de la propiedad privada o de derechos o intereses patrimoniales legítimos, acordada imperativamente, ya implique venta, permuta, censo, arrendamiento, ocupación temporal o mera cesación de su ejercicio."}, {"u": 1, "f": "Expropiación frente a delimitación", "b": "Privación singular → se indemniza. Limitaciones generales por ley → delimitan el contenido conforme a la función social y no se indemnizan."}, {"u": 1, "f": "Naturaleza", "b": "Institución de Derecho público, no compraventa forzosa. Acto complejo: declaración de utilidad pública, necesidad de ocupación, justiprecio, pago y ocupación."}, {"u": 2, "f": "Sujetos de la expropiación", "b": "Expropiante: Estado, Provincia, Municipio (art. 2.1) y CCAA. Beneficiario: por utilidad pública, entidades y concesionarios reconocidos por ley; por interés social, cualquier persona que cumpla la ley especial. Expropiado: propietario o titular (art. 3)."}, {"u": 2, "f": "Funciones del beneficiario (art. 5 REF)", "b": "Solicitar la iniciación · impulsar como parte · formular la relación de bienes (art. 17 LEF) · convenir la adquisición amistosa · actuar en la pieza de justiprecio · pagar o consignar."}, {"u": 2, "f": "Quién es el titular (art. 3.2) y Ministerio Fiscal (art. 5)", "b": "Registros públicos con presunción de titularidad → registros fiscales → pública y notoriamente. Ministerio Fiscal: si no comparecen, incapaces sin representante o propiedad litigiosa."}, {"u": 2, "f": "Objeto", "b": "Cualquier bien o derecho patrimonial. Fuera: derechos personalísimos y bienes de dominio público (desafectación; si es de la propia Administración, mutación demanial). Se adquiere libre de cargas (art. 8)."}, {"u": 2, "f": "Cómo se declara la utilidad pública", "b": "Implícita en planes de obras y servicios (art. 10) · ley genérica: Consejo de Ministros caso a caso (art. 10) · demás inmuebles: ley de Cortes (art. 11) · muebles: ley singular o Consejo de Ministros si una ley autoriza la categoría (art. 12) · interés social: como los muebles (art. 13)."}, {"u": 3, "f": "Las cinco fases", "b": "Declaración de utilidad pública o interés social (9-14) · necesidad de ocupación (15-23) · justiprecio (24-47) · pago y toma de posesión (48-55) · garantías por demora (56-58)."}, {"u": 3, "f": "Necesidad de ocupación: pasos y plazos", "b": "Relación de bienes por el beneficiario (17) → información pública 15 días (18-19) → acuerdo en 20 días del Delegado o Subdelegado del Gobierno (20) → publicación y notificación individual: inicia el expediente (21)."}, {"u": 3, "f": "Alzada contra la necesidad de ocupación (art. 22)", "b": "Ante el ministerio · 10 días para recurrir · se resuelve en 20 días · efecto suspensivo hasta la resolución expresa (excepción al art. 117 LPAC)."}, {"u": 3, "f": "Expropiación total (art. 23)", "b": "Si la parte no expropiada resulta antieconómica, el propietario pide que se expropie la totalidad; la Administración decide en 10 días."}, {"u": 3, "f": "Qué inicia el expediente", "b": "El acuerdo de necesidad de ocupación (art. 21), no la declaración de utilidad pública ni la relación de bienes (exámenes 2019 y 2022)."}, {"u": 4, "f": "Escalera del justiprecio", "b": "Mutuo acuerdo 15 días (24) · hoja del propietario 20 días (29) · Administración acepta o rechaza en 20 días (30.1) · propietario acepta o rechaza la hoja fundada en 10 días (30.2) · rechazo → Jurado (31). Serie: 15 · 20 · 20 · 10."}, {"u": 4, "f": "Inicio del expediente de justiprecio", "b": "El día siguiente a aquel en que adquiere firmeza el acuerdo de necesidad de ocupación (art. 28 REF; el temario dice 25 REF, que regula el mutuo acuerdo)."}, {"u": 4, "f": "Pieza separada (art. 26)", "b": "Una por propietario. Única si el bien es de varios en comunidad o varios bienes forman una unidad económica."}, {"u": 4, "f": "Momento de la valoración (art. 36)", "b": "Valor al iniciarse el expediente de justiprecio, sin plusvalías del proyecto ni previsibles. Suelo y construcciones: texto refundido de la Ley de Suelo (RDLeg 7/2015, arts. 34-41)."}, {"u": 4, "f": "Premio de afección (art. 47)", "b": "5 % del justo precio, en todos los casos y automático, sin solicitud."}, {"u": 5, "f": "Composición del Jurado (art. 32)", "b": "Presidente: Magistrado designado por el Presidente de la Audiencia. Vocales: Abogado del Estado · dos funcionarios técnicos de la Delegación de Hacienda · representante de la Cámara Agraria o corporación según el bien · Notario del Decano · Interventor territorial (Ley 17/2012)."}, {"u": 5, "f": "Resolución del Jurado", "b": "Decide ejecutoriamente (art. 34; el plazo de 8 días lo suprimió la Ley 14/2000) · motivada · pone fin a la vía administrativa: solo contencioso (reposición potestativa, no previa) · congruente con las hojas de aprecio · su fecha inicia el plazo del art. 58."}, {"u": 6, "f": "Pago y consignación (arts. 48 a 50)", "b": "Pago en 6 meses desde la fijación · exento de impuestos (49) · consignación en la Caja General de Depósitos si rehúsa o hay litigio; cobra ya la parte en que haya conformidad (50)."}, {"u": 6, "f": "Ocupación (art. 51)", "b": "Tras pago o consignación. Solo domicilio y locales cerrados sin acceso al público requieren consentimiento o autorización judicial; para el resto, entrada directa con auxilio policial si hace falta. Acta inscribible."}, {"u": 6, "f": "Garantías por demora (arts. 56-58)", "b": "56: 6 meses desde el inicio sin justiprecio → interés legal a cargo de la Administración culpable · 57: interés legal desde los 6 meses del art. 48 hasta el pago · 58: 4 años sin pago ni consignación → retasación."}, {"u": 6, "f": "Retasación: 2 o 4 años", "b": "4 años desde la Ley 17/2012 (en vigor el 01/01/2013). El temario dice 2: error. Pagado o consignado, ya no procede aunque hayan pasado los 4 años."}, {"u": 7, "f": "Declaración de urgencia (art. 52)", "b": "Excepcional · Consejo de Ministros (o Consejo de Gobierno autonómico) · motivada · retención de crédito por el justiprecio estimado · en cualquier momento · leyes sectoriales la declaran implícita."}, {"u": 7, "f": "Los pasos de la urgencia", "b": "1) Se da por cumplida la necesidad de ocupación · 2) aviso del acta previa ≥ 8 días · 3) acta previa con perito y Alcalde · 4) hojas de depósito previo y perjuicios por rápida ocupación · 5) ocupación ≤ 15 días, sin interdictos · 6) justiprecio y pago preferentes."}, {"u": 7, "f": "Intereses en la urgencia (52.8)", "b": "El interés del art. 56 corre desde el día siguiente a la ocupación."}, {"u": 7, "f": "Qué sustituye y qué no la urgencia", "b": "Sustituye (da por cumplido) el acuerdo de necesidad de ocupación. No sustituye la declaración de utilidad pública. No es un procedimiento especial del Título III."}, {"u": 8, "f": "Supuestos y exclusiones de la reversión", "b": "Procede: no se ejecuta la obra, parte sobrante, desaparece la afectación (54.1). No procede: nueva afectación simultánea a otro fin de utilidad pública, o afectación durante 10 años desde la terminación de la obra (54.2)."}, {"u": 8, "f": "Plazos de la reversión (54.3)", "b": "Con notificación: 3 meses. Sin notificación: exceso o desafectación antes de 20 años desde la toma de posesión · 5 años sin iniciar la obra · suspensión de más de 2 años imputable a la Administración o al beneficiario."}, {"u": 8, "f": "Precio, competencia y registro", "b": "Indemnización actualizada por el IPC (o nueva valoración si hay cambios sustanciales), pagada en 3 meses bajo caducidad (55) · resuelve la Administración titular del bien o vinculada al beneficiario (54.4) · oponible a terceros solo si consta en el Registro (54.5)."}, {"u": 9, "f": "Procedimientos especiales (Título III)", "b": "Zonas o grupos · incumplimiento de la función social (la declaración del art. 72 sustituye la necesidad de ocupación) · bienes artísticos (comisión de 3 académicos, tanteo y retracto) · entidades locales · traslado de poblaciones · colonización y obras públicas · propiedad industrial · defensa nacional."}, {"u": 9, "f": "Ocupaciones temporales y otros daños", "b": "Arts. 108-119: estudios, caminos provisionales, almacenes, extracción de materiales; se indemnizan los daños efectivos. Art. 120: calamidades y epidemias. Arts. 121-123: desplazados por la Ley 40/2015."}, {"u": 9, "f": "Recurso contencioso y lesión (art. 126)", "b": "Contra la resolución que pone fin al expediente o a una pieza separada · vicio sustancial de forma o infracción de la ley · justiprecio: lesión si difiere en más de una sexta parte de lo alegado · turno preferente."}, {"u": 9, "f": "Vía de hecho (art. 125)", "b": "Ocupación sin declaración de utilidad pública, necesidad de ocupación y previo pago o depósito → interdictos de retener y recobrar (hoy tutela sumaria, art. 250.1.4.º LEC) y recurso contra la vía de hecho (arts. 25.2, 30 y 136 LJCA), con cautelares."}, {"u": 10, "f": "Introducción de expropiación: las cuatro piezas", "b": "Art. 33.3 CE (fundamento) · art. 149.1.18.ª CE (competencia exclusiva) · Ley de 16 de diciembre de 1954, de Expropiación Forzosa (en adelante, LEF) · Reglamento por Decreto de 26 de abril de 1957."}, {"u": 10, "f": "Calificación previa del Tema 8", "b": "«Con carácter previo, procede calificar la actuación»: expropiante · beneficiario · bien y su titularidad · declaración de utilidad pública o interés social · urgente ocupación sí o no → procedimiento general o del art. 52."}, {"u": 10, "f": "Trampa del supuesto: bien propio", "b": "Una Administración no se expropia a sí misma: si el bien ya es suyo, mutación demanial (art. 71 Ley 33/2003) o adscripción."}, {"u": 10, "f": "Mini-supuesto de don Luis (cifras)", "b": "Acta previa 2/2 → ocupación 16/2 dentro de 15 días (suponiendo el depósito el 2/2) · 195.000 + 5 % = 204.750 € · interés desde el 17/2 · lesión: 240.000 / 6 = 40.000 < 45.000 de diferencia → cabe recurso por lesión."}, {"u": 10, "f": "Dato que falta en el enunciado", "b": "«El enunciado no precisa…, por lo que suponemos que…» (con su justificación) y después «Por tanto, se concluye que…». Nunca un condicional dubitativo ni coletillas de cierre."}, {"u": 4, "f": "Mutuo acuerdo con fondos públicos (art. 25 REF)", "b": "Propuesta del servicio con el acuerdo alcanzado · informe de los servicios técnicos sobre el valor · fiscalización del gasto por la Intervención · acuerdo del Ministro (u órgano local). Posible en cualquier momento del expediente (art. 24 LEF)."}, {"u": 4, "f": "Criterios estimativos (art. 43)", "b": "Propietario, Administración y Jurado pueden aplicar los criterios que juzguen más adecuados si las reglas legales no reflejan el valor real. No para los inmuebles, que se valoran por la legislación del suelo."}, {"u": 3, "f": "Información pública: quién alega y qué (art. 19)", "b": "Cualquier persona: rectificar errores de la relación u oponerse por razones de fondo o forma, indicando qué otros bienes serían preferentes. Si la necesidad está implícita en el proyecto, solo para subsanar errores."}];
+const UNAMES={"1": "Fundamento y concepto", "2": "Elementos", "3": "Necesidad de ocupación", "4": "Justiprecio", "5": "Jurado", "6": "Pago y demora", "7": "Urgencia", "8": "Reversión", "9": "Especiales y garantías", "10": "Supuesto"};
+const SK="gace27_biv_t08_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
