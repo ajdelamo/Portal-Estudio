@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BIV · Tema 8 — La expropiación forzosa (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tablewrap table{break-inside:auto}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque IV · Derecho Administrativo · Tema 8</small>
+    <h1>La expropiación forzosa: concepto, naturaleza y elementos. Procedimientos de expropiación. Garantías jurisdiccionales</h1>
+    <p>Versión fusionada: el Tema 8 del Bloque IV del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas contra el texto consolidado del BOE y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 10/11/2026 · Ley de Expropiación Forzosa consolidada (última modificación en vigor desde 01/01/2013) · Reglamento de 1957 consolidado a 06/11/1999</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">Concepto, fundamento y naturaleza</a></li>
+    <li><a href="#s2">Elementos de la expropiación</a></li>
+    <li><a href="#s3">El procedimiento general: declaración y necesidad de ocupación</a></li>
+    <li><a href="#s4">El justiprecio y el Jurado</a></li>
+    <li><a href="#s5">Pago, ocupación y garantías por demora</a></li>
+    <li><a href="#s6">El procedimiento de urgencia</a></li>
+    <li><a href="#s7">La reversión</a></li>
+    <li><a href="#s8">Procedimientos especiales, ocupaciones temporales y otros daños</a></li>
+    <li><a href="#s9">Garantías jurisdiccionales</a></li>
+    <li><a href="#s10">Lo que preguntan y trampas</a></li>
+    <li><a href="#s11">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s12">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. El tema es una ley de 1954 con muchas cifras: sigue el orden del expediente (declaración, necesidad de ocupación, justiprecio, pago y ocupación) y cuelga cada plazo de su fase.</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Repaso en audio. Al terminar, recita sin mirar la tabla de plazos del <a href="#s10">apartado 10</a>: 15 · 20 · 20 · 10 días, 6 meses, 4 años, y los de la reversión (3 meses, 5, 2, 20 y 10 años).</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s11">apartado 11</a> tapando la columna derecha. En el supuesto, la expropiación entra casi siempre por la urgencia, el justiprecio (lesión de una sexta parte) o la reversión.</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> Concepto, fundamento y naturaleza</h2>
+<h3>1.1 Fundamento constitucional</h3>
+<div class="box clave"><span class="box-h">Art. 33 CE: la piedra angular</span>
+El art. 33 reconoce la propiedad privada y la herencia, cuyo contenido delimita su <strong>función social</strong> de acuerdo con las leyes. Su apartado 3 es la garantía expropiatoria: «Nadie podrá ser privado de sus bienes y derechos sino por causa justificada de <strong>utilidad pública o interés social</strong>, mediante la correspondiente <strong>indemnización</strong> y de conformidad con lo dispuesto por las <strong>leyes</strong>».</div>
+<p>De ahí salen <strong>tres garantías</strong>: una <em>causa expropiandi</em> (utilidad pública o interés social); una indemnización que, según el Tribunal Constitucional, responde a un <strong>razonable equilibrio</strong> entre el daño expropiatorio y su reparación; y la sujeción a un <strong>procedimiento</strong> legal. En Europa, garantías análogas en el <strong>art. 1 del Protocolo Adicional n.º 1 al CEDH</strong> y en el <strong>art. 17 de la Carta de Derechos Fundamentales de la UE</strong>.</p>
+<p><strong>Competencia</strong>: exclusiva del Estado sobre la «legislación sobre expropiación forzosa» (<span class="art">art. 149.1.18.ª CE</span>), sin el adjetivo «básica»: el instituto lo regula el Estado. Las Comunidades Autónomas pueden, en sus materias, definir causas de utilidad pública o interés social, ejercer la potestad expropiatoria y crear sus propios <strong>jurados</strong> de expropiación, como han hecho varias.</p>
+<h3>1.2 Concepto legal (art. 1 LEF)</h3>
+<p>La <strong>Ley de 16 de diciembre de 1954, sobre Expropiación Forzosa</strong> (LEF) sigue vigente, completada por su <strong>Reglamento</strong>, aprobado por <strong>Decreto de 26 de abril de 1957</strong> (REF). Expropiación es «cualquier forma de <strong>privación singular</strong> de la propiedad privada o de derechos o intereses patrimoniales legítimos, cualesquiera que fueren las personas o Entidades a que pertenezcan, acordada <strong>imperativamente</strong>, ya implique venta, permuta, censo, arrendamiento, ocupación temporal o mera cesación de su ejercicio». Quedan fuera las ventas forzosas de la legislación especial de abastecimientos, comercio exterior y divisas (1.2).</p>
+<div class="grid2">
+<div class="card"><h4>Notas del concepto</h4><ul><li>Potestad administrativa de ejercicio <strong>imperativo</strong>: no depende de la voluntad del afectado.</li><li>Privación <strong>singular</strong>: afecta a personas o bienes concretos.</li><li>Objeto amplio: cualquier derecho o interés <strong>patrimonial legítimo</strong>.</li><li>Exige causa, procedimiento e indemnización.</li></ul></div>
+<div class="card"><h4>Expropiación frente a delimitación</h4>Las limitaciones <strong>generales</strong> que la ley impone a la propiedad delimitan su contenido conforme a la función social y <strong>no se indemnizan</strong>. Solo la privación singular es expropiación.</div>
+</div>
+<h3>1.3 Naturaleza</h3>
+<p>La doctrina mayoritaria la considera una institución de <strong>Derecho público</strong>, no una compraventa forzosa: una potestad <strong>ablatoria</strong> rodeada de garantías para el expropiado. El acuerdo expropiatorio es un <strong>acto complejo</strong>, formado por actos con sustantividad propia: declaración de utilidad pública, necesidad de ocupación, justiprecio, pago y ocupación.</p>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> Elementos de la expropiación</h2>
+<h3>2.1 Elementos subjetivos (arts. 2 a 5 LEF y 3 a 5 REF)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:16%">Sujeto</th><th style="width:38%">Quién</th><th>Claves</th></tr>
+<tr><td><strong>Expropiante</strong></td><td>Titular de la potestad. El art. 2.1 LEF dice: el <strong>Estado, la Provincia o el Municipio</strong>; hoy también las <strong>Comunidades Autónomas</strong>, por sus estatutos y la doctrina constitucional.</td><td>Ejerce la potestad en favor del beneficiario, a instancia de este, y decide ejecutoriamente sobre sus obligaciones (art. 4 REF). En el Estado, la necesidad de ocupación la resolvía el Gobernador civil: hoy el <strong>Delegado o Subdelegado del Gobierno</strong>, salvo atribución legal al ministerio.</td></tr>
+<tr><td><strong>Beneficiario</strong></td><td>Por <strong>utilidad pública</strong>: las entidades y concesionarios a los que la ley reconozca esta condición (2.2). Por <strong>interés social</strong>: además, cualquier persona física o jurídica que cumpla los requisitos de la ley especial (2.3).</td><td>Art. 5 REF: <strong>solicita la iniciación</strong> del expediente, lo impulsa como parte, formula la <strong>relación de bienes</strong> (art. 17 LEF), conviene la adquisición amistosa, actúa en la pieza de justiprecio y <strong>paga o consigna</strong> el justiprecio y demás indemnizaciones.</td></tr>
+<tr><td><strong>Expropiado</strong></td><td>El propietario o titular del derecho (art. 3 LEF).</td><td>Se tiene por titular a quien conste en <strong>registros públicos</strong> con presunción de titularidad; en su defecto, en <strong>registros fiscales</strong>; en último lugar, a quien lo sea <strong>pública y notoriamente</strong> (3.2). Si no comparece, es incapaz sin representante o la propiedad es <strong>litigiosa</strong>: <strong>Ministerio Fiscal</strong> (art. 5). Bienes de la Iglesia: régimen del Concordato.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al temario 2026 (y precisión al visual)</span>
+<strong>Temario</strong>: la tabla de sujetos del apartado 2.1 está <strong>vacía</strong> en el PDF (solo aparece la cabecera). Se ha completado con los arts. 2 a 5 LEF y 3 a 5 REF y con el material visual.<br>
+<strong>Visual</strong>: atribuía al art. 2 LEF la mención de las Comunidades Autónomas. El texto literal del art. 2.1 solo cita al Estado, la Provincia y el Municipio; la potestad autonómica deriva de la Constitución y de los estatutos.</div>
+<h3>2.2 Elemento objetivo</h3>
+<p>Cualquier bien o derecho de contenido patrimonial: inmuebles, muebles, derechos reales, arrendamientos, concesiones y derechos de propiedad industrial e intelectual. <strong>Quedan fuera</strong> los derechos personalísimos y los <strong>bienes de dominio público</strong>, que primero deben desafectarse; si el bien ya es de la propia Administración, la vía es la <strong>mutación demanial</strong> o la adscripción. La cosa se adquiere <strong>libre de cargas</strong>, aunque puede conservarse algún derecho real compatible con el nuevo destino si hay acuerdo (<span class="art">art. 8 LEF</span>).</p>
+<h3>2.3 Elemento causal: utilidad pública e interés social (arts. 9 a 14 LEF)</h3>
+<p>Es indispensable la <strong>previa declaración de utilidad pública o interés social</strong> del fin al que se afectará el bien (art. 9). Esa declaración lleva consigo la autorización para expropiar los bienes necesarios (art. 10 REF).</p>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Supuesto</th><th>Cómo se declara</th></tr>
+<tr><td>Inmuebles incluidos en <strong>planes de obras y servicios</strong> del Estado, Provincia y Municipio</td><td><strong>Implícita</strong> en el plan (art. 10 LEF).</td></tr>
+<tr><td>Inmuebles, cuando una ley ha declarado <strong>genéricamente</strong> la utilidad pública</td><td>Reconocimiento en cada caso por <strong>acuerdo del Consejo de Ministros</strong>, salvo que las leyes de categorías de obras, servicios o concesiones dispongan otra cosa (art. 10 LEF).</td></tr>
+<tr><td>Inmuebles en los demás casos</td><td>Por <strong>ley aprobada en Cortes</strong> (art. 11 LEF).</td></tr>
+<tr><td><strong>Bienes muebles</strong></td><td>Por <strong>ley</strong>, expresa y singularmente en cada caso; si una ley ha autorizado la expropiación de una categoría de bienes, basta el <strong>acuerdo del Consejo de Ministros</strong> (art. 12).</td></tr>
+<tr><td><strong>Interés social</strong></td><td>Mismo procedimiento que los muebles (art. 13): ley o, si la ley lo prevé, Consejo de Ministros.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al temario 2026: artículos de la declaración</span>
+El temario sitúa el acuerdo del Consejo de Ministros en el art. 11 y la exigencia de ley para inmuebles en el «art. 10 REF». En el BOE, el acuerdo del Consejo de Ministros está en el <strong>art. 10 LEF</strong> y la ley de Cortes para inmuebles en el <strong>art. 11 LEF</strong>. El art. 10 REF dice otra cosa: que la declaración lleva consigo la autorización para expropiar.</div>
+<p>La causa tiene como consecuencia la <strong>afectación</strong> del bien al fin; si la afectación desaparece, nace el <strong>derecho de reversión</strong> (<a href="#s7">apartado 7</a>).</p>
+<h3>2.4 Elemento formal</h3>
+<p>Debe seguirse el procedimiento legal. Su incumplimiento en los requisitos <strong>esenciales</strong> convierte la actuación en una <strong>vía de hecho</strong>, frente a la que caben las garantías del art. 125 LEF (<a href="#s9">apartado 9</a>).</p>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> El procedimiento general: declaración y necesidad de ocupación</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Fase</th><th>Contenido</th><th style="width:16%">Arts. LEF</th></tr>
+<tr><td>Declaración de utilidad pública o interés social</td><td>Requisito previo</td><td>9 a 14</td></tr>
+<tr><td>Necesidad de ocupación</td><td>Determinación concreta de los bienes que es preciso expropiar</td><td>15 a 23</td></tr>
+<tr><td>Justiprecio</td><td>Mutuo acuerdo o Jurado</td><td>24 a 47</td></tr>
+<tr><td>Pago y toma de posesión</td><td>Pago o consignación y ocupación</td><td>48 a 55</td></tr>
+<tr><td>Garantías por demora</td><td>Intereses y retasación</td><td>56 a 58</td></tr>
+</table></div>
+<h3>La necesidad de ocupación, paso a paso</h3>
+<div class="flowv">
+<div class="step"><b>1 · Relación de bienes (arts. 15 a 17)</b>Declarada la utilidad pública, la Administración resuelve sobre la necesidad de ocupar los bienes <strong>estrictamente indispensables</strong>; por acuerdo del Consejo de Ministros pueden incluirse los necesarios para <strong>previsibles ampliaciones</strong> (art. 15). El <strong>beneficiario</strong> formula una relación concreta e individualizada, con descripción material y jurídica. Si el proyecto ya contiene esa descripción detallada, la necesidad de ocupación se entiende <strong>implícita</strong> en su aprobación, pero la relación se formula igualmente para determinar los interesados (art. 17.2).</div>
+<div class="step"><b>2 · Información pública (arts. 18 y 19) · 15 días</b>Se publica en el BOE, en el boletín de la provincia y en uno de los diarios de mayor circulación, y se comunica a los ayuntamientos. Cualquier persona puede aportar datos para <strong>rectificar errores</strong> u <strong>oponerse</strong> por razones de fondo o forma, indicando qué otros bienes serían preferentes.</div>
+<div class="step"><b>3 · Acuerdo de necesidad de ocupación (art. 20) · 20 días</b>Resuelve el antiguo Gobernador civil (hoy <strong>Delegado o Subdelegado del Gobierno</strong>, salvo ley que lo atribuya al ministerio) en el plazo máximo de <strong>veinte días</strong>, describiendo los bienes y designando nominalmente a los interesados.</div>
+<div class="step"><b>4 · Publicación, notificación e inicio (art. 21)</b>Se publica como la información pública y se notifica individualmente. El acuerdo de necesidad de ocupación <strong>inicia el expediente expropiatorio</strong>.</div>
+<div class="step"><b>5 · Recurso de alzada (art. 22)</b>Ante el ministerio, por los interesados y por quienes comparecieron en la información pública, en <strong>diez días</strong>; se resuelve en <strong>veinte días</strong> y su interposición tiene <strong>efecto suspensivo</strong> hasta la resolución expresa. El texto añade que contra la orden ministerial que lo resuelve no cabe contencioso (22.3, al que remite el 126.1).</div>
+</div>
+<div class="box clave"><span class="box-h">Expropiación total (art. 23)</span>
+Si se expropia solo parte de una finca rústica o urbana y conservar el resto resulta <strong>antieconómico</strong>, el propietario puede pedir que la expropiación comprenda la <strong>totalidad</strong>. La Administración decide en <strong>diez días</strong>, con alzada del art. 22 y sin contencioso (se estará al art. 46).</div>
+<div class="box fix"><span class="box-h">Correcciones al material visual</span>
+<strong>Expropiación total</strong>: el visual decía que el dueño puede pedirla «en 10 días». Los diez días del art. 23 son el plazo de la <strong>Administración para decidir</strong>; la ley no fija plazo al propietario para solicitarla.<br>
+<strong>Alzada del art. 22</strong>: el visual daba por «actualizados por la Ley 39/2015» los plazos a un mes y tres meses. El texto consolidado del BOE mantiene <strong>diez días</strong> para recurrir y <strong>veinte</strong> para resolver, con efecto suspensivo. En el test, contesta con la letra de la LEF.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019 y 2022)</span>
+El expediente lo inicia el <strong>acuerdo de necesidad de ocupación</strong>, no la declaración de utilidad pública ni la relación de bienes. Son los <strong>beneficiarios</strong> quienes solicitan la iniciación (art. 5 REF). Si la propiedad es litigiosa, las diligencias se entienden con el <strong>Ministerio Fiscal</strong>.</div>
+<div class="box trampa"><span class="box-h">Trampa</span>La alzada contra la necesidad de ocupación <strong>sí suspende</strong> (art. 22.3 LEF): excepción expresa a la regla general de no suspensión del art. 117 de la Ley 39/2015.</div>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> El justiprecio y el Jurado</h2>
+<div class="flowv">
+<div class="step"><b>1 · Mutuo acuerdo (art. 24) · 15 días</b>La Administración y el particular pueden convenir libremente la adquisición; convenidos los términos, se da por concluido el expediente. Si en <strong>quince días</strong> no hay acuerdo, se sigue el procedimiento contradictorio, aunque el acuerdo sigue siendo posible en <strong>cualquier momento posterior</strong>. En el Estado, el mutuo acuerdo con fondos públicos exige propuesta, informe técnico, fiscalización de la Intervención y acuerdo del ministro (art. 25 REF).</div>
+<div class="step"><b>2 · Pieza separada (arts. 25 a 28)</b>Firme el acuerdo de necesidad de ocupación, se determina el justo precio (art. 25 LEF) en <strong>pieza separada para cada propietario</strong>; es única si el bien pertenece en comunidad a varios o varios bienes forman una unidad económica (art. 26). El expediente de justiprecio se entiende iniciado el <strong>día siguiente</strong> a aquel en que adquiere firmeza el acuerdo de necesidad de ocupación (<span class="art">art. 28 REF</span>).</div>
+<div class="step"><b>3 · Hojas de aprecio (arts. 29 y 30) · 20 · 20 · 10 días</b>El propietario presenta su hoja de aprecio en <strong>veinte días</strong>, motivada y que puede firmar un perito a su costa. La Administración la <strong>acepta</strong> (justiprecio definitivo) o la <strong>rechaza</strong> en otros <strong>veinte días</strong> y extiende su hoja de aprecio fundada, que el propietario puede aceptar lisa y llanamente o rechazar, con alegaciones y pruebas, en <strong>diez días</strong>.</div>
+<div class="step"><b>4 · Jurado Provincial de Expropiación (arts. 31 a 35)</b>Si el propietario rechaza el precio fundado de la Administración, el expediente pasa al Jurado, que decide <strong>ejecutoriamente</strong> sobre el justo precio a la vista de ambas hojas de aprecio.</div>
+</div>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Jurado (art. 32)</th><th>Composición vigente (redacción de la Ley 17/2012)</th></tr>
+<tr><td><strong>Presidente</strong></td><td><strong>Magistrado</strong> designado por el Presidente de la Audiencia correspondiente (en Ceuta y Melilla, el Juez de Primera Instancia).</td></tr>
+<tr><td><strong>Vocales</strong></td><td>a) Un <strong>Abogado del Estado</strong> de la Delegación de Hacienda · b) <strong>dos funcionarios técnicos</strong> designados por la Delegación de Hacienda según la naturaleza del bien · c) un <strong>representante</strong> de la Cámara Agraria (bienes rústicos) o de la Cámara de la Propiedad Urbana, Cámara de Comercio, colegio profesional u organización empresarial, según el bien · d) un <strong>Notario</strong> designado por el Decano del Colegio Notarial · e) el <strong>Interventor territorial</strong> de la provincia.</td></tr>
+<tr><td><strong>Resolución</strong> (art. 35)</td><td><strong>Motivada</strong>, razonando los criterios de valoración. Pone fin a la vía administrativa («ultimará la vía gubernativa») y contra ella procede el <strong>contencioso-administrativo</strong>. Su fecha es el término inicial de la caducidad de la valoración del art. 58.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones al temario 2026 sobre el Jurado y la pieza de justiprecio</span>
+<strong>Plazo del Jurado</strong>: el temario dice que resuelve «en el plazo de ocho días». Ese plazo era de la redacción original del art. 34; la <strong>Ley 14/2000</strong> lo suprimió y el texto vigente solo dice que el Jurado «decidirá ejecutoriamente». Si te preguntan por el plazo de ocho días, es un dato derogado.<br>
+<strong>Inicio del expediente de justiprecio</strong>: el temario lo atribuye al «artículo 25 REF». Está en el <strong>art. 28 REF</strong>; el art. 25 REF regula los trámites del mutuo acuerdo.<br>
+<strong>Recurso contra el Jurado</strong>: el temario añade «previo recurso potestativo de reposición». El art. 35.2 LEF dice que procede «tan sólo» el contencioso; la reposición potestativa se admite porque el acuerdo pone fin a la vía administrativa (art. 123 de la Ley 39/2015), pero <strong>no es un requisito previo</strong>.</div>
+<div class="box clave"><span class="box-h">Congruencia del Jurado</span>
+Según la jurisprudencia que recogía el visual, el Jurado no puede fijar un justiprecio <strong>inferior</strong> a la hoja de aprecio de la Administración ni <strong>superior</strong> a la del expropiado: las hojas de aprecio vinculan a quien las formula.</div>
+<h3>Criterios de valoración y premio de afección</h3>
+<ul>
+<li><strong>Momento</strong> (art. 36): valor de los bienes <strong>al iniciarse el expediente de justiprecio</strong>, sin las plusvalías que sean consecuencia directa del proyecto de obras ni las previsibles para el futuro. Las mejoras posteriores a la incoación no se indemnizan, salvo las indispensables para conservar el bien; las anteriores sí, salvo mala fe.</li>
+<li><strong>Suelo y construcciones</strong>: se valoran por el <strong>texto refundido de la Ley de Suelo y Rehabilitación Urbana</strong> (Real Decreto Legislativo 7/2015, arts. 34 a 41), que desplaza a la LEF en este ámbito.</li>
+<li><strong>Criterios estimativos</strong> (art. 43): propietario, Administración y Jurado pueden aplicar los criterios que juzguen más adecuados si las reglas legales no reflejan el valor real; no para los inmuebles, que siguen la legislación del suelo.</li>
+<li><strong>Premio de afección</strong> (art. 47): en <strong>todos los casos</strong> se abona además un <strong>5 %</strong> del justo precio. Es <strong>automático</strong>: no hay que pedirlo.</li>
+</ul>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2022 y 2024)</span>
+Mutuo acuerdo en <strong>quince días</strong> (2024) · el propietario puede rechazar el precio fundado de la Administración (2022) · el Jurado lo preside un <strong>magistrado</strong> (2022) · el justiprecio <strong>no</strong> lo fija necesariamente el Jurado, porque cabe el mutuo acuerdo (2022) · premio de afección del <strong>5 %</strong> (2022).</div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> Pago, ocupación y garantías por demora</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Elemento</th><th>Régimen</th></tr>
+<tr><td><strong>Pago</strong> (48 y 49)</td><td>En el plazo máximo de <strong>seis meses</strong> desde que se determina el justo precio, por talón nominativo o transferencia bancaria si el expropiado lo pide. El pago está <strong>exento</strong> de toda clase de gastos, impuestos y gravámenes del Estado, Provincia o Municipio.</td></tr>
+<tr><td><strong>Consignación</strong> (50)</td><td>Si el propietario rehúsa recibir el precio o hay litigio, se consigna la cantidad discutida en la <strong>Caja General de Depósitos</strong>. El expropiado tiene derecho a cobrar ya la parte en la que exista <strong>conformidad</strong>, subordinada al resultado del litigio.</td></tr>
+<tr><td><strong>Ocupación</strong> (51)</td><td>Pagado o consignado el justo precio, puede ocuparse la finca por vía administrativa. Solo necesitan consentimiento del titular o autorización judicial el <strong>domicilio</strong> y los <strong>locales cerrados sin acceso al público</strong>; para lo demás, la Administración entra directamente y puede pedir auxilio policial al Delegado del Gobierno (Ley 53/2002). El acta de pago y ocupación es título inscribible en el <strong>Registro de la Propiedad</strong>.</td></tr>
+</table></div>
+<h3>Garantías por demora (arts. 56 a 58)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Garantía</th><th>Régimen</th></tr>
+<tr><td><strong>Demora en fijar</strong> el justiprecio (56)</td><td>Si pasan <strong>seis meses</strong> desde la iniciación legal del expediente sin justiprecio definitivo, la Administración <strong>culpable</strong> de la demora abona el <strong>interés legal</strong> del justo precio hasta que se determine, liquidado con efectos retroactivos.</td></tr>
+<tr><td><strong>Demora en pagar</strong> (57)</td><td>El justo precio devenga el <strong>interés legal</strong> desde que transcurren los <strong>seis meses</strong> del art. 48 hasta el pago.</td></tr>
+<tr><td><strong>Retasación</strong> (58)</td><td>Si pasan <strong>cuatro años</strong> sin que el justo precio se pague o consigne, se valoran de nuevo los bienes. Pagado o consignado, aunque hayan pasado los cuatro años, <strong>no procede</strong>. El plazo cuenta desde la fecha del acuerdo del Jurado (35.3).</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al temario 2026: la retasación es a los cuatro años</span>
+El temario dice «si transcurren <strong>dos años</strong>». Es la redacción original de 1954. La <strong>disposición final 2.3 de la Ley 17/2012</strong> elevó el plazo a <strong>cuatro años</strong>, en vigor desde el <strong>1 de enero de 2013</strong>. El material visual lo tenía bien.</div>
+<div class="box trampa"><span class="box-h">Trampa</span>Los <strong>dos años</strong> que siguen en la ley son los de la <strong>suspensión</strong> de la obra que abre la reversión (54.3.c), no la retasación.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (examen 2022)</span>
+La ocupación puede producirse cuando el expropiado ha <strong>percibido</strong> la indemnización o esta se ha <strong>consignado</strong>. El expediente de justiprecio se inicia el día siguiente a la firmeza del acuerdo de necesidad de ocupación.</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> El procedimiento de urgencia (art. 52), el más preguntado</h2>
+<p>Invierte el orden: primero se <strong>ocupa</strong> y después se fija el justiprecio y se paga. No es un procedimiento especial del Título III, sino una <strong>variante del procedimiento general</strong>.</p>
+<div class="box clave"><span class="box-h">La declaración de urgencia</span>
+Excepcionalmente, por <strong>acuerdo del Consejo de Ministros</strong> (en las Comunidades Autónomas, su Consejo de Gobierno), puede declararse urgente la ocupación de los bienes afectados por una obra o finalidad determinada. Debe estar <strong>motivada</strong>, y en el expediente debe figurar la <strong>retención de crédito</strong> por el importe estimado del justiprecio, con cargo al ejercicio en que se prevea concluir el expediente y pagar (Ley 11/1996). Puede hacerse <strong>en cualquier momento</strong>. Muchas leyes sectoriales (carreteras, ferrocarriles, aguas, energía) declaran implícita la urgencia.</div>
+<div class="flowv">
+<div class="step"><b>1 · Efecto de la declaración</b>Se entiende <strong>cumplido el trámite de necesidad de ocupación</strong>, según el proyecto y replanteo aprobados, y da derecho a la <strong>ocupación inmediata</strong>.</div>
+<div class="step"><b>2 · Aviso del acta previa · al menos 8 días</b>Se notifica a los interesados, mediante cédula y con una antelación mínima de <strong>ocho días</strong>, el día y la hora del acta previa; con la misma antelación, edictos en los tablones, el BOE, el boletín provincial, un periódico local y dos de la capital.</div>
+<div class="step"><b>3 · Acta previa a la ocupación</b>En la finca, el representante de la Administración con un <strong>perito</strong> y el <strong>Alcalde</strong> o concejal delegado, con los propietarios, que pueden ir con sus peritos y un notario. Se describe el bien y se recoge todo lo útil para fijar derechos, titulares, valor y perjuicios.</div>
+<div class="step"><b>4 · Depósito previo e indemnización por rápida ocupación</b>La Administración formula las <strong>hojas de depósito previo</strong> (capitalización del líquido imponible al interés legal), que se consignan en la Caja de Depósitos y devengan el <strong>interés legal</strong>. También fija los <strong>perjuicios por la rapidez</strong> (mudanzas, cosechas pendientes): no cabe recurso, pero el Jurado los reconsidera al fijar el justiprecio.</div>
+<div class="step"><b>5 · Ocupación · máximo 15 días</b>Hecho el depósito y abonados o consignados los perjuicios, la ocupación se hace en el plazo máximo de <strong>quince días</strong>, sin que quepan interdictos de retener y recobrar.</div>
+<div class="step"><b>6 · Justiprecio y pago</b>Después se tramitan el justiprecio y el pago por las reglas generales, con <strong>preferencia</strong>. Sobre el justiprecio definitivo se gira el interés del art. 56, contado desde el <strong>día siguiente a la ocupación</strong> (52.8).</div>
+</div>
+<div class="box fix"><span class="box-h">Corrección al material visual</span>
+El visual decía que la urgencia «no sustituye la declaración de necesidad de ocupación», y en el paso siguiente que la lleva implícita. Lo correcto es lo segundo: según el art. 52.1, con la declaración de urgencia <strong>se entiende cumplido</strong> el trámite de necesidad de ocupación. Lo que no sustituye es la <strong>declaración de utilidad pública</strong>.</div>
+<div class="box trampa"><span class="box-h">Crítica clásica (posible pregunta de reflexión)</span>
+La urgencia se concibió como excepcional y en la práctica es el procedimiento habitual, lo que debilita la garantía del <strong>previo pago</strong>. El Tribunal Constitucional admite el pago posterior si la indemnización está garantizada: el art. 33.3 CE exige la «correspondiente» indemnización, no que sea previa.</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> La reversión (arts. 54 y 55 LEF y 63 a 70 REF)</h2>
+<p>Es el derecho del expropiado o sus causahabientes a <strong>recuperar</strong> el bien cuando desaparece la causa que justificó la expropiación. Deriva del art. 33.3 CE: la expropiación solo se justifica mientras subsiste su fin. Régimen vigente: Ley 38/1999.</p>
+<div class="grid2">
+<div class="card"><h4>✅ Supuestos (54.1)</h4><ul><li>No se ejecuta la obra o no se establece el servicio.</li><li>Hay una parte <strong>sobrante</strong>.</li><li>Desaparece la <strong>afectación</strong>.</li></ul></div>
+<div class="card"><h4>❌ No hay reversión (54.2)</h4><ul><li>Si, a la vez que se desafecta, se acuerda justificadamente una <strong>nueva afectación</strong> a otro fin de utilidad pública o interés social (con publicidad y alegaciones del primitivo dueño).</li><li>Si la afectación al fin, o a otro de utilidad pública, dura <strong>diez años</strong> desde la terminación de la obra o el establecimiento del servicio.</li></ul></div>
+</div>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Elemento</th><th>Régimen</th></tr>
+<tr><td><strong>Plazo con notificación</strong> (54.3)</td><td><strong>Tres meses</strong> desde que la Administración notifica el exceso de expropiación, la desafectación o su propósito de no ejecutar la obra o no implantar el servicio.</td></tr>
+<tr><td><strong>Sin notificación</strong> (54.3)</td><td>a) Exceso o desafectación, mientras no pasen <strong>veinte años</strong> desde la toma de posesión · b) <strong>cinco años</strong> desde la toma de posesión sin iniciar la obra o el servicio · c) obra o actuaciones <strong>suspendidas más de dos años</strong> por causa imputable a la Administración o al beneficiario, sin acto expreso de reanudación.</td></tr>
+<tr><td><strong>Competencia</strong> (54.4)</td><td>La Administración en cuya titularidad esté el bien cuando se pide la reversión, o a la que esté vinculado el beneficiario.</td></tr>
+<tr><td><strong>Registro</strong> (54.5)</td><td>En la inscripción se hace constar el derecho preferente de los reversionistas; <strong>sin esa constancia</strong>, la reversión no es oponible a terceros adquirentes que hayan inscrito.</td></tr>
+<tr><td><strong>Precio</strong> (55)</td><td>Restituir la indemnización percibida, <strong>actualizada por el IPC</strong> entre el inicio del expediente de justiprecio y el ejercicio de la reversión. Si el bien cambió de calificación jurídica, incorporó mejoras o sufrió menoscabo, <strong>nueva valoración</strong>. El pago o consignación debe hacerse en <strong>tres meses</strong> desde su fijación, bajo pena de caducidad del derecho, y es previo a la toma de posesión.</td></tr>
+</table></div>
+<div class="box trampa"><span class="box-h">Trampa</span>La reversión se paga con la indemnización actualizada por el <strong>IPC</strong>, no con intereses de mercado ni al valor actual (salvo cambios sustanciales del bien).</div>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> Procedimientos especiales, ocupaciones temporales y otros daños</h2>
+<h3>8.1 Procedimientos especiales (Título III, arts. 59 a 107)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:34%">Procedimiento</th><th>Especialidad principal</th></tr>
+<tr><td>Por <strong>zonas o grupos de bienes</strong> (59 a 70)</td><td>Planes que afectan a zonas o grupos de bienes: valoración por polígonos con precios máximos y mínimos.</td></tr>
+<tr><td>Por <strong>incumplimiento de la función social</strong> de la propiedad (71 a 75)</td><td>Exige declaración por ley o decreto acordado en Consejo de Ministros de que el bien debe transformarse o usarse de un modo; intimación de expropiación; plazo incumplido (art. 72). La declaración del art. 72 <strong>sustituye a la necesidad de ocupación</strong>, y los bienes pueden adjudicarse a terceros que se comprometan a cumplir la función.</td></tr>
+<tr><td>Bienes de valor <strong>artístico, histórico y arqueológico</strong> (76 a 84)</td><td>Justiprecio por una <strong>comisión de tres académicos</strong> (uno de la Mesa del Instituto de España, que preside, otro del Ministerio y otro del propietario: art. 78). La Administración tiene derechos de <strong>tanteo y retracto</strong>.</td></tr>
+<tr><td>Por <strong>entidades locales</strong> o por razón de urbanismo (85)</td><td>Legislación urbanística y de régimen local.</td></tr>
+<tr><td>Con <strong>traslado de poblaciones</strong> (86 a 89)</td><td>Garantías para los vecinos trasladados, como el derecho a ser reasentados.</td></tr>
+<tr><td>Por <strong>colonización u obras públicas</strong> (90 a 98)</td><td>Especialidades en zonas de colonización y obras hidráulicas.</td></tr>
+<tr><td>En materia de <strong>propiedad industrial</strong> (99)</td><td>Remite a su legislación especial.</td></tr>
+<tr><td>Por <strong>defensa nacional y seguridad del Estado</strong> (100 a 107)</td><td>Necesidades militares y requisas en tiempo de guerra o movilización.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019, 2022 y 2024)</span>
+La expropiación por defensa nacional <strong>sí</strong> es procedimiento especial del Título III (2019). La sustitución de la necesidad de ocupación por la declaración del art. 72 es propia de la expropiación por <strong>incumplimiento de la función social</strong> (2022). En bienes de valor artístico, el justiprecio lo fija una <strong>comisión de académicos</strong> (2024). La urgencia <strong>no</strong> es procedimiento especial.</div>
+<h3>8.2 Ocupaciones temporales e indemnización por otros daños (Título IV)</h3>
+<ul>
+<li><strong>Ocupaciones temporales</strong> (arts. 108 a 119): la Administración, o quien se subrogue en sus derechos, puede ocupar temporalmente terrenos para estudios u operaciones facultativas de corta duración, estaciones y caminos provisionales, talleres, almacenes o depósitos, extracción de materiales para las obras y supuestos análogos. Se indemnizan los <strong>daños efectivamente causados</strong>.</li>
+<li><strong>Otros daños</strong> (art. 120): si por graves razones de orden o seguridad públicos, epidemias, inundaciones u otras calamidades las autoridades civiles destruyen o requisan bienes sin las formalidades de la expropiación, el particular tiene derecho a indemnización, a su instancia.</li>
+<li>Los arts. 121 a 123, que regulaban la <strong>responsabilidad patrimonial</strong> (lesión por funcionamiento normal o anormal de los servicios públicos), han quedado desplazados por la <strong>Ley 40/2015</strong> (arts. 32 a 37). Conexión con el Tema 10.</li>
+</ul>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> Garantías jurisdiccionales (arts. 124 a 128)</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Garantía</th><th>Régimen</th></tr>
+<tr><td><strong>Contencioso</strong> (126.1 y 126.3)</td><td>Contra la resolución que pone fin al expediente o a cualquier pieza separada, salvo el caso del art. 22.3. Puede fundarse en <strong>vicio sustancial de forma</strong> o en la violación u omisión de los preceptos de la ley. Son recursos de <strong>turno preferente</strong> (126.4).</td></tr>
+<tr><td><strong>Recurso por lesión</strong> (126.2)</td><td>Ambas partes pueden recurrir el justo precio. Debe fundarse en <strong>lesión</strong> cuando la cantidad fijada sea inferior o superior en <strong>más de una sexta parte</strong> a la alegada por el recurrente.</td></tr>
+<tr><td><strong>Causa expropiandi</strong></td><td>No hace falta recurrir antes la necesidad de ocupación para impugnar el justiprecio, pero las cuestiones sobre la causa deben plantearse frente a la declaración de utilidad pública o el acuerdo de necesidad de ocupación.</td></tr>
+<tr><td><strong>Vía de hecho</strong> (125)</td><td>Si la Administración ocupa o intenta ocupar sin <strong>declaración de utilidad pública</strong>, <strong>necesidad de ocupación</strong> y <strong>previo pago o depósito</strong>, el interesado puede usar, además de los demás medios, los <strong>interdictos de retener y recobrar</strong>. Hoy: tutela sumaria de la posesión (art. 250.1.4.º de la Ley de Enjuiciamiento Civil) y, en lo contencioso, el recurso contra la vía de hecho (arts. 25.2, 30 y 136 de la Ley 29/1998), con medidas cautelares. Además, indemnización de daños y, en su caso, responsabilidad patrimonial.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Idea clave del temario 2026 (examen 2022)</span>
+El contencioso contra el justiprecio debe fundarse en <strong>lesión</strong> cuando la diferencia supera <strong>una sexta parte</strong>.</div>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Lo que preguntan y trampas</h2>
+<div class="box clave"><span class="box-h">La tabla de plazos del Tema 8 (memorízala en bloque)</span>
+<strong>Necesidad de ocupación</strong>: información pública 15 días · resolución 20 días · alzada 10 días, resuelta en 20, con efecto suspensivo · expropiación total: la Administración decide en 10 días.<br>
+<strong>Justiprecio</strong>: mutuo acuerdo 15 días · hoja del propietario 20 días · respuesta de la Administración 20 días · aceptación o rechazo 10 días · Jurado sin plazo propio en la LEF vigente.<br>
+<strong>Pago</strong>: 6 meses · intereses por demora en fijar: 6 meses desde el inicio (art. 56) · en pagar: desde los 6 meses del art. 48 (art. 57) · retasación: <strong>4 años</strong> · premio de afección: 5 %.<br>
+<strong>Urgencia</strong>: aviso del acta previa al menos 8 días · ocupación en 15 días como máximo · intereses desde el día siguiente a la ocupación.<br>
+<strong>Reversión</strong>: 3 meses (con notificación) · 20 años (exceso o desafectación) · 5 años (sin iniciar) · 2 años (suspensión) · 10 años (afectación consolidada) · pago del precio de reversión en 3 meses.<br>
+<strong>Recurso por lesión</strong>: más de una sexta parte.</div>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Lo que preguntan</span><ul>
+<li>Qué acto inicia el expediente.</li>
+<li>Quién solicita la iniciación y quién formula la relación de bienes.</li>
+<li>Plazos del mutuo acuerdo y de las hojas de aprecio.</li>
+<li>Presidente y composición del Jurado.</li>
+<li>Premio de afección.</li>
+<li>Pasos y plazos de la urgencia.</li>
+<li>Supuestos, exclusiones y plazos de la reversión.</li>
+<li>Procedimientos especiales del Título III.</li>
+<li>Lesión de una sexta parte y vía de hecho.</li></ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>«La retasación procede a los 2 años»: no, a los <strong>4</strong> desde 2013.</li>
+<li>«El premio de afección hay que pedirlo»: no, es automático.</li>
+<li>«El Jurado fija el precio que estime»: no, congruencia con las hojas de aprecio.</li>
+<li>«La resolución del Jurado admite alzada»: no, pone fin a la vía administrativa.</li>
+<li>«El Jurado resuelve en 8 días»: plazo suprimido en 2000.</li>
+<li>«Los bienes de dominio público se expropian»: no, primero desafectación o mutación demanial.</li>
+<li>«La urgencia la declara el Delegado del Gobierno»: no, el Consejo de Ministros.</li>
+<li>«La urgencia exige un acuerdo de necesidad de ocupación»: no, lo da por cumplido.</li>
+<li>«La reversión se paga con intereses de mercado»: no, IPC.</li>
+<li>«La alzada contra la necesidad de ocupación no suspende»: sí suspende.</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia con sus cuatro piezas: art. 33.3 CE, art. 149.1.18.ª CE, Ley de 16 de diciembre de 1954 (en adelante, LEF) y su Reglamento de 26 de abril de 1957.</li>
+<li>La calificación previa: quién expropia, quién es beneficiario, si hay declaración de utilidad pública o interés social y si se ha declarado la urgente ocupación.</li>
+<li>Las cinco fases del procedimiento general con sus artículos.</li>
+<li>Los pasos de la necesidad de ocupación y sus plazos.</li>
+<li>Las hojas de aprecio y la composición del Jurado.</li>
+<li>Las garantías por demora: arts. 56, 57 y 58.</li>
+<li>Los pasos de la urgencia.</li>
+<li>Los supuestos, exclusiones y plazos de la reversión.</li>
+<li>El recurso por lesión y la vía de hecho.</li>
+</ol>
+
+<!-- 11 -->
+<h2 id="s11"><span class="n">11.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>En las plantillas v2, la expropiación «sale poco, pero cuando sale decide la pregunta». Entra por tres puertas: una obra con <strong>urgente ocupación</strong>, una discusión sobre el <strong>justiprecio</strong> (Jurado, premio de afección, intereses, lesión) o una <strong>reversión</strong>. Y una trampa: la Administración que pretende expropiar un bien que ya es suyo.</p>
+<h3>11.1 Introducción de la materia (plantillas v2, sección 6)</h3>
+<div class="model">
+<p>«La expropiación forzosa tiene su fundamento en el artículo 33.3 de la Constitución, conforme al cual nadie podrá ser privado de sus bienes y derechos sino por causa justificada de utilidad pública o interés social, mediante la correspondiente indemnización y de conformidad con lo dispuesto por las leyes, y en el artículo 149.1.18.ª, que atribuye al Estado la legislación sobre expropiación forzosa. Resulta de aplicación la Ley de 16 de diciembre de 1954, de Expropiación Forzosa (en adelante, LEF), y su Reglamento, aprobado por Decreto de 26 de abril de 1957.»</p>
+</div>
+<div class="box sup"><span class="box-h">Las cuatro piezas</span>Art. 33.3 CE (fundamento) → art. 149.1.18.ª CE (competencia exclusiva del Estado) → LEF de 1954 → Reglamento de 1957. Si la pregunta toca el bien de la propia Administración, añade la introducción de patrimonio (Ley 33/2003).</div>
+<h3>11.2 Calificación previa propia del Tema 8</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar la actuación. Se trata de una expropiación forzosa por causa de [utilidad pública / interés social], en la que actúa como Administración expropiante [el Estado, a través de…] y como beneficiario [la entidad o concesionario], y que recae sobre [bien] de titularidad [privada]. Consta [la declaración de utilidad pública, implícita en el proyecto aprobado, conforme al artículo 10 de la LEF] y [se ha declarado / no se ha declarado] la urgente ocupación por acuerdo del Consejo de Ministros, por lo que el procedimiento aplicable es [el general de los artículos 15 a 51 / el de urgencia del artículo 52].»</p>
+</div>
+<h3>11.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Hecho del enunciado</th><th style="width:30%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>Un ministerio quiere «expropiar» un edificio de otro departamento del Estado</td><td>Una Administración no se expropia a sí misma; art. 71 Ley 33/2003</td><td>No procede la expropiación: la vía es la mutación demanial</td></tr>
+<tr><td>Se ocupan terrenos sin declaración de utilidad pública ni acuerdo de necesidad de ocupación</td><td>Art. 125 LEF</td><td>Es vía de hecho: tutela sumaria de la posesión o recurso contencioso contra la vía de hecho (art. 30 LJCA), con medidas cautelares</td></tr>
+<tr><td>Un afectado interpone alzada contra el acuerdo de necesidad de ocupación</td><td>Art. 22 LEF</td><td>El recurso suspende la ejecución hasta su resolución expresa</td></tr>
+<tr><td>Se expropia la mitad de una finca y el resto queda inservible</td><td>Art. 23 LEF</td><td>El propietario puede pedir la expropiación total; la Administración decide en 10 días</td></tr>
+<tr><td>Pasan 15 días desde la notificación del acuerdo sin pacto sobre el precio</td><td>Art. 24 LEF</td><td>Se abre el procedimiento contradictorio de hojas de aprecio, sin perjuicio de pactar después</td></tr>
+<tr><td>El propietario rechaza la hoja de aprecio fundada de la Administración</td><td>Arts. 30.2 y 31 LEF</td><td>El expediente pasa al Jurado Provincial de Expropiación</td></tr>
+<tr><td>El Jurado fija un justiprecio inferior a la hoja de la Administración</td><td>Congruencia de las hojas de aprecio (jurisprudencia)</td><td>Resolución incongruente, impugnable en vía contenciosa</td></tr>
+<tr><td>El enunciado pregunta cuánto cobra el expropiado</td><td>Art. 47 LEF</td><td>Justiprecio + 5 % de premio de afección, de oficio</td></tr>
+<tr><td>El justiprecio se fijó hace 4 años y medio y no se ha pagado ni consignado</td><td>Art. 58 LEF (Ley 17/2012)</td><td>Procede la retasación</td></tr>
+<tr><td>El Consejo de Ministros declara la urgencia sin retención de crédito</td><td>Art. 52, párrafo primero, LEF</td><td>Falta un requisito del expediente de la declaración</td></tr>
+<tr><td>En la urgencia, la ocupación se hizo el 10 de marzo y el justiprecio se fija en diciembre</td><td>Art. 52.8 LEF</td><td>Interés del art. 56 desde el 11 de marzo</td></tr>
+<tr><td>La obra se terminó hace 12 años y ahora el bien se desafecta</td><td>Art. 54.2.b LEF</td><td>No hay reversión: la afectación duró más de 10 años</td></tr>
+<tr><td>Pasaron 6 años desde la toma de posesión sin empezar la obra y sin notificación</td><td>Art. 54.3.b LEF</td><td>Procede la reversión, restituyendo la indemnización actualizada por el IPC</td></tr>
+</table></div>
+
+<h3>11.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+Para construir una variante de carretera, el Consejo de Ministros declara la <strong>urgente ocupación</strong> de una finca de don Luis. El acta previa se levanta el <strong>2 de febrero de 2026</strong> y la ocupación se produce el <strong>16 de febrero</strong>. En la pieza de justiprecio, don Luis valora la finca en <strong>240.000 €</strong> y la Administración en <strong>180.000 €</strong>. El Jurado Provincial fija el justiprecio en <strong>195.000 €</strong> el <strong>10 de septiembre de 2026</strong>.
+<br><br><strong>Cuestiones:</strong> a) Procedencia y plazo de la ocupación. b) Cantidades a que tiene derecho don Luis y posibilidad de recurrir el acuerdo del Jurado.</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 11.1.] Con carácter previo, procede calificar la actuación. Se trata de una expropiación forzosa por causa de utilidad pública, implícita en el proyecto de carretera aprobado conforme al artículo 10 de la LEF, en la que actúa como expropiante el Estado y en la que se ha declarado la urgente ocupación, por lo que rige el procedimiento del artículo 52. La cuestión a) solicita determinar si la ocupación fue procedente y si se respetó su plazo. Conforme al artículo 52.1, la declaración de urgencia da por cumplido el trámite de necesidad de ocupación y da derecho a la ocupación inmediata, y según el artículo 52.6 la ocupación debe realizarse en el plazo máximo de quince días desde que se efectúa el depósito previo y se abonan o consignan los perjuicios por la rápida ocupación. El enunciado no precisa la fecha del depósito, por lo que suponemos que se consignó el mismo día del acta previa, el 2 de febrero, que es el primer momento en que la Administración dispone de los datos para formular las hojas de depósito. En ese caso, el plazo vencía el 17 de febrero y la ocupación del día 16 está dentro de él. No obstante lo anterior, cabría plantear que el depósito se hizo después del acta, si bien eso no perjudica a don Luis, porque solo retrasaría el inicio del plazo. Por tanto, se concluye que la ocupación fue procedente y se realizó dentro del plazo del artículo 52.6 de la LEF.</p>
+<p><strong>Cuestión b).</strong> La cuestión b) plantea qué debe percibir don Luis y si puede recurrir. Conforme al artículo 47 de la LEF, en todos los casos se abona, además del justo precio, un cinco por ciento como premio de afección: el cinco por ciento de 195.000 € son 9.750 €, por lo que el principal asciende a 204.750 €. El artículo 52.8 añade, en la urgencia, el interés legal del artículo 56 desde el día siguiente a la ocupación, el 17 de febrero de 2026, hasta la fijación definitiva del justiprecio, el 10 de septiembre de 2026. Si el pago se retrasa más de seis meses desde esa fecha, se devengará además el interés del artículo 57, y si pasan cuatro años sin pago ni consignación procederá la retasación (artículo 58). Respecto del recurso, el acuerdo del Jurado pone fin a la vía administrativa (artículo 35.2), por lo que cabe recurso contencioso-administrativo. Según el artículo 126.2, el recurso contra el justiprecio debe fundarse en lesión cuando la cantidad fijada sea inferior en más de una sexta parte a la alegada por el recurrente. La sexta parte de 240.000 € son 40.000 €, y la diferencia entre 240.000 € y 195.000 € es de 45.000 €, superior a ese umbral. Por tanto, se concluye que don Luis tiene derecho a 204.750 € más el interés legal desde el 17 de febrero de 2026 hasta la fijación del justiprecio, y que puede interponer recurso contencioso-administrativo fundado en lesión, al superar la diferencia la sexta parte de su valoración.</p>
+</div>
+<h3>11.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Calificación</strong> de la expropiación, de la causa y del procedimiento de urgencia → <em>análisis</em>.<br>
+<strong>Cifras operadas</strong> (2 de febrero + 15 días; 5 % de 195.000 = 9.750; 240.000 / 6 = 40.000 frente a 45.000) → <em>aplicación de conocimientos</em>.<br>
+<strong>Suposición declarada</strong> sobre la fecha del depósito, justificada → admitida.<br>
+<strong>Alternativa evaluada</strong> (depósito posterior al acta) → <em>análisis</em>.<br>
+<strong>Encadenar las garantías</strong>: premio de afección, interés del 52.8, interés del 57 y retasación del 58 → <em>sistemática</em>.<br>
+<strong>Conclusiones afirmativas</strong> con importe y vía de recurso.</div>
+
+<!-- 12 -->
+<h2 id="s12"><span class="n">12.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Fundamento y concepto</td><td>Art. 33 CE con tres garantías, CEDH y Carta, competencia y jurados autonómicos, concepto, notas y naturaleza</td><td>Art. 33.3 literal, 149.1.18.ª sin «básica», privación singular frente a delimitación</td><td>Fusionado (1)</td></tr>
+<tr><td>Elementos</td><td>Tabla de sujetos vacía, art. 5 REF, Ministerio Fiscal, objeto, causa, forma</td><td>Tabla de sujetos, prelación de registros, libre de cargas, mutación demanial</td><td>Fusionado + BOE (2) con correcciones</td></tr>
+<tr><td>Necesidad de ocupación</td><td>Relación, información pública, acuerdo, inicio, expropiación total, ideas clave</td><td>Plazos, alzada suspensiva</td><td>Fusionado + BOE (3) con correcciones</td></tr>
+<tr><td>Justiprecio</td><td>Mutuo acuerdo, pieza separada, hojas, Jurado, valoración, premio, ideas clave</td><td>Plazos, composición del Jurado, congruencia</td><td>Fusionado + BOE (4) con correcciones</td></tr>
+<tr><td>Pago y demora</td><td>Pago, consignación, ocupación, intereses, retasación 2 años</td><td>Exención fiscal, retasación 4 años</td><td>Fusionado + BOE (5) con corrección</td></tr>
+<tr><td>Urgencia</td><td>Ocho reglas del art. 52</td><td>Inversión del orden, retención de crédito, crítica clásica</td><td>Fusionado (6) con corrección</td></tr>
+<tr><td>Reversión</td><td>Supuestos, exclusiones, plazos, competencia, indemnización</td><td>Cuadro procede / no procede, IPC, registro</td><td>Fusionado + BOE (7)</td></tr>
+<tr><td>Especiales y otros daños</td><td>Tabla del Título III, ocupaciones temporales, art. 120</td><td>Lista de especiales</td><td>Fusionado (8)</td></tr>
+<tr><td>Garantías jurisdiccionales</td><td>126, lesión, vía de hecho actualizada</td><td>Interdictos, responsabilidad</td><td>Fusionado (9)</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 11 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas (contrastadas con el BOE el 10/11/2026)</span>
+<strong>Temario 2026:</strong> retasación a los <strong>4 años</strong>, no a los 2 (Ley 17/2012) · el Jurado ya no tiene plazo de 8 días (Ley 14/2000) · el inicio del expediente de justiprecio está en el <strong>art. 28 REF</strong>, no en el 25 · Consejo de Ministros en el <strong>art. 10 LEF</strong> y ley de Cortes en el <strong>art. 11 LEF</strong>, no en el art. 10 REF · la reposición contra el acuerdo del Jurado es potestativa, no previa · la tabla de sujetos estaba vacía.<br>
+<strong>Material visual:</strong> los 10 días del art. 23 son para que decida la Administración · el art. 22 mantiene 10 y 20 días · la urgencia <strong>da por cumplida</strong> la necesidad de ocupación · el art. 2 LEF no cita a las Comunidades Autónomas.<br>
+<strong>Añadidos del BOE:</strong> retención de crédito en la urgencia (Ley 11/1996) · ampliaciones previsibles por Consejo de Ministros (15) · pieza única en comunidad (26) · exención fiscal del pago (49) · domicilio y locales cerrados en la ocupación (51, Ley 53/2002) · requisitos del art. 72 · comisión de académicos (78) · plazo de 3 meses para pagar el precio de la reversión (55.3) · fecha del Jurado como inicio del plazo de retasación (35.3).</div>
+
+<footer>
+GACE 2027 · Bloque IV · Tema 8 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 10/11/2026.<br>
+Normas: CE (arts. 33 y 149.1.18.ª) · Ley de 16 de diciembre de 1954, de Expropiación Forzosa (consolidada) · Reglamento de 26 de abril de 1957 · Real Decreto Legislativo 7/2015 · Ley 29/1998 · Ley 40/2015 · Ley 33/2003 · Ley 17/2012 · Ley 14/2000 · Ley 11/1996 · Ley 53/2002 · Ley 38/1999 · CEDH, Protocolo n.º 1 · Carta de Derechos Fundamentales de la UE, art. 17.
+</footer>
+</div>
+</body>
+</html>
