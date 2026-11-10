@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 8 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque IV · Tema 8 · La expropiación forzosa</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u":1,"t":"Según el art. 33.3 CE, nadie podrá ser privado de sus bienes y derechos sino:","o":["Por causa justificada de utilidad pública o interés social, mediante la correspondiente indemnización y de conformidad con las leyes","Por causa de interés general declarada por el Gobierno mediante real decreto, previo pago en todo caso del valor de mercado del bien y con audiencia del afectado","Por resolución judicial firme dictada en un procedimiento contradictorio","Por ley orgánica que declare la necesidad de ocupación del bien"],"c":0,"e":"Art. 33.3 CE: causa, indemnización y procedimiento legal."},
+{"u":1,"t":"La competencia del Estado sobre expropiación forzosa (art. 149.1.18.ª CE) es:","o":["Básica, con desarrollo legislativo autonómico","Exclusiva sobre la «legislación sobre expropiación forzosa», sin el adjetivo «básica»","Compartida con las Comunidades Autónomas en régimen de concurrencia","Exclusiva solo para los bienes muebles, siendo básica para los inmuebles y los derechos reales"],"c":1,"e":"El Estado regula el instituto; las CCAA pueden definir causas y ejercer la potestad."},
+{"u":1,"t":"Según el art. 1 LEF, la expropiación comprende:","o":["Solo la privación de la propiedad de bienes inmuebles","Cualquier forma de privación singular de la propiedad privada o de derechos o intereses patrimoniales legítimos, acordada imperativamente","Cualquier limitación general del derecho de propiedad establecida por ley","Las ventas forzosas reguladas por la legislación especial sobre abastecimientos, comercio exterior y divisas, además de cualquier privación singular de inmuebles"],"c":1,"e":"Art. 1.1 LEF; las ventas forzosas especiales quedan fuera (1.2)."},
+{"u":1,"t":"Las limitaciones generales del derecho de propiedad establecidas por ley:","o":["Son expropiaciones y se indemnizan siempre","Delimitan su contenido conforme a la función social y no generan derecho a indemnización","Generan indemnización solo si superan el 5 % del valor del bien","Son expropiaciones parciales sujetas a la LEF, cuyo justiprecio fija el Jurado Provincial en pieza separada para cada propietario afectado"],"c":1,"e":"Solo la privación singular es expropiación."},
+{"u":1,"t":"Según el art. 2.1 LEF, la expropiación forzosa solo podrá ser acordada por:","o":["El Estado, la Provincia o el Municipio","El Estado y las Comunidades Autónomas exclusivamente","Cualquier entidad del sector público, incluidas las sociedades mercantiles estatales","El Consejo de Ministros"],"c":0,"e":"Texto literal del art. 2.1; la potestad autonómica deriva de la CE y los estatutos."},
+{"u":1,"t":"Por causa de interés social, puede ser beneficiario de la expropiación:","o":["Solo una Administración Pública","Solo un concesionario de servicio público","Cualquier persona natural o jurídica que reúna los requisitos de la ley especial","Únicamente las entidades sin ánimo de lucro declaradas de utilidad pública por el Ministerio del Interior"],"c":2,"e":"Art. 2.3 LEF."},
+{"u":1,"t":"Según el art. 5 REF, corresponde a los beneficiarios:","o":["Declarar la utilidad pública y resolver sobre la necesidad de ocupación","Solicitar la iniciación del expediente, formular la relación de bienes y pagar o consignar el justiprecio","Presidir el Jurado Provincial de Expropiación cuando sean entidades públicas y fijar con su voto de calidad el justiprecio en caso de empate entre los vocales","Fijar ejecutoriamente el justiprecio"],"c":1,"e":"Art. 5 REF (examen 2022)."},
+{"u":1,"t":"Si la propiedad del bien expropiado es litigiosa, las diligencias se entienden con:","o":["El Abogado del Estado","El Ministerio Fiscal","El Registrador de la Propiedad","El Juez de Primera Instancia del partido judicial donde radique el bien, que nombra un defensor judicial"],"c":1,"e":"Art. 5.1 LEF (examen 2022)."},
+{"u":1,"t":"A falta de registros públicos con presunción de titularidad, la Administración considera titular a quien conste:","o":["En los registros fiscales y, en último lugar, a quien lo sea pública y notoriamente","En el padrón municipal de habitantes","En el Catastro Inmobiliario únicamente, sin otra alternativa posible ni prueba en contrario, aunque exista un titular público y notorio distinto","En el acta notarial que aporte cualquier interesado"],"c":0,"e":"Art. 3.2 LEF."},
+{"u":1,"t":"La cosa expropiada se adquiere:","o":["Con todas sus cargas, que el beneficiario debe asumir","Libre de cargas, aunque puede conservarse algún derecho real compatible si hay acuerdo","Libre de cargas solo si es un inmueble urbano","Con las cargas inscritas en el Registro de la Propiedad con anterioridad a la declaración de utilidad pública"],"c":1,"e":"Art. 8 LEF."},
+{"u":1,"t":"Para expropiar un inmueble no incluido en planes de obras ni en una ley de declaración genérica, la utilidad pública se declara:","o":["Por acuerdo del Consejo de Ministros, que reconoce en cada caso concreto la utilidad pública a propuesta del ministro competente","Por orden del ministro competente","Por ley aprobada en Cortes (art. 11 LEF)","Por resolución del Delegado del Gobierno"],"c":2,"e":"Art. 11 LEF (no art. 10 REF, como dice el temario)."},
+{"u":1,"t":"En la expropiación de bienes muebles, la utilidad pública se declara:","o":["Siempre por acuerdo del Consejo de Ministros","Por ley expresa y singular, salvo que una ley haya autorizado la expropiación de una categoría de bienes, en cuyo caso basta el Consejo de Ministros","Implícitamente en el plan de obras","Por el Delegado del Gobierno en la provincia, previo informe de la Abogacía del Estado y de la Intervención territorial, sin necesidad de ley"],"c":1,"e":"Art. 12 LEF."},
+{"u":1,"t":"Un ministerio pretende expropiar un inmueble demanial adscrito a otro departamento del Estado. ¿Qué procede?","o":["La expropiación por el procedimiento de urgencia","No cabe expropiación: la vía es la mutación demanial","La expropiación con justiprecio fijado por el Jurado","La reversión del bien al primer departamento, previo pago de la indemnización actualizada por el IPC"],"c":1,"e":"Una Administración no se expropia a sí misma (art. 71 LPAP)."},
+{"u":2,"t":"¿Qué acto inicia el expediente expropiatorio?","o":["La declaración de utilidad pública","La relación de bienes formulada por el beneficiario","El acuerdo de necesidad de ocupación","La apertura de la pieza separada de justiprecio, que se notifica individualmente a cada uno de los propietarios"],"c":2,"e":"Art. 21.1 LEF (exámenes 2019 y 2022)."},
+{"u":2,"t":"La información pública sobre la relación de bienes dura:","o":["Diez días","Quince días","Veinte días","Un mes"],"c":1,"e":"Art. 18.1 LEF."},
+{"u":2,"t":"El acuerdo de necesidad de ocupación debe dictarse en el plazo máximo de:","o":["Quince días","Veinte días","Un mes desde la publicación de la relación de bienes en el BOE y en el boletín provincial","Tres meses"],"c":1,"e":"Art. 20 LEF."},
+{"u":2,"t":"Cuando el proyecto de obras comprende la descripción material detallada de los bienes:","o":["La necesidad de ocupación se entiende implícita en su aprobación, aunque se formula la relación para determinar los interesados","Se suprimen la información pública y la relación de bienes, y el acuerdo de necesidad de ocupación se notifica solo a los titulares registrales","Se requiere declaración de urgencia del Consejo de Ministros","La necesidad de ocupación debe declararla siempre el Consejo de Ministros"],"c":0,"e":"Art. 17.2 LEF."},
+{"u":2,"t":"Mediante acuerdo del Consejo de Ministros pueden incluirse entre los bienes de necesaria ocupación:","o":["Los indispensables para previsibles ampliaciones de la obra o finalidad","Cualesquiera bienes del término municipal","Los bienes de dominio público de otras Administraciones","Los bienes muebles necesarios para el funcionamiento ordinario del servicio público una vez implantado"],"c":0,"e":"Art. 15 LEF."},
+{"u":2,"t":"Contra el acuerdo de necesidad de ocupación, según el texto de la LEF, cabe recurso de alzada:","o":["En un mes, sin efecto suspensivo","En diez días, que se resuelve en veinte días y tiene efecto suspensivo hasta la resolución expresa","En tres meses ante el Consejo de Ministros","Solo potestativo de reposición, en el plazo de un mes desde la notificación individual o la publicación"],"c":1,"e":"Art. 22 LEF."},
+{"u":2,"t":"El efecto suspensivo de la alzada contra la necesidad de ocupación:","o":["Es la regla general de la Ley 39/2015","Es una excepción expresa del art. 22.3 LEF a la regla general de no suspensión","Solo se produce si lo solicita el interesado en el escrito de recurso y lo acuerda motivadamente el órgano competente para resolver la alzada","No existe en ningún caso"],"c":1,"e":"Art. 22.3 LEF frente al art. 117 LPAC."},
+{"u":2,"t":"Si la expropiación parcial hace antieconómica la conservación del resto de la finca:","o":["El propietario puede pedir la expropiación total y la Administración decide en diez días","El propietario debe pedir la expropiación total en diez días desde la notificación","Procede siempre la expropiación total de oficio","Solo cabe una indemnización por demérito del resto, fijada por el Jurado en la pieza de justiprecio"],"c":0,"e":"Art. 23 LEF; los 10 días son de la Administración."},
+{"u":2,"t":"En la información pública de la necesidad de ocupación, pueden formular alegaciones:","o":["Solo los propietarios afectados","Cualquier persona, para rectificar errores u oponerse por razones de fondo o forma","Solo los titulares de derechos inscritos en el Registro de la Propiedad","Solo las Administraciones afectadas y los colegios profesionales con interés legítimo acreditado"],"c":1,"e":"Art. 19 LEF."},
+{"u":3,"t":"Si en el plazo de quince días no hay mutuo acuerdo sobre el justiprecio:","o":["El expediente se archiva","Se sigue el procedimiento contradictorio, sin perjuicio de que pueda alcanzarse el acuerdo en cualquier momento posterior","Fija el justiprecio el Delegado del Gobierno","Caduca la declaración de utilidad pública y hay que iniciar un nuevo expediente desde el principio, con nueva información pública y nuevo acuerdo de necesidad"],"c":1,"e":"Art. 24 LEF (examen 2024)."},
+{"u":3,"t":"El expediente de justiprecio se entiende iniciado:","o":["El día en que se publica la declaración de utilidad pública","El día siguiente a aquel en que adquiere firmeza el acuerdo de necesidad de ocupación (art. 28 REF)","El día en que el propietario presenta su hoja de aprecio","El día en que el Jurado recibe el expediente completo con las dos hojas de aprecio rechazadas y el informe de los servicios técnicos"],"c":1,"e":"Art. 28 REF (no el 25, como dice el temario)."},
+{"u":3,"t":"El propietario debe presentar su hoja de aprecio en el plazo de:","o":["Diez días","Quince días","Veinte días","Un mes desde la notificación del requerimiento de la Administración expropiante"],"c":2,"e":"Art. 29.1 LEF."},
+{"u":3,"t":"La Administración acepta o rechaza la hoja de aprecio del propietario en:","o":["Diez días","Veinte días","Un mes","Seis meses"],"c":1,"e":"Art. 30.1 LEF."},
+{"u":3,"t":"Notificada la hoja de aprecio fundada de la Administración, el propietario puede aceptarla o rechazarla en:","o":["Cinco días","Diez días","Quince días","Veinte días desde el siguiente a la notificación, con alegaciones y prueba pericial"],"c":1,"e":"Art. 30.2 LEF."},
+{"u":3,"t":"Los honorarios del perito que avala la hoja de aprecio del propietario:","o":["Corren a cargo de la Administración expropiante","Son siempre de cuenta del propietario","Se incluyen en el justiprecio","Se reparten por mitad entre las partes y el beneficiario, conforme a las tarifas oficiales del colegio profesional"],"c":1,"e":"Art. 29.2 LEF."},
+{"u":3,"t":"El Jurado Provincial de Expropiación lo preside:","o":["El Delegado del Gobierno","Un Magistrado designado por el Presidente de la Audiencia correspondiente","El Abogado del Estado","Un Notario designado por el Decano del Colegio Notarial, que decide los empates con voto de calidad"],"c":1,"e":"Art. 32.1 LEF (examen 2022)."},
+{"u":3,"t":"¿Cuál de estos NO es vocal del Jurado Provincial de Expropiación?","o":["Un Abogado del Estado","Un Notario designado por el Decano del Colegio Notarial","El Interventor territorial de la provincia","Un representante del ayuntamiento donde radique el bien"],"c":3,"e":"Art. 32.1 LEF tras la Ley 17/2012."},
+{"u":3,"t":"Sobre el plazo para que el Jurado resuelva, el texto vigente del art. 34 LEF:","o":["Fija ocho días","Fija quince días","No fija plazo: dice que decidirá ejecutoriamente; el plazo de ocho días lo suprimió la Ley 14/2000","Fija tres meses"],"c":2,"e":"Art. 34 LEF (redacción de la Ley 14/2000)."},
+{"u":3,"t":"La resolución del Jurado de Expropiación:","o":["Es recurrible en alzada ante el Ministerio de Hacienda en el plazo de un mes, y la resolución de la alzada abre la vía contencioso-administrativa","Pone fin a la vía administrativa y contra ella procede el contencioso-administrativo","Es firme y no admite recurso alguno","Requiere ratificación del Consejo de Ministros para ser ejecutiva"],"c":1,"e":"Art. 35.2 LEF."},
+{"u":3,"t":"Según la jurisprudencia, la resolución del Jurado debe ser congruente, lo que significa que:","o":["Debe coincidir con la hoja de aprecio de la Administración","No puede fijar un justiprecio inferior a la hoja de la Administración ni superior a la del expropiado","Debe fijar la media de ambas hojas de aprecio","Debe ajustarse al valor catastral del bien, incrementado en el premio de afección y en los intereses legales devengados desde la ocupación"],"c":1,"e":"Las hojas de aprecio vinculan a quien las formula."},
+{"u":3,"t":"Las tasaciones se efectúan con arreglo al valor de los bienes:","o":["Al tiempo de iniciarse el expediente de justiprecio, sin las plusvalías del proyecto ni las previsibles","En la fecha de la ocupación","En la fecha de la declaración de utilidad pública, incluidas las plusvalías que genere el proyecto de obras y las previsibles para el futuro inmediato","En la fecha del pago efectivo"],"c":0,"e":"Art. 36.1 LEF."},
+{"u":3,"t":"El premio de afección:","o":["Es el 5 % del justiprecio y se abona en todos los casos, sin necesidad de solicitarlo","Es el 10 % del justiprecio y solo para la vivienda habitual","Debe solicitarse en la hoja de aprecio","Solo procede en el procedimiento de urgencia y cuando el expropiado sea una persona física"],"c":0,"e":"Art. 47 LEF (examen 2022)."},
+{"u":3,"t":"La valoración del suelo y las construcciones en las expropiaciones se rige por:","o":["Los arts. 36 a 47 LEF exclusivamente, con aplicación de los criterios estimativos del art. 43 a cualquier clase de bien, incluidos los inmuebles","El texto refundido de la Ley de Suelo y Rehabilitación Urbana (RDLeg 7/2015)","La Ley del Catastro Inmobiliario","El Reglamento de 1957"],"c":1,"e":"Arts. 34 a 41 TRLSRU."},
+{"u":4,"t":"Determinado el justo precio, el pago debe hacerse en el plazo máximo de:","o":["Tres meses","Seis meses","Un año","Dos años desde la firmeza de la resolución del Jurado o del mutuo acuerdo"],"c":1,"e":"Art. 48.1 LEF."},
+{"u":4,"t":"Si el propietario rehúsa recibir el precio o existe litigio:","o":["Se consigna en la Caja General de Depósitos, y el expropiado puede cobrar la parte en que haya conformidad","Se suspende el expediente hasta que se resuelva el litigio","Se paga al Ministerio Fiscal, que lo custodia","Se ingresa en la cuenta de depósitos del juzgado que conozca del litigio, sin que el expropiado pueda recibir cantidad alguna hasta la sentencia firme"],"c":0,"e":"Art. 50 LEF."},
+{"u":4,"t":"El pago del justiprecio:","o":["Tributa en el IRPF como ganancia patrimonial sin excepción posible","Está exento de toda clase de gastos, impuestos y gravámenes del Estado, Provincia o Municipio (art. 49 LEF)","Está sujeto al IVA","Está sujeto al impuesto de transmisiones patrimoniales, que se liquida a cargo del beneficiario de la expropiación y se descuenta del justo precio"],"c":1,"e":"Art. 49 LEF."},
+{"u":4,"t":"Si pasan seis meses desde la iniciación legal del expediente sin fijar el justiprecio definitivo:","o":["La Administración culpable de la demora abona el interés legal del justo precio hasta su determinación","Procede la retasación del bien","Caduca el expediente expropiatorio","El expropiado puede exigir el precio de su propia hoja de aprecio sin más trámite, porque la demora equivale a la aceptación tácita de su valoración"],"c":0,"e":"Art. 56 LEF."},
+{"u":4,"t":"El justo precio fijado devenga el interés legal a favor del expropiado:","o":["Desde su fijación","Desde que transcurren los seis meses del art. 48 hasta el pago","Desde la ocupación, en todo caso","Desde la declaración de utilidad pública hasta el pago efectivo, sin excepción"],"c":1,"e":"Art. 57 LEF."},
+{"u":4,"t":"La retasación procede si, sin haberse pagado ni consignado el justo precio, transcurren:","o":["Dos años","Tres años","Cuatro años","Cinco años"],"c":2,"e":"Art. 58 LEF tras la Ley 17/2012 (el temario dice 2: error)."},
+{"u":4,"t":"Efectuado el pago del justiprecio cuando ya habían transcurrido los cuatro años del art. 58:","o":["Procede igualmente la retasación","No procede el derecho a la retasación","Procede la retasación solo si el expropiado la pide en un mes","Procede la reversión"],"c":1,"e":"Art. 58, párrafo segundo."},
+{"u":4,"t":"El término inicial para la caducidad de la valoración del art. 58 es:","o":["La fecha del acuerdo del Jurado","La fecha de la ocupación","La fecha de la declaración de utilidad pública","La fecha de la hoja de aprecio del propietario, aunque después se haya rechazado"],"c":0,"e":"Art. 35.3 LEF."},
+{"u":4,"t":"En la ocupación tras el pago, necesitan consentimiento del titular o autorización judicial:","o":["Todos los inmuebles expropiados","El domicilio y los locales cerrados sin acceso al público","Solo las fincas rústicas","Solo los bienes de valor histórico-artístico, por su especial protección"],"c":1,"e":"Art. 51 LEF (Ley 53/2002)."},
+{"u":5,"t":"La urgente ocupación se declara por:","o":["El Delegado del Gobierno","El ministro competente por razón de la materia","Acuerdo del Consejo de Ministros (o del Consejo de Gobierno autonómico)","El Jurado Provincial de Expropiación"],"c":2,"e":"Art. 52 LEF."},
+{"u":5,"t":"En el expediente que se eleva al Consejo de Ministros para declarar la urgencia debe figurar:","o":["El dictamen preceptivo del Consejo de Estado sobre la concurrencia de las circunstancias excepcionales que justifican la ocupación inmediata","La retención de crédito por el importe del justiprecio calculado conforme a la ley","La conformidad de los propietarios","El acta previa a la ocupación"],"c":1,"e":"Art. 52, párrafo primero (Ley 11/1996)."},
+{"u":5,"t":"La declaración de urgente ocupación:","o":["Exige un acuerdo posterior de necesidad de ocupación","Da por cumplido el trámite de necesidad de ocupación y da derecho a la ocupación inmediata","Sustituye a la declaración de utilidad pública","Solo puede hacerse antes de iniciar el expediente, y obliga a tramitar de nuevo la información pública sobre la relación de bienes afectados"],"c":1,"e":"Art. 52.1 LEF."},
+{"u":5,"t":"El día y hora del acta previa a la ocupación se notifica con una antelación mínima de:","o":["Cinco días","Ocho días","Quince días","Un mes, mediante publicación en el BOE y en dos diarios de la capital de la provincia"],"c":1,"e":"Art. 52.2 LEF."},
+{"u":5,"t":"Al acta previa a la ocupación asisten, por la Administración:","o":["Su representante, acompañado de un perito y del Alcalde o concejal en que delegue","Solo un notario","El Jurado Provincial","El Delegado del Gobierno y el Abogado del Estado, que levantan acta conjunta con el Registrador de la Propiedad del distrito hipotecario"],"c":0,"e":"Art. 52.3 LEF."},
+{"u":5,"t":"Efectuado el depósito previo, la ocupación debe realizarse en el plazo máximo de:","o":["Ocho días","Quince días","Un mes","Seis meses"],"c":1,"e":"Art. 52.6 LEF, sin interdictos."},
+{"u":5,"t":"Contra la fijación de los perjuicios por la rápida ocupación:","o":["Cabe alzada","No cabe recurso, pero el Jurado reconsidera la cuestión al fijar el justiprecio","Cabe contencioso directo","Cabe recurso de reposición obligatorio ante el mismo órgano en el plazo de diez días, previo a cualquier impugnación del justiprecio"],"c":1,"e":"Art. 52.5 LEF."},
+{"u":5,"t":"En la urgencia, el interés del art. 56 se computa desde:","o":["La declaración de urgencia","El día siguiente a la ocupación","El acta previa","Los seis meses posteriores a la ocupación, igual que en el procedimiento general"],"c":1,"e":"Art. 52.8 LEF."},
+{"u":5,"t":"El procedimiento de urgencia es:","o":["Un procedimiento especial del Título III","Una variante del procedimiento general (art. 52)","Un procedimiento de la Ley 39/2015","Un procedimiento de las entidades locales"],"c":1,"e":"No figura en el Título III."},
+{"u":6,"t":"NO hay derecho de reversión cuando:","o":["No se ejecuta la obra que motivó la expropiación","Existe una parte sobrante de los bienes expropiados","La afectación al fin se ha prolongado diez años desde la terminación de la obra o el establecimiento del servicio","Desaparece la afectación del bien a los cinco años de terminar la obra, sin que se haya acordado ninguna nueva afectación a otro fin de utilidad pública"],"c":2,"e":"Art. 54.2.b LEF."},
+{"u":6,"t":"Con notificación de la Administración, la reversión puede solicitarse en el plazo de:","o":["Un mes","Tres meses","Seis meses","Un año"],"c":1,"e":"Art. 54.3 LEF."},
+{"u":6,"t":"Sin notificación, la reversión puede ejercitarse si han transcurrido sin iniciarse la obra:","o":["Dos años desde la toma de posesión","Cinco años desde la toma de posesión","Diez años desde la toma de posesión","Veinte años desde la declaración de utilidad pública"],"c":1,"e":"Art. 54.3.b LEF."},
+{"u":6,"t":"La suspensión de la obra que abre la reversión debe durar más de:","o":["Seis meses","Un año","Dos años, por causa imputable a la Administración o al beneficiario, sin acto expreso de reanudación","Cuatro años"],"c":2,"e":"Art. 54.3.c LEF."},
+{"u":6,"t":"Para ejercer la reversión, el reversionista debe restituir:","o":["El valor actual de mercado del bien","La indemnización percibida actualizada por el IPC, salvo cambios sustanciales que exijan nueva valoración","La indemnización percibida más el interés legal del dinero devengado desde la toma de posesión hasta la fecha de ejercicio del derecho","Solo el premio de afección"],"c":1,"e":"Art. 55.1 y 55.2 LEF."},
+{"u":6,"t":"El derecho de reversión es oponible a terceros adquirentes que hayan inscrito:","o":["Siempre","Solo si consta en la inscripción el derecho preferente de los reversionistas","Nunca","Solo si el tercero adquirió de mala fe, conociendo la causa de la expropiación, aunque no conste nada en el Registro de la Propiedad"],"c":1,"e":"Art. 54.5 LEF."},
+{"u":6,"t":"En la expropiación de bienes de valor artístico, histórico y arqueológico, el justiprecio lo fija:","o":["El Jurado Provincial","Una comisión de tres académicos","El Ministerio de Cultura","El Consejo de Patrimonio Histórico"],"c":1,"e":"Art. 78 LEF (examen 2024)."},
+{"u":6,"t":"La sustitución de la necesidad de ocupación por la declaración del art. 72 LEF es propia de la expropiación:","o":["Por zonas o grupos de bienes","Por incumplimiento de la función social de la propiedad","Por razones de defensa nacional","Por entidades locales"],"c":1,"e":"Arts. 71 a 75 LEF (examen 2022)."},
+{"u":6,"t":"¿Cuál de estos es un procedimiento especial del Título III LEF?","o":["El procedimiento de urgencia del art. 52","La expropiación por razones de defensa nacional y seguridad del Estado","La retasación","La reversión"],"c":1,"e":"Arts. 100 a 107 LEF (examen 2019)."},
+{"u":6,"t":"El recurso contencioso contra el justiprecio debe fundarse en lesión cuando la cantidad fijada difiera de la alegada por el recurrente en más de:","o":["Un cuarto","Una quinta parte","Una sexta parte","Un décimo"],"c":2,"e":"Art. 126.2 LEF (examen 2022)."},
+{"u":6,"t":"Frente a la ocupación sin declaración de utilidad pública, necesidad de ocupación ni previo pago o depósito, el interesado puede utilizar:","o":["Solo la reclamación de responsabilidad patrimonial ante la Administración que ocupó, en el plazo de un año desde la ocupación material del bien","Los interdictos de retener y recobrar (hoy tutela sumaria de la posesión) y el recurso contra la vía de hecho","Únicamente el recurso de alzada","El recurso extraordinario de revisión"],"c":1,"e":"Art. 125 LEF y art. 30 LJCA."},
+{"u":6,"t":"Las ocupaciones temporales de terrenos (arts. 108 a 119 LEF) dan lugar a indemnización:","o":["Del valor total del terreno","De los daños y perjuicios efectivamente causados","Del 5 % del valor","Ninguna"],"c":1,"e":"Título IV LEF."},
+{"u":7,"t":"Acta previa el 2 de febrero; el enunciado no da la fecha del depósito. Según el método de la Comisión, se escribe:","o":["«Salvo mejor criterio, podríamos entender que el plazo se cumplió»","«El enunciado no precisa la fecha del depósito, por lo que suponemos que…», y después una conclusión afirmativa","Nada, porque falta el dato","«Podría entenderse que la ocupación fue tardía»"],"c":1,"e":"Suposición declarada antes de la conclusión."},
+{"u":7,"t":"Justiprecio fijado por el Jurado: 195.000 €. ¿Cuánto es el principal que corresponde al expropiado?","o":["195.000 €","204.750 €","214.500 €","199.875 €"],"c":1,"e":"195.000 + 5 % (9.750) = 204.750 € (art. 47)."},
+{"u":7,"t":"El expropiado alegó 240.000 € y el Jurado fijó 195.000 €. ¿Puede recurrir por lesión?","o":["No, la diferencia no llega a la sexta parte","Sí: la sexta parte de 240.000 € es 40.000 € y la diferencia es de 45.000 €","Solo si la diferencia supera la mitad","No, contra el Jurado solo cabe alzada"],"c":1,"e":"Art. 126.2 LEF."},
+{"u":7,"t":"Ocupación urgente el 16 de febrero de 2026. ¿Desde cuándo corre el interés del art. 56?","o":["Desde el 2 de febrero","Desde el 17 de febrero de 2026","Desde el 16 de agosto de 2026","Desde la fijación del justiprecio"],"c":1,"e":"Art. 52.8 LEF."},
+{"u":7,"t":"El justiprecio se fijó el 1 de marzo de 2022 y en noviembre de 2026 no se ha pagado ni consignado. ¿Qué se concluye?","o":["No procede nada, porque ya hay justiprecio","Procede la retasación, porque han pasado más de cuatro años sin pago ni consignación","Procede la reversión del bien","Procede solo el interés del art. 57"],"c":1,"e":"Art. 58 LEF (4 años)."},
+{"u":7,"t":"¿Qué debe dejarse escrito antes de responder a una cuestión de expropiación?","o":["El importe del depósito","La calificación: expropiante, beneficiario, causa declarada y si hay urgente ocupación","El órgano judicial competente para conocer del recurso contencioso-administrativo contra la resolución del Jurado y la cuantía del recurso","La composición del Jurado"],"c":1,"e":"«Con carácter previo, procede calificar…»."},
+{"u":7,"t":"La obra terminó hace 12 años y ahora se desafecta el bien. ¿Qué conclusión afirmativa corresponde?","o":["Procede la reversión en tres meses","No hay derecho de reversión, porque la afectación duró más de diez años","Procede la retasación","Procede la reversión si no han pasado veinte años desde la toma de posesión"],"c":1,"e":"Art. 54.2.b LEF."},
+{"u":7,"t":"¿Qué conclusión se ajusta al criterio de la Comisión?","o":["«Salvo mejor criterio fundado en Derecho, procedería la retasación»","«Podríamos entender que procede la retasación»","«Por tanto, se concluye que procede la retasación del bien conforme al artículo 58 de la LEF»","«Parece que la retasación sería posible»"],"c":2,"e":"Conclusión afirmativa con norma."}
+];
+
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Concepto y elementos",2:"Necesidad de ocupación",3:"Justiprecio y Jurado",4:"Pago y demora",5:"Urgencia",6:"Reversión, especiales y garantías",7:"Supuesto práctico"};
+const TABS={1:"Elementos",2:"Necesidad",3:"Justiprecio",4:"Pago",5:"Urgencia",6:"Reversión",7:"Supuesto"};
+const SK="gace27_biv_t08_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
