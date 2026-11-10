@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 9 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque IV · Tema 9 · El régimen patrimonial de las AAPP</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u":1,"t":"Según el art. 132.2 CE, son en todo caso bienes de dominio público estatal:","o":["La zona marítimo-terrestre, las playas, el mar territorial y los recursos naturales de la zona económica y la plataforma continental","Las aguas continentales superficiales y subterráneas, los montes catalogados de utilidad pública, las vías pecuarias y el espacio radioeléctrico","Los palacios reales y los bienes afectados al uso de la Corona","Las carreteras del Estado y los puertos de interés general"],"c":0,"e":"Art. 132.2 CE y art. 5.2 LPAP."},
+{"u":1,"t":"Según el art. 3.2 LPAP, NO forman parte del patrimonio de las Administraciones:","o":["Los derechos de arrendamiento de inmuebles que la Administración tenga concertados como arrendataria para alojar sus servicios","El dinero, los valores, los créditos y los demás recursos financieros de su hacienda","Las acciones en sociedades mercantiles estatales","Los derechos de propiedad incorporal"],"c":1,"e":"Se rigen por la Ley General Presupuestaria."},
+{"u":1,"t":"Los inmuebles de la AGE en que se alojan servicios, oficinas o dependencias de sus órganos son:","o":["Patrimoniales, salvo que el Ministro de Hacienda acuerde expresamente su afectación mediante orden publicada en el BOE","Bienes de dominio público en todo caso (art. 5.3 LPAP)","Patrimonio Nacional","Patrimoniales si se adquirieron a título oneroso"],"c":1,"e":"Art. 5.3 LPAP (examen 2019)."},
+{"u":1,"t":"¿Cuál de estos tiene en todo caso la consideración de bien patrimonial (art. 7.2 LPAP)?","o":["La plataforma continental","Un edificio que aloja una Delegación del Gobierno","Los derechos de arrendamiento","Las playas"],"c":2,"e":"Art. 7.2 LPAP (examen 2022)."},
+{"u":1,"t":"La publicidad, transparencia, concurrencia y objetividad son principios de:","o":["Los bienes demaniales","Los bienes patrimoniales (art. 8 LPAP)","El Patrimonio Nacional","Los bienes comunales"],"c":1,"e":"Art. 8.1 LPAP (examen 2019)."},
+{"u":1,"t":"La dedicación preferente al uso común frente al uso privativo es un principio de:","o":["Los bienes demaniales (art. 6)","Los bienes patrimoniales (art. 8)","La gestión de los bienes de las sociedades estatales","La cesión gratuita"],"c":0,"e":"Art. 6 LPAP."},
+{"u":1,"t":"Los bienes patrimoniales se rigen, en su régimen sustantivo y supletoriamente:","o":["Por el Derecho administrativo en todos sus aspectos, incluidos la competencia, el procedimiento y el régimen sustantivo de los contratos","Por el Derecho privado, mientras que la competencia y el procedimiento se rigen por el Derecho administrativo","Por la Ley General Presupuestaria","Por el Derecho de la Unión Europea"],"c":1,"e":"Art. 7.3 LPAP."},
+{"u":1,"t":"Los bienes patrimoniales de la Administración son inembargables cuando:","o":["Nunca lo son","Están materialmente afectados a un servicio público o función pública, entre otros supuestos del art. 30.3","Siempre, igual que los demaniales","Solo cuando son inmuebles inscritos en el Registro de la Propiedad a nombre de la Administración y figuran en el Inventario General de Bienes y Derechos"],"c":1,"e":"Art. 30.3 LPAP."},
+{"u":1,"t":"Según la LPAP, la gestión de los bienes patrimoniales debe coadyuvar en particular a la política de:","o":["Defensa","Vivienda","Empleo","Cooperación internacional"],"c":1,"e":"Art. 8.2 LPAP (examen 2022)."},
+{"u":1,"t":"La propuesta de los índices de ocupación de los edificios administrativos corresponde a:","o":["El Consejo de Ministros","La Dirección General del Patrimonio del Estado","La Junta Coordinadora de Edificios Administrativos","La Intervención General de la Administración del Estado"],"c":1,"e":"Examen 2022."},
+{"u":2,"t":"Salvo disposición legal en contrario, los bienes de la AGE se entienden adquiridos con carácter:","o":["Demanial","Patrimonial, sin perjuicio de su posterior afectación (art. 16)","Comunal o demanial según lo decida el órgano que acuerde la adquisición, hasta su inscripción definitiva en el Inventario General","Mixto, hasta su inscripción en el Inventario General"],"c":1,"e":"Art. 16 LPAP (examen 2022)."},
+{"u":2,"t":"Los inmuebles que carecen de dueño pertenecen a la AGE:","o":["Desde que se resuelve el procedimiento de investigación y se inscribe la titularidad en el Registro de la Propiedad a favor del Estado","Por ministerio de la ley, sin necesidad de acto o declaración","Previa sentencia judicial de declaración de dominio","Solo si están inscritos en el Registro de la Propiedad"],"c":1,"e":"Art. 17.2 LPAP (examen 2022)."},
+{"u":2,"t":"Si un inmueble vacante está siendo poseído por un tercero en concepto de dueño, la AGE:","o":["Toma posesión en vía administrativa","Debe ejercitar la acción que corresponda ante la jurisdicción civil","Ejerce el desahucio administrativo","Inicia la recuperación de oficio, que puede ejercerse en cualquier tiempo por tratarse de un bien adquirido por ministerio de la ley"],"c":1,"e":"Art. 17.4 LPAP."},
+{"u":2,"t":"Los saldos y depósitos abandonados corresponden a la AGE cuando no ha habido gestión del titular durante:","o":["Diez años","Quince años","Veinte años","Treinta años"],"c":2,"e":"Art. 18.1 LPAP."},
+{"u":2,"t":"La aceptación de herencias por la Administración se entiende hecha:","o":["Pura y simplemente","Siempre a beneficio de inventario","A beneficio de inventario solo si hay deudas conocidas","Previa autorización del Consejo de Ministros en todo caso"],"c":1,"e":"Art. 20.1 LPAP."},
+{"u":2,"t":"¿Pueden las Administraciones adquirir bienes por prescripción?","o":["No, nunca","Sí, conforme al Código Civil y a las leyes especiales","Solo los bienes muebles","Solo si el bien es de otra Administración"],"c":1,"e":"Art. 21 LPAP (examen 2022)."},
+{"u":2,"t":"Los bienes adquiridos por expropiación forzosa:","o":["Son patrimoniales hasta que el ministro de Hacienda los afecte expresamente al fin que motivó la expropiación mediante orden ministerial","Se entienden afectados al fin determinante de la declaración de utilidad pública","Pasan al Patrimonio Nacional","Se adscriben automáticamente a un organismo público"],"c":1,"e":"Art. 66.2.c LPAP."},
+{"u":3,"t":"El procedimiento de investigación debe resolverse en el plazo de:","o":["Seis meses","Un año","Dos años desde la publicación del acuerdo de incoación","Dieciocho meses"],"c":2,"e":"Art. 47.e LPAP."},
+{"u":3,"t":"El premio a quien denuncia la existencia de bienes presumiblemente públicos es del:","o":["5 % del valor","10 % del valor, devengado al venderse el bien","15 % del valor","20 % del valor"],"c":1,"e":"Art. 48 LPAP."},
+{"u":3,"t":"El plazo máximo para resolver el procedimiento de deslinde es de:","o":["Seis meses","Un año","Dieciocho meses desde el acuerdo de iniciación","Dos años"],"c":2,"e":"Art. 52.e LPAP."},
+{"u":3,"t":"Mientras se tramita el deslinde administrativo:","o":["Puede instarse un procedimiento judicial con igual pretensión","No puede instarse un procedimiento judicial con igual pretensión","Se suspenden todas las inscripciones registrales de la finca y de las colindantes hasta la resolución firme del procedimiento","Se suspende la posesión del colindante"],"c":1,"e":"Art. 50.2 LPAP."},
+{"u":3,"t":"La recuperación de oficio de un bien demanial puede ejercerse:","o":["En el plazo de un año desde la usurpación","En cualquier tiempo","En el plazo de cuatro años","Solo previa sentencia judicial"],"c":1,"e":"Art. 55.2 LPAP."},
+{"u":3,"t":"Para recuperar en vía administrativa un bien patrimonial usurpado se requiere que:","o":["La iniciación del procedimiento se notifique antes de que transcurra un año desde el día siguiente a la usurpación","La resolución que ponga fin al procedimiento se dicte y notifique en el plazo de un año desde que la Administración tenga conocimiento de la usurpación","El usurpador no haya inscrito su título","Lo autorice el Consejo de Ministros"],"c":0,"e":"Art. 55.3 LPAP."},
+{"u":3,"t":"En la recuperación posesoria, ante la resistencia al desalojo, cabe imponer multas coercitivas de hasta:","o":["El 1 % del valor del bien","El 5 % del valor de los bienes ocupados, reiteradas cada ocho días","El 10 % del valor","3.000 euros por cada día de ocupación, con un máximo del valor total del bien, sin perjuicio de la intervención de las Fuerzas y Cuerpos de Seguridad"],"c":1,"e":"Art. 56.b LPAP."},
+{"u":3,"t":"El desahucio administrativo procede respecto de:","o":["Bienes patrimoniales arrendados","Bienes demaniales cuando decae el título que legitimaba su ocupación por terceros","Cualquier bien público, demanial o patrimonial, usurpado sin título, siempre que no haya transcurrido el plazo de un año desde la ocupación","Bienes del Patrimonio Nacional exclusivamente"],"c":1,"e":"Art. 58 LPAP."},
+{"u":3,"t":"Las entidades públicas empresariales pueden ejercer las potestades de defensa:","o":["Sobre todos sus bienes","Solo sobre bienes demaniales","Solo sobre bienes patrimoniales","Nunca"],"c":1,"e":"Art. 41.3 LPAP."},
+{"u":4,"t":"Salvo que derive de una norma con rango de ley, la afectación debe hacerse:","o":["Por acto expreso del órgano competente","Siempre de forma tácita","Por real decreto","Por su inscripción en el Registro de la Propiedad y en el Inventario General, que surte efectos constitutivos de la afectación"],"c":0,"e":"Art. 66.1 LPAP."},
+{"u":4,"t":"Según el art. 66.2.a LPAP, la utilización pública, notoria y continuada de un bien para un servicio público produce la afectación:","o":["Cuando dura un año","Cuando dura diez años","Sin que la ley fije un plazo mínimo","Solo si la acuerda el Consejo de Ministros"],"c":2,"e":"El «un año» del temario no está en la ley."},
+{"u":4,"t":"La afectación de bienes del Patrimonio del Estado a los departamentos ministeriales se hace por:","o":["Real decreto","Orden del ministro de Hacienda","Acuerdo del Consejo de Ministros","Resolución del subsecretario del departamento"],"c":1,"e":"Examen 2022."},
+{"u":4,"t":"La desafectación de bienes demaniales:","o":["Puede producirse tácitamente cuando el bien deja de utilizarse para el uso o servicio público durante un periodo prolongado","Debe realizarse siempre de forma expresa, salvo los supuestos legales","Solo puede acordarla una ley","No existe en el dominio público estatal"],"c":1,"e":"Art. 69.2 LPAP."},
+{"u":4,"t":"La mutación demanial:","o":["Convierte el bien en patrimonial","Es una desafectación con simultánea afectación a otro uso o servicio público; el bien sigue siendo demanial","Transfiere la titularidad del bien a otra Administración Pública, que lo destina a un uso o servicio público de su competencia","Exige ley de Cortes"],"c":1,"e":"Art. 71 LPAP."},
+{"u":4,"t":"La adscripción de bienes de la AGE a un organismo público:","o":["Transfiere la titularidad del bien al organismo público, que lo incorpora a su propio patrimonio para destinarlo a sus fines","Lleva implícita la afectación y no altera la titularidad","Convierte el bien en patrimonial del organismo","La acuerda el Consejo de Ministros"],"c":1,"e":"Arts. 73 y 74 LPAP."},
+{"u":4,"t":"La mutación demanial a favor de otra Administración (art. 71.4):","o":["Transfiere la propiedad del bien a la Administración beneficiaria, que lo inscribe a su nombre en el Registro de la Propiedad","No altera la titularidad ni el carácter demanial del bien","Convierte el bien en patrimonial","Solo cabe a favor de entidades locales"],"c":1,"e":"Art. 71.4 LPAP."},
+{"u":4,"t":"El dominio público natural está formado por:","o":["Bienes concretos que adquieren la condición demanial por un acto expreso de afectación, como las carreteras o los edificios administrativos","Categorías enteras de bienes declaradas demaniales por ley, como costas, aguas o minas","Los bienes del Patrimonio Nacional","Los bienes comunales"],"c":1,"e":"Frente al artificial (carreteras, edificios)."},
+{"u":5,"t":"El aprovechamiento especial del dominio público con instalaciones desmontables durante más de cuatro años requiere:","o":["Autorización","Concesión","Licencia municipal","Ningún título"],"c":1,"e":"Art. 86.2 LPAP (examen 2019)."},
+{"u":5,"t":"El uso privativo con obras o instalaciones fijas requiere:","o":["Autorización de hasta cuatro años","Concesión administrativa","Contrato de arrendamiento","Declaración responsable"],"c":1,"e":"Art. 86.3 LPAP."},
+{"u":5,"t":"La duración máxima de las autorizaciones demaniales, incluidas las prórrogas, es de:","o":["Dos años","Cuatro años","Diez años","Setenta y cinco años"],"c":1,"e":"Art. 92.3 LPAP."},
+{"u":5,"t":"La duración máxima de las concesiones demaniales, incluidas las prórrogas, salvo norma especial, es de:","o":["Cincuenta años","Setenta y cinco años","Noventa y nueve años","Cuarenta años"],"c":1,"e":"Art. 93.3 LPAP (examen 2022)."},
+{"u":5,"t":"Las autorizaciones demaniales pueden revocarse por razones de interés público:","o":["Con indemnización plena","Sin generar derecho a indemnización","Solo previo informe del Consejo de Estado","Solo al vencer su plazo"],"c":1,"e":"Art. 92.4 LPAP."},
+{"u":5,"t":"Si el número de autorizaciones está limitado y no hay que valorar condiciones especiales de los solicitantes, se otorgan:","o":["Por orden de presentación","Mediante sorteo","Por subasta","Directamente al primero que lo pida"],"c":1,"e":"Art. 92.1 LPAP."},
+{"u":5,"t":"El derecho real del concesionario sobre sus obras fijas puede hipotecarse:","o":["Libremente","Solo para garantizar préstamos destinados a financiar esas obras, con autorización previa","Nunca, porque los bienes de dominio público son inembargables y su régimen se extiende a las obras construidas sobre ellos","Solo a favor de la Administración"],"c":1,"e":"Art. 98.2 LPAP."},
+{"u":5,"t":"Al extinguirse la concesión, las obras e instalaciones fijas:","o":["Pasan siempre a la Administración concedente previa indemnización del valor de mercado que tengan en el momento de la extinción","Se demuelen por el titular, salvo que se decida mantenerlas, en cuyo caso revierten gratis y libres de cargas","Quedan en propiedad del concesionario","Se subastan"],"c":1,"e":"Art. 101 LPAP."},
+{"u":5,"t":"El otorgamiento de concesiones demaniales se efectúa como regla:","o":["Directamente","En régimen de concurrencia","Por sorteo","Por adjudicación del Consejo de Ministros"],"c":1,"e":"Art. 93.1 LPAP."},
+{"u":6,"t":"La enajenación de un inmueble de la AGE tasado en más de 20 millones de euros requiere:","o":["Ley de Cortes","Autorización del Consejo de Ministros, a propuesta del ministro de Hacienda","Informe del Consejo de Estado","Solo resolución del ministro de Hacienda"],"c":1,"e":"Art. 135.3 LPAP."},
+{"u":6,"t":"Las formas de enajenación de inmuebles son:","o":["Solo la subasta","Subasta, concurso o adjudicación directa","Concurso o negociado","Solo la adjudicación directa con publicidad"],"c":1,"e":"Art. 137.1 LPAP."},
+{"u":6,"t":"La permuta de bienes del Patrimonio del Estado cabe si la diferencia de valor no supera:","o":["El 25 %","El 50 % del de mayor valor","El 75 %","El 10 %"],"c":1,"e":"Art. 153 LPAP; si la supera, enajenación con pago en especie."},
+{"u":6,"t":"La cesión gratuita de bienes patrimoniales de la AGE puede hacerse a favor de:","o":["Cualquier persona física","Comunidades autónomas, entidades locales, fundaciones públicas o asociaciones declaradas de utilidad pública","Solo entidades locales","Sociedades mercantiles privadas que se comprometan a destinar el bien a fines de interés social durante al menos treinta años"],"c":1,"e":"Art. 145.1 LPAP."},
+{"u":6,"t":"La competencia para arrendar inmuebles que precise la AGE corresponde a:","o":["Cada ministerio","El ministro de Hacienda","El Consejo de Ministros","La Junta Coordinadora de Edificios Administrativos"],"c":1,"e":"Art. 122.1 LPAP."},
+{"u":6,"t":"Son bienes del Patrimonio Nacional:","o":["Los de titularidad personal del Rey afectados al uso de la Corona y a la alta representación del Estado que la Constitución le atribuye","Los de titularidad del Estado afectados al uso y servicio del Rey y la Familia Real para la alta representación","Los de titularidad de la Casa Real como persona jurídica","Todos los bienes de valor histórico del Estado"],"c":1,"e":"Art. 2 Ley 23/1982."},
+{"u":6,"t":"¿Cuál NO forma parte del Patrimonio Nacional?","o":["El Palacio de la Almudaina","El Palacio de la Zarzuela","La Alhambra y el Generalife","El Palacio Real de Aranjuez"],"c":2,"e":"Exámenes 2022 y 2024."},
+{"u":6,"t":"El Presidente del Consejo de Administración del Patrimonio Nacional se nombra:","o":["Por el Rey libremente","Por real decreto, previa deliberación del Consejo de Ministros, a propuesta del Presidente del Gobierno","Por orden del Ministro de la Presidencia","Por elección del propio Consejo"],"c":1,"e":"Art. 8 Ley 23/1982 (examen 2019)."},
+{"u":6,"t":"Sobre la disponibilidad de los bienes del Patrimonio Nacional, es correcto que:","o":["Pueden enajenarse por ley de Cortes cuando dejen de cumplir sus finalidades primordiales, previo informe del Consejo de Administración","Son inalienables; cabe su desafectación por el Gobierno, nunca de los de valor histórico-artístico","Pueden venderse por acuerdo del Consejo de Administración","Son embargables por deudas del Estado"],"c":1,"e":"Arts. 6 y 8.2.k Ley 23/1982."},
+{"u":6,"t":"Los bienes comunales:","o":["Son patrimoniales de los municipios","Son demaniales, inalienables, imprescriptibles, inembargables y no sujetos a tributo","Pertenecen a las agrupaciones vecinales","Pueden pertenecer a las Comunidades Autónomas, a las provincias y a los municipios, según la legislación autonómica de régimen local"],"c":1,"e":"Arts. 79 y 80 LRBRL."},
+{"u":6,"t":"Los montes vecinales en mano común:","o":["Son bienes comunales de los municipios cuyo aprovechamiento corresponde al común de los vecinos por costumbre inmemorial","Son de naturaleza privada y su titular es la agrupación vecinal","Son dominio público estatal","Son bienes patrimoniales locales"],"c":1,"e":"Ley 55/1980."},
+{"u":6,"t":"Los comunales no aprovechados como tales durante más de diez años pueden desafectarse por:","o":["El Alcalde","El Pleno por mayoría absoluta, previa información pública","La Comunidad Autónoma","El Pleno por mayoría simple"],"c":1,"e":"Art. 47.2 LRBRL y art. 100 RB."},
+{"u":7,"t":"Antes de responder una cuestión sobre un bien público en el supuesto, lo primero que se escribe es:","o":["El órgano judicial competente","La calificación del bien: de quién es y si es demanial o patrimonial","El valor de tasación","La composición del Consejo de Ministros"],"c":1,"e":"«Con carácter previo, procede calificar el bien»."},
+{"u":7,"t":"El enunciado no indica si el solar ocupado está afectado a un servicio. Según el método de la Comisión, se escribe:","o":["«Salvo mejor criterio, podríamos entender que es patrimonial»","«El enunciado no precisa…, por lo que suponemos que no está afectado, dado que…», y después una conclusión afirmativa","Nada: sin ese dato no puede calificarse el bien y la cuestión debe quedar sin respuesta para no incurrir en un error de fondo","«Podría entenderse que es demanial»"],"c":1,"e":"Suposición declarada y justificada."},
+{"u":7,"t":"Ocupación de un solar patrimonial desde el 15/01/2025; la Administración actúa el 01/03/2026. ¿Qué se concluye?","o":["Cabe la recuperación de oficio en cualquier tiempo, porque todos los bienes del Estado gozan de la misma protección posesoria","No cabe la recuperación en vía administrativa: debe acudirse a la jurisdicción civil","Procede el desahucio administrativo","Procede la investigación"],"c":1,"e":"Art. 55.3 LPAP: más de un año."},
+{"u":7,"t":"Un particular pide instalar un quiosco desmontable en dominio público estatal durante seis años. ¿Qué título necesita?","o":["Autorización, porque es desmontable","Concesión demanial en régimen de concurrencia, porque supera cuatro años","Licencia de obras","Contrato de arrendamiento"],"c":1,"e":"Arts. 86.2 y 93 LPAP."},
+{"u":7,"t":"Un ministerio pretende «expropiar» un edificio de otro ministerio. ¿Qué conclusión corresponde?","o":["Procede la expropiación por urgencia","No procede la expropiación: la vía es la mutación demanial","Procede la permuta","Procede la cesión gratuita"],"c":1,"e":"Una Administración no se expropia a sí misma."},
+{"u":7,"t":"Permuta de un inmueble de 1.000.000 € por otro de 400.000 €. ¿Qué se concluye?","o":["Cabe la permuta, la diferencia es del 40 %","No cabe como permuta: la diferencia es del 60 %, y se tramita como enajenación con pago parcial en especie","Requiere ley","Es nula de pleno derecho"],"c":1,"e":"Art. 153 LPAP."},
+{"u":7,"t":"¿Qué conclusión se ajusta al criterio de la Comisión?","o":["«Salvo mejor criterio fundado en Derecho, la Administración no podría recuperarlo»","«Podríamos entender que debe acudirse a la vía civil»","«Por tanto, se concluye que la Administración debe ejercitar la acción ante la jurisdicción civil»","«Parece que la recuperación no sería posible»"],"c":2,"e":"Conclusión afirmativa."}
+];
+
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Marco y clasificación",2:"Adquisición",3:"Potestades de defensa",4:"Dinámica del dominio público",5:"Utilización del dominio público",6:"Patrimoniales, Patrimonio Nacional y comunales",7:"Supuesto práctico"};
+const TABS={1:"Clasificación",2:"Adquisición",3:"Potestades",4:"Afectación",5:"Uso",6:"Gestión y otros",7:"Supuesto"};
+const SK="gace27_biv_t09_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
