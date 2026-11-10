@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 9 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque IV · Tema 9 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "Art. 132 CE: los tres apartados", "b": "1) Ley del dominio público y comunales: inalienabilidad, imprescriptibilidad, inembargabilidad y desafectación · 2) dominio público estatal en todo caso: zona marítimo-terrestre, playas, mar territorial, recursos de la zona económica y plataforma continental · 3) Patrimonio del Estado y Patrimonio Nacional."}, {"u": 1, "f": "Normas del tema", "b": "Ley 33/2003 (LPAP) y Reglamento General (RD 1373/2009) · locales: LRBRL, TRRL (RDLeg 781/1986) y Reglamento de Bienes (RD 1372/1986) · Patrimonio Nacional: Ley 23/1982 y RD 496/1987 · montes vecinales: Ley 55/1980."}, {"u": 1, "f": "Qué no es patrimonio (art. 3.2)", "b": "El dinero, los valores, los créditos y demás recursos financieros de la hacienda (LGP) y la tesorería de las EPE dependientes de CCAA o corporaciones locales."}, {"u": 2, "f": "Demanial frente a patrimonial", "b": "Demanial (5): titularidad pública + afectación a uso general o servicio público, o declarado por ley. Patrimonial (7): por exclusión. Demaniales: inalienables, imprescriptibles, inembargables (30.1). Patrimoniales: enajenables y prescriptibles."}, {"u": 2, "f": "Demaniales en todo caso", "b": "Los del art. 132.2 CE, incluida la plataforma continental (5.2) · inmuebles de la AGE y sus organismos donde se alojan servicios, oficinas o dependencias de sus órganos o de los constitucionales (5.3)."}, {"u": 2, "f": "Patrimoniales en todo caso (7.2)", "b": "Derechos de arrendamiento · acciones y participaciones en sociedades y sus obligaciones · futuros y opciones sobre ellas · propiedad incorporal · derechos derivados de bienes patrimoniales."}, {"u": 2, "f": "Principios de los demaniales (art. 6)", "b": "Inalienabilidad, inembargabilidad, imprescriptibilidad · adecuación y suficiencia · aplicación efectiva · dedicación preferente al uso común · ejercicio diligente de prerrogativas · inventarios · cooperación."}, {"u": 2, "f": "Principios de los patrimoniales (art. 8)", "b": "Eficiencia y economía · eficacia y rentabilidad · publicidad, transparencia, concurrencia y objetividad · inventarios · colaboración · coadyuvar a las políticas públicas, en particular la de vivienda (8.2)."}, {"u": 2, "f": "Inembargabilidad de patrimoniales (30.3)", "b": "Si están materialmente afectados a un servicio o función pública · si sus rendimientos o el producto de su venta están afectados por ley a fines · si son acciones de sociedades estatales que ejecutan políticas públicas o prestan SIEG."}, {"u": 2, "f": "Régimen supletorio (5.4 y 7.3)", "b": "Demaniales: leyes especiales → LPAP → Derecho administrativo → Derecho privado. Patrimoniales: LPAP → Derecho administrativo en competencia y procedimiento → Derecho privado en lo sustantivo."}, {"u": 3, "f": "Órganos del Patrimonio del Estado", "b": "Consejo de Ministros (directrices, operaciones relevantes) · Ministerio de Hacienda y Dirección General del Patrimonio del Estado (gestión, defensa, Inventario General, índices de ocupación) · departamentos y organismos (bienes afectados o adscritos) · Junta Coordinadora de Edificios Administrativos."}, {"u": 4, "f": "Regla del art. 16", "b": "Lo adquirido por la AGE es patrimonial salvo disposición legal en contrario; el dominio público nace con la afectación. Excepción: lo expropiado se entiende afectado al fin (66.2.c)."}, {"u": 4, "f": "Inmuebles vacantes (art. 17)", "b": "De la AGE por ministerio de la ley, sin acto ni declaración · sin obligaciones tributarias ni responsabilidades hasta su incorporación efectiva · posesión administrativa si nadie los posee como dueño · si hay poseedor en concepto de dueño: jurisdicción civil."}, {"u": 4, "f": "Saldos y depósitos abandonados (art. 18)", "b": "Dinero, valores y saldos en entidades financieras o en la Caja General de Depósitos sin gestión del titular durante 20 años → AGE. El efectivo financia programas para personas con discapacidad y accesibilidad."}, {"u": 4, "f": "Herencias, prescripción y ocupación", "b": "Aceptación de herencias siempre a beneficio de inventario (20.1); acepta el ministro de Hacienda · sucesión abintestato: arts. 956-958 CC · las Administraciones sí adquieren por prescripción (21) y los muebles por ocupación (22)."}, {"u": 5, "f": "Las cuatro potestades (art. 41)", "b": "Investigación · deslinde · recuperación de oficio · desahucio administrativo. Las EPE solo sobre demaniales (41.3). Las cuestiones civiles, a la jurisdicción civil (41.2)."}, {"u": 5, "f": "Investigación (arts. 45-49)", "b": "De oficio o por denuncia · publicación en el BOE y en el ayuntamiento · 2 años para resolver desde la publicación o archivo (47.e) · premio del 10 % al denunciante, cobrado al venderse el bien (48)."}, {"u": 5, "f": "Deslinde (arts. 50-54)", "b": "Límites imprecisos o indicios de usurpación · durante su tramitación no cabe proceso judicial igual · nota al margen de la inscripción · informe de la Abogacía del Estado · 18 meses o caducidad (52.e) · título para inmatricular."}, {"u": 5, "f": "Recuperación de oficio (55-57)", "b": "Demaniales: en cualquier tiempo. Patrimoniales: iniciación notificada antes de 1 año desde el día siguiente a la usurpación; después, jurisdicción civil. Desalojo en ≤ 8 días; auxilio policial o multas coercitivas de hasta el 5 % cada 8 días."}, {"u": 5, "f": "Desahucio administrativo (58-60)", "b": "Solo demaniales, cuando decae el título, las condiciones o las circunstancias de la ocupación. Exige previa declaración de extinción o caducidad, con audiencia; desalojo en ≤ 8 días."}, {"u": 6, "f": "Afectación (65-66)", "b": "Vincula el bien a uso general o servicio público y lo integra en el dominio público, sin cambiar la titularidad. Salvo que derive de ley, acto expreso. A los ministerios: orden del ministro de Hacienda."}, {"u": 6, "f": "Afectaciones implícitas (66.2)", "b": "a) uso público, notorio y continuado (sin plazo legal) · b) usucapión vinculada al uso o servicio · c) expropiación · d) planes o proyectos aprobados por el Consejo de Ministros · e) muebles para los servicios o la decoración · y la adscripción (73)."}, {"u": 6, "f": "Desafectación (69-70)", "b": "Demanial → patrimonial. Siempre expresa salvo los casos legales: no se presume por desuso. En la AGE, el ministro de Hacienda; en organismos, el ministro del que dependen."}, {"u": 6, "f": "Mutación demanial (71)", "b": "Desafectación con afectación simultánea a otro uso o servicio de la AGE: el bien sigue siendo demanial. Expresa salvo reestructuraciones. Cabe entre Administraciones (71.4) sin cambiar titularidad ni carácter demanial."}, {"u": 6, "f": "Adscripción (73-74)", "b": "Bienes patrimoniales de la AGE vinculados a un organismo público · la acuerda el ministro de Hacienda, con acta · lleva implícita la afectación · no altera la titularidad."}, {"u": 6, "f": "Natural frente a artificial", "b": "Natural: categorías enteras por ley (costas, aguas, minas, espacio radioeléctrico). Artificial: bienes concretos por acto de afectación (carreteras, edificios)."}, {"u": 7, "f": "Los tres usos y su título (85-86)", "b": "Común: libre · aprovechamiento especial: autorización, o concesión si > 4 años · privativo con desmontables: autorización, o concesión si > 4 años · privativo con obras o instalaciones fijas: siempre concesión."}, {"u": 7, "f": "Autorizaciones (art. 92)", "b": "Directas, o en concurrencia o sorteo si su número es limitado · no transmisibles si son personales o limitadas · máximo 4 años con prórrogas · revocables por interés público sin indemnización · gratuitas, con contraprestación o con tasa."}, {"u": 7, "f": "Concesiones (arts. 93-104)", "b": "En concurrencia (directas: 137.4, excepcionales o por ley) · documento administrativo inscribible · máximo 75 años con prórrogas · derecho real sobre obras fijas, transmisible con conformidad e hipotecable solo para financiarlas."}, {"u": 7, "f": "Extinción de concesiones (100-101)", "b": "Muerte o extinción · transmisión sin autorización · plazo · rescate con indemnización · mutuo acuerdo · impago del canon · desaparición del bien · desafectación. Obras: se demuelen o, si se mantienen, revierten gratis y libres de cargas."}, {"u": 8, "f": "Adquisición y arrendamiento", "b": "Adquisición onerosa de inmuebles: ministro de Hacienda; concurso público o directa (urgencia, mercado, idoneidad) · arrendamiento: ministro de Hacienda, comprobando antes que no hay inmuebles propios adecuados."}, {"u": 8, "f": "Enajenación de inmuebles (135-142)", "b": "Previa declaración de alienabilidad, depuración y tasación · subasta, concurso o adjudicación directa (137) · ministro de Hacienda · autorización del Consejo de Ministros si la tasación supera 20 millones (135.3)."}, {"u": 8, "f": "Permuta y cesión gratuita", "b": "Permuta (153): diferencia ≤ 50 % del de mayor valor; si no, enajenación con pago en especie. Cesión (145): a CCAA, EELL, fundaciones públicas, asociaciones de utilidad pública (y Estados en misiones de paz); si no se destina al fin, revierte."}, {"u": 9, "f": "Patrimonio Nacional: concepto y régimen", "b": "Bienes del Estado (no del Rey) afectados al uso y servicio del Rey y la Familia Real para la alta representación (art. 2) · fines culturales, científicos y docentes si es compatible · inalienables, imprescriptibles, inembargables (art. 6) · inventario separado."}, {"u": 9, "f": "Bienes del Patrimonio Nacional (art. 4)", "b": "Palacio Real y Campo del Moro · Aranjuez y Casita del Labrador · Palacio Real de El Escorial y Casitas · La Granja y Riofrío · El Pardo, Zarzuela y La Quinta · Almudaina (Palma) · muebles en los palacios. No: Alhambra, Almudena, Prado."}, {"u": 9, "f": "Reales Patronatos (art. 5)", "b": "Encarnación · Buen Suceso · Descalzas Reales · Atocha · Santa Isabel · Loreto · Monasterio de El Escorial · Huelgas (Burgos) · Hospital del Rey · Santa Clara (Tordesillas) · San Pascual (Aranjuez) · Doncellas Nobles (Toledo)."}, {"u": 9, "f": "Consejo de Administración (art. 8)", "b": "Presidente, Gerente y hasta 13 vocales de reconocido prestigio · nombrados por real decreto, previa deliberación del Consejo de Ministros, a propuesta del Presidente del Gobierno · Presidente y Gerente funcionarios A1 · propone afectaciones y desafectaciones (nunca de bienes histórico-artísticos)."}, {"u": 10, "f": "Bienes comunales", "b": "Demaniales cuyo aprovechamiento corresponde al común de los vecinos (79.3 LRBRL) · solo de municipios y entidades locales menores · inalienables, imprescriptibles, inembargables y sin tributos (80)."}, {"u": 10, "f": "Aprovechamiento y desafectación de comunales", "b": "1) Colectivo · 2) costumbre u ordenanzas: lotes según cargas familiares y situación económica · 3) subasta con preferencia vecinal. Más de 10 años sin aprovechamiento → el Pleno puede desafectarlos por mayoría absoluta, previa información pública."}, {"u": 10, "f": "Montes vecinales en mano común", "b": "No son comunales: titular la agrupación vecinal, naturaleza privada; indivisibles, inalienables e imprescriptibles (Ley 55/1980)."}, {"u": 11, "f": "Introducción de patrimonio: las cuatro piezas", "b": "Art. 132 CE · Ley 33/2003, del Patrimonio de las Administraciones Públicas (en adelante, LPAP) · Reglamento General (RD 1373/2009) · distinción entre demaniales (art. 5) y patrimoniales (art. 7)."}, {"u": 11, "f": "Calificación previa del Tema 9", "b": "«Con carácter previo, procede calificar el bien»: de qué Administración es · si está afectado (demanial, art. 5) o no (patrimonial, art. 7) · de ahí: disponibilidad (30), potestad (41) y título de uso (86)."}, {"u": 11, "f": "Mini-supuesto Kappa (cifras)", "b": "Ocupación desde 15/01/2025 · actuación el 01/03/2026 → más de 1 año → patrimonial: jurisdicción civil (55.3) · quiosco desmontable 6 años > 4 → concesión en concurrencia (86.2 y 93)."}, {"u": 11, "f": "Trampa: bien de la propia Administración", "b": "No se expropia a sí misma: mutación demanial (71) o adscripción (73). Si se quiere vender un demanial, primero desafectación expresa (69-70)."}, {"u": 11, "f": "Dato que falta en el enunciado", "b": "«El enunciado no precisa…, por lo que suponemos que…» (con su justificación, por ejemplo el art. 16) y después «Por tanto, se concluye que…». Nunca un condicional dubitativo ni coletillas de cierre."}];
+const UNAMES={"1": "Marco y concepto", "2": "Clasificación", "3": "Organización", "4": "Adquisición", "5": "Potestades", "6": "Dinámica", "7": "Utilización", "8": "Patrimoniales", "9": "Patrimonio Nacional", "10": "Comunales", "11": "Supuesto"};
+const SK="gace27_biv_t09_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
