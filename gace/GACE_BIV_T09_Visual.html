@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BIV · Tema 9 — El régimen patrimonial de las Administraciones Públicas (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tablewrap table{break-inside:auto}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque IV · Derecho Administrativo · Tema 9</small>
+    <h1>El régimen patrimonial de las Administraciones Públicas. El dominio público. Los bienes patrimoniales del Estado. El Patrimonio Nacional. Los bienes comunales</h1>
+    <p>Versión fusionada: el Tema 9 del Bloque IV del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas contra el texto consolidado del BOE y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 10/11/2026 · Ley 33/2003 consolidada a 07/10/2026 (solo cambia la DA 20.ª) · Ley 23/1982 consolidada a 20/10/2022</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">Marco, concepto y clasificación de los bienes</a></li>
+    <li><a href="#s2">El Patrimonio del Estado y su organización</a></li>
+    <li><a href="#s3">Adquisición de bienes y derechos</a></li>
+    <li><a href="#s4">Protección y defensa: las potestades</a></li>
+    <li><a href="#s5">El dominio público: concepto y dinámica</a></li>
+    <li><a href="#s6">Utilización del dominio público</a></li>
+    <li><a href="#s7">Los bienes patrimoniales del Estado: gestión</a></li>
+    <li><a href="#s8">El Patrimonio Nacional</a></li>
+    <li><a href="#s9">Los bienes comunales</a></li>
+    <li><a href="#s10">Lo que preguntan y trampas</a></li>
+    <li><a href="#s11">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s12">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. Todo el tema gira sobre un eje: <strong>demanial o patrimonial</strong>. Cada regla (enajenar, embargar, recuperar, usar) cambia según de qué lado esté el bien.</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Repaso en audio. Al terminar, recita sin mirar los números del <a href="#s10">apartado 10</a>: 20 años, 2 años, 10 %, 18 meses, 1 año, 4 años, 75 años, 20 millones y 50 %.</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s11">apartado 11</a> tapando la columna derecha. En el supuesto, la pregunta casi siempre empieza por calificar el bien: de eso depende todo lo demás.</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> Marco, concepto y clasificación de los bienes</h2>
+<h3>1.1 El art. 132 CE: los tres apartados</h3>
+<div class="box clave"><span class="box-h">Art. 132 CE</span>
+<strong>132.1</strong>: la ley regulará el régimen jurídico de los bienes de dominio público y de los <strong>comunales</strong>, «inspirándose en los principios de <strong>inalienabilidad, imprescriptibilidad e inembargabilidad</strong>, así como su desafectación».<br>
+<strong>132.2</strong>: son bienes de dominio público estatal los que determine la ley y, <strong>en todo caso</strong>, la <strong>zona marítimo-terrestre</strong>, las <strong>playas</strong>, el <strong>mar territorial</strong> y los <strong>recursos naturales de la zona económica y la plataforma continental</strong>. Es un núcleo que el legislador no puede tocar.<br>
+<strong>132.3</strong>: por ley se regularán el <strong>Patrimonio del Estado</strong> y el <strong>Patrimonio Nacional</strong>, su administración, defensa y conservación.</div>
+<p>La norma de cabecera es la <strong>Ley 33/2003, de 3 de noviembre, del Patrimonio de las Administraciones Públicas</strong> (LPAP), desarrollada por el <strong>Real Decreto 1373/2009</strong> (Reglamento General). Solo una parte es básica o de aplicación general (disposición final segunda); el resto rige para la AGE y sus organismos. Las entidades locales se rigen además por la <strong>Ley 7/1985</strong> (LRBRL) y el <strong>Reglamento de Bienes de las Entidades Locales</strong> (Real Decreto 1372/1986). Y hay leyes especiales para el dominio público natural: costas, aguas, montes, minas, carreteras, puertos.</p>
+<h3>1.2 Concepto de patrimonio (art. 3 LPAP)</h3>
+<p>Es el conjunto de <strong>bienes y derechos</strong> de las Administraciones, cualquiera que sea su naturaleza y el título de adquisición o atribución.</p>
+<div class="box trampa"><span class="box-h">Trampa: lo que NO es patrimonio (art. 3.2)</span>
+El <strong>dinero, los valores, los créditos y los demás recursos financieros</strong> de su hacienda (se rigen por la Ley General Presupuestaria) ni, en las <strong>entidades públicas empresariales y análogas dependientes de comunidades autónomas o corporaciones locales</strong>, los recursos que forman su tesorería.</div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026</span>
+El temario habla de la tesorería de «las entidades públicas empresariales y entidades análogas» en general. El art. 3.2 la refiere a las <strong>dependientes de las comunidades autónomas o corporaciones locales</strong>.</div>
+<h3>1.3 Clasificación: demaniales y patrimoniales (arts. 4 a 8)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:16%"></th><th>Dominio público o demaniales (art. 5)</th><th>Dominio privado o patrimoniales (art. 7)</th></tr>
+<tr><td><strong>Concepto</strong></td><td>De titularidad pública y <strong>afectados al uso general o al servicio público</strong>, o declarados demaniales <strong>por ley</strong>.</td><td>Definidos <strong>por exclusión</strong>: los de titularidad pública que no son demaniales.</td></tr>
+<tr><td><strong>Principios</strong></td><td>Art. 6: inalienabilidad, inembargabilidad e imprescriptibilidad · adecuación y suficiencia para el uso o servicio · aplicación efectiva · <strong>dedicación preferente al uso común</strong> frente al privativo · ejercicio diligente de las prerrogativas · inventarios · cooperación entre Administraciones.</td><td>Art. 8: eficiencia y economía en la gestión · eficacia y <strong>rentabilidad</strong> en la explotación · <strong>publicidad, transparencia, concurrencia y objetividad</strong> en adquisición, explotación y enajenación · inventarios · colaboración. Su gestión debe coadyuvar a las políticas públicas, en particular a la de <strong>vivienda</strong> (8.2).</td></tr>
+<tr><td><strong>Disponibilidad</strong> (art. 30)</td><td><strong>Inalienables, imprescriptibles e inembargables</strong>.</td><td>Enajenables por el procedimiento legal y <strong>prescriptibles</strong> por terceros conforme al Código Civil; <strong>inembargables</strong> solo si están materialmente afectados a un servicio o función pública, si sus rendimientos están afectados a fines determinados o si son acciones de sociedades estatales que ejecutan políticas públicas o prestan servicios de interés económico general.</td></tr>
+<tr><td><strong>Régimen</strong></td><td>Leyes especiales → LPAP → Derecho administrativo → Derecho privado (5.4).</td><td>LPAP → Derecho administrativo en <strong>competencia y procedimiento</strong> → Derecho privado en el régimen <strong>sustantivo</strong> (7.3).</td></tr>
+<tr><td><strong>Recuperación</strong></td><td>En <strong>cualquier tiempo</strong>.</td><td>En <strong>un año</strong> desde la usurpación; después, jurisdicción civil.</td></tr>
+</table></div>
+<div class="grid2">
+<div class="card"><h4>Demaniales «en todo caso»</h4><ul><li>Los del art. 132.2 CE, incluida la <strong>plataforma continental</strong> (5.2).</li><li>Los inmuebles de la AGE o sus organismos donde se alojan <strong>servicios, oficinas o dependencias</strong> de sus órganos o de los órganos constitucionales (5.3).</li></ul></div>
+<div class="card"><h4>Patrimoniales «en todo caso» (7.2)</h4><ul><li>Los <strong>derechos de arrendamiento</strong>.</li><li>Las <strong>acciones y participaciones</strong> en sociedades mercantiles y sus obligaciones, y los futuros y opciones sobre ellas.</li><li>Los derechos de <strong>propiedad incorporal</strong>.</li><li>Los derechos derivados de bienes patrimoniales.</li></ul></div>
+</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019 y 2022)</span>
+Son demaniales los inmuebles donde se alojan oficinas y servicios de la AGE (2019) y la plataforma continental (2022). Son patrimoniales los arrendamientos, las acciones y la propiedad incorporal (2022). Publicidad, transparencia, concurrencia y objetividad son principios de los <strong>patrimoniales</strong> (2019). Su gestión debe coadyuvar a la política de <strong>vivienda</strong> (2022).</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> El Patrimonio del Estado y su organización</h2>
+<p>Lo forman el patrimonio de la <strong>AGE</strong> y los de los <strong>organismos públicos</strong> vinculados o dependientes (art. 9).</p>
+<div class="tablewrap"><table>
+<tr><th style="width:28%">Órgano</th><th>Funciones</th></tr>
+<tr><td><strong>Consejo de Ministros</strong></td><td>Directrices y programas de actuación sobre la gestión del Patrimonio del Estado; autoriza las operaciones de mayor relevancia (por ejemplo, enajenaciones de más de 20 millones).</td></tr>
+<tr><td><strong>Ministerio de Hacienda</strong> · <strong>Dirección General del Patrimonio del Estado</strong></td><td>Administración, gestión y defensa del Patrimonio de la AGE; ejerce las potestades; instruye afectaciones, desafectaciones, adscripciones y enajenaciones; lleva el <strong>Inventario General de Bienes y Derechos del Estado</strong>; propone los <strong>índices de ocupación</strong> y los criterios de uso de los edificios administrativos.</td></tr>
+<tr><td><strong>Departamentos y organismos</strong></td><td>Gestionan, conservan y defienden los bienes que tienen afectados o adscritos.</td></tr>
+<tr><td><strong>Órganos de coordinación</strong></td><td>Junta Coordinadora de Edificios Administrativos y Comisión de Coordinación Financiera de Actuaciones Inmobiliarias y Patrimoniales.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Idea clave del temario 2026 (examen 2022)</span>
+La <strong>Dirección General del Patrimonio del Estado</strong> propone los índices de ocupación de los edificios administrativos.</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> Adquisición de bienes y derechos (arts. 15 a 27)</h2>
+<p>Modos: por <strong>atribución de la ley</strong>, a título <strong>oneroso</strong> (con o sin expropiación), por <strong>herencia, legado o donación</strong>, por <strong>prescripción</strong> y por <strong>ocupación</strong> (art. 15).</p>
+<div class="box clave"><span class="box-h">Principio de adquisición patrimonial (art. 16)</span>
+Salvo disposición legal en contrario, los bienes de la AGE y sus organismos se entienden adquiridos como <strong>patrimoniales</strong>, sin perjuicio de su posterior afectación. El dominio público nace con la <strong>afectación</strong>. Excepción: los bienes <strong>expropiados</strong> se entienden afectados al fin de la expropiación (art. 66.2.c).</div>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Modo</th><th>Régimen</th></tr>
+<tr><td><strong>Inmuebles vacantes</strong> (17)</td><td>Los inmuebles sin dueño pertenecen a la AGE <strong>por ministerio de la ley</strong>, sin acto ni declaración. No generan obligaciones tributarias ni responsabilidades hasta su <strong>efectiva incorporación</strong> (por el procedimiento de investigación). La AGE toma posesión en vía administrativa si nadie los posee como dueño; si hay un poseedor en concepto de dueño, debe acudir a la <strong>jurisdicción civil</strong>.</td></tr>
+<tr><td><strong>Saldos y depósitos abandonados</strong> (18)</td><td>Valores, dinero y muebles depositados en la Caja General de Depósitos y en entidades financieras, y saldos de cuentas y libretas, sin gestión del titular en <strong>veinte años</strong>. El efectivo se destina a programas para personas con discapacidad y accesibilidad universal; el resto lo gestiona y puede enajenar la Dirección General del Patrimonio.</td></tr>
+<tr><td><strong>Herencias, legados y donaciones</strong> (20 y 21)</td><td>Acepta el ministro de Hacienda o el órgano en que delegue. La aceptación de herencias se entiende hecha <strong>siempre a beneficio de inventario</strong>. Sucesión abintestato a favor del Estado: arts. 956 a 958 del Código Civil y LPAP.</td></tr>
+<tr><td><strong>Prescripción</strong> (21) y <strong>ocupación</strong> (22)</td><td>Las Administraciones <strong>sí pueden</strong> adquirir por prescripción conforme al Código Civil, y los muebles por ocupación.</td></tr>
+<tr><td><strong>Onerosa</strong> (116 a 120)</td><td>Ver el <a href="#s7">apartado 7</a>.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (examen 2022)</span>
+Los inmuebles sin dueño se adquieren <strong>por ministerio de la ley</strong>. Los bienes se entienden adquiridos como <strong>patrimoniales</strong> salvo disposición en contrario. La aceptación de herencias es siempre a <strong>beneficio de inventario</strong>, y las Administraciones <strong>sí</strong> pueden adquirir por prescripción.</div>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> Protección y defensa: las potestades (arts. 28 a 70)</h2>
+<p>Las Administraciones están <strong>obligadas</strong> a proteger y defender su patrimonio (art. 28): procurar su inscripción en el <strong>Registro de la Propiedad</strong> (36 a 40) y llevar <strong>inventario</strong> (32 y 33). En el Estado, el Inventario General, que gestiona Hacienda y que <strong>no incluye</strong> el Patrimonio Nacional. Para su defensa tienen cuatro potestades (art. 41), que las <strong>entidades públicas empresariales</strong> solo pueden ejercer sobre bienes <strong>demaniales</strong> (41.3). Las cuestiones civiles que surjan van a la jurisdicción civil (41.2).</p>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Potestad</th><th>Contenido</th><th style="width:26%">Plazo clave</th></tr>
+<tr><td><strong>Investigación</strong> (45 a 49)</td><td>Averiguar la situación de bienes que presumiblemente son suyos cuando la titularidad no consta de modo cierto. De oficio o por denuncia; en la AGE, la Dirección General del Patrimonio. Acuerdo de incoación publicado en el BOE y en el ayuntamiento; informe de la Abogacía del Estado sobre las pruebas. Si se acredita la titularidad: tasación, inventario, inscripción y toma de posesión.</td><td><strong>2 años</strong> para resolver desde la publicación; si no, archivo (47.e). <strong>Premio</strong> al denunciante: <strong>10 %</strong> del valor, devengado al venderse el bien (48).</td></tr>
+<tr><td><strong>Deslinde</strong> (50 a 54)</td><td>Delimitar inmuebles cuando los límites son imprecisos o hay indicios de usurpación. Mientras se tramita, <strong>no cabe proceso judicial</strong> con igual pretensión. La iniciación se anota por <strong>nota al margen</strong> de la inscripción; resolución con informe de la Abogacía del Estado, amojonamiento e inscripción. La resolución es título para inmatricular.</td><td><strong>18 meses</strong> desde el acuerdo de iniciación; si no, caducidad (52.e).</td></tr>
+<tr><td><strong>Recuperación de oficio</strong> (55 a 57)</td><td>Recuperar por sí mismas la posesión indebidamente perdida. Previa audiencia, requerimiento de desalojo en un plazo no superior a <strong>8 días</strong>; si hay resistencia, auxilio de las Fuerzas y Cuerpos de Seguridad o <strong>multas coercitivas</strong> de hasta el <strong>5 %</strong> del valor, reiteradas cada 8 días. Los gastos y daños, a cargo del usurpador.</td><td><strong>Demaniales</strong>: en cualquier tiempo. <strong>Patrimoniales</strong>: la iniciación debe <strong>notificarse antes de un año</strong> desde el día siguiente a la usurpación; después, jurisdicción civil.</td></tr>
+<tr><td><strong>Desahucio administrativo</strong> (58 a 60)</td><td>Recuperar bienes <strong>demaniales</strong> cuando decae el título, las condiciones o las circunstancias que legitimaban la ocupación (ocupación inicialmente legítima). Exige la <strong>previa declaración de extinción o caducidad</strong> del título, con audiencia; plazo de desalojo no superior a 8 días, con las mismas medidas de ejecución.</td><td>Solo demaniales.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisiones a ambos documentos</span>
+<strong>Recuperación de patrimoniales</strong>: los dos dicen «en el plazo de un año». El art. 55.3 exige que la <strong>iniciación del procedimiento se haya notificado</strong> antes de que pase el año; no basta con decidirlo dentro del plazo.<br>
+<strong>Deslinde</strong>: el visual hablaba de «anotación preventiva». El art. 52.b dice que la incoación se hace constar por <strong>nota al margen</strong> de la inscripción de dominio.</div>
+<p><strong>Otras prerrogativas</strong>: sancionar las infracciones de la Ley (arts. 192 a 196), exigir el resarcimiento de daños y la <strong>inembargabilidad</strong> del art. 30.3.</p>
+<div class="box clave"><span class="box-h">Idea clave del temario 2026 (examen 2024)</span>
+Si la Administración pierde indebidamente la posesión, puede <strong>recuperarla por sí misma</strong>: en cualquier tiempo los demaniales y en un año los patrimoniales.</div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> El dominio público: concepto y dinámica</h2>
+<h3>5.1 Concepto y elementos</h3>
+<p>Conjunto de bienes y derechos de titularidad pública afectados a un uso o servicio público, o declarados demaniales por ley, sometidos a un régimen especial de protección y uso. Elementos: <strong>subjetivo</strong> (titular siempre una Administración), <strong>objetivo</strong> (inmuebles, muebles y derechos), <strong>teleológico</strong> (la afectación) y <strong>normativo</strong> (régimen exorbitante de Derecho público).</p>
+<div class="grid2">
+<div class="card"><h4>Dominio público natural</h4>Categorías enteras de bienes declaradas demaniales por ley: costas, aguas, minas, espacio radioeléctrico.</div>
+<div class="card"><h4>Dominio público artificial</h4>Bienes concretos que adquieren la condición por un acto de afectación: carreteras, edificios administrativos.</div>
+</div>
+<h3>5.2 La dinámica: afectación, desafectación, mutación y adscripción</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:16%">Figura</th><th style="width:30%">Qué hace</th><th>Régimen y clave de examen</th></tr>
+<tr><td><strong>Afectación</strong> (65 y 66)</td><td>Vincula el bien a un uso general o servicio público y lo integra en el dominio público. <strong>No cambia la titularidad</strong>.</td><td>Salvo que derive de ley, por <strong>acto expreso</strong> del órgano competente, que indica el bien, el fin, su integración en el dominio público y el órgano que ejercerá las competencias demaniales. A los departamentos ministeriales, por <strong>orden del ministro de Hacienda</strong>.</td></tr>
+<tr><td><strong>Afectaciones implícitas</strong> (66.2)</td><td>Producen el mismo efecto sin acto expreso.</td><td>a) Utilización <strong>pública, notoria y continuada</strong> por la AGE para un servicio o uso general · b) <strong>usucapión</strong> por actos posesorios vinculados al uso o servicio · c) <strong>expropiación forzosa</strong> (afectada al fin de la declaración de utilidad pública) · d) aprobación <strong>por el Consejo de Ministros</strong> de planes, programas o proyectos de los que resulte la vinculación · e) adquisición de <strong>muebles</strong> para los servicios o la decoración de dependencias oficiales. Y la <strong>adscripción</strong> (art. 73).</td></tr>
+<tr><td><strong>Desafectación</strong> (69 y 70)</td><td>El bien deja de ser demanial y pasa a <strong>patrimonial</strong>. Es la puerta a la enajenación.</td><td>Salvo los supuestos legales, <strong>siempre expresa</strong>: no se presume por desuso. En la AGE la acuerda el <strong>ministro de Hacienda</strong> (instruye la Dirección General del Patrimonio, de oficio o a propuesta del departamento) y exige su recepción formal por Hacienda. Los de organismos, el ministro del que dependen; los muebles de un departamento, su titular.</td></tr>
+<tr><td><strong>Mutación demanial</strong> (71)</td><td>Desafectación con <strong>simultánea afectación</strong> a otro uso o servicio de la AGE o sus organismos. El bien <strong>nunca deja</strong> de ser demanial.</td><td>Expresa, salvo en reestructuraciones orgánicas, donde los bienes siguen a la competencia. Cabe la <strong>mutación entre Administraciones</strong> (71.4), en los términos del Reglamento: no altera la titularidad ni el carácter demanial.</td></tr>
+<tr><td><strong>Adscripción</strong> (73 a 82)</td><td>Vincula bienes patrimoniales de la AGE a un <strong>organismo público</strong> para un servicio suyo o sus fines.</td><td>La acuerda el <strong>ministro de Hacienda</strong>, con acta firmada por la Dirección General del Patrimonio y el organismo. Lleva <strong>implícita la afectación</strong> (el bien pasa a demanial) y <strong>no altera la titularidad</strong>. El organismo ejerce las competencias demaniales y conserva el bien. La desadscripción procede cuando deja de ser necesario.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al temario 2026: la afectación implícita por uso</span>
+El temario dice que la utilización pública, notoria y continuada produce la afectación cuando dura «un año». El art. 66.2.a <strong>no fija plazo</strong>: basta que la utilización sea pública, notoria y continuada. El temario omite además que la aprobación de planes y proyectos debe ser del <strong>Consejo de Ministros</strong> (66.2.d) y la afectación implícita de los <strong>muebles</strong> (66.2.e).</div>
+<div class="box trampa"><span class="box-h">Trampas de la dinámica</span>
+La <strong>desafectación</strong> no puede ser tácita por desuso; la <strong>afectación</strong>, sí puede ser implícita · la <strong>mutación</strong> no convierte el bien en patrimonial · la <strong>adscripción</strong> no transfiere la titularidad: la AGE sigue siendo la dueña.</div>
+<div class="box clave"><span class="box-h">Idea clave del temario 2026 (examen 2022)</span>
+La afectación de bienes del Patrimonio del Estado a los departamentos ministeriales se hace por <strong>orden del ministro de Hacienda</strong>.</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> Utilización del dominio público (arts. 84 a 104)</h2>
+<p>Nadie puede, <strong>sin título</strong> otorgado por la autoridad competente, ocupar bienes de dominio público o usarlos excediendo el uso que corresponde a todos (art. 84).</p>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Uso (art. 85)</th><th>Concepto</th><th style="width:34%">Título (art. 86)</th></tr>
+<tr><td><strong>Común</strong></td><td>Corresponde por igual y de forma indistinta a todos; el uso de unos no impide el de los demás (pasear, bañarse en la playa).</td><td><strong>Libre</strong>, con las limitaciones de su naturaleza, los actos de afectación y las normas aplicables.</td></tr>
+<tr><td><strong>Aprovechamiento especial</strong></td><td>Sin impedir el uso común, hay <strong>peligrosidad, intensidad</strong>, preferencia en caso de escasez, <strong>rentabilidad singular</strong> u otras circunstancias que exceden el uso de todos (terraza, andamio).</td><td><strong>Autorización</strong>; <strong>concesión</strong> si dura más de <strong>cuatro años</strong>.</td></tr>
+<tr><td><strong>Privativo</strong></td><td>Ocupación de una porción que <strong>limita o excluye</strong> el uso de otros (quiosco, torre de telecomunicaciones).</td><td>Con instalaciones <strong>desmontables o muebles</strong>: autorización, o concesión si excede de cuatro años. Con <strong>obras o instalaciones fijas</strong>: siempre <strong>concesión</strong>.</td></tr>
+</table></div>
+<p>Los bienes afectados a un <strong>servicio público</strong> se usan según las normas del servicio; caben autorizaciones a terceros compatibles con él, como cafeterías o máquinas expendedoras en edificios administrativos (arts. 87 y 89).</p>
+<div class="grid2">
+<div class="card"><h4>Autorizaciones (art. 92)</h4><ul><li>Directas a quien reúna los requisitos; si su número está limitado, en <strong>concurrencia</strong> o, si no hay que valorar condiciones, por <strong>sorteo</strong>.</li><li><strong>No transmisibles</strong> si cuentan las circunstancias personales o su número es limitado, salvo que las condiciones lo admitan.</li><li>Plazo máximo de <strong>4 años</strong>, prórrogas incluidas.</li><li><strong>Revocables</strong> en cualquier momento por interés público, <strong>sin indemnización</strong>, si son incompatibles con condiciones posteriores, dañan el dominio público, impiden un uso de mayor interés o menoscaban el uso general.</li><li>Gratuitas, con contraprestación o condiciones, o sujetas a <strong>tasa</strong>.</li></ul></div>
+<div class="card"><h4>Concesiones (arts. 93 a 104)</h4><ul><li>En <strong>concurrencia</strong>; directas en los supuestos del art. 137.4, en circunstancias excepcionales justificadas o cuando lo prevea una ley.</li><li>Plazo máximo de <strong>75 años</strong>, prórrogas incluidas, salvo uno menor en normas especiales.</li><li>Se formalizan en <strong>documento administrativo</strong>, título inscribible.</li><li>El concesionario tiene un <strong>derecho real</strong> sobre las obras e instalaciones fijas (97): transmisible con conformidad previa de la Administración e <strong>hipotecable</strong>, con autorización previa, solo para financiar esas obras (98).</li></ul></div>
+</div>
+<div class="tablewrap"><table>
+<tr><th style="width:28%">Extinción (art. 100)</th><th>Destino de las obras (art. 101)</th></tr>
+<tr><td>Muerte, incapacidad o extinción de la persona jurídica · transmisión o fusión sin autorización · <strong>vencimiento del plazo</strong> · <strong>rescate</strong> con indemnización o revocación de la autorización · mutuo acuerdo · <strong>falta de pago del canon</strong> o incumplimiento grave · desaparición del bien o agotamiento · <strong>desafectación</strong> · otras causas de las condiciones.</td><td>El titular <strong>demuele</strong> las obras fijas (o la Administración a su costa), salvo que el título o la Administración decidan mantenerlas: entonces pasan a la Administración <strong>gratis y libres de cargas</strong>. En el rescate anticipado, se indemniza el perjuicio material. Cabe el <strong>desahucio administrativo</strong>.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Regla práctica (art. 86)</span>
+<strong>Obras o instalaciones fijas</strong> → concesión, sea cual sea el plazo. <strong>Desmontables o muebles</strong> → autorización si no pasan de 4 años; concesión si pasan.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019 y 2022)</span>
+El aprovechamiento especial con instalaciones desmontables por <strong>más de cuatro años</strong> requiere <strong>concesión</strong> (2019). La concesión demanial dura como máximo <strong>75 años</strong> con las prórrogas (2022).</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> Los bienes patrimoniales del Estado: gestión</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Operación</th><th>Régimen</th></tr>
+<tr><td><strong>Adquisición onerosa de inmuebles</strong> (116 a 120)</td><td>Compete al <strong>ministro de Hacienda</strong> (instruye la Dirección General del Patrimonio), de oficio o a petición razonada del departamento; los organismos, su presidente o director con informe favorable de Hacienda. Regla: <strong>concurso público</strong>; adquisición <strong>directa</strong> por las peculiaridades de la necesidad, el mercado, la urgencia o la especial idoneidad del bien.</td></tr>
+<tr><td><strong>Arrendamiento</strong> de inmuebles por la AGE (122 a 129)</td><td>Compete al <strong>ministro de Hacienda</strong>, a petición del departamento; concurso salvo contratación directa justificada. Antes hay que comprobar que no hay inmuebles adecuados disponibles en el Patrimonio del Estado.</td></tr>
+<tr><td><strong>Explotación</strong> (105 a 108)</td><td>Los patrimoniales que no conviene enajenar pueden explotarse por arrendamiento u otras fórmulas, con publicidad y concurrencia.</td></tr>
+<tr><td><strong>Enajenación de inmuebles</strong> (135 a 142)</td><td>Los no necesarios, previa declaración de <strong>alienabilidad</strong>, depuración física y jurídica y <strong>tasación</strong>. Por <strong>subasta, concurso o adjudicación directa</strong> (137): subasta al alza, a la baja, en sobre cerrado o electrónica; concurso para bienes que el Consejo de Ministros vincule a políticas públicas; directa en supuestos tasados. Compete al <strong>ministro de Hacienda</strong> (en los organismos, su presidente o director), con <strong>autorización del Consejo de Ministros</strong> si la tasación supera <strong>20 millones</strong> (135.3).</td></tr>
+<tr><td><strong>Enajenación de muebles</strong> (143 y 144)</td><td>Los no necesarios u obsoletos; pueden cederse gratis si no es posible venderlos.</td></tr>
+<tr><td><strong>Cesión gratuita</strong> (145 a 151)</td><td>Bienes cuya afectación o explotación no se juzgue previsible, para fines de utilidad pública o interés social de su competencia, a <strong>comunidades autónomas, entidades locales, fundaciones públicas o asociaciones de utilidad pública</strong>; también a Estados extranjeros u organizaciones internacionales en misiones de paz, cooperación policial o ayuda humanitaria. De la propiedad o solo del uso. Si no se destinan al fin, la cesión se resuelve y <strong>revierten</strong>.</td></tr>
+<tr><td><strong>Permuta</strong> (153 y 154)</td><td>Por razones justificadas de interés público, previa tasación, si la diferencia de valor <strong>no supera el 50 %</strong> del bien de mayor valor; si la supera, se tramita como enajenación con pago parcial en especie. Puede tener por objeto edificios a construir.</td></tr>
+</table></div>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> El Patrimonio Nacional (Ley 23/1982)</h2>
+<p>Desarrolla el art. 132.3 CE, con su Reglamento (Real Decreto 496/1987). Son bienes del Patrimonio Nacional los <strong>de titularidad del Estado</strong> afectados al <strong>uso y servicio del Rey</strong> y de la Familia Real para la alta representación (art. 2). <strong>El Rey no es el titular</strong>. Si la afectación lo permite, se usan además con fines <strong>culturales, científicos y docentes</strong> (art. 3).</p>
+<div class="box clave"><span class="box-h">Régimen (art. 6)</span>
+<strong>Inalienables, imprescriptibles e inembargables</strong>, con las exenciones tributarias del dominio público estatal; se inscriben en el Registro de la Propiedad como bienes del Estado. El Consejo de Administración puede pedir a Hacienda que ejerza la recuperación, investigación y deslinde. Supletoriamente, la legislación de patrimonio del Estado. Su inventario es <strong>distinto</strong> del Inventario General.</div>
+<div class="grid2">
+<div class="card"><h4>Bienes (art. 4)</h4><ul><li>Palacio Real de Oriente y Campo del Moro.</li><li>Palacio Real de Aranjuez y la Casita del Labrador.</li><li>Palacio Real de San Lorenzo de El Escorial, la Casita del Príncipe y la Casita de Arriba.</li><li>Palacios Reales de La Granja y de Riofrío.</li><li>Monte y Palacio de El Pardo; <strong>Palacio de la Zarzuela</strong> y La Quinta.</li><li><strong>Palacio de la Almudaina</strong>, en Palma.</li><li>Los muebles del Estado en los reales palacios y las donaciones hechas al Estado a través del Rey.</li></ul></div>
+<div class="card"><h4>Reales Patronatos (art. 5)</h4>Derechos de patronato sobre: la Encarnación, el Buen Suceso, las <strong>Descalzas Reales</strong>, la Basílica de Atocha, Santa Isabel, Loreto (Madrid), el <strong>Monasterio de El Escorial</strong>, las <strong>Huelgas</strong> (Burgos), el Hospital del Rey, <strong>Santa Clara</strong> (Tordesillas), San Pascual (Aranjuez) y el Colegio de Doncellas Nobles (Toledo).<br><br><strong>No</strong> forman parte: la <strong>Alhambra y el Generalife</strong>, la catedral de la Almudena ni el Museo del Prado.</div>
+</div>
+<div class="box clave"><span class="box-h">Consejo de Administración del Patrimonio Nacional (art. 8)</span>
+Entidad de Derecho público, adscrita al Ministerio de la Presidencia. Lo forman el <strong>Presidente</strong>, el <strong>Gerente</strong> y hasta <strong>trece vocales</strong> de reconocido prestigio (al menos dos de instituciones museísticas y dos alcaldes de municipios con bienes del Patrimonio Nacional). Todos se nombran por <strong>real decreto, previa deliberación del Consejo de Ministros, a propuesta del Presidente del Gobierno</strong>. El Presidente y el Gerente son altos cargos y deben ser <strong>funcionarios del subgrupo A1</strong>. Le corresponde, entre otras funciones, proponer al Gobierno la afectación y la <strong>desafectación</strong> de bienes.</div>
+<div class="box fix"><span class="box-h">Correcciones a ambos documentos</span>
+<strong>Material visual</strong>: decía que los bienes del Patrimonio Nacional solo se enajenan «por Ley de Cortes». La Ley 23/1982 los declara <strong>inalienables</strong>; lo que prevé es su <strong>desafectación</strong> por el Gobierno, a propuesta del Consejo, cuando dejan de cumplir su fin, y <strong>nunca</strong> la de los bienes de valor histórico-artístico (8.2.k). La ley solo se exige para desafectar terrenos incluidos en <strong>planes de protección medioambiental</strong> (3.4).<br>
+<strong>Temario 2026</strong>: sitúa el Monasterio de El Escorial entre los bienes del art. 4. El art. 4 incluye el <strong>Palacio Real</strong> de San Lorenzo de El Escorial; el <strong>Monasterio</strong> es un <strong>Real Patronato</strong> del art. 5. Y no recoge la composición vigente del Consejo (Presidente, Gerente y hasta trece vocales, con Presidente y Gerente funcionarios A1).</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019, 2022 y 2024)</span>
+El <strong>Palacio de la Almudaina</strong> sí es Patrimonio Nacional; la <strong>Alhambra y el Generalife</strong>, no (2022 y 2024). El Presidente se nombra por <strong>real decreto previa deliberación del Consejo de Ministros a propuesta del Presidente del Gobierno</strong> (2019).</div>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> Los bienes comunales</h2>
+<p>Los bienes locales son de <strong>dominio público</strong> (destinados a uso o servicio público) o <strong>patrimoniales</strong>; son <strong>comunales</strong> los de dominio público cuyo aprovechamiento corresponde al <strong>común de los vecinos</strong> (art. 79.3 LRBRL): pastos, leñas.</p>
+<div class="box clave"><span class="box-h">Régimen (art. 80 LRBRL)</span>
+Naturaleza <strong>demanial</strong>; solo pueden pertenecer a <strong>municipios y entidades locales menores</strong>. Son <strong>inalienables, imprescriptibles e inembargables</strong> y <strong>no están sujetos a tributo</strong>, como prevé el art. 132.1 CE.</div>
+<div class="grid2">
+<div class="card"><h4>Aprovechamiento</h4>Reglamento de Bienes y art. 75 del texto refundido de régimen local (Real Decreto Legislativo 781/1986): <strong>1)</strong> explotación <strong>colectiva o comunal</strong>; <strong>2)</strong> si no es practicable, la <strong>costumbre</strong> u ordenanzas, que pueden adjudicar <strong>lotes o suertes</strong> en proporción directa a las cargas familiares e inversa a la situación económica; <strong>3)</strong> en su defecto, adjudicación por <strong>precio</strong> mediante subasta, con preferencia de los vecinos.</div>
+<div class="card"><h4>Desafectación</h4>Los que <strong>más de diez años</strong> no se han aprovechado como comunales (aunque haya algún acto aislado) pueden desafectarse por acuerdo del <strong>Pleno</strong> con <strong>mayoría absoluta</strong> del número legal de miembros, previa información pública: pasan a <strong>patrimoniales</strong> (art. 47.2 LRBRL y art. 100 del Reglamento de Bienes).</div>
+</div>
+<div class="box trampa"><span class="box-h">Trampa: montes vecinales en mano común (Ley 55/1980)</span>
+<strong>No</strong> son comunales: su titular es la agrupación vecinal como grupo social, no la entidad local, y son de naturaleza <strong>privada</strong>, aunque también son indivisibles, inalienables e imprescriptibles.</div>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Lo que preguntan y trampas</h2>
+<div class="box clave"><span class="box-h">Los números del tema</span>
+Saldos abandonados: <strong>20 años</strong> · investigación: <strong>2 años</strong> y premio del <strong>10 %</strong> · deslinde: <strong>18 meses</strong> · recuperación de patrimoniales: notificar en <strong>1 año</strong>; demaniales: sin plazo · desalojo: <strong>8 días</strong>, multas coercitivas de hasta el <strong>5 %</strong> cada 8 días · autorización demanial: <strong>4 años</strong> · concesión demanial: <strong>75 años</strong> · enajenación con autorización del Consejo de Ministros: más de <strong>20 millones</strong> · permuta: diferencia de hasta el <strong>50 %</strong> · comunales sin aprovechar: <strong>10 años</strong> · Patrimonio Nacional: hasta <strong>13 vocales</strong>.</div>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Lo que preguntan</span><ul>
+<li>Qué es demanial y qué patrimonial «en todo caso».</li>
+<li>Principios de unos y otros.</li>
+<li>Inmuebles vacantes, saldos abandonados y herencias.</li>
+<li>Las cuatro potestades y sus plazos.</li>
+<li>Afectación, desafectación, mutación y adscripción.</li>
+<li>Autorización frente a concesión.</li>
+<li>Enajenación, permuta y cesión.</li>
+<li>Qué bienes son Patrimonio Nacional.</li>
+<li>Comunales y su desafectación.</li></ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>«El dinero es un bien patrimonial»: no, está fuera del patrimonio (3.2).</li>
+<li>«La desafectación puede ser tácita»: no, siempre expresa.</li>
+<li>«Lo adquirido es demanial»: no, patrimonial salvo ley o expropiación.</li>
+<li>«La mutación hace patrimonial el bien»: no, sigue siendo demanial.</li>
+<li>«La adscripción da la titularidad al organismo»: no.</li>
+<li>«El Rey es titular del Patrimonio Nacional»: no, el Estado.</li>
+<li>«La Alhambra es Patrimonio Nacional»: no.</li>
+<li>«Un patrimonial usurpado se recupera de oficio siempre»: no, hay que notificar en un año.</li>
+<li>«Los comunales son patrimoniales»: no, demaniales.</li>
+<li>«Los montes vecinales son comunales»: no, son privados.</li>
+<li>«Las Administraciones no pueden usucapir»: sí pueden.</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia con sus cuatro piezas: art. 132 CE, Ley 33/2003 (en adelante, LPAP), Reglamento General aprobado por el Real Decreto 1373/2009, y la distinción del art. 5 (demaniales) y el art. 7 (patrimoniales).</li>
+<li>La calificación previa: de quién es el bien, si es demanial o patrimonial y por qué.</li>
+<li>Los demaniales y patrimoniales «en todo caso».</li>
+<li>Los modos de adquisición y la regla del art. 16.</li>
+<li>Las cuatro potestades de defensa con sus plazos.</li>
+<li>Afectación (expresa e implícitas), desafectación, mutación y adscripción.</li>
+<li>Los tres usos del dominio público y su título.</li>
+<li>Enajenación, permuta y cesión gratuita.</li>
+<li>Patrimonio Nacional y comunales.</li>
+</ol>
+
+<!-- 11 -->
+<h2 id="s11"><span class="n">11.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>En las plantillas v2, el patrimonio va con la expropiación: «sale poco, pero cuando sale decide la pregunta». Lo que puntúa es <strong>calificar el bien</strong> antes de nada: demanial o patrimonial, y de qué Administración. De ahí salen la potestad, el plazo y el título.</p>
+<h3>11.1 Introducción de la materia (plantillas v2, sección 6)</h3>
+<div class="model">
+<p>«En materia patrimonial resulta de aplicación la Ley 33/2003, de 3 de noviembre, del Patrimonio de las Administraciones Públicas (en adelante, LPAP), en desarrollo del artículo 132 de la Constitución, y su Reglamento General, aprobado por el Real Decreto 1373/2009, de 28 de agosto. La LPAP distingue entre bienes de dominio público o demaniales, afectados a un uso o servicio público (artículo 5), y bienes patrimoniales (artículo 7).»</p>
+</div>
+<div class="box sup"><span class="box-h">Las cuatro piezas</span>Art. 132 CE → LPAP → Reglamento de 2009 → distinción de los arts. 5 y 7. Si el bien es local, añade la LRBRL y el Reglamento de Bienes (Real Decreto 1372/1986).</div>
+<h3>11.2 Calificación previa propia del Tema 9</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar el bien. Se trata de [un inmueble / un derecho] de titularidad de [la Administración General del Estado], que [se encuentra afectado al servicio público de… / no está afectado a ningún uso o servicio público], por lo que tiene la condición de bien [demanial, conforme al artículo 5 / patrimonial, conforme al artículo 7] de la LPAP. De esta calificación depende su régimen de disponibilidad (artículo 30), la potestad de defensa aplicable (artículos 41 y siguientes) y el título exigible para su uso por terceros (artículo 86).»</p>
+</div>
+<h3>11.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Hecho del enunciado</th><th style="width:30%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>Un ministerio quiere «expropiar» un edificio de otro departamento</td><td>Una Administración no se expropia a sí misma; art. 71</td><td>No procede: la vía es la mutación demanial</td></tr>
+<tr><td>Un edificio donde se alojan oficinas de la Subdelegación del Gobierno</td><td>Art. 5.3</td><td>Es demanial en todo caso: inalienable, imprescriptible e inembargable</td></tr>
+<tr><td>Se quiere vender un inmueble afectado a un servicio que ya no se presta</td><td>Arts. 69 y 70</td><td>Antes debe desafectarse expresamente por el ministro de Hacienda</td></tr>
+<tr><td>Un particular ocupa sin título un solar patrimonial desde hace 8 meses</td><td>Art. 55.3</td><td>Cabe la recuperación de oficio si la iniciación se notifica antes de cumplirse el año</td></tr>
+<tr><td>La misma ocupación dura ya 14 meses</td><td>Art. 55.3</td><td>No cabe la vía administrativa: acción ante la jurisdicción civil</td></tr>
+<tr><td>Un quiosco se mantiene en la acera tras extinguirse la concesión</td><td>Arts. 58 y 59</td><td>Desahucio administrativo, previa declaración de extinción y con audiencia</td></tr>
+<tr><td>Se pide instalar una terraza desmontable durante 3 años</td><td>Arts. 85.2, 86.2 y 92.3</td><td>Autorización, revocable sin indemnización</td></tr>
+<tr><td>La misma terraza durante 6 años</td><td>Art. 86.2</td><td>Exige concesión, en concurrencia (art. 93.1)</td></tr>
+<tr><td>Una gasolinera con obras fijas en dominio público</td><td>Arts. 86.3 y 93.3</td><td>Concesión, de 75 años como máximo con prórrogas</td></tr>
+<tr><td>Se enajena un inmueble tasado en 25 millones</td><td>Art. 135.3</td><td>Requiere autorización del Consejo de Ministros, a propuesta del ministro de Hacienda</td></tr>
+<tr><td>Permuta de un inmueble de 1.000.000 € por otro de 400.000 €</td><td>Art. 153</td><td>Diferencia del 60 %: no cabe como permuta; se tramita como enajenación con pago parcial en especie</td></tr>
+<tr><td>Fallece sin herederos una persona con un piso</td><td>Arts. 956 del Código Civil y 20 LPAP</td><td>Hereda el Estado, siempre a beneficio de inventario</td></tr>
+<tr><td>Un monte municipal lleva 12 años sin aprovechamiento vecinal</td><td>Art. 47.2 LRBRL y art. 100 del Reglamento de Bienes</td><td>El Pleno puede desafectarlo por mayoría absoluta, previa información pública</td></tr>
+</table></div>
+
+<h3>11.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+La Dirección General del Patrimonio del Estado detecta el <strong>1 de marzo de 2026</strong> que la empresa Kappa ocupa sin título, desde el <strong>15 de enero de 2025</strong>, un solar del Estado en el que deposita maquinaria. Además, un particular solicita instalar en la explanada de titularidad estatal abierta al público junto a la Delegación del Gobierno un quiosco <strong>desmontable</strong> durante <strong>seis años</strong>.
+<br><br><strong>Cuestiones:</strong> a) ¿Puede la Administración recuperar el solar por sí misma? b) ¿Qué título necesita el quiosco y cómo se otorga?</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 11.1.] Con carácter previo, procede calificar el bien. El enunciado no precisa si el solar está afectado a algún uso o servicio público, por lo que suponemos que no lo está, dado que se describe como un solar sin destino y, conforme al artículo 16 de la LPAP, los bienes de la Administración General del Estado se entienden adquiridos como patrimoniales salvo disposición en contrario. Se trata, por tanto, de un bien patrimonial del artículo 7. La cuestión a) solicita determinar si cabe la recuperación de oficio. Conforme al artículo 55.3, la recuperación de bienes patrimoniales en vía administrativa exige que la iniciación del procedimiento se notifique antes de que transcurra un año desde el día siguiente a la usurpación. En el presente supuesto, la ocupación comenzó el 15 de enero de 2025, por lo que el plazo terminó el 15 de enero de 2026; a 1 de marzo de 2026 han pasado más de trece meses. No obstante lo anterior, si el solar estuviera afectado a un servicio público, sería demanial y podría recuperarse en cualquier tiempo (artículo 55.2), si bien con los datos del enunciado la calificación más adecuada es la patrimonial. Por tanto, se concluye que la Administración no puede recuperar el solar por sí misma y debe ejercitar la acción correspondiente ante la jurisdicción civil.</p>
+<p><strong>Cuestión b).</strong> La cuestión b) solicita determinar el título del quiosco. La explanada es un bien de dominio público estatal destinado al uso general, y la instalación de un quiosco ocupa una porción de ella excluyendo su uso por otros, por lo que supone un uso privativo (artículo 85.3). Según el artículo 86.2, el uso privativo con instalaciones desmontables está sujeto a autorización, o a concesión si su duración excede de cuatro años. Seis años superan ese límite. Conforme al artículo 93, la concesión se otorga en régimen de concurrencia, salvo los supuestos de otorgamiento directo, se formaliza en documento administrativo y no puede exceder de setenta y cinco años. Por tanto, se concluye que el quiosco requiere una concesión demanial, que debe otorgarse en régimen de concurrencia por un plazo de seis años.</p>
+</div>
+<h3>11.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Calificar el bien</strong> antes de contestar (patrimonial por el art. 16; demanial la explanada) → <em>análisis</em>.<br>
+<strong>Cifras y fechas operadas</strong> (15/01/2025 + 1 año frente a 01/03/2026; 6 años frente a 4) → <em>aplicación de conocimientos</em>.<br>
+<strong>Suposición declarada</strong> sobre la afectación del solar, justificada con el art. 16 → admitida.<br>
+<strong>Alternativa evaluada</strong> (si fuera demanial, sin plazo) → <em>análisis</em>.<br>
+<strong>Conclusiones afirmativas</strong> con la vía concreta (jurisdicción civil; concesión en concurrencia).</div>
+
+<!-- 12 -->
+<h2 id="s12"><span class="n">12.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Marco y clasificación</td><td>Art. 132, LPAP y normas locales, art. 3, tabla de principios, demaniales y patrimoniales en todo caso, régimen jurídico, ideas clave</td><td>Tres apartados del 132, exclusión del dinero, cuadro de régimen</td><td>Fusionado + BOE (1) con precisión</td></tr>
+<tr><td>Organización</td><td>Consejo de Ministros, Hacienda, Dirección General, órganos de coordinación</td><td>No</td><td>Del temario (2)</td></tr>
+<tr><td>Adquisición</td><td>Modos, art. 16, vacantes, saldos, herencias, prescripción, ocupación</td><td>Igual, más adquisición onerosa</td><td>Fusionado + BOE (3)</td></tr>
+<tr><td>Potestades</td><td>Tabla de cuatro potestades, inembargabilidad</td><td>Plazos (2 años, 10 %, 18 meses), ejecución forzosa</td><td>Fusionado + BOE (4) con precisiones</td></tr>
+<tr><td>Dinámica del dominio público</td><td>Concepto, elementos, natural y artificial, afectación, implícitas, desafectación, mutación, adscripción</td><td>Cuadro de las cuatro figuras</td><td>Fusionado + BOE (5) con corrección</td></tr>
+<tr><td>Utilización</td><td>Tabla de usos, autorizaciones, concesiones, extinción</td><td>Regla práctica del art. 86</td><td>Fusionado + BOE (6)</td></tr>
+<tr><td>Patrimoniales</td><td>Adquisición, arrendamiento, explotación, enajenación, permuta, cesión</td><td>No</td><td>Del temario + BOE (7)</td></tr>
+<tr><td>Patrimonio Nacional</td><td>Concepto, régimen, lista, Consejo</td><td>Titularidad estatal, ejemplos</td><td>Fusionado + BOE (8) con correcciones</td></tr>
+<tr><td>Comunales</td><td>Concepto, aprovechamiento, desafectación, montes vecinales</td><td>Concepto y garantía</td><td>Fusionado (9)</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 11 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas (contrastadas con el BOE el 10/11/2026)</span>
+<strong>Temario 2026:</strong> la afectación implícita por uso público y notorio no exige «un año» (66.2.a) · faltaban la aprobación por el Consejo de Ministros de planes y proyectos (66.2.d) y los muebles (66.2.e) · la tesorería excluida del art. 3.2 es la de entidades dependientes de comunidades autónomas y corporaciones locales · el Monasterio de El Escorial es Real Patronato (art. 5), no bien del art. 4 · composición vigente del Consejo del Patrimonio Nacional · la recuperación de patrimoniales exige notificar la iniciación antes del año.<br>
+<strong>Material visual:</strong> los bienes del Patrimonio Nacional no se «enajenan por Ley de Cortes»: son inalienables y se desafectan por el Gobierno (nunca los histórico-artísticos) · el deslinde se anota por nota al margen, no por anotación preventiva.<br>
+<strong>Añadidos del BOE:</strong> destino de los saldos abandonados (18.2) · las entidades públicas empresariales solo defienden bienes demaniales (41.3) · plazo de 8 días y multas coercitivas del 5 % (56) · previa declaración de extinción en el desahucio (59) · sorteo en las autorizaciones (92.1) · transmisión e hipoteca del derecho real del concesionario (98) · formas y concurso de la enajenación (137) · cesión a Estados extranjeros (145.2) · enajenación con pago en especie si la permuta supera el 50 % (153).<br>
+<strong>Actualización revisada:</strong> la LPAP tiene una modificación de octubre de 2026 (Real Decreto-ley 29/2026), pero solo afecta a la disposición adicional vigésima, sobre la entidad estatal de vivienda; no toca nada de este tema.</div>
+
+<footer>
+GACE 2027 · Bloque IV · Tema 9 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 10/11/2026.<br>
+Normas: CE (art. 132) · Ley 33/2003 (consolidada a 07/10/2026) · Real Decreto 1373/2009 · Ley 23/1982 (consolidada a 20/10/2022) y Real Decreto 496/1987 · Ley 7/1985 · Real Decreto Legislativo 781/1986 · Real Decreto 1372/1986 · Ley 55/1980 · Código Civil (arts. 956 a 958).
+</footer>
+</div>
+</body>
+</html>
