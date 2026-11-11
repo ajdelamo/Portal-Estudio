@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 10 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque IV · Tema 10 · La responsabilidad patrimonial</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u":1,"t":"El primer sistema de responsabilidad objetiva de la Administración en España lo estableció:","o":["El art. 1903 del Código Civil","El art. 121 de la Ley de Expropiación Forzosa de 1954","La Ley 30/1992","La Constitución de 1978"],"c":1,"e":"LEF 1954, art. 121; luego LRJAE 1957 (art. 40)."},
+{"u":1,"t":"Según el art. 106.2 CE, el derecho a indemnización se excluye en los casos de:","o":["Caso fortuito","Fuerza mayor","Funcionamiento normal del servicio","Daños morales"],"c":1,"e":"Art. 106.2 CE."},
+{"u":1,"t":"La competencia sobre el sistema de responsabilidad de todas las Administraciones corresponde:","o":["A cada Administración","En exclusiva al Estado (art. 149.1.18.ª CE)","Al Estado en sus bases y a las CCAA en el desarrollo","A las Cortes Generales mediante ley orgánica"],"c":1,"e":"Régimen unitario."},
+{"u":1,"t":"El carácter «directo» del sistema significa que:","o":["El particular reclama a la Administración, que luego repite contra su personal","El particular puede elegir libremente demandar al funcionario causante ante la jurisdicción civil o reclamar a la Administración en vía administrativa","El funcionario responde solidariamente con la Administración","La indemnización se paga sin procedimiento previo"],"c":0,"e":"Art. 36 LRJSP."},
+{"u":1,"t":"Cuando la Administración actúa en relaciones de Derecho privado, su responsabilidad se exige:","o":["Ante la jurisdicción civil conforme a los arts. 1902 y 1903 del Código Civil, como cualquier particular que actúa en el tráfico jurídico privado","Conforme a los arts. 32 y siguientes LRJSP, incluso si concurre con sujetos privados o se exige a su aseguradora","Ante la jurisdicción social","Solo si hubo culpa grave del personal"],"c":1,"e":"Art. 35 LRJSP."},
+{"u":1,"t":"Desde 2016, el régimen sustantivo y el procedimental de la responsabilidad patrimonial se encuentran en:","o":["La Ley 30/1992 y el Real Decreto 429/1993, que siguen vigentes como régimen supletorio de las Leyes 39 y 40/2015 en todo lo no previsto","La Ley 40/2015 (sustantivo) y la Ley 39/2015 (procedimiento)","La Ley 39/2015 en exclusiva","El Código Civil y la LJCA"],"c":1,"e":"Arts. 32-37 LRJSP y especialidades LPAC."},
+{"u":2,"t":"Según el art. 32.2 LRJSP, el daño alegado debe ser:","o":["Efectivo, evaluable económicamente e individualizado con relación a una persona o grupo","Grave, permanente y superior a 1.000 euros","Cierto, causado por un funcionamiento anormal del servicio y acreditado mediante informe pericial aportado por el reclamante con la solicitud","Previsible y evitable según el estado de la técnica"],"c":0,"e":"Art. 32.2 (examen 2022)."},
+{"u":2,"t":"La Administración responde por los daños causados por:","o":["Solo el funcionamiento anormal de los servicios","El funcionamiento normal o anormal de los servicios públicos","Solo la actuación culposa o negligente de su personal, porque sin culpa no puede imputarse el daño al funcionamiento del servicio","Solo los actos administrativos anulados"],"c":1,"e":"Art. 32.1 (examen 2022)."},
+{"u":2,"t":"La anulación de un acto en vía contenciosa:","o":["Genera automáticamente derecho a indemnización","No presupone, por sí misma, derecho a la indemnización","Genera indemnización solo si el acto era nulo de pleno derecho","Impide reclamar responsabilidad"],"c":1,"e":"Art. 32.1, párrafo segundo (examen 2022)."},
+{"u":2,"t":"Los daños derivados de hechos que no se pudieron prever o evitar según el estado de la ciencia o de la técnica:","o":["Se indemnizan siempre","No son indemnizables, sin perjuicio de las prestaciones asistenciales que establezcan las leyes","Se indemnizan al 50 %","Solo se indemnizan si hay funcionamiento anormal"],"c":1,"e":"Riesgos del desarrollo, art. 34.1."},
+{"u":2,"t":"El caso fortuito, interno al servicio:","o":["Excluye la responsabilidad igual que la fuerza mayor","No excluye la responsabilidad de la Administración","Reduce la indemnización a la mitad","Traslada la responsabilidad al funcionario"],"c":1,"e":"Solo la fuerza mayor, externa, la excluye."},
+{"u":2,"t":"La intervención de la víctima en la producción del daño:","o":["Es irrelevante en un sistema de responsabilidad objetiva, en el que basta con que exista una relación entre el servicio y el daño","Puede moderar o incluso excluir la responsabilidad","Siempre excluye la responsabilidad","Solo importa si hay dolo"],"c":1,"e":"Concausalidad."},
+{"u":2,"t":"La antijuridicidad del daño significa que:","o":["El daño lo ha causado un acto ilegal, anulado en vía administrativa o contencioso-administrativa por sentencia firme","El particular no tiene el deber jurídico de soportarlo de acuerdo con la ley","El funcionario actuó con culpa","El daño supera el umbral del dictamen"],"c":1,"e":"Art. 34.1 LRJSP."},
+{"u":3,"t":"La indemnización por actos legislativos de naturaleza no expropiatoria procede:","o":["Siempre que exista un daño antijurídico derivado de la aplicación de la ley, aunque esta no diga nada sobre la indemnización","Cuando así lo establezcan los propios actos legislativos y en sus términos","Solo si la ley es declarada inconstitucional","Nunca"],"c":1,"e":"Art. 32.3."},
+{"u":3,"t":"Para reclamar por los daños de una ley declarada inconstitucional, el art. 32.4 exige:","o":["Haber obtenido sentencia firme desestimatoria de un recurso contra la actuación dañosa, alegando la inconstitucionalidad","Haber interpuesto recurso de amparo ante el Tribunal Constitucional contra la actuación administrativa que ocasionó el daño","Que la ley haya estado vigente menos de un año","Haber reclamado antes de la sentencia del TC"],"c":0,"e":"Art. 32.4 LRJSP."},
+{"u":3,"t":"En la responsabilidad del Estado legislador, solo son indemnizables los daños producidos en el plazo de:","o":["Un año anterior a la publicación de la sentencia","Cinco años anteriores a la publicación de la sentencia, salvo que esta disponga otra cosa","Diez años","Cuatro años anteriores a la publicación de la sentencia en el BOE o en el DOUE, por remisión a la Ley General Presupuestaria"],"c":1,"e":"Art. 34.1, párrafo segundo."},
+{"u":3,"t":"La STJUE de 28 de junio de 2022 (C-278/20) declaró contrarios al principio de efectividad, para las infracciones del Derecho de la Unión:","o":["Los requisitos de sentencia desestimatoria previa con alegación, la publicación en el DOUE y el límite de cinco años","El plazo de seis meses para resolver","El dictamen del Consejo de Estado","La competencia del Consejo de Ministros"],"c":0,"e":"Siguen aplicándose a la ley inconstitucional."},
+{"u":3,"t":"El proyecto de ley para adaptar el régimen del Estado legislador a la STJUE C-278/20:","o":["Se aprobó en 2025","Caducó con la disolución de las Cortes (Real Decreto 806/2026); el art. 32 conserva su redacción de 2015","Está en vigor desde el 1 de enero de 2026 y ha suprimido el límite de cinco años y la exigencia de sentencia desestimatoria previa","Se aprobó como real decreto-ley"],"c":1,"e":"Disolución de 06/10/2026."},
+{"u":3,"t":"La responsabilidad por el funcionamiento de la Administración de Justicia se rige por:","o":["La Ley 40/2015 en exclusiva, con las mismas reglas de procedimiento y plazos que la responsabilidad por el funcionamiento de los servicios públicos","La Ley Orgánica 6/1985, del Poder Judicial (arts. 292 a 297)","La Ley 50/1981","El Código Civil"],"c":1,"e":"Art. 32.7 LRJSP."},
+{"u":3,"t":"Por el funcionamiento anormal del Tribunal Constitucional en amparos, fija la indemnización:","o":["El propio Tribunal Constitucional, que fija la cuantía en la misma sentencia en que declara el funcionamiento anormal del proceso","El Consejo de Ministros, previa declaración del TC a instancia de parte","El Ministro de Justicia","El Consejo General del Poder Judicial"],"c":1,"e":"Art. 32.8 LRJSP."},
+{"u":3,"t":"Por los daños a terceros causados por un contratista en la ejecución del contrato responde, como regla:","o":["La Administración contratante","El contratista, salvo orden inmediata y directa de la Administración o vicios del proyecto elaborado por ella","Solidariamente ambos","La aseguradora de la Administración"],"c":1,"e":"Art. 196 LCSP y 32.9 LRJSP."},
+{"u":3,"t":"El requerimiento del tercero al órgano de contratación para que se pronuncie sobre quién responde:","o":["Debe hacerse en el plazo de un mes desde el hecho, es obligatorio antes de reclamar y suspende la ejecución del contrato","Puede hacerse dentro del año siguiente al hecho e interrumpe la prescripción","Es obligatorio antes de reclamar","Solo cabe en contratos de obras"],"c":1,"e":"Art. 196.3 LCSP."},
+{"u":3,"t":"En las fórmulas conjuntas de actuación entre Administraciones, frente al particular responden:","o":["Cada Administración por la parte que le corresponda según su participación en la financiación, sin solidaridad frente al particular","En todo caso de forma solidaria","Solo la de mayor financiación","La que dictó el acto"],"c":1,"e":"Art. 33.1 (examen 2019)."},
+{"u":3,"t":"A falta de reglas, en las fórmulas conjuntas tramita el procedimiento la Administración:","o":["De mayor población","Con mayor participación en la financiación del servicio","La que primero haya conocido la reclamación o, si se presentó ante varias, la que tenga mayor población dentro de su ámbito territorial","Estatal en todo caso"],"c":1,"e":"Art. 33.3 (examen 2019)."},
+{"u":4,"t":"La cuantía de la indemnización se calcula con referencia a:","o":["La fecha de la reclamación","El día en que la lesión efectivamente se produjo, actualizada con el Índice de Garantía de la Competitividad","La fecha de la resolución, sin actualización","La fecha de la sentencia firme"],"c":1,"e":"Art. 34.3 (examen 2019)."},
+{"u":4,"t":"Los intereses del art. 34.3 LRJSP son:","o":["Intereses de demora devengados desde la presentación de la reclamación hasta la notificación de la resolución que reconoce la indemnización","Los que procedan por demora en el pago de la indemnización fijada, conforme a la LGP","El interés legal desde el hecho dañoso","No existen intereses en esta materia"],"c":1,"e":"El visual decía «desde la reclamación»: incorrecto."},
+{"u":4,"t":"En casos de muerte o lesiones corporales, la indemnización puede tomar como referencia:","o":["El salario mínimo interprofesional","Los baremos de la normativa de seguros obligatorios y de la Seguridad Social","El IPREM","El valor catastral de los bienes del perjudicado, actualizado con el Índice de Precios al Consumo hasta la fecha de la resolución"],"c":1,"e":"Art. 34.2 (baremo de tráfico)."},
+{"u":4,"t":"La indemnización puede sustituirse por una compensación en especie o pagos periódicos:","o":["Por decisión unilateral y motivada de la Administración cuando así lo aconsejen razones de interés público y de disponibilidad presupuestaria","Cuando sea más adecuado y convenga al interés público, con acuerdo del interesado","Solo si la cuantía supera 50.000 €","Nunca"],"c":1,"e":"Art. 34.4."},
+{"u":4,"t":"Los criterios de valoración de la indemnización son los de:","o":["La legislación fiscal, de expropiación forzosa y demás normas, ponderando el mercado","El Código Civil exclusivamente","La Ley General de Subvenciones y el Reglamento de Bienes de las Entidades Locales, según la Administración responsable del daño","El arbitrio del órgano que resuelve"],"c":0,"e":"Art. 34.2."},
+{"u":5,"t":"La Administración exige responsabilidad a su personal tras indemnizar al lesionado cuando haya habido:","o":["Cualquier grado de culpa","Dolo, o culpa o negligencia graves, y lo hace de oficio","Solo dolo, y a instancia del perjudicado","Solo condena penal firme"],"c":1,"e":"Art. 36.2."},
+{"u":5,"t":"En el procedimiento de exigencia de responsabilidad al personal, la audiencia dura:","o":["Cinco días","Diez días","Quince días","Un mes"],"c":1,"e":"Art. 36.4.c (exámenes 2019 y 2022)."},
+{"u":5,"t":"La secuencia de plazos del procedimiento contra el personal (art. 36.4) es:","o":["Alegaciones 15 · prueba 15 · audiencia 10 · propuesta 5 · resolución 5 días","10 · 10 · 15 · 10 · 10","15 · 30 · 15 · 10 · 30","10 · 15 · 10 · 15 · 5"],"c":0,"e":"Art. 36.4."},
+{"u":5,"t":"La exigencia de responsabilidad penal al personal:","o":["Suspende siempre el procedimiento de responsabilidad patrimonial hasta que recaiga sentencia penal firme que fije los hechos probados","No lo suspende, salvo que la determinación de los hechos en vía penal sea necesaria para fijar la responsabilidad","Extingue la responsabilidad patrimonial","Solo cabe tras la resolución administrativa"],"c":1,"e":"Art. 37.2."},
+{"u":5,"t":"Para graduar la responsabilidad del personal se ponderan, entre otros:","o":["Su antigüedad, su retribución y su grado personal, así como el número de expedientes disciplinarios que se le hayan incoado","El resultado dañoso, el grado de culpabilidad, la responsabilidad profesional y su relación con el resultado","Su cuerpo y su nivel","El número de reclamaciones previas"],"c":1,"e":"Art. 36.2."},
+{"u":6,"t":"El derecho a reclamar responsabilidad patrimonial prescribe:","o":["A los seis meses","Al año","A los cuatro años","A los cinco años"],"c":1,"e":"Art. 67.1 LPAC (examen 2019)."},
+{"u":6,"t":"En daños físicos o psíquicos, el plazo de prescripción se computa desde:","o":["El hecho dañoso","La curación o la determinación del alcance de las secuelas","La primera asistencia médica","La reclamación previa"],"c":1,"e":"Art. 67.1 (exámenes 2022 y 2024)."},
+{"u":6,"t":"Cuando procede indemnizar por anulación de un acto, el año se computa desde:","o":["El dictado del acto anulado","La notificación de la resolución administrativa o de la sentencia definitiva que lo anula","La fecha en que el acto anulado adquirió firmeza en vía administrativa, con independencia de cuándo se anule después","La ejecución de la sentencia"],"c":1,"e":"Art. 67.1, párrafo segundo."},
+{"u":6,"t":"La Administración puede iniciar de oficio el procedimiento de responsabilidad patrimonial:","o":["En cualquier momento, porque la prescripción solo opera frente a las reclamaciones presentadas a instancia del interesado","Siempre que no haya prescrito el derecho del interesado a reclamar","Solo a petición del Consejo de Estado","Nunca"],"c":1,"e":"Art. 65.1 (examen 2024)."},
+{"u":6,"t":"El informe del servicio cuyo funcionamiento causó la lesión es:","o":["Facultativo y en quince días","Preceptivo y en diez días como máximo","Preceptivo y en un mes","Vinculante y en dos meses"],"c":1,"e":"Art. 81.1 (examen 2024)."},
+{"u":6,"t":"El dictamen del Consejo de Estado es preceptivo cuando la indemnización reclamada es:","o":["Superior a 30.050 euros, coincidiendo con el límite de competencia de los Juzgados Centrales de lo Contencioso-administrativo","Igual o superior a 50.000 € (o la cuantía autonómica), o lo dispone la LO 3/1980","Superior a 100.000 €","En todo caso"],"c":1,"e":"Art. 81.2."},
+{"u":6,"t":"En reclamaciones por funcionamiento anormal de la Administración de Justicia es preceptivo:","o":["El dictamen preceptivo de la Sala de Gobierno del Tribunal Supremo, que se emite en un mes y no suspende el plazo para resolver","El informe del CGPJ, en dos meses, que suspende el plazo para resolver","El informe del Ministerio Fiscal","El dictamen del Tribunal Constitucional"],"c":1,"e":"Art. 81.3 (examen 2024)."},
+{"u":6,"t":"Transcurridos seis meses sin resolución expresa ni acuerdo:","o":["Se entiende estimada la reclamación","Puede entenderse que la resolución es contraria a la indemnización","El procedimiento caduca","Procede el dictamen del Consejo de Estado"],"c":1,"e":"Art. 91.3 (examen 2022)."},
+{"u":6,"t":"En la AGE, los procedimientos de responsabilidad patrimonial los resuelve:","o":["El Delegado del Gobierno en la comunidad autónoma donde se produjo el daño, salvo que la cuantía exceda de 50.000 euros","El ministro respectivo, o el Consejo de Ministros en el Estado legislador o si una ley lo dispone","El Subsecretario","El Consejo de Estado"],"c":1,"e":"Art. 92 (examen 2022)."},
+{"u":6,"t":"Si puede existir un contratista responsable, en el procedimiento:","o":["Se suspende el procedimiento hasta que el juez civil determine si el daño es imputable al contratista o a la Administración","Debe darse audiencia en todo caso al contratista","Se archiva y se remite al contratista","Interviene el Ministerio Fiscal"],"c":1,"e":"Art. 82.5."},
+{"u":6,"t":"La tramitación simplificada en responsabilidad patrimonial procede cuando:","o":["Lo solicita el interesado en su escrito de reclamación y la cuantía reclamada no alcanza el umbral del dictamen del Consejo de Estado","El órgano considera inequívocas la causalidad, la valoración del daño y la cuantía","La cuantía es inferior a 15.000 €","No hay daños personales"],"c":1,"e":"Art. 96.4; se resuelve en 30 días."},
+{"u":6,"t":"En la tramitación simplificada, el dictamen del Consejo de Estado:","o":["No es necesario en ningún caso, porque la tramitación simplificada excluye los informes y dictámenes preceptivos del procedimiento ordinario","Podrá emitirse en quince días si lo solicita el órgano competente, y su petición suspende el plazo","Debe emitirse en cinco días","Se emite en dos meses sin suspender"],"c":1,"e":"Art. 96.6.g LPAC."},
+{"u":6,"t":"Las resoluciones en materia de responsabilidad patrimonial:","o":["Admiten recurso de alzada ante el Consejo de Ministros cuando las dicta un ministro, y ponen fin a la vía administrativa solo tras él","Ponen fin a la vía administrativa, cualquiera que sea la relación de la que deriven","Solo ponen fin a la vía si son de un ministro","Son firmes sin recurso"],"c":1,"e":"Art. 114.1.e LPAC."},
+{"u":7,"t":"La resolución de un ministro que reconoce 25.000 € de indemnización se recurre ante:","o":["La Audiencia Nacional","Los Juzgados Centrales de lo Contencioso-administrativo (no excede de 30.050 €)","El Tribunal Supremo","El Tribunal Superior de Justicia"],"c":1,"e":"Art. 9.c LJCA (examen 2022)."},
+{"u":7,"t":"Lesión el 10/03/2025; secuelas determinadas el 20/04/2026; reclamación el 15/05/2026. ¿Qué se concluye?","o":["Ha prescrito: ha pasado más de un año desde el accidente","Está en plazo: el año corre desde la determinación de las secuelas, hasta el 20/04/2027","Está en plazo porque el plazo es de cuatro años","Debe iniciarse de oficio"],"c":1,"e":"Art. 67.1 LPAC."},
+{"u":7,"t":"Se reclaman 50.000 € exactos. ¿Es preceptivo el dictamen del Consejo de Estado?","o":["No, porque el art. 81.2 exige que la cuantía reclamada supere 50.000 euros, y en este caso se queda justo en el límite","Sí: el art. 81.2 dice «igual o superior»","Solo si hay daños personales","Solo si lo pide el reclamante"],"c":1,"e":"Art. 81.2 LPAC."},
+{"u":7,"t":"El enunciado no indica si la víctima circulaba con imprudencia. Según el método de la Comisión, se escribe:","o":["«Salvo mejor criterio, podríamos entender que no hubo culpa de la víctima»","«El enunciado no precisa…, por lo que suponemos que no, dado que…», y después una conclusión afirmativa","Nada: sin ese dato no puede pronunciarse sobre la causalidad y la cuestión debe dejarse sin respuesta para no inventar hechos","«Podría entenderse que hubo concurrencia de culpas»"],"c":1,"e":"Suposición declarada."},
+{"u":7,"t":"Un ciudadano demanda directamente al funcionario que le causó el daño. ¿Qué se escribe?","o":["Que la demanda es procedente ante la jurisdicción civil, porque el funcionario responde personalmente de los daños que causa por culpa","Que debe reclamar a la Administración (art. 36.1), que después repetirá de oficio si hubo dolo o culpa grave","Que responde el funcionario solidariamente","Que debe acudir al Defensor del Pueblo"],"c":1,"e":"Responsabilidad directa."},
+{"u":7,"t":"Reclamación presentada el 15/05/2026 por 60.000 € ante el Ministerio. ¿Desde cuándo hay silencio y ante quién se recurre?","o":["Desde el 15/08/2026, ante el Juzgado Central","Desde el 15/11/2026, silencio desestimatorio; contencioso ante la Audiencia Nacional (más de 30.050 €)","Desde el 15/11/2026, silencio estimatorio","Desde el 15/05/2027, ante el Tribunal Supremo"],"c":1,"e":"Arts. 91.3 LPAC y 11.1.a LJCA."},
+{"u":7,"t":"¿Qué conclusión se ajusta al criterio de la Comisión?","o":["«Salvo mejor criterio fundado en Derecho, procedería indemnizar»","«Podríamos entender que concurren los requisitos»","«Por tanto, se concluye que concurren los requisitos del artículo 32 de la LRJSP y que la reclamación está en plazo»","«Parece que la Administración debería indemnizar»"],"c":2,"e":"Conclusión afirmativa."}
+];
+
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Evolución y caracteres",2:"Presupuestos",3:"Supuestos especiales",4:"Indemnización",5:"Responsabilidad del personal",6:"Procedimiento",7:"Jurisdicción y supuesto práctico"};
+const TABS={1:"Caracteres",2:"Requisitos",3:"Especiales",4:"Indemnización",5:"Personal",6:"Procedimiento",7:"Supuesto"};
+const SK="gace27_biv_t10_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
