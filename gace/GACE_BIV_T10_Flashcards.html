@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 10 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque IV · Tema 10 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "Hitos de la evolución", "b": "Irresponsabilidad (art. 1903 CC, agente especial) → LEF 1954, art. 121: primer sistema objetivo → LRJAE 1957 → CE 1978 → Ley 30/1992 y RD 429/1993 (Ley 4/1999: riesgos del desarrollo) → Leyes 39 y 40/2015, sin reglamento propio."}, {"u": 1, "f": "Art. 106.2 CE", "b": "«Los particulares, en los términos establecidos por la ley, tendrán derecho a ser indemnizados por toda lesión que sufran en cualquiera de sus bienes y derechos, salvo en los casos de fuerza mayor, siempre que la lesión sea consecuencia del funcionamiento de los servicios públicos»."}, {"u": 1, "f": "Otros preceptos constitucionales", "b": "Art. 9.3 (responsabilidad de los poderes públicos) · art. 121 (error judicial y funcionamiento anormal de la Justicia) · art. 149.1.18.ª (sistema de responsabilidad de todas las AAPP: exclusivo del Estado)."}, {"u": 1, "f": "Dónde está cada cosa", "b": "Sustantivo: arts. 32 a 37 LRJSP. Procedimiento: LPAC (arts. 65, 67, 81, 82.5, 86.5, 91, 92, 96.4 y 114.1.e). Jurisdicción: LJCA (arts. 2.e, 9.c, 11, 12) y LOPJ (9.4)."}, {"u": 2, "f": "Los cinco caracteres", "b": "Unitario (todas las AAPP, también en Derecho privado, art. 35) · general · directo (responde la Administración, regreso contra el personal) · objetivo (normal o anormal, matizado por la antijuridicidad) · reparador integral."}, {"u": 2, "f": "Art. 35 LRJSP", "b": "Si la Administración actúa en relaciones de Derecho privado, directamente o por una entidad privada, se aplican igualmente los arts. 32 y siguientes, aunque concurran particulares o se exija a su aseguradora."}, {"u": 3, "f": "Regla general (art. 32.1)", "b": "Toda lesión por funcionamiento normal o anormal de los servicios públicos, salvo fuerza mayor o daños que haya deber jurídico de soportar. La anulación de actos o disposiciones no presupone por sí misma indemnización."}, {"u": 3, "f": "Los cuatro requisitos", "b": "1) Daño efectivo, evaluable económicamente e individualizado (32.2) · 2) antijuridicidad (34.1) · 3) imputación al funcionamiento del servicio · 4) relación de causalidad, sin fuerza mayor."}, {"u": 3, "f": "Riesgos del desarrollo (34.1)", "b": "No se indemnizan los daños por hechos que no se pudieron prever o evitar según el estado de la ciencia o la técnica en ese momento, sin perjuicio de las prestaciones asistenciales que establezcan las leyes."}, {"u": 3, "f": "Fuerza mayor frente a caso fortuito", "b": "Fuerza mayor: imprevisible, irresistible y externa al servicio → excluye. Caso fortuito: interno al servicio → no excluye. La culpa de la víctima o de un tercero puede moderar o excluir (concausalidad)."}, {"u": 4, "f": "Estado legislador (32.3)", "b": "Actos legislativos no expropiatorios: solo si el propio acto legislativo establece la indemnización. Resuelve el Consejo de Ministros (92 LPAC) y se recurre ante el Tribunal Supremo."}, {"u": 4, "f": "Ley inconstitucional (32.4)", "b": "Sentencia firme desestimatoria previa, en cualquier instancia, contra la actuación dañosa, habiendo alegado la inconstitucionalidad. Daños de los 5 años anteriores a la publicación (34.1). Reclamación: 1 año desde la publicación en el BOE (67.1)."}, {"u": 4, "f": "Norma contraria al Derecho UE (32.5)", "b": "Mismos requisitos procesales + Francovich: norma que confiere derechos · violación suficientemente caracterizada · causalidad directa. La sentencia surte efectos desde su publicación en el DOUE (32.6)."}, {"u": 4, "f": "STJUE C-278/20 y la reforma caducada", "b": "28/06/2022: contrarios al principio de efectividad la sentencia desestimatoria previa con alegación, la publicación en el DOUE y el límite de 5 años (solo Derecho UE). El proyecto de reforma de 2025 caducó con la disolución de las Cortes (RD 806/2026): el art. 32 sigue en su redacción de 2015."}, {"u": 5, "f": "Estado juez (32.7)", "b": "LOPJ arts. 292-297: error judicial (previa declaración judicial), funcionamiento anormal y prisión provisional seguida de absolución o sobreseimiento (294). La revocación de resoluciones no indemniza. Informe del CGPJ en 2 meses, suspende."}, {"u": 5, "f": "Tribunal Constitucional (32.8)", "b": "Funcionamiento anormal en amparos o cuestiones de inconstitucionalidad declarado por el TC a instancia de parte → el Consejo de Ministros fija la indemnización; tramita Justicia con audiencia al Consejo de Estado."}, {"u": 5, "f": "Contratistas (196 LCSP y 32.9)", "b": "Responde el contratista, salvo orden inmediata y directa de la Administración o vicio del proyecto elaborado por ella. Audiencia obligatoria al contratista (82.5 LPAC). Requerimiento del tercero al órgano de contratación en 1 año: interrumpe la prescripción. El 32.9 aún cita el TRLCSP de 2011."}, {"u": 5, "f": "Concurrencia de Administraciones (33)", "b": "Fórmulas conjuntas: solidaria siempre frente al particular; el instrumento puede repartir; tramita la de los estatutos o, en su defecto, la de mayor financiación, que consulta a las demás 15 días. Otros casos: competencia, interés público e intensidad; si no se puede, solidaria."}, {"u": 6, "f": "Alcance y criterios (34.2)", "b": "Reparación integral: daño emergente, lucro cesante acreditado y daño moral. Criterios de la legislación fiscal y de expropiación forzosa, con valoraciones de mercado; en muerte o lesiones, baremo de tráfico (RDLeg 8/2004)."}, {"u": 6, "f": "Momento y actualización (34.3)", "b": "Cuantía al día de la lesión, actualizada al fin del procedimiento con el Índice de Garantía de la Competitividad (INE). Intereses: por demora en el pago de la indemnización fijada (LGP), no «desde la reclamación»."}, {"u": 6, "f": "Forma (34.4)", "b": "Dinero como regla; compensación en especie o pagos periódicos si es más adecuado y conviene al interés público, siempre con acuerdo del interesado."}, {"u": 7, "f": "Acción de regreso (36.1 a 36.3)", "b": "El particular reclama siempre a la Administración. Esta, tras indemnizar, exige de oficio al personal la responsabilidad por dolo, o culpa o negligencia graves. Criterios: resultado dañoso, grado de culpabilidad, responsabilidad profesional, relación con el daño. También por daños a bienes de la Administración."}, {"u": 7, "f": "Procedimiento contra el personal (36.4)", "b": "Alegaciones 15 días · prueba 15 · audiencia 10 · propuesta 5 · resolución 5. La resolución pone fin a la vía administrativa (36.5)."}, {"u": 7, "f": "Responsabilidad penal (37)", "b": "El proceso penal no suspende el procedimiento de responsabilidad patrimonial, salvo que los hechos deban fijarse en vía penal para determinarla."}, {"u": 8, "f": "Iniciación de oficio (65)", "b": "Solo si no ha prescrito el derecho del interesado. Notificación a los presuntos lesionados con 10 días para alegar y proponer prueba; sigue aunque no se personen."}, {"u": 8, "f": "Solicitud del interesado (67.2)", "b": "Lesiones · presunta relación de causalidad · evaluación económica si es posible · momento de la lesión · alegaciones, documentos y proposición de prueba."}, {"u": 8, "f": "Prescripción (67.1)", "b": "1 año: desde el hecho o la manifestación del efecto lesivo · daños físicos o psíquicos: desde la curación o la determinación de las secuelas · anulación: desde la notificación de la resolución administrativa o la sentencia definitiva · ley inconstitucional o contraria al Derecho UE: desde la publicación de la sentencia."}, {"u": 8, "f": "Informes y dictamen (81)", "b": "Informe del servicio: preceptivo, 10 días · dictamen del Consejo de Estado: reclamado ≥ 50.000 € (o cuantía autonómica, o LO 3/1980); propuesta en 10 días tras la audiencia; emisión en 2 meses · CGPJ en la Justicia: 2 meses, suspende."}, {"u": 8, "f": "Terminación y silencio (86.5, 91)", "b": "Convencional (acuerdo con cuantía y modo) o resolución que se pronuncia sobre causalidad, valoración, cuantía y modo. 6 meses sin resolución ni acuerdo → silencio desestimatorio."}, {"u": 8, "f": "Competencia (92)", "b": "AGE: el ministro respectivo; el Consejo de Ministros en el Estado legislador o si una ley lo dice. CCAA y EELL: sus órganos. Entidades de Derecho público: sus normas o, en su defecto, este artículo."}, {"u": 8, "f": "Tramitación simplificada (96.4 y 96.6)", "b": "Si causalidad, valoración y cuantía son inequívocas, de oficio · 30 días · alegaciones 5 días · audiencia solo si va a ser desfavorable · dictamen: suspende y podrá emitirse en 15 días si se pide · si es contrario al fondo, vuelta a la ordinaria."}, {"u": 8, "f": "Fin de la vía administrativa (114.1.e)", "b": "Las resoluciones de responsabilidad patrimonial, cualquiera que sea la relación pública o privada de la que deriven. Cabe reposición potestativa o contencioso."}, {"u": 9, "f": "Orden jurisdiccional", "b": "Exclusivamente el contencioso-administrativo, aunque concurran privados o haya aseguradora (2.e LJCA y 9.4 LOPJ). Responsabilidad civil derivada de delito: orden penal (121 CP)."}, {"u": 9, "f": "Reparto entre órganos (AGE)", "b": "Juzgados Centrales: ministros y secretarios de Estado si lo reclamado ≤ 30.050 € (9.c) · Audiencia Nacional: cuantía superior (11.1.a) · Tribunal Supremo, Sala Tercera: Consejo de Ministros (12.1.a)."}, {"u": 10, "f": "Introducción de responsabilidad: las cuatro piezas", "b": "Art. 106.2 CE · art. 149.1.18.ª CE · arts. 32 a 37 de la Ley 40/2015 (en adelante, LRJSP) · Ley 39/2015 (en adelante, LPAC) para el procedimiento."}, {"u": 10, "f": "Calificación previa del Tema 10", "b": "«Con carácter previo, procede calificar la reclamación»: daño efectivo, evaluable e individualizado · antijuridicidad · imputación y causalidad sin fuerza mayor · reclamación en plazo (67.1 LPAC)."}, {"u": 10, "f": "Mini-supuesto de don Pablo (cifras)", "b": "Caída 10/03/2025 · secuelas 20/04/2026 → plazo hasta 20/04/2027 → reclamación del 15/05/2026 en plazo · 60.000 ≥ 50.000 → dictamen · resuelve el Ministro de Transportes · silencio desde 15/11/2026 · recurso ante la Audiencia Nacional (> 30.050)."}, {"u": 10, "f": "Trampas del supuesto", "b": "Plazo en daños personales desde las secuelas, no desde el accidente · 50.000 € exactos también exigen dictamen · el silencio es negativo · no se demanda al funcionario · daño del contratista: responde él salvo orden o vicio del proyecto."}, {"u": 10, "f": "Dato que falta en el enunciado", "b": "«El enunciado no precisa…, por lo que suponemos que…» (con su justificación) y después «Por tanto, se concluye que…». Nunca un condicional dubitativo ni coletillas de cierre."}, {"u": 3, "f": "Daño indemnizable: qué entra y qué no", "b": "Entra: daño emergente, lucro cesante acreditado, daño moral. No entra: daños hipotéticos, eventuales o futuros, cargas generales no individualizadas, riesgos del desarrollo, daños con deber jurídico de soportarlos."}, {"u": 4, "f": "Plazos del Estado legislador", "b": "Efectos de la sentencia: desde su publicación (salvo que diga otra cosa) · daños indemnizables: 5 años anteriores · reclamación: 1 año desde la publicación · resuelve el Consejo de Ministros · recurso ante el Tribunal Supremo."}, {"u": 5, "f": "Prisión provisional indebida", "b": "Art. 294 LOPJ: tras absolución o sobreseimiento libre, si se causaron perjuicios, hay derecho a indemnización por funcionamiento de la Administración de Justicia."}, {"u": 8, "f": "Audiencia al contratista (82.5)", "b": "En los procedimientos del art. 32.9 LRJSP (posible contratista responsable), audiencia en todo caso al contratista, notificándole todas las actuaciones para que se persone, alegue y proponga prueba."}, {"u": 6, "f": "IGC frente a IPC", "b": "La indemnización de responsabilidad patrimonial se actualiza con el Índice de Garantía de la Competitividad. El IPC es el de la reversión expropiatoria (art. 55 LEF): no los confundas."}, {"u": 9, "f": "Recursos contra la resolución", "b": "Pone fin a la vía administrativa → reposición potestativa (1 mes) o contencioso directamente. Contra el silencio desestimatorio, igual."}];
+const UNAMES={"1": "Evolución y fundamento", "2": "Caracteres", "3": "Presupuestos", "4": "Estado legislador", "5": "Otros supuestos", "6": "Indemnización", "7": "Personal", "8": "Procedimiento", "9": "Jurisdicción", "10": "Supuesto"};
+const SK="gace27_biv_t10_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
