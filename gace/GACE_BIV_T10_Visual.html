@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BIV · Tema 10 — La responsabilidad patrimonial de las Administraciones Públicas (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tablewrap table{break-inside:auto}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque IV · Derecho Administrativo · Tema 10</small>
+    <h1>La responsabilidad patrimonial de las Administraciones Públicas. Procedimiento de responsabilidad patrimonial</h1>
+    <p>Versión fusionada: el Tema 10 del Bloque IV del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas contra el texto consolidado del BOE y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 10/11/2026 · Ley 40/2015 consolidada a 02/08/2024 (arts. 32 a 37 en su redacción original) · Ley 39/2015 consolidada a 06/11/2024</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">Evolución, fundamento y caracteres</a></li>
+    <li><a href="#s2">Presupuestos de la responsabilidad</a></li>
+    <li><a href="#s3">Supuestos especiales</a></li>
+    <li><a href="#s4">La indemnización</a></li>
+    <li><a href="#s5">Responsabilidad de las autoridades y del personal</a></li>
+    <li><a href="#s6">El procedimiento de responsabilidad patrimonial</a></li>
+    <li><a href="#s7">Garantías jurisdiccionales</a></li>
+    <li><a href="#s8">Lo que preguntan y trampas</a></li>
+    <li><a href="#s9">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s10">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. El tema tiene dos piezas: la sustantiva (arts. 32 a 37 de la Ley 40/2015: cuándo se responde y cuánto) y la procedimental (especialidades de la Ley 39/2015: cómo se reclama).</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Repaso en audio. Al terminar, recita sin mirar los números del <a href="#s8">apartado 8</a>: 1 año, 10 días, 50.000 €, 2 meses, 6 meses, 30 días, 5 años, 30.050 € y los 15-15-10-5-5 del procedimiento contra el personal.</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s9">apartado 9</a> tapando la columna derecha. Es una materia de supuesto pura: los cuatro requisitos aplicados a los hechos, el plazo bien contado y el órgano que resuelve.</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> Evolución, fundamento y caracteres</h2>
+<h3>1.1 Evolución histórica</h3>
+<div class="flowv">
+<div class="step"><b>Siglo XIX y buena parte del XX</b>Principio de <strong>irresponsabilidad</strong> del Estado. Vía civil indirecta del <strong>art. 1903 del Código Civil</strong>: solo respondía cuando actuaba mediante un «agente especial».</div>
+<div class="step"><b>Ley de Expropiación Forzosa de 1954 (art. 121)</b>Primer sistema <strong>objetivo</strong>: toda lesión por el funcionamiento <strong>normal o anormal</strong> de los servicios públicos. Lo completa la <strong>Ley de Régimen Jurídico de la Administración del Estado de 1957</strong> (art. 40).</div>
+<div class="step"><b>Constitución de 1978</b>Eleva la institución a rango constitucional (arts. 9.3, 106.2, 121 y 149.1.18.ª).</div>
+<div class="step"><b>Ley 30/1992 y Real Decreto 429/1993</b>Desarrollo legal y reglamento de procedimiento. La Ley 4/1999 introduce los <strong>riesgos del desarrollo</strong>.</div>
+<div class="step"><b>Desde 2016: Leyes 39 y 40/2015</b>Lo <strong>sustantivo</strong> en la Ley 40/2015 (LRJSP, arts. 32 a 37); el <strong>procedimiento</strong>, como especialidades del común en la Ley 39/2015 (LPAC). Ya no hay reglamento propio: el Real Decreto 429/1993 quedó derogado.</div>
+</div>
+<h3>1.2 Fundamento constitucional</h3>
+<div class="box clave"><span class="box-h">Art. 106.2 CE</span>
+«Los particulares, en los términos establecidos por la ley, tendrán derecho a ser indemnizados por toda lesión que sufran en cualquiera de sus bienes y derechos, salvo en los casos de <strong>fuerza mayor</strong>, siempre que la lesión sea consecuencia del <strong>funcionamiento de los servicios públicos</strong>».</div>
+<ul>
+<li><strong>Art. 9.3 CE</strong>: garantiza la responsabilidad de los poderes públicos.</li>
+<li><strong>Art. 121 CE</strong>: los daños por <strong>error judicial</strong> y por <strong>funcionamiento anormal de la Administración de Justicia</strong> dan derecho a indemnización a cargo del Estado.</li>
+<li><strong>Art. 149.1.18.ª CE</strong>: el «sistema de responsabilidad de todas las Administraciones públicas» es competencia exclusiva del Estado, lo que garantiza un régimen unitario.</li>
+</ul>
+<h3>1.3 Caracteres del sistema</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Carácter</th><th>Significado</th></tr>
+<tr><td><strong>Unitario</strong></td><td>Para todas las Administraciones y todas sus formas de actuar, también en relaciones de Derecho privado, directamente o a través de una entidad privada, aunque concurran particulares o responda su aseguradora (art. 35 LRJSP).</td></tr>
+<tr><td><strong>General</strong></td><td>Toda la actividad administrativa, de hecho o de derecho, y la de los poderes legislativo y judicial con sus especialidades.</td></tr>
+<tr><td><strong>Directo</strong></td><td>La Administración responde directamente frente al particular, con acción de regreso contra su personal (art. 36).</td></tr>
+<tr><td><strong>Objetivo</strong></td><td>No exige culpa: basta el funcionamiento normal o anormal. La jurisprudencia lo matiza con la <strong>antijuridicidad</strong>, para que la Administración no sea una aseguradora universal.</td></tr>
+<tr><td><strong>Reparador integral</strong></td><td>Busca la reparación íntegra del daño, incluido el moral.</td></tr>
+</table></div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> Presupuestos de la responsabilidad (art. 32 LRJSP)</h2>
+<div class="box clave"><span class="box-h">Regla general (art. 32.1)</span>
+Los particulares tienen derecho a ser indemnizados de toda lesión en sus bienes y derechos que sea consecuencia del <strong>funcionamiento normal o anormal</strong> de los servicios públicos, salvo <strong>fuerza mayor</strong> o daños que tengan el <strong>deber jurídico de soportar</strong> de acuerdo con la ley. La <strong>anulación</strong> de actos o disposiciones, en vía administrativa o contenciosa, <strong>no presupone por sí misma</strong> derecho a indemnización.</div>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Requisito</th><th>Contenido</th></tr>
+<tr><td><strong>1. Daño efectivo, evaluable e individualizado</strong> (32.2)</td><td>Real y cierto (no hipotético, eventual ni futuro), <strong>evaluable económicamente</strong> e <strong>individualizado</strong> respecto de una persona o grupo (no cargas generales). Se indemnizan el lucro cesante acreditado y el daño moral.</td></tr>
+<tr><td><strong>2. Antijuridicidad</strong> (34.1)</td><td>Solo es indemnizable el daño que el particular <strong>no tiene el deber jurídico de soportar</strong>. Es el núcleo de un sistema objetivo pero no universal. No se indemnizan los <strong>riesgos del desarrollo</strong>: daños por hechos que no se pudieron prever o evitar según el estado de la ciencia o la técnica en ese momento, sin perjuicio de las prestaciones asistenciales que prevean las leyes.</td></tr>
+<tr><td><strong>3. Imputación a una Administración</strong></td><td>Al funcionamiento de un servicio público en sentido amplio: actos, actuaciones materiales, omisiones, retrasos y conductas del personal en el ejercicio de sus funciones.</td></tr>
+<tr><td><strong>4. Relación de causalidad</strong></td><td>Nexo entre el funcionamiento del servicio y la lesión (causalidad adecuada). Se admite la <strong>concausalidad</strong>: la intervención de la víctima o de un tercero puede <strong>moderar o excluir</strong> la responsabilidad.</td></tr>
+</table></div>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Fuerza mayor frente a caso fortuito</span>
+<strong>Fuerza mayor</strong>: imprevisible, irresistible y <strong>externa</strong> al servicio → <strong>excluye</strong> la responsabilidad. <strong>Caso fortuito</strong>: <strong>interno</strong> al servicio (un fallo técnico imprevisible) → <strong>no</strong> la excluye.</div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas</span>
+«La fuerza mayor y el caso fortuito exoneran» → solo la fuerza mayor · «La anulación de un acto da derecho automático a indemnización» → no (32.1) · «Solo se responde por funcionamiento anormal» → también por el normal.</div>
+</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (examen 2022)</span>
+El daño debe ser <strong>efectivo, evaluable económicamente e individualizado</strong> · se responde por el funcionamiento <strong>normal y anormal</strong> · la anulación de un acto no presupone por sí sola derecho a indemnización.</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> Supuestos especiales</h2>
+<h3>3.1 El Estado legislador (art. 32.3 a 32.6)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Supuesto</th><th>Régimen</th></tr>
+<tr><td><strong>Actos legislativos no expropiatorios</strong> (32.3)</td><td>Se indemniza el daño que no haya deber de soportar <strong>cuando así lo establezca el propio acto legislativo</strong> y en sus términos. Resuelve el <strong>Consejo de Ministros</strong> (art. 92 LPAC).</td></tr>
+<tr><td><strong>Ley declarada inconstitucional</strong> (32.4)</td><td>Exige que el particular haya obtenido, en cualquier instancia, <strong>sentencia firme desestimatoria</strong> de un recurso contra la actuación que causó el daño y que hubiera <strong>alegado la inconstitucionalidad</strong> después declarada.</td></tr>
+<tr><td><strong>Norma contraria al Derecho de la Unión</strong> (32.5)</td><td>Los mismos requisitos procesales, más los tres de la jurisprudencia <em>Francovich</em>: a) la norma <strong>confiere derechos</strong> a los particulares; b) el incumplimiento está <strong>suficientemente caracterizado</strong>; c) hay <strong>relación de causalidad directa</strong>.</td></tr>
+<tr><td><strong>Efectos y daños indemnizables</strong> (32.6 y 34.1)</td><td>La sentencia surte efectos desde su publicación en el BOE o en el DOUE, salvo que diga otra cosa. Solo se indemnizan los daños de los <strong>cinco años anteriores</strong> a esa publicación. La reclamación prescribe <strong>al año</strong> de la publicación (67.1 LPAC).</td></tr>
+</table></div>
+<div class="box act"><span class="box-h">La STJUE C-278/20 y la reforma que no llegó</span>
+La <strong>sentencia del TJUE de 28 de junio de 2022 (C-278/20, Comisión contra España)</strong> declaró contrarios al <strong>principio de efectividad</strong>, para las reclamaciones por infracción del Derecho de la Unión, la exigencia de sentencia desestimatoria previa con alegación de la infracción, la publicación en el DOUE como presupuesto y el límite de cinco años. Esos requisitos <strong>no pueden oponerse</strong> a estas reclamaciones. Para la <strong>ley inconstitucional</strong> (32.4), el texto sigue aplicándose.<br><br>
+El Gobierno remitió en octubre de 2025 un <strong>proyecto de ley</strong> para modificar las Leyes 39 y 40/2015 en esta materia. No llegó a aprobarse: el <strong>Real Decreto 806/2026</strong> disolvió las Cortes el 6 de octubre de 2026 (elecciones del 29 de noviembre), y la disolución hace caducar los proyectos pendientes. El art. 32 sigue en su <strong>redacción de 2015</strong> (texto consolidado del BOE actualizado a 02/08/2024). En el examen: texto de 2015 + doctrina del TJUE.</div>
+<h3>3.2 Administración de Justicia y Tribunal Constitucional</h3>
+<div class="grid2">
+<div class="card"><h4>Estado juez (art. 32.7)</h4>Se rige por la <strong>Ley Orgánica 6/1985, del Poder Judicial</strong> (arts. 292 a 297): <strong>error judicial</strong> (exige previa declaración judicial), <strong>funcionamiento anormal</strong> de la Administración de Justicia y <strong>prisión provisional</strong> indebida seguida de absolución o sobreseimiento (art. 294). La mera revocación o anulación de resoluciones judiciales no indemniza. Informe preceptivo del <strong>CGPJ</strong> en dos meses, que suspende el plazo para resolver (81.3 LPAC).</div>
+<div class="card"><h4>Tribunal Constitucional (art. 32.8)</h4>Si el TC declara, a instancia de parte, un funcionamiento anormal en la tramitación de <strong>amparos o cuestiones de inconstitucionalidad</strong>, el <strong>Consejo de Ministros</strong> fija la indemnización. Tramita el Ministerio de Justicia, con audiencia al Consejo de Estado.</div>
+</div>
+<h3>3.3 Daños causados por contratistas (art. 32.9 LRJSP y art. 196 LCSP)</h3>
+<p>Como regla, responde el <strong>contratista</strong> de los daños a terceros en la ejecución del contrato. Responde la <strong>Administración</strong> si el daño es consecuencia <strong>inmediata y directa de una orden</strong> suya o de <strong>vicios del proyecto</strong> elaborado por ella; en ese caso se sigue el procedimiento de la LPAC, con <strong>audiencia obligatoria al contratista</strong> (82.5). El tercero puede requerir al órgano de contratación, <strong>dentro del año</strong> siguiente al hecho, que se pronuncie sobre a quién corresponde la responsabilidad, oído el contratista; ese requerimiento <strong>interrumpe la prescripción</strong> (196.3 LCSP).</p>
+<div class="box act"><span class="box-h">Remisión desactualizada en el art. 32.9</span>
+El art. 32.9 LRJSP sigue citando el texto refundido de la Ley de Contratos de 2011 (Real Decreto Legislativo 3/2011). Esa remisión se entiende hecha hoy a la <strong>Ley 9/2017</strong>, art. 196.</div>
+<h3>3.4 Concurrencia de Administraciones (art. 33)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Supuesto</th><th>Régimen</th></tr>
+<tr><td><strong>Fórmulas conjuntas de actuación</strong> (33.1 y 33.3)</td><td>Responden frente al particular <strong>en todo caso de forma solidaria</strong>; el instrumento de la actuación conjunta puede repartir la responsabilidad entre ellas. Tramita la Administración que fijen los estatutos o reglas del órgano colegiado y, en su defecto, la de <strong>mayor participación en la financiación</strong> del servicio, que consulta a las demás (15 días).</td></tr>
+<tr><td><strong>Otros casos de concurrencia</strong> (33.2)</td><td>Se reparte según <strong>competencia, interés público tutelado e intensidad de la intervención</strong>; si no es posible, <strong>solidaria</strong>.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Idea clave del temario 2026 (examen 2019)</span>
+En las fórmulas conjuntas, a falta de reglas, tramita la Administración con <strong>mayor participación en la financiación</strong>, y la responsabilidad es <strong>solidaria</strong>.</div>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> La indemnización (art. 34 LRJSP)</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Elemento</th><th>Régimen</th></tr>
+<tr><td><strong>Alcance</strong></td><td>Reparación integral: <strong>daño emergente</strong>, <strong>lucro cesante</strong> acreditado (no expectativas) y <strong>daño moral</strong>.</td></tr>
+<tr><td><strong>Criterios</strong> (34.2)</td><td>Los de la legislación <strong>fiscal, de expropiación forzosa</strong> y demás normas, ponderando las valoraciones de mercado. En muerte o lesiones corporales, puede tomarse como referencia el <strong>baremo</strong> de seguros obligatorios y Seguridad Social (el de tráfico, Real Decreto Legislativo 8/2004).</td></tr>
+<tr><td><strong>Momento</strong> (34.3)</td><td>Se calcula al <strong>día en que la lesión se produjo</strong>, actualizada a la fecha en que termina el procedimiento con el <strong>Índice de Garantía de la Competitividad</strong> del INE, más los <strong>intereses de demora en el pago</strong> de la indemnización fijada, según la Ley General Presupuestaria o las normas autonómicas.</td></tr>
+<tr><td><strong>Forma</strong> (34.4)</td><td>En dinero como regla; puede sustituirse por <strong>compensación en especie</strong> o <strong>pagos periódicos</strong> cuando sea más adecuado y convenga al interés público, <strong>con acuerdo del interesado</strong>.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al material visual: los intereses</span>
+El visual decía «intereses de demora desde la reclamación». El art. 34.3 no dice eso: la cuantía se fija al día del daño y se <strong>actualiza con el Índice de Garantía de la Competitividad</strong> hasta el fin del procedimiento; los intereses de demora son por el <strong>retraso en pagar la indemnización ya fijada</strong>, conforme a la Ley General Presupuestaria.</div>
+<div class="box clave"><span class="box-h">Idea clave del temario 2026 (examen 2019)</span>
+La cuantía se calcula con referencia al <strong>día en que se produjo la lesión</strong>, actualizada por el <strong>Índice de Garantía de la Competitividad</strong>.</div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> Responsabilidad de las autoridades y del personal (arts. 36 y 37)</h2>
+<div class="box clave"><span class="box-h">Responsabilidad directa y acción de regreso (art. 36)</span>
+El particular reclama <strong>siempre a la Administración</strong>, nunca al funcionario (36.1). La Administración que ha indemnizado <strong>exige de oficio</strong>, en vía administrativa, la responsabilidad de su personal si hubo <strong>dolo, o culpa o negligencia graves</strong> (36.2), ponderando el resultado dañoso, el grado de culpabilidad, la responsabilidad profesional del personal y su relación con el daño. Lo mismo por los daños causados a los <strong>bienes de la propia Administración</strong> (36.3).</div>
+<div class="flowv">
+<div class="step"><b>Procedimiento contra el personal (art. 36.4)</b>Acuerdo de iniciación notificado → <strong>alegaciones 15 días</strong> → <strong>prueba 15 días</strong> → <strong>audiencia 10 días</strong> → <strong>propuesta en 5 días</strong> → <strong>resolución en 5 días</strong>. La resolución declaratoria de responsabilidad <strong>pone fin a la vía administrativa</strong> (36.5), sin perjuicio de pasar el tanto de culpa a los tribunales (36.6).</div>
+</div>
+<p><strong>Responsabilidad penal</strong> (art. 37): se exige conforme a su legislación; el proceso penal <strong>no suspende</strong> el procedimiento de responsabilidad patrimonial, salvo que la determinación de los hechos en vía penal sea necesaria para fijarla. La acción de regreso es compatible con la responsabilidad disciplinaria.</p>
+<div class="box clave"><span class="box-h">Idea clave del temario 2026 (exámenes 2019 y 2022)</span>
+En el procedimiento contra el personal, la <strong>audiencia dura diez días</strong>. Recuerda la serie: <strong>15 · 15 · 10 · 5 · 5</strong>.</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> El procedimiento de responsabilidad patrimonial</h2>
+<h3>6.1 Iniciación</h3>
+<div class="grid2">
+<div class="card"><h4>De oficio (art. 65 LPAC)</h4>Solo si <strong>no ha prescrito</strong> el derecho del interesado. El acuerdo se notifica a los presuntos lesionados con <strong>diez días</strong> para alegar, aportar documentos y proponer prueba. El procedimiento sigue aunque no se personen.</div>
+<div class="card"><h4>A solicitud (art. 67.2 LPAC)</h4>La solicitud especifica: las <strong>lesiones</strong>, la presunta <strong>relación de causalidad</strong>, la <strong>evaluación económica</strong> si es posible y el <strong>momento</strong> en que se produjo la lesión, con las alegaciones, documentos y proposición de prueba.</div>
+</div>
+<h3>6.2 Prescripción del derecho a reclamar (art. 67.1 LPAC)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:36%">Supuesto</th><th>Un año desde…</th></tr>
+<tr><td>Regla general</td><td>Que se produjo el hecho o el acto que motiva la indemnización o se manifestó su efecto lesivo.</td></tr>
+<tr><td>Daños físicos o psíquicos</td><td>La <strong>curación</strong> o la <strong>determinación del alcance de las secuelas</strong>.</td></tr>
+<tr><td>Anulación de un acto o disposición general</td><td>La notificación de la <strong>resolución administrativa</strong> o de la <strong>sentencia definitiva</strong> que lo anula.</td></tr>
+<tr><td>Ley inconstitucional o norma contraria al Derecho de la Unión</td><td>La <strong>publicación</strong> en el BOE o en el DOUE de la sentencia que lo declara (con la salvedad de la STJUE C-278/20 para el Derecho de la Unión).</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026</span>
+Para la anulación, el temario solo menciona la «sentencia definitiva» en vía contenciosa. El art. 67.1 cuenta el año también desde la notificación de la <strong>resolución administrativa</strong> que anula el acto.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019, 2022 y 2024)</span>
+Prescripción de <strong>un año</strong> (2019) · en daños personales, desde la curación o la determinación de las secuelas (2022 y 2024) · en la anulación, desde la notificación de la sentencia definitiva (2022) · la Administración puede iniciar de oficio si no ha prescrito el derecho del interesado (2024).</div>
+<h3>6.3 Instrucción</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Trámite</th><th>Régimen</th></tr>
+<tr><td><strong>Prueba</strong> (77)</td><td>Periodo de 10 a 30 días, y extraordinario de hasta 10.</td></tr>
+<tr><td><strong>Informe del servicio</strong> (81.1)</td><td><strong>Preceptivo</strong>, del servicio cuyo funcionamiento causó la presunta lesión, en <strong>diez días</strong> como máximo.</td></tr>
+<tr><td><strong>Audiencia</strong> (82)</td><td>Antes del dictamen. Si puede haber un <strong>contratista</strong> responsable, audiencia <strong>en todo caso</strong> a este, notificándole todas las actuaciones (82.5).</td></tr>
+<tr><td><strong>Dictamen del Consejo de Estado</strong> (81.2)</td><td><strong>Preceptivo</strong> si lo reclamado es <strong>igual o superior a 50.000 €</strong> (o la cuantía autonómica), o cuando lo diga la Ley Orgánica 3/1980; en las comunidades autónomas, su órgano consultivo. El instructor remite la propuesta en <strong>diez días</strong> desde el fin de la audiencia; el dictamen se emite en <strong>dos meses</strong> y se pronuncia sobre causalidad, valoración, cuantía y modo.</td></tr>
+<tr><td><strong>Informe del CGPJ</strong> (81.3)</td><td>Preceptivo en reclamaciones por funcionamiento anormal de la Justicia: <strong>dos meses</strong> como máximo, y <strong>suspende</strong> el plazo para resolver.</td></tr>
+</table></div>
+<h3>6.4 Terminación</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Forma</th><th>Régimen</th></tr>
+<tr><td><strong>Terminación convencional</strong> (86.5 y 91.1)</td><td>El acuerdo fija cuantía y modo de la indemnización con los criterios del art. 34 LRJSP. Si el dictamen es preceptivo, se le remite la propuesta de acuerdo (81.2).</td></tr>
+<tr><td><strong>Resolución</strong> (91.2)</td><td>Además del contenido general (art. 88), se pronuncia sobre la <strong>relación de causalidad</strong> y, en su caso, la <strong>valoración</strong>, la <strong>cuantía</strong> y el <strong>modo</strong> de la indemnización.</td></tr>
+<tr><td><strong>Silencio</strong> (91.3)</td><td>A los <strong>seis meses</strong> desde el inicio sin resolución notificada ni acuerdo formalizado: <strong>desestimatorio</strong>.</td></tr>
+<tr><td><strong>Competencia</strong> (92)</td><td>AGE: el <strong>ministro</strong> respectivo, o el <strong>Consejo de Ministros</strong> en el Estado legislador (32.3) o cuando una ley lo diga. Comunidades autónomas y entidades locales: sus órganos. Entidades de Derecho público: lo que digan sus normas o, en su defecto, este artículo.</td></tr>
+<tr><td><strong>Fin de la vía administrativa</strong> (114.1.e)</td><td>Las resoluciones de responsabilidad patrimonial, cualquiera que sea la relación (pública o privada) de la que derive. Cabe reposición potestativa o contencioso.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2022 y 2024)</span>
+Informe del servicio en <strong>diez días</strong> (2024) · en la Justicia, informe del <strong>CGPJ</strong> (2024) · silencio a los seis meses <strong>desestimatorio</strong> (2022) · en la AGE resuelve el <strong>ministro</strong> o, en el Estado legislador, el <strong>Consejo de Ministros</strong> (2022).</div>
+<h3>6.5 Tramitación simplificada (art. 96.4 y 96.6 LPAC)</h3>
+<p>Si, iniciado el procedimiento, el órgano considera <strong>inequívocas</strong> la relación de causalidad, la valoración del daño y el cálculo de la cuantía, puede acordar <strong>de oficio</strong> suspender el procedimiento general e iniciar uno simplificado, que se resuelve en <strong>treinta días</strong> desde la notificación del acuerdo. Trámites: alegaciones en cinco días, audiencia solo si la resolución va a ser desfavorable, informes preceptivos y, si procede, dictamen del Consejo de Estado, que <strong>suspende</strong> el plazo y que <strong>podrá emitirse en quince días si lo solicita el órgano</strong>. Si el dictamen es contrario al fondo de la propuesta, se vuelve a la tramitación ordinaria.</p>
+<div class="box fix"><span class="box-h">Precisión al temario 2026</span>
+El temario dice que en el simplificado el Consejo de Estado «emite el dictamen en quince días». El art. 96.6.g dice que <strong>podrá</strong> emitirse en quince días <strong>si así lo solicita</strong> el órgano competente, y que la solicitud suspende el plazo para resolver.</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> Garantías jurisdiccionales</h2>
+<p>La responsabilidad patrimonial corresponde <strong>en exclusiva</strong> al orden <strong>contencioso-administrativo</strong>, cualquiera que sea la actividad o relación de la que derive, aunque concurran sujetos privados o la Administración tenga un seguro (art. 2.e de la Ley 29/1998 y art. 9.4 LOPJ). La responsabilidad civil derivada de delito se exige ante el orden penal (art. 121 del Código Penal, subsidiaria).</p>
+<div class="tablewrap"><table>
+<tr><th style="width:36%">Órgano judicial (AGE)</th><th>Asuntos</th></tr>
+<tr><td><strong>Juzgados Centrales</strong> de lo Contencioso-administrativo (9.c LJCA)</td><td>Resoluciones de <strong>ministros y secretarios de Estado</strong> en responsabilidad patrimonial cuando lo reclamado <strong>no exceda de 30.050 €</strong>.</td></tr>
+<tr><td><strong>Sala de lo Contencioso de la Audiencia Nacional</strong> (11.1.a)</td><td>Las de ministros y secretarios de Estado por cuantía superior.</td></tr>
+<tr><td><strong>Sala Tercera del Tribunal Supremo</strong> (12.1.a)</td><td>Las del <strong>Consejo de Ministros</strong>, por ejemplo en el Estado legislador.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (examen 2022)</span>
+La responsabilidad patrimonial es del <strong>orden contencioso-administrativo</strong>, y los <strong>Juzgados Centrales</strong> conocen de las resoluciones de ministros y secretarios de Estado hasta <strong>30.050 €</strong>.</div>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> Lo que preguntan y trampas</h2>
+<div class="box clave"><span class="box-h">Los números del tema</span>
+Prescripción: <strong>1 año</strong> (personales: curación o secuelas) · alegaciones en el inicio de oficio: <strong>10 días</strong> · informe del servicio: <strong>10 días</strong> · dictamen del Consejo de Estado: <strong>≥ 50.000 €</strong>, en <strong>2 meses</strong> · informe del CGPJ: <strong>2 meses</strong>, suspende · resolución: <strong>6 meses</strong>, silencio negativo · simplificado: <strong>30 días</strong> (dictamen en 15 si se pide) · Estado legislador: daños de los <strong>5 años</strong> anteriores · contratistas: requerimiento en <strong>1 año</strong>, interrumpe · procedimiento contra el personal: <strong>15 · 15 · 10 · 5 · 5</strong> · Juzgados Centrales: hasta <strong>30.050 €</strong>.</div>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Lo que preguntan</span><ul>
+<li>Los cuatro requisitos del daño y la antijuridicidad.</li>
+<li>Funcionamiento normal y anormal; fuerza mayor.</li>
+<li>Estado legislador y STJUE C-278/20.</li>
+<li>Concurrencia de Administraciones.</li>
+<li>Cálculo de la indemnización (IGC).</li>
+<li>Acción de regreso y sus plazos.</li>
+<li>Prescripción y sus cómputos.</li>
+<li>Informes, dictamen, silencio y competencia.</li>
+<li>Órgano judicial competente.</li></ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>El caso fortuito <strong>no</strong> exonera; la fuerza mayor sí.</li>
+<li>La anulación de un acto no indemniza por sí sola.</li>
+<li>No se demanda al funcionario: se reclama a la Administración.</li>
+<li>El regreso es <strong>de oficio</strong> y solo por dolo o culpa grave.</li>
+<li>El silencio es <strong>desestimatorio</strong>.</li>
+<li>El dictamen solo es preceptivo desde 50.000 € (o si una ley lo exige).</li>
+<li>Los daños del contratista los paga el contratista, salvo orden directa o vicio del proyecto.</li>
+<li>La prisión provisional seguida de absolución <strong>sí</strong> puede indemnizarse (294 LOPJ).</li>
+<li>Los requisitos del 32.5 ceden ante la STJUE C-278/20; la reforma caducó.</li>
+<li>La indemnización se actualiza con el IGC, no con el IPC.</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia con sus cuatro piezas: art. 106.2 CE, art. 149.1.18.ª CE, arts. 32 a 37 de la Ley 40/2015 (en adelante, LRJSP) y la Ley 39/2015 (en adelante, LPAC) para el procedimiento.</li>
+<li>La calificación previa: los cuatro requisitos aplicados a los hechos y la reclamación en plazo.</li>
+<li>Los caracteres del sistema.</li>
+<li>Los supuestos del Estado legislador y la doctrina del TJUE.</li>
+<li>Contratistas y concurrencia de Administraciones.</li>
+<li>Cálculo, momento y forma de la indemnización.</li>
+<li>La acción de regreso y su procedimiento.</li>
+<li>Las fases del procedimiento con sus plazos y órganos.</li>
+<li>El reparto entre los órganos judiciales.</li>
+</ol>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>La responsabilidad patrimonial es una de las materias que más sale en el supuesto. Lo que puntúa es <strong>comprobar los requisitos uno por uno contra los hechos</strong>, contar bien la prescripción (sobre todo en daños personales), decidir si hace falta dictamen por la cuantía y nombrar el órgano que resuelve.</p>
+<h3>9.1 Introducción de la materia (plantillas v2, sección 5)</h3>
+<div class="model">
+<p>«La responsabilidad patrimonial de la Administración encuentra su fundamento en el artículo 106.2 de la Constitución, que reconoce a los particulares el derecho a ser indemnizados por toda lesión que sufran en sus bienes y derechos, salvo en los casos de fuerza mayor, siempre que sea consecuencia del funcionamiento de los servicios públicos, y en el artículo 149.1.18.ª, que atribuye al Estado el sistema de responsabilidad de todas las Administraciones Públicas. Su régimen sustantivo se contiene en los artículos 32 a 37 de la Ley 40/2015, de 1 de octubre, de Régimen Jurídico del Sector Público (en adelante, LRJSP), y su procedimiento en la Ley 39/2015, de 1 de octubre, del Procedimiento Administrativo Común de las Administraciones Públicas (en adelante, LPAC).»</p>
+</div>
+<div class="box sup"><span class="box-h">Las cuatro piezas</span>Art. 106.2 CE (fundamento) → art. 149.1.18.ª CE (competencia) → arts. 32 a 37 LRJSP (sustantivo) → LPAC (procedimiento). Si el daño lo causa un contratista, añade el art. 196 de la Ley 9/2017.</div>
+<h3>9.2 Calificación previa propia del Tema 10</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar la reclamación. Se trata de una reclamación de responsabilidad patrimonial por los daños sufridos por [reclamante] como consecuencia del funcionamiento [normal / anormal] del servicio público de [servicio], prestado por [Administración]. Procede comprobar la concurrencia de los requisitos del artículo 32 de la LRJSP: daño efectivo, evaluable económicamente e individualizado; antijuridicidad, al no existir deber jurídico de soportarlo (artículo 34.1); imputación al funcionamiento del servicio y relación de causalidad, sin fuerza mayor; y reclamación en plazo (artículo 67.1 de la LPAC).»</p>
+</div>
+<h3>9.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Hecho del enunciado</th><th style="width:30%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>Un ciudadano demanda directamente al funcionario que le causó el daño</td><td>Art. 36.1 LRJSP</td><td>Debe reclamar a la Administración; esta repetirá de oficio si hubo dolo o culpa grave</td></tr>
+<tr><td>Un rayo destruye un vehículo aparcado en un recinto público</td><td>Art. 32.1 LRJSP</td><td>Fuerza mayor: no hay responsabilidad</td></tr>
+<tr><td>Falla de forma imprevisible un semáforo y causa un accidente</td><td>Caso fortuito, interno al servicio</td><td>No exonera: hay responsabilidad</td></tr>
+<tr><td>Se anula una sanción en vía contenciosa y el afectado pide indemnización</td><td>Art. 32.1, párrafo segundo</td><td>La anulación no da derecho por sí sola: debe probar un daño antijurídico; plazo de 1 año desde la sentencia</td></tr>
+<tr><td>Lesión el 10/03/2025, secuelas fijadas el 20/04/2026, reclamación el 15/05/2026</td><td>Art. 67.1 LPAC</td><td>En plazo: el año corre desde la determinación de las secuelas, hasta el 20/04/2027</td></tr>
+<tr><td>Se reclaman 60.000 €</td><td>Art. 81.2 LPAC</td><td>Dictamen preceptivo del Consejo de Estado</td></tr>
+<tr><td>Se reclaman 50.000 € exactos</td><td>Art. 81.2 LPAC: «igual o superior»</td><td>También es preceptivo el dictamen</td></tr>
+<tr><td>Pasan 6 meses sin resolución</td><td>Art. 91.3 LPAC</td><td>Silencio desestimatorio: reposición potestativa o contencioso</td></tr>
+<tr><td>El daño lo causa la empresa que ejecuta una obra del Ministerio</td><td>Art. 196 LCSP y art. 32.9 LRJSP</td><td>Responde el contratista, salvo orden directa o vicio del proyecto; el tercero puede requerir al órgano de contratación en 1 año</td></tr>
+<tr><td>Daño causado en un servicio prestado por un consorcio Estado-comunidad autónoma</td><td>Art. 33.1 y 33.3 LRJSP</td><td>Responden solidariamente; tramita la de mayor financiación si no hay regla</td></tr>
+<tr><td>La resolución del Ministro reconoce 25.000 € y el reclamante recurre</td><td>Art. 9.c LJCA</td><td>Juzgado Central de lo Contencioso-administrativo (no excede de 30.050 €)</td></tr>
+<tr><td>Se reclaman daños causados por una ley declarada inconstitucional</td><td>Arts. 32.4 LRJSP y 92 LPAC</td><td>Requiere sentencia firme desestimatoria previa con alegación; resuelve el Consejo de Ministros; recurso ante el Tribunal Supremo</td></tr>
+</table></div>
+
+<h3>9.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+Don Pablo circula en bicicleta por una carretera del Estado el <strong>10 de marzo de 2025</strong> y cae por un <strong>bache sin señalizar</strong>. Sufre una fractura de muñeca; recibe el alta con secuelas el <strong>20 de abril de 2026</strong>. El <strong>15 de mayo de 2026</strong> presenta reclamación por <strong>60.000 €</strong> ante el Ministerio de Transportes.
+<br><br><strong>Cuestiones:</strong> a) ¿Concurren los requisitos de la responsabilidad patrimonial y está la reclamación en plazo? b) Trámites esenciales, órgano competente y efectos de la falta de resolución.</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 9.1.] Con carácter previo, procede calificar la reclamación. Se trata de una reclamación de responsabilidad patrimonial por los daños sufridos por don Pablo como consecuencia del funcionamiento anormal del servicio público de conservación de carreteras del Estado. La cuestión a) solicita determinar si concurren los requisitos del artículo 32 de la LRJSP. Existe un daño efectivo, evaluable económicamente e individualizado en don Pablo (32.2): una fractura con secuelas. El daño es antijurídico, porque nadie tiene el deber de soportar los daños de un firme en mal estado (34.1). Y hay relación de causalidad con el funcionamiento del servicio, ya que el bache no estaba señalizado. El enunciado no precisa si don Pablo circulaba a velocidad inadecuada, por lo que suponemos que no, dado que no consta ningún dato que lo indique. No obstante lo anterior, si se acreditara una conducta negligente de la víctima, cabría apreciar concurrencia de culpas y moderar la indemnización, si bien con los hechos expuestos la solución más adecuada es la responsabilidad plena de la Administración. En cuanto al plazo, el artículo 67.1 de la LPAC dispone que en los daños físicos el año se computa desde la curación o la determinación del alcance de las secuelas: desde el 20 de abril de 2026, el plazo vence el 20 de abril de 2027, por lo que la reclamación del 15 de mayo de 2026 está en plazo, aunque haya pasado más de un año desde la caída. Por tanto, se concluye que concurren los requisitos del artículo 32 de la LRJSP y que la reclamación se ha presentado dentro de plazo.</p>
+<p><strong>Cuestión b).</strong> La cuestión b) plantea la tramitación. Conforme al artículo 81.1 de la LPAC, es preceptivo el informe del servicio de carreteras, que debe emitirse en diez días. Tras la audiencia, al ser la cuantía reclamada de 60.000 €, igual o superior a 50.000 €, es preceptivo el dictamen del Consejo de Estado (artículo 81.2), que se emite en dos meses. La resolución, que debe pronunciarse sobre la causalidad, la valoración y la cuantía (artículo 91.2), corresponde al Ministro de Transportes (artículo 92). La indemnización se calculará al día del daño y se actualizará con el Índice de Garantía de la Competitividad (artículo 34.3 de la LRJSP). Si en seis meses desde el 15 de mayo de 2026, es decir, hasta el 15 de noviembre de 2026, no se notifica la resolución, la reclamación podrá entenderse desestimada (artículo 91.3). Por tanto, se concluye que debe resolver el Ministro de Transportes, previo informe del servicio y dictamen del Consejo de Estado, y que el silencio a partir del 15 de noviembre de 2026 es desestimatorio, frente al que cabe reposición potestativa o recurso contencioso-administrativo ante la Audiencia Nacional, al exceder la cuantía de 30.050 €.</p>
+</div>
+<h3>9.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Los cuatro requisitos aplicados uno por uno</strong> a los hechos → <em>análisis</em>.<br>
+<strong>Cifras y fechas operadas</strong> (20/04/2026 + 1 año; 60.000 frente a 50.000; 15/05/2026 + 6 meses; 60.000 frente a 30.050) → <em>aplicación de conocimientos</em>.<br>
+<strong>Detectar la trampa del plazo</strong>: más de un año desde la caída, pero en plazo por las secuelas → lo que la Comisión premia.<br>
+<strong>Suposición declarada</strong> sobre la conducta de la víctima, justificada → admitida.<br>
+<strong>Alternativa evaluada</strong> (concurrencia de culpas) → <em>análisis</em>.<br>
+<strong>Conclusiones afirmativas</strong> con órgano, trámites, fecha del silencio y vía de recurso → <em>sistemática</em>.</div>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Evolución y fundamento</td><td>Historia, arts. 106.2, 9.3, 121 y 149.1.18.ª, cuadro de caracteres</td><td>Hitos, Ley 4/1999, derogación del RD 429/1993</td><td>Fusionado (1)</td></tr>
+<tr><td>Presupuestos</td><td>Regla general, cuatro requisitos, fuerza mayor y caso fortuito, ideas clave</td><td>Cuatro requisitos, exclusiones</td><td>Fusionado + BOE (2)</td></tr>
+<tr><td>Supuestos especiales</td><td>Estado legislador, STJUE, proyecto caducado, Justicia, contratistas, concurrencia</td><td>Cuadro con TC, LOPJ, 196 LCSP, regreso; STJUE y reforma «en tramitación»</td><td>Fusionado + BOE (3)</td></tr>
+<tr><td>Indemnización</td><td>Criterios, baremo, IGC, forma</td><td>Conceptos indemnizables, intereses «desde la reclamación»</td><td>Fusionado + BOE (4) con corrección</td></tr>
+<tr><td>Personal</td><td>Regreso, procedimiento 15-15-10-5-5, art. 37</td><td>Regreso, compatibilidades</td><td>Fusionado + BOE (5)</td></tr>
+<tr><td>Procedimiento</td><td>Iniciación, prescripción, instrucción, terminación, simplificado</td><td>Esquema de siete pasos y matices del plazo</td><td>Fusionado + BOE (6) con precisiones</td></tr>
+<tr><td>Garantías jurisdiccionales</td><td>Orden contencioso, Juzgados Centrales, AN, TS</td><td>No</td><td>Del temario (7)</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 9 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas (contrastadas con el BOE el 10/11/2026)</span>
+<strong>Temario 2026:</strong> la prescripción por anulación corre también desde la resolución administrativa que anula · en el simplificado, el dictamen «podrá» emitirse en quince días si se solicita, y suspende el plazo.<br>
+<strong>Material visual:</strong> la indemnización no devenga intereses «desde la reclamación»: se actualiza con el Índice de Garantía de la Competitividad y los intereses son por demora en el pago · la reforma del Estado legislador ya no está «en tramitación»: caducó con la disolución de las Cortes (Real Decreto 806/2026, de 6 de octubre).<br>
+<strong>Añadidos del BOE:</strong> art. 35 (Derecho privado) · consulta de 15 días a las demás Administraciones (33.4) · plazo de 10 días para remitir la propuesta al Consejo de Estado (81.2) · contenido del simplificado (96.6) · remisión desactualizada del 32.9 al texto refundido de 2011 · tramitación del 32.8 por el Ministerio de Justicia.</div>
+
+<footer>
+GACE 2027 · Bloque IV · Tema 10 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 10/11/2026.<br>
+Normas: CE (arts. 9.3, 106.2, 121 y 149.1.18.ª) · Ley 40/2015 (arts. 32 a 37) · Ley 39/2015 (arts. 65, 67, 77, 81, 82, 86, 91, 92, 96 y 114) · Ley 29/1998 · Ley Orgánica 6/1985 · Ley 9/2017 (art. 196) · Real Decreto Legislativo 8/2004 · STJUE de 28/06/2022 (C-278/20) · Real Decreto 806/2026.
+</footer>
+</div>
+</body>
+</html>
