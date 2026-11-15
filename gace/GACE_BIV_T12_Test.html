@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 12 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque IV · Tema 12 · Derechos, revisión de oficio y recursos</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u": 1, "t": "Los grupos de afectados y las entidades sin personalidad jurídica tienen capacidad de obrar ante las Administraciones:", "o": ["Siempre", "Cuando la ley así lo declare expresamente", "Si se inscriben previamente en el registro público correspondiente de la Administración actuante", "Solo en los procedimientos sancionadores"], "c": 1, "e": "Art. 3.c LPAC."},
+{"u": 1, "t": "Según el texto consolidado del art. 3.b LPAC, la excepción a la capacidad de los menores se refiere a:", "o": ["Los menores con discapacidad sujetos a medidas de apoyo, cuando estas afecten a los derechos de que se trate, conforme a la reforma civil", "Los menores incapacitados, cuando la extensión de la incapacitación afecte a los derechos de que se trate", "Los menores de catorce años", "Los menores no emancipados"], "c": 1, "e": "La LPAC conserva la redacción «menores incapacitados… incapacitación»."},
+{"u": 1, "t": "Es interesado quien, sin haber iniciado el procedimiento, tiene intereses legítimos que pueden resultar afectados:", "o": ["Siempre, desde el inicio", "Si se persona en el procedimiento mientras no haya recaído resolución definitiva", "Solo si lo cita la Administración", "Nunca: solo los titulares de derechos"], "c": 1, "e": "Art. 4.1.c LPAC."},
+{"u": 1, "t": "La representación debe acreditarse para:", "o": ["Cualquier actuación ante la Administración, incluidos los actos y gestiones de mero trámite", "Formular solicitudes, interponer recursos, desistir y renunciar, entre otros", "Solo para interponer recursos", "Solo cuando el representante es persona jurídica"], "c": 1, "e": "Art. 5.3 LPAC; en los actos de mero trámite se presume."},
+{"u": 1, "t": "La falta de acreditación de la representación puede subsanarse en:", "o": ["Cinco días", "Diez días o un plazo superior si las circunstancias lo requieren", "Quince días", "Un mes, prorrogable por otros quince días a petición del interesado si las circunstancias lo justifican"], "c": 1, "e": "Art. 5.6 LPAC."},
+{"u": 1, "t": "Los poderes inscritos en el registro electrónico de apoderamientos tienen una validez máxima de:", "o": ["Un año", "Tres años", "Cinco años, prorrogables", "Diez años, salvo revocación expresa del poderdante comunicada al registro"], "c": 2, "e": "Art. 6.6 LPAC."},
+{"u": 1, "t": "Si en una solicitud figuran varios interesados sin designar representante, las actuaciones se efectúan:", "o": ["Con todos ellos", "Con el que figure en primer término", "Con el de mayor edad", "Con el que designe el órgano"], "c": 1, "e": "Art. 7 LPAC."},
+{"u": 1, "t": "Si un interesado no obligado a relacionarse electrónicamente carece de medios, su firma puede realizarla:", "o": ["Un familiar", "Un funcionario habilitado, con su consentimiento expreso", "Cualquier empleado de la oficina", "Nadie: en ese caso debe presentarse la solicitud en papel con firma manuscrita del interesado"], "c": 1, "e": "Art. 12.2 LPAC."},
+{"u": 2, "t": "Es un derecho del art. 13 LPAC (de las personas en sus relaciones con las Administraciones):", "o": ["Conocer en cualquier momento el estado de la tramitación de los procedimientos en que sea interesado", "Ser tratado con respeto y deferencia por autoridades y empleados públicos", "Identificar al personal bajo cuya responsabilidad se tramita", "Formular alegaciones antes del trámite de audiencia"], "c": 1, "e": "Art. 13.e; las demás opciones son del art. 53."},
+{"u": 2, "t": "Es un derecho del interesado del art. 53 LPAC:", "o": ["Utilizar las lenguas oficiales de su comunidad autónoma", "Acceso a la información pública", "No presentar documentos originales salvo excepción normativa", "Comunicarse a través del Punto de Acceso General"], "c": 2, "e": "Art. 53.1.c; los demás son del art. 13."},
+{"u": 2, "t": "El interesado puede formular alegaciones y aportar documentos:", "o": ["Solo en el trámite de audiencia", "En cualquier fase anterior al trámite de audiencia", "Hasta la notificación de la resolución, siempre que no se haya dictado la propuesta", "Solo en los diez días siguientes al inicio"], "c": 1, "e": "Art. 53.1.e LPAC."},
+{"u": 2, "t": "Está obligado a relacionarse electrónicamente con las Administraciones:", "o": ["Cualquier persona física mayor de edad", "Un empleado público en todos sus trámites con la Administración, también en los de carácter personal", "Un abogado en los trámites que realice en ejercicio de su profesión", "Un pensionista que solicite una prestación"], "c": 2, "e": "Art. 14.2.c LPAC: colegiación obligatoria."},
+{"u": 2, "t": "La comparecencia de las personas en las oficinas públicas es obligatoria:", "o": ["Siempre que lo acuerde el instructor", "Solo cuando esté prevista en una norma con rango de ley", "Cuando lo prevea un reglamento o lo acuerde motivadamente el órgano instructor", "Nunca"], "c": 1, "e": "Art. 19.1 LPAC (examen 2024)."},
+{"u": 2, "t": "Ante un órgano de la AGE con sede en una comunidad con lengua cooficial, si varios interesados discrepan sobre la lengua:", "o": ["Se tramita en la lengua cooficial", "Se tramita en castellano", "Decide el órgano instructor", "Se tramita en ambas lenguas"], "c": 1, "e": "Art. 15.1 LPAC."},
+{"u": 2, "t": "La consulta por la Administración de documentos elaborados por otra Administración:", "o": ["Exige siempre consentimiento expreso", "Se presume autorizada salvo oposición expresa o ley especial que exija consentimiento", "Está prohibida", "Se requiere autorización judicial previa cuando los documentos contienen datos personales"], "c": 1, "e": "Art. 28.2 LPAC."},
+{"u": 2, "t": "No es lugar de presentación de documentos según el art. 16.4 LPAC:", "o": ["Las oficinas de Correos", "Las oficinas consulares de España en el extranjero", "Las notarías", "Las oficinas de asistencia en materia de registros"], "c": 2, "e": "Art. 16.4 LPAC."},
+{"u": 3, "t": "Es motivo de abstención el parentesco con un interesado:", "o": ["De consanguinidad dentro del segundo grado", "De consanguinidad dentro del cuarto grado o afinidad dentro del segundo", "De afinidad dentro del cuarto grado", "Cualquier parentesco"], "c": 1, "e": "Art. 23.2.b LRJSP."},
+{"u": 3, "t": "Haber prestado servicios profesionales a un interesado es motivo de abstención si se prestaron en los últimos:", "o": ["Doce meses", "Dos años", "Cuatro años", "Cinco años"], "c": 1, "e": "Art. 23.2.e LRJSP."},
+{"u": 3, "t": "La actuación de quien debía abstenerse:", "o": ["Determina siempre la nulidad de pleno derecho del acto en el que haya intervenido", "No implica necesariamente la invalidez del acto, pero genera responsabilidad", "Determina la anulabilidad automática", "Es irrelevante"], "c": 1, "e": "Art. 23.4 y 23.5 LRJSP."},
+{"u": 3, "t": "Si el recusado niega la causa, el superior resuelve en:", "o": ["El día siguiente", "Tres días", "Diez días", "Quince días"], "c": 1, "e": "Art. 24.4 LRJSP."},
+{"u": 3, "t": "Contra la resolución que desestima la recusación:", "o": ["Cabe alzada", "Cabe reposición", "No cabe recurso, sin perjuicio de alegarla al recurrir el acto que ponga fin al procedimiento", "Cabe recurso contencioso-administrativo inmediato por el procedimiento de protección de derechos fundamentales"], "c": 2, "e": "Art. 24.5 LRJSP."},
+{"u": 3, "t": "La única cuestión incidental que suspende la tramitación del procedimiento es:", "o": ["La nulidad de actuaciones", "La recusación", "La acumulación", "La abstención"], "c": 1, "e": "Art. 74 LPAC."},
+{"u": 4, "t": "La revisión de oficio de actos nulos del art. 106.1 exige:", "o": ["Dictamen preceptivo, aunque sea desfavorable, del Consejo de Estado", "Dictamen previo y favorable del Consejo de Estado u órgano consultivo autonómico", "Informe de la Abogacía del Estado", "Autorización judicial"], "c": 1, "e": "Art. 106.1 LPAC."},
+{"u": 4, "t": "La nulidad de las disposiciones administrativas (art. 106.2) puede declararse:", "o": ["De oficio o a solicitud del interesado", "Solo de oficio", "Solo a solicitud del interesado", "Solo por los tribunales"], "c": 1, "e": "Art. 106.2 LPAC."},
+{"u": 4, "t": "Si la revisión de oficio de un acto nulo se inicia a solicitud del interesado y no se resuelve en plazo:", "o": ["Caduca, y se archivan las actuaciones sin pronunciamiento sobre la nulidad alegada por el interesado", "Se entiende desestimada por silencio", "Se entiende estimada", "Se archiva sin efecto"], "c": 1, "e": "Art. 106.5 LPAC (examen 2024)."},
+{"u": 4, "t": "El procedimiento de revisión de oficio de nulidad iniciado de oficio caduca a los:", "o": ["Tres meses", "Seis meses", "Un año", "Cuatro años"], "c": 1, "e": "Art. 106.5 LPAC."},
+{"u": 4, "t": "Los actos favorables para los interesados que sean anulables:", "o": ["Los anula la Administración por sí misma, previo dictamen favorable del Consejo de Estado", "Se declaran lesivos y se impugnan ante la jurisdicción contencioso-administrativa", "Se revocan en cualquier momento", "Solo pueden rectificarse"], "c": 1, "e": "Art. 107.1 LPAC."},
+{"u": 4, "t": "La declaración de lesividad no puede adoptarse una vez transcurridos desde que se dictó el acto:", "o": ["Dos años", "Cuatro años", "Seis meses", "Un año"], "c": 1, "e": "Art. 107.2 LPAC."},
+{"u": 4, "t": "La declaración de lesividad:", "o": ["Es recurrible en alzada ante el superior jerárquico del órgano que la adoptó, en el plazo general de un mes", "No es susceptible de recurso, aunque puede notificarse a efectos informativos", "Es recurrible en reposición", "Se recurre ante el Consejo de Estado"], "c": 1, "e": "Art. 107.2 LPAC."},
+{"u": 4, "t": "En una entidad local, la declaración de lesividad corresponde:", "o": ["Al alcalde", "Al Pleno o, en su defecto, al órgano colegiado superior", "A la Junta de Gobierno Local, por ser el órgano ejecutivo de la entidad", "Al secretario"], "c": 1, "e": "Art. 107.5 LPAC."},
+{"u": 4, "t": "El recurso contencioso de lesividad se interpone en:", "o": ["Un mes", "Dos meses desde el día siguiente a la declaración", "Seis meses", "Cuatro años desde que se dictó el acto que se pretende anular"], "c": 1, "e": "Art. 46.5 LJCA."},
+{"u": 4, "t": "La revocación del art. 109.1 LPAC procede respecto de:", "o": ["Actos favorables, siempre que la revocación no perjudique a terceros ni sea contraria al ordenamiento", "Actos de gravamen o desfavorables, mientras no haya prescrito", "Disposiciones generales", "Actos nulos"], "c": 1, "e": "Art. 109.1 LPAC."},
+{"u": 4, "t": "En la AGE, los actos de un secretario de Estado los revisa de oficio:", "o": ["El Consejo de Ministros", "El ministro", "El propio secretario de Estado", "El subsecretario"], "c": 1, "e": "Art. 111.b.1.º LPAC (examen 2019)."},
+{"u": 4, "t": "Las facultades de revisión no pueden ejercerse cuando resulten contrarias a:", "o": ["La eficacia administrativa", "La equidad, la buena fe, el derecho de los particulares o las leyes", "El principio de jerarquía", "La autonomía local"], "c": 1, "e": "Art. 110 LPAC."},
+{"u": 5, "t": "Contra las disposiciones administrativas de carácter general:", "o": ["Cabe recurso de alzada", "Cabe reposición potestativa", "No cabe recurso en vía administrativa", "Cabe recurso extraordinario de revisión"], "c": 2, "e": "Art. 112.3 LPAC."},
+{"u": 5, "t": "Son recurribles los actos de trámite que:", "o": ["Todos los actos de trámite, sin excepción, siempre que se notifiquen al interesado", "Deciden el fondo, impiden continuar, producen indefensión o perjuicio irreparable", "Solo los que dicta el instructor", "Solo los notificados por escrito"], "c": 1, "e": "Art. 112.1 LPAC."},
+{"u": 5, "t": "Pone fin a la vía administrativa en la AGE:", "o": ["La resolución de un subdirector general en el ejercicio de sus competencias propias", "La resolución de un director general en materia de personal", "La resolución de un jefe de servicio", "La propuesta de resolución"], "c": 1, "e": "Art. 114.2.c LPAC."},
+{"u": 5, "t": "Contra una resolución dictada por delegación de un ministro cabe:", "o": ["Alzada ante el ministro", "Reposición potestativa", "Alzada ante el Consejo de Ministros", "Ningún recurso administrativo"], "c": 1, "e": "Art. 9.4 LRJSP y 114.2.b LPAC (examen 2022)."},
+{"u": 5, "t": "El error en la calificación del recurso por el recurrente:", "o": ["Determina su inadmisión", "No impide su tramitación si se deduce su verdadero carácter", "Obliga a subsanar la calificación en el plazo de diez días, con advertencia de inadmisión", "Convierte el recurso en reposición"], "c": 1, "e": "Art. 115.2 LPAC (examen 2024)."},
+{"u": 5, "t": "No es causa de inadmisión del art. 116 LPAC:", "o": ["Haber transcurrido el plazo previsto para la interposición del recurso administrativo correspondiente", "Carecer de legitimación", "Existir otro recurso con identidad sustancial pendiente de resolver", "Carecer manifiestamente de fundamento"], "c": 2, "e": "Art. 116 LPAC (examen 2024)."},
+{"u": 5, "t": "La ejecución del acto recurrido se entiende suspendida si:", "o": ["Se interpone el recurso", "Transcurre un mes desde la entrada de la solicitud de suspensión sin resolución expresa notificada", "Transcurren tres meses sin resolver el recurso", "Lo pide un tercero interesado"], "c": 1, "e": "Art. 117.3 LPAC."},
+{"u": 5, "t": "La audiencia en vía de recurso, cuando hay hechos o documentos nuevos, se concede por:", "o": ["Cinco días", "Entre diez y quince días", "Veinte días, ampliables a un mes si lo solicitan los interesados", "Un mes"], "c": 1, "e": "Art. 118.1 LPAC."},
+{"u": 5, "t": "Si al resolver un recurso se aprecia un vicio de forma y no procede resolver el fondo:", "o": ["Se desestima el recurso", "Se ordena la retroacción al momento en que se cometió el vicio", "Se anula el procedimiento entero y se ordena iniciar uno nuevo con conservación de trámites", "Se inadmite"], "c": 1, "e": "Art. 119.2 LPAC."},
+{"u": 5, "t": "Ante una pluralidad de recursos contra un mismo acto con un recurso judicial interpuesto, el órgano puede:", "o": ["Inadmitirlos", "Suspender el plazo para resolver hasta el pronunciamiento judicial", "Acumularlos al proceso judicial pendiente y remitir el expediente al juzgado", "Estimarlos todos"], "c": 1, "e": "Art. 120.1 LPAC."},
+{"u": 6, "t": "El plazo para interponer alzada contra un acto presunto es:", "o": ["Un mes", "Tres meses desde el día siguiente a aquel en que se produzcan los efectos del silencio", "En cualquier momento desde el día siguiente a los efectos del silencio", "Seis meses"], "c": 2, "e": "Art. 122.1 LPAC."},
+{"u": 6, "t": "El plazo máximo para resolver y notificar el recurso de alzada es de:", "o": ["Un mes", "Dos meses", "Tres meses", "Seis meses"], "c": 2, "e": "Art. 122.2 LPAC (examen 2022)."},
+{"u": 6, "t": "Si la alzada se presenta ante el órgano que dictó el acto, este debe remitirla al competente en:", "o": ["Cinco días", "Diez días", "Quince días", "Un mes"], "c": 1, "e": "Art. 121.2 LPAC."},
+{"u": 6, "t": "Los tribunales de selección se consideran dependientes, a efectos de la alzada:", "o": ["Del órgano al que estén adscritos o, en su defecto, del que nombró a su presidente", "Del Consejo de Ministros", "De la Dirección General de la Función Pública en todo caso", "De ninguno: sus actos agotan la vía"], "c": 0, "e": "Art. 121.1 LPAC."},
+{"u": 6, "t": "El plazo máximo para resolver el recurso potestativo de reposición es de:", "o": ["Un mes", "Dos meses", "Tres meses", "Quince días"], "c": 0, "e": "Art. 124.2 LPAC."},
+{"u": 6, "t": "Interpuesto recurso de reposición, el interesado:", "o": ["Puede acudir a la vez al contencioso", "No puede interponer contencioso hasta que se resuelva expresamente o se desestime por silencio", "Debe interponer después alzada", "Pierde el derecho al contencioso"], "c": 1, "e": "Art. 123.2 LPAC."},
+{"u": 6, "t": "El recurso extraordinario de revisión fundado en error de hecho de los documentos del expediente se interpone en:", "o": ["Puede acudir a la vez al contencioso, solicitando la acumulación de ambos recursos", "Un año", "Cuatro años desde la notificación de la resolución", "Cualquier momento"], "c": 2, "e": "Art. 125.2 LPAC (examen 2019)."},
+{"u": 6, "t": "El recurso extraordinario de revisión se interpone ante:", "o": ["El superior jerárquico", "El órgano que dictó el acto, que también lo resuelve", "El Consejo de Estado", "El Ministro de Justicia"], "c": 1, "e": "Art. 125.1 LPAC (examen 2019)."},
+{"u": 6, "t": "Transcurridos tres meses desde la interposición del recurso extraordinario de revisión sin resolución:", "o": ["Se entiende estimado", "Se entiende desestimado y queda expedita la vía contenciosa", "Caduca", "El Ministro de Justicia, previo informe de la Abogacía General del Estado"], "c": 1, "e": "Art. 126.3 LPAC."},
+{"u": 6, "t": "La reclamación ante el Consejo de Transparencia y Buen Gobierno es:", "o": ["Obligatoria antes del contencioso", "Potestativa y previa al contencioso, sustitutiva de los recursos administrativos", "Caduca el recurso, y el interesado puede reiterarlo por la misma causa ante el mismo órgano administrativo", "Un recurso extraordinario"], "c": 1, "e": "Arts. 23.1 y 24.1 de la Ley 19/2013."},
+{"u": 7, "t": "Resolución notificada el 16 de febrero de 2026 que no agota la vía. El último día para interponer alzada es:", "o": ["El 13 de marzo", "El 16 de marzo", "El 18 de marzo", "El 16 de abril"], "c": 1, "e": "Art. 30.4: de fecha a fecha; un mes desde el 16/02 vence el 16/03."},
+{"u": 7, "t": "Antes de elegir el recurso en el supuesto hay que calificar:", "o": ["Solo el importe", "Si el acto es expreso o presunto y si pone fin a la vía administrativa (art. 114)", "El 18 de marzo, al excluirse del cómputo mensual los sábados, domingos y festivos intermedios", "El número de interesados"], "c": 1, "e": "Calificación previa del Tema 12."},
+{"u": 7, "t": "El enunciado no dice de qué órgano depende la subdirección que dictó el acto. La redacción correcta es:", "o": ["«Podríamos entender que depende de una dirección general»", "«El enunciado no precisa de qué órgano depende, por lo que suponemos que depende de una dirección general, conforme al art. 55 de la LRJSP»", "«Salvo mejor criterio, depende del ministro»", "Omitir el dato"], "c": 1, "e": "Suposición declarada y justificada."},
+{"u": 7, "t": "Solicitud de suspensión registrada el 16 de marzo sin respuesta. El 20 de abril se concluye que:", "o": ["«Por tanto, se concluye que la ejecución está suspendida desde el 16 de abril (art. 117.3)»", "«Podría entenderse que la ejecución continúa mientras no se resuelva expresamente el recurso de alzada interpuesto por Beta»", "«La ejecución sigue porque el recurso no suspende»", "«Hay que esperar a la resolución del recurso»"], "c": 0, "e": "Art. 117.3 LPAC: suspensión automática al mes."},
+{"u": 7, "t": "Una alzada contra una resolución expresa no se resuelve en tres meses. La conclusión correcta es:", "o": ["Doble silencio: se entiende estimada", "Silencio desestimatorio: el interesado puede acudir al contencioso", "Caducidad del recurso", "Debe interponer reposición"], "c": 1, "e": "Art. 122.2 LPAC; el doble silencio solo opera contra desestimaciones presuntas de solicitudes."}
+];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Los interesados",2:"Derechos de los ciudadanos",3:"Garantías, abstención y recusación",4:"Revisión de oficio",5:"Recursos: objeto, fin de la vía y reglas comunes",6:"Alzada, reposición y revisión",7:"Supuesto práctico"};
+const TABS={1:"Interesados",2:"Derechos",3:"Garantías",4:"Revisión de oficio",5:"Recursos",6:"Alzada y otros",7:"Supuesto"};
+const SK="gace27_biv_t12_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
