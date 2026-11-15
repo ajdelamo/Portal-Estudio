@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 13 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque IV · Tema 13 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "Bases constitucionales", "b": "Art. 106.1 CE (control de la potestad reglamentaria y de la legalidad administrativa) · art. 24 (tutela judicial efectiva) · art. 117 (potestad jurisdiccional) · art. 153.c (control de la administración autonómica)."}, {"u": 1, "f": "Evolución", "b": "Jurisdicción retenida y delegada (s. XIX) → Ley de 1888 (Santamaría de Paredes) → Ley de 1956 (discrecionalidad y reglamentos) → Ley 29/1998 (inactividad, vía de hecho, juzgados, cautelares) → LO 7/2015 (casación) → LO 1/2025."}, {"u": 1, "f": "LO 1/2025: nueva planta", "b": "Juzgados → secciones de lo contencioso de los tribunales de instancia (una por provincia, sede en la capital). Juzgados centrales → sección del Tribunal Central de Instancia. Integración: 31/12/2025. La Audiencia Nacional sigue."}, {"u": 1, "f": "LO 1/2025: cambios procesales", "b": "Desde el 3/04/2025: sentencia oral en el abreviado · vista no automática si el actor pide fallo sin ella · preparación de prueba por el letrado de la Administración de Justicia · art. 19.1.k (sindicatos). MASC: solo civil y mercantil, no sector público."}, {"u": 1, "f": "Ámbito (art. 1 LJCA)", "b": "Actuación administrativa sujeta al Derecho administrativo · disposiciones de rango inferior a la ley · decretos legislativos ultra vires · personal y gestión patrimonial de órganos constitucionales · CGPJ · Administración electoral."}, {"u": 1, "f": "Sí corresponde (art. 2)", "b": "Derechos fundamentales, elementos reglados e indemnizaciones de actos del Gobierno · contratos administrativos y preparación y adjudicación de los demás · corporaciones de Derecho público · control sobre concesionarios · responsabilidad patrimonial (unidad de fuero)."}, {"u": 1, "f": "No corresponde (art. 3)", "b": "Cuestiones civiles, penales y sociales · contencioso-disciplinario militar · conflictos de jurisdicción y de atribuciones · normas forales fiscales vascas (Tribunal Constitucional)."}, {"u": 1, "f": "Prejudicialidad e improrrogabilidad (4 y 5)", "b": "Cuestiones prejudiciales no administrativas, salvo constitucionales y penales, sin efectos fuera del proceso. Falta de jurisdicción de oficio, con audiencia de 10 días a partes y Fiscal."}, {"u": 2, "f": "Juzgados (art. 8)", "b": "Todos los actos locales salvo planeamiento · comunidades autónomas: personal (salvo nacimiento o extinción de carrera), sanciones ≤ 60.000 € o 6 meses, responsabilidad ≤ 30.050 € · periférica (salvo estatal > 60.000 € y dominio, obras, expropiación, propiedades especiales) · extranjería · Juntas de Zona · entrada en domicilio y medidas sanitarias."}, {"u": 2, "f": "Juzgados centrales (art. 9)", "b": "a) Personal de ministros y secretarios de Estado (salvo confirmaciones y nacimiento o extinción de carrera) · b) sanciones de órganos centrales ≤ 60.000 € o 6 meses · c) organismos públicos estatales nacionales · d) responsabilidad de ministros y SE ≤ 30.050 € · e) inadmisión de asilo · f) disciplina deportiva."}, {"u": 2, "f": "TSJ (art. 10)", "b": "Actos locales y autonómicos no atribuidos a juzgados · disposiciones autonómicas y locales (planeamiento, ordenanzas) · TEAR · Juntas provinciales · convenios autonómicos · reunión · órganos estatales inferiores a ministro en personal, propiedades especiales y expropiación (10.1.i) · residual · apelaciones contra juzgados."}, {"u": 2, "f": "Audiencia Nacional (art. 11)", "b": "Disposiciones y actos de ministros y secretarios de Estado (y en personal, nacimiento o extinción de carrera) · convenios no autonómicos · TEAC · TACRC · Financiación del Terrorismo · Banco de España, CNMV y FROB en resolución · CNMC unidad de mercado · apelaciones contra juzgados centrales."}, {"u": 2, "f": "Tribunal Supremo (art. 12)", "b": "Consejo de Ministros y Comisiones Delegadas · CGPJ · personal y gestión de Congreso, Senado, TC, Tribunal de Cuentas y Defensor del Pueblo · Fiscal General · Junta Electoral Central y electos en generales y europeas · casación y revisión."}, {"u": 2, "f": "30.000 · 30.050 · 60.000", "b": "30.000 €: abreviado y límite de la apelación · 30.050 €: responsabilidad patrimonial en juzgados y juzgados centrales · 60.000 €: sanciones y periférica. Los 60.000 € no separan en general la Audiencia Nacional del Tribunal Central."}, {"u": 2, "f": "Errores del temario en arts. 8 y 9", "b": "El 8.1 solo excluye el planeamiento (las ordenanzas van al TSJ por ser disposiciones). Personal, propiedades especiales y expropiación de órganos centrales inferiores: TSJ (10.1.i), no juzgados centrales."}, {"u": 3, "f": "Competencia territorial (art. 14)", "b": "Regla 1.ª: sede del autor del acto originario · 2.ª: responsabilidad, personal, propiedades especiales y sanciones → domicilio o sede, a elección; actos autonómicos y locales: solo dentro del TSJ del autor · 3.ª: inmuebles · pluralidad de destinatarios: sede del autor."}, {"u": 4, "f": "Legitimación activa (art. 19)", "b": "a) Derecho o interés legítimo · b) intereses colectivos · c, d, e) Administraciones entre sí · f) Fiscal, solo si la ley lo determina · g) entidades de Derecho público · h) acción popular, solo si la ley la prevé · i) igualdad de trato (Ley 15/2022) · j) LGTBI (Ley 4/2023) · k) sindicatos por afiliados (LO 1/2025)."}, {"u": 4, "f": "Falta de legitimación (art. 20)", "b": "Órganos de la propia Administración y miembros de sus colegiados (salvo ley) · particulares que obran por delegación o como meros agentes · entidades dependientes frente a su Administración (salvo estatuto de autonomía)."}, {"u": 4, "f": "Legitimación pasiva (art. 21)", "b": "Administración autora · codemandados afectados · aseguradoras (siempre codemandadas). Fiscalización: autor si se aprueba, fiscalizadora si no. Tribunales de recursos contractuales: no son demandados; lo son los favorecidos."}, {"u": 4, "f": "Postulación (arts. 23 y 24)", "b": "Juzgados: procurador o el propio abogado; abogado siempre. Salas: procurador y abogado. Funcionarios por sí mismos en personal sin separación de inamovibles. Administraciones: sus servicios jurídicos (Abogacía del Estado)."}, {"u": 5, "f": "Actividad impugnable (25 a 28)", "b": "Actos expresos y presuntos que agotan la vía (definitivos y trámites cualificados) · disposiciones (directo e indirecto) · inactividad · vía de hecho. No: reproducción de firmes ni confirmatorios de consentidos."}, {"u": 5, "f": "Cuestión de ilegalidad (27)", "b": "Sentencia firme estimatoria por ilegalidad de la disposición aplicada → se plantea ante el tribunal del recurso directo; si es el mismo, decide en la sentencia; el Tribunal Supremo anula directamente."}, {"u": 5, "f": "Inactividad y vía de hecho (29 y 30)", "b": "Prestacional: reclamación y 3 meses · inejecución de actos firmes: petición y 1 mes, abreviado · vía de hecho: requerimiento potestativo, 10 días."}, {"u": 5, "f": "Plazos (art. 46)", "b": "Expreso o disposición: 2 meses · presunto: 6 meses (no oponible al silencio negativo, STC 52/2014) · inactividad: 2 meses tras el art. 29 · vía de hecho: 10 días o 20 sin requerimiento · lesividad y entre Administraciones: 2 meses · derechos fundamentales: 10 días."}, {"u": 5, "f": "Agosto (128.2)", "b": "No corre ningún plazo de la LJCA, salvo en el procedimiento de protección de los derechos fundamentales."}, {"u": 5, "f": "Requisitos previos", "b": "Agotar la vía (alzada si procede; reposición potestativa) · lesividad (43) · entre Administraciones (44): sin recurso administrativo; requerimiento potestativo en 2 meses, rechazado si no se contesta en 1 mes."}, {"u": 5, "f": "Pretensiones (31 y 32)", "b": "Anulación · plena jurisdicción (situación individualizada e indemnización) · condena por inactividad · cese de la vía de hecho. Congruencia con pretensiones y motivos (33)."}, {"u": 6, "f": "Tramitación inicial (45 a 51)", "b": "Escrito de interposición (demanda directa en lesividad) · expediente en 20 días improrrogables; la reclamación emplaza a la Administración · notificar a interesados en 5 días, personarse en 9 · personada por el envío del expediente · inadmisión del art. 51."}, {"u": 6, "f": "Procedimiento ordinario", "b": "Demanda 20 días · contestación 20 · alegaciones previas · prueba si hay hechos discutidos relevantes · vista o conclusiones · sentencia en 10 días."}, {"u": 6, "f": "Abreviado: ámbito (78.1)", "b": "Personal · extranjería · inadmisión de asilo · dopaje · cuantía ≤ 30.000 € · inejecución de actos firmes (29.2). Se inicia por demanda."}, {"u": 6, "f": "Abreviado: vista (78.3)", "b": "Expediente 15 días antes. Si el actor pide fallo sin vista: contestación en 20 días; en los 10 primeros la demandada puede pedir vista motivada; auto que la acuerda, irrecurrible; que la rechaza, reposición; conclusiones en 5 días sucesivos si el actor las pidió."}, {"u": 6, "f": "Abreviado: incomparecencia y sentencia", "b": "Sin actor: desistido y costas. Solo actor: sigue la vista. Sentencia en 10 días o oral al terminar la vista (78.20)."}, {"u": 7, "f": "Medidas cautelares (129 a 136)", "b": "En cualquier estado del proceso · cualquier medida · si la ejecución hace perder al recurso su finalidad legítima, ponderando intereses · caución · cautelarísimas sin audiencia (135) · inactividad y vía de hecho: régimen reforzado (136)."}, {"u": 7, "f": "Procedimientos especiales", "b": "Derechos fundamentales (10 días, preferente, siempre apelable) · sociedad de la información y medidas sanitarias · cuestión de ilegalidad · suspensión previa de acuerdos · unidad de mercado (CNMC)."}, {"u": 7, "f": "Inadmisibilidad (69)", "b": "Falta de jurisdicción, capacidad o representación, legitimación · actividad no impugnable · cosa juzgada o litispendencia · extemporaneidad."}, {"u": 7, "f": "Efectos de anular un reglamento (72 y 73)", "b": "Erga omnes desde su publicación; no afecta a los actos firmes que lo aplicaron, salvo exclusión o reducción de sanciones no ejecutadas completamente."}, {"u": 7, "f": "Apelación (art. 81)", "b": "No: cuantía ≤ 30.000 € y electoral del 8.4. Siempre: inadmisión en asuntos de hasta 30.000 € · derechos fundamentales · entre Administraciones · impugnación indirecta · extensión de efectos. STS 19/05/2025: umbral también para autos en ejecución."}, {"u": 7, "f": "Casación (86 a 93)", "b": "Sin cuantía: interés casacional objetivo (LO 7/2015). Preparación ante la Sala de instancia en 30 días → admisión (auto si admite, providencia si inadmite) → interposición → oposición → sentencia."}, {"u": 7, "f": "Ejecución (103 a 113)", "b": "Firme la sentencia, comunicación en 10 días · ejecución forzosa a los 2 meses (104.2) · actos para eludir el fallo: nulos (103.4) · imposibilidad: indemnización (105.2) · multas coercitivas (112) · extensión de efectos (110)."}, {"u": 5, "f": "Recurso directo e indirecto (26)", "b": "Directo: contra la disposición, 2 meses desde su publicación. Indirecto: contra los actos de aplicación, alegando la ilegalidad de la disposición; no lo impide no haber recurrido la disposición ni que se desestimara el directo."}, {"u": 3, "f": "Inmuebles y pluralidad (14.1.3.ª y 14.2)", "b": "Planes urbanísticos, expropiación e intervención en la propiedad: órgano del lugar de los inmuebles. Acto con destinatarios en varias circunscripciones: órgano de la sede del autor."}, {"u": 2, "f": "Órganos del orden (art. 6)", "b": "Juzgados, juzgados centrales, Salas de los TSJ, Sala de la Audiencia Nacional y Sala Tercera del Tribunal Supremo. No hay salas contenciosas en las audiencias provinciales."}, {"u": 8, "f": "Introducción del contencioso (plantillas, sección 11)", "b": "LJCA (en adelante, LJCA) · arts. 24.1 y 106.1 CE · art. 149.1.6.ª CE (legislación procesal). Complemento: LO 1/2025 (tribunales de instancia). Corrección: la responsabilidad de ministros ≤ 30.050 € está en el art. 9.1.d."}, {"u": 8, "f": "Calificación previa del Tema 13", "b": "«Con carácter previo, procede calificar la actividad impugnada»: tipo (acto, presunto, disposición, inactividad, vía de hecho), autor, si agota la vía, materia y cuantía → órgano, procedimiento y apelación."}, {"u": 8, "f": "Caso Delta: órgano", "b": "Sanción de un alcalde de 12.000 € → juzgado (sección del tribunal de instancia), abreviado; domicilio en otra comunidad: la elección no sale del TSJ del autor."}, {"u": 8, "f": "Caso Delta: plazo y apelación", "b": "Notificación 10/06 → plazo hasta 10/09 (agosto no cuenta) · alternativa: reposición previa y art. 46.4 · sentencia de fondo no apelable (≤ 30.000 €), salvo inadmisión."}, {"u": 8, "f": "Conclusión afirmativa tipo", "b": "«Por tanto, se concluye que es competente la Sección de lo Contencioso-Administrativo del Tribunal de Instancia de Madrid, por el procedimiento abreviado, hasta el 10 de septiembre de 2026.»"}];
+const UNAMES={"1": "Fundamento y ámbito", "2": "Órganos", "3": "Territorial", "4": "Partes", "5": "Actividad y plazos", "6": "Procedimiento", "7": "Cautelares, recursos y ejecución", "8": "Supuesto"};
+const SK="gace27_biv_t13_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
