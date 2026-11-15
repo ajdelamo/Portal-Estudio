@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BIV · Tema 11 — El procedimiento administrativo común (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tablewrap table{break-inside:auto}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque IV · Derecho Administrativo · Tema 11</small>
+    <h1>Las leyes del procedimiento administrativo común de las Administraciones Públicas y del régimen jurídico del sector público. Procedimiento administrativo común y su alcance: iniciación, ordenación, instrucción y terminación. La obligación de resolver. El silencio administrativo</h1>
+    <p>Versión fusionada: el Tema 11 del Bloque IV del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas contra el texto consolidado del BOE y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 15/11/2026 · Ley 39/2015 consolidada a 06/11/2024 · Ley 40/2015 consolidada a 02/08/2024 · Real Decreto 203/2021</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">Las Leyes 39/2015 y 40/2015</a></li>
+    <li><a href="#s2">El procedimiento: concepto y plazos</a></li>
+    <li><a href="#s3">La obligación de resolver</a></li>
+    <li><a href="#s4">El silencio administrativo</a></li>
+    <li><a href="#s5">La iniciación</a></li>
+    <li><a href="#s6">La ordenación</a></li>
+    <li><a href="#s7">La instrucción</a></li>
+    <li><a href="#s8">La finalización</a></li>
+    <li><a href="#s9">La ejecución</a></li>
+    <li><a href="#s10">Lo que preguntan y trampas</a></li>
+    <li><a href="#s11">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s12">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. El tema es la columna vertebral del Bloque IV: el iter del procedimiento (iniciación, ordenación, instrucción, terminación) y las dos piezas que más se preguntan, la obligación de resolver y el silencio.</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Repaso en audio. Al terminar, recita sin mirar la escalera de plazos del <a href="#s10">apartado 10</a>: 24 horas, 10 + 5, 10, 10-30 + 10, 10, 10-15, 20, 7 y 15, 3 meses, 30 días, 6 y 3 meses, 15 días.</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s11">apartado 11</a> tapando la columna derecha. En el supuesto se puntúa contar bien el plazo (inicio, suspensiones, vencimiento) y extraer el sentido del silencio.</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> Las Leyes 39/2015 y 40/2015</h2>
+<h3>1.1 Antecedentes y sentido de la reforma</h3>
+<p>El <span class="art">art. 105.c CE</span> ordena que la ley regule el procedimiento de producción de los actos administrativos, garantizando, cuando proceda, la audiencia del interesado. El <span class="art">art. 149.1.18.ª CE</span> atribuye al Estado la competencia exclusiva sobre las <strong>bases del régimen jurídico</strong> de las Administraciones y el <strong>procedimiento administrativo común</strong>, sin perjuicio de las especialidades de la organización propia de las comunidades autónomas.</p>
+<p>La Ley de Procedimiento Administrativo de 1958 y la <strong>Ley 30/1992</strong> reunían organización y procedimiento en un solo texto. La reforma de 2015, impulsada por la Comisión para la Reforma de las Administraciones Públicas (CORA), los separó en dos leyes complementarias:</p>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Ley</th><th style="width:38%">Objeto</th><th>Estructura</th></tr>
+<tr><td><strong>Ley 39/2015, de 1 de octubre, del Procedimiento Administrativo Común</strong> (LPAC)</td><td>Relaciones <strong>ad extra</strong>: validez y eficacia de los actos, procedimiento común (incluidos el sancionador y el de responsabilidad patrimonial), revisión, y principios de la iniciativa legislativa y la potestad reglamentaria.</td><td>Título preliminar (1-2) · I, interesados (3-12) · II, actividad de las Administraciones (13-33) · III, actos (34-46) · IV, procedimiento (47-105) · V, revisión (106-126) · VI, iniciativa legislativa y potestad reglamentaria (127-133). <strong>133 artículos</strong>.</td></tr>
+<tr><td><strong>Ley 40/2015, de 1 de octubre, de Régimen Jurídico del Sector Público</strong> (LRJSP)</td><td>Relaciones <strong>ad intra</strong>: principios de actuación (art. 3), órganos y competencia, potestad sancionadora (25-31), responsabilidad patrimonial (32-37), AGE, sector público institucional y relaciones interadministrativas.</td><td>Título preliminar · I, Administración General del Estado · II, sector público institucional · III, relaciones interadministrativas.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Entrada en vigor</span>
+Publicadas en el BOE el <strong>2 de octubre de 2015</strong>, entraron en vigor <strong>al año</strong>, el <strong>2 de octubre de 2016</strong>, y derogaron la Ley 30/1992. En la LPAC, las previsiones sobre <strong>registro electrónico de apoderamientos, registro electrónico, registro de empleados públicos habilitados, punto de acceso general electrónico y archivo único electrónico</strong> se aplazaron varias veces hasta el <strong>2 de abril de 2021</strong> (disposición final séptima). Su desarrollo principal es el <strong>Real Decreto 203/2021, de 30 de marzo</strong>, Reglamento de actuación y funcionamiento del sector público por medios electrónicos.</div>
+<h3>1.2 Rasgos de la LPAC</h3>
+<ul>
+<li><strong>Administración electrónica como regla</strong>: procedimiento y expediente electrónicos; obligados a relacionarse electrónicamente las personas jurídicas, los profesionales colegiados y los empleados públicos, entre otros.</li>
+<li><strong>Procedimiento común único</strong> que integra las especialidades del sancionador y del de responsabilidad patrimonial, que pierden sus reglamentos propios.</li>
+<li><strong>Tramitación simplificada</strong> como alternativa abreviada.</li>
+<li><strong>Mejora de la regulación</strong>: principios de buena regulación y planificación normativa (Título VI).</li>
+</ul>
+<div class="box clave"><span class="box-h">La STC 55/2018 y la STC 132/2018</span>
+La <strong>STC 55/2018, de 24 de mayo</strong>, resolvió la impugnación de la LPAC. Declaró <strong>inconstitucionales y nulos</strong> el párrafo segundo del <strong>art. 6.4</strong> (modelos de poder aprobados por orden ministerial), un inciso del art. 129.4 y el apartado 2 de la disposición final primera. Declaró <strong>contrarios al orden de competencias</strong>, y por tanto <strong>no aplicables a las comunidades autónomas</strong>, los arts. <strong>129</strong> (salvo parte del apartado 4), <strong>130</strong>, <strong>132</strong> y <strong>133</strong> (salvo algunos incisos). Y dio <strong>interpretación conforme</strong> a la disposición adicional segunda (adhesión de comunidades autónomas y entidades locales a las plataformas estatales). Para la <strong>AGE</strong>, la Ley se aplica íntegra. El fondo de la doctrina: el procedimiento común «en sentido estricto» es competencia exclusiva estatal; las especialidades por razón de la materia siguen a la competencia sustantiva; y la autoorganización es autonómica. La <strong>STC 132/2018, de 13 de diciembre</strong>, resolvió la impugnación de la LRJSP.</div>
+<div class="box fix"><span class="box-h">Corrección al material visual</span>
+El visual decía que la STC 55/2018 «recortó la proyección autonómica de los arts. 1.2, 6.4, 9.3, 10.4, DA 2.ª». El fallo anuló el párrafo segundo del art. 6.4 y afectó sobre todo al <strong>Título VI</strong> (arts. 129, 130, 132 y 133); la disposición adicional segunda se salvó con una interpretación conforme. Los arts. 9.3 y 10.4 no figuran entre los anulados.</div>
+<h3>1.3 Ámbito de aplicación (art. 2 LPAC)</h3>
+<p>Se aplica al <strong>sector público</strong>: la AGE, las Administraciones de las comunidades autónomas, las entidades locales y el <strong>sector público institucional</strong>. Dentro de este, los organismos y entidades de Derecho público; las <strong>entidades de Derecho privado</strong> vinculadas o dependientes, solo cuando <strong>ejerzan potestades administrativas</strong>; y las <strong>universidades públicas</strong>, por su normativa específica y supletoriamente por la LPAC. Las <strong>corporaciones de Derecho público</strong> se rigen por su normativa en las funciones públicas atribuidas por ley o delegadas, y supletoriamente por la LPAC.</p>
+<h3>1.4 Procedimientos especiales (disposición adicional primera)</h3>
+<p>Los procedimientos de leyes especiales por razón de la materia que no exijan algún trámite de la LPAC, o regulen trámites adicionales o distintos, se rigen en eso por sus leyes. Se rigen por su normativa y <strong>supletoriamente</strong> por la LPAC: la aplicación y revisión de los <strong>tributos</strong> y la materia aduanera; la gestión, inspección, liquidación, recaudación, impugnación y revisión en <strong>Seguridad Social y desempleo</strong>; los sancionadores tributarios y aduaneros, del orden social, de <strong>tráfico y seguridad vial</strong> y de extranjería; y los procedimientos de <strong>extranjería y asilo</strong>.</p>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> El procedimiento: concepto y plazos</h2>
+<h3>2.1 Concepto, garantías y fases</h3>
+<p>Es el cauce formal de la serie de actos en que se concreta la actuación administrativa para un fin. Doble función: <strong>garantía de los derechos</strong> de los ciudadanos y <strong>garantía de la legalidad y el acierto</strong> de la decisión. Principios: impulso de oficio, celeridad, contradicción, igualdad de los interesados, transparencia y publicidad, eficacia y simplificación. Fases: <strong>iniciación, ordenación, instrucción, finalización y ejecución</strong>.</p>
+<h3>2.2 Términos y plazos (arts. 29 a 33)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Regla</th><th>Contenido</th></tr>
+<tr><td><strong>Obligatoriedad</strong> (29)</td><td>Obligan a las autoridades y personal competentes y a los interesados.</td></tr>
+<tr><td><strong>Por horas</strong> (30.1)</td><td>Salvo ley o Derecho de la Unión, son <strong>hábiles</strong>: todas las del día hábil. Se cuentan de hora en hora y de minuto en minuto desde la notificación o publicación, y <strong>no pueden superar 24 horas</strong>; si no, se expresan en días.</td></tr>
+<tr><td><strong>Por días</strong> (30.2)</td><td><strong>Hábiles</strong>, excluidos <strong>sábados, domingos y festivos</strong>. Solo son naturales si lo declara una ley o el Derecho de la Unión, y debe constar en la notificación. Se cuentan desde el día siguiente a la notificación, la publicación o el silencio.</td></tr>
+<tr><td><strong>Por meses o años</strong> (30.4)</td><td>Desde el día siguiente a la notificación o publicación, y vencen el <strong>mismo día</strong> del mes o año de vencimiento en que se produjo la notificación, publicación o silencio. Si no hay día equivalente, el <strong>último del mes</strong>.</td></tr>
+<tr><td><strong>Día final inhábil</strong> (30.5)</td><td>Se prorroga al <strong>primer día hábil siguiente</strong>.</td></tr>
+<tr><td><strong>Inhábil en un sitio y hábil en otro</strong> (30.6)</td><td>Si es hábil en el municipio o comunidad del interesado e inhábil en la sede del órgano, o al revés, se considera <strong>inhábil en todo caso</strong>.</td></tr>
+<tr><td><strong>Registro electrónico</strong> (31)</td><td>Presentación todos los días del año, las 24 horas. Lo presentado en día inhábil se entiende presentado en la <strong>primera hora del primer día hábil siguiente</strong>, salvo norma que permita la recepción en día inhábil.</td></tr>
+<tr><td><strong>Ampliación</strong> (32)</td><td>De oficio o a petición, salvo precepto contrario, <strong>hasta la mitad</strong> del plazo, si no perjudica a terceros; pedida y acordada <strong>antes del vencimiento</strong> (no se amplían plazos vencidos). El acuerdo y su denegación <strong>no son recurribles</strong>. Si una incidencia técnica impide el funcionamiento del sistema, cabe ampliar los plazos no vencidos.</td></tr>
+<tr><td><strong>Urgencia</strong> (33)</td><td>Por interés público, de oficio o a petición: los plazos se <strong>reducen a la mitad</strong>, salvo los de <strong>presentación de solicitudes y recursos</strong>. El acuerdo <strong>no es recurrible</strong>, sin perjuicio del recurso contra la resolución final.</td></tr>
+</table></div>
+<div class="box trampa"><span class="box-h">Trampa</span>Los plazos por <strong>meses</strong> van de <strong>fecha a fecha</strong>: no se descuentan sábados ni festivos. Solo si el último día es inhábil se prorroga al siguiente hábil.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019 y 2022)</span>
+Un plazo por horas no puede superar las <strong>24 horas</strong> (2022) · no son recurribles los acuerdos de <strong>ampliación</strong> de plazos ni el que declara la <strong>urgencia</strong> (2019).</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> La obligación de resolver (arts. 21 a 23)</h2>
+<div class="box clave"><span class="box-h">Art. 21.1: resolver siempre</span>
+La Administración está obligada a dictar <strong>resolución expresa</strong> y a notificarla en <strong>todos</strong> los procedimientos, cualquiera que sea su forma de iniciación. En la prescripción, renuncia, caducidad, desistimiento o desaparición sobrevenida del objeto, la resolución declara esa circunstancia. <strong>Excepciones</strong>: terminación por <strong>pacto o convenio</strong> y procedimientos de derechos sometidos solo a <strong>declaración responsable o comunicación</strong>. Si la solicitud es manifiestamente infundada o inadmisible, cabe resolución de <strong>inadmisión</strong> sucinta. El vencimiento del plazo <strong>no exime</strong> de resolver.</div>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Elemento</th><th>Régimen</th></tr>
+<tr><td><strong>Plazo máximo</strong> (21.2)</td><td>El de la norma reguladora, que <strong>no puede exceder de seis meses</strong>, salvo que una <strong>norma con rango de ley</strong> establezca uno mayor o lo prevea el <strong>Derecho de la Unión</strong>.</td></tr>
+<tr><td><strong>Sin plazo fijado</strong> (21.3)</td><td><strong>Tres meses</strong>.</td></tr>
+<tr><td><strong>Cómputo</strong> (21.3)</td><td>De oficio: desde la <strong>fecha del acuerdo de iniciación</strong>. A solicitud: desde la <strong>entrada de la solicitud en el registro electrónico</strong> del órgano competente para tramitarla.</td></tr>
+<tr><td><strong>Información</strong> (21.4)</td><td>Publicar en el portal las relaciones de procedimientos con sus plazos y el sentido del silencio, e informar al interesado en los <strong>diez días</strong> siguientes a la recepción de la solicitud.</td></tr>
+<tr><td><strong>Responsabilidad</strong> (21.6)</td><td>El personal que despacha los asuntos y los titulares de los órganos son <strong>responsables directos</strong> de resolver en plazo.</td></tr>
+</table></div>
+<h3>3.1 Suspensión del plazo (art. 22)</h3>
+<div class="grid2">
+<div class="card"><h4>Suspensión potestativa (22.1: «se podrá»)</h4><ul><li>a) Requerimiento de <strong>subsanación</strong> o aportación de documentos.</li><li>b) Pronunciamiento previo y preceptivo de un <strong>órgano de la Unión</strong>.</li><li>c) Procedimiento no finalizado en la <strong>Unión</strong> que condicione la resolución.</li><li>d) <strong>Informes preceptivos</strong>: máximo <strong>tres meses</strong>; sin informe, se sigue.</li><li>e) Pruebas técnicas o análisis contradictorios propuestos por los interesados.</li><li>f) Negociaciones para un pacto o convenio.</li><li>g) Previo pronunciamiento de un <strong>órgano jurisdiccional</strong>.</li></ul></div>
+<div class="card"><h4>Suspensión obligatoria (22.2: «se suspenderá»)</h4><ul><li>a) Requerimiento de una Administración a otra para que anule o revise un acto (art. 39.5).</li><li>b) <strong>Actuaciones complementarias</strong> (art. 87).</li><li>c) <strong>Recusación</strong>, hasta que la resuelva el superior jerárquico.</li></ul></div>
+</div>
+<h3>3.2 Ampliación del plazo máximo (art. 23)</h3>
+<p>Excepcionalmente, agotados todos los medios disponibles, el órgano competente para resolver, a propuesta en su caso del instructor o del superior, puede ampliar motivadamente el plazo máximo, sin superar el <strong>plazo establecido</strong> para el procedimiento («hasta otro tanto»). El acuerdo se notifica y <strong>no es recurrible</strong>.</p>
+<div class="box trampa"><span class="box-h">Trampa</span>«Sin plazo en la norma, seis meses» → <strong>no</strong>: <strong>tres meses</strong>. Los seis meses son el <strong>máximo</strong> que puede fijar una norma reglamentaria; por encima, solo una ley o el Derecho de la Unión.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019 y 2024)</span>
+A falta de plazo, el máximo para notificar es de <strong>tres meses</strong> (2024) · el acuerdo de ampliación del plazo máximo <strong>no es recurrible</strong> (2019).</div>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> El silencio administrativo (arts. 24 y 25)</h2>
+<h3>4.1 Procedimientos iniciados a solicitud del interesado (art. 24)</h3>
+<div class="box clave"><span class="box-h">Regla general: silencio estimatorio</span>
+Vencido el plazo máximo sin notificar resolución expresa, el interesado puede entender <strong>estimada</strong> su solicitud, salvo que una <strong>norma con rango de ley</strong> o una norma de <strong>Derecho de la Unión o internacional</strong> diga lo contrario. Si el procedimiento tiene por objeto el acceso a actividades o su ejercicio, la ley que fije el silencio negativo debe fundarse en <strong>razones imperiosas de interés general</strong>.</div>
+<div class="tablewrap"><table>
+<tr><th style="width:40%">Excepciones legales: silencio desestimatorio</th><th>Contraexcepción</th></tr>
+<tr><td>Ejercicio del <strong>derecho de petición</strong> (art. 29 CE) · estimación que <strong>transfiera facultades</strong> sobre el <strong>dominio público</strong> o el <strong>servicio público</strong> · actividades que puedan <strong>dañar el medio ambiente</strong> · <strong>responsabilidad patrimonial</strong> · <strong>impugnación</strong> de actos y disposiciones · <strong>revisión de oficio</strong> iniciada a solicitud.</td><td><strong>Doble silencio</strong>: si se interpone <strong>alzada</strong> contra la desestimación por silencio de una solicitud y el órgano no resuelve en plazo, el recurso se entiende <strong>estimado</strong>, salvo en las materias del párrafo anterior (derecho de petición, dominio y servicio público, medio ambiente, responsabilidad patrimonial).</td></tr>
+</table></div>
+<div class="tablewrap"><table>
+<tr><th style="width:16%">Sentido</th><th>Naturaleza (24.2)</th><th style="width:34%">Resolución expresa posterior (24.3)</th></tr>
+<tr><td><strong>Estimatorio</strong></td><td>Es, a todos los efectos, un <strong>acto administrativo finalizador</strong> del procedimiento.</td><td>Solo puede dictarse si es <strong>confirmatoria</strong>. Para quitarlo, revisión de oficio o lesividad.</td></tr>
+<tr><td><strong>Desestimatorio</strong></td><td><strong>Ficción</strong> con el único efecto de permitir el <strong>recurso</strong> administrativo o contencioso.</td><td>Se dicta <strong>sin vinculación</strong> al sentido del silencio.</td></tr>
+</table></div>
+<p><strong>Acreditación y efectos (24.4)</strong>: los actos por silencio se hacen valer ante la Administración y ante cualquier persona; producen efectos desde el vencimiento del plazo; se acreditan por cualquier medio de prueba, incluido el <strong>certificado</strong>, que el órgano competente expide <strong>de oficio en quince días</strong> desde que vence el plazo para resolver. El interesado puede pedirlo en cualquier momento, y entonces los quince días se cuentan desde su petición.</p>
+<div class="box fix"><span class="box-h">Precisión al temario 2026: el certificado de silencio</span>
+El temario dice que el certificado «puede solicitarse» y que el órgano «debe emitirlo en quince días». El art. 24.4 establece que se expide <strong>de oficio</strong> en quince días desde que expira el plazo máximo para resolver; además, el interesado puede pedirlo en cualquier momento, y el plazo de quince días corre desde su petición. El material visual lo tenía bien.</div>
+<div class="box trampa"><span class="box-h">Trampas del silencio</span>
+El silencio positivo <strong>no</strong> da facultades contrarias al ordenamiento sin los requisitos esenciales: ese acto es <strong>nulo</strong> (art. 47.1.f) · el silencio negativo es una ficción para recurrir; la Administración puede resolver después en cualquier sentido · el doble silencio es la <strong>única</strong> vuelta al sentido positivo en los recursos.</div>
+<h3>4.2 Procedimientos iniciados de oficio (art. 25)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:44%">Tipo de procedimiento</th><th>Efecto del vencimiento</th></tr>
+<tr><td>Del que pueda derivarse el <strong>reconocimiento o constitución de derechos</strong> o situaciones favorables</td><td>Los interesados comparecidos pueden entender <strong>desestimadas</strong> sus pretensiones.</td></tr>
+<tr><td>Ejercicio de potestades <strong>sancionadoras</strong> o, en general, de <strong>intervención</strong>, susceptibles de efectos desfavorables o de gravamen</td><td><strong>Caducidad</strong>: la resolución que la declara ordena el archivo.</td></tr>
+</table></div>
+<p>Si el procedimiento se paraliza por causa <strong>imputable al interesado</strong>, se <strong>interrumpe</strong> el cómputo del plazo para resolver (25.2). El vencimiento <strong>no exime</strong> de la obligación de resolver.</p>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019 y 2022)</span>
+En la estimación por silencio, la resolución posterior solo puede ser <strong>confirmatoria</strong> (2022) · en la desestimación, se resuelve <strong>sin vinculación</strong> (2022) · el silencio estimatorio de la alzada contra una desestimación presunta es una <strong>excepción</strong> a las materias desestimatorias (2019).</div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> La iniciación</h2>
+<h3>5.1 Disposiciones generales (arts. 54 a 57)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Figura</th><th>Régimen</th></tr>
+<tr><td><strong>Formas</strong> (54)</td><td>De oficio o a solicitud del interesado.</td></tr>
+<tr><td><strong>Información o actuaciones previas</strong> (55)</td><td>Antes de iniciar, para conocer las circunstancias y la conveniencia de iniciar. En el sancionador, determinar hechos, responsables y circunstancias.</td></tr>
+<tr><td><strong>Medidas provisionales</strong> (56)</td><td>Iniciado el procedimiento, las adopta el órgano <strong>competente para resolver</strong>, de oficio o a instancia de parte, motivadamente, con proporcionalidad, efectividad y menor onerosidad. <strong>Antes</strong> de iniciar, solo por <strong>urgencia inaplazable</strong>, el órgano competente para iniciar o instruir; deben <strong>confirmarse, modificarse o levantarse</strong> en el acuerdo de iniciación, que debe dictarse en los <strong>quince días</strong> siguientes; si no, se extinguen. Nunca medidas de perjuicio de difícil o imposible reparación o que violen derechos.</td></tr>
+<tr><td><strong>Acumulación</strong> (57)</td><td>De oficio o a instancia de parte, si hay identidad sustancial o íntima conexión y es el mismo órgano el que tramita y resuelve. Contra el acuerdo <strong>no cabe recurso</strong>.</td></tr>
+</table></div>
+<h3>5.2 Iniciación de oficio (arts. 58 a 65)</h3>
+<p>Por acuerdo del órgano competente, por propia iniciativa, orden superior, petición razonada de otros órganos o denuncia (art. 58).</p>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Modalidad</th><th>Concepto</th></tr>
+<tr><td><strong>Propia iniciativa</strong> (59)</td><td>Conocimiento directo o indirecto de los hechos por el órgano competente para iniciar.</td></tr>
+<tr><td><strong>Orden superior</strong> (60)</td><td>Orden del superior jerárquico del órgano competente.</td></tr>
+<tr><td><strong>Petición razonada</strong> (61)</td><td>Propuesta de un órgano sin competencia para iniciar que conoce los hechos por sus funciones de inspección, averiguación o investigación. <strong>No vincula</strong>; si no se inicia, se comunican los motivos.</td></tr>
+<tr><td><strong>Denuncia</strong> (62)</td><td>Cualquier persona, cumpla o no una obligación legal, pone en conocimiento hechos que pueden justificar la iniciación. <strong>No confiere por sí sola</strong> la condición de interesado.</td></tr>
+</table></div>
+<p>El sancionador y el de responsabilidad patrimonial tienen especialidades de iniciación (arts. 63 a 65), vistas en los Temas 7 y 10.</p>
+<h3>5.3 Iniciación a solicitud del interesado (arts. 66 a 69)</h3>
+<ul>
+<li><strong>Contenido</strong> (66): nombre del interesado y, en su caso, del representante; medio o lugar para notificaciones y correo o dispositivo para los avisos; hechos, razones y petición; lugar y fecha; firma o acreditación de la voluntad; órgano al que se dirige y su código. Cabe una <strong>solicitud conjunta</strong> si las pretensiones tienen contenido y fundamento idéntico o similar.</li>
+<li><strong>Subsanación</strong> (68): requerimiento para subsanar en <strong>diez días</strong>, con advertencia de que, si no, se le tendrá por <strong>desistido</strong> previa resolución. Ampliable hasta <strong>cinco días</strong> más, salvo en procedimientos <strong>selectivos o de concurrencia competitiva</strong>. Si un obligado a relacionarse electrónicamente presenta en papel, se le requiere para que subsane electrónicamente, y la fecha de presentación es la de la subsanación.</li>
+<li><strong>Declaración responsable y comunicación</strong> (69): permiten ejercer el derecho o iniciar la actividad desde la presentación, con control posterior (Tema 7).</li>
+</ul>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019 y 2024)</span>
+Las medidas provisionales, iniciado el procedimiento, las adopta el <strong>órgano competente para resolver</strong> (2019) · si no se atiende la subsanación, se tiene por <strong>desistido</strong> previa resolución (2024) · la petición razonada <strong>no vincula</strong> (2019).</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> La ordenación (arts. 70 a 74)</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Regla</th><th>Contenido</th></tr>
+<tr><td><strong>Expediente</strong> (70)</td><td>Conjunto ordenado de documentos y actuaciones que fundamentan la resolución y las diligencias de ejecución. <strong>Electrónico</strong>, con <strong>índice numerado</strong>. <strong>No</strong> forma parte la información auxiliar o de apoyo (notas, borradores, opiniones, resúmenes, comunicaciones e informes internos), salvo los informes, preceptivos o facultativos, solicitados antes de la resolución.</td></tr>
+<tr><td><strong>Impulso</strong> (71)</td><td>De oficio en todos los trámites, por medios electrónicos, con celeridad. Despacho por <strong>riguroso orden de incoación</strong> en asuntos de homogénea naturaleza, salvo orden motivada en contrario.</td></tr>
+<tr><td><strong>Concentración</strong> (72)</td><td>En un solo acto los trámites que admitan impulso simultáneo.</td></tr>
+<tr><td><strong>Cumplimiento de trámites</strong> (73)</td><td>Por los interesados, en <strong>diez días</strong> salvo plazo distinto. Si no, se les puede declarar decaídos, pero se admite su actuación si se produce antes o dentro del día en que se notifique la resolución que tenga por transcurrido el plazo.</td></tr>
+<tr><td><strong>Cuestiones incidentales</strong> (74)</td><td>Incluso las de nulidad de actuaciones, <strong>no suspenden</strong> la tramitación, <strong>salvo la recusación</strong>.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Idea clave del temario 2026 (examen 2022)</span>
+Los trámites a cumplimentar por los interesados, en <strong>diez días</strong> salvo plazo distinto.</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> La instrucción (arts. 75 a 83)</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Trámite</th><th>Régimen</th></tr>
+<tr><td><strong>Actos de instrucción</strong> (75)</td><td>De oficio y por medios electrónicos, sin perjuicio del derecho de los interesados a proponer actuaciones.</td></tr>
+<tr><td><strong>Alegaciones</strong> (76)</td><td>En <strong>cualquier momento anterior al trámite de audiencia</strong>; se tienen en cuenta en la propuesta.</td></tr>
+<tr><td><strong>Prueba</strong> (77 y 78)</td><td>Cualquier medio admisible en Derecho. Si la Administración no tiene por ciertos los hechos o lo exige el procedimiento: periodo de <strong>10 a 30 días</strong>, y extraordinario de hasta <strong>10</strong>. Solo se rechazan las pruebas <strong>manifiestamente improcedentes o innecesarias</strong>, por resolución motivada. Los documentos de funcionarios con condición de <strong>autoridad</strong> hacen prueba de los hechos constatados salvo prueba en contrario. El informe pedido como prueba se considera <strong>preceptivo</strong>.</td></tr>
+<tr><td><strong>Informes</strong> (79 y 80)</td><td>Los preceptivos y los necesarios, citando el precepto o motivando su conveniencia. <strong>Facultativos y no vinculantes</strong> salvo disposición expresa. Plazo de <strong>diez días</strong>. Si no llega, se sigue, salvo que sea preceptivo (puede suspenderse el plazo para resolver). Si es de otra Administración sobre sus competencias y no llega, se sigue, y el emitido fuera de plazo <strong>puede no tenerse en cuenta</strong>.</td></tr>
+<tr><td><strong>Audiencia</strong> (82)</td><td>Instruido el procedimiento e <strong>inmediatamente antes de la propuesta</strong>, de <strong>10 a 15 días</strong>, con los límites de protección de datos y transparencia. Si el interesado dice que no alegará, se tiene por realizado. Se puede <strong>prescindir</strong> si no figuran ni se tienen en cuenta otros hechos, alegaciones o pruebas que los del interesado.</td></tr>
+<tr><td><strong>Información pública</strong> (83)</td><td>Si la naturaleza del procedimiento lo requiere; anuncio en el diario oficial; plazo de alegaciones <strong>no inferior a 20 días</strong>. No comparecer no impide recurrir; comparecer <strong>no da</strong> por sí la condición de interesado.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019 y 2022)</span>
+Periodo de prueba de <strong>10 a 30 días</strong> (2019) · los informes son, salvo disposición en contrario, <strong>facultativos y no vinculantes</strong> (2022).</div>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> La finalización (arts. 84 a 96)</h2>
+<p><strong>Modos</strong> (84): resolución, desistimiento, renuncia (si no está prohibida), caducidad y la <strong>imposibilidad material</strong> sobrevenida de continuar, siempre motivada. A ello se suman la terminación convencional y, en el sancionador, el reconocimiento de responsabilidad y el pago voluntario (85).</p>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Figura</th><th>Régimen</th></tr>
+<tr><td><strong>Actuaciones complementarias</strong> (87)</td><td>Antes de resolver, por acuerdo motivado, las indispensables (no lo son los informes que preceden inmediatamente a la resolución). Se notifican, con <strong>siete días</strong> para alegar tras su finalización; se practican en <strong>quince días</strong> como máximo; el plazo para resolver queda <strong>suspendido</strong>.</td></tr>
+<tr><td><strong>Contenido de la resolución</strong> (88)</td><td>Decide todas las cuestiones planteadas y las derivadas; las <strong>conexas</strong> no planteadas, previa audiencia de hasta quince días. A solicitud del interesado, <strong>congruente</strong> con lo pedido y sin <strong>agravar su situación inicial</strong> (no <em>reformatio in peius</em>). Motivada en los casos del art. 35; con pie de recursos (recurso, órgano y plazo). Nunca puede abstenerse de resolver por silencio, oscuridad o insuficiencia de la norma, aunque puede inadmitir solicitudes de derechos no previstos o manifiestamente infundadas. Los informes aceptados motivan si se incorporan al texto.</td></tr>
+<tr><td><strong>Terminación convencional</strong> (86)</td><td>Acuerdos, pactos, convenios o contratos con personas públicas o privadas, no contrarios al ordenamiento ni sobre materias no transigibles, para el interés público. Finalizadores o previos a la resolución, vinculantes o no. Contenido mínimo: partes, ámbito personal, funcional y territorial, y vigencia. Necesitan aprobación del <strong>Consejo de Ministros</strong> (u órgano autonómico) los que versen sobre materias de su competencia directa. No alteran competencias ni responsabilidades.</td></tr>
+<tr><td><strong>Desistimiento de la Administración</strong> (93)</td><td>En los procedimientos de oficio, motivadamente, en los supuestos y con los requisitos de las leyes.</td></tr>
+<tr><td><strong>Desistimiento y renuncia del interesado</strong> (94)</td><td>Cualquier interesado puede desistir o, si no está prohibido, renunciar; con varios, solo afecta a quien lo formula. Por cualquier medio con constancia. La Administración lo acepta <strong>de plano</strong>, salvo que terceros personados insten la continuación en <strong>diez días</strong>; si hay interés general, puede limitar sus efectos y seguir.</td></tr>
+<tr><td><strong>Caducidad por causa del interesado</strong> (95)</td><td>En procedimientos a solicitud, paralizados por causa imputable al interesado: <strong>advertencia</strong> y, pasados <strong>tres meses</strong> sin reanudar, archivo notificado y recurrible. No por la mera inactividad en trámites no indispensables. No produce por sí sola la prescripción, pero los procedimientos caducados <strong>no interrumpen</strong> la prescripción. En un nuevo procedimiento pueden conservarse actos y trámites, cumpliendo siempre alegaciones, prueba y audiencia.</td></tr>
+</table></div>
+<h3>8.1 Tramitación simplificada (art. 96)</h3>
+<div class="flowv">
+<div class="step"><b>Cuándo</b>Por <strong>interés público o falta de complejidad</strong>, de oficio o a solicitud. En cualquier momento antes de resolver se puede volver a la ordinaria.</div>
+<div class="step"><b>Oposición y solicitud</b>Acordada de oficio, se notifica; si un interesado se <strong>opone expresamente</strong>, se sigue la ordinaria. Si la pide el interesado, el órgano puede desestimarla en <strong>cinco días</strong>, <strong>sin recurso</strong>; pasado ese plazo, se entiende <strong>desestimada</strong>.</div>
+<div class="step"><b>Plazo y trámites</b>Resolución en <strong>treinta días</strong> desde la notificación del acuerdo, salvo que quede menos por la ordinaria. Trámites: inicio, subsanación, alegaciones en <strong>cinco días</strong>, audiencia <strong>solo si va a ser desfavorable</strong>, informe del servicio jurídico y del CGPJ si son preceptivos, dictamen del Consejo de Estado si es preceptivo (suspende el plazo y <strong>podrá</strong> emitirse en quince días <strong>si se solicita</strong>; si es contrario al fondo, vuelta a la ordinaria) y resolución.</div>
+</div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026</span>
+El temario dice que en el simplificado el dictamen «se emite en quince días». El art. 96.6.g dice que <strong>podrá</strong> emitirse en quince días <strong>si así lo solicita</strong> el órgano competente, y que su petición suspende el plazo para resolver.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (examen 2019)</span>
+Las actuaciones complementarias, en <strong>quince días</strong> como máximo · no cabe recurso contra la desestimación de la solicitud de tramitación simplificada.</div>
+<div class="box clave"><span class="box-h">Especialidades sancionadoras y de responsabilidad, integradas en el procedimiento común</span>
+<strong>Sancionador</strong>: separación entre instrucción y resolución, acuerdo de iniciación del art. 64, propuesta (89) y resolución sin hechos distintos, ejecutiva cuando no quepa recurso ordinario en vía administrativa (90.3); caducidad por el art. 25.1.b (Tema 7). <strong>Responsabilidad patrimonial</strong>: Tema 10.</div>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> La ejecución (arts. 97 a 105)</h2>
+<ul>
+<li><strong>Título</strong> (97): ninguna actuación material de ejecución que limite derechos sin la resolución previa que le sirva de fundamento, que debe notificarse.</li>
+<li><strong>Ejecutoriedad</strong> (98): los actos son <strong>inmediatamente ejecutivos</strong>, salvo suspensión, resolución sancionadora que admita recurso administrativo (incluida la reposición), disposición en contrario o necesidad de aprobación superior. Los pagos a la Hacienda pública, preferentemente electrónicos.</li>
+<li><strong>Ejecución forzosa</strong> (99): previo <strong>apercibimiento</strong>, salvo suspensión o cuando la Constitución o la ley exijan intervención judicial.</li>
+</ul>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Medio (100 a 104)</th><th>Supuesto</th></tr>
+<tr><td><strong>Apremio sobre el patrimonio</strong> (101)</td><td>Cantidad líquida; procedimiento de recaudación.</td></tr>
+<tr><td><strong>Ejecución subsidiaria</strong> (102)</td><td>Actos <strong>no personalísimos</strong>: la Administración los realiza, por sí o por otros, a costa del obligado, con liquidación provisional previa posible.</td></tr>
+<tr><td><strong>Multa coercitiva</strong> (103)</td><td>Si lo autoriza la <strong>ley</strong>: actos personalísimos sin compulsión, actos en que la compulsión no se estime conveniente o actos que el obligado pueda encargar a otro. Se reitera por lapsos suficientes; es independiente de las sanciones y compatible con ellas.</td></tr>
+<tr><td><strong>Compulsión sobre las personas</strong> (104)</td><td>Obligaciones personalísimas de <strong>no hacer o soportar</strong>, si la ley lo autoriza y con respeto a la dignidad. Si son de <strong>hacer</strong> y no se cumplen, indemnización de daños y perjuicios.</td></tr>
+</table></div>
+<p>Se elige el medio <strong>menos restrictivo</strong> de la libertad, con proporcionalidad. Para entrar en un domicilio, consentimiento del titular o <strong>autorización judicial</strong> (100.3). <strong>No</strong> se admiten acciones posesorias contra actuaciones competentes y conformes al procedimiento (105).</p>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Lo que preguntan y trampas</h2>
+<div class="box clave"><span class="box-h">La escalera de plazos del Tema 11</span>
+Por horas: máximo <strong>24</strong> · ampliación: hasta la <strong>mitad</strong> · urgencia: plazos a la <strong>mitad</strong> (no solicitudes ni recursos) · resolver: máximo <strong>6 meses</strong> por norma, <strong>3 meses</strong> sin plazo · información al interesado: <strong>10 días</strong> · informe preceptivo: suspende hasta <strong>3 meses</strong> · certificado de silencio: <strong>15 días</strong> de oficio · medidas provisionales previas: iniciar en <strong>15 días</strong> · subsanación: <strong>10 + 5</strong> · trámites: <strong>10</strong> · prueba: <strong>10-30 + 10</strong> · informes: <strong>10</strong> · audiencia: <strong>10-15</strong> · información pública: <strong>≥ 20</strong> · actuaciones complementarias: <strong>7</strong> de alegaciones y <strong>15</strong> para practicarlas · conexas: hasta <strong>15</strong> · desistimiento con terceros: <strong>10</strong> · caducidad: <strong>3 meses</strong> · simplificada: <strong>30 días</strong>, alegaciones <strong>5</strong>, desestimar la solicitud en <strong>5</strong> · en vigor: <strong>2/10/2016</strong>.</div>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Lo que preguntan</span><ul>
+<li>Objeto y estructura de las dos leyes; STC 55/2018.</li>
+<li>Ámbito subjetivo y procedimientos especiales.</li>
+<li>Cómputo de plazos, ampliación y urgencia.</li>
+<li>Obligación de resolver, plazos y suspensión.</li>
+<li>Sentido y efectos del silencio; doble silencio.</li>
+<li>Formas de iniciación, medidas provisionales y subsanación.</li>
+<li>Prueba, informes, audiencia e información pública.</li>
+<li>Resolución, desistimiento, caducidad y simplificada.</li>
+<li>Medios de ejecución forzosa.</li></ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>Sin plazo en la norma: <strong>3 meses</strong>, no 6.</li>
+<li>Los plazos por meses <strong>no</strong> descuentan sábados.</li>
+<li>Los informes <strong>no</strong> son vinculantes salvo norma.</li>
+<li>El denunciante <strong>no</strong> es interesado por denunciar.</li>
+<li>La responsabilidad patrimonial tiene silencio <strong>negativo</strong>.</li>
+<li>El vencimiento <strong>no</strong> exime de resolver.</li>
+<li>Las incidencias <strong>no</strong> suspenden, salvo la recusación.</li>
+<li>La urgencia <strong>no</strong> reduce el plazo de recursos.</li>
+<li>Silencio positivo + resolución posterior: solo <strong>confirmatoria</strong>.</li>
+<li>De oficio y de gravamen: <strong>caducidad</strong>, no silencio.</li>
+<li>Comparecer en la información pública <strong>no</strong> da la condición de interesado.</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia con sus cuatro piezas: art. 149.1.18.ª CE, art. 105 CE, Ley 39/2015 (en adelante, LPAC) con su objeto del art. 1 y su ámbito del art. 2; y, si hay organización, la Ley 40/2015 (en adelante, LRJSP).</li>
+<li>La calificación previa: quién es interesado, si el procedimiento se inició a solicitud o de oficio, y qué plazo tiene.</li>
+<li>La distribución de materias entre las dos leyes y la STC 55/2018.</li>
+<li>Las reglas de cómputo de plazos.</li>
+<li>La obligación de resolver, sus plazos y suspensiones.</li>
+<li>El silencio: regla, excepciones, doble silencio, efectos y certificado.</li>
+<li>Las fases del procedimiento con sus plazos.</li>
+<li>Los modos de terminación y la tramitación simplificada.</li>
+<li>Los medios de ejecución forzosa.</li>
+</ol>
+
+<!-- 11 -->
+<h2 id="s11"><span class="n">11.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>Este tema está en casi todos los supuestos, aunque la pregunta sea de otra materia: cada vez que hay una solicitud, un plazo o una falta de respuesta. Lo que puntúa es <strong>contar bien el plazo</strong> (inicio, suspensiones, vencimiento), <strong>extraer el sentido del silencio</strong> y decir qué puede hacer cada parte.</p>
+<h3>11.1 Introducción de la materia (plantillas v2, sección 4)</h3>
+<div class="model">
+<p>«En materia de procedimiento administrativo resulta de aplicación la Ley 39/2015, de 1 de octubre, del Procedimiento Administrativo Común de las Administraciones Públicas (en adelante, LPAC), dictada al amparo del artículo 149.1.18.ª de la Constitución, que atribuye al Estado la competencia sobre el procedimiento administrativo común, y en desarrollo del artículo 105 de la Constitución. Conforme a su artículo 1, regula los requisitos de validez y eficacia de los actos administrativos, el procedimiento administrativo común, incluidos el sancionador y el de responsabilidad patrimonial, y los principios de la iniciativa legislativa y de la potestad reglamentaria. Se aplica a todo el sector público, de conformidad con su artículo 2.»</p>
+</div>
+<div class="box sup"><span class="box-h">Las cuatro piezas y el complemento</span>Art. 149.1.18.ª CE → art. 105 CE → LPAC con su objeto (art. 1) → ámbito (art. 2). Si la cuestión toca órganos, competencia, abstención o recusación, añade el complemento de la LRJSP de la misma sección.</div>
+<h3>11.2 Calificación previa propia del Tema 11</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar el procedimiento. Se trata de un procedimiento iniciado [a solicitud del interesado / de oficio] el [fecha], por lo que el plazo máximo para resolver y notificar se computa desde [la entrada de la solicitud en el registro electrónico del órgano competente / la fecha del acuerdo de iniciación] (artículo 21.3 de la LPAC). La norma reguladora [fija un plazo de… / no fija plazo, por lo que rige el de tres meses del artículo 21.3], y el sentido del silencio se determina conforme al artículo [24 / 25].»</p>
+</div>
+<h3>11.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Hecho del enunciado</th><th style="width:30%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>La norma reguladora no fija plazo para resolver</td><td>Art. 21.3 LPAC</td><td>Tres meses desde la entrada de la solicitud en el registro</td></tr>
+<tr><td>Una orden ministerial fija un plazo de 8 meses</td><td>Art. 21.2 LPAC</td><td>No puede: sin ley ni Derecho de la Unión, el máximo es de 6 meses</td></tr>
+<tr><td>Se requiere subsanación: notificado el 16/03 y atendido el 25/03</td><td>Art. 22.1.a LPAC</td><td>Se suspende el plazo para resolver durante ese tiempo</td></tr>
+<tr><td>Vence el plazo de una solicitud de autorización de actividad sin resolución</td><td>Art. 24.1 LPAC</td><td>Silencio estimatorio, salvo ley o Derecho de la Unión en contrario</td></tr>
+<tr><td>Vence el plazo de una solicitud de ocupación del dominio público</td><td>Art. 24.1, párrafo segundo</td><td>Silencio desestimatorio: el interesado puede recurrir</td></tr>
+<tr><td>Tras el silencio positivo, la Administración dicta una denegación</td><td>Art. 24.3.a LPAC</td><td>La resolución posterior solo puede ser confirmatoria: la denegación es inválida; para eliminar el acto presunto, revisión de oficio o lesividad</td></tr>
+<tr><td>El interesado recurre en alzada una desestimación presunta y tampoco se resuelve</td><td>Art. 24.1, párrafo tercero</td><td>Doble silencio: la alzada se entiende estimada (salvo materias excluidas)</td></tr>
+<tr><td>Vence el plazo de un procedimiento sancionador</td><td>Art. 25.1.b LPAC</td><td>Caducidad y archivo; puede iniciarse otro si no ha prescrito</td></tr>
+<tr><td>Procedimiento a solicitud paralizado por el interesado</td><td>Art. 95 LPAC</td><td>Advertencia y, a los 3 meses, caducidad y archivo</td></tr>
+<tr><td>El plazo de un mes vence en domingo</td><td>Art. 30.5 LPAC</td><td>Se prorroga al lunes, primer día hábil</td></tr>
+<tr><td>Se presenta un escrito electrónico un sábado</td><td>Art. 31.2.b LPAC</td><td>Se entiende presentado en la primera hora del lunes hábil siguiente</td></tr>
+<tr><td>Se acuerda la urgencia y se pretende reducir el plazo de recurso</td><td>Art. 33 LPAC</td><td>No se reducen los plazos de solicitudes ni de recursos</td></tr>
+<tr><td>El instructor rechaza una prueba sin motivar</td><td>Art. 77.3 LPAC</td><td>Solo cabe rechazar las manifiestamente improcedentes o innecesarias, por resolución motivada: vicio del procedimiento</td></tr>
+</table></div>
+
+<h3>11.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+La empresa Lambda, S.L. presenta el <strong>2 de marzo de 2026</strong>, por el registro electrónico del Ministerio, una solicitud de autorización para ejercer una actividad. La norma reguladora no fija plazo para resolver. El <strong>16 de marzo</strong> se le notifica un requerimiento de subsanación, que atiende el <strong>25 de marzo</strong>. El <strong>20 de junio de 2026</strong> se le notifica una resolución denegatoria.
+<br><br><strong>Cuestiones:</strong> a) ¿Cuándo vencía el plazo para resolver y qué efecto produjo su vencimiento? b) Validez de la denegación y actuación posible de la Administración.</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 11.1.] Con carácter previo, procede calificar el procedimiento. Se trata de un procedimiento iniciado a solicitud del interesado el 2 de marzo de 2026, por lo que el plazo para resolver se computa desde la entrada de la solicitud en el registro electrónico (artículo 21.3.b de la LPAC). La cuestión a) solicita determinar el vencimiento del plazo y su efecto. Al no fijar plazo la norma reguladora, rige el de tres meses del artículo 21.3, que, contado de fecha a fecha (artículo 30.4), concluiría el 2 de junio de 2026. El artículo 22.1.a permite suspenderlo por el tiempo que medie entre la notificación del requerimiento de subsanación y su cumplimiento: del 16 al 25 de marzo, nueve días, por lo que el vencimiento se desplaza al 11 de junio de 2026. El enunciado no precisa si una ley o una norma de la Unión fija para esta actividad un silencio desestimatorio, por lo que suponemos que no, ya que no se menciona ninguna y la materia no figura entre las excepciones del artículo 24.1. Por tanto, se concluye que el plazo venció el 11 de junio de 2026 y que, conforme al artículo 24.1 de la LPAC, la solicitud quedó estimada por silencio administrativo, que tiene la consideración de acto administrativo finalizador del procedimiento (artículo 24.2).</p>
+<p><strong>Cuestión b).</strong> La cuestión b) plantea la validez de la denegación notificada el 20 de junio de 2026. El artículo 24.3.a de la LPAC dispone que, en los casos de estimación por silencio, la resolución expresa posterior solo puede dictarse si es confirmatoria del acto presunto. La denegación es contraria a ese precepto. No obstante lo anterior, cabría sostener la validez de la denegación si una ley hubiera establecido para esta actividad el silencio negativo por razones imperiosas de interés general, si bien con los datos del enunciado la solución más adecuada es la estimación por silencio. Si la Administración considera que la autorización presunta es contraria al ordenamiento, debe acudir a la revisión de oficio si incurre en nulidad, por ejemplo por adquirir facultades careciendo de los requisitos esenciales (artículos 47.1.f y 106), o a la declaración de lesividad si es anulable (artículo 107). Por tanto, se concluye que la denegación del 20 de junio de 2026 es contraria al artículo 24.3.a de la LPAC, que Lambda puede impugnarla en alzada si no pone fin a la vía administrativa o, si la pone (por ejemplo, si la dicta el Ministro), en reposición potestativa o directamente ante la jurisdicción contencioso-administrativa, y que la Administración solo puede eliminar la autorización presunta por los procedimientos de revisión.</p>
+</div>
+<h3>11.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Calificación</strong> del procedimiento, del inicio del cómputo y del plazo aplicable → <em>análisis</em>.<br>
+<strong>Fechas operadas</strong> (2/03 + 3 meses = 2/06; + 9 días de suspensión = 11/06) → <em>aplicación de conocimientos</em>.<br>
+<strong>Suposición declarada</strong> sobre la ausencia de ley de silencio negativo, justificada → admitida.<br>
+<strong>Alternativa evaluada</strong> (ley con silencio negativo) → <em>análisis</em>.<br>
+<strong>Encadenar</strong> el silencio positivo con los límites del 24.3.a y las vías de revisión (106 y 107) → <em>sistemática</em>.<br>
+<strong>Conclusiones afirmativas</strong> con fecha, efecto y vías para cada parte.</div>
+
+<!-- 12 -->
+<h2 id="s12"><span class="n">12.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Las dos leyes</td><td>Arts. 105.c y 149.1.18.ª, CORA, tabla de objeto y estructura, entrada en vigor y aplazamiento, rasgos, SSTC 55 y 132/2018, ámbito, DA 1.ª</td><td>Modelo dual, títulos con artículos, 133 artículos, STC 55/2018 y sus tres planos, ámbito</td><td>Fusionado + BOE (1) con corrección</td></tr>
+<tr><td>Plazos</td><td>Arts. 29 a 33 completos e ideas clave</td><td>Tabla de reglas</td><td>Fusionado (2)</td></tr>
+<tr><td>Obligación de resolver</td><td>Arts. 21 a 23 completos, suspensiones</td><td>Recuadro con plazos y suspensión</td><td>Fusionado + BOE (3)</td></tr>
+<tr><td>Silencio</td><td>Arts. 24 y 25, efectos, certificado «a solicitud»</td><td>Cuadro, certificado de oficio, trampas</td><td>Fusionado + BOE (4) con precisión</td></tr>
+<tr><td>Iniciación, ordenación e instrucción</td><td>Completo, con tablas e ideas clave</td><td>Esquema de cuatro fases con plazos</td><td>Fusionado (5 a 7)</td></tr>
+<tr><td>Finalización</td><td>Actuaciones complementarias, resolución, convencional, desistimiento, caducidad, simplificada</td><td>Esquema y especialidades sancionadoras</td><td>Fusionado + BOE (8) con precisión</td></tr>
+<tr><td>Ejecución</td><td>Arts. 97 a 105 y tabla de medios</td><td>No</td><td>Del temario (9)</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 11 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas (contrastadas con el BOE el 15/11/2026)</span>
+<strong>Temario 2026:</strong> el certificado de silencio se expide <strong>de oficio</strong> en quince días desde el vencimiento (24.4), no solo a petición · en el simplificado, el dictamen «podrá» emitirse en quince días si se solicita (96.6.g).<br>
+<strong>Material visual:</strong> la STC 55/2018 no afectó a los arts. 9.3 y 10.4; anuló el párrafo segundo del art. 6.4, afectó sobre todo al Título VI y salvó la disposición adicional segunda con una interpretación conforme.<br>
+<strong>Añadidos del BOE:</strong> distinción entre suspensión potestativa (22.1, siete supuestos) y obligatoria (22.2: requerimiento entre Administraciones, actuaciones complementarias y recusación) · silencio negativo también en la revisión de oficio a solicitud · prohibición de ampliar plazos vencidos y ampliación por incidencia técnica (32) · regla del día inhábil en un sitio y hábil en otro (30.6) · el informe pedido como prueba se presume preceptivo (77.7).</div>
+
+<footer>
+GACE 2027 · Bloque IV · Tema 11 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 15/11/2026.<br>
+Normas: CE (arts. 103, 105.c y 149.1.18.ª) · Ley 39/2015 (consolidada a 06/11/2024) · Ley 40/2015 (consolidada a 02/08/2024) · Real Decreto 203/2021 · SSTC 55/2018, de 24 de mayo, y 132/2018, de 13 de diciembre.
+</footer>
+</div>
+</body>
+</html>
