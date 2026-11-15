@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 13 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque IV · Tema 13 · La jurisdicción contencioso-administrativa</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u": 1, "t": "El control judicial de la potestad reglamentaria y de la legalidad de la actuación administrativa lo establece el artículo:", "o": ["24.1 CE", "103.1 CE", "106.1 CE", "117.3 CE"], "c": 2, "e": "Art. 106.1 CE."},
+{"u": 1, "t": "Tras la Ley Orgánica 1/2025, los juzgados de lo contencioso-administrativo son:", "o": ["Salas de lo contencioso-administrativo de los tribunales de instancia, con sede en cada partido judicial", "Secciones de lo contencioso-administrativo de los tribunales de instancia", "Juzgados de primera instancia e instrucción", "Secciones de las audiencias provinciales"], "c": 1, "e": "LO 1/2025; integración del orden contencioso el 31/12/2025."},
+{"u": 1, "t": "Los juzgados centrales de lo contencioso-administrativo se han transformado en:", "o": ["La Sala de lo Contencioso de la Audiencia Nacional", "La sección de lo contencioso-administrativo del Tribunal Central de Instancia", "Una sección del Tribunal Supremo", "Secciones del TSJ de Madrid"], "c": 1, "e": "LO 1/2025; la Audiencia Nacional sigue existiendo."},
+{"u": 1, "t": "Los medios adecuados de solución de controversias de la LO 1/2025:", "o": ["Son requisito previo del recurso contencioso", "Son requisito de procedibilidad en el orden civil y mercantil, no en asuntos con el sector público", "Sustituyen al recurso de alzada en los procedimientos sancionadores y de responsabilidad patrimonial de las Administraciones", "Son obligatorios en el procedimiento abreviado"], "c": 1, "e": "LO 1/2025."},
+{"u": 1, "t": "No corresponde al orden contencioso-administrativo:", "o": ["La responsabilidad patrimonial de las Administraciones", "Los conflictos de atribuciones entre órganos de una misma Administración", "Los decretos legislativos ultra vires", "La preparación y adjudicación de los contratos privados celebrados por las Administraciones Públicas"], "c": 1, "e": "Art. 3.c LJCA (exámenes 2019, 2022 y 2024)."},
+{"u": 1, "t": "Respecto de los actos del Gobierno, el orden contencioso conoce de:", "o": ["Ninguno de ellos, por tratarse de actos políticos excluidos de control judicial en todo caso", "La protección de derechos fundamentales, los elementos reglados y las indemnizaciones", "Solo los dictados en materia de personal", "Solo los que tengan forma de real decreto"], "c": 1, "e": "Art. 2.a LJCA."},
+{"u": 1, "t": "Los recursos contra las normas forales fiscales de las Juntas Generales del País Vasco corresponden:", "o": ["Al TSJ del País Vasco", "Al Tribunal Supremo", "Al Tribunal Constitucional", "A la Audiencia Nacional"], "c": 2, "e": "Art. 3.d LJCA."},
+{"u": 1, "t": "La falta de jurisdicción se aprecia de oficio previa audiencia de las partes y del Ministerio Fiscal por plazo común de:", "o": ["Cinco días", "Diez días", "Quince días", "Veinte días"], "c": 1, "e": "Art. 5.2 LJCA."},
+{"u": 2, "t": "La impugnación de un plan general de ordenación urbana municipal corresponde a:", "o": ["El juzgado de lo contencioso-administrativo", "La Sala del TSJ", "La Audiencia Nacional", "El juzgado central"], "c": 1, "e": "Arts. 8.1 y 10.1.b LJCA."},
+{"u": 2, "t": "Los actos de las comunidades autónomas en materia de sanciones corresponden a los juzgados si la multa no supera:", "o": ["30.000 euros", "30.050 euros", "60.000 euros", "100.000 euros"], "c": 2, "e": "Art. 8.2.b LJCA."},
+{"u": 2, "t": "La responsabilidad patrimonial de ministros y secretarios de Estado corresponde a los juzgados centrales si lo reclamado no excede de:", "o": ["30.000 euros", "30.050 euros", "60.000 euros", "150.000 euros"], "c": 1, "e": "Art. 9.1.d LJCA (examen 2022)."},
+{"u": 2, "t": "Los actos de los organismos públicos estatales con competencia en todo el territorio nacional corresponden, como regla, a:", "o": ["Los juzgados centrales", "La Audiencia Nacional", "El TSJ de Madrid", "El Tribunal Supremo"], "c": 0, "e": "Art. 9.1.c LJCA."},
+{"u": 2, "t": "Los actos de órganos centrales de la AGE de nivel inferior a ministro en materia de personal, propiedades especiales y expropiación corresponden a:", "o": ["Los juzgados centrales", "Las Salas de los TSJ", "La Audiencia Nacional", "Los juzgados provinciales"], "c": 1, "e": "Art. 10.1.i LJCA."},
+{"u": 2, "t": "Las disposiciones generales de los ministros se recurren ante:", "o": ["El Tribunal Supremo", "La Audiencia Nacional", "Los juzgados centrales", "El TSJ de Madrid"], "c": 1, "e": "Art. 11.1.a LJCA."},
+{"u": 2, "t": "Los actos del Consejo General del Poder Judicial y del Fiscal General del Estado se recurren ante:", "o": ["La Audiencia Nacional", "El Tribunal Supremo", "El TSJ de Madrid", "Los juzgados centrales"], "c": 1, "e": "Art. 12.1 LJCA (examen 2022)."},
+{"u": 2, "t": "Las impugnaciones contra actos de las Juntas Electorales de Zona corresponden a:", "o": ["Los juzgados de lo contencioso-administrativo", "Las Salas de los TSJ", "El Tribunal Supremo", "La Junta Electoral Central"], "c": 0, "e": "Art. 8.5 LJCA (examen 2024)."},
+{"u": 2, "t": "Las apelaciones contra sentencias de los juzgados de lo contencioso-administrativo las conoce:", "o": ["La Audiencia Nacional", "La Sala del TSJ", "El Tribunal Supremo", "La audiencia provincial"], "c": 1, "e": "Art. 10.2 LJCA (examen 2022)."},
+{"u": 2, "t": "Las resoluciones del Tribunal Administrativo Central de Recursos Contractuales se recurren, como regla, ante:", "o": ["Los juzgados centrales", "La Audiencia Nacional", "El TSJ", "El Tribunal Supremo"], "c": 1, "e": "Art. 11.1.f LJCA."},
+{"u": 2, "t": "La autorización judicial de entrada en un domicilio para ejecutar un acto administrativo corresponde a:", "o": ["Contratos administrativos, subvenciones y cualquier otra materia a elección del recurrente", "El juzgado de lo contencioso-administrativo", "El TSJ", "El juez de paz"], "c": 1, "e": "Art. 8.6 LJCA."},
+{"u": 3, "t": "El fuero electivo del domicilio del demandante opera en materia de:", "o": ["Contratos y subvenciones", "Responsabilidad patrimonial, personal, propiedades especiales y sanciones", "Cualquier juzgado de lo contencioso-administrativo de España, a elección del recurrente o del Ministerio Fiscal", "Cualquier materia"], "c": 1, "e": "Art. 14.1, regla segunda, LJCA."},
+{"u": 3, "t": "Si el acto es de una comunidad autónoma o entidad local, la elección del fuero se limita a:", "o": ["El domicilio del demandante", "La circunscripción del TSJ en que tenga su sede el órgano autor", "Solo en los procedimientos de protección de derechos fundamentales, y siempre como parte demandada", "La provincia del domicilio del demandante"], "c": 1, "e": "Art. 14.1, regla segunda, párrafo segundo."},
+{"u": 3, "t": "El Ministerio Fiscal está legitimado en el contencioso-administrativo:", "o": ["En todos los procesos", "Para intervenir en los procesos que determine la ley", "Solo en los de derechos fundamentales y siempre como demandado", "Nunca"], "c": 1, "e": "Art. 19.1.f LJCA (examen 2022)."},
+{"u": 3, "t": "La acción popular en el contencioso-administrativo:", "o": ["Existe con carácter general", "Solo cabe en los casos expresamente previstos por las leyes", "Los colegios profesionales, en defensa de los intereses individuales de sus colegiados ejercientes", "Está prohibida"], "c": 1, "e": "Art. 19.1.h LJCA."},
+{"u": 3, "t": "La LO 1/2025 añadió al art. 19.1 LJCA la legitimación de:", "o": ["Las aseguradoras", "Los sindicatos, en nombre de sus afiliados funcionarios y estatutarios que lo autoricen", "Los colegios profesionales", "El Defensor del Pueblo"], "c": 1, "e": "Art. 19.1.k LJCA, desde el 3/04/2025."},
+{"u": 3, "t": "No pueden recurrir la actividad de una Administración:", "o": ["Terceros ajenos al proceso, que solo pueden intervenir como coadyuvantes a petición de la Administración", "Los particulares que obren como meros agentes o mandatarios de ella", "Las comunidades autónomas", "Las corporaciones de Derecho público"], "c": 1, "e": "Art. 20.b LJCA (examen 2022)."},
+{"u": 3, "t": "Las aseguradoras de las Administraciones en el contencioso son:", "o": ["Terceros ajenos al proceso", "Siempre parte codemandada junto con la Administración asegurada", "Parte demandante", "El órgano de contratación en todo caso, aunque el acto recurrido haya sido dictado por el tribunal"], "c": 1, "e": "Art. 21.1.c LJCA."},
+{"u": 3, "t": "En el recurso contra una resolución de un tribunal administrativo de recursos contractuales, es parte demandada:", "o": ["Pueden actuar sin abogado si se trata de funcionarios o de asuntos de cuantía inferior a 30.000 euros", "Las personas o Administraciones favorecidas por el acto", "El Ministerio Fiscal", "El órgano de contratación siempre"], "c": 1, "e": "Art. 21.3 LJCA."},
+{"u": 3, "t": "Ante los órganos colegiados del orden contencioso, las partes:", "o": ["Pueden actuar sin abogado", "Deben conferir su representación a procurador y ser asistidas por abogado", "Siempre que lo autorice expresamente el juez o tribunal mediante providencia motivada", "Solo necesitan abogado"], "c": 1, "e": "Art. 23.2 LJCA (examen 2022)."},
+{"u": 3, "t": "Los funcionarios pueden comparecer por sí mismos en defensa de sus derechos estatutarios cuando:", "o": ["Siempre", "Se trate de cuestiones de personal que no impliquen separación de empleados públicos inamovibles", "Lo autorice el juez", "La cuantía no supere 30.000 euros"], "c": 1, "e": "Art. 23.3 LJCA."},
+{"u": 4, "t": "No es admisible el recurso contencioso contra:", "o": ["Actos presuntos", "Actos que reproduzcan otros anteriores definitivos y firmes", "Actos de trámite cualificados", "Seis meses, contados desde la fecha de la reclamación presentada en el registro"], "c": 1, "e": "Art. 28 LJCA (examen 2019)."},
+{"u": 4, "t": "En la inactividad prestacional, el recurso cabe si la Administración no cumple desde la reclamación en:", "o": ["Se tramita por el procedimiento ordinario, por tratarse de un recurso contra la inactividad", "Dos meses", "Tres meses", "Seis meses"], "c": 2, "e": "Art. 29.1 LJCA."},
+{"u": 4, "t": "Ante la inejecución de actos firmes, si la ejecución no se produce en un mes desde la petición, el recurso:", "o": ["Se tramita por el ordinario", "Se tramita por el abreviado", "Exigible solo a los particulares, no a las Administraciones que recurren entre sí", "Exige alzada previa"], "c": 1, "e": "Art. 29.2 LJCA."},
+{"u": 4, "t": "En la vía de hecho, el requerimiento de cesación a la Administración es:", "o": ["Obligatorio", "Potestativo", "Solo exigible a los particulares", "Sustituido por la alzada"], "c": 1, "e": "Art. 30 LJCA."},
+{"u": 4, "t": "Plazo para recurrir un acto expreso que pone fin a la vía administrativa:", "o": ["Un mes", "Dos meses desde el día siguiente a la notificación o publicación", "Tres meses", "Seis meses desde el día siguiente a la terminación del plazo del requerimiento previo"], "c": 1, "e": "Art. 46.1 LJCA (examen 2019)."},
+{"u": 4, "t": "En la vía de hecho sin requerimiento previo, el plazo para recurrir es de:", "o": ["Diez días", "Veinte días desde el inicio de la actuación", "Dos meses", "Un mes"], "c": 1, "e": "Art. 46.3 LJCA (examen 2019)."},
+{"u": 4, "t": "Frente a la inactividad del art. 29, el plazo de interposición es de:", "o": ["El plazo de seis meses es improrrogable y comienza el día siguiente al vencimiento del plazo para resolver", "Dos meses desde el vencimiento de los plazos del art. 29", "Seis meses", "Tres meses"], "c": 1, "e": "Art. 46.2 LJCA."},
+{"u": 4, "t": "Según la STC 52/2014, frente a la desestimación por silencio:", "o": ["Corren todos los plazos procesales, pero no el de interposición del recurso contencioso", "El plazo no puede oponerse mientras la Administración no resuelva", "Hay dos meses", "No cabe recurso"], "c": 1, "e": "Doctrina constitucional sobre el art. 46.1."},
+{"u": 4, "t": "Durante el mes de agosto:", "o": ["Corren todos los plazos", "No corre el plazo para interponer el recurso ni otros de la LJCA, salvo en derechos fundamentales", "Dos meses desde su presentación, transcurridos los cuales el requirente debe reiterar el requerimiento por escrito ante el mismo órgano", "Los plazos se reducen a la mitad"], "c": 1, "e": "Art. 128.2 LJCA."},
+{"u": 4, "t": "En los litigios entre Administraciones, el requerimiento previo se entiende rechazado si no se contesta en:", "o": ["Diez días", "Un mes desde su recepción", "Dos meses", "Tres meses"], "c": 1, "e": "Art. 44.3 LJCA."},
+{"u": 5, "t": "La Administración demandada debe remitir el expediente en el plazo improrrogable de:", "o": ["Con la notificación de la demanda a la Abogacía del Estado o a los servicios jurídicos de la Administración", "Quince días", "Veinte días", "Un mes"], "c": 2, "e": "Art. 48.3 LJCA."},
+{"u": 5, "t": "El emplazamiento de la Administración demandada se entiende efectuado:", "o": ["Con la notificación de la demanda", "Por la reclamación del expediente", "Con la citación a vista", "Con la personación del Abogado del Estado"], "c": 1, "e": "Art. 48 LJCA (examen 2024)."},
+{"u": 5, "t": "La Administración demandada se entiende personada:", "o": ["Al contestar la demanda", "Por el envío del expediente", "Diez días hábiles, contados desde la publicación del anuncio de interposición en el diario oficial", "Al comparecer en la vista"], "c": 1, "e": "Art. 50.1 LJCA (examen 2019)."},
+{"u": 5, "t": "Los interesados emplazados por la Administración pueden personarse como demandados en:", "o": ["Cinco días", "Nueve días", "Diez días", "Veinte días"], "c": 1, "e": "Art. 49.1 LJCA."},
+{"u": 5, "t": "El recurso puede iniciarse directamente por demanda en:", "o": ["Todos los recursos", "Los recursos de lesividad", "Los recursos de personal", "Los recursos contra presuntos"], "c": 1, "e": "Art. 45.5 LJCA."},
+{"u": 5, "t": "En el procedimiento ordinario, el plazo para formalizar la demanda es de:", "o": ["Diez días", "Quince días", "Veinte días", "Los recursos interpuestos ante la Audiencia Nacional contra actos de los ministros"], "c": 2, "e": "Art. 52 LJCA."},
+{"u": 5, "t": "Se tramita por el procedimiento abreviado:", "o": ["Todo asunto de cuantía hasta 60.000 euros", "Los asuntos de personal, extranjería, inadmisión de asilo, dopaje y cuantía no superior a 30.000 euros", "Solo las cuestiones de personal", "Los recursos ante la Audiencia Nacional"], "c": 1, "e": "Art. 78.1 LJCA."},
+{"u": 5, "t": "En el abreviado, si el actor pide que se falle sin vista y la demandada solicita la vista, el auto que la acuerda:", "o": ["Es recurrible en reposición", "No es recurrible", "Es apelable", "Es recurrible en súplica"], "c": 1, "e": "Art. 78.3 LJCA."},
+{"u": 5, "t": "En el abreviado, si no comparece el actor a la vista:", "o": ["Se celebra la vista en su ausencia, con intervención únicamente del demandado y del Ministerio Fiscal", "Se le tiene por desistido y se le condena en costas", "Se suspende la vista", "Se dicta sentencia estimatoria"], "c": 1, "e": "Art. 78.5 LJCA."},
+{"u": 5, "t": "La sentencia del abreviado se dicta en:", "o": ["Cinco días o, en su caso, oralmente al terminar la vista", "Diez días desde la vista, o oralmente al concluirla", "Veinte días", "Un mes"], "c": 1, "e": "Art. 78.20 LJCA."},
+{"u": 6, "t": "La medida cautelar puede acordarse cuando:", "o": ["Lo pida el recurrente, sin más", "La ejecución pueda hacer perder al recurso su finalidad legítima, valorando todos los intereses", "Si lo pide el recurrente y la Administración no se opone dentro del plazo de alegaciones", "La Administración no se oponga"], "c": 1, "e": "Art. 130.1 LJCA."},
+{"u": 6, "t": "Las medidas cautelares sin oír a la parte contraria por especial urgencia se regulan en el artículo:", "o": ["129", "130", "135", "136, que regula las medidas en los supuestos de inactividad y de vía de hecho"], "c": 2, "e": "Art. 135 LJCA."},
+{"u": 6, "t": "No son apelables las sentencias de los juzgados en asuntos de cuantía no superior a:", "o": ["18.000 euros", "30.000 euros", "30.050 euros", "60.000 euros"], "c": 1, "e": "Art. 81.1.a LJCA."},
+{"u": 6, "t": "Es siempre apelable la sentencia:", "o": ["De cuantía inferior a 30.000 euros que desestima íntegramente el recurso interpuesto", "Dictada en el procedimiento de protección de derechos fundamentales", "Dictada en materia electoral del art. 8.4", "Dictada en un asunto de extranjería de 5.000 euros"], "c": 1, "e": "Art. 81.2.b LJCA."},
+{"u": 6, "t": "El recurso de casación se prepara ante la Sala de instancia en el plazo de:", "o": ["Diez días", "Quince días", "Treinta días", "Dos meses"], "c": 2, "e": "Art. 89.1 LJCA."},
+{"u": 6, "t": "La anulación de una disposición general:", "o": ["Anula también los actos firmes que la aplicaron", "No afecta a los actos firmes que la aplicaron, salvo exclusión o reducción de sanciones no ejecutadas", "Solo afecta al recurrente que obtuvo la sentencia estimatoria y a los codemandados personados, sin efectos generales hasta que se publique un nuevo reglamento que la sustituya", "Exige nueva publicación del reglamento"], "c": 1, "e": "Art. 73 LJCA."},
+{"u": 6, "t": "Cualquiera de las partes puede instar la ejecución forzosa de la sentencia transcurridos desde su comunicación:", "o": ["Un mes", "Dos meses", "Tres meses", "Seis meses"], "c": 1, "e": "Art. 104.2 LJCA."},
+{"u": 6, "t": "Los actos dictados con la finalidad de eludir el cumplimiento de una sentencia son:", "o": ["Anulables", "Nulos de pleno derecho", "Válidos hasta que se impugnen", "Irregulares no invalidantes"], "c": 1, "e": "Art. 103.4 LJCA."},
+{"u": 7, "t": "Sanción de 12.000 € de un alcalde notificada el 10 de junio de 2026. Último día para el recurso contencioso:", "o": ["El 10 de agosto de 2026", "El 10 de septiembre de 2026", "El 31 de agosto de 2026", "El 10 de octubre de 2026"], "c": 1, "e": "Art. 46.1 y 128.2: agosto no computa."},
+{"u": 7, "t": "En el mismo caso, Delta tiene domicilio en Toledo y el municipio está en Madrid. La conclusión correcta es:", "o": ["Puede recurrir en Toledo, porque el fuero electivo en materia de sanciones permite elegir su domicilio", "La elección se limita a la circunscripción del TSJ de Madrid", "Debe recurrir ante la Audiencia Nacional", "Debe recurrir ante el TSJ de Castilla-La Mancha"], "c": 1, "e": "Art. 14.1, regla segunda, párrafo segundo."},
+{"u": 7, "t": "Antes de identificar el órgano judicial en el supuesto hay que calificar:", "o": ["Solo la fecha de notificación", "La actividad impugnada, su autor, si agota la vía y su cuantía", "Únicamente el domicilio del recurrente", "El número de codemandados"], "c": 1, "e": "Calificación previa del Tema 13."},
+{"u": 7, "t": "El enunciado no precisa el partido judicial del municipio. La redacción correcta es:", "o": ["«Podríamos entender que es competente cualquier sección»", "«El enunciado no precisa el partido judicial, por lo que suponemos que corresponde a la sección con sede en la capital de la provincia»", "«Salvo mejor criterio fundado en Derecho, conoce del recurso la Sala de lo Contencioso del Tribunal Superior de Justicia de la Comunidad de Madrid, por razón de la sede»", "Omitir el órgano"], "c": 1, "e": "Suposición declarada y justificada."},
+{"u": 7, "t": "La conclusión correcta sobre la apelación de la sentencia del caso Delta (12.000 €) es:", "o": ["«Por tanto, se concluye que la sentencia de fondo no será apelable, salvo que inadmita el recurso»", "«Podría entenderse que cabe apelación»", "«Cabe siempre casación»", "«Cabe apelación ante la Audiencia Nacional»"], "c": 0, "e": "Art. 81.1.a y 81.2.a LJCA."}
+];function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Fundamento y ámbito",2:"Competencia objetiva",3:"Competencia territorial y partes",4:"Actividad impugnable y plazos",5:"Procedimiento ordinario y abreviado",6:"Cautelares, sentencia, recursos y ejecución",7:"Supuesto práctico"};
+const TABS={1:"Ámbito",2:"Competencia",3:"Partes",4:"Plazos",5:"Procedimiento",6:"Recursos",7:"Supuesto"};
+const SK="gace27_biv_t13_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
