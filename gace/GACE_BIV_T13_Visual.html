@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BIV · Tema 13 — La jurisdicción contencioso-administrativa (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tablewrap table{break-inside:auto}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque IV · Derecho Administrativo · Tema 13</small>
+    <h1>La jurisdicción contencioso-administrativa: funciones, órganos y competencias. El recurso contencioso-administrativo. Actividad administrativa impugnable. Las partes: capacidad, legitimación, representación y defensa</h1>
+    <p>Versión fusionada: el Tema 13 del Bloque IV del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas contra el texto consolidado del BOE y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 15/11/2026 · Ley 29/1998 consolidada a 03/01/2025 (incluye la Ley Orgánica 1/2025) · Tribunales de Instancia desplegados el 31/12/2025</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">Fundamento, evolución y Ley Orgánica 1/2025</a></li>
+    <li><a href="#s2">Ámbito y extensión</a></li>
+    <li><a href="#s3">Órganos y competencia</a></li>
+    <li><a href="#s4">Las partes</a></li>
+    <li><a href="#s5">La actividad impugnable</a></li>
+    <li><a href="#s6">Pretensiones, requisitos previos y plazos</a></li>
+    <li><a href="#s7">El procedimiento: ordinario y abreviado</a></li>
+    <li><a href="#s8">Medidas cautelares y procedimientos especiales</a></li>
+    <li><a href="#s9">Sentencia, recursos y ejecución</a></li>
+    <li><a href="#s10">Lo que preguntan y trampas</a></li>
+    <li><a href="#s11">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s12">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. El tema es la continuación natural del 12: agotada la vía administrativa, ¿ante quién, cuándo y cómo se recurre?</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Al terminar, recita sin mirar el reparto de competencias del <a href="#s3">apartado 3</a> y la escalera de plazos del <a href="#s10">apartado 10</a>: 2 meses, 6 meses, 10 y 20 días, 2 meses desde el 29, agosto inhábil.</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s11">apartado 11</a> tapando la columna derecha. En el supuesto puntúa decir el órgano judicial exacto, el procedimiento, el plazo con su fecha y si la sentencia será apelable.</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> Fundamento, evolución y Ley Orgánica 1/2025</h2>
+<h3>1.1 Fundamento constitucional</h3>
+<p>Es el orden jurisdiccional que controla la legalidad de la actuación de las Administraciones y tutela los derechos e intereses legítimos frente a ellas. Sus anclajes constitucionales:</p>
+<ul>
+<li><span class="art">art. 106.1 CE</span>: los tribunales controlan la potestad reglamentaria y la legalidad de la actuación administrativa, así como su sometimiento a los fines que la justifican.</li>
+<li><span class="art">art. 24 CE</span>: tutela judicial efectiva sin indefensión.</li>
+<li><span class="art">art. 117 CE</span>: potestad jurisdiccional exclusiva de juzgados y tribunales.</li>
+<li><span class="art">art. 153.c CE</span>: control de la administración autonómica y de sus normas reglamentarias.</li>
+</ul>
+<p><strong>Caracteres</strong>: universalidad del control; carácter revisor <strong>atenuado</strong> (alcanza la inactividad, art. 29, y la vía de hecho, art. 30); <strong>improrrogabilidad</strong> (art. 5).</p>
+<h3>1.2 Evolución</h3>
+<div class="flowv">
+<div class="step"><b>Siglo XIX</b>Jurisdicción retenida y delegada en órganos administrativos.</div>
+<div class="step"><b>Ley de 1888 (Santamaría de Paredes)</b>Primer modelo judicialista.</div>
+<div class="step"><b>Ley de la Jurisdicción de 1956</b>Extiende el control a la discrecionalidad y a los reglamentos.</div>
+<div class="step"><b>Ley 29/1998, de 13 de julio (LJCA)</b>Vigente: amplía el objeto a la inactividad y la vía de hecho, crea los juzgados y refuerza las medidas cautelares. Reformas clave: casación por interés casacional (Ley Orgánica 7/2015) y eficiencia de la justicia (Ley Orgánica 1/2025).</div>
+</div>
+<h3>1.3 La reforma de la Ley Orgánica 1/2025, de 2 de enero</h3>
+<div class="box act"><span class="box-h">Tribunales de Instancia (despliegue completado el 31/12/2025)</span>
+Los <strong>juzgados de lo contencioso-administrativo</strong> son ahora <strong>secciones de lo contencioso-administrativo de los tribunales de instancia</strong> (con carácter general, una por provincia, con sede en la capital). Los <strong>juzgados centrales</strong> pasan a ser la <strong>sección de lo contencioso-administrativo del Tribunal Central de Instancia</strong>. El orden contencioso se integró en la última fase, el <strong>31 de diciembre de 2025</strong>. La LJCA conserva la palabra «juzgados» en sus artículos (8, 9, 78…), que debe leerse referida a esas secciones. El Tribunal Central de Instancia <strong>no</strong> es la Audiencia Nacional, que sigue existiendo.</div>
+<div class="box act"><span class="box-h">Cambios procesales (procedimientos iniciados desde el 3 de abril de 2025)</span>
+Sentencia <strong>oral</strong> en el abreviado; la vista deja de ser automática cuando el actor pide que se falle sin ella; diligencias de preparación de la prueba por el letrado de la Administración de Justicia; legitimación de los <strong>sindicatos</strong> por sus afiliados funcionarios y estatutarios (art. 19.1.k).</div>
+<div class="box trampa"><span class="box-h">Trampa segura: los medios adecuados de solución de controversias</span>
+Los medios adecuados (MASC) de la Ley Orgánica 1/2025 son requisito de procedibilidad solo en el orden <strong>civil y mercantil</strong>, y no se aplican a los asuntos en que es parte una entidad del sector público. Decir que «antes del contencioso hay que intentar un MASC» es <strong>falso</strong>.</div>
+<p>En este documento se mantienen las denominaciones de la LJCA («juzgados», «juzgados centrales»), que son las que usan los preceptos y las preguntas de examen.</p>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> Ámbito y extensión (arts. 1 a 5 LJCA)</h2>
+<p>El orden contencioso conoce de las pretensiones relativas a la <strong>actuación de las Administraciones sujeta al Derecho administrativo</strong>, a las <strong>disposiciones generales de rango inferior a la ley</strong> y a los <strong>decretos legislativos</strong> cuando excedan los límites de la delegación (<em>ultra vires</em>) (art. 1.1). Son Administraciones la AGE, las de las comunidades autónomas, las entidades locales y las entidades de Derecho público dependientes o vinculadas. Conoce también (art. 1.3) de los actos en materia de <strong>personal, administración y gestión patrimonial</strong> del Congreso, el Senado, el Tribunal Constitucional, el Tribunal de Cuentas, el Defensor del Pueblo y sus análogos autonómicos; de los actos y disposiciones del <strong>Consejo General del Poder Judicial</strong> y la actividad administrativa de los órganos de gobierno de los tribunales; y de la <strong>Administración electoral</strong>.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:50%">Corresponde al orden contencioso (art. 2)</th><th>No corresponde (art. 3)</th></tr>
+<tr><td>a) Protección de los derechos fundamentales, elementos reglados e indemnizaciones de los actos del <strong>Gobierno</strong> o de los Consejos de Gobierno autonómicos, cualquiera que sea su naturaleza</td><td>a) Las cuestiones atribuidas a los órdenes <strong>civil, penal y social</strong>, aunque se relacionen con la actividad administrativa</td></tr>
+<tr><td>b) <strong>Contratos administrativos</strong> y actos de <strong>preparación y adjudicación</strong> de los demás contratos del sector público</td><td>b) El recurso <strong>contencioso-disciplinario militar</strong></td></tr>
+<tr><td>c) Actos y disposiciones de las <strong>corporaciones de Derecho público</strong> en ejercicio de funciones públicas</td><td>c) Los <strong>conflictos de jurisdicción</strong> entre tribunales y Administración y los <strong>conflictos de atribuciones</strong> entre órganos de una misma Administración</td></tr>
+<tr><td>d) Actos de <strong>control o fiscalización</strong> de la Administración concedente sobre los <strong>concesionarios</strong> de servicios públicos que impliquen potestades administrativas</td><td>d) Los recursos contra las <strong>normas forales fiscales</strong> de las Juntas Generales del País Vasco, que corresponden al Tribunal Constitucional</td></tr>
+<tr><td>e) La <strong>responsabilidad patrimonial</strong>, cualquiera que sea la actividad o la relación, aunque concurran sujetos privados o haya aseguradora (unidad de fuero: nunca civil ni social)</td><td></td></tr>
+<tr><td>f) Las demás materias que le atribuya una ley</td><td></td></tr>
+</table></div>
+<ul>
+<li><strong>Cuestiones prejudiciales</strong> (art. 4): se extiende a las cuestiones prejudiciales e incidentales no administrativas directamente relacionadas con el recurso, salvo las <strong>constitucionales y penales</strong> y lo previsto en tratados. La decisión <strong>no produce efectos</strong> fuera del proceso.</li>
+<li><strong>Improrrogabilidad</strong> (art. 5): los órganos aprecian de oficio la falta de jurisdicción, previa audiencia de las partes y del Ministerio Fiscal por plazo común de <strong>diez días</strong>.</li>
+</ul>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019, 2022 y 2024)</span>
+Los conflictos de atribuciones entre órganos de una misma Administración <strong>no</strong> son contenciosos (2019, 2022 y 2024) · sí lo son la responsabilidad patrimonial, los contratos administrativos, la preparación y adjudicación de los contratos privados y los decretos legislativos <em>ultra vires</em> (2022 y 2024).</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> Órganos y competencia (arts. 6 a 14)</h2>
+<p>Integran el orden (art. 6): juzgados de lo contencioso-administrativo, juzgados centrales, Salas de los Tribunales Superiores de Justicia, Sala de la Audiencia Nacional y Sala Tercera del Tribunal Supremo. <strong>No</strong> hay salas de lo contencioso en las audiencias provinciales.</p>
+<h3>3.1 Competencia objetiva</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Órgano</th><th>Competencias principales</th></tr>
+<tr><td><strong>Juzgados</strong> (secciones de los tribunales de instancia) (art. 8)</td><td>8.1: todos los <strong>actos de las entidades locales</strong>, salvo los <strong>instrumentos de planeamiento urbanístico</strong> · 8.2: actos de las <strong>comunidades autónomas</strong> (no del Consejo de Gobierno) sobre <strong>personal</strong> (salvo nacimiento o extinción de la relación de funcionarios de carrera), <strong>sanciones</strong> de multa hasta <strong>60.000 €</strong> o cese o privación de derechos hasta <strong>seis meses</strong>, y <strong>responsabilidad patrimonial</strong> hasta <strong>30.050 €</strong> · 8.3: disposiciones y actos de la Administración <strong>periférica</strong> del Estado y de las comunidades autónomas y de organismos sin competencia nacional, salvo actos de la periférica estatal de cuantía superior a <strong>60.000 €</strong> o sobre dominio público, obras públicas, expropiación y propiedades especiales · 8.4: <strong>extranjería</strong> de la periférica · 8.5: actos de las <strong>Juntas Electorales de Zona</strong> y proclamación de candidaturas · 8.6: autorizaciones de <strong>entrada en domicilios</strong> y ratificación de <strong>medidas sanitarias</strong> singulares urgentes</td></tr>
+<tr><td><strong>Juzgados centrales</strong> (sección del Tribunal Central de Instancia) (art. 9)</td><td>a) <strong>Personal</strong>: actos de ministros y secretarios de Estado, salvo que confirmen actos inferiores o se refieran al nacimiento o extinción de la relación de funcionarios de carrera · b) <strong>sanciones</strong> de los órganos centrales de la AGE en los límites del 8.2.b (hasta 60.000 € o seis meses) · c) disposiciones y actos de <strong>organismos públicos estatales con competencia nacional</strong> · d) <strong>responsabilidad patrimonial</strong> de ministros y secretarios de Estado hasta <strong>30.050 €</strong> · e) inadmisión de peticiones de <strong>asilo</strong> · f) disciplina deportiva (hoy, Tribunal Administrativo del Deporte) · 9.2 y 9.3: sociedad de la información y propiedad intelectual, partidos políticos</td></tr>
+<tr><td><strong>Salas de los TSJ</strong> (art. 10)</td><td>Única instancia: actos de entidades locales y comunidades autónomas no atribuidos a los juzgados · <strong>disposiciones generales</strong> de comunidades autónomas y entidades locales (incluido el <strong>planeamiento</strong>) · órganos de gobierno de las asambleas autonómicas y análogos · TEAR y TEAC en tributos cedidos · Juntas Electorales Provinciales y autonómicas · convenios en el ámbito autonómico · derecho de reunión · actos de órganos de la AGE con competencia nacional y <strong>nivel inferior a ministro o secretario de Estado</strong> en <strong>personal, propiedades especiales y expropiación</strong> (10.1.i) · tribunales territoriales de recursos contractuales · <strong>cláusula residual</strong> (10.1.n). Segunda instancia: <strong>apelaciones</strong> contra los juzgados. También revisión de sus sentencias y casación autonómica.</td></tr>
+<tr><td><strong>Sala de la Audiencia Nacional</strong> (art. 11)</td><td>Única instancia: disposiciones y actos de <strong>ministros y secretarios de Estado</strong> en general (y en personal, cuando se refieran al nacimiento o extinción de funcionarios de carrera), y cuando rectifiquen actos de órganos con competencia nacional · convenios no atribuidos a los TSJ · actos económico-administrativos del Ministro de Hacienda y del <strong>TEAC</strong> · Comisión de Vigilancia de la Financiación del Terrorismo · <strong>Tribunal Administrativo Central de Recursos Contractuales</strong> · Banco de España, CNMV y FROB en resolución de entidades · recursos de la CNMC por unidad de mercado. Segunda instancia: apelaciones contra los juzgados centrales.</td></tr>
+<tr><td><strong>Sala Tercera del Tribunal Supremo</strong> (art. 12)</td><td>Única instancia: <strong>Consejo de Ministros</strong> y Comisiones Delegadas · <strong>CGPJ</strong> · personal, administración y gestión patrimonial de Congreso, Senado, Tribunal Constitucional, Tribunal de Cuentas y Defensor del Pueblo · <strong>Fiscal General del Estado</strong> · <strong>Junta Electoral Central</strong> y proclamación de electos en generales y europeas. Además, <strong>casación</strong> y revisión.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones al temario 2026 (arts. 8 y 9)</span>
+<strong>Art. 8.1</strong>: el temario excluye de los juzgados «las ordenanzas fiscales e instrumentos de planeamiento». La ley solo excluye el <strong>planeamiento urbanístico</strong>; las ordenanzas van al TSJ porque son <strong>disposiciones generales</strong> (art. 10.1.b), no por una exclusión del 8.1.<br>
+<strong>Art. 9</strong>: el temario atribuye a los juzgados centrales los actos de órganos centrales de nivel inferior a ministro en <strong>personal, propiedades especiales y expropiación</strong>. Eso es competencia de los <strong>TSJ</strong> (art. 10.1.i). Tampoco figuran en el art. 9 la extradición pasiva y la expulsión de extranjeros. Y omite tres competencias que sí están: las <strong>sanciones</strong> de órganos centrales hasta 60.000 € (9.1.b), los <strong>organismos públicos estatales</strong> con competencia nacional (9.1.c) y la disciplina deportiva (9.1.f).</div>
+<div class="box fix"><span class="box-h">Corrección al material visual: la «regla rápida» de los 60.000 €</span>
+El visual decía «AGE nacional: hasta 60.000 € → Tribunal Central de Instancia; más de 60.000 € → Audiencia Nacional». La cifra de 60.000 € solo opera para las <strong>sanciones</strong> (8.2.b y 9.1.b) y para la <strong>periférica</strong> del Estado (8.3). La Audiencia Nacional conoce por el <strong>autor</strong> (ministros y secretarios de Estado), no por la cuantía; y los actos de órganos centrales inferiores que no encajan en el art. 9 van al <strong>TSJ</strong> (10.1.i o la cláusula residual 10.1.n). Además, en personal de ministros y secretarios de Estado los juzgados centrales conocen de todo salvo el nacimiento o extinción de la relación de funcionarios de carrera, no de «personal no de carrera».</div>
+<div class="box clave"><span class="box-h">Las tres cifras que no hay que mezclar</span>
+<strong>30.000 €</strong>: procedimiento abreviado y límite de la apelación · <strong>30.050 €</strong>: responsabilidad patrimonial en juzgados y juzgados centrales · <strong>60.000 €</strong>: sanciones y periférica del Estado.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2022 y 2024)</span>
+Juntas Electorales de Zona → <strong>juzgados</strong> (2024) · responsabilidad patrimonial de ministros y secretarios de Estado hasta 30.050 € → <strong>juzgados centrales</strong> (2022) · apelaciones contra los juzgados → <strong>TSJ</strong> (2022) · CGPJ y Fiscal General del Estado → <strong>Tribunal Supremo</strong> (2022).</div>
+<h3>3.2 Competencia territorial (arts. 13 y 14)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Regla</th><th>Contenido</th></tr>
+<tr><td><strong>Primera</strong> (general)</td><td>El órgano judicial de la circunscripción donde tenga su sede el órgano autor de la disposición o del acto <strong>originario</strong>.</td></tr>
+<tr><td><strong>Segunda</strong> (fuero electivo)</td><td>En <strong>responsabilidad patrimonial, personal, propiedades especiales y sanciones</strong>, a elección del demandante: el de su <strong>domicilio</strong> o el de la sede del órgano autor. Si el acto es de una <strong>comunidad autónoma o entidad local</strong>, la elección se limita a la circunscripción del <strong>TSJ</strong> donde tenga su sede el órgano autor.</td></tr>
+<tr><td><strong>Tercera</strong> (inmuebles)</td><td>Planes de ordenación urbana, actuaciones urbanísticas, expropiatorias y de intervención en la propiedad: donde radiquen los <strong>inmuebles</strong>.</td></tr>
+<tr><td><strong>Pluralidad de destinatarios</strong> (14.2)</td><td>Si el acto afecta a muchos destinatarios de distintas circunscripciones, la competencia es del órgano de la sede del autor.</td></tr>
+<tr><td><strong>Cuestiones de competencia</strong></td><td>De oficio, previa audiencia de las partes; sin recurso salvo súplica cuando proceda.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisiones a ambos documentos (art. 14)</span>
+El temario dice que «si se trata de personal, la elección se limita» a la sede del órgano cuando hay pluralidad de destinatarios. La limitación del fuero electivo de la regla segunda es otra: para los actos de <strong>comunidades autónomas y entidades locales</strong>, la elección no puede salir de la circunscripción del TSJ del órgano autor. La pluralidad de destinatarios es una regla distinta (14.2). El material visual, por su parte, omitía la <strong>responsabilidad patrimonial</strong> entre las materias con fuero electivo.</div>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> Las partes (arts. 18 a 24)</h2>
+<h3>4.1 Capacidad (art. 18)</h3>
+<p>Además de quienes la tengan según la Ley de Enjuiciamiento Civil, los <strong>menores</strong> para los derechos que pueden ejercer sin asistencia, y los grupos de afectados, uniones sin personalidad y patrimonios autónomos cuando la ley lo declare. Las personas jurídicas aportan el documento que acredite haber cumplido los requisitos para entablar acciones (art. 45.2.d).</p>
+<h3>4.2 Legitimación activa (art. 19)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:10%">Letra</th><th>Legitimados</th></tr>
+<tr><td>a)</td><td>Personas físicas o jurídicas con <strong>derecho o interés legítimo</strong>.</td></tr>
+<tr><td>b)</td><td>Corporaciones, asociaciones, <strong>sindicatos</strong> y grupos del art. 18 afectados o habilitados para defender intereses colectivos.</td></tr>
+<tr><td>c) d) e)</td><td>La <strong>AGE</strong> contra actos de comunidades autónomas, entidades locales y entidades no sometidas a su fiscalización; las <strong>comunidades autónomas</strong> y las <strong>entidades locales</strong> contra lo que afecte a su <strong>autonomía</strong>.</td></tr>
+<tr><td>f)</td><td>El <strong>Ministerio Fiscal</strong>, para intervenir en los procesos que determine la ley.</td></tr>
+<tr><td>g)</td><td>Entidades de Derecho público con personalidad propia, para lo que afecte a sus fines.</td></tr>
+<tr><td>h)</td><td>Cualquier ciudadano, en ejercicio de la <strong>acción popular</strong>, solo en los casos previstos por las leyes (urbanismo, costas, patrimonio histórico…).</td></tr>
+<tr><td>i)</td><td>Igualdad de trato y no discriminación (Ley 15/2022): afectados con su autorización, la Autoridad Independiente para la Igualdad de Trato, partidos, sindicatos y asociaciones; en pluralidad indeterminada, legitimación para intereses difusos. La persona acosada es la única legitimada en acoso sexual y discriminatorio.</td></tr>
+<tr><td>j)</td><td>Discriminación por orientación e identidad sexual (Ley 4/2023), en términos análogos.</td></tr>
+<tr><td>k)</td><td><strong>Sindicatos</strong>, en nombre e interés del personal <strong>funcionario y estatutario afiliado</strong> que lo autorice, en defensa de sus derechos individuales (Ley Orgánica 1/2025, desde el 3 de abril de 2025).</td></tr>
+</table></div>
+<p>Además: la Administración autora puede impugnar su acto previa <strong>declaración de lesividad</strong> (19.2); los <strong>vecinos</strong> ejercen las acciones de las entidades locales según la legislación local (19.3); Administraciones y particulares pueden recurrir las resoluciones de los órganos de recursos contractuales, la Administración sin lesividad (19.4).</p>
+<div class="box fix"><span class="box-h">Corrección al temario 2026 (art. 19.1.i a k)</span>
+El temario reproduce la redacción antigua de la letra i), sobre igualdad entre mujeres y hombres. Hoy la letra i) es la de la <strong>Ley 15/2022</strong> (igualdad de trato y no discriminación), la j) la de la <strong>Ley 4/2023</strong>, y la <strong>k)</strong>, que el temario omite, la añadió la Ley Orgánica 1/2025 para los sindicatos. El material visual sí recogía la letra k).</div>
+<h3>4.3 Falta de legitimación (art. 20)</h3>
+<p>No pueden recurrir la actividad de una Administración: a) sus <strong>órganos</strong> y los miembros de sus órganos colegiados, salvo ley; b) los particulares que obren por <strong>delegación</strong> o como meros agentes o mandatarios; c) las entidades de Derecho público dependientes, respecto de su Administración matriz, salvo estatuto de autonomía legal.</p>
+<h3>4.4 Legitimación pasiva (art. 21)</h3>
+<ul>
+<li>a) La Administración o el órgano del art. 1.3 contra cuya actividad se dirige el recurso. Si hay fiscalización: el organismo autor si se aprueba; la fiscalizadora si no se aprueba íntegramente (21.2).</li>
+<li>b) Los <strong>codemandados</strong>: personas cuyos derechos o intereses puedan quedar afectados por la estimación.</li>
+<li>c) Las <strong>aseguradoras</strong> de las Administraciones, siempre codemandadas.</li>
+<li>Los <strong>órganos de recursos contractuales</strong> no son parte demandada; lo son las personas o Administraciones favorecidas por el acto (21.3).</li>
+</ul>
+<h3>4.5 Representación y defensa (arts. 23 y 24)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Órgano</th><th>Representación</th><th>Defensa</th></tr>
+<tr><td>Unipersonales (juzgados)</td><td>Pueden conferirla a <strong>procurador</strong> o al propio abogado</td><td><strong>Abogado</strong> en todo caso</td></tr>
+<tr><td>Colegiados (Salas)</td><td><strong>Procurador</strong> obligatorio</td><td><strong>Abogado</strong></td></tr>
+</table></div>
+<p>Los <strong>funcionarios</strong> pueden comparecer por sí mismos en cuestiones de personal que <strong>no impliquen separación</strong> de empleados públicos inamovibles (23.3). Las Administraciones se representan y defienden por sus servicios jurídicos (art. 551 LOPJ y Ley 52/1997): la AGE por la Abogacía del Estado; comunidades autónomas y entidades locales por sus letrados, salvo que designen abogado colegiado.</p>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (examen 2022)</span>
+Ministerio Fiscal: solo en los procesos que determine la ley · la Administración autora solo impugna previa lesividad · no recurren los particulares que actúan como agentes o mandatarios · ante las Salas, procurador y abogado · abogado obligatorio salvo funcionarios en cuestiones estatutarias.</div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> La actividad impugnable (arts. 25 a 30)</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Objeto</th><th>Régimen</th></tr>
+<tr><td><strong>Actos</strong> (25)</td><td>Expresos y presuntos que <strong>pongan fin a la vía administrativa</strong>: definitivos y de <strong>trámite cualificados</strong> (deciden el fondo, impiden continuar, indefensión o perjuicio irreparable).</td></tr>
+<tr><td><strong>Disposiciones</strong> (26)</td><td><strong>Recurso directo</strong> contra la disposición (dos meses desde su publicación) e <strong>indirecto</strong> contra los actos de aplicación, alegando la ilegalidad de la disposición; no impedido por no haberla recurrido directamente ni porque se desestimara el directo.</td></tr>
+<tr><td><strong>Cuestión de ilegalidad</strong> (27 y 123 a 126)</td><td>Si el juez dicta <strong>sentencia firme estimatoria</strong> por ilegalidad de la disposición aplicada, plantea la cuestión ante el tribunal competente para el recurso directo; si es él mismo, decide en la sentencia. Si es el <strong>Tribunal Supremo</strong>, anula directamente.</td></tr>
+<tr><td><strong>No impugnables</strong> (28)</td><td>Actos <strong>reproducción</strong> de otros definitivos y firmes y <strong>confirmatorios</strong> de actos consentidos.</td></tr>
+<tr><td><strong>Inactividad prestacional</strong> (29.1)</td><td>Obligación de una prestación concreta a personas determinadas (disposición sin actos de aplicación, acto, contrato o convenio): <strong>reclamación</strong> previa y, si en <strong>tres meses</strong> no se cumple ni hay acuerdo, recurso.</td></tr>
+<tr><td><strong>Inejecución de actos firmes</strong> (29.2)</td><td>Solicitud de ejecución y, si no se produce en <strong>un mes</strong>, recurso por el <strong>procedimiento abreviado</strong>.</td></tr>
+<tr><td><strong>Vía de hecho</strong> (30)</td><td><strong>Requerimiento potestativo</strong> de cesación; si no se formula o no se atiende en <strong>diez días</strong>, recurso directo.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Idea clave del temario 2026 (examen 2019)</span>No es admisible el recurso contra actos que reproduzcan otros anteriores definitivos y firmes.</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> Pretensiones, requisitos previos y plazos (arts. 31 a 46)</h2>
+<h3>6.1 Pretensiones (arts. 31 a 33)</h3>
+<ul>
+<li><strong>Anulatoria</strong>: declaración de no conformidad a Derecho y, en su caso, anulación.</li>
+<li><strong>Plena jurisdicción</strong>: reconocimiento de una situación jurídica individualizada y medidas para su pleno restablecimiento, incluida la <strong>indemnización</strong>.</li>
+<li>Frente a la <strong>inactividad</strong>: condena al cumplimiento. Frente a la <strong>vía de hecho</strong>: declaración de ilegalidad, cese y restablecimiento.</li>
+<li>Los tribunales juzgan dentro de las pretensiones y los motivos de las partes (congruencia, art. 33).</li>
+</ul>
+<h3>6.2 Requisitos previos</h3>
+<ul>
+<li><strong>Agotar la vía administrativa</strong> (art. 25): en su caso, interponer la alzada; la reposición es potestativa.</li>
+<li><strong>Declaración de lesividad</strong> cuando la Administración impugna su propio acto favorable (art. 43).</li>
+<li><strong>Litigios entre Administraciones</strong> (art. 44): no cabe recurso administrativo; requerimiento previo <strong>potestativo</strong> en <strong>dos meses</strong>, que se entiende rechazado si no se contesta en <strong>un mes</strong>.</li>
+</ul>
+<h3>6.3 Plazos de interposición (art. 46)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:28%">Supuesto</th><th>Plazo</th></tr>
+<tr><td><strong>Acto expreso o disposición</strong></td><td><strong>Dos meses</strong> desde el día siguiente a la publicación de la disposición o a la notificación o publicación del acto que agota la vía.</td></tr>
+<tr><td><strong>Acto presunto</strong></td><td><strong>Seis meses</strong> desde el día siguiente al acto presunto. La <strong>STC 52/2014</strong> y el Tribunal Supremo han declarado que el silencio negativo no es un acto y que este plazo no puede oponerse mientras la Administración no resuelva.</td></tr>
+<tr><td><strong>Tras reposición</strong> (46.4)</td><td>Desde el día siguiente a la notificación de su resolución expresa o a su desestimación presunta.</td></tr>
+<tr><td><strong>Inactividad e inejecución</strong> (46.2)</td><td><strong>Dos meses</strong> desde el vencimiento de los plazos del art. 29 (tres meses o un mes).</td></tr>
+<tr><td><strong>Vía de hecho</strong> (46.3)</td><td><strong>Diez días</strong> desde el fin del plazo del requerimiento; sin requerimiento, <strong>veinte días</strong> desde el inicio de la actuación.</td></tr>
+<tr><td><strong>Lesividad</strong> (46.5)</td><td><strong>Dos meses</strong> desde el día siguiente a la declaración.</td></tr>
+<tr><td><strong>Litigios entre Administraciones</strong> (46.6)</td><td><strong>Dos meses</strong>, desde la comunicación del acuerdo o el rechazo presunto del requerimiento.</td></tr>
+<tr><td><strong>Derechos fundamentales</strong> (115)</td><td><strong>Diez días</strong>.</td></tr>
+</table></div>
+<div class="box trampa"><span class="box-h">Agosto</span>Durante el mes de <strong>agosto</strong> no corre el plazo para interponer el recurso ni ningún otro de la LJCA, salvo en el procedimiento de protección de los derechos fundamentales (art. 128.2).</div>
+<div class="box fix"><span class="box-h">Corrección al material visual</span>
+El visual decía que, frente a la inejecución de actos firmes, tras el mes de espera el recurso se interpone en <strong>veinte días</strong>. El art. 46.2 fija <strong>dos meses</strong> desde el vencimiento de los plazos del art. 29, tanto en la inactividad prestacional como en la inejecución. Los veinte días son de la vía de hecho sin requerimiento.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (examen 2019)</span>Acto expreso: dos meses desde el día siguiente a la notificación o publicación · vía de hecho: diez días tras el requerimiento o veinte desde su inicio si no lo hubo.</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> El procedimiento: interposición, ordinario y abreviado</h2>
+<h3>7.1 Interposición y tramitación inicial (arts. 45 a 51)</h3>
+<div class="flowv">
+<div class="step"><b>Escrito de interposición (45)</b>Reducido a citar lo impugnado y pedir que se tenga por interpuesto, con la representación, la legitimación, copia del acto y, en personas jurídicas, el acuerdo para litigar. En <strong>lesividad</strong> y en litigios entre Administraciones contra disposiciones, puede iniciarse por <strong>demanda</strong>.</div>
+<div class="step"><b>Requerimiento del expediente (48)</b>El letrado de la Administración de Justicia lo pide a la Administración, que lo remite en el plazo <strong>improrrogable de veinte días</strong>. El <strong>emplazamiento</strong> de la Administración se entiende hecho por la <strong>reclamación del expediente</strong>.</div>
+<div class="step"><b>Emplazamiento de interesados (49)</b>La Administración notifica en <strong>cinco días</strong> a los interesados, que pueden personarse como demandados en <strong>nueve días</strong>.</div>
+<div class="step"><b>Personación (50)</b>La Administración se entiende <strong>personada</strong> por el envío del expediente.</div>
+<div class="step"><b>Inadmisión (51)</b>Si consta de modo inequívoco la falta de jurisdicción o competencia, de legitimación, actividad no impugnable o plazo caducado.</div>
+</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019 y 2024)</span>Personada por el envío del expediente (2019) · emplazada por la reclamación del expediente (2024).</div>
+<h3>7.2 Procedimiento ordinario (arts. 52 a 77)</h3>
+<p>Demanda en <strong>veinte días</strong> desde la entrega del expediente · contestación en otros <strong>veinte</strong> · alegaciones previas de inadmisibilidad · prueba solo si hay disconformidad en hechos de trascendencia · vista o conclusiones · sentencia en <strong>diez días</strong>.</p>
+<h3>7.3 Procedimiento abreviado (art. 78)</h3>
+<div class="box clave"><span class="box-h">Ámbito (78.1) · el artículo más preguntado</span>
+Ante los juzgados y juzgados centrales, en los asuntos de su competencia sobre <strong>personal</strong> al servicio de las Administraciones, <strong>extranjería</strong>, inadmisión de <strong>asilo</strong>, disciplina deportiva en materia de <strong>dopaje</strong> y todos los de cuantía no superior a <strong>30.000 €</strong>. También la <strong>inejecución de actos firmes</strong> (29.2).</div>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Trámite</th><th>Régimen tras la Ley Orgánica 1/2025</th></tr>
+<tr><td><strong>Inicio</strong></td><td>Por <strong>demanda</strong>, no por escrito de interposición.</td></tr>
+<tr><td><strong>Admisión y vista</strong></td><td>El letrado de la Administración de Justicia admite, cita a vista y pide el expediente con al menos <strong>quince días</strong> de antelación; acuerda las diligencias de preparación de la prueba.</td></tr>
+<tr><td><strong>Sin vista</strong></td><td>Si el actor pide que se falle sin prueba ni vista, la demandada contesta en <strong>veinte días</strong>. En los <strong>diez primeros</strong> puede pedir la vista, argumentando los hechos discutidos y las pruebas necesarias; el juez decide por <strong>auto</strong>: si la acuerda, <strong>irrecurrible</strong>; si la rechaza, <strong>reposición</strong>. Tras la contestación, <strong>conclusiones</strong> en <strong>cinco días sucesivos</strong> si el actor las pidió en la demanda.</td></tr>
+<tr><td><strong>Vista</strong></td><td>Si no comparece el actor (o solo el demandado), se le tiene por <strong>desistido</strong> con costas; si solo comparece el actor, sigue en ausencia del demandado. Cuestiones procesales primero; prueba oral sin pliegos; súplica contra la denegación de pruebas.</td></tr>
+<tr><td><strong>Sentencia</strong> (78.20)</td><td>En <strong>diez días</strong> desde la vista, o <strong>oral</strong> al concluirla, con los requisitos del art. 210 de la Ley de Enjuiciamiento Civil (si las partes manifiestan no recurrir, se declara firme en el acto).</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones a ambos documentos (art. 78)</span>
+<strong>Temario</strong>: limita el abreviado en personal a las cuestiones «que no se refieran al nacimiento o extinción de la relación de servicio de los funcionarios de carrera». El art. 78.1 vigente dice solo «cuestiones de personal», dentro de la competencia de los juzgados (que sí conocen, por ejemplo, de la separación de un funcionario local).<br>
+<strong>Material visual</strong>: decía «personal que no implique separación de inamovibles», que es el límite del art. 23.3 para comparecer sin abogado, no del abreviado; presentaba las conclusiones escritas de cinco días como automáticas, cuando solo se abren si el actor las pidió; y citaba el «78.22» para el plazo de sentencia, que está en el 78.20.</div>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> Medidas cautelares y procedimientos especiales</h2>
+<h3>8.1 Medidas cautelares (arts. 129 a 136)</h3>
+<ul>
+<li>Se piden en <strong>cualquier estado del proceso</strong>; cabe cualquier medida, incluida la suspensión.</li>
+<li>Criterio: <strong>periculum in mora</strong>, es decir, que la ejecución pueda hacer perder al recurso su <strong>finalidad legítima</strong>, previa valoración circunstanciada de todos los intereses; se pueden denegar por perturbación grave de los intereses generales o de tercero. Cabe exigir <strong>caución</strong>.</li>
+<li><strong>Cautelarísimas</strong> (135): por especial urgencia, sin oír a la parte contraria.</li>
+<li><strong>Inactividad y vía de hecho</strong> (136): se adoptan salvo que se aprecie con evidencia que no concurren o que causan perturbación grave.</li>
+</ul>
+<h3>8.2 Procedimientos especiales</h3>
+<ul>
+<li><strong>Derechos fundamentales</strong> (114 a 122): preferente y sumario; plazo de <strong>diez días</strong>; sus sentencias son <strong>siempre apelables</strong>.</li>
+<li>Sociedad de la información y propiedad intelectual (122 bis) y medidas sanitarias (122 quater).</li>
+<li><strong>Cuestión de ilegalidad</strong> (123 a 126).</li>
+<li>Suspensión administrativa previa de acuerdos (127).</li>
+<li><strong>Unidad de mercado</strong> (127 bis a 127 quater), con legitimación de la CNMC.</li>
+</ul>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> Sentencia, recursos y ejecución</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Institución</th><th>Régimen</th></tr>
+<tr><td><strong>Inadmisibilidad</strong> (69)</td><td>Falta de jurisdicción, de capacidad o representación, de legitimación, actividad no impugnable (28), cosa juzgada o litispendencia, extemporaneidad.</td></tr>
+<tr><td><strong>Sentencia</strong> (68 a 73)</td><td>Inadmite, estima o desestima. La anulación de una disposición general produce efectos <strong>erga omnes</strong> desde su publicación, pero <strong>no</strong> afecta a los actos firmes que la aplicaron, salvo que supongan la <strong>exclusión o reducción de sanciones</strong> no ejecutadas completamente (73).</td></tr>
+<tr><td><strong>Apelación</strong> (81)</td><td>Contra sentencias de juzgados y juzgados centrales, ante el TSJ o la Audiencia Nacional. <strong>No</strong> son apelables las de cuantía no superior a <strong>30.000 €</strong> ni las electorales del 8.4. <strong>Siempre</strong> lo son: las que inadmiten en asuntos de hasta 30.000 €, las de <strong>derechos fundamentales</strong>, las de <strong>litigios entre Administraciones</strong>, las de <strong>impugnación indirecta</strong> de disposiciones y las susceptibles de <strong>extensión de efectos</strong>.</td></tr>
+<tr><td><strong>Casación</strong> (86 a 93)</td><td>Modelo de la Ley Orgánica 7/2015: sin cuantía mínima, por <strong>interés casacional objetivo</strong> para formar jurisprudencia. Fases: <strong>preparación</strong> ante la Sala de instancia en <strong>treinta días</strong>, admisión (Sección de Admisión: auto si admite, providencia si inadmite), interposición, oposición y sentencia. Procede contra sentencias de la Audiencia Nacional, los TSJ y, en ciertos casos, de los juzgados.</td></tr>
+<tr><td><strong>Ejecución</strong> (103 a 113)</td><td>Corresponde a los tribunales; ejecuta el órgano de primera o única instancia. Firme la sentencia, se comunica en <strong>diez días</strong> al órgano responsable; pasados <strong>dos meses</strong> (o el plazo fijado), cabe <strong>ejecución forzosa</strong> (104.2). Los actos contrarios al fallo dictados para eludirlo son <strong>nulos</strong> de pleno derecho (103.4). Imposibilidad material o legal: indemnización (105.2). Multas coercitivas a las autoridades (112). <strong>Extensión de efectos</strong> en materia tributaria, de personal y de unidad de mercado (110).</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión al material visual (art. 81.2)</span>
+El visual solo citaba como siempre apelables los litigios entre Administraciones y las impugnaciones indirectas. Faltan las sentencias de <strong>derechos fundamentales</strong>, las que inadmiten en asuntos de hasta 30.000 € y las susceptibles de <strong>extensión de efectos</strong> (Real Decreto-ley 6/2023).</div>
+<div class="box sup"><span class="box-h">Jurisprudencia reciente</span>La STS de 19 de mayo de 2025 (recurso 1801/2022) extiende el umbral de 30.000 € a la apelación contra autos dictados en ejecución de sentencia: hace falta que la sentencia ejecutada sea apelable y que lo discutido en la apelación del auto supere esa cifra.</div>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Lo que preguntan y trampas</h2>
+<div class="box clave"><span class="box-h">La escalera de plazos y cifras</span>
+Interposición: <strong>2 meses</strong> (expresos y disposiciones) · <strong>6 meses</strong> (presuntos, con la doctrina de la STC 52/2014) · <strong>10 días</strong> (vía de hecho con requerimiento y derechos fundamentales) · <strong>20 días</strong> (vía de hecho sin requerimiento) · <strong>2 meses</strong> tras los 3 meses o 1 mes del art. 29 · agosto inhábil.<br>
+Tramitación: falta de jurisdicción, audiencia de <strong>10 días</strong> · expediente en <strong>20 días</strong> · notificar a interesados en <strong>5</strong>, personarse en <strong>9</strong> · demanda y contestación, <strong>20 + 20</strong> · sentencia en <strong>10 días</strong> · conclusiones del abreviado, <strong>5 días</strong> · expediente <strong>15 días</strong> antes de la vista · casación, preparar en <strong>30 días</strong> · ejecución forzosa a los <strong>2 meses</strong>.<br>
+Cuantías: <strong>30.000</strong> (abreviado y apelación) · <strong>30.050</strong> (responsabilidad patrimonial en juzgados) · <strong>60.000</strong> (sanciones y periférica).</div>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Lo que preguntan</span><ul>
+<li>Qué corresponde y qué no al orden contencioso.</li>
+<li>Reparto de competencias entre órganos.</li>
+<li>Fuero electivo y competencia territorial.</li>
+<li>Legitimación activa, falta de legitimación y pasiva.</li>
+<li>Postulación ante unipersonales y colegiados.</li>
+<li>Actividad impugnable, inactividad y vía de hecho.</li>
+<li>Plazos del art. 46.</li>
+<li>Expediente, emplazamiento y personación.</li>
+<li>Ámbito del abreviado y novedades de 2025.</li>
+<li>Apelación, casación y ejecución.</li></ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>Los «juzgados» hoy son secciones de los tribunales de instancia.</li>
+<li>El planeamiento urbanístico local va al <strong>TSJ</strong>.</li>
+<li>Los conflictos de atribuciones <strong>no</strong> son contenciosos.</li>
+<li>Los MASC <strong>no</strong> se exigen antes del contencioso.</li>
+<li>La casación <strong>no</strong> exige cuantía mínima.</li>
+<li>Anular un reglamento <strong>no</strong> revive los actos firmes (salvo sanciones).</li>
+<li>El requerimiento en vía de hecho es <strong>potestativo</strong>.</li>
+<li>El Fiscal <strong>no</strong> interviene en todos los procesos.</li>
+<li>La acción popular <strong>solo</strong> si una ley la reconoce.</li>
+<li>Agosto es inhábil, salvo derechos fundamentales.</li>
+<li>Los 60.000 € <strong>no</strong> separan Audiencia Nacional y Tribunal Central en general.</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia con sus piezas: Ley 29/1998 (en adelante, LJCA), arts. 24.1 y 106.1 CE y título competencial del art. 149.1.6.ª CE (legislación procesal); y, si se pide el órgano, la Ley Orgánica 1/2025 para la planta.</li>
+<li>La calificación previa: qué actividad se impugna, quién es su autor, si agota la vía y su cuantía.</li>
+<li>El cuadro de competencias de los arts. 8 a 12.</li>
+<li>Las reglas territoriales del art. 14.</li>
+<li>Las letras del art. 19 y el art. 20.</li>
+<li>El art. 25 y los arts. 28 a 30.</li>
+<li>Los plazos del art. 46 y la regla de agosto.</li>
+<li>El ámbito y los trámites del abreviado.</li>
+<li>La apelación (art. 81) y la ejecución (arts. 103 a 105).</li>
+</ol>
+
+<!-- 11 -->
+<h2 id="s11"><span class="n">11.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>Este tema cierra casi cualquier cuestión del supuesto: después de decir qué recurso administrativo cabe, hay que decir <strong>ante qué órgano judicial</strong>, por qué <strong>procedimiento</strong>, en qué <strong>plazo y fecha</strong> y si la sentencia será <strong>apelable</strong>.</p>
+<h3>11.1 Introducción de la materia (plantillas v2, sección 11)</h3>
+<div class="model">
+<p>«En cuanto a la vía jurisdiccional, resulta de aplicación la Ley 29/1998, de 13 de julio, reguladora de la Jurisdicción Contencioso-administrativa (en adelante, LJCA), dictada en desarrollo de los artículos 24.1 de la Constitución, que garantiza la tutela judicial efectiva, y 106.1, que atribuye a los Tribunales el control de la potestad reglamentaria y de la legalidad de la actuación administrativa, y al amparo del artículo 149.1.6.ª, que atribuye al Estado la legislación procesal.»</p>
+</div>
+<div class="box sup"><span class="box-h">Complemento que propone este tema</span>Cuando la cuestión pida el órgano concreto, añade: «Conforme a la Ley Orgánica 1/2025, de 2 de enero, de medidas en materia de eficiencia del Servicio Público de Justicia, los juzgados de lo contencioso-administrativo se integran como secciones en los tribunales de instancia, y los juzgados centrales en el Tribunal Central de Instancia.» Y recuerda que la competencia sobre responsabilidad patrimonial de ministros y secretarios de Estado hasta 30.050 € está en el <strong>art. 9.1.d</strong>, no en el 9.c que citan las plantillas.</div>
+<h3>11.2 Calificación previa propia del Tema 13</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar la actividad impugnada. Se trata de [un acto expreso / un acto presunto / una disposición general / una inactividad / una vía de hecho] dictado por [órgano y Administración], que [pone fin a la vía administrativa conforme al artículo 114 de la LPAC], en materia de [materia] y con una cuantía de [cifra], datos de los que dependen el órgano competente (artículos 8 a 12 de la LJCA), el procedimiento (artículo 78) y la apelabilidad de la sentencia (artículo 81).»</p>
+</div>
+<h3>11.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Hecho del enunciado</th><th style="width:28%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>Sanción de un alcalde de 3.000 €</td><td>Arts. 8.1 y 78.1 LJCA</td><td>Juzgado (sección del tribunal de instancia), procedimiento abreviado, sentencia no apelable</td></tr>
+<tr><td>Aprobación definitiva de un plan general por la comunidad autónoma</td><td>Arts. 8.1 y 10.1.b LJCA</td><td>Sala del TSJ, procedimiento ordinario</td></tr>
+<tr><td>Ordenanza fiscal municipal</td><td>Art. 10.1.b LJCA</td><td>Sala del TSJ, recurso directo en dos meses desde su publicación</td></tr>
+<tr><td>Orden ministerial de carácter general</td><td>Art. 11.1.a LJCA</td><td>Sala de la Audiencia Nacional</td></tr>
+<tr><td>Real decreto del Consejo de Ministros</td><td>Art. 12.1.a LJCA</td><td>Sala Tercera del Tribunal Supremo</td></tr>
+<tr><td>Responsabilidad patrimonial de un ministro por 25.000 €</td><td>Arts. 9.1.d y 78.1 LJCA</td><td>Juzgado central, abreviado</td></tr>
+<tr><td>Sanción de 40.000 € de una dirección general con competencia nacional</td><td>Art. 9.1.b LJCA</td><td>Juzgado central (Tribunal Central de Instancia)</td></tr>
+<tr><td>Traslado forzoso de un funcionario de la AGE acordado por una dirección general</td><td>Art. 10.1.i LJCA</td><td>Sala del TSJ (fuero electivo del art. 14)</td></tr>
+<tr><td>Funcionario de una comunidad autónoma vive en otra comunidad</td><td>Art. 14.1, regla segunda, párrafo segundo</td><td>Solo puede elegir dentro de la circunscripción del TSJ del órgano autor</td></tr>
+<tr><td>La Administración ocupa una finca sin procedimiento</td><td>Arts. 30 y 46.3 LJCA</td><td>Vía de hecho: requerimiento potestativo y recurso en diez días, o veinte sin requerimiento; cautelar del art. 136</td></tr>
+<tr><td>La Administración no paga lo reconocido en un convenio</td><td>Arts. 29.1 y 46.2 LJCA</td><td>Reclamación, tres meses y recurso en dos meses</td></tr>
+<tr><td>Recurso contra una desestimación por silencio presentado al año</td><td>Art. 46.1 LJCA y STC 52/2014</td><td>Admisible: el plazo de seis meses no corre frente al silencio negativo</td></tr>
+<tr><td>Notificación en junio y recurso presentado en septiembre</td><td>Arts. 46.1 y 128.2 LJCA</td><td>Agosto no computa: hay que descontarlo al calcular los dos meses</td></tr>
+</table></div>
+<h3>11.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+El alcalde de un municipio de la Comunidad de Madrid impone a Delta, S.L., con domicilio social en Toledo, una sanción de <strong>12.000 euros</strong> por una infracción de la ordenanza de terrazas. La resolución se notifica el <strong>10 de junio de 2026</strong>. Delta quiere acudir a los tribunales.
+<br><br><strong>Cuestiones:</strong> a) Órgano judicial competente y procedimiento. b) Plazo para recurrir y posibilidad de apelación.</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 11.1.] Con carácter previo, procede calificar la actividad impugnada. Se trata de un acto expreso del alcalde, órgano que carece de superior jerárquico, por lo que pone fin a la vía administrativa conforme al artículo 114.1.c de la LPAC y al artículo 52.2 de la Ley 7/1985, de 2 de abril, Reguladora de las Bases del Régimen Local; es una sanción y su cuantía es de 12.000 euros. La cuestión a) solicita determinar el órgano judicial y el procedimiento. El artículo 8.1 de la LJCA atribuye a los juzgados de lo contencioso-administrativo, hoy secciones de lo contencioso-administrativo de los tribunales de instancia tras la Ley Orgánica 1/2025, los recursos contra los actos de las entidades locales. En cuanto a la competencia territorial, en materia de sanciones el artículo 14.1, regla segunda, permite al demandante elegir entre su domicilio y la sede del órgano autor, pero, al tratarse de un acto de una entidad local, la elección queda limitada a la circunscripción del Tribunal Superior de Justicia de Madrid, de modo que el domicilio de Toledo no abre el fuero de esa provincia. El enunciado no precisa en qué partido judicial está el municipio, por lo que suponemos que corresponde a la sección con sede en la capital de la provincia, que es la regla general de la nueva planta. Al no superar la cuantía los 30.000 euros, se sigue el procedimiento abreviado del artículo 78.1, que se inicia por demanda. Por tanto, se concluye que es competente la Sección de lo Contencioso-Administrativo del Tribunal de Instancia de Madrid y que el recurso se tramita por el procedimiento abreviado.</p>
+<p><strong>Cuestión b).</strong> La cuestión b) plantea el plazo y la apelación. Conforme al artículo 46.1 de la LJCA, el plazo es de dos meses desde el día siguiente a la notificación. Contado desde el 11 de junio de 2026 y teniendo en cuenta que durante el mes de agosto no corre el plazo (artículo 128.2), vence el 10 de septiembre de 2026. No obstante lo anterior, Delta podría interponer antes recurso potestativo de reposición en el plazo de un mes (artículo 124 de la LPAC), en cuyo caso no podría acudir a la vía judicial hasta su resolución expresa o presunta, y el plazo de dos meses se contaría desde entonces (artículo 46.4 de la LJCA), si bien la vía directa es la más rápida. En cuanto a la apelación, el artículo 81.1.a excluye las sentencias de cuantía no superior a 30.000 euros, salvo que declaren la inadmisibilidad del recurso (81.2.a). Por tanto, se concluye que Delta puede interponer el recurso contencioso-administrativo hasta el 10 de septiembre de 2026 y que la sentencia que resuelva el fondo no será apelable, salvo que inadmita el recurso.</p>
+</div>
+<h3>11.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Calificar</strong> el acto (expreso, agota la vía, sanción, cuantía) → <em>análisis</em>.<br>
+<strong>Órgano</strong> con la denominación de 2025 y la <strong>limitación del fuero electivo</strong> (14.1, regla segunda) → <em>aplicación de conocimientos</em>.<br>
+<strong>Fechas operadas</strong>: 11/06 + 2 meses, sin agosto = 10/09 → <em>aplicación</em>.<br>
+<strong>Suposición declarada</strong> sobre el partido judicial → admitida.<br>
+<strong>Alternativa evaluada</strong> (reposición previa y art. 46.4) → <em>análisis</em>.<br>
+<strong>Encadenar</strong> cuantía → abreviado → no apelación → excepción de la inadmisión → <em>sistemática</em>.<br>
+<strong>Conclusiones afirmativas</strong> con órgano, procedimiento, fecha y recurso.</div>
+
+<!-- 12 -->
+<h2 id="s12"><span class="n">12.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Fundamento y evolución</td><td>Arts. 106.1, 24 y 153.c CE, evolución histórica, Ley Orgánica 1/2025</td><td>Arts. 106 y 117 CE, caracteres, Tribunales de Instancia, MASC</td><td>Fusionado (1)</td></tr>
+<tr><td>Ámbito</td><td>Arts. 1 a 5 con cuadro</td><td>Lista breve</td><td>Fusionado (2)</td></tr>
+<tr><td>Competencia</td><td>Arts. 6 a 14 con cuadro</td><td>Cuadro por órganos, regla de cuantías</td><td>Fusionado + BOE (3) con correcciones a ambos</td></tr>
+<tr><td>Partes</td><td>Arts. 18 a 24 completos</td><td>Legitimación, 19.1.k, pasiva, postulación</td><td>Fusionado + BOE (4) con corrección</td></tr>
+<tr><td>Actividad y plazos</td><td>Arts. 25 a 46</td><td>Cuadro de objetos y plazos</td><td>Fusionado + BOE (5 y 6) con corrección</td></tr>
+<tr><td>Procedimiento</td><td>Interposición, ordinario, abreviado</td><td>Abreviado tras 2025 con detalle</td><td>Fusionado + BOE (7) con correcciones a ambos</td></tr>
+<tr><td>Cautelares, especiales, sentencia, recursos, ejecución</td><td>Completo pero breve</td><td>Casación, apelación, cautelares, inadmisibilidad, efectos, ejecución</td><td>Fusionado + BOE (8 y 9)</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 11 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas (contrastadas con el BOE el 15/11/2026)</span>
+<strong>Temario 2026:</strong> el art. 8.1 no excluye las ordenanzas fiscales, solo el planeamiento · los actos de órganos centrales inferiores en personal, propiedades especiales y expropiación son del TSJ (10.1.i), no de los juzgados centrales; faltaban 9.1.b, c y f · la limitación del fuero electivo es para actos de comunidades autónomas y entidades locales · el art. 19.1.i tiene hoy la redacción de la Ley 15/2022 y faltaban las letras j) y k) · el abreviado en personal no excluye ya el nacimiento o extinción de la relación de los funcionarios de carrera.<br>
+<strong>Material visual:</strong> la frontera de 60.000 € entre Audiencia Nacional y Tribunal Central no es general · el abreviado no se limita por la «separación de inamovibles» · las conclusiones escritas solo si las pidió el actor · inejecución de actos firmes: dos meses, no veinte días · faltaba la responsabilidad patrimonial en el fuero electivo · faltaban supuestos siempre apelables · el plazo de sentencia está en el 78.20.</div>
+
+<footer>
+GACE 2027 · Bloque IV · Tema 13 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 15/11/2026.<br>
+Normas: CE (arts. 24, 106.1, 117 y 153.c) · Ley 29/1998 (consolidada a 03/01/2025) · Ley Orgánica 6/1985 · Ley Orgánica 7/2015 · Ley Orgánica 1/2025 · Ley 52/1997 · Ley 39/2015 · STC 52/2014, de 10 de abril · STS de 19 de mayo de 2025 (rec. 1801/2022).
+</footer>
+</div>
+</body>
+</html>
