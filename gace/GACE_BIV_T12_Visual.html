@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BIV · Tema 12 — Derechos de los ciudadanos, revisión de oficio y recursos (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tablewrap table{break-inside:auto}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque IV · Derecho Administrativo · Tema 12</small>
+    <h1>Los derechos de los ciudadanos en el procedimiento administrativo. Las garantías en el desarrollo del procedimiento. La revisión de los actos en vía administrativa: revisión de oficio y recursos administrativos</h1>
+    <p>Versión fusionada: el Tema 12 del Bloque IV del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas contra el texto consolidado del BOE y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 15/11/2026 · Ley 39/2015 consolidada a 06/11/2024 · Ley 40/2015 consolidada a 02/08/2024 · Ley 29/1998 consolidada a 03/01/2025 · Ley 19/2013 consolidada a 09/07/2022</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">Los interesados</a></li>
+    <li><a href="#s2">Los derechos de los ciudadanos</a></li>
+    <li><a href="#s3">Las garantías del procedimiento</a></li>
+    <li><a href="#s4">La revisión de oficio</a></li>
+    <li><a href="#s5">Los recursos: objeto, clases y fin de la vía</a></li>
+    <li><a href="#s6">Disposiciones comunes a los recursos</a></li>
+    <li><a href="#s7">Alzada y reposición</a></li>
+    <li><a href="#s8">Recurso extraordinario de revisión y vías especiales</a></li>
+    <li><a href="#s9">Lo que preguntan y trampas</a></li>
+    <li><a href="#s10">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s11">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. El tema tiene dos mitades: quién actúa y con qué derechos (arts. 3 a 53 de la LPAC) y cómo se deshace un acto en vía administrativa (arts. 106 a 126).</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Al terminar, recita sin mirar el cuadro de los tres recursos del <a href="#s9">apartado 9</a>: contra qué, ante quién, plazo para interponer, plazo para resolver y silencio.</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s10">apartado 10</a> tapando la columna derecha. En el supuesto lo que puntúa es decir si el acto agota la vía (art. 114), qué recurso cabe, ante quién y hasta qué fecha.</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> Los interesados (arts. 3 a 12 LPAC)</h2>
+<h3>1.1 Capacidad de obrar (art. 3)</h3>
+<ul>
+<li>a) Las <strong>personas físicas o jurídicas</strong> con capacidad de obrar conforme a las normas civiles.</li>
+<li>b) Los <strong>menores de edad</strong>, para los derechos e intereses cuya actuación permita el ordenamiento sin la asistencia de quien ejerza la patria potestad, tutela o curatela.</li>
+<li>c) Cuando la <strong>ley lo declare expresamente</strong>: grupos de afectados, uniones y entidades sin personalidad jurídica y patrimonios independientes o autónomos.</li>
+</ul>
+<div class="box fix"><span class="box-h">Precisión al temario 2026: la excepción del art. 3.b</span>
+El temario redacta la excepción con el lenguaje de la reforma civil de 2021 («salvo que la extensión de las medidas de apoyo afecte…»). El texto consolidado del art. 3.b de la LPAC <strong>no se ha adaptado</strong> y sigue diciendo: «Se exceptúa el supuesto de los menores <strong>incapacitados</strong>, cuando la extensión de la <strong>incapacitación</strong> afecte al ejercicio y defensa de los derechos o intereses de que se trate». En un test literal, la redacción que vale es la del BOE.</div>
+<h3>1.2 Concepto de interesado (art. 4)</h3>
+<div class="grid3">
+<div class="card"><h4>a) Promotores</h4>Quienes promuevan el procedimiento como titulares de derechos o intereses legítimos, individuales o colectivos.</div>
+<div class="card"><h4>b) Titulares de derechos afectados</h4>Quienes, sin haberlo iniciado, tengan <strong>derechos</strong> que puedan resultar afectados por la decisión.</div>
+<div class="card"><h4>c) Titulares de intereses que se personan</h4>Aquellos cuyos <strong>intereses legítimos</strong> puedan resultar afectados y <strong>se personen</strong> mientras no haya resolución definitiva.</div>
+</div>
+<p>Las asociaciones y organizaciones representativas de intereses económicos y sociales son titulares de intereses legítimos colectivos en los términos que la ley reconozca. Si la condición de interesado deriva de una relación jurídica transmisible, el <strong>derechohabiente sucede</strong> en ella cualquiera que sea el estado del procedimiento.</p>
+<h3>1.3 Representación (arts. 5 a 7)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Regla</th><th>Contenido</th></tr>
+<tr><td><strong>Quién representa</strong></td><td>Cualquier persona física con capacidad de obrar y las personas jurídicas cuando lo prevean sus estatutos. Las actuaciones se entienden con el representante, salvo manifestación expresa en contrario.</td></tr>
+<tr><td><strong>Cuándo se acredita</strong></td><td>Para formular <strong>solicitudes</strong>, presentar declaraciones responsables o comunicaciones, <strong>interponer recursos</strong>, <strong>desistir</strong> de acciones y <strong>renunciar</strong> a derechos. Para los actos de mero trámite se <strong>presume</strong>.</td></tr>
+<tr><td><strong>Cómo</strong></td><td>Cualquier medio válido que deje constancia fidedigna: apoderamiento <em>apud acta</em> presencial o electrónico, o inscripción en el registro electrónico de apoderamientos.</td></tr>
+<tr><td><strong>Defecto</strong></td><td>No impide tener por realizado el acto si se subsana en <strong>diez días</strong> (o plazo superior si lo requieren las circunstancias).</td></tr>
+<tr><td><strong>Registro de apoderamientos</strong> (6.6)</td><td>Los poderes inscritos valen <strong>cinco años</strong> como máximo desde la inscripción; el poderdante puede revocarlos o prorrogarlos antes del vencimiento, y cada prórroga vale otros cinco años como máximo.</td></tr>
+<tr><td><strong>Pluralidad</strong> (7)</td><td>Con varios interesados, las actuaciones se hacen con el representante o interesado señalado y, en su defecto, con el que figure <strong>en primer término</strong>.</td></tr>
+</table></div>
+<h3>1.4 Identificación y firma (arts. 9 a 12)</h3>
+<p>Las Administraciones están obligadas a <strong>verificar la identidad</strong>. Sistemas: certificados electrónicos cualificados de firma o de sello, y otros que consideren válidos (como la clave concertada). La <strong>firma</strong> solo se exige para solicitudes, declaraciones responsables o comunicaciones, recursos, desistimiento y renuncia (art. 11.2). Si un interesado <strong>no obligado</strong> carece de medios, la identificación o la firma puede hacerla un <strong>funcionario habilitado</strong>, con su consentimiento expreso (art. 12).</p>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> Los derechos de los ciudadanos</h2>
+<div class="box clave"><span class="box-h">Dos catálogos que no hay que confundir</span>
+El <strong>art. 13</strong> recoge los derechos de las <strong>personas</strong> en sus relaciones con las Administraciones, haya o no procedimiento. El <strong>art. 53</strong> recoge los derechos del <strong>interesado en un procedimiento</strong>. El examen de 2022 preguntó precisamente cuál pertenece a cuál.</div>
+<div class="grid2">
+<div class="card"><h4>Art. 13 · Personas ante las Administraciones</h4><ul>
+<li>a) Comunicarse por el <strong>Punto de Acceso General electrónico</strong>.</li>
+<li>b) Ser <strong>asistidos</strong> en el uso de medios electrónicos.</li>
+<li>c) Utilizar las <strong>lenguas oficiales</strong> en el territorio de su comunidad autónoma.</li>
+<li>d) <strong>Acceso a la información pública</strong>, archivos y registros (Ley 19/2013).</li>
+<li>e) Ser tratados con <strong>respeto y deferencia</strong>.</li>
+<li>f) Exigir las <strong>responsabilidades</strong> de las Administraciones y autoridades.</li>
+<li>g) Obtener y utilizar medios de <strong>identificación y firma electrónica</strong>.</li>
+<li>h) <strong>Protección de datos</strong> personales, con seguridad y confidencialidad.</li></ul></div>
+<div class="card"><h4>Art. 53 · Interesado en el procedimiento</h4><ul>
+<li>a) Conocer el <strong>estado de la tramitación</strong>, el sentido del silencio, el órgano competente y los actos de trámite; acceder y obtener <strong>copia</strong> de los documentos.</li>
+<li>b) <strong>Identificar</strong> a las autoridades y al personal responsables.</li>
+<li>c) No presentar documentos <strong>originales</strong>, salvo excepción normativa.</li>
+<li>d) No presentar datos y documentos no exigidos o que ya estén en poder de las Administraciones o hayan sido elaborados por ellas.</li>
+<li>e) Formular <strong>alegaciones</strong> y aportar documentos en cualquier fase <strong>anterior a la audiencia</strong>.</li>
+<li>f) Obtener <strong>información y orientación</strong> sobre requisitos.</li>
+<li>g) Actuar asistidos de <strong>asesor</strong>.</li>
+<li>h) Cumplir las obligaciones de <strong>pago</strong> por medios electrónicos.</li></ul></div>
+</div>
+<p><strong>Presuntos responsables en el sancionador</strong> (53.2): además, ser notificados de los hechos imputados, las infracciones y sanciones posibles, la identidad del instructor, de la autoridad competente y de la norma que le atribuye la competencia; y la <strong>presunción de no existencia de responsabilidad</strong> mientras no se demuestre lo contrario.</p>
+<h3>2.1 Derecho y obligación de relacionarse electrónicamente (art. 14)</h3>
+<p>Las <strong>personas físicas</strong> pueden elegir en todo momento, salvo que estén obligadas. Están obligados, para cualquier trámite:</p>
+<ul>
+<li>a) Las <strong>personas jurídicas</strong>.</li>
+<li>b) Las <strong>entidades sin personalidad jurídica</strong>.</li>
+<li>c) Quienes ejerzan una actividad profesional de <strong>colegiación obligatoria</strong>, en los trámites de esa actividad.</li>
+<li>d) Quienes <strong>representen</strong> a un interesado obligado.</li>
+<li>e) Los <strong>empleados públicos</strong>, en los trámites que realicen <strong>por razón de su condición</strong>, en la forma que determine cada Administración.</li>
+</ul>
+<p>Por reglamento puede extenderse la obligación a colectivos de personas físicas con acceso y disponibilidad acreditados de medios electrónicos por su capacidad económica, técnica o dedicación profesional (14.3).</p>
+<div class="box trampa"><span class="box-h">Trampa (examen 2022)</span>El empleado público <strong>no</strong> está obligado en sus asuntos personales: solo en los trámites que hace como empleado público.</div>
+<h3>2.2 Lengua, registros, aportación de documentos, archivo, colaboración y comparecencia (arts. 15 a 20 y 28)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Materia</th><th>Régimen</th></tr>
+<tr><td><strong>Lengua</strong> (15)</td><td>En la AGE, el <strong>castellano</strong>. Ante órganos de la AGE con sede en una comunidad con lengua cooficial, el interesado puede usarla y el procedimiento se tramita en la lengua elegida; si concurren varios interesados y discrepan, en <strong>castellano</strong>.</td></tr>
+<tr><td><strong>Registros</strong> (16)</td><td>Cada Administración tiene un <strong>registro electrónico general</strong>; todos deben ser interoperables.</td></tr>
+<tr><td><strong>Lugares de presentación</strong> (16.4)</td><td>Registro electrónico de la Administración destinataria o de cualquier sujeto del sector público; <strong>oficinas de Correos</strong>; representaciones diplomáticas y oficinas consulares; <strong>oficinas de asistencia</strong> en materia de registros; y los demás que establezcan las normas.</td></tr>
+<tr><td><strong>Aportación de documentos</strong> (28)</td><td>El interesado responde de la veracidad de lo que presenta y no está obligado a aportar documentos elaborados por cualquier Administración. Se <strong>presume</strong> su autorización para que la Administración los consulte, salvo <strong>oposición expresa</strong> o ley especial que exija consentimiento expreso.</td></tr>
+<tr><td><strong>Archivo</strong> (17)</td><td>Archivo electrónico <strong>único</strong> de los documentos de procedimientos finalizados.</td></tr>
+<tr><td><strong>Colaboración</strong> (18)</td><td>En los términos de la ley aplicable; a falta de previsión, facilitar informes, inspecciones y otros actos de investigación.</td></tr>
+<tr><td><strong>Comparecencia</strong> (19)</td><td>Solo obligatoria si lo prevé una <strong>norma con rango de ley</strong>. La citación expresa lugar, fecha, hora, medios, objeto y efectos de no atenderla.</td></tr>
+<tr><td><strong>Responsabilidad de la tramitación</strong> (20)</td><td>Los titulares de las unidades y el personal que resuelve o despacha son responsables directos y deben remover los obstáculos al ejercicio de los derechos.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2022 y 2024)</span>
+Las personas físicas pueden elegir; el empleado público solo está obligado por razón de su condición (2022) · la comparecencia solo es obligatoria si lo prevé una norma con rango de ley (2024) · conocer el estado de la tramitación, identificar al personal y no presentar documentos ya aportados son derechos del <strong>art. 53</strong>, no del 13 (2022).</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> Las garantías en el desarrollo del procedimiento</h2>
+<p>El procedimiento es, en sí mismo, una garantía. Las principales:</p>
+<ul>
+<li><strong>Audiencia</strong> del interesado (art. 105.c CE y art. 82 LPAC), que solo se omite en los supuestos legales.</li>
+<li><strong>Motivación</strong> de los actos que limiten derechos, resuelvan recursos o se separen del criterio seguido en actuaciones precedentes, entre otros (art. 35).</li>
+<li><strong>Acceso al expediente</strong> y obtención de copias (art. 53).</li>
+<li><strong>Congruencia</strong> y prohibición de la <em>reformatio in peius</em> (art. 88.2, y en recursos art. 119.3).</li>
+<li>En el sancionador: separación entre instrucción y resolución, presunción de inocencia y derecho a no declarar contra sí mismo.</li>
+<li><strong>Lengua</strong> (art. 15) y relación electrónica con asistencia (arts. 12 a 14).</li>
+<li><strong>Imparcialidad</strong>, garantizada por la abstención y la recusación.</li>
+</ul>
+<h3>3.1 Abstención y recusación (arts. 23 y 24 de la Ley 40/2015)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Motivo (23.2)</th><th>Contenido</th></tr>
+<tr><td><strong>a) Interés</strong></td><td>Interés personal en el asunto o en otro cuya resolución pueda influir; ser administrador de sociedad o entidad interesada; cuestión litigiosa pendiente con algún interesado.</td></tr>
+<tr><td><strong>b) Vínculo y parentesco</strong></td><td>Matrimonio o situación de hecho asimilable; parentesco de <strong>consanguinidad dentro del cuarto grado</strong> o de <strong>afinidad dentro del segundo</strong> con interesados, administradores, asesores, representantes legales o mandatarios; compartir despacho profesional o estar asociado con ellos.</td></tr>
+<tr><td><strong>c) Amistad o enemistad</strong></td><td>Amistad íntima o enemistad manifiesta con alguna de esas personas.</td></tr>
+<tr><td><strong>d) Perito o testigo</strong></td><td>Haber intervenido como perito o testigo en el procedimiento.</td></tr>
+<tr><td><strong>e) Relación de servicio</strong></td><td>Relación de servicio con persona interesada directamente, o haberle prestado servicios profesionales en los <strong>dos últimos años</strong>.</td></tr>
+</table></div>
+<div class="grid2">
+<div class="card"><h4>Abstención (art. 23)</h4>Quien incurre en un motivo se abstiene y lo comunica a su <strong>superior inmediato</strong>, que resuelve. El superior puede <strong>ordenarle</strong> que se abstenga (23.3). Actuar con motivo de abstención <strong>no implica necesariamente</strong> la invalidez del acto (23.4), pero la no abstención da lugar a <strong>responsabilidad</strong> (23.5).</div>
+<div class="card"><h4>Recusación (art. 24)</h4>La promueven los interesados en <strong>cualquier momento</strong>, por escrito con la causa. Al <strong>día siguiente</strong> el recusado dice a su superior si se da la causa; si la reconoce y el superior la aprecia, lo sustituye acto seguido; si la niega, el superior resuelve en <strong>tres días</strong>. <strong>Sin recurso</strong>, pero puede alegarse al recurrir el acto que ponga fin al procedimiento. Es la única cuestión incidental que <strong>suspende</strong> (arts. 74 y 22.2.c LPAC).</div>
+</div>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> La revisión de oficio (arts. 106 a 111 LPAC)</h2>
+<p>Es la potestad de la Administración para eliminar sus propios actos o disposiciones inválidos <strong>sin acudir a los tribunales</strong>: una manifestación de la autotutela, limitada por la seguridad jurídica y los derechos de los particulares.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:16%">Vía</th><th style="width:22%">Objeto</th><th>Requisitos</th><th style="width:20%">Plazos</th></tr>
+<tr><td><strong>Nulidad de actos</strong> (106.1)</td><td>Actos que hayan <strong>puesto fin a la vía</strong> o <strong>no recurridos en plazo</strong>, con causa del art. 47.1</td><td>De oficio <strong>o a solicitud del interesado</strong> (acción de nulidad); dictamen previo y <strong>favorable</strong> del Consejo de Estado u órgano consultivo autonómico</td><td>En cualquier momento · de oficio: caducidad a los <strong>6 meses</strong> · a solicitud: silencio <strong>desestimatorio</strong></td></tr>
+<tr><td><strong>Nulidad de disposiciones</strong> (106.2)</td><td>Disposiciones del art. 47.2</td><td><strong>Solo de oficio</strong>; dictamen favorable</td><td>En cualquier momento</td></tr>
+<tr><td><strong>Lesividad</strong> (107)</td><td>Actos <strong>favorables anulables</strong> (art. 48)</td><td>Declaración de lesividad previa audiencia (art. 82) e impugnación por la propia Administración ante el contencioso</td><td>Declarar antes de <strong>4 años</strong> desde que se dictó · caducidad a los <strong>6 meses</strong> · contencioso en <strong>2 meses</strong> (46.5 LJCA)</td></tr>
+<tr><td><strong>Revocación</strong> (109.1)</td><td>Actos de <strong>gravamen o desfavorables</strong></td><td>No puede ser dispensa o exención no permitida, ni contraria a la igualdad, al interés público o al ordenamiento</td><td>Mientras no haya prescrito</td></tr>
+<tr><td><strong>Rectificación de errores</strong> (109.2)</td><td>Errores <strong>materiales, de hecho o aritméticos</strong></td><td>De oficio o a instancia; sin alterar el contenido sustancial</td><td>En cualquier momento</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al material visual</span>
+El visual metía en una misma fila los actos y las disposiciones nulos con la nota «de oficio o a solicitud del interesado». La acción de nulidad del interesado solo existe para los <strong>actos</strong> (106.1). Las <strong>disposiciones</strong> se revisan <strong>solo de oficio</strong> (106.2): el particular puede denunciar la ilegalidad, pero su vía es el recurso contencioso directo o el indirecto.</div>
+<h3>4.1 Reglas del art. 106</h3>
+<ul>
+<li><strong>Inadmisión</strong> motivada sin dictamen (106.3) si la solicitud no se basa en una causa del 47.1, carece manifiestamente de fundamento o ya se desestimaron en cuanto al fondo otras sustancialmente iguales.</li>
+<li><strong>Indemnización</strong> (106.4): en la misma resolución, si concurren los requisitos de los arts. 32.2 y 34.1 de la Ley 40/2015. Anulada una <strong>disposición</strong>, subsisten los actos firmes dictados en su aplicación.</li>
+</ul>
+<h3>4.2 Reglas del art. 107 (lesividad)</h3>
+<ul>
+<li>La declaración de lesividad <strong>no es recurrible</strong>; se examina como presupuesto procesal en el proceso y puede notificarse a los interesados a efectos informativos.</li>
+<li>La adopta, en la AGE y en las comunidades autónomas, el <strong>órgano competente en la materia</strong>; en las entidades locales, el <strong>Pleno</strong> o, en su defecto, el órgano colegiado superior.</li>
+</ul>
+<h3>4.3 Suspensión, límites y competencia</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Regla</th><th>Contenido</th></tr>
+<tr><td><strong>Suspensión</strong> (108)</td><td>Iniciada la revisión, el órgano competente puede suspender la ejecución si pudiera causar perjuicios de imposible o difícil reparación.</td></tr>
+<tr><td><strong>Límites</strong> (110)</td><td>No se ejercen las facultades de revisión cuando, por prescripción de acciones, tiempo transcurrido u otras circunstancias, resulte contrario a la <strong>equidad</strong>, la <strong>buena fe</strong>, el derecho de los particulares o las leyes.</td></tr>
+<tr><td><strong>Competencia estatal</strong> (111)</td><td><strong>Consejo de Ministros</strong>: sus propios actos y disposiciones y los de los <strong>ministros</strong>. <strong>Ministros</strong>: los de los <strong>secretarios de Estado</strong> y los de órganos directivos no dependientes de una Secretaría de Estado. <strong>Secretarios de Estado</strong>: los de órganos directivos dependientes. <strong>Organismos públicos</strong>: el órgano de adscripción, los del máximo órgano rector; y este, los de sus órganos dependientes.</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (exámenes 2019, 2022 y 2024)</span>
+Nulidad de actos de oficio o a solicitud, con dictamen <strong>favorable</strong> (2019 y 2022) · iniciada a solicitud, silencio desestimatorio (2024) · lesividad para actos <strong>favorables anulables</strong> (2024) · caducidad de la lesividad a los <strong>seis meses</strong> (2022) · los actos de los secretarios de Estado los revisa el <strong>ministro</strong> (2019).</div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> Los recursos administrativos: objeto, clases y fin de la vía (arts. 112 a 114)</h2>
+<h3>5.1 Objeto (art. 112)</h3>
+<p>Son actos del interesado por los que pide a la Administración que revoque o reforme un acto suyo por no ser conforme a Derecho. Caben <strong>alzada</strong> y <strong>reposición</strong> contra las <strong>resoluciones</strong> y los <strong>actos de trámite cualificados</strong>: los que deciden directa o indirectamente el fondo, determinan la imposibilidad de continuar, producen indefensión o perjuicio irreparable. Se fundan en cualquier motivo de nulidad o anulabilidad (arts. 47 y 48). La oposición a los demás actos de trámite se alega para que se tenga en cuenta en la resolución final.</p>
+<ul>
+<li><strong>Disposiciones generales</strong> (112.3): no cabe recurso administrativo. El recurso contra un acto fundado <strong>solo</strong> en la nulidad de una disposición puede interponerse directamente ante el órgano que la dictó.</li>
+<li><strong>Sustitución</strong> (112.2): las leyes pueden sustituir la alzada, en ámbitos sectoriales justificados, por procedimientos de impugnación, reclamación, conciliación, mediación o arbitraje ante órganos colegiados no sometidos a instrucciones jerárquicas; también la reposición, respetando su carácter potestativo. En la Administración local no pueden desconocer las facultades de los órganos representativos electos.</li>
+<li><strong>Reclamaciones económico-administrativas</strong> (112.4): por su legislación específica.</li>
+</ul>
+<h3>5.2 Clases</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Recurso</th><th style="width:22%">Carácter</th><th>Contra</th><th style="width:26%">Ante</th></tr>
+<tr><td><strong>Alzada</strong> (121-122)</td><td>Ordinario y <strong>preceptivo</strong> para agotar la vía</td><td>Actos que <strong>no</strong> ponen fin a la vía administrativa</td><td>El <strong>superior jerárquico</strong> del que dictó el acto</td></tr>
+<tr><td><strong>Reposición</strong> (123-124)</td><td>Ordinario y <strong>potestativo</strong></td><td>Actos que <strong>sí</strong> ponen fin a la vía</td><td>El <strong>mismo órgano</strong></td></tr>
+<tr><td><strong>Extraordinario de revisión</strong> (125-126)</td><td>Extraordinario, motivos tasados</td><td>Actos <strong>firmes</strong> en vía administrativa</td><td>El <strong>mismo órgano</strong>, que lo resuelve</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026</span>
+El temario titula «Clases (art. 113)». Las clases resultan del <strong>art. 112</strong> («Objeto y clases») y de los arts. 121 a 126. El <strong>art. 113</strong> solo dice que contra los actos firmes en vía administrativa únicamente procede el recurso extraordinario de revisión, por las causas del art. 125.1.</div>
+<h3>5.3 Actos que ponen fin a la vía administrativa (art. 114)</h3>
+<div class="grid2">
+<div class="card"><h4>Regla general (114.1)</h4><ul>
+<li>a) Las resoluciones de los recursos de <strong>alzada</strong>.</li>
+<li>b) Las de los procedimientos sustitutivos del 112.2.</li>
+<li>c) Las de órganos <strong>sin superior jerárquico</strong>, salvo ley en contrario.</li>
+<li>d) Los acuerdos, pactos o convenios <strong>finalizadores</strong>.</li>
+<li>e) La resolución de <strong>responsabilidad patrimonial</strong>, cualquiera que sea la relación de la que derive.</li>
+<li>f) La de los procedimientos complementarios sancionadores del 90.4.</li>
+<li>g) Las demás que establezca una disposición legal o reglamentaria.</li></ul></div>
+<div class="card"><h4>Ámbito estatal (114.2)</h4><ul>
+<li>a) Los actos de los <strong>miembros y órganos del Gobierno</strong>.</li>
+<li>b) Los de <strong>ministros y secretarios de Estado</strong> en sus competencias.</li>
+<li>c) Los de órganos directivos con nivel de <strong>director general o superior</strong>, en materia de <strong>personal</strong>.</li>
+<li>d) En organismos públicos y entidades de Derecho público de la AGE, los de sus <strong>máximos órganos de dirección</strong>, según sus estatutos, salvo ley.</li></ul></div>
+</div>
+<div class="box clave"><span class="box-h">Delegación (art. 9.4 Ley 40/2015) · examen 2022</span>
+Las resoluciones por delegación se consideran dictadas por el órgano <strong>delegante</strong>. Contra una resolución dictada por delegación de un <strong>ministro</strong> cabe <strong>reposición potestativa</strong>, porque pone fin a la vía administrativa.</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> Disposiciones comunes a los recursos (arts. 115 a 120)</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Regla</th><th>Contenido</th></tr>
+<tr><td><strong>Interposición</strong> (115)</td><td>Escrito con recurrente e identificación, acto recurrido y razón de la impugnación, lugar, fecha, firma, órgano al que se dirige y demás exigencias. El <strong>error o la ausencia de calificación</strong> no impide tramitarlo si se deduce su verdadero carácter. Los vicios que hagan anulable un acto <strong>no pueden alegarlos quienes los causaron</strong>.</td></tr>
+<tr><td><strong>Inadmisión</strong> (116)</td><td>a) Órgano incompetente si el competente es de <strong>otra Administración</strong> (si es de la misma, se remite) · b) falta de legitimación · c) acto no susceptible de recurso · d) plazo transcurrido · e) carencia manifiesta de fundamento.</td></tr>
+<tr><td><strong>Suspensión</strong> (117)</td><td>La interposición <strong>no suspende</strong>, salvo disposición en contrario. El órgano que resuelve puede suspender, de oficio o a solicitud, previa ponderación razonada, si la ejecución causa perjuicios de <strong>imposible o difícil reparación</strong> o la impugnación se funda en una causa de <strong>nulidad</strong> del 47.1. Se entiende <strong>suspendida</strong> si pasa <strong>un mes</strong> desde la entrada de la solicitud en el registro sin resolución expresa notificada. Puede exigirse caución y adoptarse medidas cautelares; la suspensión se prolonga a la vía contenciosa si el interesado la pidió y se extiende la medida cautelar.</td></tr>
+<tr><td><strong>Audiencia</strong> (118)</td><td>Si hay nuevos hechos o documentos no recogidos en el expediente, plazo de <strong>10 a 15 días</strong>. No se tienen en cuenta los que el recurrente pudo aportar en alegaciones y no aportó. Si hay otros interesados, se les da traslado del recurso.</td></tr>
+<tr><td><strong>Resolución</strong> (119)</td><td>Estima en todo o en parte, desestima o inadmite. Vicio de forma sin resolver el fondo: <strong>retroacción</strong> al momento del vicio. Decide todas las cuestiones, alegadas o no, oyendo antes a los interesados; congruente y <strong>sin agravar la situación inicial</strong> del recurrente.</td></tr>
+<tr><td><strong>Pluralidad de recursos</strong> (120)</td><td>Si hay muchos recursos administrativos contra un <strong>mismo acto</strong> y se ha interpuesto un <strong>recurso judicial</strong> contra una resolución o un acto presunto desestimatorio, se puede <strong>suspender el plazo para resolver</strong> hasta el pronunciamiento judicial.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión al material visual</span>
+El visual resumía el art. 120 como «recurso judicial pendiente sobre un acto idéntico en masa». La ley habla de una pluralidad de recursos administrativos que traen causa de un <strong>mismo acto</strong>, y lo que se suspende es el <strong>plazo para resolverlos</strong>, no su tramitación entera.</div>
+<div class="box clave"><span class="box-h">Ideas clave del temario 2026 (examen 2024)</span>
+El error en la calificación no impide tramitar el recurso · la existencia de otro recurso con identidad sustancial <strong>no</strong> es causa de inadmisión del art. 116.</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> Recurso de alzada y recurso potestativo de reposición</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%"></th><th>Alzada (121-122)</th><th>Reposición (123-124)</th></tr>
+<tr><td><strong>Contra</strong></td><td>Actos del 112.1 que no ponen fin a la vía</td><td>Actos que ponen fin a la vía</td></tr>
+<tr><td><strong>Dónde se presenta</strong></td><td>Ante el órgano que dictó el acto <strong>o</strong> ante el competente; si se presenta ante el primero, lo remite en <strong>10 días</strong> con informe y copia del expediente</td><td>Ante el mismo órgano</td></tr>
+<tr><td><strong>Quién resuelve</strong></td><td>El <strong>superior jerárquico</strong>. Tribunales de selección y órganos con autonomía funcional dependen del órgano de adscripción o, en su defecto, del que nombró al presidente</td><td>El mismo órgano</td></tr>
+<tr><td><strong>Plazo para interponer</strong></td><td><strong>Un mes</strong> si el acto es expreso (después, el acto es firme); si es presunto, <strong>en cualquier momento</strong> desde el día siguiente a los efectos del silencio</td><td><strong>Un mes</strong> si es expreso; si es presunto, en cualquier momento desde el día siguiente al acto presunto</td></tr>
+<tr><td><strong>Plazo para resolver</strong></td><td><strong>Tres meses</strong></td><td><strong>Un mes</strong></td></tr>
+<tr><td><strong>Silencio</strong></td><td>Desestimatorio, salvo el <strong>doble silencio</strong> del 24.1, párrafo tercero (alzada contra la desestimación presunta de una solicitud)</td><td>Desestimatorio</td></tr>
+<tr><td><strong>Después</strong></td><td>Ningún otro recurso administrativo salvo el <strong>extraordinario de revisión</strong>; vía contenciosa</td><td>No cabe nueva reposición. Interpuesta, <strong>no cabe contencioso</strong> hasta su resolución expresa o presunta. Pasado el plazo sin interponerla, solo contencioso (o revisión extraordinaria)</td></tr>
+</table></div>
+<div class="box trampa"><span class="box-h">Trampas</span>
+«Cabe reposición y después alzada» → <strong>no</strong>: son excluyentes; la alzada va contra actos que no agotan la vía y la reposición contra los que sí · «Interpuesta la reposición, puedo ir ya al contencioso» → <strong>no</strong> (123.2) · «El plazo de alzada contra actos presuntos es de tres meses» → <strong>no</strong> desde 2015: en cualquier momento (122.1) · la resolución de alzada <strong>agota</strong> la vía: contra ella no cabe reposición.</div>
+<div class="box clave"><span class="box-h">Idea clave del temario 2026 (examen 2022)</span>
+Plazo para resolver la alzada: <strong>tres meses</strong>; la reposición: <strong>un mes</strong>.</div>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> Recurso extraordinario de revisión y vías especiales</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:60%">Causa (125.1)</th><th>Plazo para interponer (125.2)</th></tr>
+<tr><td>a) <strong>Error de hecho</strong> que resulte de los propios documentos del expediente</td><td><strong>Cuatro años</strong> desde la notificación de la resolución</td></tr>
+<tr><td>b) Aparición de <strong>documentos de valor esencial</strong>, aunque sean posteriores, que evidencien el error</td><td><strong>Tres meses</strong> desde el conocimiento de los documentos</td></tr>
+<tr><td>c) Influencia esencial de <strong>documentos o testimonios declarados falsos</strong> por sentencia judicial firme, anterior o posterior</td><td><strong>Tres meses</strong> desde la firmeza de la sentencia</td></tr>
+<tr><td>d) Resolución dictada por <strong>prevaricación, cohecho, violencia, maquinación fraudulenta</strong> u otra conducta punible declarada por sentencia firme</td><td><strong>Tres meses</strong> desde la firmeza de la sentencia</td></tr>
+</table></div>
+<ul>
+<li>Se interpone y se resuelve ante el <strong>órgano que dictó el acto</strong> (examen 2019).</li>
+<li>No perjudica la solicitud de revisión de oficio (106) ni la de rectificación de errores (109.2).</li>
+<li><strong>Inadmisión</strong> motivada sin dictamen si no se funda en una causa del 125.1 o ya se desestimaron en cuanto al fondo otros sustancialmente iguales (126.1).</li>
+<li>Admitido, es preceptivo el <strong>dictamen del Consejo de Estado</strong> (art. 22.9 de la Ley Orgánica 3/1980) u órgano consultivo autonómico.</li>
+<li>El órgano se pronuncia sobre la procedencia del recurso y, en su caso, sobre el <strong>fondo</strong> (126.2).</li>
+<li>A los <strong>tres meses</strong> sin resolución notificada, se entiende <strong>desestimado</strong> y queda expedita la vía contenciosa (126.3).</li>
+</ul>
+<div class="box fix"><span class="box-h">Lo que el temario no recoge</span>
+El temario omite el dictamen preceptivo del Consejo de Estado en el recurso extraordinario de revisión, que el material visual sí incluía. Es la razón de que el art. 126.1 hable de inadmitir «sin necesidad de recabar dictamen».</div>
+<h3>8.1 Otras vías especiales</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Vía</th><th>Régimen</th></tr>
+<tr><td><strong>Reclamaciones económico-administrativas</strong></td><td>Arts. 226 a 249 de la Ley 58/2003, General Tributaria, ante los tribunales económico-administrativos.</td></tr>
+<tr><td><strong>Recurso especial en materia de contratación</strong></td><td>Arts. 44 a 60 de la Ley 9/2017, ante el Tribunal Administrativo Central de Recursos Contractuales u órgano autonómico; contra su resolución solo cabe contencioso.</td></tr>
+<tr><td><strong>Reclamación ante el Consejo de Transparencia y Buen Gobierno</strong></td><td>Art. 24 de la Ley 19/2013: <strong>potestativa</strong> y previa al contencioso, en el plazo de <strong>un mes</strong>; sustitutiva de los recursos administrativos (art. 23.1).</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026</span>
+El temario presenta la reclamación ante el Consejo de Transparencia solo como «sustitutiva de los recursos administrativos». Hay que añadir que es <strong>potestativa</strong>: el solicitante puede acudir directamente al contencioso.</div>
+<div class="box act"><span class="box-h">En tramitación (no vigente)</span>
+El Gobierno abrió en 2026 la tramitación de un anteproyecto de ley de administración abierta que reformaría la Ley 19/2013 y el Consejo de Transparencia. A 15/11/2026 no se ha aprobado ninguna ley, las Cortes están disueltas desde el 6 de octubre de 2026 y la Ley 19/2013 sigue con su última actualización de 09/07/2022.</div>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> Lo que preguntan y trampas</h2>
+<div class="box clave"><span class="box-h">Los números del tema</span>
+Subsanar representación: <strong>10 días</strong> · poderes inscritos: <strong>5 años</strong> · recusación: el <strong>día siguiente</strong> y <strong>3 días</strong> · parentesco: <strong>4.º</strong> consanguinidad, <strong>2.º</strong> afinidad · servicios profesionales: <strong>2 años</strong> · nulidad de actos: sin plazo, caducidad de oficio <strong>6 meses</strong> · lesividad: <strong>4 años</strong> para declarar, <strong>6 meses</strong> de caducidad, <strong>2 meses</strong> para el contencioso · alzada: <strong>1 mes</strong> / <strong>3 meses</strong>, remisión en <strong>10 días</strong> · reposición: <strong>1 mes</strong> / <strong>1 mes</strong> · revisión: <strong>4 años</strong> o <strong>3 meses</strong> / <strong>3 meses</strong> · suspensión automática: <strong>1 mes</strong> · audiencia en recursos: <strong>10 a 15 días</strong>.</div>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Lo que preguntan</span><ul>
+<li>Capacidad de obrar e interesados (arts. 3 y 4).</li>
+<li>Representación y registro de apoderamientos.</li>
+<li>Arts. 13 y 53: qué derecho es de cada catálogo.</li>
+<li>Obligados a relacionarse electrónicamente (art. 14).</li>
+<li>Comparecencia y lugares de presentación.</li>
+<li>Abstención y recusación.</li>
+<li>Vías de revisión de oficio y su competencia.</li>
+<li>Actos que agotan la vía (art. 114).</li>
+<li>Plazos y silencio de los tres recursos.</li>
+<li>Causas de inadmisión y suspensión.</li></ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>La Administración <strong>no</strong> anula por sí sola sus actos favorables anulables: lesividad + contencioso.</li>
+<li>El dictamen en la nulidad debe ser <strong>favorable</strong>, no solo preceptivo.</li>
+<li>Las disposiciones nulas se revisan <strong>solo de oficio</strong>.</li>
+<li>La revocación es para actos de <strong>gravamen</strong>, no favorables.</li>
+<li>La declaración de lesividad <strong>no</strong> es recurrible.</li>
+<li>Contra reglamentos <strong>no</strong> cabe recurso administrativo.</li>
+<li>Contra la desestimación de la recusación <strong>no</strong> cabe recurso.</li>
+<li>El recurso de revisión solo contra actos <strong>firmes</strong> y por <strong>cuatro</strong> causas.</li>
+<li>Delegación del ministro → <strong>reposición</strong>, no alzada.</li>
+<li>Otro recurso idéntico pendiente <strong>no</strong> es causa de inadmisión.</li>
+<li>El recurso se tramita aunque esté <strong>mal calificado</strong>.</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia con sus cuatro piezas: art. 149.1.18.ª CE, art. 105 CE, Ley 39/2015 (en adelante, LPAC) con su objeto del art. 1 y su ámbito del art. 2; y, si hay abstención o recusación, la Ley 40/2015 (en adelante, LRJSP).</li>
+<li>La calificación previa: quién es interesado (art. 4), qué acto se impugna, si es expreso o presunto y si pone fin a la vía (art. 114).</li>
+<li>Los arts. 13 y 53 con sus ocho letras cada uno.</li>
+<li>Los obligados a relacionarse electrónicamente (art. 14.2).</li>
+<li>Los cinco motivos de abstención y el trámite de la recusación.</li>
+<li>El cuadro de las vías de revisión de oficio con requisitos y plazos.</li>
+<li>Los supuestos del art. 114.1 y 114.2.</li>
+<li>El cuadro de los tres recursos.</li>
+<li>Las causas de inadmisión (116) y la suspensión (117).</li>
+</ol>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>Casi todas las cuestiones del supuesto acaban con una pregunta de este tema: «¿qué puede hacer el interesado?». Lo que puntúa es <strong>calificar el acto</strong> (expreso o presunto, si agota o no la vía), elegir el <strong>recurso</strong>, el <strong>órgano</strong> y el <strong>plazo con su fecha</strong>, y ofrecer la <strong>alternativa</strong> (reposición o contencioso directo; revisión de oficio si es nulo).</p>
+<h3>10.1 Introducción de la materia (plantillas v2, sección 4)</h3>
+<div class="model">
+<p>«En materia de procedimiento administrativo resulta de aplicación la Ley 39/2015, de 1 de octubre, del Procedimiento Administrativo Común de las Administraciones Públicas (en adelante, LPAC), dictada al amparo del artículo 149.1.18.ª de la Constitución, que atribuye al Estado la competencia sobre el procedimiento administrativo común, y en desarrollo del artículo 105 de la Constitución. Conforme a su artículo 1, regula los requisitos de validez y eficacia de los actos administrativos, el procedimiento administrativo común, incluidos el sancionador y el de responsabilidad patrimonial, y los principios de la iniciativa legislativa y de la potestad reglamentaria. Se aplica a todo el sector público, de conformidad con su artículo 2.»</p>
+</div>
+<div class="box sup"><span class="box-h">Complemento</span>Si la cuestión toca la abstención, la recusación, la delegación o la jerarquía entre órganos, añade la Ley 40/2015, de 1 de octubre, de Régimen Jurídico del Sector Público (en adelante, LRJSP), arts. 9, 23 y 24.</div>
+<h3>10.2 Calificación previa propia del Tema 12</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar el acto impugnado. Se trata de un acto [expreso / presunto] dictado por [órgano], que [pone / no pone] fin a la vía administrativa conforme al artículo 114 de la LPAC, [por carecer de superior jerárquico / por tratarse de un ministro o secretario de Estado / por dictarse por delegación del ministro (artículo 9.4 de la LRJSP) / porque su autor está subordinado a (superior)]. El interesado lo es conforme al artículo 4 de la LPAC, al [haber promovido el procedimiento / ver afectados sus derechos].»</p>
+</div>
+<h3>10.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Hecho del enunciado</th><th style="width:28%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>Resolución de un subdirector general, notificada</td><td>Art. 114 LPAC: no agota la vía; art. 121</td><td>Alzada ante el director general en un mes</td></tr>
+<tr><td>Resolución de un ministro o secretario de Estado</td><td>Art. 114.2.b LPAC</td><td>Reposición potestativa en un mes o contencioso directo</td></tr>
+<tr><td>Resolución dictada por delegación del ministro</td><td>Art. 9.4 LRJSP y 114.2.b LPAC</td><td>Se imputa al ministro: reposición potestativa o contencioso</td></tr>
+<tr><td>Resolución de un director general en materia de personal</td><td>Art. 114.2.c LPAC</td><td>Agota la vía: reposición o contencioso</td></tr>
+<tr><td>El recurrente llama «reposición» a lo que es una alzada</td><td>Art. 115.2 LPAC</td><td>Se tramita como alzada; no es causa de inadmisión</td></tr>
+<tr><td>Recurso presentado un mes y un día después de la notificación</td><td>Arts. 30.4 y 116.d LPAC</td><td>Extemporáneo: inadmisión y acto firme; solo cabe la revisión extraordinaria o la de oficio</td></tr>
+<tr><td>Se pide la suspensión y no se resuelve en un mes</td><td>Art. 117.3 LPAC</td><td>La ejecución se entiende suspendida</td></tr>
+<tr><td>El acto presunto procede del silencio</td><td>Arts. 122.1 y 124.1 LPAC</td><td>Recurso en cualquier momento desde el día siguiente al silencio</td></tr>
+<tr><td>La Administración quiere anular una licencia favorable con un vicio de anulabilidad</td><td>Art. 107 LPAC</td><td>Declaración de lesividad antes de cuatro años e impugnación ante el contencioso en dos meses</td></tr>
+<tr><td>Acto firme dictado por un órgano manifiestamente incompetente</td><td>Arts. 47.1.b y 106.1 LPAC</td><td>Revisión de oficio a solicitud, con dictamen favorable del Consejo de Estado</td></tr>
+<tr><td>Error en la suma de una liquidación</td><td>Art. 109.2 LPAC</td><td>Rectificación en cualquier momento</td></tr>
+<tr><td>Al resolver la alzada se agrava la sanción</td><td>Art. 119.3 LPAC</td><td>Prohibida la reformatio in peius: la resolución es contraria a Derecho</td></tr>
+<tr><td>El instructor es primo hermano del interesado</td><td>Art. 23.2.b LRJSP (cuarto grado)</td><td>Debe abstenerse; el interesado puede recusarlo</td></tr>
+</table></div>
+<h3>10.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+El <strong>16 de febrero de 2026</strong> se notifica a Beta, S.A. una resolución de la Subdirección General de Ayudas de un ministerio que le ordena reintegrar 80.000 euros de una subvención. El <strong>16 de marzo de 2026</strong> Beta presenta ante la propia Subdirección un escrito que titula «recurso de reposición», en el que pide además la suspensión del reintegro. A <strong>20 de abril de 2026</strong> no se ha resuelto nada.
+<br><br><strong>Cuestiones:</strong> a) Naturaleza, admisibilidad y órgano competente del recurso. b) Situación de la ejecución y vías de Beta si el recurso no se resuelve.</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 10.1.] Con carácter previo, procede calificar el acto impugnado. Se trata de una resolución expresa de una subdirección general que, conforme al artículo 114 de la LPAC, no pone fin a la vía administrativa, pues las subdirecciones generales son órganos directivos subordinados y no figuran entre los supuestos del artículo 114.2. Beta es interesada conforme al artículo 4.1.b de la LPAC. La cuestión a) solicita determinar qué recurso procede, si es admisible y quién lo resuelve. El enunciado no precisa de qué órgano depende la Subdirección, por lo que suponemos que depende de una dirección general del ministerio, que es la estructura ordinaria del artículo 55 de la LRJSP. Por ello, el recurso procedente es el de alzada ante el superior jerárquico (artículo 121.1). La denominación «reposición» no impide su tramitación, porque el error en la calificación no es obstáculo si se deduce su verdadero carácter (artículo 115.2). El plazo de un mes del artículo 122.1, contado de fecha a fecha (artículo 30.4), vencía el 16 de marzo de 2026, día en que se presentó el escrito, de modo que es tempestivo. Al presentarse ante el órgano autor del acto, este debe remitirlo al competente en diez días con su informe y copia del expediente (artículo 121.2). No obstante lo anterior, cabría calificarlo como reposición si la Subdirección hubiera actuado por delegación del ministro, ya que entonces la resolución se consideraría dictada por este (artículo 9.4 de la LRJSP) y pondría fin a la vía administrativa, si bien, al no indicar el enunciado ninguna delegación, la solución más adecuada es la alzada. Por tanto, se concluye que el escrito de Beta es un recurso de alzada interpuesto en plazo, que debe admitirse y que corresponde resolver al director general del que depende la Subdirección.</p>
+<p><strong>Cuestión b).</strong> La cuestión b) plantea la situación del reintegro y las vías de Beta. Conforme al artículo 117.1 de la LPAC, la interposición del recurso no suspende la ejecución, pero el artículo 117.3 dispone que se entiende suspendida si transcurre un mes desde la entrada de la solicitud en el registro sin resolución expresa notificada. La solicitud entró el 16 de marzo de 2026 y el mes venció el 16 de abril de 2026 sin resolución, por lo que a 20 de abril la ejecución está suspendida, sin perjuicio de que pueda exigirse caución (artículo 117.4). En cuanto al fondo, el plazo para resolver la alzada es de tres meses (artículo 122.2), que vence el 16 de junio de 2026. Al no tratarse de una alzada contra una desestimación presunta, no opera el doble silencio del artículo 24.1, y el silencio es desestimatorio. Por tanto, se concluye que la ejecución del reintegro está suspendida desde el 16 de abril de 2026 y que, si el 16 de junio de 2026 no se ha notificado resolución, Beta podrá entender desestimada la alzada, que agota la vía administrativa (artículo 114.1.a), e interponer recurso contencioso-administrativo, sin que proceda ya ningún otro recurso administrativo salvo el extraordinario de revisión.</p>
+</div>
+<div class="box sup"><span class="box-h">Matiz sobre el plazo del contencioso frente al silencio</span>
+El art. 46.1 de la LJCA fija seis meses contra los actos presuntos, pero la jurisprudencia constitucional y del Tribunal Supremo ha declarado que ese plazo no corre frente a la desestimación por silencio, porque la Administración sigue obligada a resolver. En el supuesto basta con decir que el interesado puede acudir al contencioso; si se cita el plazo, hay que añadir este matiz.</div>
+<h3>10.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Calificar</strong> el acto (expreso, no agota la vía, art. 114) y al interesado → <em>análisis</em>.<br>
+<strong>Recalificar</strong> el recurso mal denominado (115.2) → <em>aplicación de conocimientos</em>.<br>
+<strong>Fechas operadas</strong>: 16/02 + 1 mes = 16/03, tempestivo; 16/03 + 1 mes = 16/04, suspensión; 16/03 + 3 meses = 16/06, silencio → <em>aplicación</em>.<br>
+<strong>Suposición declarada</strong> sobre la dependencia orgánica, justificada en el art. 55 LRJSP → admitida.<br>
+<strong>Alternativa evaluada</strong> (delegación del ministro → reposición) → <em>análisis</em>.<br>
+<strong>Encadenar</strong> suspensión, silencio, fin de la vía y contencioso → <em>sistemática</em>.<br>
+<strong>Conclusiones afirmativas</strong> con órgano, fechas y vía siguiente.</div>
+
+<!-- 11 -->
+<h2 id="s11"><span class="n">11.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Interesados</td><td>Capacidad, concepto, representación, identificación y firma</td><td>No</td><td>Del temario + BOE (1) con precisión</td></tr>
+<tr><td>Derechos</td><td>Arts. 13, 14, 15 a 20, 28 y 53 con ideas clave</td><td>Arts. 13 y 53 en dos columnas, garantías transversales</td><td>Fusionado (2)</td></tr>
+<tr><td>Garantías</td><td>Lista, abstención y recusación completas</td><td>Audiencia, lengua, relación electrónica, no reformatio</td><td>Fusionado + BOE (3)</td></tr>
+<tr><td>Revisión de oficio</td><td>Cuadro y arts. 106 a 111 con competencia</td><td>Cuadro con plazos y límites</td><td>Fusionado + BOE (4) con corrección</td></tr>
+<tr><td>Recursos</td><td>Objeto, clases, 114, comunes, alzada, reposición, revisión, especiales</td><td>Cuadro de los tres recursos, reglas comunes y trampas</td><td>Fusionado + BOE (5 a 8) con precisiones</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 10 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas (contrastadas con el BOE el 15/11/2026)</span>
+<strong>Temario 2026:</strong> el art. 3.b de la LPAC conserva la redacción «menores incapacitados… incapacitación», no la de las «medidas de apoyo» · las clases de recursos están en el art. 112, no en el 113 · la reclamación ante el Consejo de Transparencia es potestativa · falta el dictamen preceptivo del Consejo de Estado en el recurso extraordinario de revisión.<br>
+<strong>Material visual:</strong> las disposiciones nulas solo se revisan de oficio · el art. 120 suspende el plazo para resolver una pluralidad de recursos contra un mismo acto, no se refiere a «actos idénticos en masa».<br>
+<strong>Añadidos del BOE:</strong> prórroga de los poderes inscritos por otros cinco años (6.6) · el superior puede ordenar la abstención y, reconocida la causa, sustituye al recusado (23.3 y 24.3) · caución y prolongación de la suspensión a la vía contenciosa (117.4) · traslado del recurso a otros interesados (118.2) · reclamaciones económico-administrativas por su legislación (112.4).</div>
+
+<footer>
+GACE 2027 · Bloque IV · Tema 12 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 15/11/2026.<br>
+Normas: CE (arts. 103, 105 y 106) · Ley 39/2015 (consolidada a 06/11/2024) · Ley 40/2015 (consolidada a 02/08/2024), arts. 9, 23, 24 y 55 · Ley 29/1998, art. 46 · Ley 19/2013, arts. 23 y 24 · Ley Orgánica 3/1980, art. 22.9 · Real Decreto 203/2021.
+</footer>
+</div>
+</body>
+</html>
