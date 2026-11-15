@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 11 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque IV · Tema 11 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "Fundamento constitucional del procedimiento", "b": "Art. 105.c CE (la ley regula el procedimiento, con audiencia del interesado cuando proceda) y art. 149.1.18.ª CE (competencia exclusiva del Estado sobre el procedimiento administrativo común)."}, {"u": 1, "f": "Reparto entre las dos leyes", "b": "LPAC (Ley 39/2015): relaciones ad extra: actos, procedimiento común (incluidos sancionador y responsabilidad), revisión, Título VI. LRJSP (Ley 40/2015): ad intra: órganos, competencia, principios sancionadores, responsabilidad, AGE, sector público institucional, relaciones interadministrativas."}, {"u": 1, "f": "Estructura de la LPAC", "b": "133 artículos: Preliminar (1-2) · I interesados (3-12) · II actividad (13-33) · III actos (34-46) · IV procedimiento (47-105) · V revisión (106-126) · VI iniciativa legislativa y potestad reglamentaria (127-133)."}, {"u": 1, "f": "Fechas de las dos leyes", "b": "Publicadas el 2/10/2015 · en vigor el 2/10/2016 (derogan la Ley 30/1992) · registros electrónicos, punto de acceso general y archivo único: 2/04/2021 (DF 7.ª LPAC). Desarrollo: RD 203/2021."}, {"u": 1, "f": "Fallo de la STC 55/2018", "b": "Nulos: art. 6.4 párrafo 2.º, un inciso del 129.4 y DF 1.ª.2. No aplicables a las CCAA: arts. 129 (salvo parte del 4), 130, 132 y 133 (salvo incisos). Interpretación conforme: DA 2.ª. La AGE aplica la Ley íntegra."}, {"u": 1, "f": "Ámbito subjetivo (art. 2 LPAC)", "b": "AGE, CCAA, entidades locales y sector público institucional. Entidades de Derecho privado: solo cuando ejerzan potestades administrativas. Universidades: normativa propia y supletoria LPAC. Corporaciones de Derecho público: su normativa en funciones públicas, supletoria LPAC."}, {"u": 1, "f": "Procedimientos especiales (DA 1.ª)", "b": "Supletoriedad de la LPAC en: tributos y aduanas; Seguridad Social y desempleo; sancionadores tributarios, del orden social, de tráfico y de extranjería; extranjería y asilo."}, {"u": 2, "f": "Plazos por horas (30.1)", "b": "Hábiles todas las horas del día hábil; de hora en hora y minuto en minuto; máximo 24 horas (si más, en días)."}, {"u": 2, "f": "Plazos por días (30.2)", "b": "Hábiles: excluidos sábados, domingos y festivos. Naturales solo si lo dice una ley o el Derecho de la Unión, y debe constar en la notificación."}, {"u": 2, "f": "Plazos por meses o años (30.4)", "b": "Desde el día siguiente; vencen el mismo día del mes de vencimiento. Sin día equivalente, el último del mes. Último día inhábil → primer hábil siguiente (30.5)."}, {"u": 2, "f": "Inhábil en un sitio, hábil en otro (30.6)", "b": "Si es hábil en el municipio del interesado e inhábil en la sede del órgano, o al revés: inhábil en todo caso."}, {"u": 2, "f": "Registro electrónico en día inhábil (31)", "b": "Se entiende presentado en la primera hora del primer día hábil siguiente, salvo norma que permita la recepción en día inhábil."}, {"u": 2, "f": "Ampliación y urgencia (32 y 33)", "b": "Ampliación: hasta la mitad, antes del vencimiento, sin perjuicio de terceros; no recurrible. Urgencia: plazos a la mitad salvo solicitudes y recursos; no recurrible."}, {"u": 3, "f": "Obligación de resolver: excepciones (21.1)", "b": "Pacto o convenio, y derechos sometidos solo a declaración responsable o comunicación. Solicitudes manifiestamente infundadas o inadmisibles: inadmisión sucinta. El vencimiento no exime de resolver."}, {"u": 3, "f": "Plazo máximo para resolver (21.2 y 21.3)", "b": "El de la norma, máximo 6 meses salvo ley o Derecho de la Unión. Sin plazo: 3 meses. De oficio: desde el acuerdo de iniciación. A solicitud: desde la entrada en el registro electrónico del órgano competente."}, {"u": 3, "f": "Información al interesado (21.4)", "b": "Publicar en el portal los procedimientos con plazos y sentido del silencio, e informar al interesado en los 10 días siguientes a la recepción de la solicitud."}, {"u": 3, "f": "Suspensión potestativa (22.1)", "b": "Subsanación · órgano de la UE · procedimiento UE pendiente · informes preceptivos (máx. 3 meses) · pruebas técnicas contradictorias · negociación de pacto · pronunciamiento judicial previo."}, {"u": 3, "f": "Suspensión obligatoria (22.2)", "b": "a) Requerimiento de una Administración a otra (39.5) · b) actuaciones complementarias (87) · c) recusación, hasta que la resuelva el superior."}, {"u": 3, "f": "Ampliación del plazo máximo (23)", "b": "Excepcional, motivada, agotados los medios; hasta el plazo establecido («otro tanto»); se notifica y no es recurrible."}, {"u": 4, "f": "Regla del silencio a solicitud (24.1)", "b": "Estimatorio, salvo norma con rango de ley o de Derecho de la Unión o internacional. En acceso a actividades, el negativo exige razones imperiosas de interés general."}, {"u": 4, "f": "Silencio desestimatorio: materias", "b": "Derecho de petición (art. 29 CE) · facultades sobre dominio o servicio público · daño al medio ambiente · responsabilidad patrimonial · impugnación de actos y disposiciones · revisión de oficio a solicitud."}, {"u": 4, "f": "Doble silencio", "b": "Alzada contra la desestimación presunta de una solicitud sin resolver en plazo → recurso estimado, salvo petición, dominio y servicio público, medio ambiente y responsabilidad patrimonial."}, {"u": 4, "f": "Efectos del silencio (24.2 y 24.3)", "b": "Estimatorio: acto finalizador; resolución posterior solo confirmatoria; para eliminarlo, revisión o lesividad. Desestimatorio: ficción para recurrir; resolución posterior sin vinculación."}, {"u": 4, "f": "Certificado de silencio (24.4)", "b": "Lo expide de oficio el órgano competente en 15 días desde que vence el plazo para resolver. El interesado puede pedirlo en cualquier momento (15 días desde la petición)."}, {"u": 4, "f": "Silencio en procedimientos de oficio (25)", "b": "Favorables: desestimación. Sancionadores o de intervención con gravamen: caducidad y archivo. Paralización imputable al interesado: se interrumpe el cómputo."}, {"u": 4, "f": "Silencio positivo contrario a Derecho", "b": "Nulo de pleno derecho si se adquieren facultades careciendo de los requisitos esenciales (art. 47.1.f LPAC)."}, {"u": 5, "f": "Medidas provisionales (56)", "b": "Iniciado: las adopta el órgano competente para resolver. Antes de iniciar: urgencia inaplazable; confirmación en el acuerdo de iniciación, que se dicta en 15 días; si no, se extinguen."}, {"u": 5, "f": "Iniciación de oficio (58-62)", "b": "Propia iniciativa · orden superior · petición razonada (no vincula; se comunican los motivos si no se inicia) · denuncia (no da por sí sola la condición de interesado)."}, {"u": 5, "f": "Subsanación (68)", "b": "10 días, con advertencia de desistimiento previa resolución; ampliable 5 días salvo selectivos o concurrencia competitiva. Papel de un obligado electrónico: subsanar electrónicamente; vale la fecha de la subsanación."}, {"u": 5, "f": "Acumulación (57)", "b": "De oficio o a instancia de parte; identidad sustancial o íntima conexión y mismo órgano. Sin recurso."}, {"u": 5, "f": "Expediente (70)", "b": "Electrónico, con índice numerado. Excluido: información auxiliar o de apoyo (notas, borradores, opiniones, resúmenes, comunicaciones e informes internos), salvo informes pedidos antes de resolver."}, {"u": 5, "f": "Ordenación (71-74)", "b": "Impulso de oficio; riguroso orden de incoación; concentración de trámites; trámites del interesado en 10 días (decaimiento, pero se admite hasta el día de la notificación); incidentales no suspenden salvo recusación."}, {"u": 6, "f": "Alegaciones (76)", "b": "En cualquier momento anterior al trámite de audiencia."}, {"u": 6, "f": "Prueba (77 y 78)", "b": "Periodo de 10 a 30 días, extraordinario hasta 10. Rechazo solo de las manifiestamente improcedentes o innecesarias, motivado. Documentos de autoridad: prueba salvo prueba en contrario. Informe pedido como prueba: preceptivo."}, {"u": 6, "f": "Informes (79 y 80)", "b": "Facultativos y no vinculantes salvo disposición expresa; 10 días; si no llega, se sigue (preceptivo: puede suspenderse el plazo). De otra Administración fuera de plazo: puede no tenerse en cuenta."}, {"u": 6, "f": "Audiencia (82)", "b": "Inmediatamente antes de la propuesta; 10 a 15 días. Se puede prescindir si solo constan hechos, alegaciones y pruebas del interesado."}, {"u": 6, "f": "Información pública (83)", "b": "Anuncio en el diario oficial; alegaciones no inferiores a 20 días. Comparecer no da la condición de interesado; no comparecer no impide recurrir."}, {"u": 7, "f": "Modos de terminación (84 y 85)", "b": "Resolución, desistimiento, renuncia, caducidad e imposibilidad material sobrevenida (motivada). Además, convencional y, en el sancionador, reconocimiento y pago voluntario."}, {"u": 7, "f": "Actuaciones complementarias (87)", "b": "Indispensables, por acuerdo motivado; 7 días de alegaciones tras su finalización; máximo 15 días; suspenden el plazo para resolver."}, {"u": 7, "f": "Contenido de la resolución (88)", "b": "Todas las cuestiones; conexas previa audiencia de hasta 15 días; congruencia y no reformatio in peius en las de solicitud; motivación (35) y pie de recursos; nunca abstenerse por silencio u oscuridad de la norma."}, {"u": 7, "f": "Terminación convencional (86)", "b": "Acuerdos no contrarios al ordenamiento ni sobre materias no transigibles; finalizadores o previos. Aprobación del Consejo de Ministros (u órgano autonómico) si versan sobre materias de su competencia directa."}, {"u": 7, "f": "Desistimiento y renuncia (93 y 94)", "b": "Administración: en procedimientos de oficio, motivado. Interesado: solo le afecta a él; aceptación de plano salvo terceros que insten continuar en 10 días."}, {"u": 7, "f": "Caducidad por el interesado (95)", "b": "Procedimientos a solicitud paralizados por su causa: advertencia y archivo a los 3 meses; recurrible. No interrumpe la prescripción; pueden conservarse actos en un nuevo procedimiento."}, {"u": 7, "f": "Tramitación simplificada (96)", "b": "Interés público o falta de complejidad. Oposición expresa → ordinaria. Solicitud desestimable en 5 días sin recurso. 30 días para resolver; alegaciones 5 días; audiencia solo si es desfavorable; dictamen «podrá» en 15 días si se solicita."}, {"u": 7, "f": "Medios de ejecución forzosa (100-104)", "b": "Apremio sobre el patrimonio · ejecución subsidiaria (no personalísimos) · multa coercitiva (con autorización legal; compatible con sanciones) · compulsión sobre las personas (no hacer o soportar). Domicilio: consentimiento o autorización judicial."}, {"u": 8, "f": "Introducción del procedimiento: las cuatro piezas", "b": "Art. 149.1.18.ª CE · art. 105 CE · Ley 39/2015 (en adelante, LPAC) con el objeto de su art. 1 · ámbito del art. 2. Complemento LRJSP si hay órganos, competencia, abstención o recusación."}, {"u": 8, "f": "Calificación previa del Tema 11", "b": "«Con carácter previo, procede calificar el procedimiento»: iniciado a solicitud o de oficio, fecha de inicio del cómputo (21.3), plazo aplicable y artículo del silencio (24 o 25)."}, {"u": 8, "f": "Cómputo modelo del supuesto", "b": "Entrada 2/03 + 3 meses = 2/06; suspensión por subsanación del 16 al 25/03 (9 días) → vence el 11/06. Sin ley de silencio negativo: estimación (24.1)."}, {"u": 8, "f": "Dato que falta en el enunciado", "b": "«El enunciado no precisa…, por lo que suponemos que…», con la justificación, antes de la conclusión. Nunca se cierra con un condicional dubitativo."}, {"u": 8, "f": "Denegación tras silencio positivo", "b": "«Por tanto, se concluye que» es contraria al art. 24.3.a LPAC; la Administración solo puede eliminar el acto presunto por revisión de oficio (106) o lesividad (107)."}];
+const UNAMES={"1": "Las leyes y su ámbito", "2": "Plazos", "3": "Obligación de resolver", "4": "Silencio", "5": "Iniciación y ordenación", "6": "Instrucción", "7": "Finalización y ejecución", "8": "Supuesto"};
+const SK="gace27_biv_t11_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
