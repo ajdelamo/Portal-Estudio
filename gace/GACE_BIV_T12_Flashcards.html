@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 12 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque IV · Tema 12 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "Capacidad de obrar (art. 3 LPAC)", "b": "a) Personas físicas o jurídicas con capacidad civil · b) menores, para lo que pueden hacer sin asistencia (salvo menores incapacitados, cuando la incapacitación afecte) · c) si la ley lo declara: grupos de afectados, entidades sin personalidad, patrimonios autónomos."}, {"u": 1, "f": "Interesados (art. 4)", "b": "a) Quienes promueven el procedimiento · b) titulares de derechos que pueden resultar afectados · c) titulares de intereses legítimos que se personen antes de la resolución definitiva. El derechohabiente sucede en la condición transmisible."}, {"u": 1, "f": "Cuándo se acredita la representación (5.3)", "b": "Solicitudes, declaraciones responsables o comunicaciones, recursos, desistimiento y renuncia. Para el mero trámite se presume. Defecto: subsanar en 10 días."}, {"u": 1, "f": "Registro de apoderamientos (6.6)", "b": "Poderes inscritos: validez máxima de 5 años desde la inscripción; revocables o prorrogables antes del vencimiento; cada prórroga, máximo 5 años."}, {"u": 1, "f": "Pluralidad de interesados (7)", "b": "Las actuaciones se hacen con el representante o interesado señalado y, en su defecto, con el que figure en primer término."}, {"u": 1, "f": "Firma y funcionario habilitado (11 y 12)", "b": "Firma solo para solicitudes, declaraciones responsables o comunicaciones, recursos, desistimiento y renuncia. Si un no obligado carece de medios, firma un funcionario habilitado con su consentimiento expreso."}, {"u": 2, "f": "Art. 13: derechos de las personas", "b": "Punto de Acceso General · asistencia electrónica · lenguas oficiales · información pública · respeto y deferencia · exigir responsabilidades · identificación y firma electrónica · protección de datos."}, {"u": 2, "f": "Art. 53: derechos del interesado", "b": "Estado de la tramitación, silencio, órgano y copias · identificar al personal · no presentar originales · no presentar lo que ya tiene la Administración · alegar antes de la audiencia · información y orientación · asesor · pago electrónico."}, {"u": 2, "f": "Presuntos responsables (53.2)", "b": "Ser notificados de hechos, infracciones, sanciones posibles, instructor, autoridad competente y norma que atribuye la competencia; presunción de no existencia de responsabilidad."}, {"u": 2, "f": "Obligados a relacionarse electrónicamente (14.2)", "b": "Personas jurídicas · entidades sin personalidad · profesionales de colegiación obligatoria (en esa actividad) · representantes de obligados · empleados públicos por razón de su condición."}, {"u": 2, "f": "Lengua (art. 15)", "b": "AGE: castellano. Ante órganos de la AGE en una comunidad con lengua cooficial, el interesado puede usarla. Varios interesados que discrepan: castellano."}, {"u": 2, "f": "Lugares de presentación (16.4)", "b": "Registro electrónico de la Administración destinataria o de cualquier sujeto del sector público · Correos · representaciones diplomáticas y consulares · oficinas de asistencia en registros · otros que fijen las normas."}, {"u": 2, "f": "Comparecencia (19) y documentos (28)", "b": "Comparecencia: solo si lo prevé una norma con rango de ley; la citación expresa lugar, fecha, hora, medios, objeto y efectos. Documentos de otra Administración: no hay que aportarlos; se presume la autorización de consulta salvo oposición expresa o ley especial."}, {"u": 3, "f": "Garantías del procedimiento", "b": "Audiencia · motivación (35) · acceso al expediente · congruencia y no reformatio in peius (88.2 y 119.3) · en el sancionador, separación de fases, presunción de inocencia y no declarar contra sí mismo · imparcialidad."}, {"u": 3, "f": "Motivos de abstención (23.2 LRJSP)", "b": "a) Interés personal, administrador o litigio · b) matrimonio o asimilable, consanguinidad 4.º y afinidad 2.º grado, despacho compartido · c) amistad íntima o enemistad manifiesta · d) perito o testigo · e) relación de servicio o servicios profesionales en los 2 últimos años."}, {"u": 3, "f": "Efectos de no abstenerse (23.4 y 23.5)", "b": "No implica necesariamente la invalidez del acto, pero da lugar a responsabilidad. El superior puede ordenar la abstención (23.3)."}, {"u": 3, "f": "Trámite de la recusación (24)", "b": "Por escrito con la causa, en cualquier momento · el día siguiente el recusado se pronuncia · si la reconoce, sustitución · si la niega, el superior resuelve en 3 días · sin recurso, pero se alega al recurrir el acto final · suspende el procedimiento."}, {"u": 4, "f": "Vías de revisión de oficio", "b": "Nulidad de actos (106.1) · nulidad de disposiciones (106.2) · lesividad de actos favorables anulables (107) · revocación de actos de gravamen (109.1) · rectificación de errores (109.2)."}, {"u": 4, "f": "Nulidad de actos (106.1)", "b": "Actos que agotan la vía o no recurridos en plazo, con causa del 47.1 · de oficio o a solicitud · en cualquier momento · dictamen favorable del Consejo de Estado. De oficio: caducidad a los 6 meses. A solicitud: silencio desestimatorio."}, {"u": 4, "f": "Nulidad de disposiciones (106.2)", "b": "Solo de oficio, en cualquier momento, con dictamen favorable. Subsisten los actos firmes dictados en su aplicación (106.4). El particular no tiene acción: recurso directo o indirecto."}, {"u": 4, "f": "Inadmisión de la solicitud de nulidad (106.3)", "b": "Sin dictamen, motivadamente, si no se basa en el 47.1, carece manifiestamente de fundamento o ya se desestimaron en cuanto al fondo otras iguales."}, {"u": 4, "f": "Lesividad (107)", "b": "Actos favorables anulables · declaración antes de 4 años desde el acto, con audiencia · no recurrible · caducidad a los 6 meses · AGE y CCAA: órgano competente en la materia; local: Pleno · contencioso en 2 meses (46.5 LJCA)."}, {"u": 4, "f": "Revocación y rectificación (109)", "b": "Revocación: actos de gravamen, mientras no prescriban; sin dispensa no permitida ni contraria a igualdad, interés público u ordenamiento. Rectificación: errores materiales, de hecho o aritméticos, en cualquier momento."}, {"u": 4, "f": "Límites y suspensión (108 y 110)", "b": "Suspensión si hay perjuicios de imposible o difícil reparación. Límites: equidad, buena fe, derecho de los particulares y leyes."}, {"u": 4, "f": "Competencia estatal de revisión (111)", "b": "Consejo de Ministros: los suyos y los de ministros · ministros: los de secretarios de Estado y directivos no dependientes de una SE · secretarios de Estado: los de sus directivos · organismos: el de adscripción, los del máximo órgano rector; este, los de sus dependientes."}, {"u": 5, "f": "Objeto de los recursos (112.1)", "b": "Resoluciones y actos de trámite cualificados (deciden el fondo, impiden continuar, indefensión o perjuicio irreparable), por motivos de nulidad o anulabilidad. Los demás trámites: se alegan para la resolución final."}, {"u": 5, "f": "Disposiciones generales (112.3)", "b": "No cabe recurso administrativo. El recurso contra un acto fundado solo en la nulidad de la disposición puede presentarse ante el órgano que la dictó."}, {"u": 5, "f": "Clases de recursos", "b": "Alzada (preceptiva, actos que no agotan la vía, superior jerárquico) · reposición (potestativa, actos que agotan la vía, mismo órgano) · extraordinario de revisión (actos firmes, causas tasadas, mismo órgano). El art. 113 solo remite al 125.1."}, {"u": 5, "f": "Fin de la vía (114.1)", "b": "Resoluciones de alzada · procedimientos sustitutivos (112.2) · órganos sin superior · acuerdos finalizadores · responsabilidad patrimonial · procedimientos complementarios sancionadores (90.4) · lo que diga una norma."}, {"u": 5, "f": "Fin de la vía en la AGE (114.2)", "b": "Miembros y órganos del Gobierno · ministros y secretarios de Estado · directores generales o superiores en materia de personal · máximos órganos de dirección de organismos públicos."}, {"u": 5, "f": "Delegación y recurso", "b": "Lo dictado por delegación se imputa al delegante (9.4 LRJSP). Por delegación de un ministro: reposición potestativa o contencioso, nunca alzada."}, {"u": 5, "f": "Inadmisión (116)", "b": "Órgano incompetente de otra Administración · falta de legitimación · acto no recurrible · plazo transcurrido · carencia manifiesta de fundamento. Otro recurso igual pendiente no es causa."}, {"u": 5, "f": "Suspensión en vía de recurso (117)", "b": "No suspende salvo disposición. Puede suspenderse por perjuicios de imposible o difícil reparación o causa de nulidad del 47.1. Automática si pasa 1 mes desde la solicitud sin resolución notificada. Caución y cautelares posibles."}, {"u": 5, "f": "Audiencia y resolución (118 y 119)", "b": "Hechos o documentos nuevos: 10 a 15 días; no cuenta lo que pudo aportarse antes. Resolución: estima, desestima o inadmite; retroacción por vicio de forma; congruencia y sin agravar la situación inicial."}, {"u": 5, "f": "Pluralidad de recursos (120)", "b": "Muchos recursos contra un mismo acto y un recurso judicial interpuesto: se puede suspender el plazo para resolver hasta el pronunciamiento judicial."}, {"u": 6, "f": "Alzada: plazos (122)", "b": "Interponer: 1 mes si es expreso (después, firme); si es presunto, en cualquier momento desde el día siguiente al silencio. Resolver: 3 meses. Silencio desestimatorio salvo doble silencio."}, {"u": 6, "f": "Alzada: dónde y quién (121)", "b": "Se presenta ante el autor del acto o ante el competente; si ante el autor, remisión en 10 días con informe y expediente. Resuelve el superior jerárquico. Tribunales de selección: el órgano de adscripción o el que nombró al presidente."}, {"u": 6, "f": "Después de la alzada", "b": "Agota la vía (114.1.a). No cabe otro recurso administrativo salvo el extraordinario de revisión. Vía: contencioso-administrativo."}, {"u": 6, "f": "Reposición (123 y 124)", "b": "Potestativa contra actos que agotan la vía, ante el mismo órgano · 1 mes si es expreso; presunto, en cualquier momento · resolver en 1 mes · interpuesta, no cabe contencioso hasta su resolución · no cabe nueva reposición."}, {"u": 6, "f": "Trampas de los recursos", "b": "No cabe reposición y luego alzada · interpuesta la reposición no se va aún al contencioso · el plazo contra presuntos no es de 3 meses · el error de calificación no impide tramitar."}, {"u": 7, "f": "Causas del recurso extraordinario de revisión (125.1)", "b": "a) Error de hecho de los documentos del expediente · b) documentos esenciales que evidencien el error · c) documentos o testimonios declarados falsos por sentencia firme · d) prevaricación, cohecho, violencia, maquinación u otra conducta punible declarada por sentencia firme."}, {"u": 7, "f": "Plazos del recurso extraordinario de revisión", "b": "Causa a): 4 años desde la notificación. Causas b) a d): 3 meses desde el conocimiento de los documentos o la firmeza de la sentencia. Resolver: 3 meses; después, desestimado y vía contenciosa."}, {"u": 7, "f": "Tramitación del recurso de revisión (126)", "b": "Ante el órgano autor, que resuelve · inadmisión sin dictamen si no se funda en el 125.1 o ya se desestimaron otros iguales · admitido, dictamen del Consejo de Estado (art. 22.9 LO 3/1980) · se pronuncia sobre la procedencia y el fondo."}, {"u": 7, "f": "Vías especiales", "b": "Económico-administrativas (LGT) · recurso especial en contratación (arts. 44 a 60 LCSP, TACRC; después, contencioso) · reclamación ante el Consejo de Transparencia (art. 24 Ley 19/2013): potestativa, un mes, sustitutiva de los recursos."}, {"u": 8, "f": "Introducción del procedimiento: las cuatro piezas", "b": "Art. 149.1.18.ª CE · art. 105 CE · Ley 39/2015 (en adelante, LPAC) con el objeto de su art. 1 · ámbito del art. 2. Complemento LRJSP (arts. 9, 23 y 24) si hay delegación, abstención o recusación."}, {"u": 8, "f": "Calificación previa del Tema 12", "b": "«Con carácter previo, procede calificar el acto impugnado»: expreso o presunto, órgano autor, si agota la vía (art. 114) y por qué, y condición de interesado (art. 4)."}, {"u": 8, "f": "Mini-supuesto Beta: fechas", "b": "Notificación 16/02 → alzada hasta el 16/03 (tempestiva) · suspensión pedida el 16/03 → suspendida el 16/04 (117.3) · resolver hasta el 16/06 (122.2) → silencio desestimatorio y contencioso."}, {"u": 8, "f": "Recurso mal denominado en el supuesto", "b": "Se recalifica por el art. 115.2. Alternativa a evaluar: si hubo delegación del ministro, el acto agota la vía y procede reposición (9.4 LRJSP)."}, {"u": 8, "f": "Conclusión afirmativa tipo", "b": "«Por tanto, se concluye que el escrito es un recurso de alzada interpuesto en plazo, que debe admitirse y que corresponde resolver al director general.»"}];
+const UNAMES={"1": "Interesados", "2": "Derechos", "3": "Garantías", "4": "Revisión de oficio", "5": "Recursos: reglas generales", "6": "Alzada y reposición", "7": "Revisión y vías especiales", "8": "Supuesto"};
+const SK="gace27_biv_t12_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
