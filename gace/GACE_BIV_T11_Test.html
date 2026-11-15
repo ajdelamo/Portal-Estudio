@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque IV · Tema 11 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque IV · Tema 11 · El procedimiento administrativo común</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u": 1, "t": "La Ley 39/2015 y la Ley 40/2015 entraron en vigor, con carácter general:", "o": ["El 2 de octubre de 2015, día de su publicación en el Boletín Oficial del Estado", "El 2 de octubre de 2016", "El 2 de abril de 2021", "El 1 de octubre de 2016"], "c": 1, "e": "Publicadas el 2/10/2015, en vigor al año: 2/10/2016."},
+{"u": 1, "t": "Las previsiones de la LPAC sobre registro electrónico de apoderamientos y archivo único electrónico produjeron efectos desde:", "o": ["El 2 de octubre de 2016", "El 2 de octubre de 2018", "El 2 de abril de 2021", "El 30 de marzo de 2021"], "c": 2, "e": "DF 7.ª LPAC, tras los aplazamientos (RDL 11/2018 y RDL 28/2020): 2/04/2021."},
+{"u": 1, "t": "¿Qué materia regula la Ley 40/2015 y no la Ley 39/2015?", "o": ["El procedimiento sancionador", "La revisión de oficio de los actos", "Los principios de la potestad sancionadora y la responsabilidad patrimonial", "Los principios de la iniciativa legislativa y de la potestad reglamentaria del Gobierno y de las comunidades autónomas"], "c": 2, "e": "LRJSP: principios sancionadores (25-31) y responsabilidad (32-37). El procedimiento sancionador, la revisión y el Título VI están en la LPAC."},
+{"u": 1, "t": "La Ley 39/2015 tiene:", "o": ["105 artículos", "126 artículos", "133 artículos", "158 artículos, más las disposiciones adicionales, transitorias y finales"], "c": 2, "e": "133 artículos; el Título VI acaba en el art. 133."},
+{"u": 1, "t": "La STC 55/2018 declaró inconstitucional y nulo:", "o": ["El art. 2 sobre el ámbito subjetivo", "El párrafo segundo del art. 6.4, sobre modelos de poder aprobados por orden ministerial", "El art. 24 sobre el silencio estimatorio", "La disposición adicional segunda en su totalidad"], "c": 1, "e": "STC 55/2018: nulos el art. 6.4 párrafo segundo, un inciso del 129.4 y la DF 1.ª.2; la DA 2.ª recibió interpretación conforme."},
+{"u": 1, "t": "Según la STC 55/2018, los arts. 129 (en parte), 130, 132 y 133 LPAC:", "o": ["Son nulos y no se aplican a ninguna Administración, tampoco a la AGE", "No son aplicables a las comunidades autónomas", "Solo se aplican a las entidades locales", "Se declararon conformes sin matices"], "c": 1, "e": "Contrarios al orden de competencias: no aplicables a las CCAA; para la AGE rigen íntegros."},
+{"u": 1, "t": "Las entidades de Derecho privado vinculadas o dependientes de una Administración se rigen por la LPAC:", "o": ["Siempre, como cualquier otra Administración Pública del sector público institucional", "Nunca", "Cuando ejerzan potestades administrativas", "Solo en materia de contratación"], "c": 2, "e": "Art. 2.2.b LPAC."},
+{"u": 1, "t": "Las corporaciones de Derecho público se rigen por la LPAC:", "o": ["Íntegramente, como sector público institucional", "Por su normativa en las funciones públicas atribuidas o delegadas, y supletoriamente por la LPAC", "Solo en materia de responsabilidad patrimonial", "Nunca, porque son entidades privadas"], "c": 1, "e": "Art. 2.4 LPAC."},
+{"u": 1, "t": "Según la DA 1.ª LPAC, se rigen por su normativa específica y supletoriamente por la LPAC:", "o": ["Los procedimientos de concesión de subvenciones", "Las actuaciones y procedimientos de aplicación de los tributos", "Los procedimientos de contratación pública", "Los procedimientos de responsabilidad patrimonial de las Administraciones Públicas y de sus autoridades"], "c": 1, "e": "DA 1.ª.2.a LPAC: tributos y materia aduanera, entre otros."},
+{"u": 2, "t": "Un plazo fijado por horas:", "o": ["Puede alcanzar las 48 horas cuando lo justifique el interés público y así se motive", "No puede superar las 24 horas; si las supera, se expresa en días", "Se computa solo en horario de registro", "Excluye las horas de los sábados aunque sean hábiles"], "c": 1, "e": "Art. 30.1 LPAC."},
+{"u": 2, "t": "Los plazos por días, salvo que una ley o el Derecho de la Unión digan otra cosa, son:", "o": ["Naturales", "Hábiles, excluidos sábados, domingos y festivos", "Hábiles, excluidos solo domingos y festivos", "Hábiles en la sede del órgano y naturales para el interesado"], "c": 1, "e": "Art. 30.2 LPAC."},
+{"u": 2, "t": "Un plazo de un mes notificado el 31 de enero de un año no bisiesto vence:", "o": ["El 28 de febrero", "El 1 de marzo", "El 3 de marzo", "El 3 de marzo, al computarse los días que faltan para completar el mes natural"], "c": 0, "e": "Art. 30.4: si no hay día equivalente, el último día del mes."},
+{"u": 2, "t": "Si un día es hábil en el municipio del interesado e inhábil en la sede del órgano:", "o": ["Se considera hábil", "Se considera inhábil en todo caso", "Decide el interesado", "Se considera hábil si se presenta electrónicamente"], "c": 1, "e": "Art. 30.6 LPAC."},
+{"u": 2, "t": "Un escrito presentado en el registro electrónico un domingo se entiende presentado:", "o": ["A las 00:00 del domingo", "En la primera hora del primer día hábil siguiente", "En la última hora del sábado anterior", "A las 9:00 del lunes, hora oficial de apertura de la oficina de asistencia"], "c": 1, "e": "Art. 31.2.b LPAC."},
+{"u": 2, "t": "La ampliación de plazos del art. 32 LPAC:", "o": ["Puede acordarse una vez vencido el plazo", "No puede exceder de la mitad del plazo y el acuerdo no es recurrible", "Puede duplicar el plazo inicial y es recurrible en alzada", "Solo puede pedirla el interesado"], "c": 1, "e": "Art. 32.1 y 32.3 LPAC."},
+{"u": 2, "t": "La tramitación de urgencia del art. 33 LPAC reduce a la mitad los plazos, salvo:", "o": ["Los de alegaciones, audiencia e información pública, por exigencias de contradicción", "Los de presentación de solicitudes y recursos", "Los de prueba", "Los de informes preceptivos"], "c": 1, "e": "Art. 33.1 LPAC."},
+{"u": 2, "t": "Un plazo por meses que termina en sábado:", "o": ["Vence ese sábado", "Se prorroga al primer día hábil siguiente", "Se adelanta al viernes", "Se amplía de oficio en dos días hábiles para compensar el fin de semana"], "c": 1, "e": "Art. 30.5 LPAC."},
+{"u": 3, "t": "No existe obligación de resolver expresamente en:", "o": ["Los procedimientos iniciados de oficio", "La terminación por pacto o convenio y los derechos sometidos solo a declaración responsable o comunicación", "Los procedimientos caducados", "Los casos de desistimiento del interesado"], "c": 1, "e": "Art. 21.1 LPAC; en caducidad o desistimiento se resuelve declarándolo."},
+{"u": 3, "t": "El plazo máximo para resolver que puede fijar una norma reglamentaria es de:", "o": ["Tres meses", "Seis meses", "Un año", "Dieciocho meses"], "c": 1, "e": "Art. 21.2: no más de seis meses salvo ley o Derecho de la Unión."},
+{"u": 3, "t": "Si la norma reguladora no fija plazo máximo para resolver, el plazo es de:", "o": ["Seis meses", "Un mes", "Tres meses", "Seis meses, por aplicación del máximo general previsto para los procedimientos sin norma específica"], "c": 2, "e": "Art. 21.3 LPAC."},
+{"u": 3, "t": "En un procedimiento iniciado a solicitud, el plazo para resolver se computa desde:", "o": ["La fecha de firma de la solicitud", "La entrada de la solicitud en el registro electrónico del órgano competente para tramitarla", "La fecha de admisión a trámite", "La notificación del acuerdo de inicio al interesado"], "c": 1, "e": "Art. 21.3.b LPAC."},
+{"u": 3, "t": "La Administración debe informar al interesado del plazo máximo y del sentido del silencio en:", "o": ["Los diez días siguientes a la recepción de la solicitud", "Los quince días siguientes", "El mes siguiente", "En el momento de notificar la resolución final, junto con el pie de recursos"], "c": 0, "e": "Art. 21.4 LPAC."},
+{"u": 3, "t": "Es supuesto de suspensión OBLIGATORIA del plazo para resolver (art. 22.2):", "o": ["La petición de informes preceptivos", "El requerimiento de subsanación de deficiencias o aportación de documentos al interesado", "La recusación, hasta que se resuelva", "Las negociaciones para un pacto"], "c": 2, "e": "Art. 22.2: requerimiento entre Administraciones, actuaciones complementarias y recusación."},
+{"u": 3, "t": "La suspensión por petición de un informe preceptivo no puede exceder de:", "o": ["Un mes", "Dos meses", "Tres meses", "Seis meses, que es el plazo máximo general para resolver fijado por la norma reguladora"], "c": 2, "e": "Art. 22.1.d LPAC."},
+{"u": 3, "t": "El acuerdo de ampliación del plazo máximo para resolver (art. 23):", "o": ["Es recurrible en alzada", "No es recurrible y no puede superar el plazo establecido", "Debe autorizarlo el Consejo de Ministros", "Puede triplicar el plazo inicial"], "c": 1, "e": "Art. 23 LPAC."},
+{"u": 4, "t": "En los procedimientos iniciados a solicitud, el silencio es, como regla:", "o": ["Desestimatorio", "Estimatorio, salvo norma con rango de ley o de Derecho de la Unión o internacional", "Estimatorio, salvo que una norma reglamentaria o de Derecho de la Unión disponga expresamente lo contrario", "Indiferente: hay que esperar la resolución"], "c": 1, "e": "Art. 24.1 LPAC."},
+{"u": 4, "t": "Es supuesto de silencio desestimatorio en procedimientos a solicitud:", "o": ["La autorización de apertura de un comercio", "La reclamación de responsabilidad patrimonial", "La solicitud de una licencia de actividad inocua", "La inscripción en un registro administrativo"], "c": 1, "e": "Art. 24.1, párrafo segundo LPAC."},
+{"u": 4, "t": "El silencio desestimatorio tiene como único efecto:", "o": ["Poner fin al procedimiento mediante un acto presunto que vincula a la resolución expresa posterior", "Permitir la interposición del recurso administrativo o contencioso que proceda", "Impedir que la Administración resuelva después", "Obligar a resolver en sentido estimatorio"], "c": 1, "e": "Art. 24.2 LPAC."},
+{"u": 4, "t": "Estimada una solicitud por silencio, la resolución expresa posterior:", "o": ["Puede dictarse en cualquier sentido, porque el silencio estimatorio es una mera ficción procesal", "Solo puede dictarse si es confirmatoria", "Debe dictarse siempre desestimatoria", "No puede dictarse nunca"], "c": 1, "e": "Art. 24.3.a LPAC."},
+{"u": 4, "t": "El certificado acreditativo del silencio:", "o": ["Solo se expide a petición del interesado en el plazo de un mes", "Lo expide de oficio el órgano competente en quince días desde que vence el plazo para resolver", "Lo expide el registro en diez días", "No existe: el silencio se acredita solo por la copia sellada"], "c": 1, "e": "Art. 24.4 LPAC; el interesado puede además pedirlo en cualquier momento."},
+{"u": 4, "t": "Si se recurre en alzada una desestimación por silencio de una solicitud y no se resuelve el recurso en plazo:", "o": ["Se entiende desestimado", "Se entiende estimado, salvo en las materias excluidas", "Caduca el procedimiento de recurso y se archivan las actuaciones sin pronunciamiento sobre el fondo", "El interesado debe reiterar la petición"], "c": 1, "e": "Art. 24.1, párrafo tercero LPAC: doble silencio."},
+{"u": 4, "t": "En un procedimiento sancionador iniciado de oficio, el vencimiento del plazo sin resolución produce:", "o": ["Silencio estimatorio", "Silencio desestimatorio", "La caducidad", "La prescripción de la infracción"], "c": 2, "e": "Art. 25.1.b LPAC."},
+{"u": 4, "t": "En un procedimiento de oficio del que pueden derivarse derechos o situaciones favorables, el vencimiento del plazo:", "o": ["Produce la caducidad", "Permite a los interesados comparecidos entender desestimadas sus pretensiones", "Equivale a estimación", "Suspende el procedimiento hasta que se resuelva"], "c": 1, "e": "Art. 25.1.a LPAC."},
+{"u": 4, "t": "Si un procedimiento de oficio se paraliza por causa imputable al interesado:", "o": ["Caduca automáticamente, sin necesidad de advertencia previa ni de resolución que lo declare", "Se interrumpe el cómputo del plazo para resolver", "Se entiende estimado", "Se archiva sin resolución"], "c": 1, "e": "Art. 25.2 LPAC."},
+{"u": 5, "t": "Las medidas provisionales, una vez iniciado el procedimiento, las adopta:", "o": ["El órgano instructor, por ser quien dirige la tramitación del procedimiento", "El órgano competente para resolver", "El superior jerárquico", "El juez"], "c": 1, "e": "Art. 56.1 LPAC."},
+{"u": 5, "t": "Las medidas provisionales adoptadas antes de iniciar el procedimiento deben confirmarse en el acuerdo de iniciación, que se dictará en:", "o": ["Diez días", "Quince días", "Un mes, transcurrido el cual las medidas se entienden confirmadas tácitamente", "Tres días"], "c": 1, "e": "Art. 56.2 LPAC: si no, quedan sin efecto."},
+{"u": 5, "t": "La petición razonada de otro órgano para iniciar un procedimiento:", "o": ["Obliga a iniciarlo", "No vincula, y si no se inicia se comunican los motivos", "Equivale a denuncia", "Solo puede formularla el superior jerárquico"], "c": 1, "e": "Art. 61 LPAC."},
+{"u": 5, "t": "La presentación de una denuncia:", "o": ["Confiere la condición de interesado", "No confiere por sí sola la condición de interesado", "Obliga a iniciar el procedimiento cuando el denunciante cumple una obligación legal", "Exige identificar al responsable"], "c": 1, "e": "Art. 62.5 LPAC."},
+{"u": 5, "t": "El plazo de subsanación de la solicitud es de diez días, ampliable hasta cinco más, salvo:", "o": ["En los procedimientos sancionadores y en los de responsabilidad patrimonial", "En procedimientos selectivos o de concurrencia competitiva", "En procedimientos de responsabilidad patrimonial", "Cuando el interesado es una persona jurídica"], "c": 1, "e": "Art. 68.2 LPAC."},
+{"u": 5, "t": "Si un obligado a relacionarse electrónicamente presenta su solicitud en papel:", "o": ["Se inadmite", "Se le requiere para que subsane electrónicamente, y vale como fecha de presentación la de la subsanación", "Se admite con la fecha del papel", "Se le impone una sanción"], "c": 1, "e": "Art. 68.4 LPAC."},
+{"u": 5, "t": "Contra el acuerdo de acumulación de procedimientos:", "o": ["Cabe alzada", "Cabe reposición", "No cabe recurso", "Cabe recurso contencioso directo"], "c": 2, "e": "Art. 57 LPAC."},
+{"u": 5, "t": "No forma parte del expediente administrativo:", "o": ["El informe preceptivo solicitado antes de resolver", "La información auxiliar o de apoyo, como notas, borradores u opiniones", "Las alegaciones del interesado", "Las diligencias de ejecución"], "c": 1, "e": "Art. 70.4 LPAC."},
+{"u": 5, "t": "Las cuestiones incidentales, incluida la nulidad de actuaciones:", "o": ["Suspenden siempre la tramitación hasta su resolución por el órgano competente", "No suspenden la tramitación, salvo la recusación", "Suspenden solo si lo pide el interesado", "Se resuelven por el juez"], "c": 1, "e": "Art. 74 LPAC."},
+{"u": 5, "t": "Los trámites que deban cumplimentar los interesados, salvo plazo distinto, se realizan en:", "o": ["Cinco días", "Diez días", "Quince días", "Un mes"], "c": 1, "e": "Art. 73.1 LPAC."},
+{"u": 6, "t": "El periodo de prueba ordinario tiene una duración de:", "o": ["Entre 5 y 15 días", "Entre 10 y 30 días", "Entre 15 y 30 días", "Un mes, prorrogable por otros quince días a petición del interesado"], "c": 1, "e": "Art. 77.2 LPAC; extraordinario de hasta 10."},
+{"u": 6, "t": "Salvo disposición expresa en contrario, los informes son:", "o": ["Preceptivos y vinculantes", "Facultativos y no vinculantes", "Preceptivos y no vinculantes", "Facultativos y vinculantes"], "c": 1, "e": "Art. 80.1 LPAC."},
+{"u": 6, "t": "El trámite de audiencia se concede por un plazo de:", "o": ["Entre 5 y 10 días", "Entre 10 y 15 días", "Entre 15 y 20 días", "Veinte días como mínimo"], "c": 1, "e": "Art. 82.2 LPAC."},
+{"u": 6, "t": "El plazo de alegaciones en la información pública no puede ser inferior a:", "o": ["Diez días", "Quince días", "Veinte días", "Un mes, contado desde la publicación del anuncio en el diario oficial"], "c": 2, "e": "Art. 83.2 LPAC."},
+{"u": 6, "t": "Las actuaciones complementarias deben practicarse en un plazo no superior a:", "o": ["Siete días", "Diez días", "Quince días", "Un mes, prorrogable por el órgano competente para resolver"], "c": 2, "e": "Art. 87 LPAC; siete días para alegar tras su finalización."},
+{"u": 6, "t": "En el desistimiento del interesado, la Administración lo acepta de plano salvo que terceros personados insten la continuación en:", "o": ["Cinco días", "Diez días", "Quince días", "Un mes"], "c": 1, "e": "Art. 94.4 LPAC."},
+{"u": 6, "t": "La caducidad por causa del interesado (art. 95) se produce:", "o": ["A los tres meses de paralización, previa advertencia", "Al mes de paralización, sin advertencia", "A los seis meses de paralización, previa advertencia y audiencia", "Por cualquier inactividad, aunque el trámite no sea indispensable"], "c": 0, "e": "Art. 95.1 LPAC."},
+{"u": 6, "t": "Los procedimientos caducados:", "o": ["Interrumpen la prescripción", "No interrumpen el plazo de prescripción", "Producen por sí solos la prescripción", "Impiden iniciar otro procedimiento"], "c": 1, "e": "Art. 95.3 LPAC."},
+{"u": 6, "t": "En la tramitación simplificada, el plazo para resolver es de:", "o": ["Quince días", "Treinta días", "Dos meses", "Tres meses, igual que en la tramitación ordinaria sin plazo fijado"], "c": 1, "e": "Art. 96.6 LPAC, salvo que quede menos para la ordinaria."},
+{"u": 6, "t": "Si el interesado solicita la tramitación simplificada, el órgano puede desestimarla:", "o": ["En diez días, con recurso de alzada", "En cinco días, sin que quepa recurso", "En quince días, con reposición", "No puede desestimarla"], "c": 1, "e": "Art. 96.3 LPAC; pasado el plazo, se entiende desestimada."},
+{"u": 6, "t": "En la tramitación simplificada, el dictamen del Consejo de Estado preceptivo:", "o": ["Se omite siempre", "Podrá emitirse en quince días si así lo solicita el órgano competente", "Se emite obligatoriamente en diez días, y si no llega, se entiende favorable a la propuesta", "Se sustituye por un informe del servicio jurídico"], "c": 1, "e": "Art. 96.6.g LPAC."},
+{"u": 6, "t": "La multa coercitiva como medio de ejecución forzosa:", "o": ["No requiere autorización legal y puede imponerse en cualquier obligación de hacer", "Exige que la ley la autorice y es compatible con las sanciones", "Sustituye a la sanción", "Solo cabe en obligaciones de no hacer"], "c": 1, "e": "Art. 103 LPAC."},
+{"u": 6, "t": "Para ejecutar actos no personalísimos a costa del obligado, la Administración utiliza:", "o": ["La compulsión sobre las personas", "La ejecución subsidiaria", "La multa coercitiva", "El apremio sobre el patrimonio"], "c": 1, "e": "Art. 102 LPAC."},
+{"u": 7, "t": "Una solicitud entra en el registro electrónico el 2 de marzo, sin plazo en la norma; se suspende 9 días por subsanación. El plazo vence:", "o": ["El 2 de junio", "El 11 de junio", "El 15 de junio", "El 2 de septiembre"], "c": 1, "e": "3 meses (21.3) = 2/06; + 9 días de suspensión (22.1.a) = 11/06."},
+{"u": 7, "t": "En el supuesto, falta un dato sobre si una ley fija silencio negativo para la actividad. La redacción correcta es:", "o": ["«Podríamos entender que el silencio es positivo»", "«El enunciado no precisa si una ley fija silencio desestimatorio, por lo que suponemos que no, ya que no se menciona ninguna»", "«Salvo mejor criterio fundado en Derecho, el silencio es positivo»", "Omitir la cuestión"], "c": 1, "e": "Suposición declarada y justificada antes de concluir."},
+{"u": 7, "t": "Antes de contestar una cuestión de plazos en el supuesto, hay que calificar:", "o": ["Solo la cuantía", "El modo de iniciación, la fecha de inicio del cómputo y el plazo aplicable", "Solo el órgano que resuelve", "Únicamente el órgano competente para resolver y la fecha de notificación de la resolución final"], "c": 1, "e": "Calificación previa del Tema 11 (art. 21.3)."},
+{"u": 7, "t": "Estimada una autorización por silencio, la Administración dicta después una denegación. La conclusión correcta es:", "o": ["«Por tanto, se concluye que la denegación es contraria al artículo 24.3.a de la LPAC y que la autorización solo puede eliminarse por revisión de oficio o lesividad»", "«Podría entenderse que la denegación es válida»", "«Parece que la Administración puede denegar»", "«La denegación es válida porque la Administración siempre puede resolver»"], "c": 0, "e": "Conclusión afirmativa (24.3.a, 106 y 107 LPAC)."},
+{"u": 7, "t": "Una orden ministerial fija en ocho meses el plazo para resolver un procedimiento. En el supuesto se concluye que:", "o": ["Es válida porque la orden es norma reguladora", "No es válida: sin ley ni Derecho de la Unión, el máximo es de seis meses", "Es válida si se publica en el BOE", "Rige en todo caso el plazo de tres meses, porque una orden ministerial nunca puede fijar plazos"], "c": 1, "e": "Art. 21.2 LPAC."}
+];
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Las leyes y su ámbito",2:"Términos y plazos",3:"Obligación de resolver",4:"Silencio administrativo",5:"Iniciación y ordenación",6:"Instrucción, finalización y ejecución",7:"Supuesto práctico"};
+const TABS={1:"Leyes",2:"Plazos",3:"Resolver",4:"Silencio",5:"Iniciación",6:"Instrucción y fin",7:"Supuesto"};
+const SK="gace27_biv_t11_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
