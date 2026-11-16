@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BV · Tema 1 — El personal al servicio de las Administraciones Públicas (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tablewrap table{break-inside:auto}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque V · Administración de Recursos Humanos · Tema 1</small>
+    <h1>El personal al servicio de las Administraciones Públicas: concepto y clases. Adquisición y pérdida de la relación de servicio. Régimen jurídico</h1>
+    <p>Versión fusionada: el Tema 1 del Bloque V del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas contra el texto consolidado del BOE y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 16/11/2026 · TREBEP consolidado a 03/10/2026 · Real Decreto-ley 6/2023 consolidado a 03/01/2025 · OEP 2026 (Real Decreto 387/2026)</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">Régimen jurídico del empleo público</a></li>
+    <li><a href="#s2">Concepto y clases de empleados públicos</a></li>
+    <li><a href="#s3">Funcionarios de carrera</a></li>
+    <li><a href="#s4">Funcionarios interinos</a></li>
+    <li><a href="#s5">Personal laboral y personal eventual</a></li>
+    <li><a href="#s6">Personal directivo profesional</a></li>
+    <li><a href="#s7">Adquisición de la condición de funcionario</a></li>
+    <li><a href="#s8">Pérdida de la condición y rehabilitación</a></li>
+    <li><a href="#s9">Instrumentos de ordenación y Registro Central de Personal</a></li>
+    <li><a href="#s10">Lo que preguntan y trampas</a></li>
+    <li><a href="#s11">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s12">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. Es el tema de entrada del Bloque V: quién es empleado público, en qué clase está y cómo entra y sale de la función pública. Todo el bloque se apoya en él.</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Al terminar, recita sin mirar los cuatro supuestos del interino con sus plazos, los cuatro pasos del art. 62 y las cinco causas de pérdida del art. 63.</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s11">apartado 11</a> tapando la columna derecha. En el supuesto de RR. HH. lo primero que se califica es la clase de personal: de ella depende todo lo demás.</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> Régimen jurídico del empleo público</h2>
+<h3>1.1 Marco constitucional</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Precepto</th><th>Contenido</th></tr>
+<tr><td><span class="art">art. 103.1 CE</span></td><td>La Administración sirve con objetividad los intereses generales y actúa conforme a los principios de eficacia, jerarquía, descentralización, desconcentración y coordinación, con sometimiento pleno a la ley y al Derecho.</td></tr>
+<tr><td><span class="art">art. 103.3 CE</span></td><td>La <strong>ley</strong> regula el estatuto de los funcionarios, el acceso según <strong>mérito y capacidad</strong>, las peculiaridades de su derecho de sindicación, el sistema de incompatibilidades y las garantías de imparcialidad. Reserva de <strong>ley ordinaria</strong>.</td></tr>
+<tr><td><span class="art">art. 23.2 CE</span></td><td>Derecho a acceder en condiciones de <strong>igualdad</strong> a las funciones y cargos públicos, con los requisitos que señalen las leyes. Derecho fundamental protegido por el <strong>recurso de amparo</strong>.</td></tr>
+<tr><td><span class="art">art. 149.1.18.ª CE</span></td><td>Competencia exclusiva del Estado sobre las <strong>bases del régimen estatutario</strong> de los funcionarios.</td></tr>
+<tr><td><span class="art">arts. 28.1 y 127 CE</span></td><td>Limitaciones al derecho de sindicación de Fuerzas Armadas, institutos armados y jueces, magistrados y fiscales.</td></tr>
+</table></div>
+<p>La <strong>STC 99/1987</strong> declaró que la Constitución opta por un <strong>régimen estatutario</strong> como regla general para los servidores públicos: la ley debe determinar en qué casos y con qué condiciones pueden desempeñarse puestos mediante contrato laboral.</p>
+<h3>1.2 Fuentes</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:34%">Norma</th><th>Alcance</th></tr>
+<tr><td><strong>Real Decreto Legislativo 5/2015, de 30 de octubre</strong>, texto refundido de la Ley del Estatuto Básico del Empleado Público (TREBEP)</td><td>Norma <strong>básica</strong> para todas las Administraciones (art. 149.1.18.ª CE). Refunde la Ley 7/2007 (EBEP). En vigor desde el <strong>1 de noviembre de 2015</strong>. Bases del régimen estatutario y normas aplicables al personal laboral.</td></tr>
+<tr><td>Leyes de función pública del Estado y de las comunidades autónomas</td><td>Desarrollo del TREBEP. En el Estado sigue parcialmente vigente la <strong>Ley 30/1984</strong>, de Medidas para la Reforma de la Función Pública, y la <strong>Ley de Funcionarios Civiles del Estado de 1964</strong> (Decreto 315/1964) en lo no derogado.</td></tr>
+<tr><td><strong>Real Decreto-ley 6/2023, de 19 de diciembre</strong>, Libro segundo (<strong>arts. 105 a 127</strong>)</td><td>Función pública de la AGE: planificación estratégica, OEP, acceso y selección, evaluación del desempeño y carrera horizontal, y personal directivo público profesional.</td></tr>
+<tr><td><strong>Ley 20/2021, de 28 de diciembre</strong></td><td>Reforma del régimen del <strong>personal interino</strong> y procesos de estabilización.</td></tr>
+<tr><td>Reglamentos estatales</td><td>Real Decreto 364/1995 (ingreso y provisión), Real Decreto 365/1995 (situaciones), Real Decreto 33/1986 (régimen disciplinario), Ley 53/1984 y Real Decreto 598/1985 (incompatibilidades).</td></tr>
+<tr><td>Legislación laboral y convenios</td><td>Para el personal laboral: Real Decreto Legislativo 2/2015 (Estatuto de los Trabajadores) y <strong>IV Convenio Único</strong> de la AGE.</td></tr>
+</table></div>
+<p><strong>Disposición final cuarta</strong>: lo establecido en el capítulo II del título III (carrera profesional y evaluación), salvo los arts. 20 y 25.2, solo produce efectos con las leyes de función pública que lo desarrollen; mientras tanto, se mantienen las normas vigentes en cada Administración en lo que no se opongan. En la AGE ese desarrollo lo ha hecho el Real Decreto-ley 6/2023.</p>
+<div class="box fix"><span class="box-h">Precisión al temario 2026</span>
+El temario dice que «el Estatuto entró en vigor en 2007». Lo que entró en vigor en 2007 fue la <strong>Ley 7/2007</strong> (EBEP). El <strong>texto refundido</strong> vigente, el TREBEP, está en vigor desde el <strong>1 de noviembre de 2015</strong>; la regla de efectos diferidos procede de aquella ley y se conserva en su disposición final cuarta.</div>
+<div class="box act"><span class="box-h">El Real Decreto-ley 6/2023: estado a 16/11/2026</span>
+Vigente: el Congreso lo convalidó el 10 de enero de 2024 y acordó tramitarlo como proyecto de ley. Esa tramitación no concluyó y <strong>caducó con la disolución de las Cortes</strong> el 6 de octubre de 2026; el real decreto-ley sigue en vigor tal cual. Su texto consolidado no tiene cambios en el Libro segundo desde su publicación. No confundir un <strong>real decreto-ley</strong> (decreto con fuerza de ley convalidado) con un real decreto legislativo (texto refundido como el TREBEP).</div>
+<div class="box fix"><span class="box-h">Precisión al material visual</span>
+El visual situaba el Libro segundo del Real Decreto-ley 6/2023 en los arts. 105 a 129. La función pública ocupa los arts. <strong>105 a 127</strong>; el 128 modifica la Ley de Bases del Régimen Local (Libro tercero) y el 129 el régimen fiscal de las entidades sin fines lucrativos.</div>
+<h3>1.3 Objeto, fundamentos y ámbito del TREBEP (arts. 1 a 7)</h3>
+<p><strong>Objeto (art. 1)</strong>: establecer las bases del régimen estatutario de los funcionarios y las normas aplicables al personal laboral.</p>
+<div class="box clave"><span class="box-h">Los doce fundamentos de actuación (art. 1.3), en orden</span>
+a) Servicio a los ciudadanos y a los intereses generales · b) igualdad, mérito y capacidad · c) sometimiento pleno a la ley y al Derecho · d) igualdad de trato entre mujeres y hombres · e) objetividad, profesionalidad e imparcialidad, garantizadas con la <strong>inamovilidad</strong> del funcionario de carrera · f) eficacia en la planificación y gestión de los recursos humanos · g) desarrollo y cualificación profesional permanente · h) transparencia · i) evaluación y responsabilidad en la gestión · j) jerarquía · k) negociación colectiva y participación · l) cooperación entre Administraciones.</div>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Precepto</th><th>Contenido</th></tr>
+<tr><td><strong>Ámbito general</strong> (art. 2)</td><td>Personal funcionario y, en lo que proceda, laboral de: a) la AGE; b) comunidades autónomas y Ceuta y Melilla; c) entidades locales; d) organismos públicos, agencias y entidades de Derecho público; e) universidades públicas. Normas singulares para el personal investigador (2.2); legislación específica para el personal docente y el estatutario de los servicios de salud (2.3). <strong>Supletorio</strong> para todo el personal no incluido (2.5).</td></tr>
+<tr><td><strong>Entidades locales</strong> (art. 3)</td><td>TREBEP y legislación autonómica, con respeto a la autonomía local. Policía local: TREBEP y Ley Orgánica 2/1986.</td></tr>
+<tr><td><strong>Legislación específica</strong> (art. 4)</td><td>El TREBEP solo se aplica cuando lo diga su legislación a: a) Cortes Generales y asambleas autonómicas; b) demás órganos constitucionales y estatutarios; c) jueces, magistrados, fiscales y personal de la Administración de Justicia; d) Fuerzas Armadas; e) Fuerzas y Cuerpos de Seguridad; f) personal retribuido por arancel; g) Centro Nacional de Inteligencia; h) Banco de España y <strong>Fondo de Garantía de Depósitos de Entidades de Crédito</strong>.</td></tr>
+<tr><td><strong>Correos</strong> (art. 5)</td><td>Su personal funcionario se rige por sus normas específicas y supletoriamente por el TREBEP.</td></tr>
+<tr><td><strong>Personal laboral</strong> (art. 7)</td><td>Legislación laboral, convenios y los preceptos del TREBEP que así lo dispongan. En <strong>permisos</strong> de nacimiento, adopción, del progenitor diferente de la madre biológica, de lactancia y parental, se rige por el TREBEP y no por las suspensiones del Estatuto de los Trabajadores (redacción del <strong>Real Decreto-ley 9/2025</strong>, desde el 31/07/2025).</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al temario 2026 (art. 4.h)</span>
+El temario cita el «Fondo de Garantía <strong>Salarial</strong>». El art. 4.h dice «Banco de España y Fondo de Garantía de <strong>Depósitos</strong> de Entidades de Crédito». El material visual lo tenía bien.</div>
+<div class="box act"><span class="box-h">Última reforma del TREBEP</span>La última actualización consolidada (03/10/2026) procede de la <strong>Ley 4/2026, de 1 de octubre</strong>, que modifica la letra e) del art. 49 (permisos). No afecta a los preceptos de este tema; se verá en el Tema 2.</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> Concepto y clases de empleados públicos (art. 8)</h2>
+<div class="box clave"><span class="box-h">Art. 8 TREBEP</span>
+<strong>8.1 Concepto</strong>: son empleados públicos quienes desempeñan <strong>funciones retribuidas</strong> en las Administraciones públicas al servicio de los intereses generales.<br>
+<strong>8.2 Clases</strong>: a) funcionarios de carrera; b) funcionarios interinos; c) personal laboral, fijo, por tiempo indefinido o temporal; d) personal eventual.<br>
+El <strong>personal directivo profesional</strong> no es una clase (examen 2019): es un régimen específico para quien desempeña funciones directivas, que puede ser funcionario o laboral.</div>
+<div class="tablewrap"><table>
+<tr><th style="width:16%">Criterio</th><th>Funcionario de carrera (9)</th><th>Funcionario interino (10)</th><th>Personal laboral (11)</th><th>Personal eventual (12)</th></tr>
+<tr><td><strong>Vínculo</strong></td><td>Estatutario, Derecho administrativo, nombramiento legal</td><td>Estatutario temporal</td><td>Contrato de trabajo escrito</td><td>Nombramiento no permanente</td></tr>
+<tr><td><strong>Carácter</strong></td><td>Permanente</td><td>Temporal, causas tasadas</td><td>Fijo, indefinido o temporal</td><td>No permanente</td></tr>
+<tr><td><strong>Acceso</strong></td><td>Proceso selectivo</td><td>Procedimiento ágil y público (igualdad, mérito, capacidad, publicidad, celeridad)</td><td>Procedimiento público (igualdad, mérito, capacidad; celeridad en el temporal)</td><td>Libre designación</td></tr>
+<tr><td><strong>Funciones del 9.2</strong></td><td>Sí, en exclusiva</td><td>Sí, las propias de carrera</td><td>No</td><td>No: solo confianza o asesoramiento especial</td></tr>
+<tr><td><strong>Cese</strong></td><td>Art. 63</td><td>Art. 63 + art. 10.3</td><td>Legislación laboral</td><td>Libre, y siempre al cesar la autoridad</td></tr>
+<tr><td><strong>Mérito para acceder</strong></td><td>—</td><td>Según bases</td><td>Según bases</td><td><strong>Nunca</strong> (12.4)</td></tr>
+</table></div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> Funcionarios de carrera (arts. 9, 75 y 76)</h2>
+<p>Son funcionarios de carrera quienes, en virtud de <strong>nombramiento legal</strong>, están vinculados a una Administración por una <strong>relación estatutaria</strong> regulada por el Derecho administrativo para servicios profesionales retribuidos de carácter <strong>permanente</strong>.</p>
+<div class="box clave"><span class="box-h">Reserva de funciones (art. 9.2)</span>
+Las funciones que impliquen la participación directa o indirecta en el ejercicio de las <strong>potestades públicas</strong> o en la <strong>salvaguardia de los intereses generales</strong> corresponden <strong>exclusivamente</strong> a los funcionarios, en los términos de la ley de desarrollo de cada Administración.</div>
+<p><strong>Cuerpos y escalas (art. 75)</strong>: los funcionarios se agrupan en cuerpos, escalas, especialidades u otros sistemas con competencias, capacidades y conocimientos comunes acreditados por un proceso selectivo. Se crean, modifican y suprimen por <strong>ley</strong> (Cortes Generales o asambleas autonómicas). <strong>Cuerpos generales</strong> (técnico, de gestión, administrativo, auxiliar: funciones comunes) y <strong>especiales</strong> (profesión o carrera peculiar: Abogados del Estado, Inspectores de Hacienda…).</p>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Grupo (art. 76 y DA 6.ª)</th><th>Titulación exigida</th><th style="width:22%">Equivalencia (DT 3.ª)</th><th style="width:20%">Intervalo de niveles (art. 71 RD 364/1995)</th></tr>
+<tr><td><strong>A1</strong></td><td>Grado universitario (la ley puede exigir otro título universitario)</td><td>Antiguo grupo A</td><td><strong>20 a 30</strong></td></tr>
+<tr><td><strong>A2</strong></td><td>Grado universitario</td><td>Antiguo grupo B</td><td><strong>16 a 26</strong></td></tr>
+<tr><td><strong>B</strong></td><td>Técnico Superior</td><td>Grupo nuevo, sin desarrollar</td><td>Sin intervalo asignado</td></tr>
+<tr><td><strong>C1</strong></td><td>Bachiller o Técnico</td><td>Antiguo grupo C</td><td><strong>11 a 22</strong></td></tr>
+<tr><td><strong>C2</strong></td><td>Graduado en ESO</td><td>Antiguo grupo D</td><td><strong>9 a 18</strong></td></tr>
+<tr><td><strong>Agrupaciones profesionales</strong></td><td>Sin titulación del sistema educativo</td><td>Antiguo grupo E</td><td><strong>7 a 14</strong></td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al material visual: los niveles de complemento de destino</span>
+El visual atribuía al Real Decreto-ley 6/2023 unos intervalos inventados (A1 24-30, A2 20-26, B 18-24, C1 16-22, C2 14-18). El Real Decreto-ley 6/2023 no regula los niveles. Los intervalos vigentes son los del <strong>art. 71 del Real Decreto 364/1995</strong> por grupos antiguos (A 20-30, B 16-26, C 11-22, D 9-18, E 7-14), que se aplican a los subgrupos por la equivalencia de la disposición transitoria tercera del TREBEP. El grupo B del TREBEP todavía no tiene intervalo.</div>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> Funcionarios interinos (art. 10)</h2>
+<p>Tras la <strong>Ley 20/2021</strong>, son interinos los nombrados, por razones expresamente justificadas de <strong>necesidad y urgencia</strong>, con carácter temporal para funciones propias de funcionarios de carrera, en estos supuestos:</p>
+<div class="tablewrap"><table>
+<tr><th style="width:36%">Supuesto (10.1)</th><th>Duración</th></tr>
+<tr><td>a) <strong>Plazas vacantes</strong>, si no es posible cubrirlas con funcionarios de carrera</td><td>Máximo <strong>tres años</strong>. Transcurridos, termina la interinidad y la vacante solo puede ocuparla un funcionario de carrera, salvo que el proceso quede <strong>desierto</strong> (nuevo interino). Excepción: si la convocatoria se publicó <strong>dentro de los tres años</strong> y se resuelve en los plazos del art. 70, puede seguir hasta su resolución, sin compensación (10.4).</td></tr>
+<tr><td>b) <strong>Sustitución transitoria</strong> de los titulares</td><td>El tiempo estrictamente necesario.</td></tr>
+<tr><td>c) <strong>Programas de carácter temporal</strong></td><td>Máximo <strong>tres años</strong>, ampliable <strong>doce meses</strong> más por las leyes de función pública.</td></tr>
+<tr><td>d) <strong>Exceso o acumulación de tareas</strong></td><td>Máximo <strong>nueve meses</strong> dentro de un periodo de <strong>dieciocho</strong>.</td></tr>
+</table></div>
+<ul>
+<li><strong>Selección (10.2)</strong>: procedimientos públicos con igualdad, mérito, capacidad, publicidad y celeridad, para la cobertura inmediata. Nunca da la condición de funcionario de carrera.</li>
+<li><strong>Cese (10.3)</strong>: de oficio y sin compensación, además de por el art. 63: a) cobertura reglada por funcionario de carrera; b) supresión o amortización del puesto; c) fin del plazo autorizado; d) fin de la causa.</li>
+<li><strong>Régimen (10.5)</strong>: el general de los funcionarios de carrera en cuanto sea adecuado a su condición temporal (examen 2022).</li>
+<li><strong>OEP</strong>: las vacantes ocupadas por interinos se incluyen en la oferta del ejercicio de su nombramiento o, si no es posible, en la siguiente, salvo amortización.</li>
+<li><strong>Disposición adicional 17.ª</strong>: los actos que supongan incumplir los plazos máximos son <strong>nulos de pleno derecho</strong>; las actuaciones irregulares generan responsabilidades; el incumplimiento del plazo da al interino una <strong>compensación de veinte días</strong> de retribuciones fijas por año de servicio, con un máximo de <strong>doce mensualidades</strong>, desde el cese efectivo (no si el cese es disciplinario o por renuncia).</li>
+</ul>
+<div class="box trampa"><span class="box-h">Trampas</span>Acumulación de tareas: 9 meses en <strong>18</strong>, no en 12 · programas: 3 años + <strong>12 meses</strong> (examen 2019) · la convocatoria tiene que publicarse <strong>dentro</strong> de los tres años para que el interino pueda seguir.</div>
+<div class="box fix"><span class="box-h">Corrección al material visual</span>El visual decía que el art. 10 fue «reformado por el Real Decreto-ley 6/2023». La redacción vigente procede del <strong>Real Decreto-ley 14/2021</strong>, convertido en la <strong>Ley 20/2021</strong>, de 28 de diciembre.</div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> Personal laboral (art. 11) y personal eventual (art. 12)</h2>
+<div class="grid2">
+<div class="card"><h4>Personal laboral (art. 11)</h4>Contrato de trabajo <strong>escrito</strong>, en cualquiera de las modalidades de la legislación laboral. <strong>Fijo</strong> (ha superado un proceso selectivo), <strong>indefinido</strong> (figura jurisprudencial nacida de irregularidades: no es fijeza) o <strong>temporal</strong>. Selección pública con igualdad, mérito y capacidad, y celeridad en el temporal. Las leyes de función pública fijan los puestos que puede ocupar; en la AGE, art. 15 de la Ley 30/1984 (puestos no permanentes, oficios, actividades instrumentales…). Su régimen: Tema 7.</div>
+<div class="card"><h4>Personal eventual (art. 12)</h4>Nombramiento no permanente para funciones <strong>expresamente calificadas</strong> de confianza o asesoramiento especial (examen 2019), con cargo a créditos específicos. Las leyes fijan qué órganos pueden tenerlo; su número máximo lo fijan los órganos de gobierno y es <strong>público</strong>. En la AGE, gabinetes de Presidente, vicepresidentes, ministros y secretarios de Estado, en el número que fije el Consejo de Ministros. <strong>Nombramiento y cese libres</strong>; cesa en todo caso al cesar la autoridad. <strong>No</strong> es mérito para acceder ni para la promoción interna. Régimen general de los funcionarios en lo adecuado. No puede formar parte de los órganos de selección (art. 60.2).</div>
+</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> Personal directivo profesional (art. 13 TREBEP y arts. 123 a 127 RDL 6/2023)</h2>
+<p><strong>Principios del art. 13</strong>: funciones directivas definidas en las normas de cada Administración · designación por <strong>mérito, capacidad e idoneidad</strong> mediante procedimientos con publicidad y concurrencia · evaluación por eficacia, eficiencia, responsabilidad y control de resultados · sus condiciones de empleo <strong>no se negocian</strong> colectivamente; si es laboral, relación especial de <strong>alta dirección</strong>.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Aspecto (AGE)</th><th>Régimen del Real Decreto-ley 6/2023</th></tr>
+<tr><td><strong>Quiénes</strong></td><td>Titulares de las <strong>subdirecciones generales</strong>; las subdirecciones adjuntas y asimiladas son puestos <strong>predirectivos</strong>.</td></tr>
+<tr><td><strong>Requisitos</strong> (126)</td><td>Funcionario de carrera del <strong>subgrupo A1</strong> de cualquier Administración (si el puesto puede ser laboral, el mismo nivel de titulación); experiencia y antigüedad suficientes; formación requerida.</td></tr>
+<tr><td><strong>Nombramiento</strong> (127.1)</td><td><strong>Libre designación</strong>, sin cobertura provisional; solicitudes en <strong>diez días naturales</strong> (frente a los quince hábiles generales), con justificación escrita de la idoneidad, sin los informes del art. 20 de la Ley 30/1984.</td></tr>
+<tr><td><strong>Duración</strong> (127.2)</td><td>Máximo <strong>cinco años</strong>, renovables por periodos idénticos si mantiene los requisitos y no tiene evaluaciones negativas.</td></tr>
+<tr><td><strong>Cese</strong> (127.3)</td><td>a) fin del plazo; b) petición propia; c) evaluación negativa; d) supresión o modificación del puesto; e) separación o despido disciplinario; f) pérdida de requisitos; g) excepcionalmente, <strong>pérdida de la confianza</strong>.</td></tr>
+<tr><td><strong>Desarrollo</strong></td><td><strong>Orden TDF/379/2024</strong>, de 26 de abril: repertorio de puestos directivos, directorio de personal directivo y especialidades de la provisión.</td></tr>
+</table></div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> Adquisición de la condición de funcionario de carrera</h2>
+<h3>7.1 Requisitos de acceso (arts. 56 y 57)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Requisito (art. 56)</th><th>Contenido</th></tr>
+<tr><td>a) <strong>Nacionalidad</strong></td><td>Española, sin perjuicio del art. 57.</td></tr>
+<tr><td>b) <strong>Capacidad funcional</strong></td><td>Para el desempeño de las tareas.</td></tr>
+<tr><td>c) <strong>Edad</strong></td><td><strong>Dieciséis años</strong> (examen 2022) y no exceder la edad de jubilación forzosa. Solo por <strong>ley</strong> puede fijarse otra edad máxima (examen 2019).</td></tr>
+<tr><td>d) <strong>No separación ni inhabilitación</strong></td><td>No haber sido separado por expediente disciplinario de ninguna Administración ni hallarse inhabilitado por sentencia para el cuerpo o escala (o funciones similares en el laboral); los nacionales de otros Estados, sin sanción equivalente.</td></tr>
+<tr><td>e) <strong>Titulación</strong></td><td>La exigida.</td></tr>
+</table></div>
+<p>Pueden exigirse <strong>requisitos específicos</strong> objetivos y proporcionados, establecidos de forma abstracta y general, y prever la capacitación lingüística en comunidades con dos lenguas oficiales.</p>
+<p><strong>Art. 57</strong>: los nacionales de la <strong>UE</strong> acceden como funcionarios en igualdad con los españoles, salvo a empleos que impliquen ejercicio del poder público o salvaguardia de los intereses del Estado; se extiende a sus cónyuges no separados de derecho, a los descendientes propios y del cónyuge menores de veintiún años o mayores dependientes, y a quienes estén incluidos en tratados de libre circulación de trabajadores. Los extranjeros con residencia legal pueden acceder como <strong>personal laboral</strong>.</p>
+<h3>7.2 Sistemas selectivos y reserva por discapacidad</h3>
+<ul>
+<li><strong>Oposición</strong> y <strong>concurso-oposición</strong> son los sistemas ordinarios; en el concurso-oposición la fase de concurso solo se valora si se superó la oposición y nunca determina por sí sola el resultado. El <strong>concurso</strong> es <strong>excepcional</strong> y solo por <strong>ley</strong> (art. 61.6 TREBEP y art. 114.6 y 114.7 del Real Decreto-ley 6/2023).</li>
+<li><strong>Discapacidad (art. 59)</strong>: reserva no inferior al <strong>7 %</strong> de las vacantes de la OEP, de modo que al menos el <strong>2 %</strong> sea para discapacidad intelectual, hasta alcanzar progresivamente el 2 % de los efectivos. En la AGE, pruebas específicas e independientes para las plazas de discapacidad intelectual (art. 113.3 del Real Decreto-ley 6/2023).</li>
+</ul>
+<div class="box fix"><span class="box-h">Corrección al material visual</span>El visual decía que la reserva del art. 59 había sido «elevada al 10 % por el Real Decreto-ley 6/2023». El art. 59 del TREBEP mantiene el <strong>7 %</strong> (2 % para discapacidad intelectual) y el art. 113 del Real Decreto-ley no fija otro porcentaje. Los porcentajes de cada año los concreta la oferta de empleo público (Tema 3).</div>
+<h3>7.3 Adquisición (art. 62)</h3>
+<div class="flowv">
+<div class="step"><b>1. Superación del proceso selectivo</b></div>
+<div class="step"><b>2. Nombramiento</b>Por el órgano competente, publicado en el diario oficial. En la AGE, el <strong>Secretario de Estado de Función Pública</strong> (art. 25 RD 364/1995). Nunca más aprobados que plazas, salvo previsión de la convocatoria (relación complementaria por renuncias, art. 114.10 RDL 6/2023).</div>
+<div class="step"><b>3. Acatamiento</b>De la Constitución y, en su caso, del Estatuto de Autonomía y del resto del ordenamiento.</div>
+<div class="step"><b>4. Toma de posesión</b>Dentro del plazo. En la AGE (art. 114.12 RDL 6/2023): <strong>quince días naturales</strong> desde la publicación del nombramiento, o <strong>un mes</strong> si supone cambio de localidad de residencia. Interinos y eventuales: al <strong>día siguiente</strong> del nombramiento.</div>
+</div>
+<p>Quien no acredite, superado el proceso, los requisitos de la convocatoria no puede ser nombrado y sus actuaciones quedan sin efecto.</p>
+<div class="box fix"><span class="box-h">Corrección al temario 2026: el plazo de toma de posesión</span>
+El temario dice que en la AGE la toma de posesión es «de un mes desde la publicación del nombramiento». Desde el Real Decreto-ley 6/2023 (art. 114.12) son <strong>quince días naturales</strong>, y solo un mes cuando hay <strong>cambio de localidad</strong>. El mes «desde la notificación» era la regla del art. 36 de la Ley de Funcionarios Civiles de 1964, hoy desplazada. El material visual lo tenía bien.</div>
+<div class="box clave"><span class="box-h">Anticipo de la oferta de empleo público (Tema 3)</span>
+La OEP incluye las necesidades con asignación presupuestaria y puede convocar hasta un <strong>10 % adicional</strong> (art. 70.1 TREBEP), que debe ejecutarse en el plazo improrrogable de <strong>tres años</strong>. En la AGE (art. 108 RDL 6/2023), las convocatorias se publican en el mismo año de la oferta y se ejecutan en <strong>dos años</strong>, con la fase de oposición en <strong>uno</strong>. OEP 2026: <strong>Real Decreto 387/2026, de 6 de mayo</strong> (27.232 plazas).</div>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> Pérdida de la condición de funcionario y rehabilitación (arts. 63 a 68)</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Causa (art. 63)</th><th>Régimen</th><th style="width:22%">¿Vuelta?</th></tr>
+<tr><td>a) <strong>Renuncia</strong> (64)</td><td>Por escrito y <strong>aceptada expresamente</strong>. No se acepta si hay expediente disciplinario o auto de procesamiento o de apertura de juicio oral por delito.</td><td>Sí, por un nuevo proceso selectivo: no inhabilita (examen 2024)</td></tr>
+<tr><td>b) <strong>Pérdida de la nacionalidad</strong> (65)</td><td>La española o la de otro Estado de la UE o de libre circulación tenida en cuenta para el nombramiento, salvo que simultáneamente se adquiera otra de esos Estados (examen 2024).</td><td>Rehabilitación <strong>reglada</strong></td></tr>
+<tr><td>c) <strong>Jubilación total</strong> (67)</td><td>Voluntaria, forzosa o por incapacidad permanente.</td><td>Por incapacidad: rehabilitación reglada</td></tr>
+<tr><td>d) <strong>Separación del servicio</strong> firme</td><td>Sanción disciplinaria. En la AGE la acuerda el <strong>Consejo de Ministros</strong> (art. 47.1 RD 33/1986).</td><td><strong>No</strong> cabe rehabilitación</td></tr>
+<tr><td>e) <strong>Inhabilitación</strong> absoluta o especial firme (66)</td><td>La absoluta, respecto de todos los empleos; la especial, de los indicados en la sentencia.</td><td>Rehabilitación <strong>excepcional</strong></td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026 (separación en la AGE)</span>
+El temario dice que la separación la acuerda el Consejo de Ministros «a propuesta del ministro correspondiente». El art. 47.1 del Real Decreto 33/1986 la atribuye al Consejo de Ministros a propuesta del <strong>Ministro de la Presidencia</strong> (hoy, el competente en función pública), <strong>oída la Comisión Superior de Personal</strong>. Nunca la imponen los subsecretarios.</div>
+<h3>8.1 La jubilación (art. 67)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Modalidad</th><th>Régimen</th></tr>
+<tr><td><strong>Voluntaria</strong></td><td>A solicitud, con los requisitos del régimen de Seguridad Social aplicable. En Clases Pasivas: <strong>60 años y 30 de servicios</strong> (Real Decreto Legislativo 670/1987). Por ley, excepcionalmente, condiciones especiales de voluntaria y parcial.</td></tr>
+<tr><td><strong>Forzosa</strong></td><td>De oficio a los <strong>65 años</strong>. Se puede pedir la <strong>prolongación hasta los 70</strong>; la Administración resuelve motivadamente. En el Régimen General de la Seguridad Social, la edad es la de la pensión contributiva sin coeficiente reductor (67.4).</td></tr>
+<tr><td><strong>Incapacidad permanente</strong></td><td>Por incapacidad para las funciones del cuerpo o escala, o por reconocimiento de incapacidad permanente absoluta o total para ellas.</td></tr>
+<tr><td><strong>Parcial</strong></td><td>Con los requisitos de su régimen; <strong>no</strong> supone perder la condición de funcionario.</td></tr>
+</table></div>
+<div class="tablewrap"><table>
+<tr><th style="width:36%">Prolongación en la AGE (Resolución de 31 de diciembre de 1996)</th><th>Plazo</th></tr>
+<tr><td>Solicitud</td><td>Al menos <strong>dos meses</strong> antes de la edad de jubilación forzosa; suspende el procedimiento de jubilación.</td></tr>
+<tr><td>Resolución</td><td><strong>Un mes</strong> desde la entrada en el registro; la denegación solo cabe por falta del requisito de edad o solicitud fuera de plazo.</td></tr>
+<tr><td>Silencio</td><td><strong>Estimatorio</strong> si no se resuelve antes de los <strong>quince días</strong> anteriores a la fecha de jubilación.</td></tr>
+<tr><td>Fin de la prolongación</td><td>A instancia del funcionario, con <strong>tres meses</strong> de antelación.</td></tr>
+</table></div>
+<h3>8.2 Rehabilitación (art. 68 y Real Decreto 2669/1998)</h3>
+<div class="grid2">
+<div class="card"><h4>Reglada (68.1)</h4>Pérdida de la <strong>nacionalidad</strong> o jubilación por <strong>incapacidad</strong>: desaparecida la causa, se <strong>concede</strong>. Resuelven el <strong>subsecretario</strong> (último destino en servicios centrales) o el <strong>delegado del Gobierno</strong> (periféricos). Silencio <strong>estimatorio</strong> a los seis meses (art. 7.3 RD 2669/1998).</div>
+<div class="card"><h4>Excepcional (68.2)</h4><strong>Inhabilitación</strong>, extinguida la responsabilidad penal y civil: <strong>discrecional</strong>, según las circunstancias y entidad del delito. Resuelve el <strong>Consejo de Ministros</strong>, con instrucción de la Dirección General de la Función Pública e informe preceptivo de la subsecretaría. Silencio <strong>desestimatorio</strong> (68.2 TREBEP, que prevalece sobre el reglamento).</div>
+</div>
+<div class="tablewrap"><table>
+<tr><th style="width:44%">Trámite (RD 2669/1998)</th><th>Plazo</th></tr>
+<tr><td>Subsanación de la solicitud</td><td>10 días</td></tr>
+<tr><td>Alegaciones a la propuesta</td><td>15 días</td></tr>
+<tr><td>Duración máxima del procedimiento</td><td>6 meses</td></tr>
+<tr><td>Nueva solicitud tras una desestimación por inhabilitación</td><td>2 años</td></tr>
+<tr><td>Toma de posesión tras la rehabilitación</td><td>1 mes desde la notificación (si no, excedencia voluntaria por interés particular)</td></tr>
+</table></div>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> Instrumentos de ordenación y Registro Central de Personal</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Instrumento</th><th>Contenido clave</th></tr>
+<tr><td><strong>Relación de puestos de trabajo</strong> (art. 74)</td><td>Denominación, grupo, cuerpo o escala, sistema de provisión y retribuciones complementarias de cada puesto. En la AGE la aprueba la <strong>CECIR</strong> (Función Pública y Hacienda).</td></tr>
+<tr><td><strong>Planificación</strong> (art. 69 y arts. 106 y 107 RDL 6/2023)</td><td>Planes de ordenación de recursos humanos y planificación estratégica: necesidades, movilidad, promoción, formación y previsión de la OEP.</td></tr>
+<tr><td><strong>Oferta de empleo público</strong> (art. 70 y art. 108 RDL 6/2023)</td><td>Necesidades con asignación presupuestaria; hasta un 10 % adicional; plazos de ejecución vistos en el apartado 7.</td></tr>
+<tr><td><strong>Evaluación del desempeño</strong> (art. 20 y arts. 116 a 122 RDL 6/2023)</td><td>Mide la conducta profesional y el rendimiento o logro de resultados. Cada Administración fija sus efectos en la carrera horizontal, la formación, la provisión de puestos y las retribuciones complementarias (art. 20.3); la continuidad en un puesto obtenido por concurso puede quedar vinculada a ella (20.4).</td></tr>
+<tr><td><strong>Registro Central de Personal</strong></td><td>Real Decreto 1405/1986. Depende del ministerio competente en función pública a través de la Dirección General de la Función Pública. Inscribe a todo el personal de la AGE y anota los actos que afectan a su vida administrativa; asigna el <strong>número de Registro de Personal</strong> (NRP).</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Ajustes al material visual</span>
+El visual decía que el complemento de desempeño «sustituye al de productividad»; el TREBEP no lo dice así, y la referencia segura es el art. 20.3. Del Registro Central de Personal se omiten aquí el desglose de dígitos del NRP y el plazo de las anotaciones provisionales, que no he podido contrastar con el texto vigente.</div>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Lo que preguntan y trampas</h2>
+<div class="box clave"><span class="box-h">Datos para el examen</span>
+TREBEP: <strong>Real Decreto Legislativo 5/2015, de 30 de octubre</strong>, en vigor el 1/11/2015 · clases: <strong>4</strong> (art. 8.2) · interinos: vacantes <strong>3 años</strong>, programas <strong>3 + 12 meses</strong>, acumulación <strong>9 en 18</strong> · compensación: <strong>20 días/año</strong>, máximo <strong>12 mensualidades</strong> · acceso: <strong>16 años</strong> · discapacidad: <strong>7 %</strong> (2 % intelectual) · adquisición: <strong>4 pasos</strong> (art. 62) · toma de posesión: <strong>15 días naturales</strong> o <strong>1 mes</strong> con cambio de localidad; interinos y eventuales, <strong>día siguiente</strong> · pérdida: <strong>5 causas</strong> (art. 63) · jubilación forzosa <strong>65</strong>, prolongación hasta <strong>70</strong> · rehabilitación: <strong>6 meses</strong> · directivos: <strong>A1</strong>, <strong>5 años</strong>, <strong>10 días naturales</strong>.</div>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Lo que preguntan</span><ul>
+<li>Arts. 23.2, 103.3 y 149.1.18.ª CE.</li>
+<li>Ámbito del TREBEP y personal con legislación específica.</li>
+<li>Clases de empleados (art. 8) y el directivo como no clase.</li>
+<li>Supuestos y plazos del interino.</li>
+<li>Eventual: funciones y cese.</li>
+<li>Requisitos de acceso y art. 57.</li>
+<li>Los cuatro pasos del art. 62.</li>
+<li>Causas de pérdida y rehabilitación.</li>
+<li>Jubilación forzosa y prolongación.</li></ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>El concurso <strong>no</strong> es sistema ordinario: excepcional y por ley.</li>
+<li>El eventual cesa <strong>automáticamente</strong> con su autoridad.</li>
+<li>La condición de eventual <strong>no</strong> es mérito.</li>
+<li>La separación <strong>no</strong> es rehabilitable; la inhabilitación, excepcionalmente.</li>
+<li>La renuncia necesita <strong>aceptación expresa</strong>.</li>
+<li>La jubilación parcial <strong>no</strong> hace perder la condición.</li>
+<li>El directivo <strong>no</strong> es una quinta clase.</li>
+<li>Real Decreto-ley ≠ Real Decreto Legislativo.</li>
+<li>Rehabilitación por inhabilitación: silencio <strong>desestimatorio</strong>.</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia con sus piezas: art. 103.3 CE (reserva de ley, mérito y capacidad), art. 149.1.18.ª CE (bases), Real Decreto Legislativo 5/2015 (en adelante, TREBEP) y, en lo que no se oponga, la Ley 30/1984 y sus reglamentos.</li>
+<li>La calificación previa: qué clase de personal es (arts. 8 a 13 TREBEP) y en qué situación está.</li>
+<li>Los doce fundamentos del art. 1.3.</li>
+<li>El cuadro comparativo de las cuatro clases.</li>
+<li>Los cuatro supuestos del interino y sus plazos, con la excepción del 10.4.</li>
+<li>Los requisitos de los arts. 56 y 57.</li>
+<li>Los cuatro pasos del art. 62 con la toma de posesión.</li>
+<li>Las cinco causas del art. 63 y la rehabilitación.</li>
+<li>El régimen del personal directivo.</li>
+</ol>
+
+<!-- 11 -->
+<h2 id="s11"><span class="n">11.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>En los supuestos de recursos humanos el primer paso que puntúa es <strong>calificar la clase de personal</strong>: un interino, un eventual o un directivo tienen reglas distintas de nombramiento, cese y derechos. Después, contar los plazos (tres años del interino, toma de posesión) y decir la consecuencia.</p>
+<h3>11.1 Introducción de la materia (plantillas v2, sección 10)</h3>
+<div class="model">
+<p>«En materia de función pública, el artículo 103.3 de la Constitución reserva a la ley el estatuto de los funcionarios públicos y el acceso a la función pública de acuerdo con los principios de mérito y capacidad, y el artículo 149.1.18.ª atribuye al Estado las bases de su régimen estatutario. Resulta de aplicación el Real Decreto Legislativo 5/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley del Estatuto Básico del Empleado Público (en adelante, TREBEP), y, en lo que no se oponga a él, la Ley 30/1984, de 2 de agosto, de Medidas para la Reforma de la Función Pública, y sus reglamentos de desarrollo, que se mantienen en vigor conforme a su disposición final cuarta.»</p>
+</div>
+<div class="box sup"><span class="box-h">Complemento que propone este tema</span>Si la cuestión es de la AGE y toca acceso, toma de posesión, OEP o personal directivo, añade: «así como el Libro segundo del Real Decreto-ley 6/2023, de 19 de diciembre». Y si es un interino, la Ley 20/2021.</div>
+<h3>11.2 Calificación previa propia del Tema 1</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar la relación de servicio. [Nombre] es [funcionario de carrera / funcionario interino nombrado por el supuesto de la letra (…) del artículo 10.1 / personal laboral fijo, indefinido o temporal / personal eventual / personal directivo público profesional] de [Administración], conforme al artículo [9 / 10 / 11 / 12 / 13] del TREBEP, y se encuentra en la situación de [servicio activo / …].»</p>
+</div>
+<h3>11.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:32%">Hecho del enunciado</th><th style="width:26%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>Interino por vacante nombrado hace más de tres años sin convocatoria publicada en plazo</td><td>Art. 10.1.a y 10.4 TREBEP</td><td>Fin de la interinidad; la plaza solo la ocupa un funcionario de carrera; compensación de la DA 17.ª al cese</td></tr>
+<tr><td>Convocatoria publicada dentro de los tres años</td><td>Art. 10.4, párrafo tercero</td><td>El interino sigue hasta la resolución, sin compensación al cese</td></tr>
+<tr><td>Interino por acumulación de tareas 11 meses en un año</td><td>Art. 10.1.d</td><td>Excede el máximo de 9 meses en 18: nombramiento irregular, nulo en lo que exceda (DA 17.ª.3)</td></tr>
+<tr><td>Asesor del ministro cuyo ministro cesa</td><td>Art. 12.3 TREBEP</td><td>Cesa automáticamente con la autoridad</td></tr>
+<tr><td>Bases que puntúan haber sido personal eventual</td><td>Art. 12.4 TREBEP</td><td>Base nula: la condición de eventual no es mérito</td></tr>
+<tr><td>Convocatoria por concurso de méritos para funcionarios sin ley que lo prevea</td><td>Art. 61.6 TREBEP</td><td>Contraria a Derecho: el concurso es excepcional y requiere ley</td></tr>
+<tr><td>Aspirante de 17 años</td><td>Art. 56.1.c TREBEP</td><td>Cumple la edad mínima de 16 años</td></tr>
+<tr><td>Nacional de Portugal opta a un puesto de inspector</td><td>Art. 57.1 TREBEP</td><td>No: ejercicio de potestades públicas reservado a españoles</td></tr>
+<tr><td>Aprobado nombrado en el BOE que se incorpora en otra ciudad</td><td>Art. 62.1.d TREBEP y art. 114.12 RDL 6/2023</td><td>Toma de posesión en un mes; si no, no adquiere la condición</td></tr>
+<tr><td>Funcionario con expediente disciplinario abierto que renuncia</td><td>Art. 64.2 TREBEP</td><td>No se acepta la renuncia</td></tr>
+<tr><td>Funcionario que adquiere la nacionalidad francesa y pierde la española a la vez</td><td>Art. 65 TREBEP</td><td>No pierde la condición de funcionario</td></tr>
+<tr><td>Funcionario separado del servicio que pide la rehabilitación</td><td>Arts. 63.d y 68 TREBEP</td><td>No procede: la separación no es rehabilitable</td></tr>
+<tr><td>Funcionario de 64 años que pide seguir hasta los 70</td><td>Art. 67.3 TREBEP y Resolución de 31/12/1996</td><td>Solicitud con 2 meses de antelación; resolución en 1 mes; silencio estimatorio</td></tr>
+</table></div>
+<h3>11.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+Laura fue nombrada funcionaria interina en una Delegación del Gobierno el <strong>1 de marzo de 2023</strong> para ocupar una plaza vacante. La convocatoria del proceso selectivo que incluye su plaza se publicó en el BOE el <strong>15 de abril de 2026</strong> y aún no se ha resuelto. Por otro lado, Pedro, que vive en Madrid, supera el proceso selectivo del Cuerpo de Gestión; su nombramiento se publica en el BOE el <strong>2 de noviembre de 2026</strong> con destino en Sevilla.
+<br><br><strong>Cuestiones:</strong> a) Situación de Laura. b) Plazo de toma de posesión de Pedro y consecuencias de no tomar posesión.</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 11.1, con la Ley 20/2021.] Con carácter previo, procede calificar la relación de servicio. Laura es funcionaria interina nombrada por el supuesto de la letra a) del artículo 10.1 del TREBEP, la existencia de plaza vacante. La cuestión a) solicita determinar si puede seguir ocupándola. Conforme al artículo 10.4, transcurridos tres años desde el nombramiento se produce el fin de la relación de interinidad, salvo que la convocatoria se haya publicado dentro de ese plazo. Contados desde el 1 de marzo de 2023, los tres años vencieron el 1 de marzo de 2026, y la convocatoria se publicó el 15 de abril de 2026, fuera de plazo, por lo que no opera la excepción. El enunciado no precisa si Laura sigue prestando servicios después del 1 de marzo de 2026, por lo que suponemos que sí, ya que no se menciona su cese. No obstante lo anterior, cabría sostener su permanencia si la convocatoria se hubiera publicado antes del 1 de marzo de 2026, si bien con los datos del enunciado la solución más adecuada es la contraria. Por tanto, se concluye que la relación de interinidad de Laura debió finalizar el 1 de marzo de 2026, que la Administración debe formalizar de oficio su cese, que la plaza solo puede cubrirla un funcionario de carrera y que Laura tendrá derecho, desde su cese efectivo, a la compensación de veinte días de retribuciones fijas por año de servicio, con un máximo de doce mensualidades, prevista en la disposición adicional decimoséptima del TREBEP.</p>
+<p><strong>Cuestión b).</strong> La cuestión b) plantea el plazo de toma de posesión de Pedro. El artículo 62.1 del TREBEP exige la toma de posesión dentro del plazo establecido, y el artículo 114.12 del Real Decreto-ley 6/2023 lo fija en quince días naturales desde la publicación del nombramiento, o en un mes cuando suponga cambio de localidad de residencia. Pedro reside en Madrid y su destino está en Sevilla, de modo que se aplica el plazo de un mes, que, contado desde el día siguiente a la publicación (artículo 30.4 de la Ley 39/2015), vence el 2 de diciembre de 2026. Por tanto, se concluye que Pedro debe tomar posesión como máximo el 2 de diciembre de 2026 y que, si no lo hace sin causa justificada, no adquiere la condición de funcionario de carrera, al faltar el último de los requisitos sucesivos del artículo 62.</p>
+</div>
+<h3>11.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Calificar</strong> la clase de personal y el supuesto de interinidad → <em>análisis</em>.<br>
+<strong>Fechas operadas</strong>: 01/03/2023 + 3 años = 01/03/2026, convocatoria fuera de plazo; 02/11 + 1 mes = 02/12 → <em>aplicación de conocimientos</em>.<br>
+<strong>Suposición declarada</strong> sobre la continuidad de Laura → admitida.<br>
+<strong>Alternativa evaluada</strong> (convocatoria dentro del plazo) → <em>análisis</em>.<br>
+<strong>Encadenar</strong> art. 10.4 → cese de oficio → plaza para carrera → compensación de la DA 17.ª → <em>sistemática</em>.<br>
+<strong>Conclusiones afirmativas</strong> con fecha, efecto y derecho de cada persona.</div>
+
+<!-- 12 -->
+<h2 id="s12"><span class="n">12.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Marco y fuentes</td><td>Arts. CE, STC 99/1987, cuadro de fuentes, DF 4.ª, ámbito arts. 2 a 7</td><td>CE, TREBEP, impacto del RDL 6/2023 y su estado, ámbito, fundamentos del art. 1.3</td><td>Fusionado + BOE (1) con correcciones</td></tr>
+<tr><td>Clases</td><td>Arts. 8 a 13 con detalle</td><td>Cuadro comparativo, grupos con niveles, interinos, laboral, eventual, directivos con plazos</td><td>Fusionado + BOE (2 a 6) con correcciones</td></tr>
+<tr><td>Adquisición</td><td>Arts. 56, 57 y 62</td><td>Requisitos, toma de posesión, sistemas selectivos, OEP</td><td>Fusionado + BOE (7) con correcciones a ambos</td></tr>
+<tr><td>Pérdida</td><td>Arts. 63 a 68</td><td>Cuadro, prolongación, rehabilitación con plazos y órganos</td><td>Fusionado + BOE (8)</td></tr>
+<tr><td>Ordenación y RCP</td><td>No</td><td>RPT, planes, OEP, evaluación, RCP</td><td>Del visual, ajustado (9)</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 11 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas (contrastadas con el BOE el 16/11/2026)</span>
+<strong>Temario 2026:</strong> art. 4.h: Fondo de Garantía de Depósitos, no Salarial · toma de posesión en la AGE: 15 días naturales o 1 mes con cambio de localidad (art. 114.12 RDL 6/2023), no un mes en todo caso · separación: a propuesta del Ministro de la Presidencia (hoy, el de función pública), oída la Comisión Superior de Personal · el TREBEP está en vigor desde 2015; en 2007 entró en vigor la Ley 7/2007.<br>
+<strong>Material visual:</strong> intervalos de niveles inventados y atribuidos al RDL 6/2023 (son los del art. 71 RD 364/1995) · el art. 10 lo reformó la Ley 20/2021, no el RDL 6/2023 · la reserva por discapacidad del art. 59 sigue en el 7 % · el Libro segundo del RDL 6/2023 son los arts. 105 a 127 · su tramitación como proyecto de ley caducó con la disolución de las Cortes · el «complemento de desempeño que sustituye a la productividad» no tiene apoyo en el TREBEP.<br>
+<strong>Confirmado del visual:</strong> toma de posesión, plazos del personal directivo, prolongación (Resolución de 31/12/1996) y rehabilitación (RD 2669/1998).</div>
+
+<footer>
+GACE 2027 · Bloque V · Tema 1 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 16/11/2026.<br>
+Normas: CE (arts. 23.2, 103 y 149.1.18.ª) · Real Decreto Legislativo 5/2015 (consolidado a 03/10/2026) · Real Decreto-ley 6/2023 (arts. 105 a 127) · Ley 20/2021 · Ley 30/1984 · Real Decreto 364/1995 · Real Decreto 33/1986 · Real Decreto 2669/1998 · Resolución de 31 de diciembre de 1996 · Orden TDF/379/2024 · Real Decreto 387/2026 · STC 99/1987.
+</footer>
+</div>
+</body>
+</html>
