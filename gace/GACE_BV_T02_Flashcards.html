@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque V · Tema 2 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque V · Tema 2 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "Naturaleza de la relación del funcionario", "b": "Estatutaria: derechos y deberes fijados unilateralmente por la ley. Base: CE arts. 23.2, 28, 35, 37 y 103.3."}, {"u": 1, "f": "Art. 14 TREBEP: letras clave", "b": "a) inamovilidad · b) desempeño efectivo · c) carrera y promoción · d) retribuciones · f) defensa jurídica · g) formación · h) intimidad y frente al acoso · i) no discriminación · j) conciliación · j bis) intimidad y desconexión digital · k-q) expresión, salud, vacaciones y permisos, jubilación, Seguridad Social, asociación."}, {"u": 1, "f": "Art. 15 TREBEP: derechos de ejercicio colectivo", "b": "Libertad sindical · negociación colectiva y participación · huelga (con servicios esenciales) · conflictos colectivos · reunión."}, {"u": 1, "f": "¿Dónde está la huelga?", "b": "Art. 15.c TREBEP: derecho individual de ejercicio colectivo, no del art. 14 (examen 2022)."}, {"u": 1, "f": "Reunión: quién convoca (art. 46)", "b": "Sindicatos, delegados de personal, juntas de personal, comités de empresa o cualquier colectivo igual o superior al 40 % del convocado."}, {"u": 1, "f": "Ley 4/2023 en el TREBEP", "b": "Añade identidad sexual, expresión de género y características sexuales en los arts. 14.h, 14.i y 95.2.b. El temario 2026 no lo recoge."}, {"u": 2, "f": "Jornada AGE (Resolución 14/04/2026)", "b": "35 h semanales de promedio en cómputo anual = 1.533 h/año. Especial dedicación: 37,5 h. Sustituye a la Resolución de 2019 (37,5 h generales)."}, {"u": 2, "f": "Horario fijo de la jornada de mañana", "b": "9:00 a 14:00 de lunes a viernes. Flexible: 7:00-9:00 y 14:00-18:00 (lunes a jueves); 14:30-15:30 el viernes."}, {"u": 2, "f": "Jornada de verano AGE", "b": "Del 16 de junio al 15 de septiembre: 6 h 30 min continuadas entre 8:00 y 15:00. Desde el 1 de junio al 30 de septiembre con hijos hasta 12 años o discapacidad ≥ 33 % a cargo."}, {"u": 2, "f": "Reducción por interés particular", "b": "De 9:00 a 14:00 con el 75 % de las retribuciones, en puestos de nivel 28 o inferior; no en especial dedicación."}, {"u": 2, "f": "Bolsa de horas", "b": "Hasta el 5 % de la jornada anual para cuidado de menores de 18 años y mayores o personas con discapacidad hasta el primer grado; recuperable en 3 meses (examen 2022)."}, {"u": 2, "f": "Teletrabajo (art. 47 bis)", "b": "RDL 29/2020. Voluntario y reversible (salvo excepciones), expresamente autorizado, compatible con la presencial; mismos derechos y deberes, incluida prevención de riesgos; la Administración aporta los medios."}, {"u": 2, "f": "Incumplimiento de jornada: consecuencia económica", "b": "Deducción proporcional de haberes. No es sanción (exámenes 2019 y 2022)."}, {"u": 3, "f": "Art. 48.a: enfermedad grave u hospitalización", "b": "Cónyuge, pareja de hecho, 1.er grado o conviviente: 5 días hábiles. 2.º grado: 4 días hábiles. Sin distinguir localidad (RDL 5/2023)."}, {"u": 3, "f": "Art. 48.a: fallecimiento", "b": "1.er grado (y cónyuge o pareja): 3 días hábiles misma localidad / 5 distinta. 2.º grado: 2 / 4."}, {"u": 3, "f": "Error del temario en el art. 48.a", "b": "Aplica 3/5 días a enfermedad grave y hospitalización. Es la redacción anterior a 2023: hoy 3/5 y 2/4 solo valen para el fallecimiento."}, {"u": 3, "f": "Lactancia (art. 48.f)", "b": "Hijo menor de 12 meses: 1 h diaria (divisible), media hora al inicio y al final, o 1 h al inicio o al final. Acumulable en jornadas completas. Derecho individual. Aumenta en parto múltiple."}, {"u": 3, "f": "Prematuros (art. 48.g)", "b": "Hasta 2 h diarias retribuidas + reducción de hasta 2 h con disminución proporcional."}, {"u": 3, "f": "Art. 48.i", "b": "Familiar de 1.er grado con enfermedad muy grave: reducción de hasta el 50 %, retribuida, máximo 1 mes, prorrateable."}, {"u": 3, "f": "Asuntos particulares (art. 48.k y DA 13.ª)", "b": "6 días al año. Cada Administración puede añadir 2 al cumplir el 6.º trienio y 1 más por trienio desde el 8.º."}, {"u": 3, "f": "Art. 48.l y 48.m", "b": "l) matrimonio o registro de pareja de hecho: 15 días. m) actos preparatorios de donación de órganos o tejidos: tiempo indispensable (Ley 6/2024, desde 03/03/2025)."}, {"u": 4, "f": "Permiso por nacimiento (art. 49.a, RDL 9/2025)", "b": "19 semanas (32 en monoparentalidad): 6 obligatorias tras el parto + 11 (22) hasta los 12 meses + 2 (4) hasta los 8 años. Individual e intransferible."}, {"u": 4, "f": "Ampliaciones del permiso por nacimiento", "b": "Prematuridad u hospitalización: hasta 13 semanas · discapacidad del hijo: 2 semanas (una por progenitor) · parto múltiple: 1 por hijo desde el segundo para cada progenitor."}, {"u": 4, "f": "Disfrute interrumpido y adopción internacional", "b": "Preaviso de 15 días, por semanas completas. Adopción internacional: hasta 2 meses más con retribuciones básicas; inicio hasta 4 semanas antes de la resolución."}, {"u": 4, "f": "Violencia de género o sexual (art. 49.d)", "b": "Faltas justificadas; reducción de jornada o reordenación. Retribuciones íntegras si la reducción es de un tercio o menos (examen 2019)."}, {"u": 4, "f": "Hijo con cáncer o enfermedad grave (art. 49.e)", "b": "Reducción de al menos el 50 % con retribuciones íntegras. Hasta los 23 años (26 con discapacidad ≥ 65 %). Ley 4/2026 (desde 23/10/2026): sin límite de edad en gran discapacidad o gran dependencia con convivencia; ambos progenitores hasta el 100 %."}, {"u": 4, "f": "Art. 49.f y 49.g", "b": "f) víctimas del terrorismo: reducción o reordenación. g) permiso parental: hasta 8 semanas, no retribuido, hasta que el menor cumpla 8 años, preaviso de 15 días."}, {"u": 5, "f": "Vacaciones (art. 50)", "b": "22 días hábiles por año natural (sábados no hábiles). AGE: 23 con 15 años, 24 con 20, 25 con 25, 26 con 30 (DA 14.ª)."}, {"u": 5, "f": "Vacaciones aplazadas", "b": "Por nacimiento, IT o riesgo durante el embarazo o la lactancia: dentro de los 18 meses siguientes al final del año (examen 2019)."}, {"u": 5, "f": "Compensación de vacaciones (art. 50.3)", "b": "No se sustituyen por dinero. Renuncia voluntaria: debe garantizarse su disfrute. Compensación solo si la relación concluye por causas ajenas a la voluntad (jubilación por incapacidad o fallecimiento: hasta 18 meses)."}, {"u": 5, "f": "Licencias (LFCE arts. 72 a 75)", "b": "Estudios: con sueldo y complemento familiar. Asuntos propios: sin retribución, máx. 3 meses cada 2 años. Las concede el subsecretario o el director del organismo."}, {"u": 5, "f": "Art. 52 TREBEP", "b": "Deber de diligencia y de velar por los intereses generales con 15 principios. Arts. 52-54 = Código de Conducta, criterio de interpretación del régimen disciplinario."}, {"u": 5, "f": "Art. 53: principios éticos (12)", "b": "Constitución · intereses generales · lealtad y buena fe · derechos fundamentales · abstención · no obligaciones con conflicto · no tratos de favor · eficacia · no agilizar sin causa · diligencia · neutralidad · secreto y discreción."}, {"u": 5, "f": "Art. 54: principios de conducta (11)", "b": "Respeto · jornada y horario · obediencia salvo infracción manifiesta · informar · austeridad · rechazo de regalos · documentos · formación · seguridad y salud · propuestas de mejora · lengua oficial."}, {"u": 6, "f": "Normas del régimen disciplinario", "b": "TREBEP arts. 93-98 · RD 33/1986, de 10 de enero, en lo que no se oponga · Ley 39/2015 supletoria. La Ley 40/2015 no se aplica (art. 25.3)."}, {"u": 6, "f": "Principios del art. 94.2 (cinco)", "b": "Legalidad y tipicidad · irretroactividad desfavorable y retroactividad favorable · proporcionalidad · culpabilidad · presunción de inocencia."}, {"u": 6, "f": "Prejudicialidad penal (art. 94.3)", "b": "Indicios de criminalidad: se suspende el procedimiento y se comunica al Ministerio Fiscal; los hechos probados por sentencia firme vinculan."}, {"u": 6, "f": "Faltas muy graves clave (art. 95.2)", "b": "Discriminación y acoso · abandono del servicio · acuerdos manifiestamente ilegales · secretos oficiales · desobediencia abierta · coartar la huelga · incumplir servicios esenciales · incompatibilidad · no comparecer en comisión parlamentaria · acoso laboral."}, {"u": 6, "f": "Faltas graves clave (art. 7 RD 33/1986)", "b": "Falta de obediencia · abuso de autoridad · tolerancia de superiores · causa de abstención · falta de rendimiento · sigilo · ≥ 10 h/mes de incumplimiento de jornada · 3.ª falta de asistencia en 3 meses · evadir el control horario."}, {"u": 6, "f": "Faltas leves (art. 8 RD 33/1986)", "b": "Incumplir el horario sin ser grave · falta de asistencia injustificada de un día · incorrección · descuido o negligencia · otros deberes."}, {"u": 6, "f": "Sanciones (art. 96.1)", "b": "Separación · despido disciplinario · suspensión firme (máx. 6 años) · traslado forzoso · demérito · apercibimiento · otras por ley."}, {"u": 6, "f": "Suspensión y traslado en la AGE", "b": "Suspensión: muy grave, 3 a 6 años; grave, no más de 3. Traslado con cambio de residencia por grave o muy grave; no volver a la localidad 3 años / 1 año."}, {"u": 6, "f": "Competencia sancionadora AGE (art. 47 RD 33/1986)", "b": "Separación: Consejo de Ministros (oída la Comisión Superior de Personal). Suspensión y traslado: ministros y secretarios de Estado. Apercibimiento: subsecretario, DG, delegados del Gobierno."}, {"u": 7, "f": "Prescripción (art. 97)", "b": "Faltas: 3 años / 2 años / 6 meses, desde la comisión o el cese si continuadas. Sanciones: 3 / 2 / 1 año desde la firmeza."}, {"u": 7, "f": "Interrupción de la prescripción", "b": "Art. 20.2 RD 33/1986: incoación registrada. Vuelve a correr si hay paralización de más de 6 meses no imputable al funcionario."}, {"u": 7, "f": "Incoación del expediente (art. 29 RD 33/1986)", "b": "Subsecretario siempre · directores generales para su personal · delegados del Gobierno. No los subdirectores generales (examen 2019)."}, {"u": 7, "f": "Instructor (art. 30)", "b": "Funcionario de cuerpo o escala de igual o superior grupo que el expedientado. Recusación resuelta en 3 días."}, {"u": 7, "f": "Plazos del procedimiento", "b": "Pliego de cargos: 1 mes desde la incoación · contestación 10 días · prueba 1 mes · vista 10 días · propuesta 10 días · alegaciones 10 días · resolución 10 días · ejecución en 1 mes."}, {"u": 7, "f": "Suspensión provisional (art. 98.3)", "b": "Máximo 6 meses salvo paralización imputable al interesado. Cobra retribuciones básicas. Se abona a la firme. No es el art. 90."}, {"u": 7, "f": "Cancelación de sanciones", "b": "Apercibimiento 6 meses · graves 2 años · muy graves (no separación) 6 años, desde el cumplimiento. Las canceladas no cuentan para reincidencia."}, {"u": 8, "f": "Introducción de función pública: las cuatro piezas", "b": "Arts. 103.3 y 149.1.18.ª CE · RDLeg 5/2015, texto refundido del EBEP «(en adelante, TREBEP)» · Ley 30/1984 y reglamentos en lo que no se opongan (DF 4.ª) · disciplinario: RD 33/1986, de 10 de enero."}, {"u": 8, "f": "Calificación previa del Tema 2", "b": "«Con carácter previo, procede calificar los hechos»: clase de personal · falta (muy grave, grave o leve) con su artículo · fecha de comisión y plazo de prescripción (art. 97)."}, {"u": 8, "f": "Incoación por órgano incompetente", "b": "Incompetencia jerárquica: anulable (art. 48 Ley 39/2015) y convalidable por el órgano competente (art. 52.3)."}, {"u": 8, "f": "Dato que falta", "b": "«El enunciado no precisa…, por lo que suponemos que…, ya que…» antes de concluir."}, {"u": 8, "f": "Conclusión afirmativa tipo", "b": "«Por tanto, se concluye que la falta es grave, no ha prescrito y es sancionable con suspensión de hasta tres años o traslado con cambio de residencia.»"}];
+const UNAMES={"1": "Derechos", "2": "Jornada", "3": "Art. 48", "4": "Art. 49", "5": "Vacaciones y código", "6": "Faltas y sanciones", "7": "Prescripción y procedimiento", "8": "Supuesto"};
+const SK="gace27_bv_t02_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
