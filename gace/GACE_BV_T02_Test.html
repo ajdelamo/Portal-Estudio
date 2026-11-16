@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque V · Tema 2 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque V · Tema 2 · Derechos y deberes. Régimen disciplinario</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u": 1, "t": "El derecho de huelga del funcionario se recoge en el TREBEP como:", "o": ["Derecho individual del art. 14", "Derecho individual ejercido colectivamente del art. 15", "Derecho colectivo del art. 31", "Derecho de titularidad sindical del art. 37 TREBEP, ejercido a través de las organizaciones sindicales"], "c": 1, "e": "Art. 15.c TREBEP (examen 2022)."},
+{"u": 1, "t": "La inamovilidad en la condición de funcionario de carrera se reconoce en:", "o": ["Art. 14.a TREBEP", "Art. 15.a TREBEP", "Art. 52 TREBEP", "Art. 103.3 CE de forma expresa"], "c": 0, "e": "Art. 14.a TREBEP."},
+{"u": 1, "t": "El derecho a la desconexión digital se incorporó al art. 14 TREBEP como letra:", "o": ["i)", "j), dentro de las medidas de conciliación", "j bis)", "k)"], "c": 2, "e": "Art. 14 j bis, añadido por la Ley Orgánica 3/2018."},
+{"u": 1, "t": "Según el art. 46 TREBEP, puede convocar una reunión en el centro de trabajo cualquier colectivo de empleados que sea:", "o": ["Al menos el 25 % del colectivo convocado", "Igual o superior al 40 % del colectivo convocado", "La mayoría absoluta del colectivo convocado, acreditada mediante firmas", "Al menos el 33 % de la plantilla del centro"], "c": 1, "e": "Art. 46.1.e TREBEP."},
+{"u": 1, "t": "La jornada general de trabajo en la AGE desde la Resolución de 14 de abril de 2026 es de:", "o": ["37,5 horas semanales de promedio en cómputo anual", "35 horas semanales de promedio en cómputo anual (1.533 horas)", "36 horas semanales y 1.600 horas anuales", "40 horas en especial dedicación y 37,5 horas semanales en jornada general"], "c": 1, "e": "Resolución SEFP de 14/04/2026, que sustituye a la de 2019."},
+{"u": 1, "t": "La jornada de especial dedicación en la AGE, según la Resolución de 2026, es de:", "o": ["35 horas semanales", "37,5 horas semanales", "40 horas semanales, como en la Resolución de 2019", "42,5 horas semanales"], "c": 1, "e": "Resolución de 14/04/2026."},
+{"u": 1, "t": "La bolsa de horas para conciliación en la AGE puede alcanzar:", "o": ["El 5 % de la jornada anual, recuperable en tres meses", "El 10 % de la jornada anual, recuperable en seis meses", "El 5 % de la jornada mensual, recuperable en el mes siguiente", "25 horas anuales no recuperables"], "c": 0, "e": "Resolución de jornada (examen 2022)."},
+{"u": 1, "t": "La reducción de jornada por interés particular en la AGE (de 9:00 a 14:00) supone percibir:", "o": ["El 50 % de las retribuciones", "El 75 % de las retribuciones", "El 80 % de las retribuciones básicas", "Las retribuciones íntegras si el nivel es inferior a 22"], "c": 1, "e": "Resolución de 14/04/2026: puestos de nivel 28 o inferior."},
+{"u": 1, "t": "El teletrabajo del art. 47 bis TREBEP:", "o": ["Es obligatorio si lo acuerda la Mesa General", "Es voluntario y reversible salvo supuestos excepcionales, debe autorizarse expresamente y es compatible con la presencial", "Excluye la aplicación de la prevención de riesgos laborales", "Solo es posible en puestos de nivel 26 o superior y requiere informe favorable de la Mesa Delegada y del servicio de prevención, con carácter irreversible durante un año"], "c": 1, "e": "Art. 47 bis TREBEP (exámenes 2019 y 2024)."},
+{"u": 2, "t": "Por hospitalización del padre del funcionario, en otra localidad, el art. 48.a TREBEP vigente concede:", "o": ["Tres días hábiles", "Cinco días hábiles", "Cinco días naturales", "Cuatro días hábiles"], "c": 1, "e": "Art. 48.a tras el RDL 5/2023: 5 días hábiles sin distinguir localidad."},
+{"u": 2, "t": "Por enfermedad grave de un familiar de segundo grado, el permiso del art. 48.a es de:", "o": ["Dos días hábiles en la misma localidad y cuatro en distinta", "Cuatro días hábiles", "Tres días hábiles", "Cinco días hábiles"], "c": 1, "e": "Art. 48.a TREBEP vigente."},
+{"u": 2, "t": "Por fallecimiento de un hermano en la misma localidad, el permiso es de:", "o": ["Un día hábil", "Dos días hábiles", "Tres días hábiles", "Cuatro días hábiles"], "c": 1, "e": "Art. 48.a: segundo grado, 2 días en la misma localidad y 4 en distinta."},
+{"u": 2, "t": "El permiso por matrimonio o registro de pareja de hecho del art. 48.l TREBEP es de:", "o": ["Diez días naturales", "Quince días", "Veinte días hábiles", "Siete días hábiles"], "c": 1, "e": "Art. 48.l TREBEP."},
+{"u": 2, "t": "El permiso por asuntos particulares del art. 48.k es de:", "o": ["Cinco días al año, ampliables en un día por cada trienio cumplido a partir del quinto, por decisión de cada Administración", "Seis días, con posibles días adicionales por trienios (DA 13.ª)", "Seis días sin posibilidad de ampliación", "Ocho días al año"], "c": 1, "e": "Art. 48.k y DA 13.ª TREBEP."},
+{"u": 2, "t": "La reducción del 50 % de la jornada, retribuida, por un mes como máximo procede para:", "o": ["La guarda legal de un menor de 12 años o de una persona con discapacidad que no desempeñe actividad retribuida", "El cuidado de un familiar de primer grado por enfermedad muy grave", "El cuidado de un familiar de segundo grado con enfermedad grave", "Cualquier funcionario por interés particular"], "c": 1, "e": "Art. 48.i TREBEP."},
+{"u": 2, "t": "El permiso por lactancia de hijo menor de 12 meses:", "o": ["Es un derecho de la madre biológica que puede ceder al otro progenitor siempre que ambos trabajen en la misma Administración", "Es un derecho individual de cada progenitor y puede acumularse en jornadas completas", "Solo puede disfrutarse como una hora al inicio de la jornada", "Se extingue a los 9 meses del nacimiento"], "c": 1, "e": "Art. 48.f TREBEP."},
+{"u": 2, "t": "El permiso para los actos preparatorios de la donación de órganos o tejidos:", "o": ["No existe en el TREBEP", "Está en el art. 48.m, añadido por la Ley 6/2024", "Está en el art. 49.h desde 2023", "Se regula solo en la Resolución de jornada como un supuesto de flexibilidad horaria"], "c": 1, "e": "Art. 48.m TREBEP, en vigor desde el 03/03/2025."},
+{"u": 2, "t": "La reducción de jornada por guarda legal de un menor del art. 48.h procede si el menor tiene:", "o": ["Menos de 8 años", "Menos de 12 años", "Menos de 14 años", "Menos de 18 años"], "c": 1, "e": "Art. 48.h TREBEP."},
+{"u": 3, "t": "El permiso por nacimiento de la madre biológica tiene una duración de:", "o": ["16 semanas", "17 semanas", "19 semanas", "20 semanas, de ellas 6 obligatorias"], "c": 2, "e": "Art. 49.a tras el RDL 9/2025."},
+{"u": 3, "t": "En caso de familia monoparental, el permiso por nacimiento es de:", "o": ["26 semanas", "32 semanas", "34 semanas, de ellas 12 obligatorias", "38 semanas"], "c": 1, "e": "Art. 49.a TREBEP."},
+{"u": 3, "t": "Del permiso por nacimiento, las semanas obligatorias e ininterrumpidas inmediatamente posteriores al parto son:", "o": ["Cuatro", "Seis", "Ocho", "Diez"], "c": 1, "e": "Art. 49.a TREBEP."},
+{"u": 3, "t": "Las dos últimas semanas del permiso por nacimiento (cuatro en monoparentalidad) pueden disfrutarse:", "o": ["Hasta que el hijo cumpla 12 meses", "Hasta que el hijo cumpla ocho años", "Hasta que el hijo cumpla seis años", "Solo inmediatamente después de las obligatorias"], "c": 1, "e": "Art. 49.a, redacción del RDL 9/2025."},
+{"u": 3, "t": "El permiso parental del art. 49.g TREBEP:", "o": ["Dura hasta 8 semanas, es retribuido al 100 % y puede disfrutarse hasta que el menor cumpla 6 años, a tiempo completo o parcial", "Dura hasta 8 semanas, no es retribuido y puede disfrutarse hasta que el menor cumpla 8 años", "Dura 4 semanas retribuidas hasta los 12 años", "Es transferible entre progenitores"], "c": 1, "e": "Art. 49.g TREBEP."},
+{"u": 3, "t": "La funcionaria víctima de violencia de género que reduce su jornada mantiene las retribuciones íntegras si la reducción es:", "o": ["De un tercio o menos", "De la mitad o más", "De un tercio o menos, o de la mitad o más", "Cualquiera, por ser víctima"], "c": 0, "e": "Art. 49.d TREBEP (examen 2019)."},
+{"u": 3, "t": "Tras la Ley 4/2026, el permiso por cuidado de hijo con cáncer u otra enfermedad grave del art. 49.e:", "o": ["Se extingue siempre a los 18 años", "Puede mantenerse hasta los 23 años, hasta los 26 con discapacidad de al menos el 65 % y, en gran discapacidad o gran dependencia, sin límite de edad mientras haya convivencia", "Se limita a los menores de 14 años", "Solo puede disfrutarlo uno de los progenitores"], "c": 1, "e": "Art. 49.e, modificado por la Ley 4/2026 (en vigor el 23/10/2026)."},
+{"u": 3, "t": "Las víctimas del terrorismo tienen su derecho a la reducción o reordenación de jornada en el art.:", "o": ["49.d", "49.e", "49.f", "48.j, como deber inexcusable de carácter público"], "c": 2, "e": "Art. 49.f TREBEP."},
+{"u": 3, "t": "Para disfrutar de forma interrumpida las semanas del permiso por nacimiento hay que preavisar con:", "o": ["Cinco días", "Diez días", "Quince días", "Un mes"], "c": 2, "e": "Art. 49.a TREBEP."},
+{"u": 3, "t": "La Ley 4/2026 entró en vigor el:", "o": ["1 de octubre de 2026", "3 de octubre de 2026, día de su publicación en el BOE", "23 de octubre de 2026", "1 de enero de 2027"], "c": 2, "e": "Publicada el 03/10/2026, entrada en vigor a los veinte días."},
+{"u": 4, "t": "Las vacaciones del art. 50 TREBEP son:", "o": ["22 días naturales, computando sábados", "22 días hábiles por año natural, sin que los sábados sean hábiles", "Un mes natural", "25 días hábiles"], "c": 1, "e": "Art. 50.1 TREBEP."},
+{"u": 4, "t": "Si la incapacidad temporal impide disfrutar las vacaciones, podrán disfrutarse siempre que no hayan transcurrido desde el final del año en que se originaron:", "o": ["Doce meses", "Quince meses", "Dieciocho meses", "Veinticuatro meses"], "c": 2, "e": "Art. 50.2 TREBEP (examen 2019)."},
+{"u": 4, "t": "Un funcionario que renuncia voluntariamente pide que se le paguen las vacaciones no disfrutadas. Según el art. 50.3 TREBEP:", "o": ["Procede siempre la compensación económica", "No procede: debe garantizarse su disfrute antes del cese", "Procede solo si lleva más de un año de servicio en la Administración y lo solicita antes del cese", "Procede hasta 18 meses"], "c": 1, "e": "Art. 50.3: compensación solo por causas ajenas a la voluntad."},
+{"u": 4, "t": "En la AGE, un funcionario con 25 años de servicio tiene derecho a:", "o": ["23 días hábiles de vacaciones", "24 días hábiles", "25 días hábiles", "26 días hábiles"], "c": 2, "e": "DA 14.ª TREBEP y Resolución de jornada."},
+{"u": 4, "t": "La licencia por asuntos propios de la Ley de Funcionarios Civiles del Estado:", "o": ["Es retribuida, hasta tres meses al año", "No es retribuida y su duración máxima es de tres meses cada dos años", "Es un derecho que no puede denegarse", "La concede el Consejo de Ministros"], "c": 1, "e": "Art. 73 LFCE."},
+{"u": 4, "t": "El Código de Conducta de los empleados públicos lo forman los artículos:", "o": ["14 y 15 TREBEP", "47 a 51 TREBEP (jornada, permisos y vacaciones)", "52, 53 y 54 TREBEP", "93 a 98 TREBEP"], "c": 2, "e": "Arts. 52 a 54 TREBEP."},
+{"u": 4, "t": "El rechazo de regalos que superen los usos habituales, sociales y de cortesía es un:", "o": ["Principio ético del art. 53 sobre conflictos de intereses", "Principio de conducta del art. 54", "Derecho del art. 14", "Deber del art. 95"], "c": 1, "e": "Art. 54.6 TREBEP."},
+{"u": 4, "t": "La abstención en asuntos en que se tenga un interés personal es un:", "o": ["Principio de conducta del art. 54", "Principio ético del art. 53", "Principio del régimen disciplinario del art. 94", "Derecho del art. 15"], "c": 1, "e": "Art. 53.5 TREBEP."},
+{"u": 5, "t": "El abandono del servicio es una falta:", "o": ["Leve", "Grave", "Muy grave", "Grave si dura menos de un mes"], "c": 2, "e": "Art. 95.2.c TREBEP (examen 2022)."},
+{"u": 5, "t": "La tolerancia de los superiores respecto de faltas graves o muy graves de sus subordinados es una falta:", "o": ["Leve", "Grave", "Muy grave", "No tipificada"], "c": 1, "e": "Art. 7.1.d RD 33/1986 (examen 2019)."},
+{"u": 5, "t": "El incumplimiento injustificado de la jornada constituye falta grave en la AGE cuando acumula al menos:", "o": ["Cinco horas al mes", "Diez horas al mes", "Quince horas al mes", "Veinte horas al trimestre"], "c": 1, "e": "Art. 7.1.l RD 33/1986."},
+{"u": 5, "t": "El acoso laboral es una falta:", "o": ["Grave del art. 7 RD 33/1986", "Muy grave del art. 95.2.o TREBEP", "Leve si no hay daño", "Grave del art. 95.3 TREBEP"], "c": 1, "e": "Art. 95.2.o TREBEP."},
+{"u": 5, "t": "La deducción proporcional de haberes por incumplimiento de jornada:", "o": ["Es una sanción leve", "No tiene carácter sancionador", "Sustituye al apercibimiento", "Es una sanción grave si supera diez horas"], "c": 1, "e": "No es sanción (exámenes 2019 y 2022)."},
+{"u": 5, "t": "La suspensión firme de funciones por falta grave, en la AGE, no puede exceder de:", "o": ["Un año", "Tres años", "Seis años", "Seis meses"], "c": 1, "e": "Art. 16 RD 33/1986; máximo general de 6 años en el art. 96.1.c TREBEP."},
+{"u": 5, "t": "En la AGE, la única sanción para las faltas leves es:", "o": ["El demérito", "El apercibimiento", "La suspensión de hasta un mes", "El traslado sin cambio de residencia"], "c": 1, "e": "Art. 17 RD 33/1986."},
+{"u": 5, "t": "La separación del servicio de un funcionario de la AGE la acuerda:", "o": ["El ministro del departamento", "El Consejo de Ministros, a propuesta del ministro competente en función pública, oída la Comisión Superior de Personal", "El subsecretario", "El secretario de Estado de Función Pública, previo informe de la Abogacía del Estado en el departamento y con audiencia de la Comisión Superior de Personal, en todo caso"], "c": 1, "e": "Art. 47.1 RD 33/1986."},
+{"u": 5, "t": "Si el despido disciplinario de un laboral fijo se declara improcedente:", "o": ["Se le indemniza siempre", "Procede la readmisión", "Puede elegir la Administración", "Pasa a interino"], "c": 1, "e": "Art. 96.2 TREBEP."},
+{"u": 5, "t": "El art. 94.2 TREBEP enumera como principios de la potestad disciplinaria:", "o": ["Seis, incluido non bis in idem", "Cinco: legalidad y tipicidad, irretroactividad desfavorable, proporcionalidad, culpabilidad y presunción de inocencia", "Cuatro, sin el de proporcionalidad", "Los de los arts. 25 a 31 de la Ley 40/2015"], "c": 1, "e": "Art. 94.2 TREBEP."},
+{"u": 6, "t": "Las faltas muy graves prescriben:", "o": ["A los seis años", "A los tres años desde su comisión o, si son continuadas, desde su cese", "A los dos años", "Al año"], "c": 1, "e": "Art. 97 TREBEP (examen 2024)."},
+{"u": 6, "t": "Las sanciones impuestas por faltas leves prescriben:", "o": ["A los seis meses", "Al año", "A los dos años", "Al mes"], "c": 1, "e": "Art. 97 TREBEP (examen 2019)."},
+{"u": 6, "t": "La prescripción de la falta se interrumpe:", "o": ["Con la información reservada", "Con la iniciación del procedimiento, con la resolución de incoación registrada", "Con la notificación del pliego de cargos", "Con la propuesta de resolución"], "c": 1, "e": "Art. 20.2 RD 33/1986."},
+{"u": 6, "t": "Puede ordenar la incoación de un expediente disciplinario en un ministerio:", "o": ["El subdirector general de la unidad", "El subsecretario, y los directores generales respecto de su personal", "Solo el ministro", "El jefe de servicio, con conocimiento del subdirector general y dando cuenta inmediata al director general del que dependa"], "c": 1, "e": "Art. 29 RD 33/1986 (examen 2019)."},
+{"u": 6, "t": "El instructor del expediente debe ser funcionario:", "o": ["De cualquier grupo, siempre que tenga formación jurídica acreditada y no haya tenido relación con los hechos ni con el expedientado", "De un cuerpo o escala de igual o superior grupo que el expedientado", "Del grupo A1 en todo caso", "Del mismo centro que el expedientado"], "c": 1, "e": "Art. 30 RD 33/1986."},
+{"u": 6, "t": "El expedientado puede contestar el pliego de cargos en el plazo de:", "o": ["Cinco días", "Diez días", "Quince días", "Un mes"], "c": 1, "e": "Art. 36 RD 33/1986."},
+{"u": 6, "t": "La suspensión provisional como medida cautelar en el expediente:", "o": ["Se regula en el art. 90 TREBEP y no tiene límite", "No puede exceder de seis meses, salvo paralización imputable al interesado (art. 98.3 TREBEP)", "Dura hasta la resolución, sin límite", "Es de un año como máximo"], "c": 1, "e": "Art. 98.3 TREBEP."},
+{"u": 6, "t": "Una sanción de apercibimiento puede cancelarse en el Registro Central de Personal transcurridos:", "o": ["Tres meses", "Seis meses", "Un año", "Dos años"], "c": 1, "e": "Art. 93.2 LFCE, aplicado por el art. 51 RD 33/1986."},
+{"u": 6, "t": "El plazo de prescripción de la potestad disciplinaria se rige por:", "o": ["El art. 30 de la Ley 40/2015", "El art. 97 TREBEP, porque la Ley 40/2015 excluye la potestad disciplinaria sobre el personal", "El art. 20.1 RD 33/1986 (seis años, dos años y un mes)", "El Código Penal"], "c": 1, "e": "Art. 25.3 Ley 40/2015."},
+{"u": 7, "t": "En un supuesto disciplinario, antes de responder la Comisión espera que escribas:", "o": ["La conclusión con «salvo mejor criterio»", "«Con carácter previo, procede calificar los hechos»: clase de personal, falta y artículo, y plazo de prescripción", "Un resumen detallado del enunciado, reproduciendo los hechos en el mismo orden en que aparecen, antes de cualquier referencia normativa o calificación", "La historia del régimen disciplinario"], "c": 1, "e": "Calificación previa del método de la Comisión."},
+{"u": 7, "t": "El enunciado no dice si el funcionario tiene sanciones anteriores. Lo correcto es escribir:", "o": ["«Podríamos entender que no tiene sanciones anteriores, dado que el enunciado no las menciona y en caso de duda debe favorecerse al expedientado»", "«El enunciado no precisa si tiene sanciones anteriores, por lo que suponemos que no, ya que no se mencionan»", "Omitir la cuestión", "«Salvo mejor criterio, no tiene»"], "c": 1, "e": "Suposición declarada y justificada."},
+{"u": 7, "t": "Un subdirector general incoa el expediente. En el supuesto se concluye que:", "o": ["Es nulo de pleno derecho por haberlo dictado un órgano manifiestamente incompetente, y debe retrotraerse todo el procedimiento al momento inicial", "Es anulable por incompetencia jerárquica y convalidable por el órgano competente", "Es válido porque es superior jerárquico", "Podría entenderse válido"], "c": 1, "e": "Arts. 29 RD 33/1986, 48 y 52.3 Ley 39/2015."},
+{"u": 7, "t": "Una falta grave se cometió en marzo de 2026 y el expediente se incoa en octubre de 2026. Se concluye que:", "o": ["Ha prescrito, porque las graves prescriben al año", "No ha prescrito: prescribiría el 31 de marzo de 2028", "Ha prescrito a los seis meses", "No prescribe nunca"], "c": 1, "e": "Art. 97 TREBEP: dos años."},
+{"u": 7, "t": "La conclusión de cada cuestión debe redactarse como:", "o": ["«Podría entenderse que…»", "«Por tanto, se concluye que…», con la consecuencia jurídica concreta", "«Salvo mejor criterio fundado en Derecho»", "Una pregunta abierta al tribunal"], "c": 1, "e": "Conclusión afirmativa del método de la Comisión."},
+{"u": 7, "t": "La introducción de la materia de función pública en el supuesto incluye:", "o": ["Solo el TREBEP", "Arts. 103.3 y 149.1.18.ª CE, TREBEP con «(en adelante, TREBEP)», Ley 30/1984 y reglamentos en lo que no se opongan", "Arts. 9.3 y 103.1 CE y la Ley 39/2015", "El Estatuto de los Trabajadores"], "c": 1, "e": "Plantillas v2, sección 10."}
+];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Derechos, jornada y teletrabajo",2:"Permisos del art. 48",3:"Permisos del art. 49",4:"Vacaciones, licencias y Código de Conducta",5:"Faltas y sanciones",6:"Prescripción y procedimiento",7:"Supuesto práctico"};
+const TABS={1:"Derechos",2:"Art. 48",3:"Art. 49",4:"Vacaciones y código",5:"Faltas",6:"Procedimiento",7:"Supuesto"};
+const SK="gace27_bv_t02_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
