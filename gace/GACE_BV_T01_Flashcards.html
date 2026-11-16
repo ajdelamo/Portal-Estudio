@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque V · Tema 1 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque V · Tema 1 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "Preceptos constitucionales del empleo público", "b": "Art. 103.1 (objetividad y principios) · 103.3 (reserva de ley: estatuto, acceso por mérito y capacidad, sindicación, incompatibilidades, imparcialidad) · 23.2 (acceso en igualdad, amparo) · 149.1.18.ª (bases) · 28.1 y 127 (límites a la sindicación)."}, {"u": 1, "f": "STC 99/1987", "b": "La Constitución opta por el régimen estatutario como regla general; la ley debe decir cuándo cabe el contrato laboral."}, {"u": 1, "f": "TREBEP: identificación", "b": "Real Decreto Legislativo 5/2015, de 30 de octubre. Refunde la Ley 7/2007. En vigor el 1/11/2015. Básico (art. 149.1.18.ª CE). Última actualización: 03/10/2026 (Ley 4/2026, permisos)."}, {"u": 1, "f": "Fuentes del Estado", "b": "TREBEP · Ley 30/1984 y Ley de Funcionarios Civiles de 1964 en lo vigente · RDL 6/2023 (arts. 105 a 127) · Ley 20/2021 (interinos) · RD 364/1995, RD 365/1995, RD 33/1986 · Ley 53/1984 y RD 598/1985 · ET y IV Convenio Único (laborales)."}, {"u": 1, "f": "Real Decreto-ley 6/2023: estado", "b": "Convalidado el 10/01/2024; su tramitación como proyecto de ley caducó con la disolución de las Cortes (06/10/2026). Sigue vigente. Libro segundo, arts. 105 a 127."}, {"u": 1, "f": "Disposición final cuarta TREBEP", "b": "Carrera profesional y evaluación (cap. II del título III), salvo arts. 20 y 25.2, producen efectos con las leyes de desarrollo; mientras, siguen las normas de cada Administración. En la AGE: RDL 6/2023."}, {"u": 1, "f": "Doce fundamentos del art. 1.3", "b": "Servicio a los ciudadanos · igualdad, mérito y capacidad · sometimiento a la ley · igualdad mujeres y hombres · objetividad e imparcialidad con inamovilidad · eficacia en la gestión de RR. HH. · desarrollo profesional · transparencia · evaluación y responsabilidad · jerarquía · negociación colectiva · cooperación."}, {"u": 1, "f": "Ámbito (art. 2)", "b": "AGE · CCAA, Ceuta y Melilla · entidades locales · organismos, agencias y entidades de Derecho público · universidades públicas. Supletorio para el resto (2.5)."}, {"u": 1, "f": "Legislación específica (art. 4)", "b": "Cortes y asambleas · órganos constitucionales y estatutarios · Justicia · Fuerzas Armadas · Fuerzas y Cuerpos de Seguridad · arancel · CNI · Banco de España y Fondo de Garantía de Depósitos de Entidades de Crédito."}, {"u": 1, "f": "Correos y personal laboral (arts. 5 y 7)", "b": "Correos: normas específicas y supletorio el TREBEP. Laborales: legislación laboral, convenios y preceptos del TREBEP que lo digan; permisos de nacimiento, lactancia y parental por el TREBEP (RDL 9/2025)."}, {"u": 2, "f": "Concepto y clases (art. 8)", "b": "Empleados públicos: funciones retribuidas al servicio de los intereses generales. Clases: funcionario de carrera, interino, laboral (fijo, indefinido o temporal) y eventual. El directivo no es una clase."}, {"u": 2, "f": "Funcionario de carrera (art. 9)", "b": "Nombramiento legal, relación estatutaria de Derecho administrativo, servicios permanentes. Reserva exclusiva de las funciones de potestades públicas y salvaguardia de intereses generales (9.2)."}, {"u": 2, "f": "Cuerpos y escalas (art. 75)", "b": "Se crean, modifican y suprimen por ley. Cuerpos generales (funciones comunes) y especiales (profesiones peculiares)."}, {"u": 2, "f": "Grupos de clasificación (art. 76 y DA 6.ª)", "b": "A1 y A2: Grado · B: Técnico Superior · C1: Bachiller o Técnico · C2: ESO · agrupaciones profesionales: sin titulación."}, {"u": 2, "f": "Intervalos de niveles (art. 71 RD 364/1995)", "b": "A1 (antiguo A): 20-30 · A2 (B): 16-26 · C1 (C): 11-22 · C2 (D): 9-18 · agrupaciones (E): 7-14 · grupo B del TREBEP: sin intervalo."}, {"u": 3, "f": "Interinos: supuestos (art. 10.1)", "b": "a) Vacantes: máx. 3 años · b) sustitución: tiempo necesario · c) programas: 3 años + 12 meses · d) acumulación: 9 meses en 18. Reforma: Ley 20/2021."}, {"u": 3, "f": "Interinos: fin a los tres años (10.4)", "b": "Fin de la interinidad y plaza para funcionario de carrera, salvo proceso desierto. Excepción: convocatoria publicada dentro de los tres años y resuelta en plazo; sigue hasta la resolución, sin compensación."}, {"u": 3, "f": "Interinos: cese (10.3)", "b": "De oficio y sin compensación, además del art. 63: cobertura reglada · supresión o amortización · fin del plazo · fin de la causa."}, {"u": 3, "f": "DA 17.ª TREBEP", "b": "Actos que incumplan los plazos máximos: nulos de pleno derecho · responsabilidades · compensación de 20 días de retribuciones fijas por año, máximo 12 mensualidades, desde el cese efectivo (no si es disciplinario o por renuncia)."}, {"u": 4, "f": "Personal laboral (art. 11)", "b": "Contrato escrito; fijo, indefinido (no es fijeza) o temporal; selección con igualdad, mérito y capacidad (y celeridad en el temporal). Puestos en la AGE: art. 15 Ley 30/1984."}, {"u": 4, "f": "Personal eventual (art. 12)", "b": "Solo confianza o asesoramiento especial · número máximo público · nombramiento y cese libres · cesa con la autoridad · no es mérito · no forma parte de tribunales (60.2)."}, {"u": 4, "f": "Personal directivo: art. 13", "b": "Funciones directivas definidas por cada Administración · mérito, capacidad e idoneidad con publicidad y concurrencia · evaluación por resultados · condiciones no negociables · alta dirección si es laboral."}, {"u": 4, "f": "Personal directivo en la AGE (RDL 6/2023)", "b": "Subdirectores generales (adjuntos: predirectivos) · funcionario A1 · libre designación sin provisional · 10 días naturales · máx. 5 años renovables · cese también por pérdida de confianza, excepcionalmente. Orden TDF/379/2024."}, {"u": 5, "f": "Requisitos de acceso (art. 56)", "b": "Nacionalidad · capacidad funcional · 16 años y no superar la jubilación forzosa (otra edad máxima solo por ley) · no separado ni inhabilitado · titulación."}, {"u": 5, "f": "Nacionales de otros Estados (art. 57)", "b": "UE en igualdad salvo funciones de autoridad; también cónyuges no separados y descendientes menores de 21 o dependientes; extranjeros con residencia legal: como laborales."}, {"u": 5, "f": "Sistemas selectivos", "b": "Oposición y concurso-oposición (concurso solo si se superó la oposición). Concurso: excepcional y solo por ley (art. 61.6 TREBEP y 114.6 RDL 6/2023)."}, {"u": 5, "f": "Reserva por discapacidad (art. 59)", "b": "Al menos el 7 % de las vacantes, con al menos el 2 % para discapacidad intelectual, hasta alcanzar el 2 % de efectivos. No la elevó el RDL 6/2023."}, {"u": 5, "f": "Adquisición (art. 62)", "b": "1) Proceso selectivo · 2) nombramiento publicado (AGE: Secretario de Estado de Función Pública) · 3) acatamiento de la Constitución · 4) toma de posesión en plazo."}, {"u": 5, "f": "Toma de posesión en la AGE (art. 114.12 RDL 6/2023)", "b": "Carrera: 15 días naturales desde la publicación; 1 mes con cambio de localidad. Interinos y eventuales: al día siguiente del nombramiento."}, {"u": 5, "f": "OEP (anticipo)", "b": "Hasta 10 % adicional; ejecución en 3 años (art. 70). AGE: convocatorias el mismo año, ejecución en 2 años, oposición en 1 (art. 108 RDL 6/2023). OEP 2026: RD 387/2026, 27.232 plazas."}, {"u": 6, "f": "Causas de pérdida (art. 63)", "b": "Renuncia · pérdida de la nacionalidad · jubilación total · separación del servicio firme · inhabilitación absoluta o especial firme."}, {"u": 6, "f": "Renuncia (art. 64)", "b": "Escrita y aceptada expresamente. No se acepta con expediente disciplinario, auto de procesamiento o de apertura de juicio oral. No inhabilita para reingresar por nuevo proceso."}, {"u": 6, "f": "Pérdida de nacionalidad (art. 65)", "b": "La tenida en cuenta para el nombramiento; no se pierde la condición si simultáneamente se adquiere la de otro Estado de la UE o de libre circulación."}, {"u": 6, "f": "Separación en la AGE", "b": "Consejo de Ministros a propuesta del Ministro de la Presidencia (hoy, el de función pública), oída la Comisión Superior de Personal (art. 47.1 RD 33/1986). Nunca los subsecretarios. No rehabilitable."}, {"u": 6, "f": "Jubilación (art. 67)", "b": "Voluntaria (Clases Pasivas: 60 años y 30 de servicios) · forzosa a los 65 (prolongación hasta 70, resolución motivada) · incapacidad permanente · parcial (no pierde la condición)."}, {"u": 6, "f": "Prolongación en la AGE (Res. 31/12/1996)", "b": "Solicitud con 2 meses de antelación · resolución en 1 mes · silencio estimatorio si no se resuelve 15 días antes · fin con 3 meses de aviso."}, {"u": 7, "f": "Rehabilitación reglada (68.1)", "b": "Pérdida de nacionalidad o jubilación por incapacidad, desaparecida la causa: se concede. Subsecretario o delegado del Gobierno. Silencio estimatorio a los 6 meses."}, {"u": 7, "f": "Rehabilitación excepcional (68.2)", "b": "Inhabilitación, extinguida la responsabilidad penal y civil; discrecional según el delito. Consejo de Ministros. Silencio desestimatorio. Nueva solicitud tras 2 años."}, {"u": 7, "f": "Plazos del RD 2669/1998", "b": "Subsanación 10 días · alegaciones 15 días · duración 6 meses · toma de posesión 1 mes (si no, excedencia voluntaria por interés particular)."}, {"u": 7, "f": "Instrumentos de ordenación", "b": "RPT (art. 74; AGE: CECIR) · planificación (art. 69; arts. 106-107 RDL 6/2023) · OEP (art. 70) · evaluación del desempeño (art. 20; efectos en carrera, formación, provisión y retribuciones)."}, {"u": 7, "f": "Registro Central de Personal", "b": "RD 1405/1986; Dirección General de la Función Pública; inscribe a todo el personal de la AGE y asigna el NRP."}, {"u": 8, "f": "Introducción de función pública: las piezas", "b": "Art. 103.3 CE · art. 149.1.18.ª CE · RDLeg 5/2015 (en adelante, TREBEP) · Ley 30/1984 y reglamentos en lo que no se opongan. Complemento AGE: RDL 6/2023; interinos: Ley 20/2021."}, {"u": 8, "f": "Calificación previa del Tema 1", "b": "«Con carácter previo, procede calificar la relación de servicio»: clase de personal (arts. 8 a 13 TREBEP), supuesto concreto si es interino y situación administrativa."}, {"u": 8, "f": "Caso Laura (interina)", "b": "Nombrada 01/03/2023 por vacante → 3 años = 01/03/2026 · convocatoria 15/04/2026, fuera de plazo → fin de la interinidad, cese de oficio, plaza para carrera y compensación de la DA 17.ª al cese."}, {"u": 8, "f": "Caso Pedro (toma de posesión)", "b": "Publicación 02/11/2026, de Madrid a Sevilla → cambio de localidad → 1 mes → hasta el 02/12/2026; si no toma posesión, no adquiere la condición (art. 62)."}, {"u": 8, "f": "Conclusión afirmativa tipo", "b": "«Por tanto, se concluye que la interinidad debió finalizar el 1 de marzo de 2026 y que procede la compensación de la disposición adicional decimoséptima desde el cese efectivo.»"}];
+const UNAMES={"1": "Régimen jurídico", "2": "Clases", "3": "Carrera e interinos", "4": "Laboral, eventual y directivo", "5": "Adquisición", "6": "Pérdida", "7": "Rehabilitación y ordenación", "8": "Supuesto"};
+const SK="gace27_bv_t01_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
