@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Practica la Unit 5 · Comunicación Profesional en Inglés</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F4; --surface:#FFFFFF; --ink:#1B2433; --muted:#566173; --line:#D5DCE4;
+  --accent:#2346A0; --accent-ink:#FFFFFF; --ok:#1E7F5C; --ok-bg:#E3F4EC; --ko:#B3261E; --ko-bg:#FBE9E7;
+  --mark:#FFE45C;
+  --serif:"Literata", Georgia, "Times New Roman", serif;
+  --sans:"Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+    --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+    --mark:rgba(255,228,92,.38);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+  --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+  --mark:rgba(255,228,92,.38);
+}
+:root{ box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+html{ scroll-padding-top:env(safe-area-inset-top,0px); }
+*,*::before,*::after{ box-sizing:inherit; }
+body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.5; }
+.wrap{ max-width:660px; margin:0 auto; padding:20px 16px 48px; }
+h1{ font-family:var(--serif); font-weight:600; font-size:1.9rem; line-height:1.15; margin:8px 0 6px; letter-spacing:-.01em; }
+.lead{ color:var(--muted); margin:0 0 18px; max-width:60ch; }
+.mark{ background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); padding:8px 0 10px; margin:0 -16px 8px; }
+.tabs{ display:flex; gap:6px; overflow-x:auto; padding:0 16px; scrollbar-width:none; }
+.tabs::-webkit-scrollbar{ display:none; }
+.tab{ flex:0 0 auto; border:1px solid var(--line); background:var(--surface); color:var(--ink); font:500 .92rem var(--sans); padding:8px 14px; border-radius:999px; cursor:pointer; }
+.tab[aria-selected="true"]{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.panel{ display:none; }
+.panel.on{ display:block; }
+.card{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; margin-bottom:14px; }
+.meta{ display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:.88rem; margin-bottom:10px; flex-wrap:wrap; }
+.prompt{ font-family:var(--serif); font-size:1.22rem; line-height:1.45; margin:0 0 14px; }
+.opts{ display:grid; gap:8px; }
+.opt{ text-align:left; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:10px; padding:11px 13px; font:1rem var(--serif); cursor:pointer; }
+.opt:hover:not(:disabled){ border-color:var(--accent); }
+.opt.ok{ background:var(--ok-bg); border-color:var(--ok); }
+.opt.ko{ background:var(--ko-bg); border-color:var(--ko); }
+.opt:disabled{ cursor:default; }
+.row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.btn{ border:0; background:var(--accent); color:var(--accent-ink); font:600 .95rem var(--sans); padding:10px 16px; border-radius:10px; cursor:pointer; }
+.btn.ghost{ background:transparent; color:var(--accent); border:1px solid var(--line); }
+.btn:disabled{ opacity:.45; cursor:default; }
+.fb{ margin-top:12px; padding:12px 14px; border-radius:10px; font-size:.95rem; display:none; }
+.fb.show{ display:block; }
+.fb.ok{ background:var(--ok-bg); color:var(--ink); border-left:4px solid var(--ok); }
+.fb.ko{ background:var(--ko-bg); color:var(--ink); border-left:4px solid var(--ko); }
+.es{ color:var(--muted); font-style:italic; margin-top:6px; }
+input[type=text], textarea{ width:100%; font:1.05rem var(--serif); color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+textarea{ min-height:240px; line-height:1.5; resize:vertical; }
+input:focus, textarea:focus, .btn:focus-visible, .opt:focus-visible, .tab:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+.hint{ color:var(--muted); font-size:.9rem; margin:0 0 10px; }
+.stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin:12px 0; }
+.stat{ border:1px solid var(--line); border-radius:10px; padding:10px; }
+.stat b{ display:block; font-family:var(--serif); font-size:1.5rem; }
+.stat span{ color:var(--muted); font-size:.85rem; }
+.review{ margin:12px 0 0; padding:0; list-style:none; }
+.review li{ border-top:1px solid var(--line); padding:10px 0; font-size:.95rem; }
+.checks{ list-style:none; padding:0; margin:12px 0 0; }
+.checks li{ padding:6px 0 6px 28px; position:relative; font-size:.95rem; }
+.checks li::before{ content:""; position:absolute; left:4px; top:11px; width:12px; height:12px; border-radius:50%; border:2px solid var(--line); }
+.checks li.pass::before{ background:var(--ok); border-color:var(--ok); }
+.checks li.fail::before{ border-color:var(--ko); }
+.seg{ display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.progress{ height:4px; background:var(--line); border-radius:2px; overflow:hidden; margin-bottom:12px; }
+.progress i{ display:block; height:100%; background:var(--accent); width:0; transition:width .25s; }
+details summary{ cursor:pointer; color:var(--accent); font-weight:500; }
+.model{ font-family:var(--serif); white-space:pre-wrap; background:var(--bg); border-radius:10px; padding:12px; margin-top:8px; }
+@media (prefers-reduced-motion: reduce){ .progress i{ transition:none; } }
+.vt{width:100%;border-collapse:collapse;font-size:.92rem}.vt th,.vt td{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}.vt th{color:var(--muted);font-weight:600}.vt h4{margin:14px 0 4px}.tw{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Practica la Unit 5</h1>
+  <p class="lead">Relative sentences, conectores y cartas formales. Los fallos vuelven a salir hasta que los aciertes. El test sigue el formato de corrección de las clases (Why?, Why are the other options wrong? y Remember:) con las 4 opciones del examen: 30 preguntas, cada fallo resta 0,33. Incluye preguntas del tipo de la sesión del 17/11, repaso de las Units 1-4 e irregulares dentro de oraciones de relativo.</p>
+
+  <nav aria-label="Modos de práctica">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-p="exam" aria-selected="true">Test tipo examen</button>
+      <button class="tab" role="tab" data-p="gap" aria-selected="false">Rellena huecos</button>
+      <button class="tab" role="tab" data-p="spell" aria-selected="false">Conectores</button>
+      <button class="tab" role="tab" data-p="irr" aria-selected="false">Irregulares</button>
+      <button class="tab" role="tab" data-p="fix" aria-selected="false">Corrige el error</button>
+      <button class="tab" role="tab" data-p="reg" aria-selected="false">¿Defining o non-defining?</button>
+      <button class="tab" role="tab" data-p="write" aria-selected="false">Redacta</button>
+    </div>
+  </nav>
+
+  <!-- EXAM -->
+  <section class="panel on" id="p-exam">
+    <div id="exam-start" class="card">
+      <p class="prompt">30 preguntas al azar de un banco de 55, con 4 opciones (A, B, C, D), como en el examen final.</p>
+      <p class="hint">Tipos de pregunta de las clases de la profesora: <i>Choose the correct relative pronoun</i>, <i>Complete the sentence</i>, <i>Which sentence contains a defining / non-defining clause?</i>, <i>Can we omit the relative pronoun?</i> y <i>Choose the correct sentence</i>. Incluye conectores, cartas formales, repaso de las Units 1-4 e irregulares.</p>
+      <p class="hint">Formato de las clases: cada corrección trae <b>Why?</b>, <b>Why are the other options wrong?</b> y <b>Remember:</b>. Exam strategy (Quick check de la sesión del 17/11): 1) ¿hay comas? defining o non-defining; 2) ¿a qué se refiere el relativo? persona, cosa, posesión, lugar, tiempo o razón; 3) ¿es sujeto u objeto?; 4) elimina lo imposible (that tras coma, which para personas, whose sin nombre).</p>
+      <p class="hint">Acierto +1, fallo −0,33, en blanco 0. Con 4 opciones, contestar al azar vale cero; si descartas una opción, responder vale +0,11; si descartas dos, +0,34. Responde solo si puedes descartar al menos una.</p>
+      <div id="exam-history" class="hint"></div>
+      <div class="row"><button class="btn" id="exam-go">Empezar test</button></div>
+    </div>
+    <div id="exam-run" class="card" hidden>
+      <div class="progress"><i id="exam-bar"></i></div>
+      <div class="meta"><span id="exam-count"></span><span id="exam-score"></span></div>
+      <p class="prompt" id="exam-q"></p>
+      <div class="opts" id="exam-opts"></div>
+      <div class="fb" id="exam-fb"></div>
+      <div class="row">
+        <button class="btn ghost" id="exam-blank">Dejar en blanco</button>
+        <button class="btn" id="exam-next" disabled>Siguiente</button>
+      </div>
+    </div>
+    <div id="exam-end" class="card" hidden></div>
+  </section>
+
+  <!-- GAP -->
+  <section class="panel" id="p-gap">
+    <div class="card">
+      <div class="progress"><i id="gap-bar"></i></div>
+      <div class="meta"><span id="gap-count"></span><span>Pista entre paréntesis</span></div>
+      <p class="prompt" id="gap-q"></p>
+      <input type="text" id="gap-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Tu respuesta">
+      <div class="fb" id="gap-fb"></div>
+      <div class="row">
+        <button class="btn" id="gap-check">Comprobar</button>
+        <button class="btn ghost" id="gap-next" disabled>Siguiente</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPELL -->
+  <section class="panel" id="p-spell">
+    <div class="card">
+      <div class="progress"><i id="spell-bar"></i></div>
+      <div class="meta"><span id="spell-count"></span><span id="spell-mode"></span></div>
+      <p class="prompt" id="spell-q"></p>
+      <input type="text" id="spell-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Conector">
+      <div class="fb" id="spell-fb"></div>
+      <div class="row">
+        <button class="btn" id="spell-check">Comprobar</button>
+        <button class="btn ghost" id="spell-next" disabled>Siguiente</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- IRREGULAR VERBS -->
+  <section class="panel" id="p-irr">
+    <div class="card">
+      <div class="seg" id="irr-groups"></div>
+      <div class="progress"><i id="irr-bar"></i></div>
+      <div class="meta"><span id="irr-count"></span><span id="irr-glabel"></span></div>
+      <p class="prompt" id="irr-q"></p>
+      <p class="hint" id="irr-es"></p>
+      <div id="irr-inputs">
+        <label class="hint" for="irr-past" id="irr-past-l">Past simple</label>
+        <input type="text" id="irr-past" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <p></p>
+        <label class="hint" for="irr-pp">Past participle</label>
+        <input type="text" id="irr-pp" autocomplete="off" autocapitalize="off" spellcheck="false">
+      </div>
+      <div class="fb" id="irr-fb"></div>
+      <div class="row">
+        <button class="btn" id="irr-check">Comprobar</button>
+        <button class="btn ghost" id="irr-next" disabled>Siguiente</button>
+      </div>
+    </div>
+    <div class="card"><details><summary>Ver la lista completa por grupos</summary><div class="tw" id="irr-list"></div></details></div>
+  </section>
+
+  <!-- FIX -->
+  <section class="panel" id="p-fix">
+    <div class="card">
+      <div class="progress"><i id="fix-bar"></i></div>
+      <div class="meta"><span id="fix-count"></span><span>Encuentra el error y corrígelo mentalmente</span></div>
+      <p class="prompt" id="fix-q"></p>
+      <div class="fb" id="fix-fb"></div>
+      <div class="row" id="fix-row1"><button class="btn" id="fix-show">Ver corrección</button></div>
+      <div class="row" id="fix-row2" hidden>
+        <button class="btn" id="fix-good">Lo tenía bien</button>
+        <button class="btn ghost" id="fix-bad">Repasar otra vez</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section class="panel" id="p-reg">
+    <div class="card">
+      <div class="progress"><i id="reg-bar"></i></div>
+      <div class="meta"><span id="reg-count"></span><span>¿Especificativa o explicativa? ¿Se puede omitir el relativo?</span></div>
+      <p class="prompt" id="reg-q"></p>
+      <p class="hint" id="reg-ctx"></p>
+      <div class="opts" id="reg-opts"></div>
+      <div class="fb" id="reg-fb"></div>
+      <div class="row"><button class="btn ghost" id="reg-next" disabled>Siguiente</button></div>
+    </div>
+  </section>
+
+  <!-- WRITE -->
+  <section class="panel" id="p-write">
+    <div class="card">
+      <div class="seg">
+        <button class="btn" id="w-formal">Carta formal breve</button>
+        <button class="btn ghost" id="w-informal">Párrafo con relativos</button>
+      </div>
+      <p class="prompt" id="w-task"></p>
+      <label class="hint" for="w-subject">Subject (asunto de la carta; en el párrafo, un título)</label>
+      <input type="text" id="w-subject" autocomplete="off">
+      <p></p>
+      <label class="hint" for="w-body">Texto</label>
+      <textarea id="w-body" spellcheck="true"></textarea>
+      <div class="meta"><span id="w-words">0 words</span><span>El borrador se guarda en este navegador</span></div>
+      <ul class="checks" id="w-checks"></ul>
+      <p class="hint">La comprobación es mecánica: detecta forma, no contenido. Revisa tú que el mensaje diga lo que tiene que decir.</p>
+      <details><summary>Ver un modelo de respuesta</summary><div class="model" id="w-model"></div></details>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+"use strict";
+var D={"CHECKS": ["Read the whole sentence and look for commas: con coma antes del hueco (y otra después) es explicativa (non-defining) y nunca lleva that; sin comas, especificativa (defining).", "What does the relative word refer to? Persona → who/whom; cosa o animal → which; posesión (le sigue un nombre) → whose; lugar → where; tiempo → when; razón → why. En conectores: ¿añade, contrasta, da consecuencia, ejemplifica o resume?", "Is the pronoun the subject or the object? Si detrás viene un verbo, es sujeto y no se omite; si viene un sujeto (I, he, we…), es objeto y se puede omitir solo en especificativas. Detrás de preposición, solo whom o which.", "Eliminate the impossible options: that detrás de coma, which para personas, where para tiempo, whose sin nombre detrás, from who / with that, una sola coma, Dear Sir… Yours sincerely."], "EXAM": [{"t": "R", "q": "Choose the correct relative pronoun: “The lawyer ___ represents the company is on holiday.”", "o": ["who", "which", "whose", "whom"], "w": "A person (the lawyer) and the pronoun is the subject of “represents”: who.", "r": "Person + subject → who (or that, in defining clauses).", "c": 2, "x": ["Which is for things and animals, not people.", "Whose needs a noun after it (whose client…).", "Whom is an object form; here the pronoun is the subject of “represents”."]}, {"t": "R", "q": "Complete the sentence: “The contract ___ we signed yesterday has an error.”", "o": ["that", "who", "whose", "where"], "w": "A thing (the contract) in a defining clause: that (or which). It is the object of “signed”.", "r": "Thing → which/that. Object in a defining clause → it can be omitted.", "c": 2, "x": ["Who is for people.", "Whose needs a noun after it.", "Where is for places."]}, {"t": "R", "q": "Choose the correct word: “She is the client ___ company opened an office in Lisbon.”", "o": ["whose", "who", "which", "who's"], "w": "Possession: the client's company. Whose + noun.", "r": "Whose + noun = possession (cuyo, cuya).", "c": 2, "x": ["Who cannot show possession.", "Which cannot show possession.", "Who's = who is: “who is company” makes no sense."]}, {"t": "R", "q": "Choose the correct sentence.", "o": ["The firm which advises us is based in London.", "The firm who advises us is based in London.", "The firm whose advises us is based in London.", "The firm where advises us is based in London."], "w": "A firm is a thing (an organisation): which, here subject of “advises”.", "r": "Organisations and things → which/that.", "c": 2, "x": ["Who is for people; with organisations the standard choice is which.", "Whose needs a noun after it.", "Where is for places and cannot be the subject of a verb."]}, {"t": "R", "q": "Choose the correct relative pronoun: “The witness ___ the judge called did not appear.”", "o": ["whom", "whose", "which", "where"], "w": "A person (the witness) and the pronoun is the object of “called” (the judge called the witness): whom.", "r": "Whom = person as object (formal). Who or that are also possible; whose, which and where are not.", "c": 3, "x": ["Whose needs a noun after it.", "Which is for things.", "Where is for places."]}, {"t": "R", "q": "Choose the correct sentence for a possession.", "o": ["That is the company whose director resigned.", "That is the company which director resigned.", "That is the company who director resigned.", "That is the company that's director resigned."], "w": "The director of the company: possession → whose + noun.", "r": "Possession → whose, also for things and organisations.", "c": 2, "x": ["Which cannot express possession.", "Who cannot express possession.", "That's = that is; it does not express possession."]}, {"t": "R", "q": "Complete the sentence: “Do you know the woman ___ is talking to the manager?”", "o": ["who", "whom", "whose", "which"], "w": "A person and the pronoun is the subject of “is talking”: who.", "r": "After the gap comes a verb → subject pronoun: who/that.", "c": 3, "x": ["Whom is an object form; here we need a subject.", "Whose needs a noun after it.", "Which is not used for people."]}, {"t": "R", "q": "Complete the sentence: “That is the court ___ the trial took place.”", "o": ["where", "when", "which", "whose"], "w": "A place (the court): where = in which.", "r": "Place → where (= in/at which).", "c": 2, "x": ["When is for time.", "Which would need a preposition: in which.", "Whose needs a noun and expresses possession."]}, {"t": "R", "q": "Choose the correct relative adverb: “2008 was the year ___ the crisis began.”", "o": ["when", "where", "why", "which"], "w": "A time (the year): when = in which.", "r": "Time → when (= on/in which).", "c": 2, "x": ["Where is for places.", "Why is for reasons.", "Which would need a preposition: in which."]}, {"t": "R", "q": "Complete the sentence: “Nobody knows the reason ___ the meeting was cancelled.”", "o": ["why", "where", "when", "whose"], "w": "A reason: why = for which.", "r": "Reason → why (= for which).", "c": 2, "x": ["Where is for places.", "When is for time.", "Whose needs a noun and expresses possession."]}, {"t": "R", "q": "Choose the more formal equivalent of “the office where I work”.", "o": ["the office in which I work", "the office in where I work", "the office which in I work", "the office in that I work"], "w": "Where = preposition + which: in which.", "r": "Formal register: preposition + which (in which, on which, for which).", "c": 3, "x": ["Where already contains the preposition: in where is wrong.", "The preposition goes before which, not after it.", "That cannot follow a preposition."]}, {"t": "R", "q": "Choose the correct sentence.", "o": ["Madrid, which is the capital of Spain, has many law firms.", "Madrid, that is the capital of Spain, has many law firms.", "Madrid which is the capital of Spain, has many law firms.", "Madrid, who is the capital of Spain, has many law firms."], "w": "Madrid is unique, so the clause gives extra information: non-defining, two commas and which.", "r": "Non-defining → two commas and never that.", "c": 1, "x": ["That is never used in non-defining clauses.", "A non-defining clause needs both commas, not just one.", "Who is for people, not cities."]}, {"t": "R", "q": "Which sentence contains a non-defining relative clause?", "o": ["My manager, who studied in Bristol, speaks French.", "The manager who studied in Bristol speaks French.", "The report that you sent me is incomplete.", "The client we met yesterday was very polite."], "w": "The commas show extra information about a person we already know (my manager).", "r": "Commas = non-defining = extra information.", "c": 1, "x": ["No commas: it identifies which manager, so it is defining.", "No commas and that: defining.", "The pronoun is omitted: only possible in defining clauses."]}, {"t": "R", "q": "Which sentence contains a defining relative clause?", "o": ["The judge who handled the case retired last year.", "Judge Smith, who handled the case, retired last year.", "The Supreme Court, which is in Madrid, rejected the appeal.", "My father, whose firm is in Seville, is a notary."], "w": "No commas: the clause tells us which judge. Essential information.", "r": "Defining = no commas = tells us which one.", "c": 1, "x": ["With a proper name and commas, the clause is extra information.", "Commas: non-defining.", "Commas: non-defining extra information about my father."]}, {"t": "R", "q": "Choose the correct sentence.", "o": ["Our new office, which opened in May, is in the city centre.", "Our new office, that opened in May, is in the city centre.", "Our new office which opened in May, is in the city centre.", "Our new office, which opened in May is in the city centre."], "w": "Extra information about one office: non-defining, which and two commas.", "r": "Non-defining: comma before and after the clause.", "c": 1, "x": ["That cannot follow a comma.", "Only one comma: the opening comma is missing.", "Only one comma: the closing comma is missing."]}, {"t": "R", "q": "Choose the correct sentence for extra information about your only sister.", "o": ["My sister, who works in a bank, lives in Valencia.", "My sister who works in a bank lives in Valencia.", "My sister, that works in a bank, lives in Valencia.", "My sister, which works in a bank, lives in Valencia."], "w": "You have only one sister, so the clause does not identify her: non-defining with commas and who.", "r": "Only one (my mother, my only sister) → non-defining with commas.", "c": 1, "x": ["Without commas it suggests you have more than one sister: it does not fit the situation.", "That is not used in non-defining clauses.", "Which is not used for people."]}, {"t": "R", "q": "Choose the correct sentence.", "o": ["The documents that you need are on my desk.", "The documents, that you need, are on my desk.", "The documents who you need are on my desk.", "The documents whose you need are on my desk."], "w": "Defining clause (which documents?): no commas, that or which.", "r": "Defining → no commas; that is fine.", "c": 1, "x": ["That is never placed between commas.", "Who is for people.", "Whose needs a noun after it."]}, {"t": "R", "q": "In which sentence can the relative pronoun be omitted?", "o": ["The car that he bought is electric.", "The car that runs on gas is cheaper.", "My car, which is electric, is new.", "The man who sold me the car was kind."], "w": "That is the object of “bought” (he bought the car) in a defining clause: it can be omitted.", "r": "Omit only object pronouns in defining clauses: The car (that) he bought.", "c": 3, "x": ["That is the subject of “runs”: it cannot be omitted.", "Non-defining clause: the pronoun is never omitted.", "Who is the subject of “sold”: it cannot be omitted."]}, {"t": "R", "q": "Can we omit the relative pronoun? “The colleague who helped me is from Ireland.”", "o": ["No, because who is the subject of “helped”.", "Yes, because it is a defining clause.", "Yes, because who refers to a person.", "No, because there are no commas."], "w": "After who comes a verb (helped): who is the subject, so it must stay.", "r": "Verb after the pronoun → subject → it cannot be omitted.", "c": 3, "x": ["Being defining is necessary but not enough: it must also be the object.", "Whether it refers to a person is irrelevant for omission.", "No commas means defining, which allows omission only of objects."]}, {"t": "R", "q": "Choose the correct sentence.", "o": ["The email I received this morning was from HR.", "The email received I this morning was from HR.", "The email, I received this morning, was from HR.", "The email who I received this morning was from HR."], "w": "The object pronoun (that/which) has been omitted in a defining clause: correct.", "r": "The book (that) I bought → The book I bought.", "c": 3, "x": ["Word order: subject before verb (I received).", "Commas make it non-defining, and non-defining clauses never omit the pronoun.", "Who is for people."]}, {"t": "R", "q": "Which sentence is NOT correct?", "o": ["Ana, I met at the conference, is a judge.", "Ana, whom I met at the conference, is a judge.", "Ana, who I met at the conference, is a judge.", "The woman I met at the conference is a judge."], "w": "In a non-defining clause the pronoun can never be omitted.", "r": "Omission is only possible in defining clauses.", "c": 3, "x": ["Correct: non-defining with whom.", "Correct: who is also used as an object in everyday English.", "Correct: defining clause with the object pronoun omitted."]}, {"t": "R", "q": "Choose the correct sentence.", "o": ["This is the partner with whom I work.", "This is the partner with who I work.", "This is the partner with that I work.", "This is the partner with which I work."], "w": "Preposition before the pronoun + person → whom.", "r": "Preposition + person → whom; preposition + thing → which.", "c": 3, "x": ["After a preposition we use whom, not who.", "That never follows a preposition.", "Which is for things, not people."]}, {"t": "R", "q": "Choose the correct sentence.", "o": ["This is the partner who I work with.", "This is the partner with who I work with.", "This is the partner whom I work with with.", "This is the partner which I work with."], "w": "Preposition at the end: who (or that, whom) and the preposition only once.", "r": "Preposition at the end → who I work with (informal).", "c": 3, "x": ["The preposition appears twice.", "The preposition appears twice.", "Which is not used for people."]}, {"t": "R", "q": "Complete the sentence: “The law ___ this case is based was passed in 2015.”", "o": ["on which", "on that", "which on", "on whom"], "w": "Something is based on the law: on + which (a thing).", "r": "Preposition + which for things.", "c": 3, "x": ["That cannot follow a preposition.", "The preposition goes before which.", "Whom is for people."]}, {"t": "R", "q": "Choose the correct sentence.", "o": ["I still remember the day when I passed the bar exam.", "I still remember the day where I passed the bar exam.", "I still remember the day whose I passed the bar exam.", "I still remember the day why I passed the bar exam."], "w": "A day is a time: when.", "r": "Time → when; place → where; reason → why.", "c": 2, "x": ["Where is for places, not time.", "Whose needs a noun and expresses possession.", "Why is for reasons."]}, {"t": "R", "q": "Choose the correct sentence.", "o": ["The building where we have our office is very old.", "The building when we have our office is very old.", "The building whose we have our office is very old.", "The building which we have our office is very old."], "w": "A place where something happens: where (= in which).", "r": "Where = in which: the building where / in which we have our office.", "c": 2, "x": ["When is for time.", "Whose needs a noun after it.", "Which needs a preposition here: in which we have our office."]}, {"t": "C", "q": "Choose the coordinating conjunction: “The client called twice, ___ nobody answered.”", "o": ["but", "because", "although", "unless"], "w": "Two independent clauses in contrast joined with a comma: but.", "r": "Coordinating conjunctions: and, but, or, nor, so, yet, for.", "c": 2, "x": ["Because introduces a cause, which does not fit: nobody answered is not why the client called.", "Although is subordinating; it would have to go before the first idea (Although the client called…).", "Unless means if not and does not fit the meaning."]}, {"t": "C", "q": "Which sentence contains a dependent (subordinate) clause?", "o": ["We stayed late because the deadline was the next day.", "We stayed late and finished the report.", "We stayed late, so we missed the train.", "We stayed late, but we did not finish."], "w": "Because introduces a subordinate clause that cannot stand alone.", "r": "Subordinating conjunctions: because, although, if, unless, when, while…", "c": 2, "x": ["And joins two independent clauses.", "So is a coordinating conjunction here.", "But joins two independent clauses."]}, {"t": "C", "q": "Complete the sentence: “You will not get the job ___ you send the form before Friday.”", "o": ["unless", "because", "whereas", "so"], "w": "Unless = if not: you will not get it if you do not send the form.", "r": "Unless = if… not.", "c": 2, "x": ["Because gives a cause and does not fit the meaning.", "Whereas contrasts two facts.", "So introduces a consequence."]}, {"t": "C", "q": "Choose the correct sentence.", "o": ["The fee was high. However, the client accepted it.", "The fee was high, however the client accepted it.", "The fee was high however, the client accepted it.", "However the fee was high, the client accepted it."], "w": "However is a conjunctive adverb: after a full stop (or semicolon) and followed by a comma.", "r": "Full stop or semicolon + However + comma.", "c": 4, "x": ["A comma cannot join two sentences with however.", "The comma is in the wrong place.", "However does not work as a subordinating conjunction like although."]}, {"t": "C", "q": "Choose the subordinating conjunction that expresses contrast: “___ it was raining, the hearing started on time.”", "o": ["Although", "Because", "So", "Therefore"], "w": "Contrast between two ideas in a subordinate clause: although.", "r": "Although / though / even though = aunque.", "c": 2, "x": ["Because expresses cause, not contrast.", "So expresses consequence and cannot start this sentence.", "Therefore expresses consequence."]}, {"t": "M", "q": "Choose the discourse marker for consequence: “The documents arrived late. ___, the hearing was postponed.”", "o": ["Consequently", "Moreover", "For instance", "In contrast"], "w": "The second sentence is the result of the first: consequently.", "r": "Consequence: therefore, consequently, as a result, hence.", "c": 2, "x": ["Moreover adds information.", "For instance gives an example.", "In contrast introduces an opposite idea."]}, {"t": "M", "q": "Choose the discourse marker for adding information: “I speak English and French. ___, I have some knowledge of German.”", "o": ["In addition", "However", "Therefore", "In conclusion"], "w": "A new piece of information is added: in addition.", "r": "Adding: in addition, moreover, furthermore, also.", "c": 2, "x": ["However introduces a contrast.", "Therefore introduces a consequence.", "In conclusion introduces a summary."]}, {"t": "M", "q": "Choose the correct sentence.", "o": ["In addition to my degree, I have a master's in business.", "In addition my degree, I have a master's in business.", "In addition to I have a degree, I have a master's in business.", "In addition of my degree, I have a master's in business."], "w": "In addition to + noun (or -ing).", "r": "In addition, + sentence · In addition to + noun / -ing.", "c": 4, "x": ["The preposition to is missing.", "In addition to cannot be followed by a full clause.", "The preposition is to, not of."]}, {"t": "M", "q": "Choose the marker that introduces an example: “Some clients, ___ Iberia, pay in advance.”", "o": ["such as", "whereas", "furthermore", "in short"], "w": "Iberia is an example of the clients: such as.", "r": "Illustrating: for example, for instance, such as.", "c": 2, "x": ["Whereas contrasts two facts.", "Furthermore adds information.", "In short summarises."]}, {"t": "M", "q": "Which marker expresses contrast?", "o": ["nevertheless", "moreover", "consequently", "similarly"], "w": "Nevertheless = sin embargo: contrast.", "r": "Contrast: however, nevertheless, whereas, in contrast, on the other hand.", "c": 2, "x": ["Moreover adds information (además).", "Consequently expresses a result.", "Similarly compares."]}, {"t": "M", "q": "Which marker would you use to summarise at the end of a letter or report?", "o": ["In conclusion", "For instance", "Meanwhile", "Furthermore"], "w": "In conclusion introduces the summary or final idea.", "r": "Summarising: in short, in conclusion, all in all, on the whole.", "c": 2, "x": ["For instance introduces an example.", "Meanwhile is for sequence (at the same time).", "Furthermore adds information."]}, {"t": "M", "q": "Choose the correct sentence.", "o": ["The team worked hard; therefore, the project ended on time.", "The team worked hard, therefore the project ended on time.", "The team worked hard therefore, the project ended on time.", "Therefore the team worked hard, the project ended on time."], "w": "Therefore links two sentences after a semicolon (or full stop) and is followed by a comma.", "r": "; therefore, / . Therefore,", "c": 4, "x": ["A comma alone cannot join two sentences with therefore.", "The comma is in the wrong place.", "Therefore introduces the consequence, not the cause."]}, {"t": "L", "q": "You start a letter with “Dear Sir or Madam”. Choose the correct closing.", "o": ["Yours faithfully,", "Yours sincerely,", "Best wishes,", "See you soon,"], "w": "No name in the greeting → Yours faithfully.", "r": "Dear Sir or Madam → Yours faithfully · Dear Mr/Ms + surname → Yours sincerely.", "c": 4, "x": ["Yours sincerely goes with a name (Dear Ms Cole).", "Best wishes is informal.", "See you soon is informal."]}, {"t": "L", "q": "You start a letter with “Dear Ms Taylor”. Choose the correct closing.", "o": ["Yours sincerely,", "Yours faithfully,", "Love,", "Cheers,"], "w": "Greeting with a surname → Yours sincerely.", "r": "Name → sincerely; no name → faithfully.", "c": 4, "x": ["Yours faithfully is for Dear Sir or Madam.", "Love is informal and personal.", "Cheers is informal."]}, {"t": "L", "q": "Choose the correct greeting for a woman whose marital status you do not know.", "o": ["Dear Ms Taylor,", "Dear Miss Taylor,", "Dear Mrs Taylor,", "Dear Ms Laura,"], "w": "Ms does not indicate marital status and goes with the surname.", "r": "Ms + surname is the safe choice.", "c": 4, "x": ["Miss indicates a single woman.", "Mrs indicates a married woman.", "Ms goes with the surname, not the first name."]}, {"t": "L", "q": "Choose the most appropriate sentence for a cover letter.", "o": ["I would like to apply for the position of trainee lawyer.", "I wanna apply for the trainee lawyer job.", "I'm applying for the job, hope that's OK.", "Hi! I'd love to get the trainee job."], "w": "Formal register: no contractions or colloquial words, polite modal (would like).", "r": "Formal letters: no contractions, no slang, modal verbs for politeness.", "c": 4, "x": ["Wanna is colloquial.", "Contractions and a casual tone.", "Hi and contractions are informal."]}, {"t": "L", "q": "Choose the correct closing sentence for a formal letter.", "o": ["I look forward to hearing from you.", "I look forward to hear from you.", "I look forward hearing from you.", "I am looking forward hear from you."], "w": "Look forward to + -ing: to is a preposition here.", "r": "I look forward to hearing from you.", "c": 4, "x": ["After look forward to we need -ing, not the base form.", "The preposition to is missing.", "Both to and -ing are missing."]}, {"t": "L", "q": "In a British formal letter (traditional layout), where does the sender's address go?", "o": ["In the top right-hand corner, without the sender's name", "In the top left-hand corner, with the sender's name", "Centred at the top of the page", "At the bottom, under the signature"], "w": "The unit says: your address, but not your name, in the top right-hand corner.", "r": "Sender's address top right · recipient on the left below it.", "c": 4, "x": ["That is where the recipient's address goes, and the name is not included in the address.", "Formal letters are not centred.", "Only your signature and full name go at the bottom."]}, {"t": "L", "q": "Choose the correct sentence for a formal letter.", "o": ["Do not hesitate to contact me should you require further information.", "Don't hesitate to contact me if you need more info.", "Do not hesitate contacting me should you require further information.", "Do not hesitate to contact me should you required further information."], "w": "Formal fixed expression: should you require = if you require.", "r": "Should you require… = if you require (formal inversion).", "c": 4, "x": ["Contraction and info are informal.", "Hesitate is followed by to + base form.", "After should we need the base form: require."]}, {"t": "V", "q": "Review (Unit 4). Choose the correct sentence.", "o": ["If I had known about the vacancy, I would have applied.", "If I would have known about the vacancy, I would have applied.", "If I knew about the vacancy, I would have apply.", "If I had knew about the vacancy, I would have applied."], "w": "Third conditional: if + had + participle, would have + participle.", "r": "Never would in the if-clause.", "c": 4, "x": ["Would cannot go in the if-clause.", "Would have needs the participle: applied.", "Had + participle: known, not knew."]}, {"t": "V", "q": "Review (Unit 3). Choose the correct form: “You ___ wear a suit in court; it is compulsory.”", "o": ["must", "might", "could", "would"], "w": "Obligation: must.", "r": "Must / have to = obligation; might = possibility.", "c": 2, "x": ["Might expresses possibility.", "Could expresses ability or possibility.", "Would expresses conditional or habit."]}, {"t": "V", "q": "Review (Unit 2). Choose the correct sentence.", "o": ["By the time we arrived, the hearing had started.", "By the time we arrived, the hearing has started.", "By the time we arrived, the hearing starts.", "By the time we arrived, the hearing had start."], "w": "An action before another past action: past perfect.", "r": "By the time + past simple → past perfect.", "c": 2, "x": ["Present perfect does not fit a past reference point.", "Present simple does not fit.", "Had needs the participle: started."]}, {"t": "V", "q": "Review (Unit 1). Choose the correct sentence.", "o": ["I have been working here since 2023.", "I am working here since 2023.", "I work here since 2023.", "I have been working here for 2023."], "w": "From the past until now with since: present perfect continuous.", "r": "Since + starting point · for + period.", "c": 2, "x": ["Present continuous cannot be used with since.", "Present simple cannot be used with since.", "For needs a period (for three years), not a year."]}, {"t": "V", "q": "Review (Unit 4). Choose the correct question tag: “You sent the contract, ___?”", "o": ["didn't you", "did you", "haven't you", "don't you"], "w": "Positive sentence in past simple → negative tag with did.", "r": "Opposite polarity, same auxiliary.", "c": 4, "x": ["The tag must be negative after a positive sentence.", "The sentence is in past simple, not present perfect.", "The sentence is in the past."]}, {"t": "I", "q": "Choose the correct form: “The report that she ___ last week was excellent.”", "o": ["wrote", "writed", "written", "write"], "w": "Past simple of write: wrote.", "r": "write – wrote – written.", "c": 4, "x": ["Write is irregular: no -ed.", "Written is the participle and needs have.", "Last week requires the past."]}, {"t": "I", "q": "Choose the correct form: “The client, who ___ us last month, has paid.”", "o": ["met", "meeted", "meet", "metted"], "w": "Past simple of meet: met.", "r": "meet – met – met.", "c": 4, "x": ["Meet is irregular: no -ed.", "Last month requires the past.", "The past is met, without -ed."]}, {"t": "I", "q": "Choose the correct form: “The witness who ___ the truth was protected.”", "o": ["told", "telled", "tell", "toldn"], "w": "Past simple of tell: told.", "r": "tell – told – told.", "c": 4, "x": ["Tell is irregular: no -ed.", "The sentence is about the past (was protected).", "Toldn does not exist: the participle is also told."]}, {"t": "I", "q": "Choose the correct form: “That is the laptop which I ___ in London.”", "o": ["bought", "buyed", "brought", "boughten"], "w": "Past simple of buy: bought.", "r": "buy – bought – bought (not bring – brought).", "c": 4, "x": ["Buy is irregular.", "Brought is the past of bring.", "Boughten does not exist."]}, {"t": "I", "q": "Choose the correct form: “The lawyer who ___ the case has resigned.”", "o": ["lost", "losed", "losted", "loosed"], "w": "Past simple of lose: lost.", "r": "lose – lost – lost.", "c": 4, "x": ["Lose is irregular.", "There is no -ed after lost.", "Loosed is the past of loose (aflojar)."]}], "GAPS": [{"s": "The judge ___ heard the case was very strict. (persona, sujeto)", "a": ["who", "that"], "es": "El juez que vio el caso era muy estricto."}, {"s": "The contract ___ we signed is valid for two years. (cosa)", "a": ["that", "which"], "es": "El contrato que firmamos es válido durante dos años."}, {"s": "Mr Ruiz, ___ son works with us, is a notary. (posesión)", "a": ["whose"], "es": "El señor Ruiz, cuyo hijo trabaja con nosotros, es notario."}, {"s": "This is the office ___ I started my career. (lugar)", "a": ["where", "in which"], "es": "Esta es la oficina donde empecé mi carrera."}, {"s": "Friday is the day ___ the deadline ends. (tiempo)", "a": ["when", "on which"], "es": "El viernes es el día en que termina el plazo."}, {"s": "I don't understand the reason ___ he left. (razón)", "a": ["why", "for which"], "es": "No entiendo por qué se fue."}, {"s": "Seville, ___ is in the south, is very hot in summer. (explicativa, cosa)", "a": ["which"], "es": "Sevilla, que está en el sur, es muy calurosa en verano."}, {"s": "My boss, ___ is from Bilbao, is very kind. (explicativa, persona)", "a": ["who"], "es": "Mi jefe, que es de Bilbao, es muy amable."}, {"s": "The colleague with ___ I share the office is on leave. (preposición + persona)", "a": ["whom"], "es": "El compañero con el que comparto despacho está de baja."}, {"s": "The law to ___ he referred was repealed. (preposición + cosa)", "a": ["which"], "es": "La ley a la que se refirió fue derogada."}, {"s": "The firm ___ advises the council is in Madrid. (empresa, sujeto)", "a": ["which", "that"], "es": "La empresa que asesora al ayuntamiento está en Madrid."}, {"s": "She is the witness ___ evidence was decisive. (posesión)", "a": ["whose"], "es": "Es la testigo cuyo testimonio fue decisivo."}, {"s": "The students ___ passed the exam got a certificate. (personas, sujeto)", "a": ["who", "that"], "es": "Los alumnos que aprobaron el examen recibieron un certificado."}, {"s": "The city ___ the conference took place was Lisbon. (lugar)", "a": ["where", "in which"], "es": "La ciudad donde se celebró el congreso fue Lisboa."}, {"s": "I remember the moment ___ they called my name. (tiempo)", "a": ["when"], "es": "Recuerdo el momento en que dijeron mi nombre."}, {"s": "The fee was high. ___, the client accepted it. (contraste)", "a": ["however", "nevertheless"], "es": "Los honorarios eran altos. Sin embargo, el cliente los aceptó."}, {"s": "The train was late. ___, I missed the hearing. (consecuencia)", "a": ["therefore", "consequently", "as a result"], "es": "El tren llegó tarde. Por tanto, me perdí la vista."}, {"s": "I speak French. ___, I can read Italian. (adición, dos palabras)", "a": ["in addition", "moreover", "furthermore", "additionally"], "es": "Hablo francés. Además, leo italiano."}, {"s": "Some subjects, ___ Civil Law, were very useful. (ejemplo, dos palabras)", "a": ["such as"], "es": "Algunas asignaturas, como Derecho Civil, fueron muy útiles."}, {"s": "___, the meeting was a success. (resumen, dos palabras)", "a": ["in short", "in conclusion", "all in all", "on the whole", "in brief"], "es": "En resumen, la reunión fue un éxito."}, {"s": "I won't sign ___ you change clause 3. (a menos que)", "a": ["unless"], "es": "No firmaré a menos que cambies la cláusula 3."}, {"s": "___ I was tired, I finished the report. (aunque)", "a": ["although", "though", "even though"], "es": "Aunque estaba cansado, terminé el informe."}, {"s": "She studies law, ___ her brother studies medicine. (mientras que)", "a": ["whereas", "while"], "es": "Ella estudia Derecho, mientras que su hermano estudia Medicina."}, {"s": "Dear Sir or Madam, … Yours ___, (despedida)", "a": ["faithfully"], "es": "Estimado señor o señora… Atentamente."}, {"s": "Dear Mr Brown, … Yours ___, (despedida)", "a": ["sincerely"], "es": "Estimado señor Brown… Atentamente."}, {"s": "I look forward to ___ from you. (hear)", "a": ["hearing"], "es": "Quedo a la espera de sus noticias."}, {"s": "Do not hesitate to contact me ___ you require further information. (formal = if)", "a": ["should"], "es": "No dude en contactarme si necesita más información."}, {"s": "I would like to apply ___ the position of trainee lawyer. (preposición)", "a": ["for"], "es": "Me gustaría solicitar el puesto de abogado en prácticas."}, {"s": "The book ___ I'm reading is about Brexit. (puede omitirse: escribe that o which)", "a": ["that", "which"], "es": "El libro que estoy leyendo trata del Brexit."}, {"s": "The man ___ car was stolen called the police. (posesión)", "a": ["whose"], "es": "El hombre al que le robaron el coche llamó a la policía."}], "SP": [{"v": "Contraste (sin embargo) · The case was difficult. ___, we won it.", "k": "m", "a": ["however", "nevertheless"], "r": "however / nevertheless + coma, tras punto"}, {"v": "Consecuencia (por tanto) · He missed the deadline. ___, the claim was rejected.", "k": "m", "a": ["therefore", "consequently", "as a result", "hence", "thus"], "r": "therefore / consequently, tras punto"}, {"v": "Adición (además) · The office is modern. ___, it is near the station.", "k": "m", "a": ["moreover", "furthermore", "in addition", "additionally", "also"], "r": "moreover / furthermore / in addition"}, {"v": "Ejemplo (por ejemplo) · Many firms, ___ Garrigues, have offices abroad. (2 palabras)", "k": "m", "a": ["such as"], "r": "such as + nombre"}, {"v": "Ejemplo (por ejemplo) · There are many risks. ___, the client may not pay. (2 palabras)", "k": "m", "a": ["for example", "for instance"], "r": "for example / for instance + coma"}, {"v": "Resumen (en conclusión) · ___, I believe I am a good candidate. (2 palabras)", "k": "m", "a": ["in conclusion", "in short", "all in all", "to sum up"], "r": "in conclusion / in short"}, {"v": "Secuencia (mientras tanto) · I called the client. ___, my colleague prepared the file.", "k": "m", "a": ["meanwhile"], "r": "meanwhile = mientras tanto"}, {"v": "Secuencia (por último) · ___, sign the document and send it back.", "k": "m", "a": ["finally", "lastly"], "r": "finally = por último"}, {"v": "Comparación (del mismo modo) · The first contract was clear. ___, the second one had no errors.", "k": "m", "a": ["similarly", "likewise", "in the same way"], "r": "similarly / likewise"}, {"v": "Contraste (en cambio) · Spain uses LexNET. ___, the UK uses CE-File. (2 palabras)", "k": "m", "a": ["in contrast", "by contrast", "however"], "r": "in contrast"}, {"v": "Énfasis (sobre todo) · I value teamwork and, ___, honesty. (2 palabras)", "k": "m", "a": ["above all", "in particular", "especially"], "r": "above all / especially (no specially)"}, {"v": "Causa (porque) · The hearing was postponed ___ the judge was ill.", "k": "c", "a": ["because", "as", "since"], "r": "because + oración"}, {"v": "Contraste subordinado (aunque) · ___ the fee was high, he paid it.", "k": "c", "a": ["although", "though", "even though"], "r": "although + oración"}, {"v": "Condición negativa (a menos que) · We will not start ___ everybody signs.", "k": "c", "a": ["unless"], "r": "unless = if not"}, {"v": "Finalidad (para que) · I sent it early ___ you could read it. (2 palabras)", "k": "c", "a": ["so that", "in order that"], "r": "so that = para que"}, {"v": "Tiempo (mientras) · She took notes ___ the judge was speaking.", "k": "c", "a": ["while", "as", "whilst"], "r": "while = mientras"}, {"v": "Contraste entre hechos (mientras que) · Ana prefers civil law, ___ Luis prefers criminal law.", "k": "c", "a": ["whereas", "while"], "r": "whereas = mientras que"}, {"v": "Coordinante de contraste (pero) · The fee was high, ___ it was fair.", "k": "c", "a": ["but", "yet"], "r": "but / yet tras coma"}, {"v": "Coordinante de consecuencia (así que) · It was late, ___ we went home.", "k": "c", "a": ["so"], "r": "so = así que"}, {"v": "Alternativa negativa (ni) · He doesn't smoke, ___ does he drink.", "k": "c", "a": ["nor"], "r": "nor + auxiliar + sujeto"}, {"v": "Adición + nombre (además de) · ___ English, I speak French. (3 palabras)", "k": "m", "a": ["in addition to", "as well as"], "r": "in addition to / as well as + nombre"}, {"v": "Consecuencia (como resultado) · The firm grew fast. ___, it opened two offices. (3 palabras)", "k": "m", "a": ["as a result", "consequently", "therefore"], "r": "as a result = como resultado"}, {"v": "Fórmula formal (si necesita) · Do not hesitate to contact me ___ you require further information.", "k": "m", "a": ["should", "if"], "r": "should you require = if you require"}, {"v": "Por un lado… (por otro lado) · On the one hand, it is expensive. ___, it is very good. (5 palabras)", "k": "m", "a": ["on the other hand"], "r": "on the one hand… on the other hand"}], "IRR": [{"g": "AAA", "b": "bet", "p": "bet", "pp": "bet", "es": "apostar"}, {"g": "AAA", "b": "cost", "p": "cost", "pp": "cost", "es": "costar"}, {"g": "AAA", "b": "cut", "p": "cut", "pp": "cut", "es": "cortar"}, {"g": "AAA", "b": "hit", "p": "hit", "pp": "hit", "es": "golpear"}, {"g": "AAA", "b": "hurt", "p": "hurt", "pp": "hurt", "es": "herir, doler"}, {"g": "AAA", "b": "let", "p": "let", "pp": "let", "es": "dejar, permitir"}, {"g": "AAA", "b": "put", "p": "put", "pp": "put", "es": "poner"}, {"g": "AAA", "b": "quit", "p": "quit", "pp": "quit", "es": "dejar, abandonar"}, {"g": "AAA", "b": "read", "p": "read", "pp": "read", "es": "leer (se pronuncia /red/ en pasado)"}, {"g": "AAA", "b": "set", "p": "set", "pp": "set", "es": "fijar, establecer"}, {"g": "AAA", "b": "shut", "p": "shut", "pp": "shut", "es": "cerrar"}, {"g": "AAA", "b": "spread", "p": "spread", "pp": "spread", "es": "extender, difundir"}, {"g": "ABB", "b": "bring", "p": "brought", "pp": "brought", "es": "traer"}, {"g": "ABB", "b": "build", "p": "built", "pp": "built", "es": "construir"}, {"g": "ABB", "b": "burn", "p": "burnt/burned", "pp": "burnt/burned", "es": "quemar"}, {"g": "ABB", "b": "buy", "p": "bought", "pp": "bought", "es": "comprar"}, {"g": "ABB", "b": "catch", "p": "caught", "pp": "caught", "es": "coger, atrapar"}, {"g": "ABB", "b": "dream", "p": "dreamt/dreamed", "pp": "dreamt/dreamed", "es": "soñar"}, {"g": "ABB", "b": "feed", "p": "fed", "pp": "fed", "es": "alimentar"}, {"g": "ABB", "b": "feel", "p": "felt", "pp": "felt", "es": "sentir"}, {"g": "ABB", "b": "fight", "p": "fought", "pp": "fought", "es": "luchar"}, {"g": "ABB", "b": "find", "p": "found", "pp": "found", "es": "encontrar"}, {"g": "ABB", "b": "get", "p": "got", "pp": "got", "es": "conseguir, obtener (US: gotten)"}, {"g": "ABB", "b": "hang", "p": "hung", "pp": "hung", "es": "colgar"}, {"g": "ABB", "b": "have", "p": "had", "pp": "had", "es": "tener, haber"}, {"g": "ABB", "b": "hear", "p": "heard", "pp": "heard", "es": "oír"}, {"g": "ABB", "b": "hold", "p": "held", "pp": "held", "es": "sostener, celebrar (una reunión)"}, {"g": "ABB", "b": "keep", "p": "kept", "pp": "kept", "es": "mantener, guardar"}, {"g": "ABB", "b": "lay", "p": "laid", "pp": "laid", "es": "poner, colocar"}, {"g": "ABB", "b": "lead", "p": "led", "pp": "led", "es": "dirigir, liderar"}, {"g": "ABB", "b": "learn", "p": "learnt/learned", "pp": "learnt/learned", "es": "aprender"}, {"g": "ABB", "b": "leave", "p": "left", "pp": "left", "es": "dejar, irse"}, {"g": "ABB", "b": "lend", "p": "lent", "pp": "lent", "es": "prestar"}, {"g": "ABB", "b": "light", "p": "lit", "pp": "lit", "es": "encender"}, {"g": "ABB", "b": "lose", "p": "lost", "pp": "lost", "es": "perder"}, {"g": "ABB", "b": "make", "p": "made", "pp": "made", "es": "hacer, fabricar"}, {"g": "ABB", "b": "mean", "p": "meant", "pp": "meant", "es": "significar, querer decir"}, {"g": "ABB", "b": "meet", "p": "met", "pp": "met", "es": "conocer, reunirse"}, {"g": "ABB", "b": "pay", "p": "paid", "pp": "paid", "es": "pagar"}, {"g": "ABB", "b": "say", "p": "said", "pp": "said", "es": "decir"}, {"g": "ABB", "b": "sell", "p": "sold", "pp": "sold", "es": "vender"}, {"g": "ABB", "b": "send", "p": "sent", "pp": "sent", "es": "enviar"}, {"g": "ABB", "b": "shoot", "p": "shot", "pp": "shot", "es": "disparar"}, {"g": "ABB", "b": "sit", "p": "sat", "pp": "sat", "es": "sentarse"}, {"g": "ABB", "b": "sleep", "p": "slept", "pp": "slept", "es": "dormir"}, {"g": "ABB", "b": "smell", "p": "smelt/smelled", "pp": "smelt/smelled", "es": "oler"}, {"g": "ABB", "b": "spell", "p": "spelt/spelled", "pp": "spelt/spelled", "es": "deletrear"}, {"g": "ABB", "b": "spend", "p": "spent", "pp": "spent", "es": "gastar, pasar (tiempo)"}, {"g": "ABB", "b": "spill", "p": "spilt/spilled", "pp": "spilt/spilled", "es": "derramar"}, {"g": "ABB", "b": "stand", "p": "stood", "pp": "stood", "es": "estar de pie"}, {"g": "ABB", "b": "stick", "p": "stuck", "pp": "stuck", "es": "pegar, atascarse"}, {"g": "ABB", "b": "teach", "p": "taught", "pp": "taught", "es": "enseñar"}, {"g": "ABB", "b": "tell", "p": "told", "pp": "told", "es": "decir, contar"}, {"g": "ABB", "b": "think", "p": "thought", "pp": "thought", "es": "pensar"}, {"g": "ABB", "b": "understand", "p": "understood", "pp": "understood", "es": "entender"}, {"g": "ABB", "b": "win", "p": "won", "pp": "won", "es": "ganar"}, {"g": "ABC", "b": "be", "p": "was/were", "pp": "been", "es": "ser, estar"}, {"g": "ABC", "b": "begin", "p": "began", "pp": "begun", "es": "empezar"}, {"g": "ABC", "b": "bite", "p": "bit", "pp": "bitten", "es": "morder"}, {"g": "ABC", "b": "blow", "p": "blew", "pp": "blown", "es": "soplar"}, {"g": "ABC", "b": "break", "p": "broke", "pp": "broken", "es": "romper"}, {"g": "ABC", "b": "choose", "p": "chose", "pp": "chosen", "es": "elegir"}, {"g": "ABC", "b": "do", "p": "did", "pp": "done", "es": "hacer"}, {"g": "ABC", "b": "draw", "p": "drew", "pp": "drawn", "es": "dibujar"}, {"g": "ABC", "b": "drink", "p": "drank", "pp": "drunk", "es": "beber"}, {"g": "ABC", "b": "drive", "p": "drove", "pp": "driven", "es": "conducir"}, {"g": "ABC", "b": "eat", "p": "ate", "pp": "eaten", "es": "comer"}, {"g": "ABC", "b": "fall", "p": "fell", "pp": "fallen", "es": "caer"}, {"g": "ABC", "b": "fly", "p": "flew", "pp": "flown", "es": "volar"}, {"g": "ABC", "b": "forget", "p": "forgot", "pp": "forgotten", "es": "olvidar"}, {"g": "ABC", "b": "forgive", "p": "forgave", "pp": "forgiven", "es": "perdonar"}, {"g": "ABC", "b": "freeze", "p": "froze", "pp": "frozen", "es": "congelar"}, {"g": "ABC", "b": "give", "p": "gave", "pp": "given", "es": "dar"}, {"g": "ABC", "b": "go", "p": "went", "pp": "gone", "es": "ir"}, {"g": "ABC", "b": "grow", "p": "grew", "pp": "grown", "es": "crecer, cultivar"}, {"g": "ABC", "b": "hide", "p": "hid", "pp": "hidden", "es": "esconder"}, {"g": "ABC", "b": "know", "p": "knew", "pp": "known", "es": "saber, conocer"}, {"g": "ABC", "b": "lie", "p": "lay", "pp": "lain", "es": "tumbarse (≠ lie, lied, lied: mentir)"}, {"g": "ABC", "b": "ride", "p": "rode", "pp": "ridden", "es": "montar"}, {"g": "ABC", "b": "ring", "p": "rang", "pp": "rung", "es": "sonar, llamar por teléfono"}, {"g": "ABC", "b": "rise", "p": "rose", "pp": "risen", "es": "subir, levantarse"}, {"g": "ABC", "b": "see", "p": "saw", "pp": "seen", "es": "ver"}, {"g": "ABC", "b": "shake", "p": "shook", "pp": "shaken", "es": "agitar, temblar"}, {"g": "ABC", "b": "show", "p": "showed", "pp": "shown", "es": "mostrar"}, {"g": "ABC", "b": "sing", "p": "sang", "pp": "sung", "es": "cantar"}, {"g": "ABC", "b": "sink", "p": "sank", "pp": "sunk", "es": "hundir(se)"}, {"g": "ABC", "b": "speak", "p": "spoke", "pp": "spoken", "es": "hablar"}, {"g": "ABC", "b": "steal", "p": "stole", "pp": "stolen", "es": "robar"}, {"g": "ABC", "b": "swim", "p": "swam", "pp": "swum", "es": "nadar"}, {"g": "ABC", "b": "take", "p": "took", "pp": "taken", "es": "tomar, llevar"}, {"g": "ABC", "b": "tear", "p": "tore", "pp": "torn", "es": "rasgar"}, {"g": "ABC", "b": "throw", "p": "threw", "pp": "thrown", "es": "lanzar"}, {"g": "ABC", "b": "wake", "p": "woke", "pp": "woken", "es": "despertar(se)"}, {"g": "ABC", "b": "wear", "p": "wore", "pp": "worn", "es": "llevar puesto"}, {"g": "ABC", "b": "write", "p": "wrote", "pp": "written", "es": "escribir"}, {"g": "ABA", "b": "become", "p": "became", "pp": "become", "es": "llegar a ser, convertirse"}, {"g": "ABA", "b": "come", "p": "came", "pp": "come", "es": "venir"}, {"g": "ABA", "b": "run", "p": "ran", "pp": "run", "es": "correr"}, {"g": "ABB", "b": "sweep", "p": "swept", "pp": "swept", "es": "barrer"}, {"g": "ABB", "b": "creep", "p": "crept", "pp": "crept", "es": "arrastrarse, avanzar sigilosamente"}, {"g": "ABB", "b": "deal", "p": "dealt", "pp": "dealt", "es": "tratar, ocuparse de"}, {"g": "ABB", "b": "bleed", "p": "bled", "pp": "bled", "es": "sangrar"}, {"g": "ABC", "b": "beat", "p": "beat", "pp": "beaten", "es": "vencer, golpear (beat, beat, beaten)"}], "GROUPS": [{"g": "AAA", "es": "Las tres formas iguales", "n": 12}, {"g": "ABB", "es": "Pasado y participio iguales", "n": 48}, {"g": "ABC", "es": "Las tres formas distintas", "n": 40}, {"g": "ABA", "es": "Base y participio iguales", "n": 3}], "FIX": [{"b": "The woman which works at reception is very helpful.", "g": "The woman who works at reception is very helpful.", "w": "Which no se usa para personas (errata de la página 5)."}, {"b": "We had paella, that is my favourite meal.", "g": "We had paella, which is my favourite meal.", "w": "Nunca that en una explicativa (detrás de coma). Errata de la página 6."}, {"b": "I had an aunt in Spain, from who I inherited some money.", "g": "I had an aunt in Spain, from whom I inherited some money.", "w": "Detrás de preposición, whom (errata de la página 6)."}, {"b": "My brother who lives in Madrid, is a teacher.", "g": "My brother, who lives in Madrid, is a teacher.", "w": "Una explicativa lleva las dos comas."}, {"b": "The woman works here is very kind.", "g": "The woman who works here is very kind.", "w": "El relativo sujeto no se puede omitir."}, {"b": "Madrid, I visited last year, is beautiful.", "g": "Madrid, which I visited last year, is beautiful.", "w": "En las explicativas nunca se omite el relativo."}, {"b": "That is the student who's father is a judge.", "g": "That is the student whose father is a judge.", "w": "Posesión: whose (who's = who is)."}, {"b": "This is the office where I work in.", "g": "This is the office where I work. / …the office which I work in.", "w": "Where ya incluye la preposición."}, {"b": "I remember the day where we met.", "g": "I remember the day when we met.", "w": "Tiempo: when."}, {"b": "This is the colleague with that I work.", "g": "This is the colleague with whom I work.", "w": "That no puede ir detrás de una preposición."}, {"b": "The fee was high, however the client paid it.", "g": "The fee was high. However, the client paid it.", "w": "However no une dos oraciones con coma: punto (o punto y coma) y coma detrás."}, {"b": "In addition to I speak French, I speak German.", "g": "In addition to French, I speak German. / In addition, I speak German.", "w": "In addition to + nombre o -ing; In addition, + oración."}, {"b": "Dear Sir or Madam, … Yours sincerely,", "g": "Dear Sir or Madam, … Yours faithfully,", "w": "Sin nombre en el saludo, Yours faithfully."}, {"b": "Dear Mr Brown, … Yours faithfully,", "g": "Dear Mr Brown, … Yours sincerely,", "w": "Con apellido en el saludo, Yours sincerely."}, {"b": "I look forward to hear from you.", "g": "I look forward to hearing from you.", "w": "Look forward to + -ing."}, {"b": "I'm familiar with Microsoft Office.", "g": "I am familiar with Microsoft Office.", "w": "Sin contracciones en una carta formal (errata de la página 19)."}, {"b": "I chose to take a MA in Business.", "g": "I chose to take an MA in Business.", "w": "An delante de sonido vocálico (errata de la carta modelo)."}, {"b": "Dependent clauses haven't sense by themselves.", "g": "Dependent clauses do not make sense on their own.", "w": "Make sense (errata de la página 9)."}, {"b": "I value honesty and, specially, teamwork.", "g": "I value honesty and, especially, teamwork.", "w": "Especially = sobre todo (errata de la tabla 4)."}, {"b": "The documents, that you need, are on my desk.", "g": "The documents that you need are on my desk.", "w": "Especificativa: sin comas (y that no va entre comas)."}, {"b": "The firm who advises us is in London.", "g": "The firm which advises us is in London.", "w": "Empresas y cosas: which (o that)."}, {"b": "The day on when the trial started was Monday.", "g": "The day on which the trial started was Monday. / The day when…", "w": "When ya incluye la preposición; con preposición, which."}], "CATS": ["defining (se puede omitir)", "defining (no se puede omitir)", "non-defining"], "WHYC": {"defining (se puede omitir)": "Sin comas, identifica de quién o de qué se habla, y el relativo es objeto (detrás viene un sujeto): se puede quitar.", "defining (no se puede omitir)": "Sin comas e identifica, pero el relativo es sujeto (detrás viene un verbo) o lleva preposición delante: no se puede quitar.", "non-defining": "Va entre comas y da información extra: nunca that y nunca se omite el relativo."}, "REG": [{"s": "", "e": "The book that I bought is interesting.", "c": "defining (se puede omitir)"}, {"s": "", "e": "The woman who works here is very kind.", "c": "defining (no se puede omitir)"}, {"s": "", "e": "My brother, who lives in Madrid, is a teacher.", "c": "non-defining"}, {"s": "", "e": "The lawyer whom we hired was excellent.", "c": "defining (se puede omitir)"}, {"s": "", "e": "The car that is parked outside is mine.", "c": "defining (no se puede omitir)"}, {"s": "", "e": "London, which is very busy, is expensive.", "c": "non-defining"}, {"s": "", "e": "The report that you sent me is incomplete.", "c": "defining (se puede omitir)"}, {"s": "", "e": "The client who called this morning wants a meeting.", "c": "defining (no se puede omitir)"}, {"s": "", "e": "Our director, whose office is upstairs, is on holiday.", "c": "non-defining"}, {"s": "", "e": "The film we watched was excellent.", "c": "defining (se puede omitir)"}, {"s": "", "e": "The judge who handled the case retired.", "c": "defining (no se puede omitir)"}, {"s": "", "e": "The Supreme Court, which is in Madrid, rejected the appeal.", "c": "non-defining"}, {"s": "", "e": "The documents which the court requested are ready.", "c": "defining (se puede omitir)"}, {"s": "", "e": "The partner with whom I work is on leave.", "c": "defining (no se puede omitir)"}, {"s": "", "e": "My mother, who is a nurse, works nights.", "c": "non-defining"}, {"s": "", "e": "The email that I received was from HR.", "c": "defining (se puede omitir)"}, {"s": "", "e": "The student whose father is a judge sits near the window.", "c": "defining (no se puede omitir)"}, {"s": "", "e": "Lisbon, where the conference took place, is beautiful.", "c": "non-defining"}, {"s": "", "e": "The colleague who I met at the conference sent me an email.", "c": "defining (se puede omitir)"}, {"s": "", "e": "The office that has the best view belongs to the partner.", "c": "defining (no se puede omitir)"}, {"s": "", "e": "Ana, whom I met at university, is now a judge.", "c": "non-defining"}, {"s": "", "e": "The museum which opened in 1900 is free today.", "c": "defining (no se puede omitir)"}, {"s": "", "e": "The case they lost was very complex.", "c": "defining (se puede omitir)"}, {"s": "", "e": "My phone, which is quite old, still works.", "c": "non-defining"}], "TASKS": {"letter": {"label": "Carta formal breve", "t": "Escribe una carta formal breve (120-200 palabras) solicitando unas prácticas en un despacho. Sigue el formato de la unidad: saludo con nombre (Dear Mr/Ms + apellido) y su despedida (Yours sincerely), o Dear Sir or Madam y Yours faithfully; el asunto en el campo Subject; sin contracciones; al menos dos oraciones de relativo y tres marcadores; y cierra con I look forward to hearing from you.", "m": "Dear Ms Taylor,\n\nI am writing to apply for the trainee position which was advertised on your website last week. I am a first-year law student, and I currently work at a city council, where I deal with contracts and public procedures.\n\nMoreover, I work with colleagues who come from different departments, so I am used to explaining legal problems in simple words. However, I would like to gain experience in a firm that works with international clients. Therefore, your firm, whose reputation in commercial law is excellent, seems the ideal place for me.\n\nIn addition, I speak Spanish and English fluently, and I am available for an interview at any time.\n\nI look forward to hearing from you.\n\nYours sincerely,\n\n[Your full name]"}, "para": {"label": "Párrafo con relativos y conectores", "t": "Describe tu trabajo o tu despacho en un párrafo de 80-140 palabras. Usa al menos una especificativa (sin comas), al menos una explicativa (entre comas, con who, which, whose o where) y tres marcadores de tipos distintos (por ejemplo, adición, contraste y consecuencia). Nunca that detrás de coma.", "m": "I work at a city council in a historic town near Madrid, which has about 200,000 inhabitants. The department where I work deals with trade, human resources and public safety. My manager, who has worked there for many years, gives me tasks that require a lot of coordination. For example, I prepare the reports that the councillors need before each meeting. The work is sometimes stressful. However, I enjoy it because I learn something new every day. Moreover, I meet people whose problems I can help to solve. Therefore, I think this job is a good preparation for a career in law."}}};
+var STORE="ui1-ing-ud5-v1";
+function load(){ try{ var r=localStorage.getItem(STORE); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
+function save(d){ try{ localStorage.setItem(STORE, JSON.stringify(d)); }catch(e){} }
+var db=load(); db.examHistory=db.examHistory||[]; db.drafts=db.drafts||{};
+
+function $(id){ return document.getElementById(id); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function norm(s){ return (s||"").toLowerCase().replace(/[’‘`]/g,"'").replace(/\s+/g," ").trim().replace(/[.!?]+$/,""); }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function fb(el,ok,html){ el.className="fb show "+(ok?"ok":"ko"); el.innerHTML=html; }
+function hideFb(el){ el.className="fb"; el.innerHTML=""; }
+function fmt(n){ return (Math.round(n*100)/100).toString().replace(".",","); }
+
+/* Tabs */
+var tabs=document.querySelectorAll(".tab");
+tabs.forEach(function(t){ t.addEventListener("click",function(){
+  tabs.forEach(function(x){ x.setAttribute("aria-selected", x===t?"true":"false"); });
+  document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id==="p-"+t.dataset.p); });
+}); });
+
+/* ===== EXAM ===== */
+var L="ABCD";
+function explain(it,good){
+  var h="<b>✓ Correct answer: "+L.charAt(it.o.indexOf(it.ok))+")</b> "+esc(it.ok);
+  h+="<div style='margin-top:8px'><b>Why?</b> "+esc(it.w)+"</div>";
+  h+="<div style='margin-top:6px'><b>Remember:</b> "+esc(it.r)+"</div>";
+  if(it.x){
+    var m={}; for(var k=1;k<it.src.o.length;k++) m[it.src.o[k]]=it.x[k-1];
+    h+="<div style='margin-top:6px'><b>Why are the other options wrong?</b> "+it.o.map(function(op,k){ return op===it.ok?"":L.charAt(k)+") "+esc(m[op]); }).filter(Boolean).join(" ")+"</div>";
+  }
+  if(!good) h+="<div class='es'>"+esc(D.CHECKS[it.c-1])+"</div>";
+  return h;
+}
+var ex=null;
+function renderHistory(){
+  var h=db.examHistory;
+  $("exam-history").textContent = h.length ? ("Últimas notas: "+h.slice(-5).map(function(x){ return fmt(x.nota); }).join(" / ")+" sobre 10.") : "";
+}
+function startExam(pool){
+  var qs=(pool||shuffle(D.EXAM).slice(0,30)).map(function(it){ return {q:it.q,w:it.w,r:it.r,c:it.c,x:it.x,ok:it.o[0],o:shuffle(it.o),src:it}; });
+  ex={qs:qs,i:0,ok:0,ko:0,blank:0,wrong:[],done:false};
+  $("exam-start").hidden=true; $("exam-end").hidden=true; $("exam-run").hidden=false;
+  showQ();
+}
+function showQ(){
+  if(ex.i>=ex.qs.length){ return endExam(); }
+  var it=ex.qs[ex.i]; ex.done=false;
+  $("exam-bar").style.width=(ex.i/ex.qs.length*100)+"%";
+  $("exam-count").textContent="Pregunta "+(ex.i+1)+" de "+ex.qs.length;
+  $("exam-score").textContent="Puntos: "+fmt(ex.ok-ex.ko*0.33);
+  $("exam-q").innerHTML="<span class='hint' style='display:block;margin:0 0 6px'>Choose ONE correct answer.</span>"+esc(it.q);
+  var box=$("exam-opts"); box.innerHTML="";
+  it.o.forEach(function(op,k){
+    var b=document.createElement("button"); b.className="opt"; b.dataset.v=op; b.textContent=L.charAt(k)+") "+op;
+    b.addEventListener("click",function(){ answer(op,b); });
+    box.appendChild(b);
+  });
+  hideFb($("exam-fb")); $("exam-next").disabled=true; $("exam-blank").disabled=false;
+}
+function reveal(){
+  var it=ex.qs[ex.i];
+  $("exam-opts").querySelectorAll(".opt").forEach(function(b){ b.disabled=true; if(b.dataset.v===it.ok) b.classList.add("ok"); });
+}
+function answer(op,btn){
+  if(ex.done) return; ex.done=true;
+  var it=ex.qs[ex.i]; reveal();
+  if(op===it.ok){ ex.ok++; fb($("exam-fb"),true,explain(it,true)); }
+  else { ex.ko++; btn.classList.add("ko"); ex.wrong.push(it.src); fb($("exam-fb"),false,explain(it,false)); }
+  $("exam-next").disabled=false; $("exam-blank").disabled=true; $("exam-next").focus();
+}
+$("exam-blank").addEventListener("click",function(){
+  if(ex.done) return; ex.done=true; ex.blank++; var it=ex.qs[ex.i]; ex.wrong.push(it.src);
+  reveal(); fb($("exam-fb"),false,"En blanco. "+explain(it,false));
+  $("exam-next").disabled=false; $("exam-blank").disabled=true;
+});
+$("exam-next").addEventListener("click",function(){ ex.i++; showQ(); });
+$("exam-go").addEventListener("click",function(){ startExam(); });
+function endExam(){
+  $("exam-run").hidden=true;
+  var n=ex.qs.length, raw=ex.ok-ex.ko*0.33, nota=Math.max(0,raw)/n*10;
+  if(n===30){ db.examHistory.push({d:Date.now(),nota:Math.round(nota*100)/100}); db.examHistory=db.examHistory.slice(-20); save(db); }
+  var h="<p class='prompt'>Nota: <span class='mark'>"+fmt(nota)+"</span> sobre 10</p>";
+  h+="<div class='stats'><div class='stat'><b>"+ex.ok+"</b><span>aciertos</span></div><div class='stat'><b>"+ex.ko+"</b><span>fallos (−"+fmt(ex.ko*0.33)+")</span></div><div class='stat'><b>"+ex.blank+"</b><span>en blanco</span></div></div>";
+  h+= n===30 ? "<p class='hint'>El examen vale el 50 % de la nota: necesitas al menos un 4 en él y un 5 de media con la PEC.</p>" : "<p class='hint'>Ronda de repaso: no cuenta en el historial.</p>";
+  if(ex.wrong.length){
+    h+="<ul class='review'>"+ex.wrong.map(function(w){ return "<li><b>"+esc(w.q)+"</b><br><span class='mark'>"+esc(w.o[0])+"</span>. "+esc(w.w)+"<div class='es'>Remember: "+esc(w.r)+"</div></li>"; }).join("")+"</ul>";
+  }
+  h+="<div class='row'>"+(ex.wrong.length?"<button class='btn' id='exam-retry'>Repetir solo los fallos</button>":"")+"<button class='btn ghost' id='exam-new'>Nuevo test de 30</button></div>";
+  var end=$("exam-end"); end.innerHTML=h; end.hidden=false;
+  var wr=ex.wrong.slice();
+  if($("exam-retry")) $("exam-retry").addEventListener("click",function(){ startExam(shuffle(wr)); });
+  $("exam-new").addEventListener("click",function(){ startExam(); });
+  renderHistory();
+}
+renderHistory();
+
+/* ===== generic adaptive queue ===== */
+function Queue(items){ this.q=shuffle(items); this.total=items.length; this.mastered=0; this.cur=null; }
+Queue.prototype.next=function(){ this.cur=this.q.shift()||null; return this.cur; };
+Queue.prototype.fail=function(){ var pos=Math.min(3,this.q.length); this.q.splice(pos,0,this.cur); };
+Queue.prototype.pass=function(){ this.mastered++; };
+function bar(id,Q){ $(id).style.width=(Q.mastered/Q.total*100)+"%"; }
+function done(Q){ return !Q.cur && Q.q.length===0 && Q.mastered===Q.total; }
+
+/* ===== GAP FILL ===== */
+var G=new Queue(D.GAPS), gDone=false;
+function gapShow(){
+  var c=G.next(); bar("gap-bar",G); hideFb($("gap-fb"));
+  if(!c){ $("gap-q").innerHTML="<span class='mark'>Completado.</span> Has acertado las "+G.total+" tarjetas."; $("gap-in").hidden=true; $("gap-check").hidden=true; $("gap-next").textContent="Empezar de nuevo"; $("gap-next").disabled=false; $("gap-count").textContent=""; return; }
+  $("gap-in").hidden=false; $("gap-check").hidden=false; $("gap-next").textContent="Siguiente";
+  $("gap-count").textContent="Dominadas "+G.mastered+" de "+G.total;
+  $("gap-q").textContent=c.s; $("gap-in").value=""; $("gap-next").disabled=true; gDone=false; $("gap-in").focus({preventScroll:true});
+}
+function gapCheck(){
+  if(gDone) return; var c=G.cur; if(!c) return; var v=norm($("gap-in").value); if(!v) return; gDone=true;
+  var ok=c.a.some(function(a){ return norm(a)===v; });
+  if(ok){ G.pass(); fb($("gap-fb"),true,"Correcto.<div class='es'>"+esc(c.es)+"</div>"); }
+  else { G.fail(); fb($("gap-fb"),false,"Respuesta: <span class='mark'>"+esc(c.a[0])+"</span>. Volverá a salir.<div class='es'>"+esc(c.es)+"</div>"); }
+  bar("gap-bar",G); $("gap-next").disabled=false; $("gap-next").focus();
+}
+$("gap-check").addEventListener("click",gapCheck);
+$("gap-in").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(gDone) gapShow(); else gapCheck(); } });
+$("gap-next").addEventListener("click",function(){ if(done(G)){ G=new Queue(D.GAPS); } gapShow(); });
+gapShow();
+
+/* ===== PAST FORMS ===== */
+var S=new Queue(D.SP), sDone=false;
+function spShow(){
+  var c=S.next(); bar("spell-bar",S); hideFb($("spell-fb"));
+  if(!c){ $("spell-q").innerHTML="<span class='mark'>Completado.</span> "+S.total+" conectores acertados."; $("spell-in").hidden=true; $("spell-check").hidden=true; $("spell-next").textContent="Empezar de nuevo"; $("spell-next").disabled=false; $("spell-count").textContent=""; $("spell-mode").textContent=""; return; }
+  $("spell-in").hidden=false; $("spell-check").hidden=false; $("spell-next").textContent="Siguiente";
+  $("spell-count").textContent="Dominadas "+S.mastered+" de "+S.total;
+  $("spell-mode").textContent="Escribe el conector";
+  $("spell-q").textContent = c.v;
+  $("spell-in").value=""; $("spell-next").disabled=true; sDone=false; $("spell-in").focus({preventScroll:true});
+}
+function spCheck(){
+  if(sDone) return; var c=S.cur; if(!c) return; var v=norm($("spell-in").value); if(!v) return; sDone=true;
+  var ok=c.a.some(function(a){ return norm(a)===v; });
+  if(ok){ S.pass(); fb($("spell-fb"),true,"Correcto: "+esc(c.a[0])+". Regla: "+esc(c.r)+"."); }
+  else { S.fail(); fb($("spell-fb"),false,"Es <span class='mark'>"+esc(c.a[0])+"</span>. Regla: "+esc(c.r)+"."); }
+  bar("spell-bar",S); $("spell-next").disabled=false; $("spell-next").focus();
+}
+$("spell-check").addEventListener("click",spCheck);
+$("spell-in").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(sDone) spShow(); else spCheck(); } });
+$("spell-next").addEventListener("click",function(){ if(done(S)){ S=new Queue(D.SP); } spShow(); });
+spShow();
+
+/* ===== IRREGULAR VERBS ===== */
+var IG="all", I=null, iDone=false, PPO=false;
+function accs(s){ var a=s.split("/").map(norm); a.push(norm(s)); a.push(norm(s.replace("/"," / "))); return a; }
+function irrPool(){ return D.IRR.filter(function(v){ return IG==="all"||v.g===IG; }); }
+function irrGroups(){
+  var box=$("irr-groups"); box.innerHTML="";
+  [{g:"all",es:"Todos",n:D.IRR.length}].concat(D.GROUPS).forEach(function(G){
+    var b=document.createElement("button"); b.className= IG===G.g?"btn":"btn ghost";
+    b.textContent=(G.g==="all"?"Todos":G.g)+" ("+G.n+")"; b.title=G.es;
+    b.addEventListener("click",function(){ IG=G.g; I=new Queue(irrPool()); irrGroups(); irrShow(); });
+    box.appendChild(b);
+  });
+  var t=document.createElement("button"); t.className= PPO?"btn":"btn ghost"; t.textContent= PPO?"Solo participio ✓":"Solo participio";
+  t.title="Escribe solo el participio (lo necesitarás en la pasiva de la Unit 6)";
+  t.addEventListener("click",function(){ PPO=!PPO; irrGroups(); irrShow(); }); box.appendChild(t);
+  var cur=D.GROUPS.filter(function(G){ return G.g===IG; })[0];
+  $("irr-glabel").textContent= (cur? cur.es : "Los "+D.IRR.length+" verbos")+(PPO?" · solo participio":"");
+}
+function irrShow(){
+  var c=I.next(); bar("irr-bar",I); hideFb($("irr-fb")); iDone=false;
+  if(!c){ $("irr-q").innerHTML="<span class='mark'>Completado.</span> Grupo dominado."; $("irr-es").textContent=""; $("irr-inputs").hidden=true; $("irr-check").hidden=true; $("irr-next").textContent="Empezar de nuevo"; $("irr-next").disabled=false; $("irr-count").textContent=""; return; }
+  $("irr-inputs").hidden=false; $("irr-check").hidden=false; $("irr-next").textContent="Siguiente"; $("irr-next").disabled=true;
+  $("irr-count").textContent="Dominados "+I.mastered+" de "+I.total;
+  $("irr-q").innerHTML="<b>"+esc(c.b)+"</b>"; $("irr-es").textContent=c.es+" · grupo "+c.g;
+  $("irr-past").value=""; $("irr-pp").value=""; $("irr-past").hidden=PPO; $("irr-past-l").hidden=PPO; (PPO?$("irr-pp"):$("irr-past")).focus({preventScroll:true});
+}
+function irrCheck(){
+  if(iDone) return; var c=I.cur; if(!c) return;
+  var p=norm($("irr-past").value), pp=norm($("irr-pp").value); if((!p&&!PPO)||!pp) return; iDone=true;
+  var okP=PPO||accs(c.p).indexOf(p)>-1, okPP=accs(c.pp).indexOf(pp)>-1;
+  var forms="<span class='mark'>"+esc(c.b)+" – "+esc(c.p)+" – "+esc(c.pp)+"</span>";
+  if(okP&&okPP){ I.pass(); fb($("irr-fb"),true,"Correcto: "+forms); }
+  else { I.fail(); fb($("irr-fb"),false,(okP?"":"Past simple mal. ")+(okPP?"":"Participio mal. ")+"Es "+forms+". Volverá a salir."); }
+  bar("irr-bar",I); $("irr-next").disabled=false; $("irr-next").focus();
+}
+$("irr-check").addEventListener("click",irrCheck);
+$("irr-past").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(iDone) irrShow(); else $("irr-pp").focus(); } });
+$("irr-pp").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(iDone) irrShow(); else irrCheck(); } });
+$("irr-next").addEventListener("click",function(){ if(done(I)){ I=new Queue(irrPool()); } irrShow(); });
+$("irr-list").innerHTML=D.GROUPS.map(function(G){
+  return "<h4>"+G.g+" · "+esc(G.es)+" ("+G.n+")</h4><table class='vt'><tr><th>Base</th><th>Past</th><th>Participle</th><th>Español</th></tr>"+
+    D.IRR.filter(function(v){ return v.g===G.g; }).map(function(v){ return "<tr><td>"+esc(v.b)+"</td><td>"+esc(v.p)+"</td><td>"+esc(v.pp)+"</td><td>"+esc(v.es)+"</td></tr>"; }).join("")+"</table>";
+}).join("");
+I=new Queue(irrPool()); irrGroups(); irrShow();
+
+/* ===== FIX THE MISTAKE ===== */
+var F=new Queue(D.FIX);
+function fixShow(){
+  var c=F.next(); bar("fix-bar",F); hideFb($("fix-fb"));
+  $("fix-row1").hidden=false; $("fix-row2").hidden=true;
+  if(!c){ $("fix-q").innerHTML="<span class='mark'>Completado.</span>"; $("fix-show").textContent="Empezar de nuevo"; $("fix-count").textContent=""; return; }
+  $("fix-show").textContent="Ver corrección";
+  $("fix-count").textContent="Dominadas "+F.mastered+" de "+F.total;
+  $("fix-q").textContent=c.b;
+}
+$("fix-show").addEventListener("click",function(){
+  if(!F.cur){ F=new Queue(D.FIX); fixShow(); return; }
+  var c=F.cur; fb($("fix-fb"),true,"<span class='mark'>"+esc(c.g)+"</span><div class='es'>"+esc(c.w)+"</div>");
+  $("fix-row1").hidden=true; $("fix-row2").hidden=false;
+});
+$("fix-good").addEventListener("click",function(){ F.pass(); fixShow(); });
+$("fix-bad").addEventListener("click",function(){ F.fail(); fixShow(); });
+fixShow();
+
+/* ===== WHICH FUTURE? ===== */
+var R=new Queue(D.REG), rDone=false;
+function regShow(){
+  var c=R.next(); bar("reg-bar",R); hideFb($("reg-fb")); rDone=false; $("reg-next").disabled=true;
+  var box=$("reg-opts"); box.innerHTML="";
+  if(!c){ $("reg-q").innerHTML="<span class='mark'>Completado.</span>"; $("reg-ctx").textContent=""; $("reg-next").textContent="Empezar de nuevo"; $("reg-next").disabled=false; $("reg-count").textContent=""; return; }
+  $("reg-next").textContent="Siguiente";
+  $("reg-count").textContent="Dominadas "+R.mastered+" de "+R.total;
+  $("reg-ctx").textContent=c.s; $("reg-q").textContent=c.e;
+  D.CATS.forEach(function(cat){
+    var b=document.createElement("button"); b.className="opt"; b.textContent=cat; b.dataset.v=cat;
+    b.addEventListener("click",function(){ regAns(cat,b); });
+    box.appendChild(b);
+  });
+}
+function regAns(cat,btn){
+  if(rDone || !R.cur) return; rDone=true; var c=R.cur;
+  $("reg-opts").querySelectorAll(".opt").forEach(function(b){ b.disabled=true; if(b.dataset.v===c.c) b.classList.add("ok"); });
+  if(cat===c.c){ R.pass(); fb($("reg-fb"),true,"Correcto. "+esc(D.WHYC[c.c])); }
+  else { R.fail(); btn.classList.add("ko"); fb($("reg-fb"),false,"Es <span class='mark'>"+esc(c.c)+"</span>. "+esc(D.WHYC[c.c])); }
+  bar("reg-bar",R); $("reg-next").disabled=false; $("reg-next").focus();
+}
+$("reg-next").addEventListener("click",function(){ if(done(R)){ R=new Queue(D.REG); } regShow(); });
+regShow();
+
+/* ===== WRITE ===== */
+var wMode="letter";
+var CONTR=/\b(i'm|you're|we're|they're|it's|that's|there's|he's|she's|don't|doesn't|didn't|can't|won't|isn't|aren't|wasn't|weren't|haven't|hasn't|wouldn't|couldn't|shouldn't|i've|i'd|i'll|we'll|let's)\b/i;
+var MK={add:/\b(moreover|furthermore|in addition|additionally|as well as|also)\b/i, con:/\b(however|nevertheless|although|whereas|in contrast|on the other hand|but)\b/i, res:/\b(therefore|consequently|as a result|hence|thus|so)\b/i, ex:/\b(for example|for instance|such as)\b/i, sum:/\b(in conclusion|in short|all in all|on the whole|to sum up|finally)\b/i};
+function cnt(re,t){ return (t.match(re)||[]).length; }
+function kinds(t){ var n=0; for(var k in MK){ if(MK[k].test(t)) n++; } return n; }
+function checksFor(sub,body){
+  var words=(body.match(/[A-Za-z']+/g)||[]).length;
+  var c=[], b=body.replace(/[’]/g,"'");
+  if(wMode==="letter"){
+    var nameG=/^\s*dear\s+(mr|ms|mrs|miss|dr)\.?\s+[a-z]/im.test(b), anonG=/^\s*dear\s+sir\s+or\s+madam/im.test(b);
+    c.push({ok:nameG||anonG, t:"Saludo formal: Dear Mr/Ms + apellido, o Dear Sir or Madam"});
+    c.push({ok:(nameG&&/yours sincerely/i.test(b))||(anonG&&/yours faithfully/i.test(b)), t:"Despedida que casa con el saludo (sincerely con nombre; faithfully sin nombre)"});
+    c.push({ok:sub.trim().length>3, t:"Asunto escrito en el campo Subject"});
+    c.push({ok:!CONTR.test(b), t:"Sin contracciones (I am, no I'm)"});
+    c.push({ok:cnt(/\b(who|whom|which|whose|where)\b/gi,b)>=2, t:"Al menos dos oraciones de relativo (who, whom, which, whose, where)"});
+    c.push({ok:kinds(b)>=3, t:"Marcadores de al menos tres tipos (adición, contraste, consecuencia, ejemplo, resumen)"});
+    c.push({ok:/i look forward to hearing from you/i.test(b), t:"I look forward to hearing from you"});
+    c.push({ok:!/,\s*that\b/i.test(b.replace(/so that/gi,"")), t:"Nunca that detrás de coma"});
+    c.push({ok:words>=120 && words<=200, t:"Entre 120 y 200 palabras"});
+  } else {
+    c.push({ok:/[^,\s]\s+(who|which|that|whose|where)\s+\w+/i.test(b), t:"Al menos una especificativa (sin coma delante)"});
+    c.push({ok:/,\s*(who|which|whose|where)\b[^,.]*,/i.test(b) || /,\s*(who|which|whose|where)\b[^.]*\./i.test(b), t:"Al menos una explicativa entre comas (who, which, whose o where)"});
+    c.push({ok:!/,\s*that\b/i.test(b.replace(/so that/gi,"")), t:"Nunca that detrás de coma"});
+    c.push({ok:kinds(b)>=3, t:"Marcadores de al menos tres tipos (adición, contraste, consecuencia, ejemplo, resumen)"});
+    c.push({ok:/[.;]\s*(however|therefore|moreover|consequently|furthermore|nevertheless|in addition|for example|for instance),/i.test(b), t:"Un conector tras punto y seguido de coma (. However, …)"});
+    c.push({ok:words>=80 && words<=140, t:"Entre 80 y 140 palabras"});
+  }
+  return {c:c,words:words};
+}
+function wRender(){
+  var sub=$("w-subject").value, body=$("w-body").value, r=checksFor(sub,body);
+  $("w-words").textContent=r.words+" words";
+  $("w-checks").innerHTML=r.c.map(function(x){ return "<li class='"+(body.trim()?(x.ok?"pass":"fail"):"")+"'>"+esc(x.t)+"</li>"; }).join("");
+  db.drafts[wMode]={s:sub,b:body}; save(db);
+}
+function wSet(m){
+  wMode=m; $("w-formal").className= m==="letter"?"btn":"btn ghost"; $("w-informal").className= m==="para"?"btn":"btn ghost";
+  $("w-task").textContent=D.TASKS[m].t; $("w-model").textContent=D.TASKS[m].m;
+  var d=db.drafts[m]||{s:"",b:""}; $("w-subject").value=d.s; $("w-body").value=d.b; wRender();
+}
+$("w-formal").addEventListener("click",function(){ wSet("letter"); });
+$("w-informal").addEventListener("click",function(){ wSet("para"); });
+$("w-subject").addEventListener("input",wRender);
+$("w-body").addEventListener("input",wRender);
+wSet("letter");
+
+})();
+</script>
+</body>
+</html>
