@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque V · Tema 4 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque V · Tema 4 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "DF 4.ª TREBEP: qué no surte efectos todavía", "b": "Cap. III del título V (arts. 78-84, provisión y movilidad) y caps. II y III del título III (carrera y retribuciones, salvo 25.2), hasta las leyes de función pública de desarrollo."}, {"u": 1, "f": "Normas que rigen la provisión en la AGE", "b": "Art. 20 Ley 30/1984 · RD 364/1995, título III (y IV y V para carrera y promoción) · RDL 6/2023 en evaluación, carrera horizontal, directivos e intervalos."}, {"u": 1, "f": "Acceso frente a provisión", "b": "Acceso: adquirir la condición de funcionario. Provisión: asignar un puesto a quien ya es funcionario."}, {"u": 1, "f": "Formas de provisión (art. 36 RD 364/1995)", "b": "Ordinarias: concurso (normal) y libre designación · por necesidades: redistribución, reasignación, cambio de adscripción · temporales: comisión de servicios y adscripción provisional."}, {"u": 1, "f": "Art. 81.3 TREBEP", "b": "Urgente e inaplazable necesidad: provisión provisional, con convocatoria posterior (examen 2022)."}, {"u": 2, "f": "Autorización, convocatoria y resolución del concurso", "b": "Autoriza la Secretaría de Estado de Función Pública a iniciativa de los departamentos (art. 39) · convoca y resuelve el subsecretario (art. 63.1.n Ley 40/2015)."}, {"u": 2, "f": "Permanencia mínima para concursar", "b": "2 años en el puesto definitivo. Excepciones: misma secretaría de Estado (o departamento), remoción, cese en libre designación, supresión del puesto."}, {"u": 2, "f": "Plazos del concurso", "b": "Solicitudes: 15 días hábiles · resolución: 2 meses · cese: 3 días hábiles (diferible 20 días hábiles; SEFP hasta 3 meses) · posesión: 3 días hábiles o 1 mes."}, {"u": 2, "f": "Méritos obligatorios (art. 44.1)", "b": "Grado personal · trabajo desarrollado · cursos de formación · antigüedad · méritos específicos. Cada concepto entre el 10 % y el 40 % del total."}, {"u": 2, "f": "Méritos de conciliación (art. 44.2)", "b": "Destino previo del cónyuge · cuidado de hijos hasta 12 años · cuidado de familiar hasta 2.º grado (incompatible con hijos). Máximo: la puntuación de la antigüedad."}, {"u": 2, "f": "Desempate (art. 44.4)", "b": "1.º méritos del 44.1 por su orden · 2.º fecha de ingreso en el cuerpo desde el que se concursa · 3.º número del proceso selectivo."}, {"u": 2, "f": "Concurso específico (art. 45)", "b": "Dos fases: méritos generales y méritos específicos (memoria o entrevista). Media desechando la máxima y la mínima."}, {"u": 2, "f": "Comisiones de valoración (art. 46)", "b": "Mínimo 4 miembros · sindicatos más representativos con derecho a participar, sin igualar a los de la Administración · grupo igual o superior. No es «número impar»."}, {"u": 2, "f": "Destinos del concurso (art. 49)", "b": "Irrenunciables salvo otro destino por convocatoria pública antes de acabar el plazo posesorio; voluntarios, sin indemnización."}, {"u": 2, "f": "Remoción del puesto de concurso (art. 50)", "b": "Causas: alteración del puesto por la RPT o rendimiento insuficiente sin inhibición · propuesta motivada · 10 días hábiles de alegaciones · parecer de la Junta de Personal · resolución que agota la vía."}, {"u": 3, "f": "Puestos de libre designación (art. 51.2)", "b": "Subdirectores generales · delegados y directores territoriales o provinciales · secretarías de altos cargos · directivos o de especial responsabilidad según la RPT."}, {"u": 3, "f": "Trámite de la libre designación", "b": "15 días hábiles de solicitudes · informe del centro; si viene de otro departamento, favorable (silencio favorable en 15 días naturales) · nombramiento en 1 mes, prorrogable 1 más."}, {"u": 3, "f": "Cese en libre designación (art. 58)", "b": "Discrecional, motivado solo por la competencia. Garantía: puesto de su cuerpo no inferior en más de 2 niveles a su grado, mismo municipio."}, {"u": 3, "f": "Personal directivo público profesional (RDL 6/2023)", "b": "Subdirectores generales y asimilados · A1 · libre designación con 10 días naturales, sin informes ni cobertura provisional · 5 años renovables · cese motivado; pérdida de confianza solo excepcional."}, {"u": 4, "f": "Redistribución de efectivos (art. 59)", "b": "Puesto definitivo no singularizado → otro igual (nivel, complementos, forma de provisión), sin cambio de municipio. Sigue siendo definitivo (examen 2022)."}, {"u": 4, "f": "Reasignación de efectivos: las tres fases", "b": "1.ª ministerio: 6 meses · 2.ª SEFP en otros ministerios: 3 meses · 3.ª expectativa de destino: máximo 1 año → excedencia forzosa."}, {"u": 4, "f": "Expectativa de destino: retribuciones", "b": "Básicas + complemento de destino del grado + 50 % del complemento específico del puesto anterior."}, {"u": 4, "f": "Adscripción provisional (art. 63)", "b": "Solo en: remoción o cese (concurso o libre designación) · supresión del puesto · reingreso sin reserva. Sin reserva de puesto."}, {"u": 4, "f": "Comisión de servicios (art. 64)", "b": "Vacante urgente · voluntaria; forzosa si el concurso quedó desierto · 1 año + 1 · reserva el puesto y cobra el desempeñado · el puesto va a la siguiente convocatoria."}, {"u": 4, "f": "Movilidad por salud (art. 66 bis)", "b": "Funcionario, cónyuge o hijos a cargo · informe médico oficial · vacante de necesaria provisión de nivel no superior al de origen (examen 2019)."}, {"u": 4, "f": "Violencia de género (art. 82 TREBEP; art. 66 ter RD 364/1995)", "b": "Traslado a puesto de análogas características; traslado forzoso. TREBEP: sin necesidad de vacante de necesaria cobertura. Reglamento AGE: vacante de necesaria provisión."}, {"u": 4, "f": "Permuta (art. 62 LFCE 1964)", "b": "Igual naturaleza y forma de provisión · ≤ 5 años de diferencia de servicio · no otra en 10 años · no si faltan < 10 años para jubilarse · se anula si hay jubilación voluntaria en 2 años."}, {"u": 4, "f": "Atribución temporal de funciones (art. 66)", "b": "Excepcional, por el subsecretario: funciones no asignadas a puestos o exceso coyuntural de tareas. Cobra su puesto."}, {"u": 4, "f": "Movilidad interadministrativa (art. 84 TREBEP)", "b": "Servicio en otras Administraciones públicas. Cese en libre designación: la de destino tiene 1 mes; luego reingreso en origen en 1 mes."}, {"u": 5, "f": "Modalidades de carrera (art. 16.3 TREBEP)", "b": "Horizontal (sin cambiar de puesto) · vertical (provisión) · promoción interna vertical (subgrupo superior) · promoción interna horizontal (mismo subgrupo)."}, {"u": 5, "f": "Adquisición del grado personal", "b": "2 años continuados o 3 con interrupción en puestos del nivel (examen 2019). 30 niveles. Lo reconoce el subsecretario."}, {"u": 5, "f": "Puesto superior en más de dos niveles", "b": "Se consolidan 2 niveles cada 2 años continuados, sin superar el nivel del puesto ni el intervalo del cuerpo (art. 70.2)."}, {"u": 5, "f": "Qué computa para el grado", "b": "Servicios especiales · primer año de excedencia por cuidado de hijos · fases 1.ª y 2.ª de reasignación y expectativa · comisión de servicios si se obtiene luego el puesto. Adscripción provisional < 6 meses no interrumpe."}, {"u": 5, "f": "Garantías del grado", "b": "Cobrar al menos el complemento de destino de su nivel · puesto no inferior en más de 2 niveles en el mismo municipio · supresión: 3 meses con las complementarias anteriores."}, {"u": 5, "f": "Intervalos de niveles (DT 6.ª RDL 6/2023)", "b": "A1 24-30 · A2 20-26 · B 18-24 · C1 16-22 · C2 14-18. La tabla del art. 71 RD 364/1995 está superada."}, {"u": 5, "f": "Carrera horizontal (art. 122 RDL 6/2023)", "b": "Voluntaria · convocatoria anual · 4 tramos · 5 años el primero y 6 los siguientes · complemento de carrera desde el 1 de enero siguiente · pendiente de reglamento."}, {"u": 5, "f": "Qué computa en la carrera horizontal", "b": "Servicios especiales y excedencias por cuidado de familiares, violencia de género o terrorista. Se mantienen los tramos de grupos anteriores."}, {"u": 6, "f": "Evaluación del desempeño (art. 20 TREBEP)", "b": "Mide y valora la conducta profesional y el rendimiento. Efectos en carrera horizontal, formación, provisión y retribuciones. La continuidad en el puesto de concurso queda vinculada a ella."}, {"u": 6, "f": "Evaluación en la Administración del Estado", "b": "Anual y obligatoria · conducta presumida positiva · efectos en complemento de desempeño, carrera, provisión, continuidad y formación · sin consecuencias las 2 primeras anualidades."}, {"u": 6, "f": "Complemento de desempeño (DT 7.ª)", "b": "Hasta implantar la evaluación, sigue las reglas del complemento de productividad; después lo sustituye."}, {"u": 7, "f": "Requisitos de la promoción interna (art. 18 TREBEP)", "b": "Requisitos de ingreso · 2 años de servicio activo en el subgrupo inferior · superar las pruebas (examen 2024)."}, {"u": 7, "f": "Sistemas y convocatorias (arts. 74, 75 y 79)", "b": "Oposición o concurso-oposición; el concurso nunca sirve para superar la oposición · mixtas (desiertas al turno libre) o independientes autorizadas por el Gobierno."}, {"u": 7, "f": "Derechos del que promociona (art. 78)", "b": "Preferencia sobre el turno libre para elegir destino · posible destino en su puesto o municipio · conservar el grado si está en el intervalo."}, {"u": 7, "f": "De C2 a C1 (DA 22.ª Ley 30/1984)", "b": "Concurso-oposición. Titulación sustituible por 10 años en C2, o 5 años + curso específico."}, {"u": 8, "f": "Introducción de función pública: las cuatro piezas", "b": "Arts. 103.3 y 149.1.18.ª CE · RDLeg 5/2015 «(en adelante, TREBEP)» · Ley 30/1984 y reglamentos en lo que no se opongan · para este tema: RD 364/1995 y la DF 4.ª."}, {"u": 8, "f": "Calificación previa del Tema 4", "b": "«Con carácter previo, procede calificar la situación del funcionario»: cuerpo y subgrupo · grado · nivel del puesto · forma y carácter (definitivo o provisional) de la ocupación."}, {"u": 8, "f": "Mini-supuesto: permanencia", "b": "Puesto definitivo desde 15/02/2025 → 2 años el 15/02/2027. Plazo de solicitudes hasta 01/12/2026: no puede concursar."}, {"u": 8, "f": "Mini-supuesto: remoción y grado", "b": "Pérdida de confianza: no es causa de remoción del concurso. Garantía: nivel ≥ grado − 2 en el mismo municipio. Grado 22 y puesto 24: consolida 24 a los 2 años."}, {"u": 8, "f": "Conclusión afirmativa tipo", "b": "«Por tanto, se concluye que no procede la remoción de Marta, porque la pérdida de confianza no es causa legal de remoción de un puesto obtenido por concurso.»"}];
+const UNAMES={"1": "Marco", "2": "Concurso", "3": "Libre designación", "4": "Movilidad", "5": "Grado y carrera", "6": "Evaluación", "7": "Promoción interna", "8": "Supuesto"};
+const SK="gace27_bv_t04_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
