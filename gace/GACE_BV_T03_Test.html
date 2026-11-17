@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque V · Tema 3 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque V · Tema 3 · Planificación, OEP, selección y competencias</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u": 1, "t": "Según el art. 69.1 TREBEP, la planificación de recursos humanos tiene como objetivo contribuir a:", "o": ["La reducción del gasto de personal", "La eficacia en la prestación de los servicios y la eficiencia en la utilización de los recursos económicos", "La estabilidad en el empleo del personal temporal", "La igualdad retributiva entre Administraciones"], "c": 1, "e": "Art. 69.1 TREBEP."},
+{"u": 1, "t": "Entre las medidas de los planes de ordenación del art. 69.2 TREBEP figura:", "o": ["La suspensión de incorporaciones de personal externo a un determinado ámbito", "La supresión de la promoción interna mientras dure el plan de ordenación aprobado por la Administración", "La congelación de trienios", "La creación de cuerpos por resolución"], "c": 0, "e": "Art. 69.2.c TREBEP."},
+{"u": 1, "t": "La planificación estratégica del Real Decreto-ley 6/2023 establece:", "o": ["Un escenario anual cerrado", "El escenario plurianual de empleo público, periódicamente revisable", "Un plan cuatrienal aprobado por las Cortes Generales junto con la ley de Presupuestos", "Un plan sin relación con los Presupuestos"], "c": 1, "e": "Art. 107.1 RDL 6/2023."},
+{"u": 1, "t": "Los planes de planificación estratégica de la Administración del Estado deben ser objeto de:", "o": ["Informe preceptivo del Consejo de Estado y del Consejo de Transparencia", "Negociación colectiva previa y evaluación posterior", "Aprobación por el Consejo de Ministros", "Publicación en el BOE en todo caso"], "c": 1, "e": "Art. 107.5 RDL 6/2023."},
+{"u": 1, "t": "Según la Orden TDF/380/2024, los planes específicos de recursos humanos se aprueban:", "o": ["Por la Secretaría de Estado de Función Pública en el mes de diciembre del año anterior", "Por los departamentos ministeriales en el primer trimestre del año", "Por el Consejo de Ministros cada dos años", "Por la CECIR en el segundo semestre"], "c": 1, "e": "Arts. 5 y 7 Orden TDF/380/2024."},
+{"u": 1, "t": "El plan de ámbito general de la Orden TDF/380/2024 lo aprueba:", "o": ["Cada ministerio", "La Secretaría de Estado de Función Pública, anualmente, en los dos meses siguientes a los específicos", "El Ministerio de Hacienda", "La Comisión Superior de Personal"], "c": 1, "e": "Arts. 4 y 7 Orden TDF/380/2024."},
+{"u": 1, "t": "El plan general de recursos humanos incluye un diagnóstico de situación del empleo público a:", "o": ["Un año", "Tres años", "Cinco años", "Diez años"], "c": 1, "e": "Art. 4.1 Orden TDF/380/2024."},
+{"u": 1, "t": "Los modelos normalizados de los planes de recursos humanos los adopta:", "o": ["La Comisión Superior de Personal", "La Comisión de Coordinación del Empleo Público", "El INAP", "La Mesa General"], "c": 0, "e": "Art. 7.2 Orden TDF/380/2024 y RD 349/2001."},
+{"u": 2, "t": "El contenido mínimo de las RPT según el art. 74 TREBEP incluye:", "o": ["Nombre de los ocupantes y su antigüedad", "Denominación, grupos de clasificación, cuerpos o escalas, sistemas de provisión y retribuciones complementarias", "Solo los puestos de libre designación", "Las retribuciones básicas y los trienios"], "c": 1, "e": "Art. 74 TREBEP."},
+{"u": 2, "t": "En la AGE, las relaciones de puestos de trabajo las aprueba y modifica:", "o": ["El Consejo de Ministros", "La Comisión Ejecutiva de la Comisión Interministerial de Retribuciones (CECIR)", "El subsecretario de cada departamento", "La Dirección General de la Función Pública por sí sola, previo informe del subsecretario del departamento afectado"], "c": 1, "e": "Temario; RPT en la AGE."},
+{"u": 2, "t": "Según el art. 109 del Real Decreto-ley 6/2023, las RPT de la Administración del Estado incluyen:", "o": ["Solo los puestos de funcionarios", "Todos los puestos de naturaleza funcionarial, laboral y eventual", "Solo los puestos con complemento específico y nivel de complemento de destino superior al 26", "Los puestos de altos cargos"], "c": 1, "e": "Art. 109.1 RDL 6/2023."},
+{"u": 2, "t": "Las unidades administrativas que no son órganos se crean y modifican:", "o": ["Por real decreto de estructura orgánica básica del departamento, a propuesta del ministro", "A través de las relaciones de puestos de trabajo (art. 59.2 Ley 40/2015)", "Por orden ministerial publicada en el BOE", "Por acuerdo de la Mesa General"], "c": 1, "e": "Art. 59.2 Ley 40/2015."},
+{"u": 2, "t": "Los concursos unitarios de carácter abierto y permanente los convoca:", "o": ["Cada subsecretario", "La Secretaría de Estado de Función Pública", "El INAP", "El Consejo de Ministros"], "c": 1, "e": "Art. 111 RDL 6/2023."},
+{"u": 2, "t": "Los actos que deban inscribirse en el Registro Central de Personal se le comunican en el plazo máximo de:", "o": ["Tres días", "Diez días", "Un mes", "Quince días"], "c": 0, "e": "Art. 11.2 Reglamento del RCP (RD 2073/1999)."},
+{"u": 2, "t": "Las anotaciones provisionales en el Registro Central de Personal pueden mantenerse:", "o": ["30 días", "90 días naturales, prorrogables otros 90", "Seis meses naturales, sin posibilidad de prórroga alguna", "Un año"], "c": 1, "e": "RD 2073/1999."},
+{"u": 2, "t": "En el expediente personal del funcionario no pueden figurar datos relativos a:", "o": ["Sanciones disciplinarias cancelables y las faltas leves no sancionadas", "Raza, religión u opinión", "Titulaciones", "Trienios"], "c": 1, "e": "Art. 13.5 Ley 30/1984."},
+{"u": 3, "t": "La oferta de empleo público obliga a convocar los procesos para las plazas comprometidas y:", "o": ["Hasta un 5 % adicional", "Hasta un 10 % adicional", "Hasta un 20 % adicional, previa autorización de Hacienda y negociación en la Mesa General", "Sin margen adicional"], "c": 1, "e": "Art. 70.1 TREBEP."},
+{"u": 3, "t": "La ejecución de la oferta de empleo público debe desarrollarse en el plazo improrrogable de:", "o": ["Un año", "Dos años", "Tres años", "Cuatro años"], "c": 2, "e": "Art. 70.1 TREBEP (examen 2019)."},
+{"u": 3, "t": "En la Administración del Estado, las convocatorias derivadas de la oferta deben publicarse:", "o": ["En los seis meses siguientes", "En el mismo año natural de publicación de la oferta en el BOE", "En los tres años siguientes", "Antes del 31 de marzo del año siguiente al de publicación de la oferta en el BOE"], "c": 1, "e": "Art. 108.2 RDL 6/2023."},
+{"u": 3, "t": "Cada convocatoria de la Administración del Estado debe ejecutarse en un máximo de:", "o": ["Un año, y la oposición en seis meses", "Dos años desde su publicación, y la fase de oposición en un año salvo causa justificada", "Tres años", "18 meses"], "c": 1, "e": "Art. 108.2 RDL 6/2023."},
+{"u": 3, "t": "Las plazas no cubiertas de una convocatoria pueden volver a convocarse:", "o": ["En cualquier momento, siempre que exista crédito presupuestario suficiente en el departamento", "Si no han transcurrido más de tres años desde la publicación de la oferta", "Solo en el año siguiente", "Nunca"], "c": 1, "e": "Art. 108.2 RDL 6/2023."},
+{"u": 3, "t": "La oferta de la Administración del Estado debe incluir para promoción interna:", "o": ["No menos del 20 % de las plazas de acceso libre", "No menos del 30 % de las plazas de acceso libre", "El 50 % de las plazas totales", "Un porcentaje libre"], "c": 1, "e": "Art. 108.3 RDL 6/2023."},
+{"u": 3, "t": "El cupo de reserva para personas con discapacidad del art. 59 TREBEP, aplicable a todas las Administraciones, es:", "o": ["No inferior al 5 %", "No inferior al 7 %, con al menos un 2 % para discapacidad intelectual", "No inferior al 10 %", "Derogado por el Real Decreto-ley 6/2023, que lo sustituye por el 10 % para todas las Administraciones"], "c": 1, "e": "Art. 59.1 TREBEP, vigente."},
+{"u": 3, "t": "En la oferta de la Administración General del Estado la reserva para discapacidad es:", "o": ["El 7 %", "No inferior al 10 %, con al menos un 2 % para discapacidad intelectual", "El 5 %", "El 12 %"], "c": 1, "e": "Art. 108.4 RDL 6/2023."},
+{"u": 3, "t": "La oferta de empleo público de la AGE se aprueba:", "o": ["Por orden del ministro de función pública", "Por real decreto del Gobierno, a propuesta del ministerio de función pública y con informe favorable de Hacienda", "Por ley de Presupuestos", "Por resolución de la Secretaría de Estado de Función Pública"], "c": 1, "e": "RD 2169/1984 art. 2.g; RD 387/2026."},
+{"u": 3, "t": "La oferta de empleo público de 2026 de la AGE (Real Decreto 387/2026) incluye para acceso libre al Cuerpo de Gestión de la Administración Civil del Estado:", "o": ["856 plazas", "1.255 plazas", "1.705 plazas", "2.689 plazas, que son las reservadas a discapacidad en toda la oferta"], "c": 1, "e": "RD 387/2026: 1.255 libres y 450 de promoción interna."},
+{"u": 3, "t": "El total de plazas de la oferta de empleo público de 2026 es:", "o": ["20.541", "27.232", "33.793", "Unas 37.000 plazas, sumando todas las Administraciones"], "c": 1, "e": "RD 387/2026."},
+{"u": 4, "t": "NO es uno de los principios del art. 55.2 TREBEP:", "o": ["Publicidad de las convocatorias y de sus bases", "Antigüedad en el servicio", "Independencia y discrecionalidad técnica", "Agilidad, sin perjuicio de la objetividad"], "c": 1, "e": "Art. 55.2 TREBEP."},
+{"u": 4, "t": "El art. 112 del Real Decreto-ley 6/2023 define el modelo de selección de la Administración del Estado como:", "o": ["Memorístico, cerrado y centralizado", "Adaptable, mixto y social", "Exclusivamente por competencias", "Por concurso de méritos"], "c": 1, "e": "Art. 112.1 RDL 6/2023."},
+{"u": 4, "t": "Para funcionarios de carrera, el sistema de concurso:", "o": ["Es el sistema ordinario", "Solo puede aplicarse con carácter excepcional y en virtud de ley", "Puede aplicarse si lo prevé la convocatoria y lo informa favorablemente la Dirección General de la Función Pública", "Está prohibido"], "c": 1, "e": "Art. 61.6 TREBEP."},
+{"u": 4, "t": "Para el personal laboral fijo, el concurso de valoración de méritos es:", "o": ["Excepcional, solo si una ley lo prevé expresamente para cada categoría profesional", "Uno de los sistemas selectivos ordinarios", "Inaplicable", "Solo para promoción interna"], "c": 1, "e": "Art. 61.7 TREBEP."},
+{"u": 4, "t": "En el concurso-oposición de la Administración del Estado, para que se valore la fase de concurso:", "o": ["Basta presentar los méritos", "Es necesario haber superado la fase de oposición", "Se valora antes de la oposición", "La fase de concurso puede decidir por sí sola el resultado si la convocatoria lo prevé expresamente"], "c": 1, "e": "Art. 114.7 RDL 6/2023."},
+{"u": 4, "t": "Los órganos de selección pueden proponer más aprobados que plazas convocadas:", "o": ["Nunca", "Cuando así lo prevea la propia convocatoria", "Siempre que se produzcan renuncias antes del nombramiento, sin necesidad de previsión", "Hasta un 10 % más"], "c": 1, "e": "Art. 61.8 TREBEP."},
+{"u": 4, "t": "El órgano convocante puede pedir una relación complementaria de aspirantes cuando:", "o": ["El tribunal ha propuesto menos aspirantes que plazas", "Se han propuesto tantos aspirantes como plazas y se producen renuncias antes del nombramiento o la toma de posesión", "Lo solicita un aspirante no aprobado", "Ha transcurrido un año"], "c": 1, "e": "Art. 61.8 TREBEP y 114.10 RDL 6/2023."},
+{"u": 4, "t": "Durante el curso selectivo del art. 114.8 del Real Decreto-ley 6/2023, el aspirante tiene la condición de:", "o": ["Funcionario interino", "Funcionario en prácticas", "Personal laboral temporal", "Aspirante sin vínculo"], "c": 1, "e": "Art. 114.8 RDL 6/2023."},
+{"u": 4, "t": "Las plazas reservadas a discapacidad intelectual se cubren mediante:", "o": ["El turno general de acceso libre, con adaptaciones de tiempo y medios en cada ejercicio", "Pruebas selectivas específicas e independientes", "Concurso de méritos", "Libre designación"], "c": 1, "e": "Art. 113.3 RDL 6/2023."},
+{"u": 5, "t": "El plazo para presentar solicitudes en los procesos selectivos de la AGE es:", "o": ["10 días hábiles desde la publicación de la convocatoria en el BOE, ampliables cinco más", "15 días naturales", "20 días naturales desde el día siguiente a la publicación", "Un mes"], "c": 2, "e": "Art. 18 RD 364/1995."},
+{"u": 5, "t": "La resolución que aprueba la lista de admitidos y excluidos debe dictarse en el plazo máximo de:", "o": ["10 días", "Un mes desde que expira el plazo de solicitudes", "Dos meses desde la publicación de la convocatoria en el BOE", "45 días"], "c": 1, "e": "Art. 20 RD 364/1995."},
+{"u": 5, "t": "El plazo de subsanación tras la lista de admitidos y excluidos es de:", "o": ["5 días hábiles", "10 días hábiles", "15 días naturales", "20 días naturales"], "c": 1, "e": "Art. 20 RD 364/1995."},
+{"u": 5, "t": "Entre la conclusión de un ejercicio y el comienzo del siguiente debe transcurrir:", "o": ["Mínimo 24 horas y máximo 30 días naturales, salvo previsión en las bases", "Mínimo 72 horas y máximo 45 días naturales", "Mínimo 48 horas y máximo 60 días", "Mínimo una semana"], "c": 1, "e": "Art. 16.j RD 364/1995."},
+{"u": 5, "t": "Si el anuncio corresponde a una nueva prueba (un nuevo ejercicio), debe hacerse con una antelación mínima de:", "o": ["12 horas", "24 horas", "48 horas", "72 horas, con publicación del anuncio en el BOE"], "c": 1, "e": "Art. 21 RD 364/1995."},
+{"u": 5, "t": "Los aspirantes aprobados aportan la documentación acreditativa en:", "o": ["10 días hábiles", "20 días naturales desde la publicación de la relación definitiva", "Un mes", "Tres meses desde el nombramiento como funcionario en prácticas"], "c": 1, "e": "Art. 23 RD 364/1995."},
+{"u": 5, "t": "El nombramiento como funcionario de carrera de más aspirantes que plazas convocadas es:", "o": ["Válido si hay crédito", "Nulo de pleno derecho", "Anulable", "Irregular no invalidante"], "c": 1, "e": "Art. 25.1 RD 364/1995."},
+{"u": 5, "t": "En la AGE nombra a los funcionarios de carrera:", "o": ["El ministro del departamento", "La Secretaría de Estado de Función Pública", "El subsecretario del departamento al que esté adscrito el cuerpo, a propuesta del tribunal", "El Consejo de Ministros"], "c": 1, "e": "Art. 25 RD 364/1995 y RD 2169/1984 art. 6.3, con la denominación actual."},
+{"u": 5, "t": "El plazo de toma de posesión del funcionario de carrera en la Administración del Estado es de:", "o": ["Un mes en todo caso", "15 días naturales desde la publicación del nombramiento, o un mes si supone cambio de localidad de residencia", "Tres días hábiles", "20 días naturales"], "c": 1, "e": "Art. 114.12 RDL 6/2023."},
+{"u": 5, "t": "Los destinos adjudicados a los funcionarios de nuevo ingreso tienen carácter:", "o": ["Provisional hasta que el funcionario participe en el primer concurso de méritos que se convoque", "Definitivo, equivalente a todos los efectos a los obtenidos por concurso", "De comisión de servicios", "De adscripción provisional por un año"], "c": 1, "e": "Art. 26 RD 364/1995."},
+{"u": 5, "t": "Corresponde convocar y resolver las pruebas selectivas del personal funcionario y laboral del departamento al:", "o": ["Ministro", "Subsecretario", "Director general de la Función Pública", "Secretario de Estado de Presupuestos"], "c": 1, "e": "Temario (examen 2019)."},
+{"u": 6, "t": "Según el art. 60.2 TREBEP, NO pueden formar parte de los órganos de selección:", "o": ["Los funcionarios de carrera de otro cuerpo", "El personal de elección o designación política, los funcionarios interinos y el personal eventual", "El personal laboral fijo en procesos de laborales", "Los funcionarios jubilados"], "c": 1, "e": "Art. 60.2 TREBEP."},
+{"u": 6, "t": "El art. 115.2 del Real Decreto-ley 6/2023 añade a las exclusiones del TREBEP:", "o": ["A los funcionarios de grupo A2", "A los altos cargos y al personal laboral no fijo", "A los funcionarios en excedencia voluntaria y a los asesores especialistas de otros cuerpos", "A los asesores especialistas"], "c": 1, "e": "Art. 115.2 RDL 6/2023."},
+{"u": 6, "t": "Los tribunales de la AGE están constituidos, salvo excepción justificada, por:", "o": ["Tres miembros, cualquiera que sea su vínculo", "Un número impar de miembros, funcionarios de carrera, no inferior a cinco, con igual número de suplentes", "Siete miembros, uno a propuesta sindical", "Un número par para garantizar la paridad"], "c": 1, "e": "Art. 11 RD 364/1995 (examen 2019)."},
+{"u": 6, "t": "No pueden formar parte de los órganos de selección los funcionarios que hayan preparado aspirantes en los:", "o": ["Dos años anteriores", "Cinco años anteriores a la publicación de la convocatoria", "Diez años anteriores a la publicación de la convocatoria en el BOE", "Últimos seis meses"], "c": 1, "e": "Art. 13.2 RD 364/1995."},
+{"u": 6, "t": "La Comisión Permanente de Selección (Orden HFP/266/2023) está compuesta por:", "o": ["Un presidente y cinco vocales", "Un presidente, 45 vocales y un secretario", "Un presidente, 25 vocales y un secretario", "Un presidente, 45 vocales, un secretario y sus suplentes por cada cuerpo"], "c": 1, "e": "Art. 2 Orden HFP/266/2023."},
+{"u": 6, "t": "En los procesos de personal laboral puede formar parte del órgano de selección:", "o": ["El personal eventual", "El personal laboral fijo", "El funcionario interino", "El personal de designación política"], "c": 1, "e": "Temario (examen 2019)."},
+{"u": 6, "t": "La provisión de puestos por libre designación corresponde, según el Real Decreto 2169/1984:", "o": ["A los subsecretarios", "A los ministros y secretarios de Estado", "Al Consejo de Ministros", "A la Dirección General de la Función Pública"], "c": 1, "e": "Art. 9.1 RD 2169/1984."},
+{"u": 6, "t": "Dar posesión y cese a los funcionarios destinados en servicios periféricos corresponde a:", "o": ["El ministro", "Los delegados del Gobierno", "La Secretaría de Estado de Función Pública", "El INAP"], "c": 1, "e": "Art. 11.2 RD 2169/1984."},
+{"u": 6, "t": "La separación del servicio de un funcionario de la AGE la acuerda:", "o": ["El ministro", "El Gobierno (Consejo de Ministros)", "El subsecretario", "La Secretaría de Estado de Función Pública"], "c": 1, "e": "Competencias del Gobierno."},
+{"u": 7, "t": "Ante un supuesto sobre una convocatoria, antes de contestar se escribe:", "o": ["«Salvo mejor criterio, el proceso es válido»", "«Con carácter previo, procede calificar el proceso»: turno, oferta de la que procede, fase y órgano que dictó el acto", "Un resumen del temario", "La lista de todas las normas de función pública"], "c": 1, "e": "Calificación previa."},
+{"u": 7, "t": "Una convocatoria de 4 de septiembre de 2026 reconvoca plazas no cubiertas de una oferta publicada el 12 de julio de 2023. Se concluye que:", "o": ["Es válida porque el plazo de tres años se cuenta desde la convocatoria anterior, no desde la oferta", "No pueden incluirse: el plazo de tres años terminó el 12 de julio de 2026", "Es válida si lo informa Hacienda", "Podría entenderse válida"], "c": 1, "e": "Art. 108.2 RDL 6/2023."},
+{"u": 7, "t": "El enunciado no dice dónde reside la aspirante nombrada. Lo correcto es:", "o": ["Omitir el plazo de toma de posesión", "«El enunciado no precisa dónde reside, por lo que suponemos que…, ya que…» y operar el plazo", "«Podríamos entender que reside en el destino»", "Pedir el dato al tribunal"], "c": 1, "e": "Suposición declarada."},
+{"u": 7, "t": "Nombramiento publicado el 2 de noviembre de 2026, sin cambio de residencia. El plazo de toma de posesión vence el:", "o": ["2 de diciembre de 2026, un mes desde la publicación", "17 de noviembre de 2026", "12 de noviembre de 2026", "23 de noviembre de 2026"], "c": 1, "e": "15 días naturales desde la publicación (art. 114.12 RDL 6/2023)."},
+{"u": 7, "t": "Un tribunal de cuatro miembros con un funcionario interino. La conclusión correcta es:", "o": ["Es válido si actúa por unanimidad", "Su composición es contraria a Derecho y debe designarse un tribunal de al menos cinco funcionarios de carrera antes del primer ejercicio", "Podría entenderse válido", "Solo hay que cambiar al interino"], "c": 1, "e": "Arts. 11 RD 364/1995 y 60.2 TREBEP."},
+{"u": 7, "t": "La conclusión de cada cuestión del supuesto se redacta como:", "o": ["«Podría entenderse que…»", "«Por tanto, se concluye que…», con la consecuencia y el remedio", "«Salvo mejor criterio fundado en Derecho», seguida de la cita literal del artículo aplicado", "Una pregunta al tribunal"], "c": 1, "e": "Conclusión afirmativa."}
+];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Planificación",2:"RPT y registros",3:"Oferta de empleo público",4:"Principios y sistemas selectivos",5:"Procedimiento selectivo",6:"Órganos de selección y competencias",7:"Supuesto práctico"};
+const TABS={1:"Planificación",2:"RPT y registros",3:"OEP",4:"Sistemas",5:"Procedimiento",6:"Órganos y competencias",7:"Supuesto"};
+const SK="gace27_bv_t03_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
