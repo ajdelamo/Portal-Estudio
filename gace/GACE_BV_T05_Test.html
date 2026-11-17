@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque V · Tema 5 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque V · Tema 5 · Situaciones administrativas. Incompatibilidades</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u": 1, "t": "Según el art. 85.1 TREBEP, NO es una situación administrativa de los funcionarios de carrera:", "o": ["Servicios especiales", "Servicio en otras Administraciones públicas", "Expectativa de destino", "Suspensión de funciones"], "c": 2, "e": "Art. 85.1 TREBEP; la expectativa de destino es propia de la AGE (Ley 30/1984 y RD 365/1995)."},
+{"u": 1, "t": "El catálogo de situaciones administrativas del TREBEP:", "o": ["Es cerrado", "No es cerrado: las leyes de función pública pueden regular otras situaciones", "Solo puede ampliarse por real decreto del Consejo de Ministros, a propuesta del ministro competente en función pública, y para toda la Administración", "Se limita a tres situaciones"], "c": 1, "e": "Art. 85.2 TREBEP."},
+{"u": 1, "t": "Las situaciones del personal laboral se rigen por:", "o": ["El TREBEP en todo caso, porque el título VI se aplica por igual a funcionarios y laborales de todas las Administraciones públicas", "El Estatuto de los Trabajadores y los convenios, que pueden remitirse al capítulo del TREBEP", "El Real Decreto 365/1995", "La Ley 30/1984"], "c": 1, "e": "Art. 92 TREBEP."},
+{"u": 1, "t": "Está en situación de servicio activo, según el Real Decreto 365/1995:", "o": ["El funcionario nombrado secretario de Estado", "El funcionario en comisión de servicios o en el plazo posesorio", "El diputado de las Cortes Generales", "El funcionario de una organización internacional"], "c": 1, "e": "Art. 3 RD 365/1995."},
+{"u": 1, "t": "El funcionario que, sin ser alto cargo, es nombrado subdirector general queda en:", "o": ["Servicios especiales", "Servicio activo", "Excedencia voluntaria", "Servicio en otras Administraciones públicas"], "c": 1, "e": "Arts. 86 TREBEP y 55.6 Ley 40/2015."},
+{"u": 1, "t": "Los funcionarios en las dos primeras fases de reasignación de efectivos están en:", "o": ["Expectativa de destino", "Servicio activo", "Excedencia forzosa", "Servicios especiales"], "c": 1, "e": "Art. 3.j RD 365/1995."},
+{"u": 2, "t": "Pasa a servicios especiales el funcionario autorizado para realizar una misión en un organismo internacional por un periodo:", "o": ["De seis meses o más", "Superior a seis meses", "De al menos un año", "De cualquier duración"], "c": 1, "e": "Art. 87.1.b TREBEP (examen 2019)."},
+{"u": 2, "t": "El funcionario designado miembro del Consejo General del Poder Judicial pasa a:", "o": ["Servicio activo", "Servicios especiales", "Excedencia voluntaria", "Servicio en otras Administraciones públicas"], "c": 1, "e": "Art. 87.1.g TREBEP (examen 2024)."},
+{"u": 2, "t": "Los parlamentarios autonómicos que no perciben retribuciones periódicas:", "o": ["Pasan necesariamente a servicios especiales desde la toma de posesión del escaño, sin opción alguna", "Pueden optar entre servicio activo y servicios especiales", "Pasan a excedencia voluntaria", "Quedan en suspensión de funciones"], "c": 1, "e": "Art. 87.1.e TREBEP y art. 4.g RD 365/1995."},
+{"u": 2, "t": "En servicios especiales, el funcionario percibe:", "o": ["Las retribuciones de su puesto de funcionario", "Las del puesto o cargo que desempeña, más los trienios reconocidos", "Solo los trienios", "Las retribuciones básicas de su cuerpo y el 50 % del complemento específico del último puesto desempeñado"], "c": 1, "e": "Art. 87.2 TREBEP."},
+{"u": 2, "t": "El tiempo en servicios especiales computa a efectos de:", "o": ["Nada", "Ascensos, trienios, promoción interna y derechos de Seguridad Social", "Solo trienios", "Solo derechos pasivos, porque el resto de efectos se suspende mientras dura la situación"], "c": 1, "e": "Art. 87.2 TREBEP (examen 2022)."},
+{"u": 2, "t": "Quien pierde la condición que le llevó a servicios especiales debe pedir el reingreso en:", "o": ["Diez días", "Un mes; si no, excedencia voluntaria por interés particular", "Tres meses", "Seis meses desde el cese en el cargo, y si no lo pide pasa a excedencia forzosa"], "c": 1, "e": "Art. 9.1 RD 365/1995."},
+{"u": 2, "t": "Al reingresar de servicios especiales quien venía de un puesto de libre designación, se le adjudica:", "o": ["Su mismo puesto de libre designación", "Con carácter provisional, un puesto de igual nivel y similares retribuciones en el mismo municipio", "Un puesto definitivo en cualquier municipio", "Ninguno: debe concursar"], "c": 1, "e": "Art. 7.1.a RD 365/1995."},
+{"u": 2, "t": "Los funcionarios transferidos a una comunidad autónoma se encuentran en ella en situación de:", "o": ["Servicios especiales", "Servicio activo", "Excedencia voluntaria", "Servicio en otras Administraciones públicas"], "c": 1, "e": "Art. 88.2 TREBEP."},
+{"u": 2, "t": "La separación del servicio de un funcionario del Estado destinado por concurso en una comunidad autónoma la acuerda:", "o": ["El órgano autonómico, previo dictamen del Consejo de Estado", "El ministro del departamento al que está adscrito su cuerpo, previo expediente incoado por la comunidad", "El Consejo de Ministros", "La Secretaría de Estado de Función Pública, previo informe de la comunidad autónoma de destino y del Consejo de Estado en todo caso"], "c": 1, "e": "Art. 11.2 RD 365/1995."},
+{"u": 3, "t": "Para la excedencia voluntaria por interés particular se exigen servicios efectivos durante los:", "o": ["Tres años inmediatamente anteriores", "Cinco años inmediatamente anteriores", "Dos años", "Diez años"], "c": 1, "e": "Art. 89.2 TREBEP."},
+{"u": 3, "t": "La excedencia voluntaria por interés particular NO puede declararse cuando:", "o": ["El funcionario tiene hijos", "Se le instruye expediente disciplinario", "El funcionario lleva más de diez años de servicio en el mismo cuerpo o escala", "Está en comisión de servicios"], "c": 1, "e": "Art. 89.2 TREBEP."},
+{"u": 3, "t": "En la AGE, la permanencia mínima en excedencia por interés particular es de:", "o": ["Un año", "Dos años continuados", "Cinco años", "No hay mínimo, puede reingresar cuando lo desee"], "c": 1, "e": "Art. 29.3.c Ley 30/1984."},
+{"u": 3, "t": "Durante la excedencia por interés particular:", "o": ["Se cobra el 50 % del sueldo", "No se devengan retribuciones ni computa el tiempo a efectos de ascensos, trienios y Seguridad Social", "Computa para trienios", "Se reserva el puesto durante el primer año y se computa ese tiempo para trienios y carrera"], "c": 1, "e": "Art. 89.2 TREBEP (examen 2019)."},
+{"u": 3, "t": "La excedencia por agrupación familiar:", "o": ["Exige cinco años de servicio", "No exige haber prestado servicios previos y en la AGE dura entre dos y quince años", "Computa para trienios", "Exige que el cónyuge sea funcionario interino"], "c": 1, "e": "Art. 89.3 TREBEP y art. 17 RD 365/1995."},
+{"u": 3, "t": "La excedencia por cuidado de cada hijo tiene una duración no superior a:", "o": ["Un año", "Tres años desde el nacimiento o la resolución", "Cinco años", "Hasta que el hijo cumpla doce años, sin límite de duración por hijo"], "c": 1, "e": "Art. 89.4 TREBEP."},
+{"u": 3, "t": "En la excedencia por cuidado de familiares, el puesto desempeñado se reserva al menos durante:", "o": ["Seis meses", "Dos años; después, un puesto en la misma localidad y de igual retribución", "Tres años, durante todo el periodo de excedencia, sin distinciones", "Un año"], "c": 1, "e": "Art. 89.4 TREBEP."},
+{"u": 3, "t": "La excedencia por cuidado de familiares:", "o": ["No computa a ningún efecto", "Computa a efectos de trienios, carrera y derechos de Seguridad Social", "Solo computa para trienios durante el primer año, y no computa para carrera ni Seguridad Social", "Computa solo si es por hijo"], "c": 1, "e": "Art. 89.4 TREBEP."},
+{"u": 3, "t": "En la excedencia por violencia de género, la funcionaria percibe las retribuciones íntegras durante:", "o": ["Todo el periodo", "Los dos primeros meses", "Los seis primeros meses", "El primer año"], "c": 1, "e": "Art. 89.5 TREBEP."},
+{"u": 3, "t": "La reserva del puesto en la excedencia por violencia de género dura:", "o": ["Dos meses", "Seis meses, prorrogables por periodos de tres meses hasta un máximo de dieciocho", "Un año improrrogable", "Tres años"], "c": 1, "e": "Art. 89.5 TREBEP."},
+{"u": 3, "t": "La excedencia voluntaria incentivada dura:", "o": ["Dos años", "Cinco años, con prohibición de trabajar en el sector público", "Diez años", "Indefinidamente, hasta que el funcionario pida el reingreso en el servicio activo"], "c": 1, "e": "Art. 18.4 RD 365/1995."},
+{"u": 3, "t": "La indemnización por excedencia voluntaria incentivada es de:", "o": ["Seis mensualidades fijas", "Una mensualidad por año completo de servicio, con un máximo de doce", "Veinte días por año", "Dos mensualidades por año de servicio, sin límite máximo y con las pagas extraordinarias incluidas"], "c": 1, "e": "Art. 18.5 RD 365/1995."},
+{"u": 4, "t": "La expectativa de destino tiene una duración máxima de:", "o": ["Seis meses", "Un año, tras el cual se pasa a excedencia forzosa", "Dos años", "Tres años, prorrogables por otro más si no se ha obtenido destino"], "c": 1, "e": "Art. 12.2 RD 365/1995 (examen 2019)."},
+{"u": 4, "t": "En expectativa de destino, las obligaciones de aceptar puestos y concursar se refieren a:", "o": ["Todo el territorio nacional, en puestos de cualquier característica", "La provincia donde estaban destinados", "La comunidad autónoma", "El municipio de residencia"], "c": 1, "e": "Art. 12.3 RD 365/1995."},
+{"u": 4, "t": "El funcionario en excedencia forzosa percibe:", "o": ["Las básicas y el complemento de destino", "Las retribuciones básicas y, en su caso, las prestaciones familiares por hijo a cargo", "Nada", "El 50 % de todas sus retribuciones"], "c": 1, "e": "Art. 13.6 RD 365/1995."},
+{"u": 4, "t": "El suspenso firme sin reserva que pide el reingreso y no lo obtiene en seis meses pasa a:", "o": ["Excedencia voluntaria por interés particular", "Excedencia forzosa", "Expectativa de destino", "Servicio activo"], "c": 1, "e": "Arts. 13.1.b y 22.5 RD 365/1995."},
+{"u": 4, "t": "La suspensión de funciones determina la pérdida del puesto cuando:", "o": ["Es provisional", "Excede de seis meses", "Excede de un año", "Es por condena penal"], "c": 1, "e": "Art. 90.1 TREBEP (examen 2019)."},
+{"u": 4, "t": "La suspensión firme por sanción disciplinaria no puede exceder de:", "o": ["Tres años", "Seis años", "Un año", "Diez años en el caso de faltas muy graves"], "c": 1, "e": "Art. 90.2 TREBEP."},
+{"u": 4, "t": "El suspenso firme que ha perdido el puesto debe solicitar el reingreso:", "o": ["En el mes siguiente al fin de la suspensión, contado desde el último día de esta", "Con un mes de antelación a la finalización del periodo de suspensión", "En cualquier momento", "Seis meses antes"], "c": 1, "e": "Art. 22.3 RD 365/1995."},
+{"u": 4, "t": "El reingreso del suspenso firme solicitado en plazo tiene efectos:", "o": ["Desde la resolución de reingreso que dicte el órgano competente del departamento", "Desde la fecha de extinción de la responsabilidad penal o disciplinaria", "Desde la toma de posesión", "Desde la solicitud"], "c": 1, "e": "Art. 22.3 RD 365/1995 (examen 2019)."},
+{"u": 4, "t": "Durante la suspensión provisional, según el art. 98.3 TREBEP, el funcionario percibe:", "o": ["Nada", "Las retribuciones básicas y, en su caso, las prestaciones familiares por hijo a cargo", "El 100 % de sus retribuciones", "El 50 % de las retribuciones complementarias y la totalidad de las básicas durante todo el expediente"], "c": 1, "e": "Art. 98.3 TREBEP."},
+{"u": 4, "t": "El reingreso de los funcionarios sin reserva de puesto se regula en:", "o": ["Los arts. 62 a 66 del Real Decreto 365/1995, Reglamento de Situaciones Administrativas de los funcionarios civiles", "El art. 62 del Real Decreto 364/1995: concurso, libre designación o adscripción provisional", "El art. 91 TREBEP exclusivamente", "La Ley 53/1984"], "c": 1, "e": "Art. 62 RD 364/1995."},
+{"u": 5, "t": "Según el art. 1 de la Ley 53/1984, la regla general para un segundo puesto en el sector público es:", "o": ["La compatibilidad", "La incompatibilidad, salvo los supuestos previstos en la ley", "La compatibilidad si es a tiempo parcial", "La libre elección"], "c": 1, "e": "Art. 1.1 Ley 53/1984."},
+{"u": 5, "t": "El segundo puesto por razón de interés público lo determina:", "o": ["Una ley de las Cortes Generales para cada supuesto concreto, con informe previo del Consejo de Estado y de la Comisión Superior de Personal, en cualquier régimen jurídico", "El Consejo de Ministros mediante real decreto (u órgano de gobierno autonómico), en régimen laboral, a tiempo parcial y de duración determinada", "El subsecretario", "La Comisión Superior de Personal"], "c": 1, "e": "Art. 3.1 Ley 53/1984."},
+{"u": 5, "t": "Puede autorizarse la compatibilidad para desempeñar un segundo puesto como:", "o": ["Asesor de una empresa contratista del propio ministerio, a tiempo parcial", "Profesor universitario asociado en régimen de tiempo parcial", "Interino en otro cuerpo", "Director de un hospital"], "c": 1, "e": "Art. 4.1 Ley 53/1984."},
+{"u": 5, "t": "Para un funcionario del antiguo grupo A, el total percibido por dos puestos públicos no puede superar la retribución del principal incrementada en un:", "o": ["10 %", "30 %", "50 %", "40 %"], "c": 1, "e": "Art. 7.1 Ley 53/1984."},
+{"u": 5, "t": "Los servicios prestados en el segundo puesto compatible:", "o": ["Computan para trienios", "No se computan a efectos de trienios ni de derechos pasivos", "Computan para derechos pasivos, pero no para trienios ni carrera profesional", "Computan para todo"], "c": 1, "e": "Art. 7.2 Ley 53/1984 (exámenes 2019 y 2022)."},
+{"u": 5, "t": "A efectos de compatibilidad, se entiende por jornada a tiempo parcial la que no supera:", "o": ["Veinte horas semanales", "Treinta horas semanales", "Veinticinco horas semanales", "Treinta y siete horas y media"], "c": 1, "e": "Art. 14 RD 598/1985 (examen 2019)."},
+{"u": 5, "t": "En representación del sector público, no se puede pertenecer a más de:", "o": ["Un consejo de administración, salvo que se trate de empresas públicas del mismo grupo y con autorización expresa", "Dos consejos de administración u órganos de gobierno, salvo autorización", "Tres consejos", "Cinco consejos"], "c": 1, "e": "Art. 8 Ley 53/1984."},
+{"u": 5, "t": "Quien accede a un nuevo puesto público incompatible con el que tenía debe optar:", "o": ["En un mes desde la toma de posesión", "Dentro del plazo de toma de posesión; si no, se entiende que opta por el nuevo", "En tres meses", "En cualquier momento"], "c": 1, "e": "Art. 10 Ley 53/1984."},
+{"u": 5, "t": "Si el nuevo puesto es susceptible de compatibilidad, la autorización debe instarse:", "o": ["Antes de presentarse al proceso selectivo, mediante solicitud dirigida al órgano convocante", "En los diez primeros días del plazo de toma de posesión", "En el mes siguiente", "Al año"], "c": 1, "e": "Art. 10 Ley 53/1984."},
+{"u": 5, "t": "La compatibilidad para un segundo puesto público en la AGE se resuelve en un plazo de:", "o": ["Un mes", "Tres meses, prorrogable un mes", "Seis meses", "Dos meses, con silencio positivo si no se resuelve"], "c": 1, "e": "Art. 5 RD 598/1985."},
+{"u": 6, "t": "Está prohibido el ejercicio de actividades privadas en los asuntos en que el funcionario haya intervenido en los últimos:", "o": ["Seis meses", "Dos años", "Cinco años", "Diez años"], "c": 1, "e": "Art. 12.1.a Ley 53/1984."},
+{"u": 6, "t": "Está prohibida la participación en el capital de empresas concesionarias o contratistas del sector público superior al:", "o": ["5 %, o cualquier participación si la empresa es contratista", "10 %", "25 %", "50 %"], "c": 1, "e": "Art. 12.1.d Ley 53/1984 (examen 2022)."},
+{"u": 6, "t": "El reconocimiento de compatibilidad para actividades privadas se resuelve en el plazo de:", "o": ["Un mes", "Dos meses", "Tres meses", "Seis meses"], "c": 1, "e": "Art. 14 Ley 53/1984."},
+{"u": 6, "t": "El reconocimiento de compatibilidad para actividades privadas queda sin efecto:", "o": ["Al año", "Automáticamente en caso de cambio de puesto en el sector público", "Nunca", "Al cambiar de domicilio"], "c": 1, "e": "Art. 14 Ley 53/1984."},
+{"u": 6, "t": "Puede reconocerse compatibilidad para actividades privadas al personal con complemento específico cuando este no supere:", "o": ["El 10 % de la retribución básica", "El 30 % de la retribución básica, excluida la antigüedad", "El 50 % de las retribuciones totales", "La cuantía del complemento de destino del nivel del puesto que desempeña el funcionario"], "c": 1, "e": "Art. 16.4 Ley 53/1984."},
+{"u": 6, "t": "Están exceptuadas del régimen de incompatibilidades la dirección de cursos en centros oficiales de formación de funcionarios no habituales hasta:", "o": ["Cincuenta horas al año", "Setenta y cinco horas al año", "Cien horas al año", "Ciento cincuenta horas al año"], "c": 1, "e": "Art. 19.b Ley 53/1984."},
+{"u": 6, "t": "Es una actividad exceptuada del régimen de incompatibilidades:", "o": ["Ser administrador de una empresa contratista", "La producción y creación literaria, artística, científica y técnica, si no deriva de una relación de empleo", "Ejercer la abogacía en asuntos del propio ministerio en que intervino hace menos de dos años como funcionario", "Tener el 20 % de una concesionaria"], "c": 1, "e": "Art. 19.f Ley 53/1984 (examen 2022)."},
+{"u": 6, "t": "La preparación para el acceso a la función pública como actividad exceptuada:", "o": ["No tiene límite", "No puede superar setenta y cinco horas anuales e impide formar parte de órganos de selección", "Requiere siempre compatibilidad", "Está prohibida"], "c": 1, "e": "Art. 19 RD 598/1985."},
+{"u": 6, "t": "El incumplimiento de las normas de incompatibilidades que dé lugar a una situación de incompatibilidad es falta:", "o": ["Leve", "Grave", "Muy grave", "No sancionable"], "c": 2, "e": "Art. 95.2.n TREBEP."},
+{"u": 6, "t": "El art. 19 de la Ley 53/1984 enumera como actividades exceptuadas:", "o": ["Nueve", "Ocho", "Seis", "Diez"], "c": 1, "e": "Art. 19, letras a) a h)."},
+{"u": 7, "t": "Ante una cuestión sobre situaciones administrativas, lo primero que se escribe es:", "o": ["«Salvo mejor criterio…»", "«Con carácter previo, procede calificar la situación administrativa»: causa, fecha, reserva y cómputo", "Un resumen del Estatuto", "La historia de la Ley 30/1984"], "c": 1, "e": "Calificación previa."},
+{"u": 7, "t": "Hijo nacido el 10/03/2025; excedencia desde el 01/09/2025. La reserva de su puesto concreto termina el:", "o": ["10/03/2027, dos años desde el nacimiento", "01/09/2027", "10/03/2028", "01/09/2028"], "c": 1, "e": "Art. 89.4 TREBEP: dos años de reserva."},
+{"u": 7, "t": "En el mismo caso, el máximo de la excedencia vence el:", "o": ["01/09/2028", "10/03/2028", "10/03/2027", "31/12/2028"], "c": 1, "e": "Art. 89.4 TREBEP: tres años desde el nacimiento."},
+{"u": 7, "t": "Funcionario con complemento específico del 40 % de sus básicas que quiere dar 100 horas anuales de preparación de oposiciones. Se concluye que:", "o": ["Puede hacerlo sin más", "No puede: excede de 75 horas y su específico supera el 30 % que permite reconocer la compatibilidad", "Podría entenderse compatible", "Puede si lo autoriza verbalmente su jefe inmediato, sin necesidad de reconocimiento formal ni límite de horas"], "c": 1, "e": "Arts. 16 y 19 Ley 53/1984 y art. 19 RD 598/1985."},
+{"u": 7, "t": "El enunciado no aclara si el otro progenitor disfruta de la excedencia. Lo correcto es:", "o": ["Ignorarlo", "«El enunciado no precisa…, por lo que suponemos que no, ya que no se menciona»", "«Podríamos entender que no disfruta de la excedencia, aunque el enunciado no lo aclare»", "Pedir el dato"], "c": 1, "e": "Suposición declarada."},
+{"u": 7, "t": "La conclusión de cada cuestión se redacta como:", "o": ["«Podría entenderse que…»", "«Por tanto, se concluye que…», con fecha y consecuencia", "«Salvo mejor criterio fundado en Derecho»", "Una pregunta abierta"], "c": 1, "e": "Conclusión afirmativa."}
+];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Concepto y servicio activo",2:"Servicios especiales y otras Administraciones",3:"Excedencias",4:"Expectativa, forzosa, suspensión y reingreso",5:"Incompatibilidades: actividades públicas",6:"Incompatibilidades: actividades privadas y exceptuadas",7:"Supuesto práctico"};
+const TABS={1:"Concepto",2:"Servicios especiales",3:"Excedencias",4:"Suspensión",5:"Públicas",6:"Privadas",7:"Supuesto"};
+const SK="gace27_bv_t05_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
