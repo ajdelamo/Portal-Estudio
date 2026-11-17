@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque V · Tema 5 · Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:680px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:.7rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.55rem;text-align:center}
+.stat-n{font-size:19px;font-weight:600}.stat-l{font-size:11px;color:#888780}
+.ctrl{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.9rem}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.card{background:#fff;border:1.5px solid #d3d1c7;border-radius:14px;min-height:260px;padding:22px 22px 18px;cursor:pointer;display:flex;flex-direction:column;user-select:none}
+.card:focus-visible{outline:3px solid #185fa5;outline-offset:2px}
+.card.back-side{border-color:#185fa5;background:#fbfdff}
+.meta{display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:12px}
+.face{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:1.55;white-space:pre-line}
+.back-side .face{font-size:15px;text-align:left;justify-content:flex-start;align-items:flex-start}
+.hint{font-size:11px;color:#b4b2a9;text-align:center;margin-top:12px}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.answer button{padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid}
+.no{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.si{background:#eaf3de;color:#0f6e56;border-color:#a6d9b8}
+.answer button:disabled{opacity:.4;cursor:default}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:14px}
+.dot{width:9px;height:9px;border-radius:2px;background:#e4e2db}
+.dot.ok{background:#1d9e75}.dot.ko{background:#e24b4a}.dot.cur{outline:2px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>🃏 GACE 2027 · Bloque V · Tema 5 · Flashcards</h1>
+<div class="nav" id="nav"></div>
+<div class="stats" id="stats"></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="stage"></div>
+</div>
+<script>
+const CARDS=[{"u": 1, "f": "Situaciones del art. 85 TREBEP", "b": "Servicio activo · servicios especiales · servicio en otras Administraciones públicas · excedencia · suspensión de funciones. Catálogo abierto (85.2)."}, {"u": 1, "f": "Situaciones del RD 365/1995 (11)", "b": "Activo · servicios especiales · servicio en comunidades autónomas · expectativa de destino · excedencia forzosa · cuidado de hijos · voluntaria por sector público · interés particular · agrupación familiar · incentivada · suspensión."}, {"u": 1, "f": "Normas de las situaciones", "b": "TREBEP arts. 85-92 (en vigor) · Ley 30/1984 art. 29 · RD 365/1995, de 10 de marzo. Laborales: Estatuto de los Trabajadores y convenios (art. 92)."}, {"u": 1, "f": "Servicio activo en la AGE (art. 3 RD 365/1995)", "b": "Comisión de servicios · plazo posesorio · dos primeras fases de reasignación · gabinetes si optan · concejales sin dedicación exclusiva · subdirectores generales (no altos cargos)."}, {"u": 2, "f": "Supuestos clave de servicios especiales", "b": "Gobierno y altos cargos · misión > 6 meses · TC, Defensor del Pueblo, Tribunal de Cuentas · diputados y senadores · CGPJ · órganos constitucionales · eventual que no opta por activo · organizaciones internacionales · asesores parlamentarios · reservistas."}, {"u": 2, "f": "Parlamentarios autonómicos", "b": "Con retribución periódica: servicios especiales. Sin ella: pueden optar entre activo y servicios especiales."}, {"u": 2, "f": "Efectos de los servicios especiales", "b": "Retribución del cargo + trienios · computa para ascensos, trienios, promoción interna y Seguridad Social (y grado en la AGE) · reingreso al menos en la misma localidad."}, {"u": 2, "f": "Reserva al reingresar de servicios especiales (art. 7)", "b": "Venía de libre designación: puesto provisional de igual nivel en el mismo municipio. Resto: definitivo de igual nivel, mismo ministerio y municipio."}, {"u": 2, "f": "Plazo de reingreso desde servicios especiales", "b": "Un mes desde la pérdida de la condición; si no, excedencia voluntaria por interés particular. Parlamentarios: pueden seguir hasta la nueva constitución de las cámaras."}, {"u": 3, "f": "Transferidos frente a provisión", "b": "Transferidos: activo en la comunidad; separación por el órgano autonómico previo dictamen del Consejo de Estado. Provisión: legislación de destino, conservan la condición de origen; separación por el ministro de su cuerpo."}, {"u": 4, "f": "Excedencia por interés particular", "b": "5 años de servicios previos · necesidades del servicio · no con expediente disciplinario · mínimo 2 años (AGE) · sin retribución, cómputo ni reserva. Sin máximo legal."}, {"u": 4, "f": "Excedencia por agrupación familiar", "b": "Sin servicios previos · cónyuge con puesto definitivo en otra localidad · AGE: 2 a 15 años · sin retribución, cómputo ni reserva."}, {"u": 4, "f": "Excedencia por cuidado de familiares", "b": "Hijo: hasta 3 años desde nacimiento o resolución · familiar hasta 2.º grado: hasta 3 años · computa (trienios, carrera, Seguridad Social) · reserva del puesto 2 años, después mismo municipio y retribución."}, {"u": 4, "f": "Excedencia por violencia de género o sexual", "b": "Funcionaria · sin servicios previos ni permanencia · reserva 6 meses, prórrogas de 3 hasta 18 · íntegras los 2 primeros meses."}, {"u": 4, "f": "Excedencia por violencia terrorista", "b": "Heridos y amenazados, previo reconocimiento del Interior o sentencia firme · mismas condiciones que la de violencia de género."}, {"u": 4, "f": "Excedencia por servicios en el sector público", "b": "Otro cuerpo en activo sin compatibilidad o laboral fijo del sector público · no la da ser interino o temporal · reingreso en 1 mes al cesar."}, {"u": 4, "f": "Excedencia voluntaria incentivada", "b": "Plan de empleo (fases 1.ª y 2.ª, expectativa o forzosa) · 5 años · prohibido el sector público · 1 mensualidad por año, máx. 12."}, {"u": 5, "f": "Expectativa de destino", "b": "Tras las dos primeras fases de reasignación sin puesto · máx. 1 año · básicas + CD del grado + 50 % del específico · obligaciones en la provincia · equiparada al activo a los demás efectos."}, {"u": 5, "f": "Excedencia forzosa: causas", "b": "a) Fin del año de expectativa o incumplimiento de sus obligaciones. b) Suspenso firme sin reserva que no reingresa en 6 meses."}, {"u": 5, "f": "Excedencia forzosa: régimen", "b": "Solo básicas + prestaciones por hijo · computa trienios y derechos pasivos · concursar y aceptar destinos · prohibido el sector público · incumplir → interés particular."}, {"u": 6, "f": "Suspensión de funciones (art. 90)", "b": "Privación de funciones y derechos · > 6 meses: pérdida del puesto · firme disciplinaria máx. 6 años · no puede trabajar en ninguna Administración."}, {"u": 6, "f": "Suspensión provisional", "b": "Cautelar: máx. 6 meses en expediente disciplinario · cobra básicas (art. 98.3 TREBEP) · si no deviene firme, computa como activo."}, {"u": 6, "f": "Reingreso del suspenso firme (art. 22)", "b": "Pedirlo 1 mes antes del fin · efectos desde la extinción de la responsabilidad · si no lo pide: interés particular · si no se concede en 6 meses: excedencia forzosa."}, {"u": 6, "f": "Reingreso sin reserva (art. 62 RD 364/1995)", "b": "Concurso, libre designación o adscripción provisional a vacante, que se convoca en 1 año con obligación de participar."}, {"u": 7, "f": "Las tres reglas del art. 1 Ley 53/1984", "b": "No segundo puesto público salvo excepción · no más de una remuneración pública · incompatible toda actividad que menoscabe deberes o imparcialidad."}, {"u": 7, "f": "Segundo puesto público: supuestos", "b": "Docencia (profesor asociado a tiempo parcial) · sanidad · investigación · cargos electivos compatibles · interés público fijado por el Consejo de Ministros por real decreto (laboral, tiempo parcial, duración determinada)."}, {"u": 7, "f": "Límite retributivo del segundo puesto (art. 7.1)", "b": "No superar la retribución de director general ni el principal + 30 % (A), 35 % (B), 40 % (C), 45 % (D), 50 % (E)."}, {"u": 7, "f": "Segundo puesto: otros efectos", "b": "No computa para trienios ni derechos pasivos · tiempo parcial = ≤ 30 h/semana · máx. 2 consejos de administración · resolución en 3 meses (+1)."}, {"u": 7, "f": "Opción ante puestos incompatibles (art. 10)", "b": "Dentro del plazo de toma de posesión; si no opta, se entiende el nuevo. Si es compatible previa autorización: pedirla en los 10 primeros días del plazo."}, {"u": 7, "f": "Prohibiciones del art. 12", "b": "Asuntos en que intervino en los 2 últimos años · consejos de empresas privadas relacionadas · cargos en concesionarias o contratistas · > 10 % de su capital."}, {"u": 7, "f": "Compatibilidad de actividades privadas (arts. 14 y 16)", "b": "Reconocimiento previo, resuelto en 2 meses, sin cambiar horario, decae si cambia el puesto. No con complemento específico salvo que no supere el 30 % de las básicas (sin antigüedad)."}, {"u": 7, "f": "Actividades exceptuadas (art. 19): las ocho", "b": "Patrimonio propio · cursos de formación de funcionarios y preparación de oposiciones (≤ 75 h/año) · tribunales calificadores · exámenes del profesorado · mutualidades no retribuidas · creación literaria, artística, científica y técnica · medios de comunicación ocasional · congresos ocasionales."}, {"u": 7, "f": "Preparación de oposiciones (art. 19 RD 598/1985)", "b": "Exceptuada hasta 75 horas anuales sin afectar al horario. Impide formar parte de órganos de selección."}, {"u": 7, "f": "Incumplimiento de incompatibilidades", "b": "Muy grave si da lugar a una situación de incompatibilidad (art. 95.2.n TREBEP) · grave si es de plazos o procedimiento sin mantenerla · revoca la compatibilidad."}, {"u": 1, "f": "Interinos y situaciones administrativas", "b": "Las situaciones son de los funcionarios de carrera. El interino no pasa a otra situación: si concurre una causa incompatible, cesa o se aplica su régimen específico."}, {"u": 1, "f": "Cambios de situación (art. 23 RD 365/1995)", "b": "Se comunican siempre al Registro Central de Personal y pueden hacerse sin reingresar antes al servicio activo."}, {"u": 2, "f": "Misión internacional de cuatro meses", "b": "No da servicios especiales (exige más de seis meses): se tramita como comisión de servicios de cooperación internacional."}, {"u": 2, "f": "Trienios en servicios especiales", "b": "Si el cargo no puede pagarlos por causa legal, los abona el departamento del último destino, igual que la cuota de Seguridad Social (art. 8)."}, {"u": 3, "f": "Reconocimiento de carrera al reingresar de otra Administración", "b": "Según los convenios de Conferencia Sectorial (art. 84) o, en su defecto, por la Administración de reingreso (art. 88.4)."}, {"u": 4, "f": "Excedencias que computan y que no", "b": "Computan: cuidado de familiares y violencia (durante la reserva). No computan: interés particular y agrupación familiar."}, {"u": 4, "f": "Excedencia por cuidado: varios sujetos causantes", "b": "Periodo único por sujeto causante; uno nuevo pone fin al anterior. Si dos funcionarios lo generan por el mismo sujeto, se puede limitar el ejercicio simultáneo."}, {"u": 6, "f": "Plazos de reingreso según la procedencia", "b": "Servicios especiales, sector público e incentivada: 1 mes · agrupación familiar: antes de 15 años · cuidado: antes de que acabe · suspensión firme: 1 mes antes del final."}, {"u": 7, "f": "Segundo puesto y pensión", "b": "Desempeñar un puesto público es incompatible con cobrar pensión de jubilación, que queda en suspenso (art. 3.2 Ley 53/1984)."}, {"u": 7, "f": "Quién autoriza la compatibilidad en la AGE", "b": "El ministerio de función pública, a propuesta del subsecretario (o del delegado del Gobierno en periféricos), con informe favorable del órgano del segundo puesto."}, {"u": 8, "f": "Introducción: piezas del Tema 5", "b": "Arts. 103.3 y 149.1.18.ª CE · RDLeg 5/2015 «(en adelante, TREBEP)» · Ley 30/1984 y reglamentos · RD 365/1995. Incompatibilidades: Ley 53/1984 y RD 598/1985."}, {"u": 8, "f": "Calificación previa del Tema 5", "b": "«Con carácter previo, procede calificar la situación administrativa»: desde cuándo, por qué causa, si hay reserva de puesto y si computa."}, {"u": 8, "f": "Mini-supuesto: excedencia por hijo", "b": "Nacimiento 10/03/2025; excedencia desde 01/09/2025 → reserva del puesto hasta 01/09/2027 · máximo 10/03/2028 · reingreso antes o interés particular."}, {"u": 8, "f": "Mini-supuesto: preparación de oposiciones", "b": "100 h/año > 75 → necesita compatibilidad · específico 40 % > 30 % → no se puede reconocer · solo hasta 75 h, sin poder ser tribunal."}];
+const UNAMES={"1": "Concepto", "2": "Servicios especiales", "3": "Otras Administraciones", "4": "Excedencias", "5": "Expectativa y forzosa", "6": "Suspensión y reingreso", "7": "Incompatibilidades", "8": "Supuesto"};
+const SK="gace27_bv_t05_fc_v1";
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db))}catch(e){}}
+function r(i){return db[i]||{ok:0,ko:0,last:null}}
+let st={unit:0,mode:"all",order:[],pos:0,flipped:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(){
+  let ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  if(st.mode==="pend")ids=ids.filter(i=>r(i).last!=="ok");
+  st.order=shuffle(ids);st.pos=0;st.flipped=false;
+}
+function renderNav(){
+  const t=[{v:0,l:"Todo el tema"},...Object.keys(UNAMES).map(k=>({v:+k,l:UNAMES[k]}))];
+  document.getElementById("nav").innerHTML=t.map(x=>`<button class="nb${st.unit===x.v?" active":""}" onclick="setUnit(${x.v})">${x.l}</button>`).join("");
+}
+function renderStats(){
+  const ids=CARDS.map((c,i)=>i).filter(i=>st.unit===0||CARDS[i].u===st.unit);
+  const ok=ids.filter(i=>r(i).last==="ok").length, ko=ids.filter(i=>r(i).last==="ko").length;
+  document.getElementById("stats").innerHTML=`<div class="stat"><div class="stat-n" style="color:#0f6e56">${ok}</div><div class="stat-l">Sabidas</div></div><div class="stat"><div class="stat-n" style="color:#a32d2d">${ko}</div><div class="stat-l">Por repasar</div></div><div class="stat"><div class="stat-n">${ids.length-ok-ko}</div><div class="stat-l">Sin ver</div></div>`;
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`<button class="btn${st.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button><button class="btn${st.mode==="pend"?" active":""}" onclick="setMode('pend')">Solo pendientes</button><button class="btn" onclick="build();render()">🔀 Barajar</button><button class="btn danger" style="margin-left:auto" onclick="resetAll(this)">Reiniciar progreso</button>`;
+}
+function resetAll(b){
+  if(b.dataset.armed){db={};save();build();renderAll();return}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar progreso"}},3000);
+}
+function render(){
+  renderStats();
+  const s=document.getElementById("stage");
+  if(!st.order.length){s.innerHTML=`<div class="empty">${st.mode==="pend"?"No te queda ninguna pendiente en este bloque. Pulsa «Todas» para repasar el mazo completo.":"No hay tarjetas en este bloque."}</div>`;return}
+  if(st.pos>=st.order.length){s.innerHTML=`<div class="empty">Ronda terminada.<br><br><button class="btn active" onclick="build();render()">Empezar otra ronda</button></div>`;return}
+  const i=st.order[st.pos],c=CARDS[i];
+  s.innerHTML=`<div class="card${st.flipped?" back-side":""}" tabindex="0" role="button" aria-label="Girar tarjeta" onclick="flip()" onkeydown="if(event.key==='Enter'){flip()}">
+    <div class="meta"><span>${UNAMES[c.u]}</span><span>${st.pos+1} / ${st.order.length}</span></div>
+    <div class="face">${st.flipped?c.b:c.f}</div>
+    <div class="hint">${st.flipped?"¿La sabías?":"Toca la tarjeta o pulsa espacio para ver la respuesta"}</div></div>
+    <div class="answer"><button class="no" ${st.flipped?"":"disabled"} onclick="mark('ko')">✗ No la sabía</button><button class="si" ${st.flipped?"":"disabled"} onclick="mark('ok')">✓ La sabía</button></div>
+    <div class="dots">${st.order.map((id,k)=>`<span class="dot ${r(id).last==="ok"?"ok":r(id).last==="ko"?"ko":""}${k===st.pos?" cur":""}"></span>`).join("")}</div>`;
+}
+function flip(){st.flipped=!st.flipped;render()}
+function mark(v){const i=st.order[st.pos],x=r(i);x[v]++;x.last=v;db[i]=x;save();if(v==="ko")st.order.push(i);st.pos++;st.flipped=false;render()}
+function setUnit(u){st.unit=u;build();renderAll()}
+function setMode(m){st.mode=m;build();renderAll()}
+function renderAll(){renderNav();renderCtrl();render()}
+document.addEventListener("keydown",e=>{if(e.target.tagName==="BUTTON")return;if(e.code==="Space"){e.preventDefault();flip()}else if(st.flipped&&e.key==="ArrowRight")mark("ok");else if(st.flipped&&e.key==="ArrowLeft")mark("ko")});
+build();renderAll();
+</script>
+</body>
+</html>
