@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BV · Tema 3 — Planificación de RR. HH., OEP, selección y competencias (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tablewrap table{break-inside:auto}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque V · Administración de Recursos Humanos · Tema 3</small>
+    <h1>Planificación de recursos humanos. Ofertas de empleo público. Selección de personal. Las competencias en materia de personal</h1>
+    <p>Versión fusionada: el Tema 3 del Bloque V del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas contra el texto consolidado del BOE y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 16/11/2026 · TREBEP consolidado a 03/10/2026 · Real Decreto-ley 6/2023 (libro II) · Real Decreto 364/1995 · Orden TDF/380/2024 · Real Decreto 387/2026 (OEP 2026)</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">Planificación de los recursos humanos</a></li>
+    <li><a href="#s2">Instrumentos: RPT, estructuración de puestos y registros</a></li>
+    <li><a href="#s3">La oferta de empleo público</a></li>
+    <li><a href="#s4">Selección: principios y sistemas</a></li>
+    <li><a href="#s5">El procedimiento selectivo en la AGE</a></li>
+    <li><a href="#s6">Órganos de selección</a></li>
+    <li><a href="#s7">Competencias en materia de personal en la AGE</a></li>
+    <li><a href="#s8">Lo que preguntan y trampas</a></li>
+    <li><a href="#s9">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s10">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. El tema se pregunta por plazos y porcentajes: 3 años, 2 años, 1 año; 10 % adicional, 30 %, 10 % y 2 %; 20 días, 1 mes, 10 días, 72 horas y 45 días; 15 días o un mes para tomar posesión.</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Al terminar, recita sin mirar las tres cifras de la oferta (art. 70 TREBEP y art. 108 del Real Decreto-ley 6/2023), los plazos del procedimiento del Real Decreto 364/1995 y quién hace qué en la AGE.</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s9">apartado 9</a> tapando la columna derecha. Los supuestos de este tema giran en torno a una convocatoria: plazos de la oferta, composición del tribunal, número de aprobados y toma de posesión.</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> Planificación de los recursos humanos</h2>
+<h3>1.1 Objetivo y marco normativo</h3>
+<div class="box clave"><span class="box-h">Art. 69.1 TREBEP</span>La planificación de los recursos humanos tiene como objetivo contribuir a la <strong>eficacia</strong> en la prestación de los servicios y a la <strong>eficiencia</strong> en la utilización de los recursos económicos disponibles, mediante la dimensión adecuada de sus efectivos, su mejor distribución, formación, promoción profesional y movilidad.</div>
+<p>Marco: título V del TREBEP (arts. 69 a 77, básicos); libro segundo del <strong>Real Decreto-ley 6/2023</strong>, de 19 de diciembre (título I, arts. 106 a 111, planificación estratégica en la Administración del Estado); <strong>Orden TDF/380/2024</strong>, de 26 de abril, sobre planificación estratégica de los recursos humanos de la Administración del Estado; y los preceptos vigentes de la Ley 30/1984.</p>
+<h3>1.2 Planes para la ordenación de los recursos humanos (art. 69.2 TREBEP)</h3>
+<p>Las Administraciones <strong>podrán</strong> aprobarlos, con algunas de estas medidas, entre otras:</p>
+<ol type="a">
+<li>Análisis de las disponibilidades y necesidades de personal, en número de efectivos y en perfiles profesionales o niveles de cualificación.</li>
+<li>Previsiones sobre los sistemas de organización del trabajo y modificaciones de estructuras de puestos.</li>
+<li>Medidas de movilidad, entre ellas la <strong>suspensión de incorporaciones de personal externo</strong> a un ámbito o la convocatoria de concursos limitados a personal de ámbitos determinados.</li>
+<li>Medidas de promoción interna, de formación y de movilidad forzosa.</li>
+<li>La previsión de la incorporación de recursos humanos a través de la oferta de empleo público.</li>
+</ol>
+<p>Cada Administración planifica sus recursos humanos con los sistemas de sus normas (69.3). En la AGE, los <strong>planes de ordenación y de empleo</strong> son planes integrales que pueden afectar a uno o varios departamentos: la iniciativa es del ministerio afectado y los aprueba la Secretaría de Estado de Función Pública, previo informe favorable de Hacienda y negociación con los sindicatos.</p>
+<h3>1.3 Planificación estratégica en la Administración del Estado (arts. 106 y 107 del Real Decreto-ley 6/2023)</h3>
+<ul>
+<li>La Administración del Estado actúa conforme a planes o instrumentos de planificación estratégica (art. 106).</li>
+<li>La planificación estratégica establece el <strong>escenario plurianual de empleo público</strong> dentro de las previsiones presupuestarias, y es <strong>periódicamente revisable</strong> (107.1). Sirve para optimizar el capital humano, gestionar y retener el talento, fomentar la formación y buscar el buen clima laboral (107.2).</li>
+<li>Contiene, al menos, los criterios para articular la <strong>oferta de empleo público</strong>, orientar la movilidad, las convocatorias de provisión y la promoción interna, proponer itinerarios formativos y fijar objetivos de desempeño (107.3).</li>
+<li>Se estructura en <strong>planes de ámbito general</strong>, <strong>planes específicos</strong> de departamentos u organismos y <strong>planes de reestructuración</strong> de sectores concretos (107.4). Todos requieren <strong>negociación colectiva previa</strong> y evaluación posterior (107.5).</li>
+</ul>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Plan (Orden TDF/380/2024)</th><th style="width:26%">Quién lo aprueba</th><th>Contenido y plazo</th></tr>
+<tr><td><strong>Específicos</strong> (art. 5)</td><td>Departamentos ministeriales, uno por área funcional</td><td>Análisis de dotaciones y del diferencial con las necesarias, necesidades de nuevo ingreso, permanencia más allá de la jubilación, provisión, puestos de difícil cobertura, formación. Aprobación en el <strong>primer trimestre</strong> del año.</td></tr>
+<tr><td><strong>General</strong> (art. 4)</td><td><strong>Secretaría de Estado de Función Pública</strong>, cada año</td><td>A partir de los específicos, con un <strong>diagnóstico del empleo público a tres años</strong>. Aprobación en los <strong>dos meses siguientes</strong> a los específicos. La oferta de cada ejercicio se vincula a su diagnóstico.</td></tr>
+<tr><td><strong>Reestructuración</strong> (art. 6)</td><td>Secretaría de Estado de Función Pública, previa negociación colectiva</td><td>Cuando un cambio tecnológico u organizativo comprometa la prestación del servicio en un sector. La iniciativa es de los departamentos, los organismos o el propio ministerio.</td></tr>
+</table></div>
+<p>Plan general y específicos son <strong>anuales</strong>, se elaboran con los Presupuestos y deben aprobarse antes de la orden de elaboración de los Presupuestos Generales del Estado. Se hacen con los modelos normalizados de la <strong>Comisión Superior de Personal</strong> (Real Decreto 349/2001) y tienen un informe de ejecución (art. 7).</p>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> Instrumentos: RPT, estructuración de puestos y registros</h2>
+<h3>2.1 Relaciones de puestos de trabajo (art. 74 TREBEP y art. 109 del Real Decreto-ley 6/2023)</h3>
+<div class="box clave"><span class="box-h">Contenido mínimo (art. 74 TREBEP)</span>Denominación de los puestos · grupos de clasificación profesional · cuerpos o escalas a que estén adscritos · sistemas de provisión · retribuciones complementarias. Son <strong>públicas</strong>.</div>
+<ul>
+<li>Son instrumentos técnicos de planificación para organizar, racionalizar y ordenar el personal. En la Administración del Estado incluyen todos los puestos de naturaleza <strong>funcionarial, laboral y eventual</strong>, de forma conjunta o separada (art. 109.1).</li>
+<li>Denominaciones tipo y en <strong>lenguaje no sexista</strong> (109.2). En ámbitos específicos caben otros instrumentos que las sustituyan (109.3).</li>
+<li>En la AGE las aprueba y modifica la <strong>Comisión Ejecutiva de la Comisión Interministerial de Retribuciones (CECIR)</strong>.</li>
+<li>Las unidades que no son órganos se crean, modifican y suprimen a través de las RPT (art. 59.2 de la Ley 40/2015).</li>
+</ul>
+<h3>2.2 Estructuración de puestos y concurso abierto (arts. 110 y 111 del Real Decreto-ley 6/2023)</h3>
+<p>Los puestos se ordenan en <strong>niveles</strong> según la responsabilidad; crear, modificar o suprimir un puesto exige un análisis del <strong>perfil de competencias</strong>; los puestos se adscriben a <strong>áreas funcionales</strong>, que se fijarán por reglamento. La Secretaría de Estado de Función Pública convoca <strong>concursos unitarios de carácter abierto y permanente</strong> para ocupar plazas de necesaria cobertura y ordenar la movilidad (art. 111; se estudian en el Tema 4).</p>
+<h3>2.3 Registros de personal (art. 71 TREBEP) y Registro Central de Personal</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Aspecto</th><th>Régimen</th></tr>
+<tr><td>Base</td><td>Cada Administración constituye un registro de su personal (art. 71). En la AGE, el <strong>Registro Central de Personal</strong> (Reglamento modificado por el Real Decreto 2073/1999), dependiente del ministerio de función pública y gestionado por la <strong>Dirección General de la Función Pública</strong>.</td></tr>
+<tr><td>Comunicación de actos</td><td>En <strong>tres días</strong> desde que se dictan; el asiento se practica en otros <strong>tres días</strong> desde la recepción (art. 11.2).</td></tr>
+<tr><td>Anotaciones provisionales</td><td><strong>90 días naturales</strong>, prorrogables otros 90; si no llega la comunicación formal, se cancelan.</td></tr>
+<tr><td>Nómina</td><td>No se incluyen nuevas remuneraciones sin haber comunicado antes al Registro el acto que las reconoce.</td></tr>
+<tr><td>Procedimientos especiales</td><td>Para contratos o interinidades de menos de <strong>seis meses</strong>, los fija la Secretaría de Estado.</td></tr>
+<tr><td>Datos excluidos</td><td>En el expediente personal no figuran datos de <strong>raza, religión u opinión</strong> (art. 13.5 de la Ley 30/1984).</td></tr>
+<tr><td>Acceso del personal</td><td>Portal del empleado «Funciona». Asientos: inscripciones y anotaciones (ordinarias, provisionales y marginales).</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión al material visual</span>El visual daba los plazos del Registro en «días hábiles». El Real Decreto 2073/1999 dice «tres días»; se computan como hábiles por la regla general de la Ley 39/2015, pero la cifra que hay que recordar es <strong>tres</strong>.</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> La oferta de empleo público</h2>
+<h3>3.1 Régimen básico (art. 70 TREBEP)</h3>
+<div class="box clave"><span class="box-h">Las tres cifras del art. 70</span>
+Las necesidades de recursos humanos <strong>con asignación presupuestaria</strong> que deban cubrirse con personal de nuevo ingreso son objeto de la oferta de empleo público (o instrumento similar). Eso obliga a convocar los procesos para las plazas comprometidas <strong>y hasta un 10 % adicional</strong>, fijando el plazo máximo para convocarlos. La ejecución de la oferta debe hacerse en el plazo <strong>improrrogable de tres años</strong> (examen 2019). Se aprueba <strong>anualmente</strong> por los órganos de gobierno y se publica en el diario oficial. Puede contener medidas de planificación.</div>
+<h3>3.2 Especialidades en la Administración del Estado (art. 108 del Real Decreto-ley 6/2023)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Aspecto</th><th>Régimen</th></tr>
+<tr><td>Concepto</td><td>Acto por el que se definen y cuantifican los efectivos según las necesidades de los departamentos y las políticas prioritarias, en el marco de la planificación estratégica (108.1).</td></tr>
+<tr><td>Aprobación</td><td>El Gobierno, por <strong>real decreto</strong>, a propuesta del ministerio de función pública y con informe favorable de Hacienda (art. 2.g del Real Decreto 2169/1984). Caben ofertas adicionales por necesidades urgentes.</td></tr>
+<tr><td>Convocatorias</td><td>Se publican en el <strong>mismo año natural</strong> que la oferta en el BOE.</td></tr>
+<tr><td>Ejecución de la convocatoria</td><td>Máximo <strong>dos años</strong> desde su publicación; la fase de oposición, en <strong>un año</strong>, salvo causa justificada.</td></tr>
+<tr><td>Plazas no cubiertas</td><td>Pueden convocarse de nuevo si no han pasado <strong>más de tres años</strong> desde la publicación de la oferta, previo informe del departamento de función pública, que puede asignarlas a otros cuerpos o escalas, preferentemente del mismo grupo o subgrupo. La convocatoria identifica de qué oferta proceden.</td></tr>
+<tr><td>Promoción interna</td><td>No menos del <strong>30 %</strong> de las plazas de acceso libre.</td></tr>
+<tr><td>Discapacidad</td><td>No menos del <strong>10 %</strong> de las plazas convocadas, con al menos el <strong>2 %</strong> para discapacidad intelectual, hasta alcanzar el 2 % de los efectivos totales. La reserva se calcula sobre el total de la oferta y puede concentrarse en los cuerpos más adecuados.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al material visual: el 7 % no está derogado</span>
+El visual decía que el 7 % del art. 59 TREBEP es «un dato histórico, derogado a efectos prácticos». No es así: el art. 59.1 TREBEP sigue fijando, con carácter <strong>básico</strong> y para todas las Administraciones, un cupo no inferior al <strong>7 %</strong> (2 % intelectual). El <strong>10 %</strong> es una mejora que el art. 108.4 del Real Decreto-ley 6/2023 aplica solo a la <strong>Administración del Estado</strong>. Si la pregunta habla del TREBEP o de las Administraciones en general, la respuesta es 7 %; si habla de la AGE, 10 %.</div>
+<div class="box trampa"><span class="box-h">Trampa: tres plazos distintos</span><strong>3 años</strong>: ejecución de la oferta (art. 70) y límite para reconvocar plazas no cubiertas · <strong>2 años</strong>: ejecución de cada convocatoria · <strong>1 año</strong>: fase de oposición. Y la convocatoria, en el mismo año natural de la oferta.</div>
+<h3>3.3 La oferta de 2026 (Real Decreto 387/2026, de 6 de mayo)</h3>
+<div class="box act"><span class="box-h">Dato de actualidad (BOE de 7 de mayo de 2026)</span>
+<strong>27.232 plazas</strong>: 20.541 de acceso libre, 6.345 de promoción interna y 346 de una oferta extraordinaria por las emergencias climáticas (Real Decreto-ley 5/2026). <strong>2.689</strong> reservadas a personas con discapacidad, <strong>538</strong> de ellas para discapacidad intelectual. Cuerpo de Gestión de la Administración Civil del Estado: <strong>1.255</strong> plazas de acceso libre (y 450 de promoción interna). Prioridades: transformación digital, inteligencia artificial y ciberseguridad (unas 1.700 plazas TIC), infraestructuras, transporte y economía.<br>
+Reglas de gestión del real decreto: las convocatorias las informa favorablemente la Dirección General de la Función Pública; si la última convocatoria del mismo cuerpo cubrió menos del <strong>75 %</strong> de las plazas, hay que acompañar un diagnóstico con medidas correctoras; los órganos de selección publican un <strong>cronograma orientativo</strong>; y reasignar plazas no cubiertas a cuerpos de grupo superior exige además informe de la Secretaría de Estado de Presupuestos y Gastos.</div>
+<div class="box fix"><span class="box-h">Precisión al material visual</span>El visual seguía citando como vigente la referencia al Real Decreto 651/2025 (oferta de 2025). La referencia de actualidad es el Real Decreto 387/2026, que ya recogía.</div>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> Selección: principios y sistemas</h2>
+<h3>4.1 Principios (art. 55 TREBEP y art. 112 del Real Decreto-ley 6/2023)</h3>
+<p>Igualdad, mérito y capacidad, más: a) <strong>publicidad</strong> de convocatorias y bases; b) <strong>transparencia</strong>; c) <strong>imparcialidad y profesionalidad</strong> de los órganos de selección; d) <strong>independencia y discrecionalidad técnica</strong>; e) <strong>adecuación</strong> entre pruebas y funciones; f) <strong>agilidad</strong>, sin perjuicio de la objetividad (art. 55.2).</p>
+<p>El art. 112 del Real Decreto-ley 6/2023 añade para la Administración del Estado un modelo <strong>adaptable</strong> (según el cuerpo), <strong>mixto</strong> (conocimientos y competencias) y <strong>social</strong> (diversidad social y territorial), y garantiza además la <strong>accesibilidad</strong>, la <strong>confidencialidad</strong> de los órganos de selección y la igualdad de acceso con independencia de la <strong>situación socioeconómica</strong>.</p>
+<p><strong>Discapacidad (art. 113)</strong>: participación en igualdad, acreditando el grado y la compatibilidad; las plazas para discapacidad intelectual (grado igual o superior al 33 %) se cubren con <strong>pruebas específicas e independientes</strong>; adaptaciones de tiempo y medios.</p>
+<p><strong>Requisitos de acceso (arts. 56 y 57 TREBEP, del Tema 1)</strong>: nacionalidad española (salvo el art. 57), 16 años y no superar la edad de jubilación forzosa, capacidad funcional, no haber sido separado ni estar inhabilitado, y la titulación exigida. Los nacionales de la Unión Europea acceden en igualdad salvo en empleos con ejercicio de poder público; los extranjeros con residencia legal, solo como personal laboral.</p>
+<h3>4.2 Sistemas selectivos (art. 61 TREBEP y art. 114 del Real Decreto-ley 6/2023)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Sistema</th><th>Concepto</th><th style="width:26%">Ámbito</th></tr>
+<tr><td><strong>Oposición</strong></td><td>Una o más pruebas de conocimientos, competencias o habilidades para determinar la capacidad y fijar el orden de prelación.</td><td>Ordinario para funcionarios de carrera</td></tr>
+<tr><td><strong>Concurso-oposición</strong></td><td>Celebración <strong>sucesiva</strong> de ambos. La fase de concurso es proporcionada y nunca decide por sí sola; para que se valore hay que haber <strong>superado la oposición</strong> (114.7).</td><td>Ordinario para funcionarios de carrera</td></tr>
+<tr><td><strong>Concurso</strong></td><td>Solo valoración de méritos conforme a un baremo previo.</td><td>Para funcionarios, <strong>excepcional y por ley</strong>; para el laboral fijo, uno de los ordinarios (61.7)</td></tr>
+</table></div>
+<ul>
+<li>Procesos <strong>abiertos</strong> y de libre concurrencia, sin perjuicio de la promoción interna y la discriminación positiva (61.1).</li>
+<li>Pruebas: conocimientos y capacidad analítica (oral o escrita), habilidades y destrezas, lenguas extranjeras, pruebas físicas; pueden completarse con cursos, prácticas, exposición curricular, psicotécnicos, entrevistas y reconocimientos médicos (61.2 y 61.5). En la Administración del Estado, además, pruebas psicométricas y de competencias digitales; la convocatoria debe <strong>justificar</strong> el tipo de pruebas, y las pruebas se celebran de forma <strong>territorializada</strong> salvo razones justificadas (114.2 y 114.3).</li>
+<li><strong>Curso selectivo</strong> o periodo de prácticas evaluable: durante él se tiene la condición de <strong>funcionario en prácticas</strong> (114.8).</li>
+</ul>
+<div class="box clave"><span class="box-h">Número de aprobados y relación complementaria (art. 61.8 TREBEP y art. 114.10 del Real Decreto-ley 6/2023)</span>
+Los órganos de selección no pueden proponer más aprobados que plazas, salvo que lo prevea la convocatoria. Si han propuesto <strong>tantos aspirantes como plazas</strong> y se producen <strong>renuncias</strong> antes del nombramiento o de la toma de posesión, el órgano convocante puede pedir una <strong>relación complementaria</strong> de los siguientes, que hayan obtenido la puntuación mínima. No procede si se propusieron menos aspirantes que plazas. Los órganos de selección elaboran además <strong>relaciones de candidatos</strong> para interinos o laborales temporales.</div>
+<p><strong>Bases (114.11)</strong>: vinculan al órgano convocante, a los órganos de selección y a los participantes. Contenido mínimo: plazas y oferta, requisitos, sistema y pruebas con programa y baremo, composición del órgano de selección, curso selectivo o prácticas, y porcentajes de reserva.</p>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> El procedimiento selectivo en la AGE (Real Decreto 364/1995 y Real Decreto-ley 6/2023)</h2>
+<div class="flowv">
+<div class="step"><b>1. Convocatoria</b>La convoca el departamento al que está adscrito el cuerpo, con <strong>informe favorable de la Dirección General de la Función Pública</strong>; en cada ministerio corresponde al <strong>subsecretario</strong> convocar y resolver las pruebas selectivas (examen 2019). Se publica con sus bases en el <strong>BOE</strong> (art. 15) y solo puede modificarse con sujeción a la Ley 39/2015. Antes de las pruebas, la Secretaría de Estado fija por <strong>sorteo público único</strong> el orden de actuación de los aspirantes de todo el año (art. 17).</div>
+<div class="step"><b>2. Solicitudes</b>En <strong>20 días naturales</strong> desde el día siguiente a la publicación de la convocatoria (art. 18), con carácter general por medios electrónicos. Basta declarar que se reúnen los requisitos a la fecha de fin del plazo.</div>
+<div class="step"><b>3. Admitidos y excluidos</b>Resolución en el plazo máximo de <strong>un mes</strong>, publicada en el BOE, con <strong>10 días hábiles</strong> para subsanar (art. 20).</div>
+<div class="step"><b>4. Pruebas</b>Entre la conclusión de un ejercicio y el comienzo del siguiente: mínimo <strong>72 horas</strong> y máximo <strong>45 días naturales</strong> (art. 16.j). Anuncios de las siguientes pruebas con <strong>12 horas</strong> de antelación si es el mismo ejercicio y <strong>24 horas</strong> si es uno nuevo (art. 21). Anonimato de los escritos cuando sea posible.</div>
+<div class="step"><b>5. Aprobados y documentación</b>Relación de aprobados por orden de puntuación, motivada, que se publica en el BOE (art. 22). Los aprobados aportan los documentos en <strong>20 días naturales</strong>; si no lo hacen o no cumplen requisitos, no pueden ser nombrados y quedan anuladas sus actuaciones (art. 23).</div>
+<div class="step"><b>6. Curso selectivo o prácticas</b>Nombramiento como funcionarios en prácticas. Quien no supera el <strong>curso selectivo</strong> pierde el derecho al nombramiento por resolución motivada; por fuerza mayor puede hacerse después, intercalándose según la puntuación (art. 24).</div>
+<div class="step"><b>7. Nombramiento y toma de posesión</b>Nombramiento por la <strong>Secretaría de Estado de Función Pública</strong>, publicado en el BOE; nunca más nombrados que plazas, bajo sanción de <strong>nulidad de pleno derecho</strong> (art. 25). Destinos según el orden obtenido, con carácter <strong>definitivo</strong>, equivalente a los obtenidos por concurso (art. 26). Toma de posesión en <strong>15 días naturales</strong> desde la publicación del nombramiento, o <strong>un mes</strong> si supone cambio de localidad de residencia (art. 114.12 del Real Decreto-ley 6/2023); interinos y eventuales, al día siguiente. Se da posesión ante el subsecretario (servicios centrales) o el delegado del Gobierno (servicios periféricos) (art. 11.2 del Real Decreto 2169/1984).</div>
+<div class="step"><b>8. Bolsas</b>Relaciones de candidatos para interinos o laborales temporales, en los términos de la oferta.</div>
+</div>
+<div class="box fix"><span class="box-h">Correcciones al material visual (procedimiento)</span>
+<strong>Toma de posesión</strong>: el visual daba «1 mes desde la publicación del nombramiento» en todo caso. Desde el Real Decreto-ley 6/2023 son <strong>15 días naturales</strong>, y un mes solo si hay cambio de localidad de residencia.<br>
+<strong>Órgano que nombra</strong>: el visual decía «Secretario de Estado para la Administración Pública», denominación que conserva el art. 25 del Real Decreto 364/1995. Hoy es la <strong>Secretaría de Estado de Función Pública</strong>.</div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026</span>El temario no recoge el plazo de <strong>un mes</strong> para aprobar la lista de admitidos, los plazos entre ejercicios ni la nulidad de los nombramientos que excedan las plazas (art. 25.1 del Real Decreto 364/1995). Los tres se preguntan.</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> Órganos de selección</h2>
+<h3>6.1 Reglas comunes (art. 60 TREBEP y art. 115 del Real Decreto-ley 6/2023)</h3>
+<ul>
+<li><strong>Colegiados</strong>; imparcialidad y profesionalidad; tendencia a la <strong>paridad</strong> entre mujer y hombre (60.1). En la Administración del Estado, además, especialización, agilidad y celeridad, y participación de personas con discapacidad, sobre todo con turno de reserva (115.2).</li>
+<li><strong>No pueden formar parte</strong>: personal de elección o designación política, funcionarios interinos y personal eventual (60.2). El art. 115.2 añade los <strong>altos cargos</strong> (Ley 3/2015) y el <strong>personal laboral no fijo</strong>.</li>
+<li>Pertenencia siempre <strong>a título individual</strong>, nunca en representación de nadie (60.3).</li>
+<li>Pueden crearse órganos o comités especializados, permanentes y renovables (115.4; 61.4 TREBEP). El <strong>INAP</strong> organiza u homologa formación en técnicas de selección, que se valora para designar a los miembros (115.5).</li>
+</ul>
+<h3>6.2 Tribunales y Comisiones Permanentes (arts. 10 a 14 del Real Decreto 364/1995)</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:20%"></th><th>Tribunales (art. 11)</th><th>Comisiones Permanentes de Selección (art. 12)</th></tr>
+<tr><td>Cuándo</td><td>Se nombran en <strong>cada convocatoria</strong>, salvo excepción justificada</td><td>Cuerpos con muchos aspirantes o titulación o especialización que lo aconsejen</td></tr>
+<tr><td>Composición</td><td>Número <strong>impar</strong>, funcionarios de carrera, <strong>no inferior a cinco</strong>, con igual número de suplentes; titulación igual o superior a la del cuerpo (examen 2019)</td><td>Número impar de funcionarios de carrera con titulación igual o superior. La del GACE: <strong>Orden HFP/266/2023, de 12 de marzo</strong>: <strong>presidente + 45 vocales + secretario</strong></td></tr>
+<tr><td>Cuerpos</td><td>El de la convocatoria</td><td>Gestión de la Administración Civil, Gestión de Sistemas e Informática, General Administrativo, Técnicos Auxiliares de Informática y General Auxiliar</td></tr>
+</table></div>
+<ul>
+<li>No pueden estar formados <strong>mayoritariamente</strong> por funcionarios del mismo cuerpo o escala objeto de la selección, salvo normas específicas (art. 13.1).</li>
+<li>No pueden formar parte quienes hayan <strong>preparado aspirantes</strong> en los <strong>cinco años</strong> anteriores a la convocatoria (13.2).</li>
+<li>Pueden incorporar <strong>asesores especialistas</strong>, que solo colaboran en su especialidad (13.3). Abstención y recusación según la ley de procedimiento (13.4).</li>
+<li>Sus resoluciones <strong>vinculan</strong> a la Administración, que solo puede revisarlas por las vías de revisión de oficio; contra sus actos y los de trámite cualificados cabe recurso (hoy de alzada) ante la autoridad que nombró al presidente (art. 14).</li>
+<li><strong>Personal laboral</strong>: órganos de selección en cada convocatoria, número impar, al menos uno a propuesta de la representación de los trabajadores; puede formar parte el <strong>laboral fijo</strong>, no el eventual, el interino ni el de designación política (examen 2019).</li>
+</ul>
+<div class="box fix"><span class="box-h">Precisión al material visual (Comisión Permanente de Selección)</span>El visual decía que el INAP «propone el presidente» de la Comisión. Según la Orden HFP/266/2023, la presidencia corresponde a quien sea titular de la <strong>Subdirección de Selección del INAP</strong>, por razón del cargo. Los vocales los designa la Secretaría de Estado de Función Pública a propuesta conjunta del INAP y de la Dirección General de la Función Pública.</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> Competencias en materia de personal en la AGE</h2>
+<p>Base: Real Decreto 2169/1984, de 28 de noviembre, de atribución de competencias en materia de personal (hay que leer sus órganos con las denominaciones actuales), y la estructura del <strong>Ministerio para la Transformación Digital y de la Función Pública</strong> (Real Decreto 210/2024).</p>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Órgano</th><th>Competencias principales</th></tr>
+<tr><td><strong>Gobierno</strong> (Consejo de Ministros)</td><td>Dirige la política de personal y ejerce la potestad reglamentaria; <strong>aprueba la oferta de empleo público</strong>; da instrucciones para la negociación y valida los acuerdos de la Mesa General; fija las retribuciones dentro de los Presupuestos; determina el número máximo de eventuales; acuerda la <strong>separación del servicio</strong>.</td></tr>
+<tr><td><strong>Ministerio para la Transformación Digital y de la Función Pública</strong></td><td>Desarrollo, coordinación y control de la política de personal; propone al Gobierno los proyectos normativos y la oferta; normas de aplicación general sobre clasificación, provisión y selección; planes de formación; dicta las directrices de la planificación estratégica (art. 107.4 del Real Decreto-ley 6/2023).</td></tr>
+<tr><td><strong>Secretaría de Estado de Función Pública</strong></td><td><strong>Nombra a los funcionarios de carrera</strong>; aprueba los planes general y de reestructuración y los planes de empleo; convoca concursos unitarios y el abierto y permanente; propone e informa la oferta; sorteo del orden de actuación; bases de los concursos; coordina con las demás Administraciones. Dependen de ella la <strong>Dirección General de la Función Pública</strong> (informa las convocatorias, gestiona el Registro Central de Personal) y el <strong>INAP</strong>.</td></tr>
+<tr><td><strong>Ministerio de Hacienda</strong></td><td>Informe favorable a la oferta y a toda medida de personal con efectos en el gasto; propuesta de retribuciones. Con el ministerio de función pública integra la Comisión Interministerial de Retribuciones, cuya Comisión Ejecutiva (<strong>CECIR</strong>) aprueba las RPT.</td></tr>
+<tr><td><strong>Ministros y secretarios de Estado</strong></td><td>Jefatura del personal del departamento; provisión por <strong>libre designación</strong>; <strong>convocar y resolver los concursos</strong>; potestad disciplinaria salvo la separación (faltas graves y muy graves); propuesta de la RPT; nombramiento y cese del personal eventual (arts. 9 y 13 del Real Decreto 2169/1984).</td></tr>
+<tr><td><strong>Subsecretarios</strong></td><td>Jefatura superior del personal después del ministro e inspección; <strong>convocar y resolver las pruebas selectivas</strong> del personal funcionario y laboral del departamento (examen 2019); situaciones de servicios especiales; grados personales; incoar expedientes disciplinarios y sancionar faltas leves; gestión ordinaria no atribuida a otros órganos.</td></tr>
+<tr><td><strong>Subsecretarios</strong> (servicios centrales) y <strong>delegados del Gobierno</strong> (periféricos)</td><td>Dar <strong>posesión y cese</strong>; jubilaciones forzosas y por incapacidad; permisos y licencias; trienios; excedencias voluntarias que no sean por interés particular; comisiones de servicio de menos de seis meses sin cambio de ministerio ni localidad (art. 11 del Real Decreto 2169/1984).</td></tr>
+<tr><td><strong>Comisión Superior de Personal</strong></td><td>Coordinación y consulta; aprueba los modelos normalizados de planes de recursos humanos (Real Decreto 349/2001).</td></tr>
+<tr><td><strong>Comisión de Coordinación del Empleo Público</strong></td><td>Coordinación entre Administraciones, dentro de la Conferencia Sectorial de Administración Pública (art. 100 TREBEP).</td></tr>
+<tr><td><strong>INAP</strong></td><td>Formación de los órganos de selección; organiza u homologa procesos; su Subdirección de Selección preside la Comisión Permanente de Selección.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026</span>El temario atribuye a los subsecretarios «resolver los concursos y las libres designaciones». Según el art. 9 del Real Decreto 2169/1984, esas competencias son de los <strong>ministros y secretarios de Estado</strong>; en la práctica suelen estar delegadas en el subsecretario. En el test, si la pregunta es «a quién corresponde», la respuesta normativa es el ministro.</div>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> Lo que preguntan y trampas</h2>
+<div class="box clave"><span class="box-h">Las cifras del tema</span>
+Oferta: hasta <strong>10 %</strong> adicional · ejecución <strong>3 años</strong> improrrogables · convocatoria en el mismo año natural, ejecutada en <strong>2 años</strong>, oposición en <strong>1 año</strong> · reconvocar no cubiertas: hasta <strong>3 años</strong> · promoción interna ≥ <strong>30 %</strong> de acceso libre · discapacidad: <strong>7 %</strong> básico, <strong>10 %</strong> en la AGE, <strong>2 %</strong> intelectual · solicitudes <strong>20 días naturales</strong> · admitidos en <strong>1 mes</strong>, subsanar en <strong>10 días hábiles</strong> · entre ejercicios <strong>72 h</strong> a <strong>45 días naturales</strong> · anuncios <strong>12 h / 24 h</strong> · documentación <strong>20 días naturales</strong> · toma de posesión <strong>15 días naturales</strong> o <strong>1 mes</strong> · tribunal impar ≥ <strong>5</strong> · preparadores: <strong>5 años</strong> · Comisión Permanente: <strong>1 + 45 + 1</strong> · Registro: <strong>3 días</strong>, provisionales <strong>90 + 90</strong> · OEP 2026: <strong>27.232</strong> plazas, GACE <strong>1.255</strong> libres.</div>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Lo que preguntan</span><ul>
+<li>Las medidas de los planes del art. 69.2.</li>
+<li>Contenido mínimo de la RPT y quién la aprueba.</li>
+<li>Los plazos de la oferta.</li>
+<li>Reservas de promoción interna y discapacidad.</li>
+<li>Principios del art. 55.</li>
+<li>Sistemas selectivos y concurso excepcional.</li>
+<li>Composición de tribunales y exclusiones.</li>
+<li>Plazos del Real Decreto 364/1995.</li>
+<li>Quién convoca, quién nombra, quién aprueba la oferta.</li></ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>3 años de la oferta frente a 2 de la convocatoria.</li>
+<li>7 % (TREBEP, todas las Administraciones) frente a 10 % (AGE).</li>
+<li>El concurso puro es excepcional y por ley.</li>
+<li>La fase de concurso nunca decide sola.</li>
+<li>Laboral fijo sí puede estar en el tribunal; interino, eventual y laboral no fijo, no.</li>
+<li>La relación complementaria exige haber propuesto tantos como plazas.</li>
+<li>Toma de posesión: 15 días, no un mes.</li>
+<li>Nombra la Secretaría de Estado; convoca el subsecretario.</li>
+<li>Real Decreto-ley 6/2023, no «Real Decreto Legislativo».</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia con sus piezas: arts. 103.3 y 149.1.18.ª CE; Real Decreto Legislativo 5/2015 (en adelante, TREBEP); Ley 30/1984 y reglamentos en lo que no se opongan; y, para este tema, el libro segundo del Real Decreto-ley 6/2023 y el Real Decreto 364/1995.</li>
+<li>La calificación previa: qué proceso es (libre, promoción interna, reserva), en qué fase está y qué órgano dictó el acto.</li>
+<li>El objetivo y las cinco medidas del art. 69.</li>
+<li>Los tres tipos de planes de la Orden TDF/380/2024 y sus plazos.</li>
+<li>Las cifras del art. 70 TREBEP y del art. 108 del Real Decreto-ley 6/2023.</li>
+<li>Los seis principios del art. 55.2.</li>
+<li>Los tres sistemas selectivos.</li>
+<li>Los ocho pasos del procedimiento con sus plazos.</li>
+<li>Las reglas de composición de los órganos de selección y la tabla de competencias.</li>
+</ol>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>Este tema entra en el supuesto a través de un <strong>proceso selectivo</strong>: si las plazas pueden convocarse, si el tribunal está bien formado, cuántos aprobados caben y cuándo vence la toma de posesión.</p>
+<h3>9.1 Introducción de la materia (plantillas v2, sección 10)</h3>
+<div class="model">
+<p>«En materia de función pública, el artículo 103.3 de la Constitución reserva a la ley el estatuto de los funcionarios públicos y el acceso a la función pública de acuerdo con los principios de mérito y capacidad, y el artículo 149.1.18.ª atribuye al Estado las bases de su régimen estatutario. Resulta de aplicación el Real Decreto Legislativo 5/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley del Estatuto Básico del Empleado Público (en adelante, TREBEP), y, en lo que no se oponga a él, la Ley 30/1984, de 2 de agosto, de Medidas para la Reforma de la Función Pública, y sus reglamentos de desarrollo, que se mantienen en vigor conforme a su disposición final cuarta.»</p>
+</div>
+<div class="box sup"><span class="box-h">Complemento propio del Tema 3</span>«…así como el libro segundo del Real Decreto-ley 6/2023, de 19 de diciembre, para la Administración del Estado, y el Real Decreto 364/1995, de 10 de marzo, por el que se aprueba el Reglamento General de Ingreso del Personal al servicio de la Administración General del Estado.» Si el enunciado da la oferta, cita también el real decreto que la aprueba.</div>
+<h3>9.2 Calificación previa propia del Tema 3</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar el proceso. Se trata de un proceso selectivo de [acceso libre / promoción interna / turno de reserva] para el ingreso en el [cuerpo], derivado de la oferta de empleo público [de año], publicada el [fecha], que se encuentra en la fase de [convocatoria / pruebas / nombramiento], y el acto controvertido lo ha dictado [órgano].»</p>
+</div>
+<h3>9.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:32%">Hecho del enunciado</th><th style="width:26%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>Convocatoria publicada al año siguiente al de la oferta</td><td>Art. 108.2 Real Decreto-ley 6/2023</td><td>Incumple el mismo año natural; la oferta debe ejecutarse igualmente dentro de los tres años del art. 70</td></tr>
+<tr><td>Se reconvocan plazas no cubiertas de una oferta publicada hace más de tres años</td><td>Art. 108.2</td><td>No procede: esas plazas no pueden convocarse de nuevo</td></tr>
+<tr><td>Oferta de la AGE con un 7 % de reserva para discapacidad</td><td>Art. 108.4 Real Decreto-ley 6/2023</td><td>Insuficiente: en la AGE el mínimo es el 10 %, con un 2 % intelectual</td></tr>
+<tr><td>Promoción interna del 20 % de las plazas de acceso libre</td><td>Art. 108.3</td><td>Incumple el mínimo del 30 %</td></tr>
+<tr><td>Concurso de méritos para ingresar como funcionario de carrera sin ley que lo prevea</td><td>Art. 61.6 TREBEP</td><td>No es válido: el concurso es excepcional y requiere ley</td></tr>
+<tr><td>Fase de concurso que puede decidir el proceso por sí sola</td><td>Arts. 61.3 TREBEP y 114.7</td><td>Base contraria a la ley: debe ser proporcionada y valorarse tras superar la oposición</td></tr>
+<tr><td>Tribunal de cuatro miembros</td><td>Art. 11 Real Decreto 364/1995</td><td>Composición irregular: número impar no inferior a cinco</td></tr>
+<tr><td>Un funcionario interino o un eventual en el tribunal</td><td>Arts. 60.2 TREBEP y 115.2</td><td>No puede formar parte: debe sustituirse antes de que actúe</td></tr>
+<tr><td>El tribunal propone 52 aprobados para 50 plazas sin previsión en las bases</td><td>Art. 61.8 TREBEP y art. 25 Real Decreto 364/1995</td><td>Propuesta contraria a la norma; el nombramiento de los dos excedentes sería nulo de pleno derecho</td></tr>
+<tr><td>Renuncia de dos aprobados antes de la toma de posesión</td><td>Art. 61.8 TREBEP y 114.10</td><td>El órgano convocante puede pedir una relación complementaria</td></tr>
+<tr><td>Aprobado que no presenta la documentación en 20 días naturales</td><td>Art. 23 Real Decreto 364/1995</td><td>No puede ser nombrado; se anulan sus actuaciones</td></tr>
+<tr><td>Toma de posesión 25 días después de publicarse el nombramiento, sin cambio de residencia</td><td>Art. 114.12 Real Decreto-ley 6/2023</td><td>Fuera de plazo: eran 15 días naturales</td></tr>
+</table></div>
+<h3>9.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+La oferta de empleo público de la AGE de un ejercicio se publicó en el BOE el <strong>12 de julio de 2023</strong>. Por resolución del subsecretario publicada el <strong>4 de septiembre de 2026</strong> se convoca un proceso selectivo de acceso libre al Cuerpo de Gestión de la Administración Civil del Estado que incluye <strong>15 plazas no cubiertas</strong> de aquella oferta. Las bases designan un tribunal de <strong>cuatro miembros titulares</strong>, uno de ellos funcionario <strong>interino</strong>.<br>
+De un proceso anterior, el nombramiento de Laura como funcionaria de carrera se publicó en el BOE el <strong>2 de noviembre de 2026</strong>, con destino en Valladolid.
+<br><br><strong>Cuestiones:</strong> a) ¿Pueden incluirse esas 15 plazas en la convocatoria? b) Validez de la composición del tribunal. c) Plazo de toma de posesión de Laura.</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 9.1.] Con carácter previo, procede calificar el proceso. Se trata de un proceso selectivo de acceso libre para el ingreso en el Cuerpo de Gestión de la Administración Civil del Estado, convocado por el subsecretario, que incluye plazas de una oferta publicada el 12 de julio de 2023. La cuestión a) solicita determinar si esas plazas pueden convocarse de nuevo. El artículo 108.2 del Real Decreto-ley 6/2023 permite convocar las plazas no cubiertas siempre que no hayan transcurrido más de tres años desde la publicación de la oferta, en coherencia con el plazo improrrogable de tres años del artículo 70.1 del TREBEP. Publicada la oferta el 12 de julio de 2023, el plazo terminó el 12 de julio de 2026, y la convocatoria se publicó el 4 de septiembre de 2026, casi dos meses después. Por tanto, se concluye que las 15 plazas no pueden incluirse en esta convocatoria y que, si siguen siendo necesarias, deberán incorporarse a una nueva oferta de empleo público.</p>
+<p><strong>Cuestión b).</strong> La cuestión b) plantea la validez de la composición del tribunal. El artículo 11 del Real Decreto 364/1995 exige un número impar de miembros, funcionarios de carrera, no inferior a cinco, y los artículos 60.2 del TREBEP y 115.2 del Real Decreto-ley 6/2023 excluyen a los funcionarios interinos. El tribunal designado tiene cuatro miembros y uno de ellos es interino, por lo que incumple ambas reglas. Procede, por tanto, modificar las bases antes de que el tribunal actúe, con sujeción a la Ley 39/2015, como exige el artículo 15.5 del Real Decreto 364/1995. Si llegara a actuar así, sus actos podrían considerarse dictados prescindiendo de las reglas esenciales para formar la voluntad de un órgano colegiado (artículo 47.1.e de la Ley 39/2015). No obstante lo anterior, cabría sostener que el vicio solo determina la anulabilidad si el voto del miembro excluido no fue decisivo, si bien la solución más adecuada es corregir la composición antes de iniciar las pruebas. Por tanto, se concluye que la composición del tribunal es contraria a Derecho y que debe designarse un tribunal de al menos cinco funcionarios de carrera, con igual número de suplentes, antes del primer ejercicio.</p>
+<p><strong>Cuestión c).</strong> La cuestión c) solicita determinar el plazo de toma de posesión de Laura. El artículo 114.12 del Real Decreto-ley 6/2023 fija quince días naturales desde la publicación del nombramiento, o un mes si supone cambio de localidad de residencia. El enunciado no precisa dónde reside Laura, por lo que suponemos que en Madrid, ya que es donde se celebran las pruebas y el curso selectivo del cuerpo, de modo que el destino en Valladolid supone cambio de residencia. Publicado el nombramiento el 2 de noviembre de 2026, el plazo de un mes vence el 2 de diciembre de 2026; si no hubiera cambio de residencia, vencería el 17 de noviembre. Por tanto, se concluye que Laura debe tomar posesión como máximo el 2 de diciembre de 2026, ante el delegado del Gobierno si el destino corresponde a los servicios periféricos.</p>
+</div>
+<h3>9.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Calificar</strong> el proceso (acceso libre, oferta de 2023, órgano) → <em>análisis</em>.<br>
+<strong>Fechas operadas</strong>: 12/07/2023 + 3 años = 12/07/2026; 02/11/2026 + 1 mes = 02/12/2026 → <em>aplicación de conocimientos</em>.<br>
+<strong>Suposición declarada</strong> sobre la residencia → admitida.<br>
+<strong>Alternativa evaluada</strong> (nulidad o anulabilidad del tribunal) → <em>análisis</em>.<br>
+<strong>Encadenar</strong> art. 70 TREBEP con art. 108 del Real Decreto-ley 6/2023 y el Real Decreto 364/1995 con la Ley 39/2015 → <em>sistemática</em>.<br>
+<strong>Conclusiones afirmativas</strong> con la consecuencia y el remedio.</div>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Planificación</td><td>Art. 69, marco, planes de empleo, planificación estratégica</td><td>Art. 107 del Real Decreto-ley 6/2023 y tabla de la Orden TDF/380/2024</td><td>Fusionado + BOE (1)</td></tr>
+<tr><td>Instrumentos</td><td>RPT, registro, CECIR, art. 59.2 Ley 40/2015</td><td>RPT del art. 109, concurso abierto, plazos del Registro</td><td>Fusionado + arts. 110 y 111 (2)</td></tr>
+<tr><td>Oferta</td><td>Art. 70, arts. 107 a 110, oferta de 2026 con desglose</td><td>Tabla de plazos, reservas, oferta de 2026</td><td>Fusionado + BOE (3) con corrección del 7 %</td></tr>
+<tr><td>Selección</td><td>Art. 55, sistemas, procedimiento en 8 pasos</td><td>Requisitos, sistemas, plazos del Real Decreto 364/1995, curso selectivo</td><td>Fusionado + BOE (4 y 5)</td></tr>
+<tr><td>Órganos de selección</td><td>Art. 60, art. 115, personal laboral</td><td>Exclusiones, regla de la mayoría, Comisión Permanente</td><td>Fusionado + Orden HFP/266/2023 (6)</td></tr>
+<tr><td>Competencias</td><td>Tabla por órganos</td><td>Tabla con Comisión Superior, CCEP, INAP</td><td>Fusionado + Real Decreto 2169/1984 (7)</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 9 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas (contrastadas con el BOE el 16/11/2026)</span>
+<strong>Temario 2026:</strong> libre designación y resolución de concursos corresponden normativamente a ministros y secretarios de Estado (art. 9 del Real Decreto 2169/1984) · omite el plazo de un mes de la lista de admitidos, los plazos entre ejercicios y la nulidad de los nombramientos que excedan las plazas.<br>
+<strong>Material visual:</strong> el 7 % del art. 59 TREBEP sigue vigente como mínimo básico; el 10 % es solo para la AGE · toma de posesión: 15 días naturales, no un mes · nombra la Secretaría de Estado de Función Pública · la Comisión Permanente la preside el titular de la Subdirección de Selección del INAP · plazos del Registro: tres días.</div>
+
+<footer>
+GACE 2027 · Bloque V · Tema 3 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 16/11/2026.<br>
+Normas: CE (arts. 23.2, 103.3 y 149.1.18.ª) · Real Decreto Legislativo 5/2015 (arts. 55 a 62 y 69 a 77) · Real Decreto-ley 6/2023 (arts. 105 a 115) · Ley 30/1984 · Ley 40/2015 (art. 59.2) · Real Decreto 2169/1984 · Real Decreto 364/1995 (arts. 10 a 26) · Real Decreto 2073/1999 · Orden TDF/380/2024 · Orden HFP/266/2023 · Real Decreto 387/2026.
+</footer>
+</div>
+</body>
+</html>
