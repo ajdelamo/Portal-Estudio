@@ -1,0 +1,594 @@
+<title>Practica la UD 5 · Derecho Constitucional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F4; --surface:#FFFFFF; --ink:#1B2433; --muted:#566173; --line:#D5DCE4;
+  --accent:#2346A0; --accent-ink:#FFFFFF; --ok:#1E7F5C; --ok-bg:#E3F4EC; --ko:#B3261E; --ko-bg:#FBE9E7;
+  --mark:#FFE45C;
+  --serif:"Literata", Georgia, "Times New Roman", serif;
+  --sans:"Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+    --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+    --mark:rgba(255,228,92,.38); color-scheme:dark;
+  }
+}
+
+:root[data-theme="dark"]{ color-scheme:dark;
+  --bg:#10151D; --surface:#19202B; --ink:#E6EAF0; --muted:#9BA6B6; --line:#2B3443;
+  --accent:#8FA8FF; --accent-ink:#10151D; --ok:#5CC99A; --ok-bg:#15322A; --ko:#FF8A80; --ko-bg:#3A1B1A;
+  --mark:rgba(255,228,92,.38);
+}
+:root{ box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+html{ scroll-padding-top:env(safe-area-inset-top,0px); }
+*,*::before,*::after{ box-sizing:inherit; }
+body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.5; }
+.wrap{ max-width:660px; margin:0 auto; padding:20px 16px 48px; }
+h1{ font-family:var(--serif); font-weight:600; font-size:1.9rem; line-height:1.15; margin:8px 0 6px; letter-spacing:-.01em; }
+.lead{ color:var(--muted); margin:0 0 18px; max-width:60ch; }
+.mark{ background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); padding:8px 0 10px; margin:0 -16px 8px; }
+.tabs{ display:flex; gap:6px; overflow-x:auto; padding:0 16px; scrollbar-width:none; }
+.tabs::-webkit-scrollbar{ display:none; }
+.tab{ flex:0 0 auto; border:1px solid var(--line); background:var(--surface); color:var(--ink); font:500 .92rem var(--sans); padding:8px 14px; border-radius:999px; cursor:pointer; }
+.tab[aria-selected="true"]{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.panel{ display:none; }
+.panel.on{ display:block; }
+.card{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; margin-bottom:14px; }
+.meta{ display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:.88rem; margin-bottom:10px; flex-wrap:wrap; }
+.prompt{ font-family:var(--serif); font-size:1.22rem; line-height:1.45; margin:0 0 14px; }
+.opts{ display:grid; gap:8px; }
+.opt{ text-align:left; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:10px; padding:11px 13px; font:1rem var(--serif); cursor:pointer; }
+.opt:hover:not(:disabled){ border-color:var(--accent); }
+.opt.ok{ background:var(--ok-bg); border-color:var(--ok); }
+.opt.ko{ background:var(--ko-bg); border-color:var(--ko); }
+.opt:disabled{ cursor:default; }
+.row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.btn{ border:0; background:var(--accent); color:var(--accent-ink); font:600 .95rem var(--sans); padding:10px 16px; border-radius:10px; cursor:pointer; }
+.btn.ghost{ background:transparent; color:var(--accent); border:1px solid var(--line); }
+.btn:disabled{ opacity:.45; cursor:default; }
+.fb{ margin-top:12px; padding:12px 14px; border-radius:10px; font-size:.95rem; display:none; }
+.fb.show{ display:block; }
+.fb.ok{ background:var(--ok-bg); color:var(--ink); border-left:4px solid var(--ok); }
+.fb.ko{ background:var(--ko-bg); color:var(--ink); border-left:4px solid var(--ko); }
+.es{ color:var(--muted); font-style:italic; margin-top:6px; }
+input[type=text], textarea{ width:100%; font:1.05rem var(--serif); color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+textarea{ min-height:240px; line-height:1.5; resize:vertical; }
+input:focus, textarea:focus, .btn:focus-visible, .opt:focus-visible, .tab:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+.hint{ color:var(--muted); font-size:.9rem; margin:0 0 10px; }
+.stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin:12px 0; }
+.stat{ border:1px solid var(--line); border-radius:10px; padding:10px; }
+.stat b{ display:block; font-family:var(--serif); font-size:1.5rem; }
+.stat span{ color:var(--muted); font-size:.85rem; }
+.review{ margin:12px 0 0; padding:0; list-style:none; }
+.review li{ border-top:1px solid var(--line); padding:10px 0; font-size:.95rem; }
+.checks{ list-style:none; padding:0; margin:12px 0 0; }
+.checks li{ padding:6px 0 6px 28px; position:relative; font-size:.95rem; }
+.checks li::before{ content:""; position:absolute; left:4px; top:11px; width:12px; height:12px; border-radius:50%; border:2px solid var(--line); }
+.checks li.pass::before{ background:var(--ok); border-color:var(--ok); }
+.checks li.fail::before{ border-color:var(--ko); }
+.seg{ display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.progress{ height:4px; background:var(--line); border-radius:2px; overflow:hidden; margin-bottom:12px; }
+.progress i{ display:block; height:100%; background:var(--accent); width:0; transition:width .25s; }
+details summary{ cursor:pointer; color:var(--accent); font-weight:500; }
+.model{ font-family:var(--serif); white-space:pre-wrap; background:var(--bg); border-radius:10px; padding:12px; margin-top:8px; }
+@media (prefers-reduced-motion: reduce){ .progress i{ transition:none; } }
+</style>
+
+<div class="wrap">
+  <h1>Practica la UD 5 de Constitucional</h1>
+  <p class="lead">Título primero, artículos 18 a 23: honor, intimidad e imagen, domicilio, comunicaciones y datos, circulación, expresión e información, reunión, asociación y participación. Los fallos vuelven a salir hasta que los aciertes. El test usa el formato del examen final: 30 preguntas, 4 opciones, cada fallo resta 0,33.</p>
+  <nav aria-label="Modos de práctica">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-p="exam" aria-selected="true">Test tipo examen</button>
+      <button class="tab" role="tab" data-p="lit" aria-selected="false">Artículos literales</button>
+      <button class="tab" role="tab" data-p="con" aria-selected="false">Conceptos</button>
+      <button class="tab" role="tab" data-p="cls" aria-selected="false">¿Qué artículo?</button>
+      <button class="tab" role="tab" data-p="vf" aria-selected="false">Verdadero o falso</button>
+      <button class="tab" role="tab" data-p="write" aria-selected="false">Aplicación (PEC)</button>
+    </div>
+  </nav>
+
+  <section class="panel on" id="p-exam">
+    <div id="exam-start" class="card">
+      <p class="prompt">30 preguntas al azar de un banco de 83 (incluye 8 de repaso de las UD 1 a 4), con 4 opciones (A, B, C, D), como en el examen final.</p>
+      <p class="hint">Las respuestas siguen el texto de la unidad, que es contra lo que se corrige el examen, aunque el documento de estudio señale alguna imprecisión. Cada corrección trae <b>Por qué</b>, <b>Recuerda</b> y el apartado de la unidad.</p>
+      <p class="hint">Acierto +1, fallo −0,33, en blanco 0. Con 4 opciones, contestar al azar tiene valor esperado cero. Si descartas una opción, responder vale +0,11; si descartas dos, +0,34. Regla: responde solo si puedes descartar al menos una.</p>
+      <div id="exam-history" class="hint"></div>
+      <div class="row"><button class="btn" id="exam-go">Empezar test</button></div>
+    </div>
+    <div id="exam-run" class="card" hidden>
+      <div class="progress"><i id="exam-bar"></i></div>
+      <div class="meta"><span id="exam-count"></span><span id="exam-score"></span></div>
+      <p class="prompt" id="exam-q"></p>
+      <div class="opts" id="exam-opts"></div>
+      <div class="fb" id="exam-fb"></div>
+      <div class="row"><button class="btn ghost" id="exam-blank">Dejar en blanco</button><button class="btn" id="exam-next" disabled>Siguiente</button></div>
+    </div>
+    <div id="exam-end" class="card" hidden></div>
+  </section>
+
+  <section class="panel" id="p-lit">
+    <div class="card">
+      <div class="progress"><i id="lit-bar"></i></div>
+      <div class="meta"><span id="lit-count"></span><span id="lit-art"></span></div>
+      <p class="prompt" id="lit-q"></p>
+      <input type="text" id="lit-in" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Palabra que falta">
+      <div class="fb" id="lit-fb"></div>
+      <div class="row"><button class="btn" id="lit-check">Comprobar</button><button class="btn ghost" id="lit-next" disabled>Siguiente</button></div>
+      <p class="hint" style="margin-top:12px">No importan las tildes ni las mayúsculas. Al corregir verás el artículo completo.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="p-con">
+    <div class="card">
+      <div class="progress"><i id="con-bar"></i></div>
+      <div class="meta"><span id="con-count"></span><span id="con-kind"></span></div>
+      <p class="prompt" id="con-q"></p>
+      <div class="fb" id="con-fb"></div>
+      <div class="row" id="con-row1"><button class="btn" id="con-show">Ver respuesta</button></div>
+      <div class="row" id="con-row2" hidden><button class="btn" id="con-good">Lo sabía</button><button class="btn ghost" id="con-bad">Repasar otra vez</button></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-cls">
+    <div class="card">
+      <div class="progress"><i id="cls-bar"></i></div>
+      <div class="meta"><span id="cls-count"></span><span>¿En qué artículo de la Constitución está?</span></div>
+      <p class="prompt" id="cls-q"></p>
+      <div class="row" id="cls-btns"></div>
+      <div class="fb" id="cls-fb"></div>
+      <div class="row"><button class="btn ghost" id="cls-next" disabled>Siguiente</button></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-vf">
+    <div class="card">
+      <div class="progress"><i id="vf-bar"></i></div>
+      <div class="meta"><span id="vf-count"></span><span>Afirmaciones con trampa</span></div>
+      <p class="prompt" id="vf-q"></p>
+      <div class="row"><button class="btn" id="vf-t">Verdadero</button><button class="btn" id="vf-f">Falso</button></div>
+      <div class="fb" id="vf-fb"></div>
+      <div class="row"><button class="btn ghost" id="vf-next" disabled>Siguiente</button></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-write">
+    <div class="card">
+      <div class="seg"><button class="btn" id="w-a">Supuesto 1: honor e imagen</button><button class="btn ghost" id="w-b">Supuesto 2: manifestación</button></div>
+      <p class="prompt" id="w-task"></p>
+      <label class="hint" for="w-body">Tu respuesta</label>
+      <textarea id="w-body" spellcheck="true"></textarea>
+      <div class="meta"><span id="w-words">0 palabras</span><span>El borrador se guarda en este navegador</span></div>
+      <ul class="checks" id="w-checks"></ul>
+      <p class="hint">La comprobación es mecánica: detecta que cites y nombres lo necesario, no que el razonamiento sea correcto. Compáralo con el modelo.</p>
+      <details><summary>Ver una respuesta modelo</summary><div class="model" id="w-model"></div></details>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ===== BANCOS UD5 ===== */
+var EXAM=[
+/* 5.1 Artículo 18.1 */
+{q:"¿Qué ley orgánica desarrolla los derechos al honor, a la intimidad y a la propia imagen?",o:["La Ley Orgánica 1/1982, de 5 de mayo","La Ley Orgánica 1/2002, de 22 de marzo","La Ley Orgánica 3/2018, de 5 de diciembre","La Ley Orgánica 9/1983, de 15 de julio"],w:"Es la ley de protección civil del derecho al honor, a la intimidad personal y familiar y a la propia imagen.",r:"Artículo 18.1 → Ley Orgánica 1/1982.",s:"5.1"},
+{q:"Según el Tribunal Constitucional, los derechos al honor, a la intimidad y a la propia imagen son…",o:["derechos autónomos con contenido propio, aunque un solo hecho puede lesionar varios","un único derecho con tres manifestaciones inseparables, de modo que lesionar una supone lesionar las tres","derechos que se lesionan siempre de forma conjunta","meros principios rectores sin contenido propio"],w:"La vulneración de uno no tiene por qué suponer la de todos.",r:"Tres derechos autónomos.",s:"5.1"},
+{q:"Según la unidad, ¿quiénes son titulares del derecho al honor?",o:["Las personas físicas y las jurídicas","Solo las personas físicas","Solo las personas físicas de nacionalidad española","Solo las personas jurídicas de derecho público"],w:"La unidad cita la sentencia 139/1995.",r:"Honor: físicas y jurídicas.",s:"5.1.1"},
+{q:"¿Qué concepción del honor recomienda seguir la unidad?",o:["La objetiva, referida a la buena reputación y la fama","La subjetiva, referida a la opinión que el sujeto tiene de sí mismo","La moral, referida a las convicciones religiosas","La patrimonial, referida al valor económico del nombre"],w:"Porque el ordenamiento no define el honor, salvo lo señalado en la Ley Orgánica 1/1982.",r:"Honor objetivo = reputación y fama.",s:"5.1.1"},
+{q:"Según la unidad, ¿qué componente es decisivo para fijar el límite de lo tolerable en una crítica?",o:["La intencionalidad","La veracidad de los hechos","El medio de difusión utilizado","La profesión del afectado"],w:"Sentencia 180/1999.",r:"Límite de lo tolerable → intencionalidad.",s:"5.1.1"},
+{q:"¿En qué artículo de la Declaración Universal de los Derechos Humanos aparecía ya el derecho a la intimidad, según la unidad?",o:["En el artículo 12","En el artículo 17","En el artículo 8","En el artículo 10"],w:"El 17 es del Pacto Internacional de Derechos Civiles y Políticos y el 8 del Convenio Europeo.",r:"Intimidad: Declaración 12, Pacto 17, Convenio Europeo 8.",s:"5.1.2"},
+{q:"¿Qué dos vertientes tiene el derecho a la intimidad según la unidad?",o:["Personal y familiar","Personal y profesional","Física y moral","Individual y colectiva"],w:"El artículo 18.1 habla de «intimidad personal y familiar».",r:"Intimidad: personal y familiar.",s:"5.1.2"},
+{q:"Según la unidad, ¿qué garantiza exactamente el artículo 18 respecto de la intimidad?",o:["El derecho a poseerla y a controlar la publicidad de la información sobre uno mismo y su familia","La intimidad sin más, entendida como un estado de hecho que el Estado debe asegurar a toda persona en cualquier circunstancia","Solo la intimidad de los hechos delictivos","Solo los datos de contenido económico"],w:"Sea cual sea el contenido de lo que se quiere mantener en secreto.",r:"Intimidad = poder de control.",s:"5.1.2"},
+{q:"Según la unidad, ¿se extiende el derecho a la intimidad a las personas jurídicas?",o:["En principio no, porque protege la vida privada de las personas individuales","Sí, en los mismos términos que a las personas físicas, porque la Constitución no distingue entre unas y otras","Solo a las sociedades mercantiles","Solo a las asociaciones inscritas en el registro"],w:"La unidad cita la resolución 257/1985. La única excepción es la inviolabilidad del domicilio.",r:"Intimidad: solo personas físicas.",s:"5.1.2"},
+{q:"¿Cuál de estos NO es un requisito que justifique una injerencia en la intimidad según la unidad?",o:["El consentimiento del Ministerio Fiscal","Un fin constitucional legítimo","La habilitación legal","Una resolución judicial motivada que acuerde la injerencia de forma expresa e individualizada"],w:"El cuarto requisito es la estricta observancia del principio de proporcionalidad.",r:"Injerencia: fin legítimo, ley, resolución judicial, proporcionalidad.",s:"5.1.2"},
+{q:"¿En qué tres condiciones se concreta el principio de proporcionalidad según la unidad?",o:["Idoneidad, necesidad y proporcionalidad en sentido estricto","Legalidad, publicidad y motivación","Urgencia, necesidad y temporalidad","Idoneidad, eficacia y economía"],w:"Es el juicio de proporcionalidad clásico.",r:"Proporcionalidad: idónea, necesaria, estricta.",s:"5.1.2"},
+{q:"¿Qué sentencia cita la unidad sobre la trascendencia de la intimidad familiar?",o:["La 231/1988","La 139/2001","La 81/2001","La 292/2000"],w:"Es el caso de la viuda del torero Paquirri.",r:"Intimidad familiar → 231/1988.",s:"5.1.2"},
+{q:"Según la sentencia 139/2001, el derecho a la propia imagen atribuye a su titular la facultad de…",o:["evitar la difusión incondicionada de su aspecto físico","obtener una compensación económica por cualquier fotografía","prohibir toda captación de imágenes en lugares públicos","rectificar cualquier información publicada sobre él"],w:"Para controlar la difusión de su imagen.",r:"Propia imagen: evitar la difusión incondicionada.",s:"5.1.3"},
+{q:"¿Qué sentencia cita la unidad al decir que el derecho a la propia imagen trata de evitar injerencias no deseadas?",o:["La 81/2001","La 139/2001","La 231/1988","La 180/1999"],w:"La 139/2001 habla de la difusión incondicionada del aspecto físico.",r:"Injerencias no deseadas → 81/2001.",s:"5.1.3"},
+{q:"Según la unidad, ¿qué dos elementos considera decisivos el Tribunal Constitucional para valorar una injerencia en la propia imagen?",o:["Si el lugar es público o privado y si hay o no consentimiento","La notoriedad de la persona retratada y la veracidad de la noticia a la que acompaña la imagen","El medio de difusión y el ánimo de lucro","La edad del afectado y su profesión"],w:"Lo dice la unidad antes de remitir a los artículos 7 y 8 de la Ley Orgánica 1/1982.",r:"Imagen: lugar y consentimiento.",s:"5.1.3"},
+{q:"¿Qué artículo de la Ley Orgánica 1/1982 enumera las intromisiones ilegítimas?",o:["El 7","El 8","El 2","El 9"],w:"El 8 recoge lo que no se considera intromisión.",r:"Intromisiones: 7; excepciones: 8.",s:"5.1.3"},
+{q:"¿Cuál de estas NO es una excepción del artículo 8 de la Ley Orgánica 1/1982 a la protección de la propia imagen?",o:["La publicación de la imagen de cualquier persona en su domicilio con fines comerciales","La imagen de un cargo público captada en un acto público","La caricatura de un personaje público de acuerdo con el uso social","La imagen accesoria en la información gráfica de un suceso público"],w:"El uso con fines comerciales sin consentimiento es intromisión ilegítima (artículo 7).",r:"Excepciones: acto público, caricatura, imagen accesoria.",s:"5.1.3"},
+{q:"¿A quién no se aplican las excepciones del acto público y la caricatura?",o:["A las autoridades o personas cuyas funciones necesiten el anonimato","A los menores de edad","A los cargos electos","A los periodistas"],w:"Por ejemplo, determinados agentes policiales.",r:"Excepción a la excepción: anonimato.",s:"5.1.3"},
+/* 5.2 */
+{q:"¿Qué apartado del artículo 18 regula la inviolabilidad del domicilio?",o:["El 18.2","El 18.1","El 18.3","El 18.4"],w:"El 18.3 es el secreto de las comunicaciones y el 18.4 la informática.",r:"Domicilio → 18.2.",s:"5.2.1"},
+{q:"¿En qué casos permite el artículo 18.2 entrar o registrar un domicilio?",o:["Con consentimiento del titular, con resolución judicial o en caso de flagrante delito","Con autorización del Ministerio Fiscal o, en casos de urgencia, de la policía judicial bajo su responsabilidad","Solo con resolución judicial","Con consentimiento de cualquier vecino o del administrador de la finca"],w:"Son los tres supuestos que desarrolla la unidad.",r:"Domicilio: consentimiento, juez, flagrante delito.",s:"5.2.1"},
+{q:"Según la unidad, ¿quiénes son titulares del derecho a la inviolabilidad del domicilio?",o:["Las personas físicas y las jurídicas","Solo las personas físicas","Solo los propietarios del inmueble","Solo los residentes empadronados en la vivienda en el momento de la entrada o registro"],w:"Es la «única excepción» que la unidad admite para las personas jurídicas en materia de intimidad.",r:"Domicilio: físicas y jurídicas.",s:"5.2.1"},
+{q:"Según la unidad, ¿cuál de estos espacios puede considerarse domicilio?",o:["La habitación de un hotel","Un despacho público de atención al ciudadano","Un vehículo de uso público","Un bar abierto al público"],w:"También la tienda de campaña, la autocaravana o la pensión.",r:"Domicilio: espacio de vida privada.",s:"5.2.1"},
+{q:"Para las personas jurídicas, ¿qué se considera domicilio según la unidad?",o:["El lugar donde se halle su representación legal o donde ejerzan sus funciones fundamentales","Cualquier local de su propiedad","El domicilio de su administrador","La sede que figure en el registro mercantil o en el registro de asociaciones, exclusivamente"],w:"Artículo 41 del Código Civil.",r:"Domicilio de la persona jurídica: artículo 41 del Código Civil.",s:"5.2.1"},
+{q:"Según la unidad, ¿qué ha incluido el Tribunal Constitucional en el ámbito de protección de la inviolabilidad del domicilio?",o:["La contaminación acústica evitable e insoportable","Las llamadas telefónicas comerciales","El acceso a los datos del catastro","Las vistas desde el exterior de la vivienda que puedan obtener los vecinos colindantes"],w:"La exposición prolongada a ruidos evitables e insoportables.",r:"Ruido → domicilio.",s:"5.2.1"},
+{q:"Según la unidad, el flagrante delito se da cuando el delincuente…",o:["es sorprendido en el momento de delinquir o en circunstancias inmediatamente previas","ha sido identificado por un testigo","tiene antecedentes por el mismo delito","ha confesado los hechos a la policía después de haber sido informado de sus derechos"],w:"Es la definición del Tribunal Constitucional que recoge la unidad.",r:"Flagrante delito: sorprendido al delinquir.",s:"5.2.1"},
+{q:"¿Qué comunicaciones cita expresamente el artículo 18.3?",o:["Las postales, telegráficas y telefónicas","Las postales, electrónicas y telefónicas","Las telefónicas y las electrónicas","Las postales y las telemáticas"],w:"La lista no es cerrada: incluye las nuevas tecnologías.",r:"18.3: postales, telegráficas, telefónicas.",s:"5.2.2"},
+{q:"Según la unidad, el secreto de las comunicaciones es una garantía…",o:["formal, que protege la comunicación con independencia de su contenido","material, que solo protege los contenidos íntimos o que afecten a la vida privada de los interlocutores","subsidiaria del derecho al honor","exclusivamente frente a los particulares"],w:"Protege la «opacidad» de las comunicaciones (sentencias 114/1984 y 34/1996).",r:"Garantía formal.",s:"5.2.2"},
+{q:"¿Cuál de estas condiciones NO exige el Tribunal Constitucional para intervenir legítimamente una comunicación?",o:["La autorización previa del Defensor del Pueblo","Previsión legal suficientemente precisa","Respeto al principio de proporcionalidad","Control judicial de la ejecución de la medida durante todo el tiempo que dure"],w:"También motivación suficiente. Y en las intervenciones telefónicas, notificación al Ministerio Fiscal.",r:"Intervención: ley, proporcionalidad, motivación, control judicial.",s:"5.2.2"},
+{q:"En las intervenciones telefónicas, ¿a quién debe notificarse la resolución judicial que las autoriza?",o:["Al Ministerio Fiscal","Al Defensor del Pueblo","Al propio investigado","A la Agencia Española de Protección de Datos"],w:"Lo dice la unidad al final del epígrafe 5.2.2.",r:"Intervención telefónica → Ministerio Fiscal.",s:"5.2.2"},
+{q:"Según la unidad, ¿qué determina la lesión del derecho al secreto de las comunicaciones?",o:["La ausencia de resolución judicial o su falta de motivación suficiente","La intervención de comunicaciones de contenido no íntimo","La notificación tardía al interesado","El uso de medios técnicos modernos no previstos expresamente en la Constitución de 1978"],w:"Frase en negrita de la unidad.",r:"Sin resolución judicial motivada → lesión.",s:"5.2.2"},
+{q:"¿Cómo se denomina también el derecho del artículo 18.4?",o:["Habeas data o libertad informática","Habeas corpus","Derecho de rectificación","Secreto profesional"],w:"Es el poder de disposición y control sobre los datos personales.",r:"18.4 = habeas data.",s:"5.2.3"},
+{q:"¿Qué sentencia cita la unidad para enumerar las facultades de control sobre los datos personales?",o:["La 292/2000","La 114/1984","La 104/1986","La 139/1995"],w:"La unidad cita también la 290/2000 junto a la 292/2000.",r:"Facultades del habeas data → 292/2000.",s:"5.2.3"},
+{q:"Según la unidad, la libertad informática…",o:["es un derecho autónomo que protege los datos personales aunque no sean íntimos","es una parte del derecho a la intimidad que solo protege datos íntimos","solo protege a las personas jurídicas","solo protege los datos que consten en ficheros en papel, no los informatizados"],w:"Lo relevante es que se trate de datos personales.",r:"Libertad informática ≠ intimidad.",s:"5.2.3"},
+{q:"¿Qué ley desarrolla el derecho a la protección de datos según la unidad?",o:["La Ley Orgánica 3/2018, de 5 de diciembre","La Ley Orgánica 15/1999, de 13 de diciembre","La Ley Orgánica 1/1982, de 5 de mayo","La Ley 34/2002, de servicios de la sociedad de la información"],w:"Ley de protección de datos personales y garantía de los derechos digitales.",r:"Datos → Ley Orgánica 3/2018.",s:"5.2.3"},
+/* 5.3 */
+{q:"¿Qué tres derechos reconoce el artículo 19 según la unidad?",o:["Elegir libremente la residencia, circular por el territorio nacional y entrar y salir de España","Residencia, circulación y asilo","Circulación, nacionalidad y retorno","Residencia, empadronamiento y circulación"],w:"El asilo está en el artículo 13.4.",r:"Artículo 19: residencia, circulación, entrar y salir.",s:"5.3"},
+{q:"¿Por qué motivos no puede limitarse el derecho a entrar y salir de España según el artículo 19?",o:["Por motivos políticos o ideológicos","Por motivos de salud pública","Por motivos económicos","Por motivos penales, cuando la persona tenga antecedentes no cancelados"],w:"La unidad añade que ningún derecho puede limitarse por esos motivos en virtud del artículo 14.",r:"Artículo 19: no por motivos políticos o ideológicos.",s:"5.3"},
+{q:"Según la unidad, que el artículo 19 empiece por «Los españoles» significa que…",o:["no es exclusivo de los nacionales: hay que estar al artículo 13 y a los tratados y leyes","los extranjeros carecen de libertad de circulación","solo los ciudadanos de la Unión Europea pueden circular","los extranjeros solo pueden residir en España con autorización judicial previa y motivada"],w:"Además los nacionales de la Unión Europea tienen un estatus especial.",r:"Artículo 19 + artículo 13.",s:"5.3"},
+/* 5.4 */
+{q:"¿Qué apartado del artículo 20 recoge los límites de las libertades de expresión e información?",o:["El apartado 4","El apartado 2","El apartado 3","El apartado 5"],w:"Los apartados 2, 3 y 5 regulan garantías.",r:"Límites: 20.4.",s:"5.4"},
+{q:"¿Qué prohíbe el artículo 20.2?",o:["La censura previa","El secuestro de publicaciones","La cláusula de conciencia","La libertad de cátedra"],w:"El secuestro solo puede acordarse por resolución judicial (20.5).",r:"20.2: censura previa.",s:"5.4.1"},
+{q:"Según el artículo 20.5, ¿quién puede acordar el secuestro de una publicación?",o:["Solo la autoridad judicial","La autoridad gubernativa","El Ministerio Fiscal","El Consejo de Ministros, a propuesta del Ministerio del Interior"],w:"«En virtud de resolución judicial».",r:"Secuestro → juez.",s:"5.4.1"},
+{q:"¿Qué regula el artículo 20.3?",o:["La organización y el control parlamentario de los medios de comunicación públicos","La prohibición de la censura previa","El secuestro de publicaciones","El derecho de rectificación"],w:"Y el acceso de los grupos sociales y políticos significativos.",r:"20.3: medios públicos.",s:"5.4.1"},
+{q:"Según la unidad, las libertades de expresión e información son derechos…",o:["innatos, que se tienen por el mero hecho de ser persona","concedidos por el Estado","de configuración legal","reservados a los profesionales de la información"],w:"«No son derechos concedidos, sino derechos innatos».",r:"Derechos innatos.",s:"5.4.1"},
+{q:"¿Cuál de estos derechos NO está reconocido expresamente en el artículo 20, según la unidad?",o:["El derecho de rectificación","La libertad de cátedra","La producción y creación literaria","Comunicar o recibir información veraz"],w:"Tampoco lo están recibir ideas, investigar o crear medios informativos.",r:"Rectificación: fuera del texto del 20.",s:"5.4.1"},
+{q:"Según la unidad, ¿qué artículo de la Constitución reconoce la libertad de empresa, relacionada con la creación de medios informativos?",o:["El 38","El 105","El 33","El 20.3"],w:"La unidad lo menciona entre los derechos no reconocidos expresamente en el 20.",r:"Libertad de empresa → 38.",s:"5.4.1"},
+{q:"¿Desde qué sentencia distingue el Tribunal Constitucional el objeto de la libertad de expresión y el de la libertad de información?",o:["Desde la 104/1986","Desde la 12/1982","Desde la 336/1993","Desde la 159/1986"],w:"Expresión: pensamientos, ideas y opiniones; información: hechos noticiables.",r:"Distinción → 104/1986.",s:"5.4.3"},
+{q:"¿Por qué es decisiva la distinción entre expresión e información?",o:["Porque los hechos pueden probarse y las opiniones no, de modo que solo a la información se le exige veracidad","Porque la expresión no tiene límites y la información sí","Porque solo la información está protegida por el amparo","Porque la expresión solo corresponde a los periodistas y la información a cualquier ciudadano que la difunda"],w:"El artículo 20.1.d exige información «veraz».",r:"Información → veracidad.",s:"5.4.3"},
+{q:"¿Qué sostuvo la sentencia 336/1993 sobre el conflicto entre los artículos 18 y 20?",o:["Que no puede establecerse una jerarquía entre ellos","Que prevalece siempre la libertad de información","Que prevalece siempre el derecho al honor","Que el conflicto debe resolverlo el legislador mediante una ley orgánica que fije la prevalencia"],w:"Hay que analizar caso por caso.",r:"336/1993: sin jerarquía.",s:"5.4.3"},
+{q:"Según la unidad, cuando la información cumple determinados requisitos se convierte en garantía de…",o:["la libre formación de la opinión pública y del pluralismo político","la seguridad nacional","la igualdad ante la ley","el derecho a la tutela judicial efectiva"],w:"Valores superiores del artículo 1.1.",r:"Información → opinión pública libre.",s:"5.4.3"},
+{q:"¿Cuál de estos NO es un requisito para que prevalezca la libertad de información según la doctrina que recoge la unidad?",o:["Que el periodista tenga autorización del medio","Interés público de la información","Veracidad, con comprobación diligente","Ausencia de expresiones injuriosas innecesarias"],w:"Son los tres requisitos del epígrafe sobre medios de comunicación.",r:"Interés público + veracidad + sin insultos.",s:"5.4.3"},
+{q:"¿Qué sentencia reconoció, según la unidad, el derecho a crear los medios materiales para difundir ideas y opiniones?",o:["La 12/1982","La 104/1986","La 107/1988","La 216/2013"],w:"«El derecho de difundir las ideas y opiniones comprende, en principio, el derecho de crear los medios materiales…».",r:"Crear medios → 12/1982.",s:"5.4.3"},
+{q:"Según la unidad, ¿cuándo prevalecen las libertades de expresión e información frente al derecho al honor?",o:["Cuando el titular es una persona pública, ejerce funciones públicas o está implicado en asuntos de relevancia pública","Siempre que la información la publique un medio de comunicación","Cuando el afectado es una persona jurídica","Cuando la información se publica en internet o en redes sociales de acceso libre"],w:"Sentencias 107/1988, 110/2000 y 216/2013.",r:"Personas públicas → prevalece el 20.",s:"5.4.3"},
+/* 5.5 */
+{q:"¿Qué ley regula el derecho de reunión?",o:["La Ley Orgánica 9/1983, de 15 de julio","La Ley Orgánica 1/2002, de 22 de marzo","La Ley Orgánica 4/2015, de 30 de marzo","La Ley Orgánica 5/1985, de 19 de junio"],w:"La 1/2002 es la del derecho de asociación.",r:"Reunión → Ley Orgánica 9/1983.",s:"5.5.1"},
+{q:"Según el artículo 1.2 de la Ley Orgánica 9/1983, ¿qué se entiende por reunión?",o:["La concurrencia concertada y temporal de más de 20 personas, con finalidad determinada","La agrupación espontánea de más de 10 personas","La concurrencia permanente de más de 20 personas","Cualquier concentración en la vía pública"],w:"Además debe ser pacífica y sin armas.",r:"Reunión: más de 20, concertada, temporal, finalidad.",s:"5.5.1"},
+{q:"Según la unidad, ¿quiénes son titulares del derecho de reunión?",o:["Los nacionales y los extranjeros","Solo los españoles mayores de edad","Solo las personas inscritas en el censo electoral","Solo los españoles y los ciudadanos de la Unión Europea"],w:"Es un derecho individual de ejercicio colectivo.",r:"Reunión: nacionales y extranjeros.",s:"5.5.1"},
+{q:"¿Necesita autorización previa el ejercicio del derecho de reunión?",o:["No; en lugares de tránsito público basta la comunicación previa","Sí, siempre","Solo si participan más de 20 personas","Sí, de la autoridad judicial del lugar donde vaya a celebrarse la reunión"],w:"Artículo 21.1 y artículo 3 de la Ley Orgánica 9/1983.",r:"Sin autorización; con comunicación en vía pública.",s:"5.5.1"},
+{q:"¿Cuál de estas reuniones está excluida de la Ley Orgánica 9/1983?",o:["La que celebran unos amigos en un local privado","Una concentración en una plaza pública","Una manifestación con recorrido por la ciudad","Una reunión de 50 personas en un parque público"],w:"Artículo 2.b: razones familiares o de amistad.",r:"Excluidas: domicilio, familia o amistad, entidades, profesionales, militares.",s:"5.5.1"},
+{q:"¿Con qué antelación deben comunicarse las manifestaciones según el artículo 8 de la Ley Orgánica 9/1983?",o:["Diez días naturales como mínimo y treinta como máximo","Quince días hábiles como mínimo","Cinco días naturales como mínimo y veinte como máximo","Diez días hábiles como mínimo y sesenta como máximo"],w:"Por escrito, a la autoridad gubernativa, por los organizadores o promotores.",r:"Manifestación: 10 a 30 días naturales.",s:"5.5.1"},
+{q:"Según la unidad, ¿qué diferencia una manifestación de una concentración?",o:["La manifestación tiene recorrido; la concentración es estática","La concentración necesita autorización y la manifestación no","La manifestación es de más de 20 personas y la concentración de menos","La concentración solo se celebra en lugares cerrados"],w:"Las dos se celebran en lugares de tránsito público.",r:"Manifestación = con recorrido.",s:"5.5.1"},
+{q:"¿Cuándo puede la autoridad prohibir una reunión en lugar de tránsito público según el artículo 21.2?",o:["Cuando existan razones fundadas de alteración del orden público, con peligro para personas o bienes","Cuando no se haya pedido autorización","Cuando su finalidad sea política","Cuando coincida en el tiempo y en el lugar con un acto oficial de las instituciones del Estado"],w:"Es la única causa que da la Constitución.",r:"Prohibición: alteración del orden público con peligro.",s:"5.5.1"},
+{q:"¿Cuál de estos supuestos de disolución NO recoge el artículo 5 de la Ley Orgánica 9/1983?",o:["Que la reunión no se haya comunicado a la autoridad judicial","Que sea ilícita conforme a las leyes penales","Que se produzcan alteraciones del orden público con peligro","Que los asistentes usen uniformes paramilitares"],w:"La comunicación se dirige a la autoridad gubernativa.",r:"Disolución: ilícita, orden público, uniformes paramilitares.",s:"5.5.1"},
+{q:"¿Qué sentencia cita la unidad para exigir que la reunión sea pacífica y sin armas?",o:["La 59/1990","La 104/1986","La 12/1982","La 292/2000"],w:"Es el requisito imprescindible para que sea ejercicio del artículo 21.",r:"Pacífica y sin armas → 59/1990.",s:"5.5.1"},
+{q:"¿Qué ley regula el derecho de asociación?",o:["La Ley Orgánica 1/2002, de 22 de marzo","La Ley Orgánica 9/1983, de 15 de julio","La Ley Orgánica 6/2002, de partidos políticos","La Ley Orgánica 11/1985, de libertad sindical"],w:"Reguladora del Derecho de Asociación.",r:"Asociación → Ley Orgánica 1/2002.",s:"5.5.2"},
+{q:"Según el artículo 22.3, las asociaciones deben inscribirse en un registro…",o:["a los solos efectos de publicidad","como requisito para existir","para obtener personalidad jurídica plena","solo si reciben subvenciones"],w:"La inscripción no es constitutiva.",r:"Inscripción: solo publicidad.",s:"5.5.2"},
+{q:"¿Qué asociaciones prohíbe expresamente el artículo 22.5?",o:["Las secretas y las de carácter paramilitar","Las religiosas y las secretas","Las políticas y las paramilitares","Las no inscritas en el registro de asociaciones en el plazo legal"],w:"Las que persigan fines o usen medios delictivos son ilegales (22.2).",r:"Prohibidas: secretas y paramilitares.",s:"5.5.2"},
+{q:"¿Quién puede disolver o suspender una asociación, salvo la disolución voluntaria?",o:["La autoridad judicial, por resolución motivada","El Ministerio del Interior","El registro de asociaciones","La asamblea general de la asociación por mayoría simple de los asociados presentes"],w:"Artículo 22.4 y artículo 38 de la Ley Orgánica 1/2002.",r:"Disolución → juez.",s:"5.5.2"},
+{q:"¿Cuál de estas entidades excluye la Ley Orgánica 1/2002 de su ámbito de aplicación?",o:["Las comunidades de propietarios","Los partidos políticos","Las federaciones deportivas","Las asociaciones de consumidores"],w:"También las sociedades, cooperativas, mutualidades, uniones temporales de empresas y agrupaciones de interés económico.",r:"Excluidas: comunidades de bienes y propietarios, sociedades.",s:"5.5.2"},
+{q:"La vertiente negativa del derecho de asociación consiste en…",o:["no ser obligado a constituir una asociación ni a integrarse en ella","no poder ser disuelta sin resolución judicial","no tener que inscribirse en el registro","no poder recibir financiación pública"],w:"Artículo 2.3 de la Ley Orgánica 1/2002.",r:"Vertiente negativa: no asociarse.",s:"5.5.2"},
+{q:"¿Qué artículo del Código Penal cita la unidad sobre las asociaciones ilícitas?",o:["El 515","El 510","El 172","El 22"],w:"Está enlazado en la unidad.",r:"Asociaciones ilícitas → artículo 515 del Código Penal.",s:"5.5.2"},
+{q:"Según el artículo 13.2, ¿quiénes son titulares de los derechos del artículo 23?",o:["Solo los españoles, salvo el sufragio en las elecciones municipales por reciprocidad","Todos los residentes legales","Los españoles y todos los ciudadanos de la Unión Europea residentes en España, en cualquier proceso electoral","Todas las personas mayores de edad"],w:"Los extranjeros pueden votar y ser elegidos en municipales si hay tratado o ley.",r:"Artículo 23: españoles (salvo municipales).",s:"5.5.3"},
+{q:"¿Cuáles son los mecanismos de participación directa que cita la unidad?",o:["La iniciativa legislativa popular y el referéndum","El sufragio activo y el pasivo","El derecho de petición y el de reunión","La moción de censura y la cuestión de confianza"],w:"El sufragio es participación por medio de representantes.",r:"Directa: iniciativa popular y referéndum.",s:"5.5.3"},
+{q:"¿Qué ley regula el régimen electoral general?",o:["La Ley Orgánica 5/1985, de 19 de junio","La Ley Orgánica 2/1980, de 18 de enero","La Ley Orgánica 3/1984, de 26 de marzo","La Ley Orgánica 6/2002, de 27 de junio"],w:"La 2/1980 regula el referéndum y la 3/1984 la iniciativa legislativa popular.",r:"Elecciones → Ley Orgánica 5/1985.",s:"5.5.3"},
+{q:"¿Qué es el sufragio pasivo?",o:["La capacidad para ser candidato y presentar candidatura","La capacidad para ser elector y votar","La abstención en unas elecciones","El voto por correo"],w:"El activo es la capacidad para votar.",r:"Pasivo = ser elegible.",s:"5.5.3"},
+{q:"Según el artículo 3.1 de la Ley Orgánica 5/1985, ¿quiénes carecen del derecho de sufragio?",o:["Los condenados por sentencia firme a la pena de privación del derecho de sufragio, mientras la cumplen","Las personas con discapacidad","Los residentes en el extranjero","Los menores emancipados que no hayan cumplido dieciocho años el día de la votación"],w:"Desde 2018 toda persona puede votar con los apoyos que necesite (artículo 3.2).",r:"Sin sufragio: condenados a privación del sufragio.",s:"5.5.3"},
+{q:"¿Qué artículo de la Constitución regula la iniciativa legislativa popular?",o:["El 87.3","El 92","El 23.1","El 166"],w:"El 92 regula el referéndum consultivo.",r:"Iniciativa popular → 87.3.",s:"5.5.3"},
+{q:"Según la unidad, el derecho del artículo 23.2 comprende también…",o:["el derecho a permanecer en el cargo y a desempeñarlo","el derecho a ser nombrado sin pruebas selectivas","el derecho a una retribución mínima","el derecho a elegir destino dentro de la Administración en la que se ingresa"],w:"Si no, el derecho quedaría vacío de contenido.",r:"23.2: acceder, permanecer y desempeñar.",s:"5.5.3"},
+/* Repaso UD1 a UD4 */
+{q:"Repaso UD4. ¿Qué sentencia denegó el amparo a un trabajador porque la ayuda de guardería solo para mujeres era una medida compensatoria?",o:["La 128/1987","La 103/1983","La 145/1991","La 22/1981"],w:"La propia presentación de las clases 5 y 6 lo confirma.",r:"128/1987: guardería, amparo denegado.",s:"UD4"},
+{q:"Repaso UD4. ¿Cuál es el plazo máximo de la detención preventiva del artículo 17.2?",o:["Setenta y dos horas","Cuarenta y ocho horas","Veinticuatro horas","Cinco días"],w:"Con prórroga de 48 horas en terrorismo (artículo 520 bis de la Ley de Enjuiciamiento Criminal).",r:"Detención: 72 horas.",s:"UD4"},
+{q:"Repaso UD4. Según la unidad, el Estado español es…",o:["aconfesional, pero no laico","laico","confesional católico","multiconfesional"],w:"Artículo 16.3.",r:"Aconfesional.",s:"UD4"},
+{q:"Repaso UD3. ¿Cuál es el plazo para interponer recurso de amparo contra un acto del poder ejecutivo?",o:["Veinte días","Treinta días","Tres meses","Diez días"],w:"Treinta días contra resoluciones judiciales y tres meses contra actos parlamentarios.",r:"Amparo ejecutivo: 20 días.",s:"UD3"},
+{q:"Repaso UD3. ¿En qué plazo debe resolverse el habeas corpus?",o:["Veinticuatro horas","Setenta y dos horas","Diez días","Cuarenta y ocho horas"],w:"Ley Orgánica 6/1984.",r:"Habeas corpus: 24 horas.",s:"UD3"},
+{q:"Repaso UD2. ¿Qué mayoría exige una ley orgánica?",o:["Mayoría absoluta del Congreso en una votación final sobre el conjunto del proyecto","Tres quintos de ambas Cámaras","Mayoría simple del Congreso","Dos tercios del Senado"],w:"Artículo 81.2.",r:"Ley orgánica: absoluta del Congreso.",s:"UD2"},
+{q:"Repaso UD2. ¿Qué artículo obliga a interpretar los derechos fundamentales conforme a la Declaración Universal y los tratados ratificados por España?",o:["El 10.2","El 96.1","El 93","El 9.3"],w:"El 96.1 integra los tratados en el ordenamiento.",r:"Interpretación conforme: 10.2.",s:"UD2"},
+{q:"Repaso UD1. ¿Qué valores superiores enumera el artículo 1.1?",o:["Libertad, justicia, igualdad y pluralismo político","Libertad, igualdad, fraternidad y solidaridad","Dignidad, libertad, igualdad y seguridad","Justicia, legalidad, seguridad y jerarquía"],w:"La seguridad jurídica es un principio del 9.3.",r:"Cuatro valores superiores.",s:"UD1"}
+];
+var ARTS={
+"18":"Artículo 18 de la Constitución: «1. Se garantiza el derecho al honor, a la intimidad personal y familiar y a la propia imagen. 2. El domicilio es inviolable. Ninguna entrada o registro podrá hacerse en él sin consentimiento del titular o resolución judicial, salvo en caso de flagrante delito. 3. Se garantiza el secreto de las comunicaciones y, en especial, de las postales, telegráficas y telefónicas, salvo resolución judicial. 4. La ley limitará el uso de la informática para garantizar el honor y la intimidad personal y familiar de los ciudadanos y el pleno ejercicio de sus derechos.»",
+"19":"Artículo 19 de la Constitución: «Los españoles tienen derecho a elegir libremente su residencia y a circular por el territorio nacional. Asimismo, tienen derecho a entrar y salir libremente de España en los términos que la ley establezca. Este derecho no podrá ser limitado por motivos políticos o ideológicos.»",
+"20":"Artículo 20 de la Constitución: «1. Se reconocen y protegen los derechos: a) A expresar y difundir libremente los pensamientos, ideas y opiniones mediante la palabra, el escrito o cualquier otro medio de reproducción. b) A la producción y creación literaria, artística, científica y técnica. c) A la libertad de cátedra. d) A comunicar o recibir libremente información veraz por cualquier medio de difusión. La ley regulará el derecho a la cláusula de conciencia y al secreto profesional en el ejercicio de estas libertades. 2. El ejercicio de estos derechos no puede restringirse mediante ningún tipo de censura previa. 3. La ley regulará la organización y el control parlamentario de los medios de comunicación social dependientes del Estado o de cualquier ente público y garantizará el acceso a dichos medios de los grupos sociales y políticos significativos, respetando el pluralismo de la sociedad y de las diversas lenguas de España. 4. Estas libertades tienen su límite en el respeto a los derechos reconocidos en este Título, en los preceptos de las leyes que lo desarrollen y, especialmente, en el derecho al honor, a la intimidad, a la propia imagen y a la protección de la juventud y de la infancia. 5. Sólo podrá acordarse el secuestro de publicaciones, grabaciones y otros medios de información en virtud de resolución judicial.»",
+"21":"Artículo 21 de la Constitución: «1. Se reconoce el derecho de reunión pacífica y sin armas. El ejercicio de este derecho no necesitará autorización previa. 2. En los casos de reuniones en lugares de tránsito público y manifestaciones se dará comunicación previa a la autoridad, que sólo podrá prohibirlas cuando existan razones fundadas de alteración del orden público, con peligro para personas o bienes.»",
+"22":"Artículo 22 de la Constitución: «1. Se reconoce el derecho de asociación. 2. Las asociaciones que persigan fines o utilicen medios tipificados como delito son ilegales. 3. Las asociaciones constituidas al amparo de este artículo deberán inscribirse en un registro a los solos efectos de publicidad. 4. Las asociaciones sólo podrán ser disueltas o suspendidas en sus actividades en virtud de resolución judicial motivada. 5. Se prohíben las asociaciones secretas y las de carácter paramilitar.»",
+"23":"Artículo 23 de la Constitución: «1. Los ciudadanos tienen el derecho a participar en los asuntos públicos, directamente o por medio de representantes, libremente elegidos en elecciones periódicas por sufragio universal. 2. Asimismo, tienen derecho a acceder en condiciones de igualdad a las funciones y cargos públicos, con los requisitos que señalen las leyes.»",
+"13.2":"Artículo 13.2 de la Constitución: «Solamente los españoles serán titulares de los derechos reconocidos en el artículo 23, salvo lo que, atendiendo a criterios de reciprocidad, pueda establecerse por tratado o ley para el derecho de sufragio activo y pasivo en las elecciones municipales.»",
+"87.3":"Artículo 87.3 de la Constitución: «Una ley orgánica regulará las formas de ejercicio y requisitos de la iniciativa popular para la presentación de proposiciones de ley. En todo caso se exigirán no menos de 500.000 firmas acreditadas. No procederá dicha iniciativa en materias propias de ley orgánica, tributarias o de carácter internacional, ni en lo relativo a la prerrogativa de gracia.»",
+"LR 1.2":"Artículo 1.2 de la Ley Orgánica 9/1983: «A los efectos de la presente Ley, se entiende por reunión la concurrencia concertada y temporal de más de 20 personas, con finalidad determinada.»",
+"LR 8":"Artículo 8 de la Ley Orgánica 9/1983: «La celebración de reuniones en lugares de tránsito público y de manifestaciones deberán ser comunicadas por escrito a la autoridad gubernativa correspondiente por los organizadores o promotores de aquéllas, con una antelación de diez días naturales, como mínimo y treinta como máximo. […] Cuando existan causas extraordinarias y graves que justifiquen la urgencia […], la comunicación […] podrá hacerse con una antelación mínima de veinticuatro horas.»",
+"LH 8.2":"Artículo 8.2 de la Ley Orgánica 1/1982: «En particular, el derecho a la propia imagen no impedirá: a) Su captación, reproducción o publicación por cualquier medio cuando se trate de personas que ejerzan un cargo público o una profesión de notoriedad o proyección pública y la imagen se capte durante un acto público o en lugares abiertos al público. b) La utilización de la caricatura de dichas personas, de acuerdo con el uso social. c) La información gráfica sobre un suceso o acaecimiento público cuando la imagen de una persona determinada aparezca como meramente accesoria. Las excepciones contempladas en los párrafos a) y b) no serán de aplicación respecto de las autoridades o personas que desempeñen funciones que por su naturaleza necesiten el anonimato de la persona que las ejerza.»",
+"LA 2":"Artículo 2 de la Ley Orgánica 1/2002: «1. Todas las personas tienen derecho a asociarse libremente para la consecución de fines lícitos. 2. El derecho de asociación comprende la libertad de asociarse o crear asociaciones, sin necesidad de autorización previa. 3. Nadie puede ser obligado a constituir una asociación, a integrarse en ella o a permanecer en su seno, ni a declarar su pertenencia a una asociación legalmente constituida.»"
+};
+var ARTLABEL={"LR 1.2":"Ley Orgánica 9/1983, artículo 1.2","LR 8":"Ley Orgánica 9/1983, artículo 8","LH 8.2":"Ley Orgánica 1/1982, artículo 8.2","LA 2":"Ley Orgánica 1/2002, artículo 2"};
+var LIT=[
+{k:"18",s:"Se garantiza el derecho al honor, a la intimidad personal y ___ y a la propia imagen.",a:["familiar"]},
+{k:"18",s:"El domicilio es ___.",a:["inviolable"]},
+{k:"18",s:"Ninguna entrada o registro podrá hacerse en él sin consentimiento del titular o resolución judicial, salvo en caso de ___ delito.",a:["flagrante"]},
+{k:"18",s:"Se garantiza el secreto de las comunicaciones y, en especial, de las postales, ___ y telefónicas, salvo resolución judicial.",a:["telegraficas"]},
+{k:"18",s:"La ley limitará el uso de la ___ para garantizar el honor y la intimidad personal y familiar de los ciudadanos…",a:["informatica"]},
+{k:"19",s:"Los españoles tienen derecho a elegir libremente su ___ y a circular por el territorio nacional.",a:["residencia"]},
+{k:"19",s:"Este derecho no podrá ser limitado por motivos políticos o ___.",a:["ideologicos"]},
+{k:"20",s:"A la libertad de ___.",a:["catedra"]},
+{k:"20",s:"A comunicar o recibir libremente información ___ por cualquier medio de difusión.",a:["veraz"]},
+{k:"20",s:"La ley regulará el derecho a la cláusula de ___ y al secreto profesional en el ejercicio de estas libertades.",a:["conciencia"]},
+{k:"20",s:"El ejercicio de estos derechos no puede restringirse mediante ningún tipo de ___ previa.",a:["censura"]},
+{k:"20",s:"…y especialmente, en el derecho al honor, a la intimidad, a la propia imagen y a la protección de la ___ y de la infancia.",a:["juventud"]},
+{k:"20",s:"Sólo podrá acordarse el ___ de publicaciones, grabaciones y otros medios de información en virtud de resolución judicial.",a:["secuestro"]},
+{k:"21",s:"Se reconoce el derecho de reunión ___ y sin armas.",a:["pacifica"]},
+{k:"21",s:"El ejercicio de este derecho no necesitará ___ previa.",a:["autorizacion"]},
+{k:"21",s:"…se dará ___ previa a la autoridad, que sólo podrá prohibirlas cuando existan razones fundadas de alteración del orden público…",a:["comunicacion"]},
+{k:"22",s:"Las asociaciones constituidas al amparo de este artículo deberán inscribirse en un registro a los solos efectos de ___.",a:["publicidad"]},
+{k:"22",s:"Las asociaciones sólo podrán ser disueltas o suspendidas en sus actividades en virtud de resolución judicial ___.",a:["motivada"]},
+{k:"22",s:"Se prohíben las asociaciones secretas y las de carácter ___.",a:["paramilitar"]},
+{k:"23",s:"…libremente elegidos en elecciones ___ por sufragio universal.",a:["periodicas"]},
+{k:"23",s:"Asimismo, tienen derecho a acceder en condiciones de ___ a las funciones y cargos públicos…",a:["igualdad"]},
+{k:"13.2",s:"Solamente los españoles serán titulares de los derechos reconocidos en el artículo 23, salvo lo que, atendiendo a criterios de ___…",a:["reciprocidad"]},
+{k:"87.3",s:"En todo caso se exigirán no menos de ___ firmas acreditadas.",a:["500.000","500000","quinientas mil"]},
+{k:"LR 1.2",s:"…se entiende por reunión la concurrencia concertada y temporal de más de ___ personas, con finalidad determinada.",a:["20","veinte"]},
+{k:"LR 8",s:"…con una antelación de diez días naturales, como mínimo y ___ como máximo.",a:["treinta","30"]},
+{k:"LR 8",s:"…la comunicación podrá hacerse con una antelación mínima de ___ horas.",a:["veinticuatro","24"]},
+{k:"LH 8.2",s:"b) La utilización de la ___ de dichas personas, de acuerdo con el uso social.",a:["caricatura"]},
+{k:"LA 2",s:"Nadie puede ser obligado a constituir una asociación, a ___ en ella o a permanecer en su seno…",a:["integrarse"]}
+];
+var CONC=[
+{t:"Honor",d:"Aprecio y estima que una persona recibe en la sociedad: buena reputación, fama u honra."},
+{t:"Honor objetivo",d:"La buena reputación y la fama; la concepción que la unidad recomienda seguir."},
+{t:"Honor subjetivo",d:"La concepción que de sí mismo y de sus valores tiene el sujeto."},
+{t:"Intimidad",d:"Ámbito más privado de la vida del individuo; el artículo 18 garantiza el poder de control sobre la publicidad de esa información."},
+{t:"Intimidad familiar",d:"Extensión de la intimidad al núcleo familiar y a personas con las que se guarda estrecha vinculación (sentencia 231/1988)."},
+{t:"Propia imagen",d:"Facultad de evitar la difusión incondicionada del propio aspecto físico y decidir sobre su uso (sentencia 139/2001)."},
+{t:"Intromisión ilegítima",d:"Injerencia en el honor, la intimidad o la imagen que enumera el artículo 7 de la Ley Orgánica 1/1982."},
+{t:"Caricatura",d:"No es intromisión cuando se refiere a personas públicas y respeta el uso social (artículo 8.2.b de la Ley Orgánica 1/1982)."},
+{t:"Imagen accesoria",d:"La de una persona que aparece de forma secundaria en la información gráfica de un suceso público; no es intromisión."},
+{t:"Juicio de proporcionalidad",d:"La medida debe ser idónea, necesaria y proporcional en sentido estricto."},
+{t:"Domicilio",d:"Espacio en el que la persona vive y ejerce su libertad más íntima; incluye hoteles, pensiones, autocaravanas o tiendas de campaña."},
+{t:"Flagrante delito",d:"El delincuente es sorprendido al delinquir o en circunstancias inmediatamente previas."},
+{t:"Consentimiento para entrar",d:"Derecho individual de cada uno de los que residen en el domicilio."},
+{t:"Secreto de las comunicaciones",d:"Garantía de la impenetrabilidad de las comunicaciones frente a terceros, particulares y poderes públicos (18.3)."},
+{t:"Garantía formal",d:"El secreto protege la comunicación con independencia de su contenido: la «opacidad»."},
+{t:"Habeas data",d:"Libertad informática: poder de disposición y control sobre los datos personales (18.4)."},
+{t:"Categorías especiales de datos",d:"Datos con protección reforzada para evitar discriminaciones: ideología, afiliación sindical, religión, orientación sexual, creencias, origen racial o étnico, entre otros."},
+{t:"Libertad de circulación",d:"Facultad de desplazarse por el territorio nacional (artículo 19)."},
+{t:"Libertad de expresión",d:"Difundir pensamientos, ideas, opiniones y juicios de valor; no se le exige prueba de verdad."},
+{t:"Libertad de información",d:"Comunicar o recibir hechos noticiables; se le exige veracidad."},
+{t:"Veracidad",d:"Que el profesional haya comprobado y contrastado de modo diligente lo difundido."},
+{t:"Censura previa",d:"Control anterior a la difusión, prohibido por el artículo 20.2."},
+{t:"Secuestro",d:"Retirada de publicaciones o grabaciones; solo por resolución judicial (20.5)."},
+{t:"Derecho de rectificación",d:"Garantía de los derechos del artículo 20 no recogida expresamente en él; faceta de la responsabilidad del informador."},
+{t:"Interés público",d:"El requisito que más pesa para que la información prevalezca sobre el honor o la intimidad."},
+{t:"Reunión",d:"Concurrencia concertada y temporal de más de 20 personas con finalidad determinada (artículo 1.2 de la Ley Orgánica 9/1983)."},
+{t:"Manifestación",d:"Reunión en lugar de tránsito público con recorrido."},
+{t:"Concentración",d:"Reunión estática en lugar de tránsito público."},
+{t:"Comunicación previa",d:"Aviso por escrito a la autoridad gubernativa con 10 a 30 días naturales de antelación (24 horas si es urgente)."},
+{t:"Asociación ilegal",d:"La que persigue fines o utiliza medios tipificados como delito (22.2)."},
+{t:"Inscripción registral",d:"Obligatoria para las asociaciones, a los solos efectos de publicidad (22.3)."},
+{t:"Vertiente negativa de la asociación",d:"Nadie puede ser obligado a constituir una asociación ni a integrarse en ella."},
+{t:"Sufragio activo",d:"Capacidad para ser elector y emitir el voto."},
+{t:"Sufragio pasivo",d:"Capacidad para ser candidato y presentar candidatura."},
+{t:"Iniciativa legislativa popular",d:"Participación directa: proposición de ley con no menos de 500.000 firmas (87.3, Ley Orgánica 3/1984)."}
+];
+var CLS_OPTS=["Artículo 18","Artículo 19","Artículo 20","Artículo 21","Artículo 22","Artículo 23"];
+var CLS=[
+{p:"Publicar la foto de una persona en su casa sin su consentimiento.",a:"Artículo 18"},
+{p:"Entrada de la policía en una vivienda sin orden judicial.",a:"Artículo 18"},
+{p:"Escuchas telefónicas sin resolución judicial.",a:"Artículo 18"},
+{p:"Cesión de datos personales a un tercero sin consentimiento.",a:"Artículo 18"},
+{p:"Calificativos vejatorios contra un vecino en una revista.",a:"Artículo 18"},
+{p:"Fijar la residencia en otra comunidad autónoma.",a:"Artículo 19"},
+{p:"Salir de España sin que se pueda limitar por motivos ideológicos.",a:"Artículo 19"},
+{p:"Prohibición de la censura previa.",a:"Artículo 20"},
+{p:"Libertad de cátedra de un profesor universitario.",a:"Artículo 20"},
+{p:"Secuestro judicial de un libro.",a:"Artículo 20"},
+{p:"Cláusula de conciencia de los periodistas.",a:"Artículo 20"},
+{p:"Concentración de 50 personas frente al ayuntamiento.",a:"Artículo 21"},
+{p:"Comunicación de una manifestación con 10 días naturales de antelación.",a:"Artículo 21"},
+{p:"Disolución de una reunión por uso de uniformes paramilitares.",a:"Artículo 21"},
+{p:"Crear una asociación de vecinos sin autorización previa.",a:"Artículo 22"},
+{p:"Inscripción en el registro a los solos efectos de publicidad.",a:"Artículo 22"},
+{p:"Prohibición de las asociaciones secretas.",a:"Artículo 22"},
+{p:"Votar en las elecciones generales.",a:"Artículo 23"},
+{p:"Presentarse a unas oposiciones en condiciones de igualdad.",a:"Artículo 23"},
+{p:"Firmar una iniciativa legislativa popular.",a:"Artículo 23"}
+];
+var VF=[
+{p:"Los derechos al honor, a la intimidad y a la propia imagen son un único derecho.",v:false,w:"Falso. Son tres derechos autónomos, aunque un solo hecho puede lesionar varios."},
+{p:"Las personas jurídicas pueden ser titulares del derecho al honor.",v:true,w:"Verdadero. Lo dice la unidad citando la sentencia 139/1995."},
+{p:"Las personas jurídicas son titulares del derecho a la intimidad en los mismos términos que las físicas.",v:false,w:"Falso. En principio, la intimidad solo corresponde a las personas físicas."},
+{p:"Las personas jurídicas pueden invocar la inviolabilidad del domicilio.",v:true,w:"Verdadero. Es la única excepción que la unidad admite en materia de intimidad."},
+{p:"La unidad recomienda seguir la concepción subjetiva del honor.",v:false,w:"Falso. Recomienda la objetiva: buena reputación y fama."},
+{p:"El artículo 18.2 dice literalmente «resolución judicial previa».",v:false,w:"Falso. Dice «resolución judicial»; que sea previa es exigencia doctrinal."},
+{p:"La habitación de un hotel puede ser domicilio a efectos del artículo 18.2.",v:true,w:"Verdadero. También la tienda de campaña o la autocaravana."},
+{p:"La contaminación acústica puede vulnerar la inviolabilidad del domicilio.",v:true,w:"Verdadero. Si el ruido es evitable e insoportable."},
+{p:"El secreto de las comunicaciones solo protege conversaciones de contenido íntimo.",v:false,w:"Falso. Es una garantía formal: protege con independencia del contenido."},
+{p:"La lista de comunicaciones del artículo 18.3 es cerrada.",v:false,w:"Falso. Es abierta: comprende las nuevas tecnologías. (La unidad cita por error el 18.4.)"},
+{p:"La resolución que autoriza una intervención telefónica se notifica al Ministerio Fiscal.",v:true,w:"Verdadero. Lo dice el epígrafe 5.2.2."},
+{p:"La libertad informática solo protege datos íntimos.",v:false,w:"Falso. Protege cualquier dato personal, sea o no íntimo."},
+{p:"El derecho a entrar y salir de España puede limitarse por motivos ideológicos si lo prevé una ley orgánica.",v:false,w:"Falso. El artículo 19 lo prohíbe expresamente."},
+{p:"Las libertades de expresión e información son derechos innatos según la unidad.",v:true,w:"Verdadero. «No son derechos concedidos»."},
+{p:"El derecho de rectificación está reconocido expresamente en el artículo 20.",v:false,w:"Falso. Es uno de los derechos relacionados no recogidos expresamente."},
+{p:"A las opiniones se les exige prueba de verdad.",v:false,w:"Falso. Solo los hechos son susceptibles de prueba; la veracidad se exige a la información."},
+{p:"Según la sentencia 336/1993, la libertad de información tiene una posición jerárquica superior al honor.",v:false,w:"Falso. No puede establecerse una jerarquía; hay que ir caso por caso."},
+{p:"La unidad afirma que la jurisprudencia tiende a dar una posición preferente a la libertad de expresión cuando hay relevancia pública y veracidad.",v:true,w:"Verdadero. Es la conclusión del epígrafe 5.4.3."},
+{p:"El derecho de reunión requiere autorización previa.",v:false,w:"Falso. Solo la comunicación previa en lugares de tránsito público."},
+{p:"Los extranjeros son titulares del derecho de reunión.",v:true,w:"Verdadero. La unidad lo atribuye a nacionales y extranjeros."},
+{p:"Una reunión de amigos en un local privado está incluida en la Ley Orgánica 9/1983.",v:false,w:"Falso. Está excluida por el artículo 2.b."},
+{p:"La manifestación se comunica al juez de guardia.",v:false,w:"Falso. Se comunica por escrito a la autoridad gubernativa."},
+{p:"La inscripción de una asociación en el registro es constitutiva.",v:false,w:"Falso. Es a los solos efectos de publicidad."},
+{p:"Las comunidades de propietarios se rigen por la Ley Orgánica 1/2002.",v:false,w:"Falso. Están expresamente excluidas (artículo 1.4)."},
+{p:"Los extranjeros pueden ser titulares del sufragio en las elecciones municipales si hay reciprocidad.",v:true,w:"Verdadero. Artículo 13.2."},
+{p:"El referéndum es un mecanismo de participación directa.",v:true,w:"Verdadero. Junto con la iniciativa legislativa popular."}
+];
+var TASKS={
+ a:{t:"Supuesto 1. Una revista publica fotos de un concejal tomadas con teleobjetivo en el jardín de su casa, junto a sus hijos, con un titular que lo llama «parásito». El concejal demanda. Explica qué derechos están en juego, qué dice la Ley Orgánica 1/1982 sobre la imagen de los cargos públicos, cómo resuelve el Tribunal Constitucional el conflicto con la libertad de información y cuál sería tu conclusión. Mínimo 150 palabras.",
+  checks:[
+   {re:/18\.1/,t:"Cita el artículo 18.1"},
+   {re:/\b20\b/,t:"Cita el artículo 20"},
+   {re:/1\/1982/,t:"Cita la Ley Orgánica 1/1982"},
+   {re:/(acto p[uú]blico|lugares abiertos)/i,t:"Aplica la excepción del acto público (artículo 8.2)"},
+   {re:/intimidad familiar|hijos/i,t:"Valora la intimidad familiar"},
+   {re:/(inter[eé]s p[uú]blico|relevancia p[uú]blica)/i,t:"Aplica el requisito del interés público"},
+   {re:/(injurios|vejatori|insult)/i,t:"Valora las expresiones injuriosas"},
+   {re:/(en conclusi[oó]n|por tanto|en definitiva|concluyo)/i,t:"Conclusión explícita"}
+  ],
+  min:150,
+  m:"Están en juego el derecho al honor, a la intimidad personal y familiar y a la propia imagen del artículo 18.1, frente a la libertad de información del artículo 20. Son tres derechos autónomos y aquí un solo hecho los afecta a la vez.\n\nLa Ley Orgánica 1/1982 permite captar la imagen de un cargo público sin su consentimiento solo durante un acto público o en lugares abiertos al público (artículo 8.2.a). El jardín de su casa no lo es: es un espacio de vida privada, y las fotos con teleobjetivo son una intromisión ilegítima en su imagen y en su intimidad. La presencia de sus hijos añade la intimidad familiar, que el Tribunal protege con especial cuidado (sentencia 231/1988).\n\nEl Tribunal Constitucional no establece jerarquía entre los artículos 18 y 20 (sentencia 336/1993). La información prevalece si tiene interés público, es veraz y no contiene expresiones injuriosas innecesarias. Que sea concejal da relevancia pública a su actividad política, no a su vida en casa. Y llamarlo «parásito» es un insulto innecesario para informar.\n\nEn conclusión, prevalecen los derechos del artículo 18.1: hay intromisión ilegítima en la imagen y la intimidad, y lesión del honor por la expresión vejatoria."},
+ b:{t:"Supuesto 2. Una plataforma vecinal convoca una manifestación urgente contra el cierre de un centro de salud y la comunica a la Delegación del Gobierno con 48 horas de antelación. La Delegación la prohíbe porque «no se ha respetado el plazo de diez días» y porque «perjudicará al tráfico». Explica qué artículos se aplican, si el plazo es correcto, si las razones de la prohibición son válidas y qué podrían hacer los convocantes. Mínimo 150 palabras.",
+  checks:[
+   {re:/\b21\b/,t:"Cita el artículo 21"},
+   {re:/9\/1983/,t:"Cita la Ley Orgánica 9/1983"},
+   {re:/(diez d[ií]as|10 d[ií]as)/i,t:"Aplica el plazo general de diez días"},
+   {re:/(veinticuatro|24) horas/i,t:"Aplica el plazo de urgencia de 24 horas"},
+   {re:/orden p[uú]blico/i,t:"Valora la alteración del orden público"},
+   {re:/(personas o bienes)/i,t:"Cita el peligro para personas o bienes"},
+   {re:/(recurso|contencioso)/i,t:"Indica la vía de recurso"},
+   {re:/(en conclusi[oó]n|por tanto|en definitiva|concluyo)/i,t:"Conclusión explícita"}
+  ],
+  min:150,
+  m:"Se aplica el derecho de reunión del artículo 21 y su desarrollo en la Ley Orgánica 9/1983. Una manifestación es una reunión en lugar de tránsito público con recorrido; no necesita autorización, solo comunicación previa por escrito a la autoridad gubernativa.\n\nEl plazo general es de diez días naturales como mínimo y treinta como máximo (artículo 8). Pero el mismo artículo admite una antelación mínima de veinticuatro horas cuando causas extraordinarias y graves justifiquen la urgencia. El cierre inminente de un centro de salud puede encajar ahí, y la plataforma comunicó con 48 horas: el plazo sería correcto.\n\nEl artículo 21.2 solo permite prohibir cuando existan razones fundadas de alteración del orden público, con peligro para personas o bienes. Una molestia para el tráfico no es eso: la autoridad podría proponer cambios de recorrido o de horario, pero no prohibir.\n\nLos convocantes pueden interponer recurso contencioso-administrativo (artículo 11 de la ley) por el procedimiento especial de protección de derechos fundamentales y, agotada esa vía, recurso de amparo.\n\nEn conclusión, la prohibición vulnera el derecho de reunión."}
+};
+
+(function(){
+"use strict";
+var STORE="ui1-const-ud5-v1";
+function load(){ try{ var r=localStorage.getItem(STORE); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
+function save(d){ try{ localStorage.setItem(STORE, JSON.stringify(d)); }catch(e){} }
+var db=load(); db.examHistory=db.examHistory||[]; db.drafts=db.drafts||{};
+function $(id){ return document.getElementById(id); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function norm(s){ return (s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/\s+/g," ").trim().replace(/[.,;:!?»«"]+$/,""); }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function fb(el,ok,html){ el.className="fb show "+(ok?"ok":"ko"); el.innerHTML=html; }
+function hideFb(el){ el.className="fb"; el.innerHTML=""; }
+function fmt(n){ return (Math.round(n*100)/100).toString().replace(".",","); }
+
+var tabs=document.querySelectorAll(".tab");
+tabs.forEach(function(t){ t.addEventListener("click",function(){
+  tabs.forEach(function(x){ x.setAttribute("aria-selected", x===t?"true":"false"); });
+  document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id==="p-"+t.dataset.p); });
+}); });
+
+/* ===== EXAM ===== */
+function letter(it){ return "ABCD".charAt(it.o.indexOf(it.ok)); }
+function explain(it){
+  var h="<b>✓ Respuesta correcta: "+letter(it)+")</b> "+esc(it.ok);
+  h+="<div style='margin-top:8px'><b>Por qué:</b> "+esc(it.w)+"</div>";
+  h+="<div style='margin-top:6px'><b>Recuerda:</b> "+esc(it.r)+"</div>";
+  h+="<div class='es'>Apartado de la unidad: "+esc(it.s)+"</div>";
+  return h;
+}
+var ex=null;
+function renderHistory(){ var h=db.examHistory; $("exam-history").textContent = h.length ? ("Últimas notas: "+h.slice(-5).map(function(x){ return fmt(x.nota); }).join(" / ")+" sobre 10.") : ""; }
+function startExam(pool){
+  var qs=(pool||shuffle(EXAM).slice(0,30)).map(function(it){ return {q:it.q,w:it.w,r:it.r,s:it.s,ok:it.o[0],o:shuffle(it.o),src:it}; });
+  ex={qs:qs,i:0,ok:0,ko:0,blank:0,wrong:[],done:false};
+  $("exam-start").hidden=true; $("exam-end").hidden=true; $("exam-run").hidden=false; showQ();
+}
+function showQ(){
+  if(ex.i>=ex.qs.length){ return endExam(); }
+  var it=ex.qs[ex.i]; ex.done=false;
+  $("exam-bar").style.width=(ex.i/ex.qs.length*100)+"%";
+  $("exam-count").textContent="Pregunta "+(ex.i+1)+" de "+ex.qs.length;
+  $("exam-score").textContent="Puntos: "+fmt(ex.ok-ex.ko*0.33);
+  $("exam-q").innerHTML="<span class='hint' style='display:block;margin:0 0 6px'>Elige UNA respuesta correcta.</span>"+esc(it.q);
+  var box=$("exam-opts"); box.innerHTML="";
+  it.o.forEach(function(op,k){ var b=document.createElement("button"); b.className="opt"; b.dataset.v=op; b.textContent="ABCD".charAt(k)+") "+op; b.addEventListener("click",function(){ answer(op,b); }); box.appendChild(b); });
+  hideFb($("exam-fb")); $("exam-next").disabled=true; $("exam-blank").disabled=false;
+}
+function reveal(){ var it=ex.qs[ex.i]; $("exam-opts").querySelectorAll(".opt").forEach(function(b){ b.disabled=true; if(b.dataset.v===it.ok) b.classList.add("ok"); }); }
+function answer(op,btn){
+  if(ex.done) return; ex.done=true; var it=ex.qs[ex.i]; reveal();
+  if(op===it.ok){ ex.ok++; fb($("exam-fb"),true,explain(it)); } else { ex.ko++; btn.classList.add("ko"); ex.wrong.push(it.src); fb($("exam-fb"),false,explain(it)); }
+  $("exam-next").disabled=false; $("exam-blank").disabled=true; $("exam-next").focus();
+}
+$("exam-blank").addEventListener("click",function(){ if(ex.done) return; ex.done=true; ex.blank++; var it=ex.qs[ex.i]; ex.wrong.push(it.src); reveal(); fb($("exam-fb"),false,"En blanco. "+explain(it)); $("exam-next").disabled=false; $("exam-blank").disabled=true; });
+$("exam-next").addEventListener("click",function(){ ex.i++; showQ(); });
+$("exam-go").addEventListener("click",function(){ startExam(); });
+function endExam(){
+  $("exam-run").hidden=true;
+  var n=ex.qs.length, raw=ex.ok-ex.ko*0.33, nota=Math.max(0,raw)/n*10;
+  if(n===30){ db.examHistory.push({d:Date.now(),nota:Math.round(nota*100)/100}); db.examHistory=db.examHistory.slice(-20); save(db); }
+  var h="<p class='prompt'>Nota: <span class='mark'>"+fmt(nota)+"</span> sobre 10</p>";
+  h+="<div class='stats'><div class='stat'><b>"+ex.ok+"</b><span>aciertos</span></div><div class='stat'><b>"+ex.ko+"</b><span>fallos (−"+fmt(ex.ko*0.33)+")</span></div><div class='stat'><b>"+ex.blank+"</b><span>en blanco</span></div></div>";
+  h+= n===30 ? "<p class='hint'>Mínimo en el examen: 4 sobre 10 en cada parte y 5 de media. Objetivo: 7 o más dos veces seguidas.</p>" : "<p class='hint'>Ronda de repaso: no cuenta en el historial.</p>";
+  if(ex.wrong.length){ h+="<ul class='review'>"+ex.wrong.map(function(w){ return "<li><b>"+esc(w.q)+"</b><br><span class='mark'>"+esc(w.o[0])+"</span>. "+esc(w.w)+"<div class='es'>Recuerda: "+esc(w.r)+"</div></li>"; }).join("")+"</ul>"; }
+  h+="<div class='row'>"+(ex.wrong.length?"<button class='btn' id='exam-retry'>Repetir solo los fallos</button>":"")+"<button class='btn ghost' id='exam-new'>Nuevo test de 30</button></div>";
+  var end=$("exam-end"); end.innerHTML=h; end.hidden=false;
+  var wr=ex.wrong.slice();
+  if($("exam-retry")) $("exam-retry").addEventListener("click",function(){ startExam(shuffle(wr)); });
+  $("exam-new").addEventListener("click",function(){ startExam(); });
+  renderHistory();
+}
+renderHistory();
+
+/* ===== adaptive queue ===== */
+function Queue(items){ this.q=shuffle(items); this.total=items.length; this.mastered=0; this.cur=null; }
+Queue.prototype.next=function(){ this.cur=this.q.shift()||null; return this.cur; };
+Queue.prototype.fail=function(){ var pos=Math.min(3,this.q.length); this.q.splice(pos,0,this.cur); };
+Queue.prototype.pass=function(){ this.mastered++; };
+function bar(id,Q){ $(id).style.width=(Q.mastered/Q.total*100)+"%"; }
+
+/* ===== ARTÍCULOS LITERALES ===== */
+var L=new Queue(LIT), lDone=false;
+function litShow(){
+  var c=L.next(); bar("lit-bar",L); hideFb($("lit-fb"));
+  if(!c){ $("lit-q").innerHTML="<span class='mark'>Completado.</span> Has acertado los "+L.total+" huecos."; $("lit-in").hidden=true; $("lit-check").hidden=true; $("lit-next").textContent="Empezar de nuevo"; $("lit-next").disabled=false; $("lit-count").textContent=""; $("lit-art").textContent=""; return; }
+  $("lit-in").hidden=false; $("lit-check").hidden=false; $("lit-next").textContent="Siguiente";
+  $("lit-count").textContent="Dominados "+L.mastered+" de "+L.total;
+  $("lit-art").textContent=(ARTLABEL[c.k]||"Constitución, artículo "+c.k);
+  $("lit-q").textContent=c.s; $("lit-in").value=""; $("lit-next").disabled=true; lDone=false; $("lit-in").focus({preventScroll:true});
+}
+function litCheck(){
+  if(lDone) return; var c=L.cur; if(!c) return; var v=norm($("lit-in").value); if(!v) return; lDone=true;
+  var ok=c.a.some(function(a){ return norm(a)===v; });
+  var full="<div class='es'>"+esc(ARTS[c.k])+"</div>";
+  if(ok){ L.pass(); fb($("lit-fb"),true,"Correcto."+full); } else { L.fail(); fb($("lit-fb"),false,"Respuesta: <span class='mark'>"+esc(c.a[0])+"</span>. Volverá a salir."+full); }
+  bar("lit-bar",L); $("lit-next").disabled=false; $("lit-next").focus();
+}
+$("lit-check").addEventListener("click",litCheck);
+$("lit-in").addEventListener("keydown",function(e){ if(e.key==="Enter"){ if(lDone) litShow(); else litCheck(); } });
+$("lit-next").addEventListener("click",function(){ if(!L.cur && L.q.length===0 && L.mastered===L.total){ L=new Queue(LIT); } litShow(); });
+litShow();
+
+/* ===== CONCEPTOS ===== */
+var CC=[]; CONC.forEach(function(x){ CC.push({f:x.d,b:x.t,k:"¿Qué concepto es?"}); CC.push({f:x.t,b:x.d,k:"Defínelo según la unidad"}); });
+var C=new Queue(CC);
+function conShow(){
+  var c=C.next(); bar("con-bar",C); hideFb($("con-fb")); $("con-row1").hidden=false; $("con-row2").hidden=true;
+  if(!c){ $("con-q").innerHTML="<span class='mark'>Completado.</span>"; $("con-show").textContent="Empezar de nuevo"; $("con-count").textContent=""; $("con-kind").textContent=""; return; }
+  $("con-show").textContent="Ver respuesta"; $("con-count").textContent="Dominadas "+C.mastered+" de "+C.total; $("con-kind").textContent=c.k; $("con-q").textContent=c.f;
+}
+$("con-show").addEventListener("click",function(){ if(!C.cur){ C=new Queue(CC); conShow(); return; } fb($("con-fb"),true,"<span class='mark'>"+esc(C.cur.b)+"</span>"); $("con-row1").hidden=true; $("con-row2").hidden=false; });
+$("con-good").addEventListener("click",function(){ C.pass(); conShow(); });
+$("con-bad").addEventListener("click",function(){ C.fail(); conShow(); });
+conShow();
+
+/* ===== CLASIFICACIÓN ===== */
+var K=new Queue(CLS), kDone=false;
+var kb=$("cls-btns"); CLS_OPTS.forEach(function(y){ var b=document.createElement("button"); b.className="btn ghost"; b.textContent=y; b.dataset.y=y; b.addEventListener("click",function(){ clsAns(y); }); kb.appendChild(b); });
+function clsShow(){
+  var c=K.next(); bar("cls-bar",K); hideFb($("cls-fb")); kDone=false; $("cls-next").disabled=true;
+  if(!c){ $("cls-q").innerHTML="<span class='mark'>Completado.</span>"; kb.hidden=true; $("cls-next").textContent="Empezar de nuevo"; $("cls-next").disabled=false; $("cls-count").textContent=""; return; }
+  kb.hidden=false; $("cls-next").textContent="Siguiente"; $("cls-count").textContent="Dominadas "+K.mastered+" de "+K.total; $("cls-q").textContent=c.p;
+}
+function clsAns(y){
+  if(kDone||!K.cur) return; kDone=true; var c=K.cur;
+  if(y===c.a){ K.pass(); fb($("cls-fb"),true,"Correcto: "+esc(c.a)+"."); } else { K.fail(); fb($("cls-fb"),false,"Es <span class='mark'>"+esc(c.a)+"</span>. Volverá a salir."); }
+  bar("cls-bar",K); $("cls-next").disabled=false; $("cls-next").focus();
+}
+$("cls-next").addEventListener("click",function(){ if(!K.cur && K.q.length===0 && K.mastered===K.total){ K=new Queue(CLS); } clsShow(); });
+clsShow();
+
+/* ===== VERDADERO O FALSO ===== */
+var V=new Queue(VF), vDone=false;
+function vfShow(){
+  var c=V.next(); bar("vf-bar",V); hideFb($("vf-fb")); vDone=false; $("vf-next").disabled=true;
+  if(!c){ $("vf-q").innerHTML="<span class='mark'>Completado.</span>"; $("vf-t").hidden=true; $("vf-f").hidden=true; $("vf-next").textContent="Empezar de nuevo"; $("vf-next").disabled=false; $("vf-count").textContent=""; return; }
+  $("vf-t").hidden=false; $("vf-f").hidden=false; $("vf-next").textContent="Siguiente"; $("vf-count").textContent="Dominadas "+V.mastered+" de "+V.total; $("vf-q").textContent=c.p;
+}
+function vfAns(val){
+  if(vDone||!V.cur) return; vDone=true; var c=V.cur;
+  if(val===c.v){ V.pass(); fb($("vf-fb"),true,esc(c.w)); } else { V.fail(); fb($("vf-fb"),false,esc(c.w)+" Volverá a salir."); }
+  bar("vf-bar",V); $("vf-next").disabled=false; $("vf-next").focus();
+}
+$("vf-t").addEventListener("click",function(){ vfAns(true); });
+$("vf-f").addEventListener("click",function(){ vfAns(false); });
+$("vf-next").addEventListener("click",function(){ if(!V.cur && V.q.length===0 && V.mastered===V.total){ V=new Queue(VF); } vfShow(); });
+vfShow();
+
+/* ===== APLICACIÓN ===== */
+var wMode="a";
+function countWords(t){ return (t.match(/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9]+/g)||[]).length; }
+function checksFor(task,body){ var n=countWords(body); var c=task.checks.map(function(x){ return {ok:x.re.test(body),t:x.t}; }); c.push({ok:n>=task.min,t:"Al menos "+task.min+" palabras (ahora "+n+")"}); return {c:c,words:n}; }
+function wRender(){
+  var body=$("w-body").value, r=checksFor(TASKS[wMode],body);
+  $("w-words").textContent=r.words+" palabras";
+  $("w-checks").innerHTML=r.c.map(function(x){ return "<li class='"+(body.trim()?(x.ok?"pass":"fail"):"")+"'>"+esc(x.t)+"</li>"; }).join("");
+  db.drafts[wMode]=body; save(db);
+}
+function wSet(m){ wMode=m; $("w-a").className= m==="a"?"btn":"btn ghost"; $("w-b").className= m==="b"?"btn":"btn ghost"; $("w-task").textContent=TASKS[m].t; $("w-model").textContent=TASKS[m].m; $("w-body").value=db.drafts[m]||""; wRender(); }
+$("w-a").addEventListener("click",function(){ wSet("a"); });
+$("w-b").addEventListener("click",function(){ wSet("b"); });
+$("w-body").addEventListener("input",wRender);
+wSet("a");
+})();
+
+</script>
