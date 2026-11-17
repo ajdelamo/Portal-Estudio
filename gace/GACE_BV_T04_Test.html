@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GACE 2027 · Bloque V · Tema 4 · Test adaptativo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f4;color:#1a1a18;min-height:100vh;padding:1rem}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-block;font-size:12px;color:#185fa5;text-decoration:none;margin-bottom:.6rem}
+h1{font-size:17px;font-weight:600;margin-bottom:1rem;color:#1a1a18}
+.nav{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.8rem}
+.nb{padding:5px 12px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:13px;cursor:pointer}
+.nb.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.nb:hover:not(.active){background:#f1efe8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:.8rem}
+.stat{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:.6rem .8rem;text-align:center}
+.stat-n{font-size:20px;font-weight:600}
+.stat-l{font-size:11px;color:#888780;margin-top:1px}
+.unit-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:.8rem}
+@media(max-width:560px){.unit-bars{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+.ubar{background:#fff;border:1px solid #d3d1c7;border-radius:8px;padding:7px 9px;cursor:pointer;min-width:0}
+.ubar:hover{border-color:#185fa5}
+.ubar-title{font-size:11px;color:#888780;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ubar-track{height:5px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-bottom:2px}
+.ubar-fill{height:100%;border-radius:3px;transition:width .3s}
+.ubar-pct{font-size:10px;color:#888780}
+.prog-wrap{height:3px;background:#d3d1c7;border-radius:2px;margin-bottom:.8rem;overflow:hidden}
+.prog-bar{height:100%;background:#185fa5;border-radius:2px;transition:width .3s}
+.ctrl{display:flex;gap:5px;margin-bottom:.8rem;flex-wrap:wrap}
+.btn{padding:6px 13px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer}
+.btn:hover{background:#f1efe8}
+.btn.active{background:#e6f1fb;color:#185fa5;border-color:#185fa5}
+.btn.danger{background:#fcebeb;color:#a32d2d;border-color:#f7c1c1}
+.qcard{background:#fff;border:1.5px solid #d3d1c7;border-radius:12px;padding:1.1rem;margin-bottom:.9rem;transition:border-color .15s,background .15s}
+.qcard.ok{border-color:#1d9e75;background:#eaf3de}
+.qcard.fail{border-color:#e24b4a;background:#fcebeb}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.qbadge{font-size:11px;color:#888780;background:#f1efe8;padding:2px 7px;border-radius:5px}
+.qmeta{display:flex;gap:5px;align-items:center}
+.qpct{font-size:11px;padding:2px 7px;border-radius:5px;font-weight:600}
+.qnum{font-size:10px;color:#b4b2a9}
+.qtext{font-size:14px;line-height:1.65;margin-bottom:.8rem;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:4px}
+.opt{text-align:left;padding:9px 12px;border:1px solid #d3d1c7;border-radius:7px;background:#fff;cursor:pointer;font-size:13px;line-height:1.5;font-family:inherit;color:#1a1a18}
+.opt:hover:not(:disabled){background:#f1efe8}
+.opt.c-ok{background:#eaf3de;border-color:#1d9e75;color:#0f6e56;font-weight:600}
+.opt.c-fail{background:#fcebeb;border-color:#e24b4a;color:#a32d2d}
+.exp{margin-top:.6rem;padding:8px 11px;background:#f1efe8;border-radius:7px;font-size:12px;color:#444441;line-height:1.6;border-left:3px solid #185fa5}
+.empty{color:#888780;font-size:14px;padding:3rem;text-align:center;background:#fff;border-radius:12px;border:1px solid #d3d1c7}
+.sep{font-size:12px;font-weight:600;color:#888780;margin:1.2rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #d3d1c7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← Portal de Estudio</a>
+<h1>📚 GACE 2027 · Bloque V · Tema 4 · Provisión de puestos, movilidad, promoción interna y carrera</h1>
+<div class="nav" id="nav"></div>
+<div class="stats-grid" id="stats"></div>
+<div class="unit-bars" id="ubars"></div>
+<div class="prog-wrap"><div class="prog-bar" id="prog"></div></div>
+<div class="ctrl" id="ctrl"></div>
+<div id="questions"></div>
+</div>
+<script>
+const BANK=[
+{"u": 1, "t": "Según la disposición final cuarta del TREBEP, el capítulo III del título V (provisión de puestos y movilidad):", "o": ["Está plenamente en vigor desde 2007 como legislación básica directamente aplicable", "Produce efectos a partir de la entrada en vigor de las leyes de función pública que lo desarrollen", "Fue derogado por el Real Decreto-ley 6/2023", "Solo se aplica a las entidades locales"], "c": 1, "e": "DF 4.ª.1 TREBEP."},
+{"u": 1, "t": "En la AGE, la provisión de puestos se rige materialmente por:", "o": ["Solo los arts. 78 a 84 del TREBEP, directamente aplicables como legislación básica desde 2007", "El art. 20 de la Ley 30/1984 y el título III del Real Decreto 364/1995", "La Ley 40/2015 exclusivamente", "El IV Convenio Único"], "c": 1, "e": "DF 4.ª.2 TREBEP; art. 20 Ley 30/1984; RD 364/1995."},
+{"u": 1, "t": "La diferencia entre acceso y provisión es que:", "o": ["Son la misma figura con distinta denominación, según se trate de funcionarios de carrera o interinos del Estado", "El acceso da la condición de funcionario; la provisión asigna un puesto a quien ya la tiene", "La provisión es anterior al acceso", "El acceso solo se aplica a laborales"], "c": 1, "e": "Concepto."},
+{"u": 1, "t": "Según el art. 36 del Real Decreto 364/1995, son formas temporales de provisión:", "o": ["El concurso y la libre designación", "La comisión de servicios y la adscripción provisional", "La redistribución y la reasignación de efectivos como consecuencia de un plan de empleo", "La permuta y el traslado forzoso"], "c": 1, "e": "Art. 36.3 RD 364/1995."},
+{"u": 1, "t": "En caso de urgente e inaplazable necesidad, el art. 81.3 TREBEP permite:", "o": ["Nombrar personal eventual", "Proveer los puestos con carácter provisional, debiendo convocarse después", "Suspender el concurso", "Contratar personal laboral temporal sin convocatoria pública hasta que se cubra el puesto definitivamente"], "c": 1, "e": "Art. 81.3 TREBEP (examen 2022)."},
+{"u": 1, "t": "Las diligencias de cese y toma de posesión se comunican al Registro Central de Personal en:", "o": ["Un mes", "Diez días", "Tres días hábiles", "Veinte días naturales"], "c": 2, "e": "Art. 37 RD 364/1995."},
+{"u": 2, "t": "Las convocatorias de concurso en la AGE las autoriza:", "o": ["El Consejo de Ministros, a propuesta del ministro competente en materia de función pública, cada año", "La Secretaría de Estado de Función Pública, a iniciativa de los departamentos", "La CECIR", "El INAP"], "c": 1, "e": "Art. 39 RD 364/1995."},
+{"u": 2, "t": "Convocar y resolver los concursos de personal funcionario del departamento corresponde, según la Ley 40/2015, al:", "o": ["Ministro", "Subsecretario", "Secretario general técnico", "Director general de la Función Pública"], "c": 1, "e": "Art. 63.1.n Ley 40/2015."},
+{"u": 2, "t": "Para participar en un concurso de otro ministerio, el funcionario debe haber permanecido en su puesto definitivo:", "o": ["Un año", "Dos años, salvo en el ámbito de la misma secretaría de Estado o departamento, remoción, cese o supresión", "Tres años", "Cinco años"], "c": 1, "e": "Art. 20.1.f Ley 30/1984 y art. 41.2 RD 364/1995."},
+{"u": 2, "t": "No pueden participar en los concursos mientras dure la situación:", "o": ["Los funcionarios en excedencia voluntaria", "Los suspensos en firme", "Los funcionarios en servicios especiales", "Los que estén en comisión de servicios"], "c": 1, "e": "Art. 41.1 RD 364/1995."},
+{"u": 2, "t": "El plazo de presentación de solicitudes en los concursos es de:", "o": ["Diez días naturales desde la publicación de la convocatoria en el BOE, ampliables cinco días más", "Quince días hábiles desde el día siguiente a la publicación en el BOE", "Veinte días naturales", "Un mes"], "c": 1, "e": "Art. 42.2 RD 364/1995."},
+{"u": 2, "t": "La puntuación de cada uno de los méritos del concurso no puede:", "o": ["Superar el 25 % del total", "Exceder del 40 % ni ser inferior al 10 % de la puntuación máxima total", "Ser inferior al 20 %", "Superar el 50 % del total, salvo en los concursos específicos, donde no hay límite para los méritos generales"], "c": 1, "e": "Art. 44.3 RD 364/1995."},
+{"u": 2, "t": "El mérito de cuidado de hijos en los concursos se valora hasta que el hijo cumpla:", "o": ["Seis años", "Doce años", "Catorce años", "Dieciocho años"], "c": 1, "e": "Art. 44.2.b RD 364/1995."},
+{"u": 2, "t": "Si persiste el empate tras los méritos, se acude a:", "o": ["La edad del funcionario", "La fecha de ingreso como funcionario de carrera en el cuerpo desde el que se concursa y, en su defecto, al número obtenido en el proceso selectivo", "El sorteo público", "La antigüedad total en la Administración"], "c": 1, "e": "Art. 44.4 RD 364/1995."},
+{"u": 2, "t": "Las comisiones de valoración de los concursos están constituidas:", "o": ["Por un número impar de miembros", "Como mínimo por cuatro miembros designados por la autoridad convocante", "Por tres miembros", "Por cinco funcionarios designados por la Administración y dos representantes de las organizaciones sindicales"], "c": 1, "e": "Art. 46.1 RD 364/1995."},
+{"u": 2, "t": "El número de representantes sindicales en la comisión de valoración:", "o": ["Debe ser igual al de los miembros designados por la Administración, para garantizar la paridad en la valoración", "No puede ser igual o superior al de los miembros designados a propuesta de la Administración", "Es libre", "Debe ser mayoritario"], "c": 1, "e": "Art. 46.1 RD 364/1995."},
+{"u": 2, "t": "El plazo para resolver el concurso es, salvo otro en la convocatoria, de:", "o": ["Un mes", "Dos meses desde el día siguiente al fin del plazo de solicitudes", "Tres meses desde la publicación de la convocatoria en el BOE, prorrogables por otros tres", "Seis meses"], "c": 1, "e": "Art. 47.1 RD 364/1995."},
+{"u": 2, "t": "El cese en el puesto de origen tras un concurso debe producirse en:", "o": ["Un mes", "Los tres días hábiles siguientes a la publicación de la resolución en el BOE", "Quince días naturales", "Diez días hábiles"], "c": 1, "e": "Art. 48.1 RD 364/1995."},
+{"u": 2, "t": "El subsecretario del departamento de origen puede diferir el cese por necesidades del servicio hasta:", "o": ["Diez días hábiles", "Veinte días hábiles", "Un mes", "Tres meses, sin necesidad de autorización de la Secretaría de Estado"], "c": 1, "e": "Art. 48.2 RD 364/1995."},
+{"u": 2, "t": "La toma de posesión tras un concurso que implica cambio de residencia es de:", "o": ["Tres días hábiles", "Quince días naturales", "Un mes", "Dos meses"], "c": 2, "e": "Art. 48.1 RD 364/1995."},
+{"u": 2, "t": "El funcionario que obtuvo su puesto por concurso puede ser removido por:", "o": ["Pérdida de confianza", "Alteración del contenido del puesto a través de la RPT o rendimiento insuficiente que no comporte inhibición", "Cualquier causa motivada", "Reorganización política"], "c": 1, "e": "Art. 20.1.e Ley 30/1984 y art. 50 RD 364/1995."},
+{"u": 2, "t": "En el procedimiento de remoción, el interesado puede alegar en:", "o": ["Tres días hábiles", "Diez días hábiles", "Quince días naturales", "Un mes"], "c": 1, "e": "Art. 50.2 RD 364/1995."},
+{"u": 3, "t": "Según el art. 51.2 del Real Decreto 364/1995, pueden cubrirse por libre designación:", "o": ["Todos los puestos de nivel 26 o superior", "Los puestos de subdirector general, delegados y directores territoriales o provinciales, secretarías de altos cargos y otros directivos o de especial responsabilidad así determinados en la RPT", "Cualquier puesto que decida el ministro", "Solo los de jefe de servicio"], "c": 1, "e": "Art. 51.2 RD 364/1995."},
+{"u": 3, "t": "Si el candidato a un puesto de libre designación está destinado en otro departamento, el informe de este:", "o": ["No es necesario", "Se entiende favorable si no se emite en quince días naturales", "Es vinculante en todo caso, y si es desfavorable impide el nombramiento sin excepción", "Se emite en un mes"], "c": 1, "e": "Art. 54.1 RD 364/1995."},
+{"u": 3, "t": "Los nombramientos de libre designación deben efectuarse en el plazo máximo de:", "o": ["Quince días", "Un mes desde el fin del plazo de solicitudes, prorrogable hasta un mes más", "Dos meses desde la publicación de la convocatoria en el BOE, sin posibilidad de prórroga", "Tres meses"], "c": 1, "e": "Art. 56.1 RD 364/1995."},
+{"u": 3, "t": "El funcionario cesado en un puesto de libre designación es adscrito provisionalmente a un puesto:", "o": ["De cualquier nivel", "No inferior en más de dos niveles al de su grado personal, en el mismo municipio", "Del mismo nivel que el que ocupaba", "No inferior en más de cuatro niveles"], "c": 1, "e": "Art. 58.2 RD 364/1995."},
+{"u": 3, "t": "Tienen la consideración de personal directivo público profesional en la AGE:", "o": ["Los secretarios generales técnicos y los directores generales de cada departamento ministerial", "Los titulares de las subdirecciones generales", "Los jefes de servicio", "Los delegados del Gobierno"], "c": 1, "e": "Art. 123.3 RDL 6/2023."},
+{"u": 3, "t": "El nombramiento del personal directivo público profesional tiene una duración máxima de:", "o": ["Dos años", "Cuatro años", "Cinco años, renovable", "Indefinida, como en la libre designación general, hasta el cese discrecional"], "c": 2, "e": "Art. 127.2 RDL 6/2023."},
+{"u": 3, "t": "En la libre designación de personal directivo público profesional, el plazo de solicitudes es de:", "o": ["Quince días hábiles, con informe del titular del centro y posibilidad de cobertura provisional", "Diez días naturales, sin informes y sin cobertura provisional", "Un mes", "Cinco días hábiles"], "c": 1, "e": "Art. 127.1 RDL 6/2023."},
+{"u": 3, "t": "Para ser nombrado personal directivo público profesional (puesto funcionarial) se requiere ser funcionario de carrera del:", "o": ["Subgrupo A2 o superior", "Subgrupo A1", "Grupo B", "Cualquier grupo con experiencia"], "c": 1, "e": "Art. 126.a RDL 6/2023."},
+{"u": 4, "t": "La adscripción de un funcionario que ocupa con carácter definitivo un puesto no singularizado a otro de igual nivel, complementos y forma de provisión, sin cambio de municipio, es:", "o": ["La reasignación de efectivos como consecuencia de un plan de empleo", "La redistribución de efectivos", "La comisión de servicios", "La adscripción provisional"], "c": 1, "e": "Art. 59 RD 364/1995 (examen 2022)."},
+{"u": 4, "t": "En la reasignación de efectivos, la primera fase se desarrolla en el propio ministerio durante un máximo de:", "o": ["Tres meses, ampliables otros tres por la Secretaría de Estado", "Seis meses", "Un año", "Dos meses"], "c": 1, "e": "Art. 20.1.g Ley 30/1984 y art. 60 RD 364/1995."},
+{"u": 4, "t": "La situación de expectativa de destino tiene una duración máxima de:", "o": ["Seis meses", "Un año, tras el cual se pasa a excedencia forzosa", "Dos años", "Tres años, tras los cuales el funcionario es declarado en excedencia voluntaria por interés particular"], "c": 1, "e": "Art. 29.5 Ley 30/1984."},
+{"u": 4, "t": "En expectativa de destino, el funcionario percibe:", "o": ["Todas sus retribuciones", "Las básicas, el complemento de destino del grado y el 50 % del complemento específico", "Solo las básicas", "El 75 % de todas sus retribuciones, incluido el complemento de productividad del último año"], "c": 1, "e": "Art. 29.5 Ley 30/1984."},
+{"u": 4, "t": "La adscripción provisional procede únicamente en caso de:", "o": ["Urgente necesidad del servicio", "Remoción o cese en un puesto de concurso o libre designación, supresión del puesto o reingreso sin reserva", "Petición del interesado", "Vacante de difícil cobertura"], "c": 1, "e": "Art. 63 RD 364/1995."},
+{"u": 4, "t": "La comisión de servicios tiene una duración máxima de:", "o": ["Seis meses", "Un año prorrogable por otro si el puesto no se ha cubierto con carácter definitivo", "Dos años improrrogables", "Tres años"], "c": 1, "e": "Art. 64.3 RD 364/1995."},
+{"u": 4, "t": "La comisión de servicios de carácter forzoso procede cuando:", "o": ["Lo decide el subsecretario", "Celebrado concurso, la vacante se declara desierta y su provisión es urgente", "El funcionario lo solicita", "Hay un plan de empleo"], "c": 1, "e": "Art. 64.2 RD 364/1995."},
+{"u": 4, "t": "Al funcionario en comisión de servicios:", "o": ["No se le reserva el puesto", "Se le reserva el puesto de trabajo y percibe las retribuciones del puesto que desempeña", "Se le reserva el puesto solo durante el primer año, y en la prórroga pierde la reserva y cobra el puesto de origen", "Cobra las retribuciones de origen"], "c": 1, "e": "Art. 64.6 RD 364/1995."},
+{"u": 4, "t": "La atribución temporal de funciones del art. 66 la acuerda:", "o": ["El ministro", "El subsecretario", "El director general de la Función Pública", "El delegado del Gobierno"], "c": 1, "e": "Art. 66.1 RD 364/1995."},
+{"u": 4, "t": "En la movilidad por motivos de salud, el puesto de destino:", "o": ["Puede tener cualquier nivel", "No puede tener nivel de complemento de destino y específico superior al del puesto de origen", "Debe ser de nivel superior", "Debe estar en otra localidad distinta de la de origen y tener un nivel superior para compensar el traslado"], "c": 1, "e": "Art. 66 bis RD 364/1995 (examen 2019)."},
+{"u": 4, "t": "Según el art. 82.1 TREBEP, el traslado de la víctima de violencia de género:", "o": ["Requiere siempre vacante de necesaria cobertura", "Procede sin necesidad de que sea vacante de necesaria cobertura y tiene la consideración de traslado forzoso", "Es un traslado voluntario sin indemnización, que requiere vacante de necesaria cobertura y dos años de permanencia previa", "Solo procede dentro de la misma localidad"], "c": 1, "e": "Art. 82.1 TREBEP."},
+{"u": 4, "t": "La permuta de destinos entre funcionarios se regula en:", "o": ["El art. 62 de la Ley 30/1984", "El art. 62 de la Ley de Funcionarios Civiles del Estado (Decreto 315/1964)", "El art. 66 del Real Decreto 364/1995, como forma de atribución temporal de funciones entre funcionarios", "El art. 84 del TREBEP"], "c": 1, "e": "Art. 62 LFCE."},
+{"u": 4, "t": "No puede autorizarse una permuta cuando a alguno de los funcionarios le falten para la jubilación forzosa menos de:", "o": ["Cinco años", "Diez años", "Dos años", "Quince años"], "c": 1, "e": "Art. 62.3 LFCE."},
+{"u": 4, "t": "El funcionario que obtiene destino en otra Administración por movilidad queda, respecto de la de origen, en situación de:", "o": ["Excedencia voluntaria", "Servicio en otras Administraciones públicas", "Servicios especiales, con reserva del puesto de origen durante dos años", "Expectativa de destino"], "c": 1, "e": "Art. 84.3 TREBEP."},
+{"u": 5, "t": "Son modalidades de carrera profesional del art. 16.3 TREBEP:", "o": ["Solo la carrera vertical y la promoción interna, porque la carrera horizontal no está prevista en el TREBEP para ninguna Administración", "Carrera horizontal, carrera vertical, promoción interna vertical y promoción interna horizontal", "Carrera administrativa y política", "Ascenso por antigüedad y por mérito"], "c": 1, "e": "Art. 16.3 TREBEP."},
+{"u": 5, "t": "El grado personal se adquiere por el desempeño de puestos del nivel correspondiente durante:", "o": ["Un año", "Dos años continuados o tres con interrupción", "Tres años continuados", "Cinco años"], "c": 1, "e": "Art. 21 Ley 30/1984 y art. 70.2 RD 364/1995 (examen 2019)."},
+{"u": 5, "t": "Los puestos de trabajo de la AGE se clasifican en:", "o": ["24 niveles", "30 niveles", "28 niveles, más dos niveles adicionales para directivos", "20 niveles"], "c": 1, "e": "Art. 70.1 RD 364/1995."},
+{"u": 5, "t": "Un funcionario con grado 20 que ocupa un puesto de nivel 26 consolida, tras dos años continuados:", "o": ["El grado 26", "El grado 22", "El grado 24", "No consolida nada"], "c": 1, "e": "Art. 70.2 RD 364/1995: dos niveles cada dos años si el puesto es superior en más de dos."},
+{"u": 5, "t": "El grado personal se reconoce por:", "o": ["El ministro", "El subsecretario del departamento donde presta servicios", "La Secretaría de Estado de Función Pública, previo informe del Registro Central de Personal", "El Registro Central de Personal"], "c": 1, "e": "Art. 70.11 RD 364/1995."},
+{"u": 5, "t": "El intervalo de niveles del subgrupo A2 según la DT 6.ª del Real Decreto-ley 6/2023 es:", "o": ["Del 16 al 26, como el antiguo grupo B del art. 71", "Del 20 al 26", "Del 22 al 28", "Del 24 al 30"], "c": 1, "e": "DT 6.ª RDL 6/2023."},
+{"u": 5, "t": "La adscripción provisional del funcionario removido o cesado no interrumpe la consolidación del grado si dura menos de:", "o": ["Tres meses, transcurridos los cuales pierde todo el tiempo acumulado", "Seis meses", "Un año", "Dos años"], "c": 1, "e": "Art. 70.8 RD 364/1995."},
+{"u": 5, "t": "La carrera horizontal del Real Decreto-ley 6/2023 se organiza en:", "o": ["Seis tramos de cuatro años cada uno, con ascensos no necesariamente consecutivos", "Cuatro tramos, con cinco años en el primero y seis en los siguientes", "Tres tramos de cinco años", "Cinco tramos de cinco años"], "c": 1, "e": "Art. 122.2 RDL 6/2023."},
+{"u": 5, "t": "Los efectos económicos de cada tramo de carrera horizontal se producen:", "o": ["Desde la solicitud", "A partir del 1 de enero del año siguiente", "Desde la resolución", "Al cabo de seis meses desde la resolución que reconoce el tramo"], "c": 1, "e": "Art. 122.6.b RDL 6/2023."},
+{"u": 6, "t": "La evaluación del desempeño en la Administración del Estado es:", "o": ["Voluntaria y bienal", "Anual y obligatoria para todo el personal en servicio activo o asimilado", "Solo para directivos", "Trienal"], "c": 1, "e": "Arts. 116 y 117 RDL 6/2023."},
+{"u": 6, "t": "Una vez validado el modelo, las evaluaciones del desempeño no tienen consecuencias durante:", "o": ["El primer año, salvo que la evaluación sea negativa, en cuyo caso produce efectos inmediatos", "Las dos primeras anualidades tras su implementación", "Tres años", "Seis meses"], "c": 1, "e": "Art. 120.2 RDL 6/2023."},
+{"u": 6, "t": "En la evaluación del desempeño, la conducta profesional:", "o": ["Se presume negativa hasta que el evaluado acredite lo contrario con el informe de su superior jerárquico", "Se presume positiva salvo valoración negativa expresa y motivada", "No se valora", "Solo se valora si hay sanción"], "c": 1, "e": "Art. 118.3 RDL 6/2023."},
+{"u": 6, "t": "Para participar en promoción interna, el art. 18 TREBEP exige una antigüedad de al menos:", "o": ["Un año", "Dos años de servicio activo en el subgrupo inferior", "Tres años", "Cinco años"], "c": 1, "e": "Art. 18.2 TREBEP (examen 2024)."},
+{"u": 6, "t": "En el concurso-oposición de promoción interna, la puntuación de la fase de concurso:", "o": ["Se suma a la de la fase de oposición para superar cada uno de sus ejercicios eliminatorios", "Nunca puede aplicarse para superar los ejercicios de la fase de oposición", "Sustituye a la oposición", "Es eliminatoria"], "c": 1, "e": "Art. 74.2 RD 364/1995."},
+{"u": 6, "t": "En las convocatorias mixtas, las plazas de promoción interna que quedan desiertas:", "o": ["Se pierden", "Se acumulan a las de acceso libre", "Se convocan de nuevo por promoción interna en la siguiente oferta de empleo público", "Pasan a interinos"], "c": 1, "e": "Art. 79 RD 364/1995."},
+{"u": 6, "t": "Para promocionar del subgrupo C2 al C1, la titulación puede sustituirse por:", "o": ["Cinco años de antigüedad", "Diez años de antigüedad en el C2, o cinco años y un curso específico de formación", "Quince años", "Un curso de formación específico, sin necesidad de antigüedad mínima en el cuerpo de origen"], "c": 1, "e": "DA 22.ª Ley 30/1984."},
+{"u": 6, "t": "Los funcionarios de promoción interna tienen, respecto de los del turno libre:", "o": ["Los mismos derechos, sin preferencia alguna, porque la adjudicación se hace solo por puntuación conjunta", "Preferencia para cubrir los puestos vacantes de la convocatoria", "Peor posición en la adjudicación", "Destino provisional obligatorio"], "c": 1, "e": "Art. 78.1 RD 364/1995."},
+{"u": 7, "t": "Antes de contestar un supuesto de provisión, la Comisión espera que escribas:", "o": ["«Salvo mejor criterio, procede»", "«Con carácter previo, procede calificar la situación del funcionario»: cuerpo, grado, nivel y forma y carácter de la ocupación", "La historia de la Ley 30/1984", "Un resumen del TREBEP"], "c": 1, "e": "Calificación previa."},
+{"u": 7, "t": "Funcionaria en puesto definitivo desde el 15/02/2025; concurso de otro ministerio con plazo hasta el 01/12/2026. La conclusión es:", "o": ["Puede participar porque lleva más de un año", "No puede participar: los dos años se cumplen el 15/02/2027", "Puede participar si lo autoriza el subsecretario", "Podríamos entender que puede participar"], "c": 1, "e": "Art. 41.2 RD 364/1995."},
+{"u": 7, "t": "Se propone remover por «pérdida de confianza» a quien obtuvo el puesto por concurso. Se concluye que:", "o": ["Procede, con audiencia", "No procede: solo cabe por alteración del puesto o rendimiento insuficiente", "Procede si lo acuerda el ministro", "Podría entenderse procedente"], "c": 1, "e": "Art. 50 RD 364/1995."},
+{"u": 7, "t": "El enunciado no dice si hubo interrupciones en el desempeño. Lo correcto es:", "o": ["Omitir el cómputo del grado", "«El enunciado no precisa…, por lo que suponemos que no, ya que no se mencionan» y operar el plazo", "Pedir aclaración al tribunal", "«Salvo mejor criterio, no las hubo»"], "c": 1, "e": "Suposición declarada."},
+{"u": 7, "t": "Grado 22 y adscripción provisional tras remoción. Se le garantiza un puesto de nivel:", "o": ["22 o superior, porque nunca puede adscribirse por debajo de su grado consolidado", "20 o superior en el mismo municipio", "18 o superior", "Cualquiera"], "c": 1, "e": "Arts. 50.5 y 72 RD 364/1995."},
+{"u": 7, "t": "La conclusión de cada cuestión se redacta como:", "o": ["«Podría entenderse que…»", "«Por tanto, se concluye que…», con la consecuencia concreta", "«Salvo mejor criterio fundado en Derecho», seguida de la cita literal del artículo aplicado", "Una pregunta abierta"], "c": 1, "e": "Conclusión afirmativa."}
+];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildPool(){
+  return BANK.map((q,k)=>{
+    const idx=shuffle([0,1,2,3]);
+    return{k,u:q.u,t:q.t,opts:idx.map(i=>q.o[i]),correct:idx.indexOf(q.c),e:q.e};
+  });
+}
+let pool=buildPool();
+const UNITS=[1,2,3,4,5];
+const UNAMES={1:"Marco normativo",2:"El concurso",3:"Libre designación y directivos",4:"Otras formas de provisión y movilidad",5:"Grado y carrera",6:"Evaluación y promoción interna",7:"Supuesto práctico"};
+const TABS={1:"Marco",2:"Concurso",3:"Libre designación",4:"Movilidad",5:"Grado y carrera",6:"Evaluación y PI",7:"Supuesto"};
+const SK="gace27_bv_t04_test_v1";
+let state={unit:0,mode:"all"};
+let db=(()=>{try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{records:{}};}catch(e){return{records:{}};}})();
+function save(){try{localStorage.setItem(SK,JSON.stringify(db));}catch(e){}}
+function rec(k){if(!db.records[k])db.records[k]={ok:0,fail:0};return db.records[k];}
+function pct(k){const r=rec(k),t=r.ok+r.fail;return t===0?-1:Math.round(r.ok/t*100);}
+function ustat(u){
+  const idxs=pool.filter(p=>p.u===u).map(p=>p.k);
+  let ok=0,fail=0;
+  idxs.forEach(k=>{const r=rec(k);ok+=r.ok;fail+=r.fail;});
+  const ans=idxs.filter(k=>rec(k).ok+rec(k).fail>0).length;
+  return{total:idxs.length,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):-1};
+}
+function gstat(){
+  let ok=0,fail=0,ans=0;
+  pool.forEach(p=>{const r=rec(p.k);ok+=r.ok;fail+=r.fail;if(r.ok+r.fail>0)ans++;});
+  return{total:pool.length,ok,fail,answered:ans,pct:ok+fail>0?Math.round(ok/(ok+fail)*100):0};
+}
+function adaptive(unit){
+  let items=unit>0?pool.filter(p=>p.u===unit):pool;
+  return items.map(p=>{
+    const r=rec(p.k),t=r.ok+r.fail;
+    let w=t===0?2:(r.ok/t<0.5?4:r.ok/t<0.75?3:r.ok/t<1?2:0.3);
+    return{...p,w:w+Math.random()*0.1};
+  }).sort((a,b)=>b.w-a.w).slice(0,20);
+}
+function filtered(){
+  let items=state.unit>0?pool.filter(p=>p.u===state.unit):pool;
+  if(state.mode==="fail")items=items.filter(p=>rec(p.k).fail>0);
+  if(state.mode==="adaptive")items=adaptive(state.unit);
+  return items;
+}
+function renderNav(){
+  const tabs=[{v:0,l:"Todo el tema"},...UNITS.map(u=>({v:u,l:TABS[u]}))];
+  document.getElementById("nav").innerHTML=tabs.map(t=>`<button class="nb${state.unit==t.v?" active":""}" onclick="setUnit(${t.v})">${t.l}</button>`).join("");
+}
+function renderStats(){
+  const g=gstat();
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><div class="stat-n">${g.answered}/${g.total}</div><div class="stat-l">Respondidas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#0f6e56">${g.ok}</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n" style="color:#a32d2d">${g.fail}</div><div class="stat-l">Erróneas</div></div>
+    <div class="stat"><div class="stat-n">${g.pct}%</div><div class="stat-l">% acierto</div></div>`;
+  document.getElementById("prog").style.width=g.pct+"%";
+}
+function renderUBars(){
+  document.getElementById("ubars").innerHTML=UNITS.map(u=>{
+    const s=ustat(u);
+    const p=s.pct<0?0:s.pct;
+    const col=s.pct<0?"#b4b2a9":s.pct<50?"#e24b4a":s.pct<75?"#ef9f27":"#1d9e75";
+    return`<div class="ubar" onclick="setUnit(${u})"><div class="ubar-title">${UNAMES[u]}</div><div class="ubar-track"><div class="ubar-fill" style="width:${p}%;background:${col}"></div></div><div class="ubar-pct">${s.pct<0?"sin datos":s.pct+"%"} · ${s.answered}/${s.total}</div></div>`;
+  }).join("");
+}
+function renderCtrl(){
+  document.getElementById("ctrl").innerHTML=`
+    <button class="btn${state.mode==="all"?" active":""}" onclick="setMode('all')">Todas</button>
+    <button class="btn${state.mode==="fail"?" active":""}" onclick="setMode('fail')">Solo erróneas</button>
+    <button class="btn${state.mode==="adaptive"?" active":""}" onclick="setMode('adaptive')">🎯 Top 20 adaptativo</button>
+    <button class="btn" onclick="reShuf()" title="Volver a barajar las opciones">🔀 Barajar</button>
+    <button class="btn danger" onclick="resetAll()" style="margin-left:auto">Reiniciar historial</button>`;
+}
+function resetAll(){
+  const b=document.querySelector(".btn.danger");
+  if(b.dataset.armed){db={records:{}};save();renderAll();return;}
+  b.dataset.armed="1";b.textContent="Pulsa otra vez para borrar";
+  setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="Reiniciar historial";}},3000);
+}
+function renderQuestions(){
+  const items=filtered();
+  if(!items.length){document.getElementById("questions").innerHTML=`<div class="empty">No hay preguntas en este filtro. Si eliges «Solo erróneas», aparecerán aquí las que hayas fallado alguna vez.</div>`;return;}
+  let prev=null,html="";
+  items.forEach(p=>{
+    if(state.unit===0&&state.mode!=="adaptive"&&p.u!==prev){html+=`<div class="sep">${UNAMES[p.u]}</div>`;prev=p.u;}
+    const r=rec(p.k),pc=pct(p.k);
+    const badge=pc<0?"":
+      `<span class="qpct" style="background:${pc>=75?"#eaf3de":pc>=50?"#faeeda":"#fcebeb"};color:${pc>=75?"#0f6e56":pc>=50?"#854f0b":"#a32d2d"}">${pc}% (${r.ok+r.fail}v)</span>`;
+    html+=`<div class="qcard" id="qc-${p.k}">
+      <div class="qhead"><span class="qbadge">${UNAMES[p.u]}</span><div class="qmeta">${badge}<span class="qnum">#${p.k+1}</span></div></div>
+      <div class="qtext">${p.t}</div>
+      <div class="opts">${p.opts.map((o,i)=>`<button class="opt" id="o-${p.k}-${i}" onclick="answer(${p.k},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}</div>
+      <div id="ex-${p.k}"></div>
+    </div>`;
+  });
+  document.getElementById("questions").innerHTML=html;
+}
+function answer(k,chosen){
+  const p=pool[k],ok=chosen===p.correct,r=rec(k);
+  if(ok)r.ok++;else r.fail++;
+  save();
+  document.getElementById("qc-"+k).classList.add(ok?"ok":"fail");
+  for(let i=0;i<p.opts.length;i++){
+    const b=document.getElementById("o-"+k+"-"+i);
+    b.disabled=true;
+    if(i===p.correct)b.classList.add("c-ok");
+    if(i===chosen&&!ok)b.classList.add("c-fail");
+  }
+  document.getElementById("ex-"+k).innerHTML=`<div class="exp"><strong style="color:${ok?"#0f6e56":"#a32d2d"}">${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${p.e}</div>`;
+  renderStats();renderUBars();
+}
+function setUnit(u){state.unit=parseInt(u);renderAll();}
+function setMode(m){state.mode=m;renderCtrl();renderQuestions();}
+function reShuf(){pool=buildPool();renderAll();}
+function renderAll(){renderNav();renderStats();renderUBars();renderCtrl();renderQuestions();}
+renderAll();
+
+</script>
+</body>
+</html>
