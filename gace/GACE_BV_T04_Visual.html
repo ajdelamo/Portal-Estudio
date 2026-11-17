@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BV · Tema 4 — Provisión de puestos, movilidad, promoción interna y carrera (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tablewrap table{break-inside:auto}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque V · Administración de Recursos Humanos · Tema 4</small>
+    <h1>Formas de provisión de puestos de trabajo y movilidad en la Administración del Estado. Promoción interna y carrera profesional</h1>
+    <p>Versión fusionada: el Tema 4 del Bloque V del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas contra el texto consolidado del BOE y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 17/11/2026 · TREBEP consolidado (DF 4.ª) · Ley 30/1984 (art. 20) · Real Decreto 364/1995 · Real Decreto-ley 6/2023 (arts. 116 a 127 y DT 6.ª) · Ley 40/2015 (art. 63)</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">Marco normativo: qué está en vigor</a></li>
+    <li><a href="#s2">El concurso</a></li>
+    <li><a href="#s3">La libre designación y el personal directivo</a></li>
+    <li><a href="#s4">Otras formas de provisión y movilidad</a></li>
+    <li><a href="#s5">La carrera profesional y el grado personal</a></li>
+    <li><a href="#s6">Carrera horizontal y evaluación del desempeño</a></li>
+    <li><a href="#s7">La promoción interna</a></li>
+    <li><a href="#s8">Lo que preguntan y trampas</a></li>
+    <li><a href="#s9">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s10">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. Es el tema de los plazos encadenados: 2 años para concursar, 15 días hábiles para pedir, 2 meses para resolver, 3 días para cesar y 3 días o un mes para tomar posesión; 1 + 1 años de comisión; 6 + 3 meses + 1 año de reasignación.</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Al terminar, recita sin mirar la escalera de la reasignación, las garantías del removido y del cesado (no más de dos niveles por debajo del grado, mismo municipio) y las reglas del grado personal.</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s9">apartado 9</a> tapando la columna derecha. Los supuestos de este tema preguntan si alguien puede concursar, si se le puede remover o cesar y qué puesto y grado le quedan.</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> Marco normativo: qué está en vigor</h2>
+<p>La <strong>provisión de puestos</strong> es el conjunto de procedimientos por los que los funcionarios de carrera obtienen destino en un puesto concreto de la RPT. No hay que confundirla con el <strong>acceso</strong>: el acceso da la condición de funcionario; la provisión asigna un puesto a quien ya la tiene.</p>
+<div class="box clave"><span class="box-h">La clave del tema: disposición final cuarta del TREBEP</span>
+El <strong>capítulo III del título V</strong> del TREBEP (arts. 78 a 84, provisión y movilidad) y los <strong>capítulos II y III del título III</strong> (carrera profesional y retribuciones, salvo el art. 25.2) solo producen efectos a partir de la entrada en vigor de las <strong>leyes de función pública</strong> que los desarrollen. Mientras tanto se mantienen las normas vigentes que no se opongan al Estatuto (DF 4.ª.2).<br>
+En la AGE la provisión se rige materialmente por el <strong>art. 20 de la Ley 30/1984</strong> y el <strong>título III del Real Decreto 364/1995</strong>. El <strong>Real Decreto-ley 6/2023</strong> sí se aplica directamente en evaluación del desempeño, carrera horizontal (pendientes de desarrollo reglamentario), personal directivo e intervalos de niveles.</div>
+<div class="box fix"><span class="box-h">Precisión al temario 2026</span>El temario presenta los arts. 78 a 84 del TREBEP como «regulación básica» de la provisión sin advertir que su eficacia está condicionada por la disposición final cuarta. Se estudian (y se preguntan, como el art. 81.3 en el examen de 2022), pero en un supuesto de la AGE el precepto que aplicas es el de la Ley 30/1984 y el Real Decreto 364/1995.</div>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Tipo</th><th>Formas (art. 36 del Real Decreto 364/1995)</th></tr>
+<tr><td><strong>Ordinarias, definitivas</strong></td><td><strong>Concurso</strong> (sistema normal) y <strong>libre designación</strong>, según lo que diga la RPT.</td></tr>
+<tr><td><strong>Por necesidades del servicio, definitivas</strong></td><td>Redistribución de efectivos y reasignación como consecuencia de un plan de empleo; movilidad por cambio de adscripción del puesto.</td></tr>
+<tr><td><strong>Temporales</strong></td><td>Comisión de servicios y adscripción provisional.</td></tr>
+<tr><td><strong>Otras movilidades</strong></td><td>Permuta · salud o rehabilitación · violencia de género, sexual o terrorista · interadministrativa · traslado por necesidades del servicio.</td></tr>
+</table></div>
+<p>Principios: igualdad, mérito, capacidad y publicidad (art. 78.1 TREBEP). Convocatorias y resoluciones se publican en el <strong>BOE</strong> (art. 38 del Real Decreto 364/1995), y los ceses y tomas de posesión se comunican al Registro Central de Personal en <strong>tres días hábiles</strong> (art. 37). En caso de urgente e inaplazable necesidad, los puestos pueden proveerse con carácter provisional, debiendo convocarse después (art. 81.3 TREBEP, examen 2022).</p>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> El concurso (art. 20.1.a Ley 30/1984, art. 79 TREBEP y arts. 39 a 50 del Real Decreto 364/1995)</h2>
+<p>Es el <strong>sistema normal</strong>: valoración de los méritos y capacidades y, en su caso, aptitudes por <strong>órganos colegiados de carácter técnico</strong>, con profesionalidad, especialización, paridad, imparcialidad y objetividad (art. 79.1 TREBEP). Discrecionalidad técnica, controlable judicialmente.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Aspecto</th><th>Régimen</th></tr>
+<tr><td>Autorización</td><td>La <strong>Secretaría de Estado de Función Pública</strong>, a iniciativa de los departamentos (art. 39).</td></tr>
+<tr><td>Convocatoria y resolución</td><td>Cada ministerio (art. 40); en concreto, el <strong>subsecretario</strong> (art. 63.1.n Ley 40/2015). En los organismos, el órgano que fijen sus estatutos.</td></tr>
+<tr><td>Contenido de la convocatoria</td><td>Denominación, nivel, descripción y localización de los puestos; requisitos; méritos y baremo; memorias o entrevistas; composición de la comisión; <strong>puntuación mínima</strong> para adjudicar (art. 44.6).</td></tr>
+<tr><td>Quién participa</td><td>Funcionarios en cualquier situación, salvo los <strong>suspensos en firme</strong>, que reúnan los requisitos al terminar el plazo de solicitudes (art. 41.1). Cabe la <strong>petición condicionada</strong> de dos funcionarios por convivencia familiar (41.3).</td></tr>
+<tr><td>Permanencia mínima</td><td><strong>Dos años</strong> en el puesto de destino definitivo, salvo en el ámbito de la misma secretaría de Estado (o del departamento, en su defecto), remoción, cese en libre designación o supresión del puesto (art. 20.1.f Ley 30/1984 y 41.2). Quien accede a otro cuerpo por promoción interna y sigue en el mismo puesto suma el tiempo.</td></tr>
+<tr><td>Solicitudes</td><td><strong>15 días hábiles</strong> desde el día siguiente a la publicación en el BOE (art. 42).</td></tr>
+<tr><td>Resolución</td><td><strong>Dos meses</strong> desde el día siguiente al fin del plazo de solicitudes, salvo otro en la convocatoria (art. 47); motivada.</td></tr>
+<tr><td>Destinos</td><td><strong>Irrenunciables</strong>, salvo que antes de acabar el plazo de toma de posesión se obtenga otro por convocatoria pública; voluntarios, sin indemnización (art. 49).</td></tr>
+</table></div>
+<h3>2.1 Méritos (art. 44)</h3>
+<div class="grid2">
+<div class="card"><h4>Obligatorios (44.1)</h4><ul>
+<li><strong>Grado personal</strong> consolidado, en sentido positivo según su posición en el intervalo.</li>
+<li><strong>Trabajo desarrollado</strong>: permanencia en puestos de cada nivel, experiencia en el área funcional, similitud de contenido; aptitudes y rendimientos.</li>
+<li><strong>Cursos</strong> de formación incluidos en la convocatoria, relacionados con el puesto.</li>
+<li><strong>Antigüedad</strong> por años de servicio, incluidos los previos reconocidos; sin servicios simultáneos.</li>
+<li>Méritos <strong>específicos</strong> adecuados al puesto.</li></ul></div>
+<div class="card"><h4>Conciliación (44.2), hasta la puntuación de la antigüedad</h4><ul>
+<li><strong>Destino previo del cónyuge</strong> funcionario en el municipio, si se viene de otro.</li>
+<li><strong>Cuidado de hijos</strong> hasta que cumplan <strong>12 años</strong>.</li>
+<li><strong>Cuidado de un familiar</strong> hasta el segundo grado que no pueda valerse, sin actividad retribuida, viniendo de otro municipio. Incompatible con el de hijos.</li>
+<li>Víctimas del terrorismo o amenazados (art. 79.3 TREBEP).</li></ul></div>
+</div>
+<p>Cada concepto puntúa entre el <strong>10 %</strong> y el <strong>40 %</strong> del total (44.3). <strong>Desempate</strong>: puntuación en los méritos del 44.1 por su orden (grado, trabajo, cursos, antigüedad); después, <strong>fecha de ingreso</strong> como funcionario de carrera en el cuerpo desde el que se concursa; y, en último término, el <strong>número obtenido en el proceso selectivo</strong> (44.4).</p>
+<div class="box fix"><span class="box-h">Precisión al material visual</span>El visual daba como segundo criterio de desempate la «mayor antigüedad». El art. 44.4 dice la <strong>fecha de ingreso en el cuerpo o escala desde el que se concursa</strong>, que no es lo mismo que la antigüedad total.</div>
+<h3>2.2 Concurso general y concurso específico (art. 45)</h3>
+<p>El concurso <strong>general u ordinario</strong> tiene una sola fase. El <strong>específico</strong>, para puestos que lo requieran, tiene <strong>dos fases</strong>: en la primera, los méritos generales; en la segunda, los <strong>méritos específicos</strong>, con <strong>memoria</strong> o <strong>entrevista</strong> si lo prevé la convocatoria. Se fijan puntuaciones máximas y mínimas de ambas fases. La puntuación es la media de los miembros de la comisión, desechando la máxima y la mínima. La propuesta recae en quien sume más entre las dos fases.</p>
+<h3>2.3 Comisiones de valoración (art. 46)</h3>
+<ul>
+<li>Como <strong>mínimo cuatro miembros</strong> designados por la autoridad convocante; al menos uno a propuesta del centro directivo de personal y, en el específico, otro del centro al que estén adscritos los puestos. Puede haber uno de la Secretaría de Estado de Función Pública.</li>
+<li>Derecho a participar de las <strong>organizaciones sindicales más representativas</strong> y de las que tengan más del 10 % de representantes; su número <strong>no puede igualar ni superar</strong> el de los miembros propuestos por la Administración.</li>
+<li>Miembros de cuerpos de grupo de titulación <strong>igual o superior</strong> al de los puestos; en el específico, además, grado o puesto de nivel igual o superior. Pueden contar con asesores con voz y sin voto.</li>
+</ul>
+<div class="box fix"><span class="box-h">Corrección al temario 2026</span>El temario dice que las comisiones de valoración están constituidas por «un número impar de miembros». El art. 46 del Real Decreto 364/1995 no exige número impar: exige <strong>como mínimo cuatro</strong> miembros, y que los sindicales no igualen a los de la Administración. El número impar es la regla de los <strong>tribunales de selección</strong> (art. 11, Tema 3).</div>
+<h3>2.4 Cese y toma de posesión (art. 48)</h3>
+<div class="flowv">
+<div class="step"><b>Cese en el puesto de origen</b>En los <strong>tres días hábiles</strong> siguientes a la publicación de la resolución en el BOE. El subsecretario del departamento de origen puede <strong>diferirlo hasta 20 días hábiles</strong>; excepcionalmente, la Secretaría de Estado de Función Pública, hasta <strong>tres meses</strong> en total.</div>
+<div class="step"><b>Toma de posesión</b><strong>Tres días hábiles</strong> si no hay cambio de residencia; <strong>un mes</strong> si lo hay o si supone reingreso al servicio activo. Se cuenta desde el día siguiente al cese (desde la publicación, si es reingreso). El subsecretario del nuevo destino puede conceder una <strong>prórroga de incorporación</strong> de hasta 20 días hábiles si hay cambio de residencia y razones justificadas.</div>
+<div class="step"><b>Efectos</b>El plazo posesorio es servicio activo, salvo el reingreso desde excedencia voluntaria o por cuidado de hijos pasado el primer año. Los plazos empiezan a contar al acabar los permisos o licencias concedidos.</div>
+</div>
+<div class="box trampa"><span class="box-h">Trampa: dos regímenes de toma de posesión</span>Tras un <strong>concurso o libre designación</strong>: 3 días hábiles o 1 mes (art. 48 del Real Decreto 364/1995). Tras <strong>superar un proceso selectivo</strong>: 15 días naturales o 1 mes (art. 114.12 del Real Decreto-ley 6/2023, Tema 3).</div>
+<h3>2.5 Remoción del puesto obtenido por concurso (art. 20.1.e Ley 30/1984 y art. 50)</h3>
+<p>Solo por <strong>causas sobrevenidas</strong>: a) <strong>alteración del contenido</strong> del puesto a través de la RPT que modifique los supuestos de la convocatoria; o b) <strong>falta de capacidad</strong> manifestada por <strong>rendimiento insuficiente</strong> que no comporte inhibición. Procedimiento: propuesta motivada del titular del centro directivo o del delegado del Gobierno → <strong>10 días hábiles</strong> de alegaciones → parecer de la <strong>Junta de Personal</strong> en 10 días hábiles → nueva audiencia si cambia la propuesta → resolución motivada del órgano que nombró, que pone fin a la vía administrativa. El removido pasa a desempeñar provisionalmente un puesto de su cuerpo, en el <strong>mismo municipio</strong>, <strong>no inferior en más de dos niveles</strong> a su grado personal. El TREBEP vincula además la continuidad en el puesto de concurso a la evaluación del desempeño (art. 20.4).</p>
+<h3>2.6 Concursos unitarios abiertos y permanentes (art. 111 del Real Decreto-ley 6/2023)</h3>
+<p>La Secretaría de Estado de Función Pública, con los departamentos, convoca concursos unitarios abiertos y permanentes para cubrir plazas de necesaria cobertura y ordenar la movilidad. El sistema ya funcionaba para el personal laboral en el IV Convenio Único, donde para participar se exige una permanencia mínima en el último puesto obtenido con carácter definitivo (examen 2019).</p>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> La libre designación y el personal directivo</h2>
+<p><strong>Apreciación discrecional</strong> de la idoneidad de los candidatos por el órgano competente (art. 80.1 TREBEP). Es <strong>excepcional y restrictiva</strong>: solo para <strong>subdirectores generales</strong>, delegados y directores territoriales, provinciales o comisionados, <strong>secretarías de altos cargos</strong> y puestos directivos o de especial responsabilidad así calificados en la RPT (art. 20.1.b Ley 30/1984 y art. 51.2).</p>
+<div class="tablewrap"><table>
+<tr><th style="width:28%">Trámite</th><th>Régimen (arts. 51 a 58 del Real Decreto 364/1995)</th></tr>
+<tr><td>Competencia</td><td>Los ministros y secretarios de Estado (art. 51.1); el subsecretario nombra y cesa al «resto del personal de libre designación» del departamento (art. 63.1.l Ley 40/2015).</td></tr>
+<tr><td>Convocatoria</td><td>Pública, en el BOE, con descripción y requisitos del puesto.</td></tr>
+<tr><td>Solicitudes</td><td><strong>15 días hábiles</strong>.</td></tr>
+<tr><td>Informes</td><td>Previo del titular del centro u órgano al que esté adscrito el puesto. Si el candidato está en <strong>otro departamento</strong>, informe favorable de este: si no se emite en <strong>15 días naturales</strong> se entiende favorable, y si es desfavorable puede nombrarse con autorización de la Secretaría de Estado de Función Pública (art. 54).</td></tr>
+<tr><td>Nombramiento</td><td>En <strong>un mes</strong> desde el fin del plazo de solicitudes, prorrogable <strong>un mes</strong> más; motivado por el cumplimiento de requisitos y la competencia (art. 56).</td></tr>
+<tr><td>Toma de posesión</td><td>Como en el concurso (art. 57): 3 días hábiles o 1 mes.</td></tr>
+<tr><td>Cese</td><td><strong>Discrecional</strong>, motivado solo por la competencia (art. 58). El cesado queda adscrito provisionalmente a un puesto de su cuerpo <strong>no inferior en más de dos niveles</strong> a su grado, en el <strong>mismo municipio</strong> (salvo destinos en el exterior), desde el día siguiente al cese.</td></tr>
+</table></div>
+<div class="box act"><span class="box-h">Personal directivo público profesional (arts. 123 a 127 del Real Decreto-ley 6/2023 y Orden TDF/379/2024)</span>
+Son directivos los <strong>subdirectores generales</strong> (art. 67 Ley 40/2015) y las unidades periféricas asimiladas; los subdirectores adjuntos son <strong>predirectivos</strong>. Requisitos: funcionario de carrera del <strong>subgrupo A1</strong> (de cualquier Administración), experiencia y formación del perfil. Se nombran y cesan siempre por <strong>libre designación</strong>, con estas especialidades: solicitudes en <strong>10 días naturales</strong> con justificación escrita de la idoneidad; <strong>sin informes</strong> del art. 20 de la Ley 30/1984; <strong>sin cobertura provisional</strong>; duración máxima de <strong>cinco años</strong>, renovable si no hay evaluaciones negativas. Causas de cese tasadas y motivadas: fin del plazo, petición propia, evaluación negativa, supresión o reorganización, separación o despido, pérdida de requisitos y, <strong>excepcionalmente, pérdida de la confianza</strong>. Repertorio de puestos directivos independiente de la RPT. No se aplica a quienes ya ocupaban esos puestos al entrar en vigor el Real Decreto-ley, mientras sigan en ellos (DT 8.ª).</div>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> Otras formas de provisión y movilidad</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Figura</th><th>Supuesto y régimen</th></tr>
+<tr><td><strong>Redistribución de efectivos</strong> (art. 59)</td><td>Por necesidades del servicio, el funcionario que ocupa con carácter <strong>definitivo</strong> un puesto <strong>no singularizado</strong> pasa a otro de la misma naturaleza, nivel de complemento de destino y específico y forma de provisión, <strong>sin cambio de municipio</strong>. El nuevo puesto también es definitivo, y el cómputo de los dos años para concursar sigue desde el puesto anterior (examen 2022). La acuerdan la Secretaría de Estado (entre departamentos), el subsecretario (en su departamento), los presidentes de organismos o los delegados del Gobierno.</td></tr>
+<tr><td><strong>Reasignación de efectivos</strong> (art. 20.1.g Ley 30/1984 y art. 60)</td><td>Cuando un <strong>plan de empleo</strong> suprime el puesto, con criterios objetivos. <strong>1.ª fase</strong>: el propio ministerio, en <strong>seis meses</strong>. <strong>2.ª fase</strong>: la Secretaría de Estado de Función Pública, en <strong>tres meses</strong>, en otros departamentos. En ambas, obligatoria en el mismo municipio y voluntaria en otro, cobrando las retribuciones del puesto suprimido. <strong>3.ª fase</strong>: <strong>expectativa de destino</strong>, adscrito al ministerio de función pública, con retribuciones básicas, complemento de destino del grado y 50 % del específico, máximo <strong>un año</strong>; después, <strong>excedencia forzosa</strong> (art. 29.5 y 29.6 Ley 30/1984). Indemnización si cambia la residencia. El puesto reasignado es definitivo.</td></tr>
+<tr><td><strong>Cambio de adscripción</strong> (art. 61)</td><td>Los puestos no singularizados y sus titulares pueden adscribirse a otras unidades; con cambio de municipio, solo con su conformidad.</td></tr>
+<tr><td><strong>Adscripción provisional</strong> (art. 63)</td><td>Solo en tres supuestos: a) <strong>remoción o cese</strong> en un puesto de concurso o libre designación; b) <strong>supresión</strong> del puesto (examen 2022); c) <strong>reingreso</strong> sin reserva de puesto. No hay reserva de puesto. El puesto se convoca y el adscrito debe participar (art. 72.2); en el reingreso, en el plazo máximo de un año (art. 62.2).</td></tr>
+<tr><td><strong>Comisión de servicios</strong> (art. 64)</td><td>Puesto <strong>vacante</strong> con <strong>urgente e inaplazable necesidad</strong>: voluntaria, con quien reúna los requisitos. <strong>Forzosa</strong> si el concurso queda <strong>desierto</strong> y la cobertura es urgente (funcionario del mismo departamento, municipio más próximo, menores cargas familiares y, a igualdad, menor antigüedad). Máximo <strong>un año prorrogable por otro</strong> si no se ha cubierto el puesto. Cese y toma de posesión: 3 días sin cambio de residencia; 8 días (voluntaria) o 30 (forzosa) con cambio. Se <strong>reserva el puesto</strong> de origen y se cobra el puesto desempeñado. El puesto se incluye en la siguiente convocatoria.</td></tr>
+<tr><td><strong>Misiones de cooperación internacional</strong> (art. 65)</td><td>Comisión acordada por el subsecretario, en principio no superior a seis meses.</td></tr>
+<tr><td><strong>Atribución temporal de funciones</strong> (art. 66)</td><td>Excepcional, por el subsecretario: funciones especiales no asignadas a puestos de la RPT o tareas que por su volumen temporal no puedan atender los titulares. Se cobran las retribuciones del propio puesto y las indemnizaciones.</td></tr>
+<tr><td><strong>Salud o rehabilitación</strong> (art. 20.1.h Ley 30/1984 y art. 66 bis)</td><td>A petición, por salud o rehabilitación del funcionario, su cónyuge o hijos a cargo; informe del servicio médico oficial (y del de prevención si afecta al propio funcionario). Puesto <strong>vacante</strong>, dotado, de necesaria provisión, con nivel de destino y específico <strong>no superior</strong> al de origen (examen 2019). Definitiva si el origen lo era, con dos años de permanencia. Cese y posesión: 3 días hábiles o 1 mes.</td></tr>
+<tr><td><strong>Violencia de género o sexual</strong> (art. 82.1 TREBEP; art. 20.1.i Ley 30/1984 y art. 66 ter)</td><td>La funcionaria que deba abandonar su puesto para su protección o asistencia social integral tiene derecho al traslado a otro puesto de su cuerpo de análogas características. Acreditación: orden de protección o, hasta que se dicte, informe del Ministerio Fiscal. <strong>Traslado forzoso</strong> si cambia la residencia. Se protege la intimidad de la víctima.</td></tr>
+<tr><td><strong>Víctimas del terrorismo</strong> (art. 82.2 TREBEP)</td><td>Traslado a puesto de análogas características cuando la vacante sea de necesaria cobertura o, si no, dentro de la comunidad autónoma, previo reconocimiento del Ministerio del Interior o sentencia firme. Traslado forzoso.</td></tr>
+<tr><td><strong>Permuta</strong> (art. 62 de la Ley de Funcionarios Civiles de 1964)</td><td>Autorización excepcional del subsecretario (o del órgano superior si son ministerios distintos): puestos de <strong>igual naturaleza y forma de provisión</strong>; años de servicio que no difieran en más de <strong>cinco</strong>; informe previo de los jefes. No cabe otra permuta en <strong>diez años</strong>, ni si a alguno le faltan menos de <strong>diez años</strong> para la jubilación forzosa. Se anula si uno se jubila voluntariamente en los <strong>dos años</strong> siguientes.</td></tr>
+<tr><td><strong>Traslado por necesidades del servicio</strong> (art. 20.1.c Ley 30/1984; art. 81.2 TREBEP)</td><td>A otras unidades u organismos, respetando retribuciones, condiciones esenciales y provincia o isla. Con cambio de municipio, indemnización de traslado forzoso.</td></tr>
+<tr><td><strong>Movilidad interadministrativa</strong> (art. 84 TREBEP; arts. 67 a 69)</td><td>Preferentemente por convenio de Conferencia Sectorial. Quien obtiene destino en otra Administración queda en <strong>servicio en otras Administraciones públicas</strong>. Si es cesado en libre designación, la Administración de destino tiene un mes para adscribirle; si no, debe pedir el reingreso en la de origen en un mes. Concursos de comunidades autónomas: dos años de permanencia; comisiones de servicio en comunidades autónomas de hasta <strong>dos años</strong>.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisiones a los dos documentos (violencia de género)</span>El temario y el visual dicen, con el art. 82.1 TREBEP, que el traslado procede «sin necesidad de que sea vacante de necesaria cobertura». Ese artículo está dentro del capítulo afectado por la disposición final cuarta. En la AGE, el art. 20.1.i de la Ley 30/1984 y el art. 66 ter del Real Decreto 364/1995 hablan de un puesto <strong>vacante y de necesaria provisión</strong>, con nivel no superior al de origen y dos años de permanencia si es definitivo. En el test, si citan el TREBEP, la respuesta es «sin necesidad de vacante»; en un supuesto de la AGE, menciona las dos reglas.</div>
+<div class="box fix"><span class="box-h">Corrección al material visual (permuta)</span>El visual situaba la permuta en el «art. 62 LMRFP». Está en el <strong>art. 62 de la Ley de Funcionarios Civiles del Estado</strong> (Decreto 315/1964). Además, el visual omitía que no cabe otra permuta en los diez años siguientes.</div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> La carrera profesional y el grado personal</h2>
+<h3>5.1 Concepto y modalidades (arts. 16 y 17 TREBEP)</h3>
+<p>Los funcionarios de carrera tienen derecho a la <strong>promoción profesional</strong>. La carrera es el <strong>conjunto ordenado de oportunidades de ascenso y expectativas de progreso</strong> profesional conforme a igualdad, mérito y capacidad. Modalidades, aisladas o simultáneas (art. 16.3):</p>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Modalidad</th><th>Contenido</th></tr>
+<tr><td><strong>Carrera horizontal</strong></td><td>Progresión de grado, categoría, escalón u otros conceptos, <strong>sin cambiar de puesto</strong>.</td></tr>
+<tr><td><strong>Carrera vertical</strong></td><td>Ascenso en la estructura de puestos por los procedimientos de <strong>provisión</strong>.</td></tr>
+<tr><td><strong>Promoción interna vertical</strong></td><td>Ascenso a un cuerpo o escala de un <strong>subgrupo superior</strong> (o grupo, si no tiene subgrupos).</td></tr>
+<tr><td><strong>Promoción interna horizontal</strong></td><td>Acceso a cuerpos o escalas del <strong>mismo subgrupo</strong>.</td></tr>
+</table></div>
+<p>Pueden progresar a la vez en horizontal y vertical si la Administración las implanta (16.4). El capítulo II del título III (carrera) solo surte efectos con las leyes de desarrollo (DF 4.ª). Para el <strong>personal laboral</strong>, la carrera se hace efectiva por el Estatuto de los Trabajadores o los convenios (art. 19).</p>
+<h3>5.2 El grado personal (art. 21 Ley 30/1984 y arts. 70 a 72 del Real Decreto 364/1995)</h3>
+<div class="box clave"><span class="box-h">Los puestos tienen nivel; los funcionarios, grado</span>
+Los puestos se clasifican en <strong>30 niveles</strong>. Se adquiere el grado por el desempeño de uno o más puestos del nivel durante <strong>dos años continuados o tres con interrupción</strong> (examen 2019), cualquiera que sea el sistema de provisión. El grado garantiza cobrar, como mínimo, el <strong>complemento de destino</strong> de su nivel (70.12). Lo reconoce el <strong>subsecretario</strong> y se comunica al Registro Central en tres días hábiles (70.11).</div>
+<ul>
+<li><strong>Grado inicial</strong>: necesariamente el del puesto adjudicado tras el proceso selectivo, salvo que se pase voluntariamente a uno inferior (70.3).</li>
+<li>Puesto <strong>superior en más de dos niveles</strong> al grado: se consolidan <strong>dos niveles cada dos años</strong> continuados, sin superar el del puesto ni el intervalo del cuerpo (70.2).</li>
+<li>Si el nivel del puesto cambia, se computa el <strong>más alto</strong> (70.4). El tiempo en comisión de servicios cuenta si después se obtiene definitivamente ese puesto u otro de igual o superior nivel (70.6).</li>
+<li>Cuentan para consolidar: las dos primeras fases de reasignación y la expectativa de destino (70.7); los <strong>servicios especiales</strong>, como prestados en el último puesto (70.9); el <strong>primer año de excedencia por cuidado de hijos</strong> (70.10). La adscripción provisional del removido o cesado de <strong>menos de seis meses</strong> no interrumpe (70.8).</li>
+<li>Garantía del puesto: el cesado, removido o con puesto suprimido recibe un puesto de su cuerpo <strong>no inferior en más de dos niveles</strong> a su grado en el mismo municipio; si cesa por supresión o alteración del puesto, conserva durante un máximo de <strong>tres meses</strong> las complementarias del puesto anterior (art. 72).</li>
+<li>En promoción interna se puede <strong>conservar el grado</strong> si está dentro del intervalo del nuevo cuerpo (art. 78.3).</li>
+</ul>
+<div class="tablewrap"><table>
+<tr><th>Subgrupo</th><th>A1</th><th>A2</th><th>B</th><th>C1</th><th>C2</th></tr>
+<tr><td><strong>Intervalo de niveles</strong> (DT 6.ª del Real Decreto-ley 6/2023)</td><td>24 a 30</td><td>20 a 26</td><td>18 a 24</td><td>16 a 22</td><td>14 a 18</td></tr>
+</table></div>
+<p>Ningún funcionario puede obtener puestos fuera del intervalo de su subgrupo (art. 71.2).</p>
+<div class="box act"><span class="box-h">Actualización: los intervalos ya no son los del art. 71</span>El art. 71 del Real Decreto 364/1995 sigue mostrando la tabla antigua (grupo A 20-30, B 16-26, C 11-22, D 9-18, E 7-14). Desde el Real Decreto-ley 6/2023 rige, hasta que haya reglamento, la de su <strong>disposición transitoria sexta</strong>. El visual no la recogía.</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> Carrera horizontal y evaluación del desempeño</h2>
+<h3>6.1 Carrera horizontal en la AGE (art. 122 del Real Decreto-ley 6/2023)</h3>
+<ul>
+<li>Reconocimiento del desarrollo profesional mediante el ascenso en <strong>tramos</strong>, tras una evaluación objetiva y reglada, sin cambiar de puesto. <strong>Voluntaria</strong>; <strong>convocatoria anual</strong>.</li>
+<li><strong>Cuatro tramos</strong> por grupo o subgrupo; ascensos <strong>consecutivos</strong>; mínimo <strong>cinco años</strong> de servicios efectivos en el primer tramo y <strong>seis</strong> en los siguientes.</li>
+<li>A solicitud del interesado, valorando al menos: trayectoria y <strong>evaluación del desempeño</strong>; <strong>itinerario de formación</strong> (y gestión del conocimiento, docencia o investigación); <strong>competencias</strong> adquiridas.</li>
+<li>Computan los <strong>servicios especiales</strong> y las excedencias por <strong>cuidado de familiares</strong>, <strong>violencia de género</strong> o <strong>terrorista</strong>.</li>
+<li>Se mantienen los tramos consolidados en grupos anteriores; tras una promoción interna, la fracción de tiempo no consolidada cuenta en el nuevo grupo.</li>
+<li>Se retribuye con un <strong>complemento de carrera</strong>, igual para todos los del mismo subgrupo y tramo, con efectos económicos desde el <strong>1 de enero del año siguiente</strong>.</li>
+</ul>
+<div class="box act"><span class="box-h">Pendiente de desarrollo</span>El sistema de acreditación de méritos requiere reglamento (122.3), y el art. 20.5 TREBEP exige sistemas objetivos de evaluación del desempeño previos a la carrera horizontal. A la fecha de este documento no consta aprobado ese desarrollo en la AGE.</div>
+<h3>6.2 Evaluación del desempeño (art. 20 TREBEP y arts. 116 a 121 del Real Decreto-ley 6/2023)</h3>
+<p>Procedimiento por el que se <strong>mide y valora la conducta profesional y el rendimiento o el logro de resultados</strong> (art. 20.1), con transparencia, objetividad, imparcialidad y no discriminación. Las Administraciones fijan sus efectos en carrera horizontal, formación, provisión y retribuciones complementarias; la <strong>continuidad en el puesto de concurso</strong> queda vinculada a ella, con audiencia y resolución motivada (20.3 y 20.4).</p>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Aspecto</th><th>Real Decreto-ley 6/2023</th></tr>
+<tr><td>Carácter</td><td><strong>Anual</strong> y <strong>obligatoria</strong> para todo el personal en servicio activo o asimilado (arts. 116 y 117). Parte de la planificación estratégica.</td></tr>
+<tr><td>Criterios (art. 118)</td><td>Planificación · participación en los objetivos · fiabilidad · mejora continua · revisión. La conducta se valora con el código de conducta del TREBEP y se <strong>presume positiva</strong> salvo valoración negativa expresa y motivada. Comisiones de seguimiento con los sindicatos más representativos.</td></tr>
+<tr><td>Efectos (art. 119)</td><td>Retribuciones variables (<strong>complemento de desempeño</strong>) · carrera · criterios de provisión · continuidad en el puesto · necesidades formativas. Los resultados los conoce el evaluado y se informa a los sindicatos; las cuantías del complemento son públicas para el personal del ámbito.</td></tr>
+<tr><td>Puesta en marcha (art. 120)</td><td>Requiere que el departamento haya implantado su planificación estratégica; validado el modelo por la Comisión de Coordinación de la Evaluación del Desempeño (art. 121), las evaluaciones <strong>no tienen consecuencias en las dos primeras anualidades</strong>.</td></tr>
+<tr><td>Transitorio (DT 7.ª)</td><td>Hasta su implantación, el complemento de desempeño sigue los criterios del <strong>complemento de productividad</strong>; después lo sustituye.</td></tr>
+<tr><td>Negociación</td><td>Los criterios generales son materia de negociación colectiva (116.3).</td></tr>
+</table></div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> La promoción interna</h2>
+<div class="box clave"><span class="box-h">Art. 18 TREBEP (examen 2024)</span>
+Procesos selectivos con igualdad, mérito, capacidad y los principios del art. 55.2. Requisitos: los <strong>exigidos para el ingreso</strong>, <strong>dos años de servicio activo</strong> en el subgrupo inferior (o grupo, si no tiene subgrupo) y <strong>superar las pruebas</strong>. Las Administraciones adoptan medidas para incentivar la participación. Es un derecho, pero no automático: exige proceso selectivo.</div>
+<div class="tablewrap"><table>
+<tr><th style="width:26%">Aspecto</th><th>Régimen en la AGE (arts. 73 a 79 del Real Decreto 364/1995)</th></tr>
+<tr><td>Modalidades</td><td>Vertical: ascenso a cuerpos del grupo (subgrupo) inmediato superior. Horizontal: acceso a cuerpos del mismo grupo (art. 73).</td></tr>
+<tr><td>Sistemas</td><td><strong>Oposición o concurso-oposición</strong>. En el concurso-oposición puede fijarse una puntuación mínima para pasar a la oposición, y la puntuación del concurso <strong>nunca</strong> sirve para superar los ejercicios (art. 74).</td></tr>
+<tr><td>Convocatorias</td><td><strong>Mixtas</strong>, con el acceso libre, o <strong>independientes</strong> si lo autoriza el Gobierno por la planificación (art. 75). En las mixtas, las plazas de promoción interna desiertas se <strong>acumulan</strong> al turno libre (art. 79).</td></tr>
+<tr><td>Requisitos (art. 76)</td><td>Dos años de antigüedad en el cuerpo de origen al terminar el plazo de solicitudes, más titulación y requisitos de acceso.</td></tr>
+<tr><td>Exención de pruebas (art. 77)</td><td>De las materias ya acreditadas en el ingreso al cuerpo de origen.</td></tr>
+<tr><td>Derechos (art. 78)</td><td><strong>Preferencia</strong> para elegir vacantes sobre el turno libre; posibilidad de quedarse en el puesto que ya ocupaban o en otro vacante del municipio, con autorización; conservar el <strong>grado</strong> si está en el intervalo del nuevo cuerpo.</td></tr>
+<tr><td>De C2 a C1 (DA 22.ª Ley 30/1984)</td><td>Por <strong>concurso-oposición</strong>. La titulación puede sustituirse por <strong>diez años</strong> de antigüedad en un cuerpo del subgrupo C2, o por <strong>cinco años</strong> más un <strong>curso específico</strong> de formación.</td></tr>
+<tr><td>Peso en la oferta</td><td>No menos del <strong>30 %</strong> de las plazas de acceso libre (art. 108.3 del Real Decreto-ley 6/2023).</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Precisión al material visual</span>El visual hablaba de «promoción del grupo D al C», que es la denominación literal de la DA 22.ª de la Ley 30/1984. Con la equivalencia de la DT 3.ª del TREBEP, hoy es la promoción del <strong>subgrupo C2 al C1</strong>.</div>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> Lo que preguntan y trampas</h2>
+<div class="box clave"><span class="box-h">Las cifras del tema</span>
+Permanencia para concursar <strong>2 años</strong> · solicitudes <strong>15 días hábiles</strong> (directivos: 10 naturales) · resolución del concurso <strong>2 meses</strong> · méritos entre el <strong>10 % y el 40 %</strong> · hijos hasta <strong>12 años</strong> · comisión de valoración: <strong>mínimo 4</strong> · cese <strong>3 días hábiles</strong>, diferible <strong>20 días hábiles</strong> o <strong>3 meses</strong> · posesión <strong>3 días hábiles / 1 mes</strong> · libre designación: informe en <strong>15 días naturales</strong>, nombramiento en <strong>1 + 1 mes</strong> · remoción: <strong>10 + 10 días hábiles</strong> · comisión de servicios <strong>1 + 1 año</strong> · reasignación <strong>6 meses + 3 meses + 1 año</strong> de expectativa · grado <strong>2 años continuados / 3 con interrupción</strong> · <strong>30 niveles</strong> · garantía: <strong>no más de 2 niveles</strong> por debajo · directivos <strong>5 años</strong> · carrera horizontal <strong>4 tramos</strong>, <strong>5 + 6</strong> años · evaluación sin efectos <strong>2 anualidades</strong> · promoción interna <strong>2 años</strong>; C2 a C1: <strong>10 años</strong> o <strong>5 + curso</strong> · permuta: <strong>5</strong> años de diferencia, <strong>10</strong> años, <strong>2</strong> años.</div>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Lo que preguntan</span><ul>
+<li>Concurso como sistema normal y sus méritos.</li>
+<li>Permanencia de dos años y excepciones.</li>
+<li>Puestos de libre designación.</li>
+<li>Redistribución frente a reasignación.</li>
+<li>Supuestos de adscripción provisional.</li>
+<li>Comisión de servicios: duración y forzosa.</li>
+<li>Movilidad por salud y por violencia.</li>
+<li>Grado personal y modalidades de carrera.</li>
+<li>Requisitos de la promoción interna.</li></ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>Acceso no es provisión.</li>
+<li>Los arts. 78 a 84 TREBEP están condicionados por la DF 4.ª.</li>
+<li>Concurso normal; libre designación excepcional.</li>
+<li>Los dos años no rigen dentro de la misma secretaría de Estado.</li>
+<li>La comisión de servicios reserva el puesto; la adscripción provisional, no.</li>
+<li>Redistribución: definitivo a definitivo, mismo municipio.</li>
+<li>Salud: nivel de destino no superior al de origen.</li>
+<li>Comisión de valoración: mínimo cuatro, no «impar».</li>
+<li>Posesión tras concurso (3 días/1 mes) frente a tras oposición (15 días/1 mes).</li>
+<li>Pérdida de confianza: solo para libre designación (y, excepcionalmente, directivos).</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia con sus piezas: arts. 103.3 y 149.1.18.ª CE; Real Decreto Legislativo 5/2015 (en adelante, TREBEP); Ley 30/1984 y reglamentos en lo que no se opongan; y, para este tema, el Real Decreto 364/1995 (títulos III a V) y el libro segundo del Real Decreto-ley 6/2023.</li>
+<li>La calificación previa: forma de provisión del puesto, carácter definitivo o provisional de la ocupación, grado personal y nivel.</li>
+<li>Las formas de provisión del art. 36.</li>
+<li>Los méritos del art. 44 y los plazos del concurso.</li>
+<li>Los puestos y trámites de la libre designación y las especialidades de los directivos.</li>
+<li>Las tres fases de la reasignación.</li>
+<li>Los tres supuestos de adscripción provisional y el régimen de la comisión de servicios.</li>
+<li>Las reglas del grado personal y los intervalos.</li>
+<li>Carrera horizontal, evaluación del desempeño y promoción interna.</li>
+</ol>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>En un supuesto, este tema aparece cuando un funcionario quiere <strong>moverse</strong> (concursar, pedir una comisión o un traslado) o cuando la Administración quiere <strong>moverle</strong> (removerle, cesarle, suprimir su puesto). La pregunta de fondo es siempre qué garantías tiene.</p>
+<h3>9.1 Introducción de la materia (plantillas v2, sección 10)</h3>
+<div class="model">
+<p>«En materia de función pública, el artículo 103.3 de la Constitución reserva a la ley el estatuto de los funcionarios públicos y el acceso a la función pública de acuerdo con los principios de mérito y capacidad, y el artículo 149.1.18.ª atribuye al Estado las bases de su régimen estatutario. Resulta de aplicación el Real Decreto Legislativo 5/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley del Estatuto Básico del Empleado Público (en adelante, TREBEP), y, en lo que no se oponga a él, la Ley 30/1984, de 2 de agosto, de Medidas para la Reforma de la Función Pública, y sus reglamentos de desarrollo, que se mantienen en vigor conforme a su disposición final cuarta.»</p>
+</div>
+<div class="box sup"><span class="box-h">Complemento propio del Tema 4</span>«…en particular, el Real Decreto 364/1995, de 10 de marzo, por el que se aprueba el Reglamento General de Ingreso del Personal al servicio de la Administración General del Estado y de Provisión de Puestos de Trabajo y Promoción Profesional de los Funcionarios Civiles de la Administración General del Estado.» Es útil añadir una frase: «La provisión de puestos del capítulo III del título V del TREBEP surte efectos con las leyes de desarrollo (disposición final cuarta), por lo que se aplica el artículo 20 de la Ley 30/1984.»</div>
+<h3>9.2 Calificación previa propia del Tema 4</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar la situación del funcionario. [Nombre] es funcionario de carrera del [cuerpo, subgrupo], con grado personal consolidado [nivel], y ocupa con carácter [definitivo / provisional] desde el [fecha] un puesto de nivel [x], obtenido por [concurso / libre designación / redistribución / comisión de servicios].»</p>
+</div>
+<h3>9.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:32%">Hecho del enunciado</th><th style="width:26%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>Funcionario con un año en su puesto de concurso que concursa en otro ministerio</td><td>Art. 20.1.f Ley 30/1984 y art. 41.2</td><td>No puede participar: le faltan los dos años</td></tr>
+<tr><td>El mismo funcionario concursa en otra dirección general de su secretaría de Estado</td><td>Excepción del art. 41.2</td><td>Sí puede participar</td></tr>
+<tr><td>Se remueve a quien obtuvo el puesto por concurso alegando pérdida de confianza</td><td>Art. 20.1.e Ley 30/1984 y art. 50</td><td>No procede: solo cabe por alteración del puesto o rendimiento insuficiente, con expediente</td></tr>
+<tr><td>Se cesa a un subdirector general de libre designación sin más motivación que la competencia</td><td>Art. 58</td><td>Válido: el cese es discrecional; se le adscribe provisionalmente</td></tr>
+<tr><td>Al cesado se le adscribe a un puesto tres niveles por debajo de su grado</td><td>Arts. 58.2 y 72</td><td>Contrario a la norma: no más de dos niveles por debajo, mismo municipio</td></tr>
+<tr><td>Comisión de servicios que dura ya 26 meses</td><td>Art. 64.3</td><td>Excede del máximo de un año más otro: debe cubrirse el puesto por el sistema que corresponda</td></tr>
+<tr><td>Comisión forzosa sin concurso previo desierto</td><td>Art. 64.2</td><td>No procede: la forzosa exige concurso desierto y urgencia</td></tr>
+<tr><td>Plan de empleo suprime el puesto: el ministerio no reasigna en seis meses</td><td>Art. 20.1.g Ley 30/1984 y art. 60</td><td>Pasa a la segunda fase (tres meses en otros ministerios) y después a expectativa de destino</td></tr>
+<tr><td>Movilidad por salud a un puesto de nivel superior al de origen</td><td>Art. 66 bis</td><td>No procede: el nivel no puede ser superior</td></tr>
+<tr><td>Funcionaria víctima de violencia de género que pide traslado a otra localidad</td><td>Art. 82 TREBEP, art. 20.1.i Ley 30/1984 y art. 66 ter</td><td>Tiene derecho; con cambio de residencia, traslado forzoso con indemnización</td></tr>
+<tr><td>Funcionario A2 con un año en su cuerpo que se presenta a promoción interna al A1</td><td>Art. 18 TREBEP y art. 76</td><td>No cumple: necesita dos años de servicio activo en el subgrupo inferior</td></tr>
+<tr><td>Grado 22 y puesto de nivel 26 durante dos años</td><td>Art. 70.2</td><td>Consolida el 24 (dos niveles cada dos años)</td></tr>
+</table></div>
+<h3>9.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+Marta, funcionaria del Cuerpo de Gestión de la Administración Civil del Estado (A2), con grado personal consolidado <strong>22</strong>, ocupa desde el <strong>15 de febrero de 2025</strong>, por concurso, un puesto de nivel <strong>24</strong> en una dirección general de un ministerio en Madrid. El <strong>10 de noviembre de 2026</strong> se publica en el BOE un concurso de <strong>otro ministerio</strong> con plazo de solicitudes que termina el <strong>1 de diciembre de 2026</strong>. Además, el subdirector general de su unidad propone su <strong>remoción</strong> por «pérdida de confianza».
+<br><br><strong>Cuestiones:</strong> a) ¿Puede participar en el concurso? b) ¿Procede la remoción? c) Si se la removiera, ¿qué puesto y qué grado le corresponderían?</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 9.1.] Con carácter previo, procede calificar la situación de la funcionaria. Marta es funcionaria de carrera del subgrupo A2, con grado personal consolidado 22, y ocupa con carácter definitivo desde el 15 de febrero de 2025 un puesto de nivel 24 obtenido por concurso. La cuestión a) solicita determinar si puede participar en el concurso de otro ministerio. El artículo 20.1.f) de la Ley 30/1984 y el artículo 41.2 del Real Decreto 364/1995 exigen permanecer un mínimo de dos años en el puesto de destino definitivo para concursar, salvo dentro de la misma secretaría de Estado o departamento, o en los casos de remoción, cese o supresión del puesto, y los requisitos deben cumplirse al terminar el plazo de solicitudes (artículo 41.1). Los dos años se cumplen el 15 de febrero de 2027, y el plazo termina el 1 de diciembre de 2026. Por tanto, se concluye que Marta no puede participar en este concurso, al no haber completado la permanencia mínima.</p>
+<p><strong>Cuestión b).</strong> La cuestión b) plantea si procede la remoción. Según el artículo 20.1.e) de la Ley 30/1984 y el artículo 50 del Real Decreto 364/1995, quien obtiene un puesto por concurso solo puede ser removido por causas sobrevenidas: una alteración del contenido del puesto a través de la RPT, o una falta de capacidad manifestada por rendimiento insuficiente, previo expediente contradictorio con propuesta motivada del titular del centro directivo, diez días hábiles de alegaciones y parecer de la Junta de Personal. La «pérdida de confianza» es una causa propia del cese en puestos de libre designación, no del concurso, y la propuesta procede del subdirector y no del titular del centro directivo. No obstante lo anterior, cabría reconducir la propuesta a un rendimiento insuficiente si constara acreditado, si bien la solución más adecuada es rechazarla, porque el enunciado no aporta ningún dato sobre el rendimiento. Por tanto, se concluye que no procede la remoción de Marta.</p>
+<p><strong>Cuestión c).</strong> La cuestión c) solicita determinar el puesto y el grado que le corresponderían. Si fuera removida por una causa legal, el artículo 50.5 le garantiza el desempeño provisional de un puesto de su cuerpo, en el mismo municipio, no inferior en más de dos niveles a su grado personal, esto es, de nivel 20 o superior en Madrid. En cuanto al grado, el artículo 70.2 permite consolidar el grado del puesto tras dos años continuados, y el puesto de nivel 24 está a dos niveles de su grado 22. El enunciado no precisa si ha habido interrupciones, por lo que suponemos que no, ya que no se mencionan, de modo que el 15 de febrero de 2027 consolidaría el grado 24; y una adscripción provisional de menos de seis meses no interrumpiría ese cómputo (artículo 70.8). Por tanto, se concluye que, de ser removida, Marta tendría garantizado un puesto de nivel 20 o superior en Madrid y conservaría la expectativa de consolidar el grado 24 el 15 de febrero de 2027.</p>
+</div>
+<h3>9.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Calificar</strong> a la funcionaria (subgrupo, grado, nivel, forma y carácter de la ocupación) → <em>análisis</em>.<br>
+<strong>Fechas operadas</strong>: 15/02/2025 + 2 años = 15/02/2027, frente al 01/12/2026 → <em>aplicación de conocimientos</em>.<br>
+<strong>Suposición declarada</strong> sobre las interrupciones → admitida.<br>
+<strong>Alternativa evaluada</strong> (reconducir a rendimiento insuficiente) → <em>análisis</em>.<br>
+<strong>Encadenar</strong> Ley 30/1984 con el Real Decreto 364/1995 (permanencia, remoción, garantía y grado) → <em>sistemática</em>.<br>
+<strong>Conclusiones afirmativas</strong> con la consecuencia concreta.</div>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Marco</td><td>TREBEP arts. 78-84 como básico</td><td>Nota sobre la DF 4.ª, clasificación de sistemas</td><td>Fusionado + BOE (1)</td></tr>
+<tr><td>Concurso</td><td>Convocatoria, méritos, comisiones (impar), resolución, posesión</td><td>Autorización, puntuaciones, plazos de cese, desempate, remoción</td><td>Fusionado + BOE (2) con corrección de las comisiones</td></tr>
+<tr><td>Libre designación</td><td>Puestos, procedimiento, cese, Orden TDF/379/2024</td><td>Informe con silencio, prórroga, directivos con 5 años</td><td>Fusionado + arts. 123-127 (3)</td></tr>
+<tr><td>Otras formas</td><td>Tabla de redistribución, reasignación, adscripción, comisión, atribución, salud, violencia, interadministrativa</td><td>Escalera 6+3+1, permuta, traslado forzoso, comisiones especiales</td><td>Fusionado + BOE (4)</td></tr>
+<tr><td>Carrera</td><td>Modalidades, grado, intervalos de la DT 6.ª, carrera horizontal, evaluación</td><td>Grado, carrera horizontal, evaluación con dos anualidades</td><td>Fusionado + BOE (5 y 6)</td></tr>
+<tr><td>Promoción interna</td><td>Art. 18 y régimen AGE, C2 a C1</td><td>Vertical/horizontal, D a C</td><td>Fusionado (7)</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 9 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas (contrastadas con el BOE el 17/11/2026)</span>
+<strong>Temario 2026:</strong> comisiones de valoración de mínimo cuatro miembros, no de número impar · los arts. 78 a 84 TREBEP están condicionados por la DF 4.ª · en la AGE, la movilidad por violencia de género exige vacante de necesaria provisión (art. 66 ter).<br>
+<strong>Material visual:</strong> la permuta está en el art. 62 de la Ley de Funcionarios Civiles de 1964, no en la Ley 30/1984, y omitía el límite de diez años · desempate por fecha de ingreso en el cuerpo, no por antigüedad · «grupo D a C» es hoy C2 a C1 · faltaban los intervalos de niveles de la DT 6.ª del Real Decreto-ley 6/2023.</div>
+
+<footer>
+GACE 2027 · Bloque V · Tema 4 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 17/11/2026.<br>
+Normas: CE (arts. 23.2 y 103.3) · Real Decreto Legislativo 5/2015 (arts. 16 a 20, 78 a 84 y DF 4.ª) · Ley 30/1984 (arts. 20, 21, 29 y DA 22.ª) · Decreto 315/1964 (art. 62) · Ley 40/2015 (arts. 63 y 67) · Real Decreto 364/1995 (arts. 36 a 79) · Real Decreto-ley 6/2023 (arts. 111 y 116 a 127, DT 6.ª a 8.ª) · Orden TDF/379/2024.
+</footer>
+</div>
+</body>
+</html>
