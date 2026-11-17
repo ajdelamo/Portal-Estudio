@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GACE · BV · Tema 5 — Situaciones administrativas. Incompatibilidades (versión fusionada)</title>
+<style>
+:root{
+  --ink:#1b2333; --soft:#4a5568; --line:#d6dbe4; --paper:#ffffff; --wash:#f5f7fa;
+  --navy:#1f3a6e; --navy2:#2c4f8f;
+  --blue:#1d4ed8; --blueBg:#eef3ff;
+  --red:#b42318; --redBg:#fff1ef;
+  --amber:#a15c07; --amberBg:#fff8e6;
+  --green:#166534; --greenBg:#effaf2;
+  --violet:#5b21b6; --violetBg:#f4f0ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ebf2; --soft:#aab4c3; --line:#334055; --paper:#141a24; --wash:#1b2330;
+    --navy:#9db8ec; --navy2:#7da0e0;
+    --blue:#93b4ff; --blueBg:#18233d; --red:#ff9b8f; --redBg:#3a1d1a;
+    --amber:#f3c063; --amberBg:#33280f; --green:#86e0a3; --greenBg:#13291b;
+    --violet:#c6b0ff; --violetBg:#251c3d;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Iowan Old Style","Charter","Georgia",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+h1,h2,h3,h4,.sans,table,.tag,.toc,.box-h{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif}
+header.hero{background:var(--navy);color:#fff;padding:34px 20px 28px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) header.hero{background:#16284d}}
+header.hero .wrap{padding-bottom:0}
+.hero small{display:block;opacity:.8;font-size:14px;letter-spacing:.02em}
+.hero h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:700}
+.hero p{margin:0;opacity:.92;font-size:16px;max-width:62ch}
+.verif{display:inline-block;margin-top:14px;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:6px;font-size:13.5px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+h2{font-size:25px;color:var(--navy);margin:46px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--navy)}
+h2 .n{display:inline-block;min-width:1.6em}
+h3{font-size:19px;margin:28px 0 8px;color:var(--navy2)}
+h4{font-size:16px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0 8px 1.2em;padding-left:.6em}
+li{margin:4px 0}
+strong{font-weight:700}
+.lit{font-style:italic}
+.toc{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:15px}
+.toc ol{margin:6px 0 0 1.1em;columns:2;column-gap:28px}
+.toc a{color:var(--navy2);text-decoration:none}
+.toc a:hover,.toc a:focus{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tablewrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) th{background:#22345c}}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--wash)}
+.art{display:inline-block;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:700;background:var(--blueBg);color:var(--blue);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.box{border-left:5px solid;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;break-inside:avoid}
+.box-h{font-weight:700;font-size:14px;margin-bottom:4px;display:block}
+.box p:first-of-type{margin-top:2px}
+.clave{border-color:var(--blue);background:var(--blueBg)} .clave .box-h{color:var(--blue)}
+.trampa{border-color:var(--red);background:var(--redBg)} .trampa .box-h{color:var(--red)}
+.act{border-color:var(--amber);background:var(--amberBg)} .act .box-h{color:var(--amber)}
+.sup{border-color:var(--green);background:var(--greenBg)} .sup .box-h{color:var(--green)}
+.fix{border-color:var(--violet);background:var(--violetBg)} .fix .box-h{color:var(--violet)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.toc ol{columns:1}.hero h1{font-size:27px}}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);break-inside:avoid}
+.card h4{margin:0 0 6px;color:var(--navy2)}
+.card .q{font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:13.5px;color:var(--soft);margin-top:6px}
+.pyr{margin:18px auto;max-width:640px;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.pyr div{margin:0 auto 5px;color:#fff;text-align:center;padding:9px 10px;border-radius:5px;font-size:14px;line-height:1.3}
+.pyr b{display:block;font-size:15px}
+.p1{width:44%;background:#7f1d1d}.p2{width:58%;background:#9a3412}.p3{width:72%;background:#1e3a8a}.p4{width:86%;background:#1d4ed8}.p5{width:100%;background:#475569}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media (max-width:680px){.timeline{grid-template-columns:1fr 1fr}}
+.tl{border-top:5px solid var(--navy);background:var(--wash);border-radius:0 0 8px 8px;padding:10px 12px;font-size:14.5px;line-height:1.45;font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+.tl .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.tl .a{font-weight:700;margin:2px 0 6px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14px}
+.flow span{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.flow i{align-self:center;font-style:normal;color:var(--soft)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 6px;vertical-align:middle}
+.t-ok{background:#dcfce7;color:#14532d}.t-no{background:#fee2e2;color:#7f1d1d}.t-mid{background:#fef3c7;color:#78350f}
+.recite{counter-reset:r;list-style:none;margin-left:0;padding-left:0}
+.recite li{counter-increment:r;padding-left:2.2em;position:relative;margin:7px 0}
+.recite li::before{content:counter(r);position:absolute;left:0;top:1px;width:1.6em;height:1.6em;border-radius:50%;background:var(--navy);color:#fff;font:700 12px/1.6em "Avenir Next",Arial,sans-serif;text-align:center}
+.model{background:var(--wash);border:1px dashed var(--green);border-radius:8px;padding:14px 18px;margin:12px 0}
+.model p{margin:8px 0}
+footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);font-family:"Avenir Next","Segoe UI",Arial,sans-serif}
+@media print{
+  body{font-size:11pt;background:#fff;color:#000}
+  :root{padding:0}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th,.box,.pyr div,.tl,.tag,.art,tr:nth-child(even) td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{break-after:avoid}h3{break-after:avoid}
+  table,.card,.box,.tl{break-inside:avoid}
+  .toc a{color:#000}
+  .wrap{max-width:none}
+}
+.flowv{display:flex;flex-direction:column;gap:6px;margin:12px 0;font-family:"Avenir Next","Segoe UI",Arial,sans-serif;font-size:14.5px;line-height:1.45}
+.flowv .step{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 8px 8px 0;padding:8px 12px;break-inside:avoid}
+.flowv .step b{display:block;color:var(--navy);margin-bottom:2px}
+@media print{.flowv .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.tablewrap table{break-inside:auto}tr{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a href="../index.html" style="display:inline-block;color:#fff;opacity:.85;font-size:13px;text-decoration:none;margin-bottom:10px;font-family:'Avenir Next','Segoe UI',Arial,sans-serif">← Portal de Estudio</a>
+    <small>GACE 2027 · Bloque V · Administración de Recursos Humanos · Tema 5</small>
+    <h1>Situaciones administrativas del personal al servicio de las Administraciones Públicas. Incompatibilidades</h1>
+    <p>Versión fusionada: el Tema 5 del Bloque V del temario (edición ECAP 2026) + el material visual de estudio, sin dejar nada fuera, con las imprecisiones de ambos corregidas contra el texto consolidado del BOE y una capa final para el supuesto práctico.</p>
+    <span class="verif">Vigencia revisada a 17/11/2026 · TREBEP arts. 85 a 92 (sin cambios por el Real Decreto-ley 9/2025 ni la Ley 4/2026) · Ley 30/1984 (art. 29) · Real Decreto 365/1995 · Ley 53/1984 · Real Decreto 598/1985</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <strong>Índice</strong>
+  <ol start="0">
+    <li><a href="#s0">Cómo usar este documento</a></li>
+    <li><a href="#s1">Situaciones administrativas: concepto y cuadro</a></li>
+    <li><a href="#s2">Servicio activo y servicios especiales</a></li>
+    <li><a href="#s3">Servicio en otras Administraciones públicas</a></li>
+    <li><a href="#s4">Las excedencias</a></li>
+    <li><a href="#s5">Expectativa de destino y excedencia forzosa</a></li>
+    <li><a href="#s6">Suspensión de funciones y reingreso</a></li>
+    <li><a href="#s7">Incompatibilidades</a></li>
+    <li><a href="#s8">Lo que preguntan y trampas</a></li>
+    <li><a href="#s9">Aplicación al supuesto práctico</a></li>
+    <li><a href="#s10">Anexo: comparación de los dos documentos</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<h2 id="s0"><span class="n">0.</span> Cómo usar este documento</h2>
+<div class="grid3">
+  <div class="card"><h4>1.ª pasada · leer + escuchar</h4>Sube la versión Speechify y léela mientras la escuchas. Para cada situación hay que saber cuatro cosas: si se cobra, si computa, si hay reserva de puesto y cómo se vuelve.</div>
+  <div class="card"><h4>2.ª pasada · solo audio</h4>Al terminar, recita sin mirar las cifras: 5 años y mínimo 2 de interés particular; 2 a 15 años de agrupación familiar; 3 años, 2 de reserva, en cuidado de familiares; 2, 6 y 18 meses en violencia; 1 año de expectativa; 6 meses y 6 años en suspensión; 30 %, 30 horas, 75 horas, 10 % y 2 consejos en incompatibilidades.</div>
+  <div class="card"><h4>3.ª pasada · supuesto</h4>Haz la matriz del <a href="#s9">apartado 9</a> tapando la columna derecha. Los supuestos de este tema piden la situación correcta, la fecha límite del reingreso y si una segunda actividad es compatible.</div>
+</div>
+<div class="box clave"><span class="box-h">Código de colores de las cajas</span>
+<span class="tag" style="background:var(--blueBg);color:var(--blue)">Azul</span> concepto clave ·
+<span class="tag" style="background:var(--redBg);color:var(--red)">Rojo</span> trampa de examen ·
+<span class="tag" style="background:var(--amberBg);color:var(--amber)">Ámbar</span> actualización normativa ·
+<span class="tag" style="background:var(--violetBg);color:var(--violet)">Violeta</span> corrección de alguno de los dos documentos de origen ·
+<span class="tag" style="background:var(--greenBg);color:var(--green)">Verde</span> cómo se usa en el supuesto práctico.
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1.</span> Situaciones administrativas: concepto y cuadro</h2>
+<p>Las situaciones administrativas son los <strong>estados</strong> en que puede encontrarse un <strong>funcionario de carrera</strong> en su relación con la Administración, según preste o no servicio activo y por qué causa. Determinan si cobra, si se le computa el tiempo a efectos de trienios, carrera y derechos pasivos, y si tiene reserva de puesto. El interino no pasa a otra situación: si concurre una circunstancia incompatible con el servicio, cesa o se aplica su régimen específico. El <strong>personal laboral</strong> se rige por el Estatuto de los Trabajadores y los convenios, que pueden remitirse al TREBEP (art. 92).</p>
+<p>Normas: título VI del TREBEP (<strong>arts. 85 a 92</strong>, en vigor, a diferencia de la provisión del Tema 4); en la AGE, el <strong>art. 29 de la Ley 30/1984</strong> y el <strong>Real Decreto 365/1995</strong>, de 10 de marzo, Reglamento de Situaciones Administrativas. El catálogo <strong>no es cerrado</strong>: las leyes de función pública pueden crear otras por reestructuración o exceso de personal, o cuando se accede a otro cuerpo o se pasa al sector público en régimen distinto (art. 85.2).</p>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Situación</th><th>Supuesto</th><th style="width:22%">Retribución y cómputo</th><th style="width:20%">Reserva de puesto</th></tr>
+<tr><td><strong>Servicio activo</strong> (art. 86)</td><td>Presta servicios como funcionario en cualquier Administración y no le corresponde otra situación</td><td>Plenitud de derechos</td><td>Ocupa su puesto</td></tr>
+<tr><td><strong>Servicios especiales</strong> (art. 87)</td><td>Cargos públicos o de interés general fuera de su puesto</td><td>Retribución del cargo + trienios; computa a todos los efectos</td><td>Derecho a reingresar en la misma localidad</td></tr>
+<tr><td><strong>Servicio en otras Administraciones</strong> (art. 88)</td><td>Destino en otra Administración por transferencia o provisión</td><td>Legislación de la Administración de destino; computa como activo en origen</td><td>Puede concursar en la de origen</td></tr>
+<tr><td><strong>Excedencias</strong> (art. 89)</td><td>Cinco modalidades del TREBEP + las propias de la AGE</td><td>Según modalidad</td><td>Según modalidad</td></tr>
+<tr><td><strong>Suspensión de funciones</strong> (art. 90)</td><td>Provisional o firme</td><td>Sin derechos (la provisional: básicas)</td><td>Se pierde si dura más de seis meses</td></tr>
+<tr><td><strong>Expectativa de destino y excedencia forzosa</strong> (Ley 30/1984 y Real Decreto 365/1995)</td><td>Propias de la AGE, por planes de empleo y suspensión</td><td>Ver apartado 5</td><td>No</td></tr>
+</table></div>
+<div class="box clave"><span class="box-h">Las once situaciones del art. 2 del Real Decreto 365/1995 (AGE)</span>Servicio activo · servicios especiales · servicio en comunidades autónomas · expectativa de destino · excedencia forzosa · excedencia para el cuidado de hijos · excedencia voluntaria por servicios en el sector público · por interés particular · por agrupación familiar · incentivada · suspensión de funciones. Los cambios de situación se comunican siempre al Registro Central de Personal y pueden hacerse sin reingresar antes (art. 23).</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2.</span> Servicio activo y servicios especiales</h2>
+<h3>2.1 Servicio activo (art. 86 TREBEP y art. 3 del Real Decreto 365/1995)</h3>
+<p>Es la situación <strong>por defecto</strong>: todos los derechos y deberes, y punto de retorno desde las demás. En la AGE están en activo, entre otros: quien está en <strong>comisión de servicios</strong>; en gabinetes con puesto dentro del intervalo de su cuerpo, si opta por ello; en el <strong>plazo posesorio</strong>; en las <strong>dos primeras fases de reasignación</strong>; los concejales sin dedicación exclusiva; los parlamentarios autonómicos sin retribución periódica que opten por ello; y en cesación progresiva de actividades. Los <strong>subdirectores generales</strong>, que no son altos cargos (art. 55.6 Ley 40/2015), siguen en servicio activo.</p>
+<h3>2.2 Servicios especiales (art. 87 TREBEP)</h3>
+<div class="grid2">
+<div class="card"><h4>Supuestos (87.1)</h4><ol type="a">
+<li>Miembros del <strong>Gobierno</strong> o de gobiernos autonómicos y de Ceuta y Melilla, de instituciones de la UE o de organizaciones internacionales; <strong>altos cargos</strong> de esas Administraciones (examen 2022: secretario de Estado; consejero autonómico).</li>
+<li><strong>Misión</strong> por periodo determinado <strong>superior a seis meses</strong> en organismos internacionales, gobiernos extranjeros o cooperación internacional (examen 2019).</li>
+<li>Cargos en organismos públicos <strong>asimilados a altos cargos</strong>.</li>
+<li>Adscritos al <strong>Tribunal Constitucional</strong>, al <strong>Defensor del Pueblo</strong> o destinados al <strong>Tribunal de Cuentas</strong>.</li>
+<li><strong>Diputados y senadores</strong>, y parlamentarios autonómicos con retribución periódica (sin ella, pueden optar).</li>
+<li>Cargos electivos retribuidos y de dedicación exclusiva en entidades locales y en las asambleas de Ceuta y Melilla; órganos superiores y directivos municipales; órganos económico-administrativos locales.</li>
+<li><strong>Consejo General del Poder Judicial</strong> o consejos de justicia autonómicos (examen 2024).</li>
+<li>Órganos <strong>constitucionales</strong> o estatutarios, u otros elegidos por las Cortes o los parlamentos autonómicos.</li>
+<li><strong>Personal eventual</strong> de confianza o asesoramiento político, si no opta por seguir en activo.</li>
+<li>Funcionarios de <strong>organizaciones internacionales</strong> (exámenes 2019 y 2024).</li>
+<li><strong>Asesores de grupos parlamentarios</strong>.</li>
+<li><strong>Reservistas voluntarios</strong> activados.</li></ol></div>
+<div class="card"><h4>Régimen</h4><ul>
+<li><strong>Retribución</strong>: la del cargo, no la de funcionario, más los <strong>trienios</strong> reconocidos; si el cargo no puede pagarlos, los abona el departamento de origen, igual que la cuota de Seguridad Social (art. 8 del Real Decreto 365/1995).</li>
+<li><strong>Cómputo</strong>: ascensos, trienios, promoción interna y Seguridad Social (examen 2022); en la AGE también grado personal y los cinco años para pedir la excedencia por interés particular.</li>
+<li><strong>Reingreso</strong>: al menos en la <strong>misma localidad</strong>, con el nivel o escalón consolidado (87.3). En la AGE: si venía de un puesto de libre designación, provisional de igual nivel en el mismo municipio; en los demás casos, definitivo de igual nivel en el mismo ministerio y municipio (art. 7).</li>
+<li>Plazo: solicitar el reingreso en <strong>un mes</strong> desde que se pierde la condición; si no, <strong>excedencia voluntaria por interés particular</strong> (art. 9). Los parlamentarios que cesan por disolución pueden seguir en servicios especiales hasta la nueva constitución de las cámaras.</li>
+<li>Garantía de carrera para altos cargos y similares: como mínimo, el mismo trato que quienes hayan sido directores generales en grado y complementos (87.3).</li></ul></div>
+</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3.</span> Servicio en otras Administraciones públicas (art. 88 TREBEP y arts. 10 y 11 del Real Decreto 365/1995)</h2>
+<div class="grid2">
+<div class="card"><h4>Transferidos</h4>Se integran plenamente en la comunidad autónoma, donde están en <strong>servicio activo</strong>; en origen, en servicio en otras Administraciones, con todos sus derechos como si estuvieran en activo. La comunidad respeta su grupo y sus derechos económicos. La <strong>separación</strong> la acuerda el órgano autonómico, previo dictamen del <strong>Consejo de Estado</strong>.</div>
+<div class="card"><h4>Por provisión de puestos</h4>Se rigen por la legislación de la Administración de destino, <strong>conservan la condición de funcionario</strong> de la de origen y pueden concursar en ella. El tiempo computa como servicio activo en su cuerpo. La <strong>separación</strong> la acuerda el ministro del departamento de adscripción del cuerpo, previo expediente incoado por la comunidad.</div>
+</div>
+<p>Al reingresar, los progresos de carrera se reconocen según los convenios de Conferencia Sectorial (art. 84) o, en su defecto, por la Administración de reingreso (88.4).</p>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4.</span> Las excedencias (art. 89 TREBEP, art. 29 Ley 30/1984 y arts. 14 a 19 del Real Decreto 365/1995)</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Modalidad</th><th>Requisitos y duración</th><th style="width:30%">Efectos</th></tr>
+<tr><td><strong>Voluntaria por interés particular</strong> (89.2)</td><td><strong>Cinco años</strong> de servicios efectivos inmediatamente anteriores en cualquier Administración. Subordinada a las necesidades del servicio (motivadas). <strong>No</strong> si se le instruye <strong>expediente disciplinario</strong>. De oficio, si no pide el reingreso en plazo al terminar otra situación. En la AGE, permanencia mínima de <strong>dos años continuados</strong> (art. 29.3.c Ley 30/1984).</td><td>Sin retribución ni cómputo para ascensos, trienios ni Seguridad Social (examen 2019). Sin reserva.</td></tr>
+<tr><td><strong>Voluntaria por agrupación familiar</strong> (89.3)</td><td>Sin requisito de servicios previos: <strong>cónyuge</strong> que reside en otra localidad por haber obtenido un puesto <strong>definitivo</strong> de funcionario o laboral fijo en cualquier Administración, órgano constitucional, Unión Europea u organización internacional. En la AGE, <strong>mínimo dos y máximo quince años</strong>; antes de los quince hay que pedir el reingreso o se declara de oficio la de interés particular (art. 17).</td><td>Sin retribución ni cómputo. Sin reserva.</td></tr>
+<tr><td><strong>Por cuidado de familiares</strong> (89.4)</td><td><strong>Hijo</strong> (naturaleza, adopción, guarda o acogimiento permanente): hasta <strong>tres años</strong> desde el nacimiento o la resolución. <strong>Familiar hasta el segundo grado</strong> que no pueda valerse y no tenga actividad retribuida: hasta <strong>tres años</strong>. Periodo único por sujeto causante; uno nuevo pone fin al anterior. Derecho individual; si dos funcionarios lo generan por el mismo sujeto, se puede limitar el ejercicio simultáneo.</td><td><strong>Computa</strong> para trienios, carrera y Seguridad Social. <strong>Reserva del puesto dos años</strong>; después, puesto en la misma localidad y de igual retribución. Puede hacer cursos de formación. Si no pide el reingreso antes de que acabe, interés particular de oficio (art. 14.3).</td></tr>
+<tr><td><strong>Por violencia de género o sexual</strong> (89.5)</td><td>Las <strong>funcionarias</strong> víctimas, para su protección o asistencia social integral; <strong>sin tiempo mínimo</strong> de servicios ni plazo de permanencia.</td><td>Reserva del puesto los <strong>seis primeros meses</strong>, computables; prorrogable por periodos de <strong>tres meses</strong> hasta <strong>dieciocho</strong> si lo exigen las actuaciones judiciales. <strong>Retribuciones íntegras los dos primeros meses</strong> y prestaciones por hijo a cargo.</td></tr>
+<tr><td><strong>Por violencia terrorista</strong> (89.6)</td><td>Funcionarios con daños físicos o psíquicos por la actividad terrorista y los <strong>amenazados</strong> (Ley 29/2011), previo reconocimiento del Ministerio del Interior o sentencia firme.</td><td>Mismas condiciones que la de violencia de género; se mantiene mientras sea necesaria para la protección.</td></tr>
+<tr><td><strong>Voluntaria por servicios en el sector público</strong> (art. 29.3.a Ley 30/1984 y art. 15)</td><td>De oficio o a instancia: servicio activo en <strong>otro cuerpo</strong> de cualquier Administración (salvo compatibilidad) o paso a <strong>laboral fijo</strong> del sector público. No la da ser interino o laboral temporal. Se mantiene mientras dure la otra relación; al cesar, reingreso en <strong>un mes</strong>.</td><td>Sin retribución ni reserva. Computa para <strong>trienios</strong> el tiempo en organismos o entidades del sector público, salvo sociedades mercantiles.</td></tr>
+<tr><td><strong>Voluntaria incentivada</strong> (art. 18)</td><td>Afectados por un plan de empleo en las dos primeras fases de reasignación, en expectativa de destino o en excedencia forzosa derivada del plan.</td><td><strong>Cinco años</strong>; prohibido trabajar en el sector público. Indemnización: <strong>una mensualidad por año</strong> de servicio, máximo <strong>doce</strong>. Reingreso en el mes siguiente o interés particular.</td></tr>
+</table></div>
+<div class="box act"><span class="box-h">La excedencia por interés particular ya no tiene máximo</span>El art. 16 del Real Decreto 365/1995 conserva un máximo de quince años y la pérdida de la condición de funcionario si no se pide el reingreso. La redacción vigente del art. 29.3.c de la Ley 30/1984 solo fija el mínimo de dos años y no establece máximo, por lo que ese límite reglamentario no se aplica. El máximo de quince años sí sigue vigente para la de <strong>agrupación familiar</strong>.</div>
+<div class="box trampa"><span class="box-h">Trampa: qué excedencias computan</span>Computan las de <strong>cuidado de familiares</strong> y las de <strong>violencia</strong> (durante la reserva). No computan las de <strong>interés particular</strong> ni <strong>agrupación familiar</strong>. La titular de la de violencia de género es la <strong>funcionaria</strong>; cobra íntegro solo los <strong>dos primeros meses</strong>.</div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5.</span> Expectativa de destino y excedencia forzosa (AGE)</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:20%"></th><th>Expectativa de destino (art. 29.5 Ley 30/1984 y art. 12)</th><th>Excedencia forzosa (art. 29.6 Ley 30/1984 y art. 13)</th></tr>
+<tr><td>Causa</td><td>No obtener puesto en las <strong>dos primeras fases</strong> de una reasignación por plan de empleo (examen 2019).</td><td>a) Fin del <strong>año</strong> de expectativa o incumplimiento de sus obligaciones. b) Suspenso firme sin reserva que pide el reingreso y no lo obtiene en <strong>seis meses</strong> desde la extinción de la responsabilidad.</td></tr>
+<tr><td>Duración</td><td>Máximo <strong>un año</strong> (exámenes 2019).</td><td>Indefinida, hasta el reingreso.</td></tr>
+<tr><td>Retribución</td><td>Básicas + complemento de destino del grado + <strong>50 %</strong> del complemento específico.</td><td><strong>Básicas</strong> y, en su caso, prestaciones por hijo a cargo.</td></tr>
+<tr><td>Cómputo</td><td>A los restantes efectos se <strong>equipara al servicio activo</strong>, incluidas las incompatibilidades.</td><td>Trienios y derechos pasivos.</td></tr>
+<tr><td>Obligaciones</td><td>Aceptar puestos similares, participar en concursos y cursos <strong>en la provincia</strong> de destino.</td><td>Participar en concursos y aceptar el reingreso obligatorio en puestos de su cuerpo (sin limitarse a la provincia); <strong>no puede trabajar en el sector público</strong> (si lo hace, pasa a excedencia por servicios en el sector público).</td></tr>
+<tr><td>Incumplimiento</td><td>Pasa a excedencia forzosa.</td><td>Pasa a excedencia voluntaria por interés particular.</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones a los dos documentos (excedencia forzosa)</span>
+<strong>Temario 2026</strong>: incluye entre las causas «cuando, suprimido el puesto y no siendo posible la adscripción, el funcionario no obtiene otro». El art. 13 del Real Decreto 365/1995 y el art. 29.6 de la Ley 30/1984 no recogen esa causa: solo el fin o incumplimiento de la expectativa y el suspenso firme sin reingreso en seis meses.<br>
+<strong>Material visual</strong>: decía que el excedente forzoso cobra «básicas + complemento de destino». Cobra solo las <strong>básicas</strong> y las prestaciones por hijo a cargo; el complemento de destino es de la expectativa de destino.</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6.</span> Suspensión de funciones y reingreso</h2>
+<h3>6.1 Suspensión de funciones (art. 90 TREBEP y arts. 20 a 22 del Real Decreto 365/1995)</h3>
+<p>El suspenso queda privado del ejercicio de sus funciones y de todos los derechos inherentes a la condición. La suspensión <strong>superior a seis meses</strong> determina la <strong>pérdida del puesto</strong> (examen 2019). No puede prestar servicios en ninguna Administración ni en sus entes de Derecho público mientras cumple la pena o sanción. La firme se declara en <strong>todos los cuerpos</strong> a que pertenezca.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:20%"></th><th>Provisional</th><th>Firme</th></tr>
+<tr><td>Causa</td><td>Medida cautelar en un expediente disciplinario o un procedimiento judicial (prisión provisional u otra medida que impida trabajar)</td><td>Condena penal o sanción disciplinaria</td></tr>
+<tr><td>Duración</td><td>Máximo <strong>seis meses</strong> en el expediente, salvo paralización imputable al interesado; en el judicial, lo que duren las medidas</td><td>La sanción disciplinaria, máximo <strong>seis años</strong>; la penal, la que fije la sentencia</td></tr>
+<tr><td>Retribución</td><td><strong>Retribuciones básicas</strong> y prestaciones por hijo a cargo (art. 98.3 TREBEP); nada si hay paralización imputable o incomparecencia</td><td>Ninguna</td></tr>
+<tr><td>Si no deviene firme</td><td>Computa como servicio activo, con reincorporación y abono de lo dejado de percibir</td><td>—</td></tr>
+</table></div>
+<p><strong>Reingreso del suspenso firme</strong> (art. 22): si perdió el puesto, debe solicitarlo con <strong>un mes de antelación</strong> al fin de la suspensión; el reingreso tiene efectos desde la <strong>extinción de la responsabilidad</strong> (examen 2019). Si no lo pide, excedencia voluntaria por interés particular de oficio; si lo pide y no se le concede en <strong>seis meses</strong>, excedencia forzosa.</p>
+<div class="box fix"><span class="box-h">Correcciones (suspensión)</span>
+<strong>Temario 2026</strong>: dice que, concluida la suspensión, se pide el reingreso «en el plazo de un mes». El art. 22.3 del Real Decreto 365/1995 exige pedirlo <strong>con un mes de antelación a la finalización</strong> de la suspensión. Y el límite de seis años es el de la suspensión firme <strong>por sanción disciplinaria</strong> (art. 90.2), no el de la penal.<br>
+<strong>Ambos</strong>: el art. 21.4 del Real Decreto 365/1995 todavía dice que el suspenso provisional cobra el 75 % del sueldo, trienios y pagas; prevalece el art. 98.3 del TREBEP, que le reconoce las <strong>retribuciones básicas</strong>.</div>
+<h3>6.2 Reingreso al servicio activo (art. 91 TREBEP y art. 62 del Real Decreto 364/1995)</h3>
+<p>Plazos y condiciones por reglamento, respetando la reserva de puesto cuando proceda. Sin reserva, el reingreso se hace por <strong>concurso o libre designación</strong> o, provisionalmente, por <strong>adscripción provisional</strong> a una vacante, que se convoca en el plazo máximo de <strong>un año</strong> con obligación de participar; si no obtiene destino definitivo, se le asigna otro puesto o, si no participa, pasa a excedencia voluntaria de oficio.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:44%">Procedencia</th><th>Plazo para pedir el reingreso y consecuencia</th></tr>
+<tr><td>Servicios especiales; excedencia por servicios en el sector público; incentivada</td><td><strong>Un mes</strong> desde que cesa la causa (o desde el fin de los cinco años); si no, interés particular</td></tr>
+<tr><td>Agrupación familiar</td><td>Antes de cumplir los <strong>quince años</strong>; si no, interés particular</td></tr>
+<tr><td>Cuidado de familiares</td><td>Antes de que termine el periodo; si no, interés particular</td></tr>
+<tr><td>Suspensión firme con pérdida del puesto</td><td><strong>Un mes antes</strong> de que termine; si no, interés particular; si no se concede en seis meses, excedencia forzosa</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Corrección al temario 2026</span>El temario cita los «arts. 62 a 66 del Real Decreto 365/1995» para el reingreso. Ese reglamento solo tiene 23 artículos. El reingreso sin reserva se regula en el <strong>art. 62 del Real Decreto 364/1995</strong> (Reglamento de Ingreso y Provisión), y los plazos según la situación de procedencia, en los arts. 9, 14, 15, 17, 18 y 22 del Real Decreto 365/1995.</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7.</span> Incompatibilidades (Ley 53/1984 y Real Decreto 598/1985)</h2>
+<h3>7.1 Fundamento y principios</h3>
+<p>El <strong>art. 103.3 CE</strong> reserva a la ley el sistema de incompatibilidades. Finalidad: <strong>imparcialidad, objetividad, dedicación</strong> y eficiencia. Norma básica: <strong>Ley 53/1984</strong>, de 26 de diciembre; en la AGE, <strong>Real Decreto 598/1985</strong>, de 30 de abril. Los altos cargos tienen su régimen en la <strong>Ley 3/2015</strong>. Se aplica a <strong>todo el personal</strong>, cualquiera que sea su relación, incluidas entidades con presupuesto público en más del 50 % y empresas con participación pública superior al 50 % (art. 2).</p>
+<div class="box clave"><span class="box-h">Las tres reglas del art. 1</span>
+1. No se puede desempeñar un <strong>segundo puesto o actividad en el sector público</strong>, salvo las excepciones de la ley.<br>
+2. No se puede percibir <strong>más de una remuneración</strong> con cargo a presupuestos públicos.<br>
+3. Es incompatible <strong>cualquier actividad</strong>, pública o privada, que impida o menoscabe el cumplimiento de los deberes o comprometa la imparcialidad o independencia.<br>
+De ahí la regla práctica: dos puestos públicos son <strong>incompatibles</strong> salvo excepción; un puesto público y una actividad privada son <strong>compatibles</strong> previo reconocimiento y con límites.</div>
+<h3>7.2 Actividades públicas (arts. 3 a 10)</h3>
+<ul>
+<li>Segundo puesto solo en los supuestos de <strong>docencia</strong> (profesor universitario <strong>asociado</strong> a tiempo parcial), <strong>sanidad</strong>, <strong>investigación</strong> y asesoramiento no permanentes, cargos electivos compatibles (parlamentarios autonómicos sin retribución periódica, concejales sin dedicación exclusiva) y los que por <strong>interés público</strong> determine el <strong>Consejo de Ministros por real decreto</strong> (u órgano autonómico), en este caso solo en régimen laboral, a tiempo parcial y de duración determinada. Exige <strong>autorización previa y expresa</strong>, sin modificar jornada ni horario.</li>
+<li>Es incompatible con cobrar <strong>pensión de jubilación</strong>, que queda en suspenso (art. 3.2).</li>
+<li><strong>Límite retributivo</strong> (art. 7.1): el total no puede superar la retribución de <strong>director general</strong> ni la del puesto principal incrementada en un <strong>30 %</strong> (grupo A), <strong>35 %</strong> (B), <strong>40 %</strong> (C), <strong>45 %</strong> (D) o <strong>50 %</strong> (E). Superarlo exige acuerdo del Gobierno.</li>
+<li>El segundo puesto <strong>no computa</strong> para trienios ni derechos pasivos; pagas extraordinarias y prestaciones familiares, solo por uno (art. 7.2; exámenes 2019 y 2022).</li>
+<li><strong>Tiempo parcial</strong>: el que no supera <strong>treinta horas semanales</strong> (art. 14 del Real Decreto 598/1985; examen 2019).</li>
+<li><strong>Consejos de administración</strong> en representación del sector público: solo dietas; máximo <strong>dos</strong>, salvo autorización (art. 8).</li>
+<li><strong>Competencia</strong>: el ministerio de función pública, a propuesta del subsecretario, con informe favorable del órgano del segundo puesto (art. 9); en la AGE resuelve en <strong>tres meses</strong>, prorrogables uno (art. 5 del Real Decreto 598/1985).</li>
+<li><strong>Opción</strong> (art. 10): quien accede a un puesto incompatible opta <strong>dentro del plazo de toma de posesión</strong>; si no opta, se entiende que elige el nuevo y pasa a excedencia voluntaria en el anterior. Si es compatible previa autorización, debe pedirla en los <strong>diez primeros días</strong> del plazo posesorio, que se prorroga hasta que se resuelva.</li>
+</ul>
+<div class="box fix"><span class="box-h">Precisión al temario 2026</span>El temario dice que el segundo puesto por interés público se determina «por ley». El art. 3.1 de la Ley 53/1984 lo atribuye al <strong>Consejo de Ministros mediante real decreto</strong> (o al órgano de gobierno autonómico), y solo en régimen laboral, a tiempo parcial y con duración determinada.</div>
+<div class="box fix"><span class="box-h">Correcciones al material visual (actividades públicas)</span>
+El visual presentaba los porcentajes 30/35/40/45/50 como «porcentajes de complemento específico compatible» por subgrupos A1, A2, C1, C2 y agrupaciones profesionales. Son los <strong>incrementos sobre la retribución del puesto principal</strong> que marcan el tope del art. 7.1, por los antiguos grupos A a E. El 30 % del complemento específico es otra regla, la del art. 16.4 para actividades privadas.<br>
+También daba «un mes» para optar tras la toma de posesión: el art. 10 dice <strong>dentro del plazo de toma de posesión</strong>.</div>
+<h3>7.3 Actividades privadas (arts. 11 a 16)</h3>
+<ul>
+<li><strong>Prohibición general</strong> (art. 11): actividades privadas relacionadas directamente con las que desarrolla el departamento u organismo de destino, salvo las que se hacen para uno mismo en ejercicio de un derecho.</li>
+<li><strong>Prohibiciones absolutas</strong> (art. 12): actividades en asuntos en que <strong>intervenga, haya intervenido en los dos últimos años</strong> o tenga que intervenir; consejos de administración de empresas privadas relacionadas con su departamento; cargos en empresas <strong>concesionarias o contratistas</strong>; participación <strong>superior al 10 %</strong> en el capital de esas empresas (examen 2022). Las actividades privadas de media jornada o más solo se autorizan si la pública es a tiempo parcial (12.2).</li>
+<li>No cabe reconocer actividad privada si la suma de los dos puestos públicos ya alcanza la jornada máxima (art. 13).</li>
+<li><strong>Reconocimiento previo de compatibilidad</strong> (art. 14), resuelto en <strong>dos meses</strong> por el ministerio de función pública a propuesta del subsecretario (o delegado del Gobierno en periféricos); no modifica la jornada ni el horario; queda <strong>sin efecto si cambia el puesto</strong>.</li>
+<li><strong>Complemento específico</strong> (art. 16): no se reconoce compatibilidad al personal con complemento específico o equiparable, ni al retribuido por arancel, <strong>salvo</strong> que el específico no supere el <strong>30 % de la retribución básica</strong>, excluida la antigüedad (16.4). Excepciones: profesor asociado e investigación o asesoramiento del art. 6.</li>
+<li>No se puede usar la condición pública para la actividad privada (art. 15). Las resoluciones se inscriben en el registro de personal (art. 18).</li>
+</ul>
+<div class="box act"><span class="box-h">Redacción futura del art. 16.1</span>La disposición final tercera del TREBEP dio nueva redacción al art. 16.1 (vinculando la incompatibilidad al «factor de incompatibilidad» del complemento específico y añadiendo al personal directivo), pero solo surtirá efectos con las leyes de desarrollo del capítulo III del título III (DF 4.ª). Hoy sigue aplicándose la redacción anterior: complemento específico o concepto equiparable.</div>
+<h3>7.4 Actividades exceptuadas (art. 19)</h3>
+<ol type="a">
+<li>Administración del <strong>patrimonio personal o familiar</strong> (sin perjuicio del art. 12).</li>
+<li>Dirección de seminarios, cursos o conferencias en centros oficiales de formación de funcionarios o profesorado, no permanentes ni habituales y hasta <strong>75 horas al año</strong>, y la <strong>preparación para el acceso a la función pública</strong> en los términos reglamentarios: hasta 75 horas anuales, sin incumplir el horario, e incompatible con formar parte de órganos de selección (art. 19 del Real Decreto 598/1985; examen 2022).</li>
+<li>Participación en <strong>tribunales calificadores</strong>.</li>
+<li>Participación del personal docente en exámenes o evaluaciones no habituales.</li>
+<li>Presidente, vocal o miembro de juntas rectoras de <strong>mutualidades o patronatos</strong> de funcionarios, no retribuido.</li>
+<li><strong>Producción y creación literaria, artística, científica y técnica</strong> y sus publicaciones, si no derivan de una relación de empleo (examen 2022).</li>
+<li>Participación <strong>ocasional</strong> en coloquios y programas de medios de comunicación.</li>
+<li>Colaboración y asistencia <strong>ocasional</strong> a congresos, seminarios o cursos profesionales.</li>
+</ol>
+<div class="box fix"><span class="box-h">Precisión al material visual</span>El visual hablaba de «9 actividades» que no requieren compatibilidad. El art. 19 recoge <strong>ocho</strong> (letras a a h). Su cuadro de plazos con el Real Decreto 1777/1994 («4 meses con silencio positivo», «3 meses» para la actividad privada) no se ha podido contrastar y contradice el art. 14 de la Ley 53/1984, que fija <strong>dos meses</strong> para la actividad privada; no se recoge aquí.</div>
+<h3>7.5 Consecuencias del incumplimiento</h3>
+<p>Se sanciona por el régimen disciplinario (art. 20). Es <strong>falta muy grave</strong> el incumplimiento de las normas de incompatibilidades cuando dé lugar a una <strong>situación de incompatibilidad</strong> (art. 95.2.n TREBEP); es <strong>grave</strong> el incumplimiento de plazos u otras normas de procedimiento cuando no la mantenga (art. 7 del Real Decreto 33/1986). La compatibilidad no excusa de la asistencia ni del rendimiento, y queda <strong>revocada automáticamente</strong> si se sanciona una falta grave o muy grave relacionada (20.2).</p>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8.</span> Lo que preguntan y trampas</h2>
+<div class="box clave"><span class="box-h">Las cifras del tema</span>
+Servicios especiales: misión <strong>&gt; 6 meses</strong>; reingreso en <strong>1 mes</strong> · interés particular: <strong>5 años</strong> de servicio, mínimo <strong>2 años</strong> · agrupación familiar: <strong>2 a 15 años</strong> · cuidado de familiares: <strong>3 años</strong>, reserva <strong>2 años</strong> · violencia: íntegras <strong>2 meses</strong>, reserva <strong>6 meses</strong>, prórrogas de <strong>3</strong> hasta <strong>18</strong> · incentivada: <strong>5 años</strong>, <strong>1 mensualidad por año, máx. 12</strong> · expectativa: <strong>1 año</strong>, <strong>50 %</strong> del específico · suspensión: pérdida del puesto si <strong>&gt; 6 meses</strong>; firme disciplinaria <strong>≤ 6 años</strong>; reingreso pedido <strong>1 mes antes</strong>; forzosa si no se concede en <strong>6 meses</strong> · incompatibilidades: <strong>30-35-40-45-50 %</strong>, <strong>30 horas</strong>, <strong>2</strong> consejos, <strong>10 %</strong> del capital, <strong>2 años</strong> de intervención, <strong>30 %</strong> del específico, <strong>75 horas</strong>, <strong>10 días</strong> para pedir compatibilidad, <strong>2 meses</strong> (privada) y <strong>3 + 1 meses</strong> (pública).</div>
+<div class="grid2">
+<div class="box clave" style="margin:0"><span class="box-h">Lo que preguntan</span><ul>
+<li>Qué supuesto lleva a servicios especiales.</li>
+<li>Qué se computa en cada situación.</li>
+<li>Requisitos de cada excedencia.</li>
+<li>Expectativa de destino y excedencia forzosa.</li>
+<li>Pérdida del puesto en la suspensión.</li>
+<li>Efectos del reingreso del suspenso.</li>
+<li>Segundo puesto: cómputo y tiempo parcial.</li>
+<li>Actividades exceptuadas.</li>
+<li>Prohibiciones del art. 12.</li></ul></div>
+<div class="box trampa" style="margin:0"><span class="box-h">Trampas típicas</span><ul>
+<li>El subdirector general no alto cargo sigue en activo.</li>
+<li>Misión de 6 meses justos: no basta, debe ser superior.</li>
+<li>Interés particular: no con expediente disciplinario abierto.</li>
+<li>Agrupación familiar: sin requisito de servicios previos.</li>
+<li>Cuidado de familiares sí computa; interés particular no.</li>
+<li>Excedencia forzosa: solo básicas.</li>
+<li>Reingreso del suspenso: con un mes de antelación.</li>
+<li>Dos puestos públicos: regla, incompatibilidad.</li>
+<li>Los porcentajes del 30 al 50 % son el tope del segundo puesto público, no del específico.</li>
+<li>Son ocho las actividades exceptuadas.</li>
+</ul></div>
+</div>
+<h3>Lo que tienes que poder recitar sin mirar</h3>
+<ol class="recite">
+<li>La introducción de la materia con sus piezas: arts. 103.3 y 149.1.18.ª CE; Real Decreto Legislativo 5/2015 (en adelante, TREBEP); Ley 30/1984 y reglamentos en lo que no se opongan; y, para este tema, el Real Decreto 365/1995 o, si es de incompatibilidades, la Ley 53/1984 y el Real Decreto 598/1985.</li>
+<li>La calificación previa: situación de procedencia, fecha de inicio, causa y si conlleva reserva de puesto.</li>
+<li>Las cinco situaciones del art. 85 y las once del Real Decreto 365/1995.</li>
+<li>Los supuestos y efectos de los servicios especiales.</li>
+<li>El cuadro de excedencias con requisitos, duración y efectos.</li>
+<li>Expectativa de destino frente a excedencia forzosa.</li>
+<li>Suspensión provisional frente a firme, y su reingreso.</li>
+<li>Las tres reglas del art. 1 de la Ley 53/1984 y el régimen del segundo puesto público.</li>
+<li>Las prohibiciones del art. 12, el art. 16 y las ocho actividades exceptuadas.</li>
+</ol>
+
+<!-- 9 -->
+<h2 id="s9"><span class="n">9.</span> Aplicación al supuesto práctico (ejercicio 2)</h2>
+<p>En el supuesto, este tema aparece cuando un funcionario <strong>deja de prestar servicio</strong> (una excedencia, un cargo, una suspensión) y hay que saber en qué situación queda y cómo vuelve, o cuando quiere <strong>compatibilizar</strong> otra actividad.</p>
+<h3>9.1 Introducción de la materia (plantillas v2, sección 10)</h3>
+<div class="model">
+<p>«En materia de función pública, el artículo 103.3 de la Constitución reserva a la ley el estatuto de los funcionarios públicos y el acceso a la función pública de acuerdo con los principios de mérito y capacidad, y el artículo 149.1.18.ª atribuye al Estado las bases de su régimen estatutario. Resulta de aplicación el Real Decreto Legislativo 5/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley del Estatuto Básico del Empleado Público (en adelante, TREBEP), y, en lo que no se oponga a él, la Ley 30/1984, de 2 de agosto, de Medidas para la Reforma de la Función Pública, y sus reglamentos de desarrollo, que se mantienen en vigor conforme a su disposición final cuarta.»</p>
+</div>
+<div class="box sup"><span class="box-h">Complemento propio del Tema 5</span>Situaciones: «…en particular, el Real Decreto 365/1995, de 10 de marzo, por el que se aprueba el Reglamento de Situaciones Administrativas de los Funcionarios Civiles de la Administración General del Estado». Incompatibilidades: «Asimismo, el artículo 103.3 de la Constitución remite a la ley el sistema de incompatibilidades, regulado por la Ley 53/1984, de 26 de diciembre, de Incompatibilidades del Personal al Servicio de las Administraciones Públicas, desarrollada por el Real Decreto 598/1985, de 30 de abril.»</div>
+<h3>9.2 Calificación previa propia del Tema 5</h3>
+<div class="model">
+<p>«Con carácter previo, procede calificar la situación administrativa. [Nombre] es funcionario de carrera del [cuerpo], que se encuentra desde el [fecha] en situación de [servicio activo / servicios especiales / excedencia por…], por [causa], situación que [conlleva / no conlleva] reserva de puesto y [computa / no computa] a efectos de trienios y carrera.»</p>
+</div>
+<h3>9.3 Matriz «si en el enunciado aparece… → aplicas…»</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:32%">Hecho del enunciado</th><th style="width:26%">Norma y razonamiento</th><th>Consecuencia y vía</th></tr>
+<tr><td>Funcionario nombrado secretario de Estado</td><td>Art. 87.1.a TREBEP</td><td>Servicios especiales; reingreso en un mes al cesar</td></tr>
+<tr><td>Funcionario nombrado subdirector general</td><td>Art. 55.6 Ley 40/2015; art. 86 TREBEP</td><td>Sigue en servicio activo</td></tr>
+<tr><td>Misión en un organismo internacional de cuatro meses</td><td>Art. 87.1.b TREBEP</td><td>No da servicios especiales: comisión de servicios (Tema 4)</td></tr>
+<tr><td>Funcionario con cuatro años de servicio pide excedencia por interés particular</td><td>Art. 89.2 TREBEP</td><td>No procede: exige cinco años</td></tr>
+<tr><td>Pide excedencia por interés particular con un expediente disciplinario abierto</td><td>Art. 89.2 TREBEP</td><td>No puede declararse</td></tr>
+<tr><td>Cónyuge con plaza definitiva de laboral fijo en otra ciudad</td><td>Art. 89.3 TREBEP y art. 17</td><td>Agrupación familiar, sin requisito de servicios, de 2 a 15 años</td></tr>
+<tr><td>Excedencia por cuidado de hijo a los dos años y medio</td><td>Art. 89.4 TREBEP</td><td>Ya no reserva su puesto, sino uno en la misma localidad y retribución</td></tr>
+<tr><td>Funcionaria víctima de violencia de género en excedencia desde hace tres meses pide sus retribuciones</td><td>Art. 89.5 TREBEP</td><td>No: solo cobra íntegras los dos primeros meses; conserva la reserva</td></tr>
+<tr><td>Expectativa de destino desde hace trece meses</td><td>Art. 29.5 Ley 30/1984 y art. 12</td><td>Debe pasar a excedencia forzosa</td></tr>
+<tr><td>Suspensión firme de ocho meses</td><td>Art. 90.1 TREBEP</td><td>Pierde el puesto; reingreso pedido un mes antes del final</td></tr>
+<tr><td>Funcionario A2 que quiere ser profesor asociado de universidad</td><td>Arts. 4.1 y 16.3 Ley 53/1984</td><td>Compatible con autorización, aunque cobre complemento específico</td></tr>
+<tr><td>Funcionario que tiene el 15 % de una empresa contratista de su ministerio</td><td>Art. 12.1.d Ley 53/1984</td><td>Prohibido; si mantiene la situación, falta muy grave (art. 95.2.n)</td></tr>
+</table></div>
+<h3>9.4 Mini-supuesto resuelto (modelo de redacción de la Comisión)</h3>
+<div class="box sup"><span class="box-h">Enunciado</span>
+Elena, funcionaria del Cuerpo de Gestión de la Administración Civil del Estado, tuvo un hijo el <strong>10 de marzo de 2025</strong> y está en excedencia por cuidado de hijos desde el <strong>1 de septiembre de 2025</strong>. Pregunta hasta cuándo conserva su puesto y hasta cuándo puede seguir en excedencia. Su compañero Pablo, del mismo cuerpo, cobra un complemento específico equivalente al <strong>40 % de su retribución básica</strong> y quiere dar <strong>100 horas al año</strong> de clases en una academia de preparación de oposiciones.
+<br><br><strong>Cuestiones:</strong> a) Situación de Elena: reserva, duración máxima y reingreso. b) ¿Puede Pablo dar esas clases?</div>
+<div class="model">
+<p><strong>Cuestión a).</strong> [Introducción de la materia, apartado 9.1, con el Real Decreto 365/1995.] Con carácter previo, procede calificar la situación administrativa. Elena es funcionaria de carrera del Cuerpo de Gestión y se encuentra desde el 1 de septiembre de 2025 en excedencia por cuidado de hijos, situación que conlleva reserva de puesto y computa a efectos de trienios, carrera y Seguridad Social. La cuestión a) solicita determinar hasta cuándo conserva su puesto y cuál es la duración máxima. El artículo 89.4 del TREBEP reconoce una excedencia de duración no superior a tres años desde la fecha de nacimiento, con reserva del puesto desempeñado durante al menos dos años y, después, de un puesto en la misma localidad y de igual retribución. El enunciado no precisa si el otro progenitor es también funcionario y disfruta de la excedencia por el mismo hijo, por lo que suponemos que no, ya que no se menciona, de modo que no hay limitación del ejercicio simultáneo. Contados desde el inicio, los dos años de reserva de su puesto concreto terminan el 1 de septiembre de 2027, y el máximo de tres años desde el nacimiento vence el 10 de marzo de 2028. Si no solicita el reingreso antes de esa fecha, será declarada de oficio en excedencia voluntaria por interés particular (artículo 14.3 del Real Decreto 365/1995). Por tanto, se concluye que Elena conserva su puesto hasta el 1 de septiembre de 2027, después un puesto en la misma localidad y de igual retribución, y debe pedir el reingreso antes del 10 de marzo de 2028.</p>
+<p><strong>Cuestión b).</strong> [Introducción con la Ley 53/1984 y el Real Decreto 598/1985.] La cuestión b) plantea si Pablo puede dar las clases. El artículo 19.b) de la Ley 53/1984 exceptúa del régimen de incompatibilidades la preparación para el acceso a la función pública en los términos reglamentarios, y el artículo 19 del Real Decreto 598/1985 solo la considera exceptuada cuando no supera setenta y cinco horas anuales ni afecta al horario, e impide formar parte de órganos de selección. Con cien horas al año, la actividad no está exceptuada y requiere el reconocimiento previo de compatibilidad del artículo 14 de la Ley 53/1984. Sin embargo, el artículo 16 impide reconocer compatibilidad para actividades privadas a quien percibe complemento específico, salvo que no supere el 30 % de su retribución básica, y el de Pablo alcanza el 40 %. No obstante lo anterior, cabría que Pablo limitara su dedicación a setenta y cinco horas anuales, si bien en ese caso la actividad quedaría exceptuada y no podría formar parte de tribunales. Por tanto, se concluye que Pablo no puede impartir cien horas anuales de preparación, y que solo podría hacerlo hasta setenta y cinco horas sin necesidad de compatibilidad.</p>
+</div>
+<h3>9.5 Por qué esta redacción puntúa</h3>
+<div class="box sup"><span class="box-h">Cada paso y el criterio de la Comisión que cubre</span>
+<strong>Calificar</strong> la situación (excedencia, reserva, cómputo) → <em>análisis</em>.<br>
+<strong>Fechas operadas</strong>: 01/09/2025 + 2 años = 01/09/2027; 10/03/2025 + 3 años = 10/03/2028 → <em>aplicación de conocimientos</em>.<br>
+<strong>Suposición declarada</strong> sobre el otro progenitor → admitida.<br>
+<strong>Alternativa evaluada</strong> (limitar a 75 horas) → <em>análisis</em>.<br>
+<strong>Encadenar</strong> TREBEP, reglamento de situaciones, Ley 53/1984 y Real Decreto 598/1985 → <em>sistemática</em>.<br>
+<strong>Conclusiones afirmativas</strong> con fechas y consecuencia.</div>
+
+<!-- 10 -->
+<h2 id="s10"><span class="n">10.</span> Anexo: comparación de los dos documentos de origen</h2>
+<div class="tablewrap"><table>
+<tr><th style="width:18%">Aspecto</th><th>Temario (edición ECAP 2026)</th><th>Material visual (agosto 2026)</th><th style="width:20%">En este documento</th></tr>
+<tr><td>Marco y cuadro</td><td>Concepto, normas, cuadro general, interinos</td><td>Catálogo abierto, situaciones del Real Decreto 365/1995, precisión sobre el Real Decreto-ley 9/2025</td><td>Fusionado + BOE (1)</td></tr>
+<tr><td>Servicios especiales</td><td>Lista completa del art. 87, subdirectores en activo, exámenes</td><td>Retribución, cómputo, reingreso, reserva, disolución de cámaras</td><td>Fusionado + arts. 3 a 9 (2)</td></tr>
+<tr><td>Otras Administraciones</td><td>Cuadro</td><td>Transferidos frente a provisión, separación</td><td>Fusionado (3)</td></tr>
+<tr><td>Excedencias</td><td>Cuadro de siete modalidades</td><td>Cuadro con duraciones e indemnización</td><td>Fusionado + BOE (4)</td></tr>
+<tr><td>Expectativa y forzosa</td><td>Régimen, con una causa de más</td><td>Cuadro, con error retributivo</td><td>Corregido (5)</td></tr>
+<tr><td>Suspensión y reingreso</td><td>Régimen y reingreso (con cita y plazo errados)</td><td>Cuadro provisional/firme, tabla de reingresos</td><td>Corregido (6)</td></tr>
+<tr><td>Incompatibilidades</td><td>Ley 53/1984 detallada y exámenes</td><td>Reglas generales, plazos, porcentajes mal etiquetados</td><td>Fusionado + BOE (7)</td></tr>
+<tr><td>Supuesto práctico</td><td>No</td><td>No</td><td>Apdo. 9 (criterio de la Comisión)</td></tr>
+</table></div>
+<div class="box fix"><span class="box-h">Correcciones aplicadas (contrastadas con el BOE el 17/11/2026)</span>
+<strong>Temario 2026:</strong> causa inexistente de excedencia forzosa (supresión del puesto) · el suspenso firme pide el reingreso con un mes de antelación, no en el mes siguiente · el límite de seis años es el de la suspensión disciplinaria · el reingreso no está en los «arts. 62 a 66 del Real Decreto 365/1995», sino en el art. 62 del Real Decreto 364/1995 · el segundo puesto por interés público lo fija el Consejo de Ministros por real decreto, no la ley.<br>
+<strong>Material visual:</strong> el excedente forzoso cobra solo básicas · los porcentajes 30 a 50 % son el tope del segundo puesto público por grupos A a E, no del complemento específico · la opción se hace dentro del plazo posesorio, no en un mes · las actividades exceptuadas son ocho · plazos del Real Decreto 1777/1994 no contrastados, omitidos.<br>
+<strong>Ambos:</strong> el suspenso provisional cobra las retribuciones básicas (art. 98.3 TREBEP), no el 75 % del reglamento · la excedencia por interés particular ya no tiene máximo de quince años.</div>
+
+<footer>
+GACE 2027 · Bloque V · Tema 5 · Documento fusionado (temario ECAP 2026 + material visual) · Vigencia revisada a 17/11/2026.<br>
+Normas: CE (art. 103.3) · Real Decreto Legislativo 5/2015 (arts. 85 a 92, 95 y 98) · Ley 30/1984 (art. 29) · Real Decreto 365/1995 · Real Decreto 364/1995 (art. 62) · Ley 53/1984 · Real Decreto 598/1985 · Real Decreto 33/1986 · Ley 40/2015 (art. 55.6) · Ley 3/2015.
+</footer>
+</div>
+</body>
+</html>
